@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/nepal-4n5d.jpg',
+        image: '/uploads/packages/vb1q7giz8knrotcrratjypfxzoti0rjraf4quymy220406072547.jpg',
         duration: '4 Nights 5 Days',
         title: 'Nepal Tour Package',
         location: 'Kathmandu, Pokhara',
@@ -18,7 +18,7 @@ export default function NepalTours() {
         <TourCategoryPage
             title="Nepal Tour Packages"
             subtitle="Explore the roof of the world"
-            bannerImage="https://www.wegomap.com/uploads/categories/nepal-banner.jpg"
+            bannerImage="/uploads/categories/zuq5qozfb1bxlyyr84azxkajfabeigl2udrfhhxa220406065441.jpg"
             packages={packages}
             readMoreHeading="A Trip to the Himalayas"
             readMoreContent={

@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/kashmir-4n5d.jpg',
+        image: '/uploads/packages/hgksm2sl24ngdvpsh5ovizl3otpxu35iimuvjuni240829022035.jpg',
         duration: '4 Nights 5 Days',
         title: 'Kashmir Holiday',
         location: 'Srinagar, Gulmarg, Pahalgam',
@@ -11,7 +11,7 @@ const packages: TourPackage[] = [
         detailUrl: 'kashmir-holiday-package/'
     },
     {
-        image: 'uploads/tours/kashmir-5n6d.jpg',
+        image: '/uploads/packages/hgksm2sl24ngdvpsh5ovizl3otpxu35iimuvjuni240829022035.jpg',
         duration: '5 Nights 6 Days',
         title: 'Kashmir Holiday Package',
         location: 'Srinagar, Gulmarg, Sonamarg, Pahalgam',
@@ -27,7 +27,7 @@ export default function KashmirTours() {
         <TourCategoryPage
             title="Kashmir Holiday Package"
             subtitle="Paradise on Earth"
-            bannerImage="https://www.wegomap.com/uploads/categories/kashmir-banner.jpg"
+            bannerImage="/uploads/categories/vsgopcdmooaxqkjltfnahzvl4vqe1fdioxawg2yt240829024046.jpg"
             packages={packages}
             readMoreHeading="Plan your Kashmir Trip"
             readMoreContent={

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Leh Ladakh Tour Package',
         description: 'Leh Ladakh Holidays',
-        images: ['https://www.wegomap.com/uploads/categories/d4rzq89o8xu3a9ejgnhkfes4r5lpqvsfgtldzmoi240904033509.jpg'],
+        images: ['/uploads/categories/d4rzq89o8xu3a9ejgnhkfes4r5lpqvsfgtldzmoi240904033509.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/leh-ladakh-tour-package',

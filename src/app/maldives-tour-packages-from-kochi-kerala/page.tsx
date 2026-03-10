@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/maldives-3n4d.jpg',
+        image: '/uploads/packages/h1xw5ekx8qsl0hyos8pethtm6u8fjkbjksewkdyd240905033121.jpg',
         duration: '3 Nights 4 Days',
         title: 'Maldives Tour Package (3Night)',
         location: 'Island Resort / Beach Villa',
@@ -11,7 +11,7 @@ const packages: TourPackage[] = [
         detailUrl: 'tours/malaysia-3-nights-4-days/'
     },
     {
-        image: 'uploads/tours/maldives-tour-package.jpg',
+        image: '/uploads/packages/h1xw5ekx8qsl0hyos8pethtm6u8fjkbjksewkdyd240905033121.jpg',
         duration: '4 Nights 5 Days',
         title: 'Maldives Tour Package (4N)',
         location: 'Water Villa / Private Resort',
@@ -27,7 +27,7 @@ export default function MaldivesTours() {
         <TourCategoryPage
             title="Maldives Tour Packages"
             subtitle="Pristine white beaches and turquoise lagoons"
-            bannerImage="https://www.wegomap.com/uploads/categories/maldives-banner.jpg"
+            bannerImage="/uploads/categories/nyuzwvgb639wz6mbjratshvfzdtm9tgxbpivpjqs220406065555.jpg"
             packages={packages}
             readMoreHeading="Exclusive Maldives Holiday"
             readMoreContent={

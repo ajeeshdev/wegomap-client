@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Andaman Packages',
         description: 'Andaman Holidays',
-        images: ['https://www.wegomap.com/uploads/categories/x8mupizywhx0lbujzpvsk6qrznf18bixirysodea240904050124.jpg'],
+        images: ['/uploads/categories/x8mupizywhx0lbujzpvsk6qrznf18bixirysodea240904050124.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/andaman-packages',

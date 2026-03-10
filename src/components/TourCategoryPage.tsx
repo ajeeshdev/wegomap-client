@@ -30,14 +30,14 @@ export interface TourCategoryPageProps {
 }
 
 const testimonials = [
-    { name: 'Imran Shariff', img: 'https://www.wegomap.com/uploads/testimonials/lECdwnqz0sFj4Pcwi4IenLB5m6kVr82TaOfU35Ib260228022926.png', text: 'Exploring Munnar without wegomap was impossible... It was a great experience. Everything was awesome — service, the tempo traveler driver Binu bhai was very honest and humble in the whole trip. I recommend to everyone.' },
-    { name: 'Sumit Kumar Sinha', img: 'https://www.wegomap.com/uploads/testimonials/e9LVL1MpqxfB7dYYZjbfgT9c6PctXAF277MdMGPt260228022430.png', text: 'Wegomaps provided an outstanding Kerala experience, surpassing expectations. From well-curated itineraries to impeccable accommodations, every detail was meticulously planned. I highly recommend Wegomap.' },
-    { name: 'Komanpally Ravindra', img: 'https://www.wegomap.com/uploads/testimonials/qX82Z9vyeZBLSPm0L3VseevrrkLdPtcQSaNC8sHj260228021643.png', text: 'That was an awesome trip to Kerala with WEGOMAP. Fathima really helped us a lot in every aspect. The driver Ajmal was too friendly and made our journey with comfort and safety. Thank you Wegomap.' },
-    { name: 'Suresh K', img: 'https://www.wegomap.com/uploads/testimonials/5KYj0KGZVjbwoQFwps9kcGMQLjyZkW0s6IMbzUrN260228021237.png', text: 'Wegomap tour and events was very well organized our trip. Very good hotel, boathouse and trip route in Kerala. We enjoyed very well. Thanks to team and special thanks to Fathima, she was very supportive.' },
-    { name: 'V T Vishwanath', img: 'https://www.wegomap.com/uploads/testimonials/GMzo4CeZOh1IOz5n8gGAor2nPKlQCqURaIoTsyyE260226040945.png', text: 'Really good travel service by WEGOMAP. Athira from WEGOMAP helped us to plan our Munnar and Thekkady Kerala honeymoon trip. Nice driver cum tour guide. Good accommodation and car provided. Thanks!' },
-    { name: 'Pooja Singh', img: 'https://www.wegomap.com/uploads/testimonials/ZRyfMmqrgi6Hd4QW1Pv2Op6vPqTeAC5qhuJQOUuw260226035449.png', text: 'Had a fabulous experience, the itinerary was well planned. The hotels were located at best places. Fathima was amazing. We have not faced any issues in our entire trip. Thanks Wegomap!' },
-    { name: 'Ravina Vaishnav', img: 'https://www.wegomap.com/uploads/testimonials/58IAT9y5Gjf79jB6uTSuvSgQI7aaPZ4XYnWaoasI260226035056.png', text: 'Whole trip was good and our driver Jithin Mathew was too good and friendly and our adviser Miss Fatima was very cooperative. Best service ever. We enjoyed too much — very memorable trip for us.' },
-    { name: 'Vishesh Maity', img: 'https://www.wegomap.com/uploads/testimonials/5gx8E8RQimgCGiohTY51b6YPb7vd4CWNYgn13X7A260226033830.jpg', text: 'We booked a 6N/7D package with Wegomap Tour, and it was an absolutely amazing experience! Everything — from the stay, food, and transportation to the overall planning — was perfectly organized.' },
+    { name: 'Imran Shariff', img: '/uploads/testimonials/lECdwnqz0sFj4Pcwi4IenLB5m6kVr82TaOfU35Ib260228022926.png', text: 'Exploring Munnar without wegomap was impossible... It was a great experience. Everything was awesome — service, the tempo traveler driver Binu bhai was very honest and humble in the whole trip. I recommend to everyone.' },
+    { name: 'Sumit Kumar Sinha', img: '/uploads/testimonials/e9LVL1MpqxfB7dYYZjbfgT9c6PctXAF277MdMGPt260228022430.png', text: 'Wegomaps provided an outstanding Kerala experience, surpassing expectations. From well-curated itineraries to impeccable accommodations, every detail was meticulously planned. I highly recommend Wegomap.' },
+    { name: 'Komanpally Ravindra', img: '/uploads/testimonials/qX82Z9vyeZBLSPm0L3VseevrrkLdPtcQSaNC8sHj260228021643.png', text: 'That was an awesome trip to Kerala with WEGOMAP. Fathima really helped us a lot in every aspect. The driver Ajmal was too friendly and made our journey with comfort and safety. Thank you Wegomap.' },
+    { name: 'Suresh K', img: '/uploads/testimonials/5KYj0KGZVjbwoQFwps9kcGMQLjyZkW0s6IMbzUrN260228021237.png', text: 'Wegomap tour and events was very well organized our trip. Very good hotel, boathouse and trip route in Kerala. We enjoyed very well. Thanks to team and special thanks to Fathima, she was very supportive.' },
+    { name: 'V T Vishwanath', img: '/uploads/testimonials/GMzo4CeZOh1IOz5n8gGAor2nPKlQCqURaIoTsyyE260226040945.png', text: 'Really good travel service by WEGOMAP. Athira from WEGOMAP helped us to plan our Munnar and Thekkady Kerala honeymoon trip. Nice driver cum tour guide. Good accommodation and car provided. Thanks!' },
+    { name: 'Pooja Singh', img: '/uploads/testimonials/ZRyfMmqrgi6Hd4QW1Pv2Op6vPqTeAC5qhuJQOUuw260226035449.png', text: 'Had a fabulous experience, the itinerary was well planned. The hotels were located at best places. Fathima was amazing. We have not faced any issues in our entire trip. Thanks Wegomap!' },
+    { name: 'Ravina Vaishnav', img: '/uploads/testimonials/58IAT9y5Gjf79jB6uTSuvSgQI7aaPZ4XYnWaoasI260226035056.png', text: 'Whole trip was good and our driver Jithin Mathew was too good and friendly and our adviser Miss Fatima was very cooperative. Best service ever. We enjoyed too much — very memorable trip for us.' },
+    { name: 'Vishesh Maity', img: '/uploads/testimonials/5gx8E8RQimgCGiohTY51b6YPb7vd4CWNYgn13X7A260226033830.jpg', text: 'We booked a 6N/7D package with Wegomap Tour, and it was an absolutely amazing experience! Everything — from the stay, food, and transportation to the overall planning — was perfectly organized.' },
 ];
 
 export default function TourCategoryPage({
@@ -70,7 +70,7 @@ export default function TourCategoryPage({
                     <p className="tourCatBannerSub">{subtitle}</p>
                     <div className="tourCatRating">
                         <Image
-                            src="https://www.wegomap.com/assests/site/assets/images/google-logo.svg"
+                            src="/assests/site/assets/images/google-logo.svg"
                             alt="Google"
                             width={60}
                             height={20}
@@ -100,7 +100,7 @@ export default function TourCategoryPage({
                             <div key={i} className="tourCatCard">
                                 <Link href={`https://www.wegomap.com/${pkg.detailUrl}`} target="_blank" className="tourCatCardImgWrap">
                                     <Image
-                                        src={`https://www.wegomap.com/${pkg.image}`}
+                                        src={pkg.image}
                                         alt={pkg.title}
                                         fill
                                         style={{ objectFit: 'cover' }}
@@ -190,7 +190,7 @@ export default function TourCategoryPage({
                                     <div className="tourCatReviewStars">★★★★★</div>
                                     <p className="tourCatReviewText">{t.text}</p>
                                     <Image
-                                        src="https://www.wegomap.com/assests/site/assets/images/google-review.svg"
+                                        src="/assests/site/assets/images/google-review.svg"
                                         alt="Google Review"
                                         width={80}
                                         height={28}

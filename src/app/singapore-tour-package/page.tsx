@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/singapore-3n.jpg',
+        image: '/uploads/packages/jyky2rsv6qbalqwelupkbrpng8vrykhooekvnvz0240828045640.jpg',
         duration: '3 Nights 4 Days',
         title: 'Singapore Tour Package (3N Singapore)',
         location: 'Sentosa, City Tour',
@@ -11,7 +11,7 @@ const packages: TourPackage[] = [
         detailUrl: 'singapore-tour-package/'
     },
     {
-        image: 'uploads/tours/singapore-4n.jpg',
+        image: '/uploads/packages/jyky2rsv6qbalqwelupkbrpng8vrykhooekvnvz0240828045640.jpg',
         duration: '4 Nights 5 Days',
         title: 'Singapore Tour Package (4N Singapore)',
         location: 'Universal Studios, Gardens by the Bay',
@@ -27,7 +27,7 @@ export default function SingaporeTours() {
         <TourCategoryPage
             title="Singapore Tour Package"
             subtitle="The lion city awaits you"
-            bannerImage="https://www.wegomap.com/uploads/categories/singapore-banner.jpg"
+            bannerImage="/uploads/categories/KENL2OFT3a7kTbcVoTO8SQYucDDNMiWvx6DeaIEk240827110728.jpg"
             packages={packages}
             readMoreHeading="Modern Singapore Experience"
             readMoreContent={

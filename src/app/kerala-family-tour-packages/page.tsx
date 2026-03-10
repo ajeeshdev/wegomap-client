@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/4n5d-kerala-honeymoon-package.jpg',
+        image: '/uploads/packages/dw03erik9i4urenemjauu0deqjpcxjf4dsvsaejq220406030155.jpg',
         duration: '2N Munnar / 1N Thekkady / 1N Houseboat',
         title: '4N5D Kerala Family Package',
         location: 'Munnar, Thekkady, Alleppey',
@@ -12,7 +12,7 @@ const packages: TourPackage[] = [
         strip: 'Best for Family'
     },
     {
-        image: 'uploads/tours/6n7d-kerala-budget-tour-package.jpg',
+        image: '/uploads/packages/tctld65d4pjbk5tipatqzm302pzzgx9l6vbxqf5v220406034142.jpg',
         duration: '2N Munnar / 1N Thekkady / 2N Kovalam',
         title: '6N7D Kerala Complete Plan',
         location: 'Munnar, Thekkady, Kovalam, Alleppey',
@@ -21,7 +21,7 @@ const packages: TourPackage[] = [
         detailUrl: 'kerala-tour-packages/tours/6n7d-kerala-budget-tour-package/'
     },
     {
-        image: 'uploads/tours/7n8d-kerala-tour-package.jpg',
+        image: '/uploads/packages/jnjaha72rrtbo4dafxxt9gftp2nsqoaecncm136c220406035704.jpg',
         duration: '1N Athirapilly / 2N Munnar / 2N Kovalam',
         title: '7N8D Kerala Premium Holiday',
         location: 'Athirapilly, Munnar, Kovalam, Thekkady',
@@ -31,7 +31,7 @@ const packages: TourPackage[] = [
         strip: 'Premium'
     },
     {
-        image: 'uploads/tours/kerala-season-plan.jpg',
+        image: '/uploads/packages/rTyOuCPG9NxzaC3QrYXuqrJ6EE1uxfPijXWaXQyX221128120851.jpg',
         duration: '2N Munnar / 1N Thekkady / 1N Aleppey',
         title: 'Kerala Season Plan',
         location: 'Munnar, Thekkady, Alleppey',
@@ -46,7 +46,7 @@ export default function FamilyTours() {
         <TourCategoryPage
             title="Kerala Family Tour Packages"
             subtitle="Perfect holidays for you and your loved ones"
-            bannerImage="https://www.wegomap.com/uploads/categories/happy-family-kerala-trip.jpg"
+            bannerImage="/uploads/categories/o6xdubpsa3zfofx28b8iqnzym9zajlm3uau8ouuu220406065405.jpg"
             packages={packages}
             readMoreHeading="Memorable Family Holidays in Kerala"
             readMoreContent={

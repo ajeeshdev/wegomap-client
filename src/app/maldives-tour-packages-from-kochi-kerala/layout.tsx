@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Maldives Tour Packages',
         description: 'Explore with us',
-        images: ['https://www.wegomap.com/uploads/categories/nyuzwvgb639wz6mbjratshvfzdtm9tgxbpivpjqs220406065555.jpg'],
+        images: ['/uploads/categories/nyuzwvgb639wz6mbjratshvfzdtm9tgxbpivpjqs220406065555.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/maldives-tour-packages-from-kochi-kerala',

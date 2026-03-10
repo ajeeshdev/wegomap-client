@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Rajasthan Tour package',
         description: 'Rajasthan Tour package',
-        images: ['https://www.wegomap.com/uploads/categories/twhsfbqthmna28zogfp3kpedhqd692qv29cqe85u240904024319.jpg'],
+        images: ['/uploads/categories/twhsfbqthmna28zogfp3kpedhqd692qv29cqe85u240904024319.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/rajasthan-tour-package',

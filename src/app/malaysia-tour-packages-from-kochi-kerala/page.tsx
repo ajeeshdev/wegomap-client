@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/malaysia.jpg',
+        image: '/uploads/packages/sc3sabi8yshgcivodgcqgboalmhdvwdanrukaopu240904025152.png',
         duration: '3 Nights 4 Days',
         title: 'Malaysia Tour Package',
         location: 'Kuala Lumpur, Genting Highlands',
@@ -18,7 +18,7 @@ export default function MalaysiaTours() {
         <TourCategoryPage
             title="Malaysia Tour Packages"
             subtitle="Truly Asia experience"
-            bannerImage="https://www.wegomap.com/uploads/categories/malaysia-banner.jpg"
+            bannerImage="/uploads/categories/7Er9MHHpU4tIDnHWJm9rmvpELUno6GQ2zdd7pozR240821040000.jpg"
             packages={packages}
             readMoreHeading="Explore Malaysia with Wegomap"
             readMoreContent={

@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/lakshadweep.jpg',
+        image: '/uploads/packages/rqeuFriCXbjmlMkRh6UmXGJka06Jt1bLAWQFexJD240821035047.jpeg',
         duration: '3 Nights 4 Days',
         title: 'Lakshadweep Package',
         location: 'Agatti Island',
@@ -18,7 +18,7 @@ export default function LakshadweepTours() {
         <TourCategoryPage
             title="Lakshadweep Tour Package"
             subtitle="The untouched beauty of coral islands"
-            bannerImage="https://www.wegomap.com/uploads/categories/lakshadweep-banner.jpg"
+            bannerImage="/uploads/categories/vjy7xslqm4mc1yqd6utmyochqman4xalxjfiyzoa240820042745.jpg"
             packages={packages}
             readMoreHeading="Paradise at Lakshadweep"
             readMoreContent={

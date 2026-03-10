@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Coorg / Mysore / Ooty',
         description: '2N Coorg /1N Mysore /2N Ooty',
-        images: ['https://www.wegomap.com/uploads/categories/neqghtvqmhem7lqiiniilprz8hoskpvtcyb82xo1240905031746.jpg'],
+        images: ['/uploads/categories/neqghtvqmhem7lqiiniilprz8hoskpvtcyb82xo1240905031746.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/coorg-mysore-ooty',

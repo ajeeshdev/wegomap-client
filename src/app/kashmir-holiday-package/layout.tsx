@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Kashmir Holiday Package',
         description: '5N Srinagar',
-        images: ['https://www.wegomap.com/uploads/categories/vsgopcdmooaxqkjltfnahzvl4vqe1fdioxawg2yt240829024046.jpg'],
+        images: ['/uploads/categories/vsgopcdmooaxqkjltfnahzvl4vqe1fdioxawg2yt240829024046.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/kashmir-holiday-package',

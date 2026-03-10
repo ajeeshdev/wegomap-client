@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/thailand-delight.jpg',
+        image: '/uploads/packages/U58KmFr2waHgoZCqz2YiipHY43bHX1lDH2R4cWqg240822120232.jpg',
         duration: '3 Nights 4 Days',
         title: 'Thailand Delight',
         location: 'Bangkok, Pattaya',
@@ -11,7 +11,7 @@ const packages: TourPackage[] = [
         detailUrl: 'tours/thailand-tour-package-premium/'
     },
     {
-        image: 'uploads/tours/3n4d-thailand-package.jpg',
+        image: '/uploads/packages/zxlqmhgq71iv3xvevzebzywogiwwt6uv7zm2mgos220406082237.jpg',
         duration: '3 Nights 4 Days',
         title: 'Amazing Thailand',
         location: 'Bangkok, Pattaya',
@@ -21,7 +21,7 @@ const packages: TourPackage[] = [
         strip: 'Best Seller'
     },
     {
-        image: 'uploads/tours/thailand-premium.jpg',
+        image: '/uploads/packages/3t7juwrgvdmth8malgvhehbwyx7ownmp8xjgiyla250603053815.jpg',
         duration: '4 Nights 5 Days',
         title: 'Thailand Premium',
         location: 'Bangkok, Pattaya, Coral Island',
@@ -30,7 +30,7 @@ const packages: TourPackage[] = [
         detailUrl: 'tours/thailand-premium/'
     },
     {
-        image: 'uploads/tours/thailand-phuket-krabi.jpg',
+        image: '/uploads/packages/Uzi8MYAjx3MwWWmNS2soW9x9IzESbmt0I4wN42Xx240822120635.jpg',
         duration: '4 Nights 5 Days',
         title: 'Thailand Phuket & Krabi',
         location: 'Phuket, Krabi',
@@ -40,7 +40,7 @@ const packages: TourPackage[] = [
         strip: 'Trending'
     },
     {
-        image: 'uploads/tours/thailand-tour-package.jpg',
+        image: '/uploads/packages/ItyyJiyjRVdzXZVfc8LFGxEVs3MYHasDqQdY48Ff240822120710.jpg',
         duration: '6 Nights 7 Days',
         title: 'Thailand Tour Package',
         location: 'Bangkok, Pattaya, Phuket',
@@ -55,7 +55,7 @@ export default function ThailandTours() {
         <TourCategoryPage
             title="Thailand Tour Packages"
             subtitle="Land of smiles and beautiful beaches"
-            bannerImage="https://www.wegomap.com/uploads/categories/thailand-banner.jpg"
+            bannerImage="/uploads/categories/8fimn8i11x1d6lhyiqx3s8dw9ang49kfv6ayvhxt220406065511.jpg"
             packages={packages}
             readMoreHeading="Explore the Best of Thailand"
             readMoreContent={

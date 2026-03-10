@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/manali-package.jpg',
+        image: '/uploads/packages/j6cozrh2jgnksv5hsfoj9m6emdicmwtvtvqvnqu8240829050035.jpg',
         duration: '4N5D Manali',
         title: 'Manali Tour Packages',
         location: 'Himachal Pradesh',
@@ -12,7 +12,7 @@ const packages: TourPackage[] = [
         strip: 'Trending'
     },
     {
-        image: 'uploads/tours/goa-package-3-days-2-night.jpg',
+        image: '/uploads/packages/q2zgcmko8vaz9urxqizdz53eyfbc8vnjxe2uis9a240905105822.jpg',
         duration: '2N3D Goa',
         title: 'Goa Tour Packages',
         location: 'Goa',
@@ -22,7 +22,7 @@ const packages: TourPackage[] = [
         strip: 'Best Seller'
     },
     {
-        image: 'uploads/tours/bali-tour-plan.jpg',
+        image: '/uploads/packages/scjv80siga8jttcsryrjx5hfckuzsflpd6ten4ld240827103913.jpg',
         duration: '3N4D Bali',
         title: 'Bali Tour Packages',
         location: 'Indonesia',
@@ -31,7 +31,7 @@ const packages: TourPackage[] = [
         detailUrl: 'bali-tour-packages-from-kochi-kerala/'
     },
     {
-        image: 'uploads/tours/3n4d-thailand-package.jpg',
+        image: '/uploads/packages/ItyyJiyjRVdzXZVfc8LFGxEVs3MYHasDqQdY48Ff240822120710.jpg',
         duration: '3N4D Thailand',
         title: 'Thailand Tour Packages',
         location: 'Thailand',
@@ -40,7 +40,7 @@ const packages: TourPackage[] = [
         detailUrl: 'thailand-tour-packages-from-kochi-kerala/'
     },
     {
-        image: 'uploads/tours/dubai-tour-package.jpg',
+        image: '/uploads/packages/kbtqjlCKQNNuhMP0GPgbaNNl1ewhvNSCNEVgh0Vm260130012049.jpg',
         duration: '4N5D Dubai',
         title: 'Dubai Tour Packages',
         location: 'UAE',
@@ -49,7 +49,7 @@ const packages: TourPackage[] = [
         detailUrl: 'dubai-tour-packages/'
     },
     {
-        image: 'uploads/tours/maldives-tour-package.jpg',
+        image: '/uploads/packages/h1xw5ekx8qsl0hyos8pethtm6u8fjkbjksewkdyd240905033121.jpg',
         duration: '4N5D Maldives',
         title: 'Maldives Tour Packages',
         location: 'Maldives',
@@ -64,7 +64,7 @@ export default function DomesticIntlTours() {
         <TourCategoryPage
             title="Domestic & International Packages"
             subtitle="Explore breathtaking destinations across the globe"
-            bannerImage="https://www.wegomap.com/uploads/categories/city-lights-international.jpg"
+            bannerImage="/uploads/categories/auvy9thxlogxhhxy3zqofaonrhj91o4babncqjvi220406070159.jpg"
             packages={packages}
             readMoreHeading="Custom International Holidays"
             readMoreContent={

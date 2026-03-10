@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/coorg-mysore-ooty.jpg',
+        image: '/uploads/packages/vbpwushzobsqylb8s1z1uhvlgken5enhwzdly3x5240905024552.jpg',
         duration: '5 Nights 6 Days',
         title: 'Coorg Mysore Ooty Package',
         location: 'Coorg, Mysore, Ooty',
@@ -18,7 +18,7 @@ export default function CoorgMysoreOoty() {
         <TourCategoryPage
             title="Coorg Mysore Ooty"
             subtitle="The spice capital and the queen of hills"
-            bannerImage="https://www.wegomap.com/uploads/categories/coorg-mysore-ooty-banner.jpg"
+            bannerImage="/uploads/categories/neqghtvqmhem7lqiiniilprz8hoskpvtcyb82xo1240905031746.jpg"
             packages={packages}
             readMoreHeading="Complete South India Tour"
             readMoreContent={

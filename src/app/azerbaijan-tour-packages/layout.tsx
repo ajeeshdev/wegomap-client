@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Azerbaijan Tour Packages',
         description: '3N 4D',
-        images: ['https://www.wegomap.com/uploads/categories/twlgefqv2zwvq2gs99ix4ozzi3n9r41z9xbotxid250131024536.jpg'],
+        images: ['/uploads/categories/twlgefqv2zwvq2gs99ix4ozzi3n9r41z9xbotxid250131024536.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/azerbaijan-tour-packages',

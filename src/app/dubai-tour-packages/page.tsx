@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/dubai-package.jpg',
+        image: '/uploads/packages/kbtqjlCKQNNuhMP0GPgbaNNl1ewhvNSCNEVgh0Vm260130012049.jpg',
         duration: '3 Nights 4 Days',
         title: 'Dubai Package (3N)',
         location: 'City View, Marina',
@@ -11,7 +11,7 @@ const packages: TourPackage[] = [
         detailUrl: 'tours/dubai-package/'
     },
     {
-        image: 'uploads/tours/dubai-tour-package.jpg',
+        image: '/uploads/packages/kbtqjlCKQNNuhMP0GPgbaNNl1ewhvNSCNEVgh0Vm260130012049.jpg',
         duration: '4 Nights 5 Days',
         title: 'Dubai Tour Package (4N)',
         location: 'Burj Khalifa, Desert Safari',
@@ -21,7 +21,7 @@ const packages: TourPackage[] = [
         strip: 'Best Seller'
     },
     {
-        image: 'uploads/tours/dubai-package-2.jpg',
+        image: '/uploads/packages/kbtqjlCKQNNuhMP0GPgbaNNl1ewhvNSCNEVgh0Vm260130012049.jpg',
         duration: '5 Nights 6 Days',
         title: 'Dubai Package (5N)',
         location: 'Dhow Cruise, City Tour',
@@ -30,7 +30,7 @@ const packages: TourPackage[] = [
         detailUrl: 'tours/dubai-package-2/'
     },
     {
-        image: 'uploads/tours/dubai-package-1.jpg',
+        image: '/uploads/packages/kbtqjlCKQNNuhMP0GPgbaNNl1ewhvNSCNEVgh0Vm260130012049.jpg',
         duration: '6 Nights 7 Days',
         title: 'Dubai Package (6N)',
         location: 'Global Village, Miracle Garden',
@@ -46,7 +46,7 @@ export default function DubaiTours() {
         <TourCategoryPage
             title="Dubai Tour Packages"
             subtitle="Explore the futuristic city of gold"
-            bannerImage="https://www.wegomap.com/uploads/categories/dubai-banner.jpg"
+            bannerImage="/uploads/categories/y7acfjy1zi0t3c9rpn4ftogqxtwytpflgfocfmrq240905095417.jpg"
             packages={packages}
             readMoreHeading="Plan your Dubai Journey"
             readMoreContent={

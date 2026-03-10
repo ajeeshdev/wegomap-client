@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/budgeted-vietnam-package.jpg',
+        image: '/uploads/packages/7J1QWWJ0sjoMbiKxSyAxxtIQgWgPeauAN0sLEU7a250527121157.jpeg',
         duration: '3 Nights 4 Days',
         title: 'Budgeted Vietnam',
         location: 'Hanoi, Halong Bay',
@@ -12,7 +12,7 @@ const packages: TourPackage[] = [
         strip: 'Best Value'
     },
     {
-        image: 'uploads/tours/basic-vietnam-package.jpg',
+        image: '/uploads/packages/LbdQh1glU8sAHOeRv6CziNxX5ABPavpMW3dp6J5f250527123910.jpeg',
         duration: '3 Nights 4 Days',
         title: 'Basic Vietnam',
         location: 'Hanoi, Ninh Binh',
@@ -21,7 +21,7 @@ const packages: TourPackage[] = [
         detailUrl: 'tours/basic-vietnam-package/'
     },
     {
-        image: 'uploads/tours/magical-vietnam-package.jpg',
+        image: '/uploads/packages/5lxwwbdd0mh4yklmgl5kfizrzumz99exjffdhnpj250603054551.jpg',
         duration: '4 Nights 5 Days',
         title: 'Magical Vietnam',
         location: 'Da Nang, Hoi An',
@@ -31,7 +31,7 @@ const packages: TourPackage[] = [
         strip: 'Trending'
     },
     {
-        image: 'uploads/tours/fabulous-vietnam-package.jpg',
+        image: '/uploads/packages/oskhdoun5lxwuoqzmh3p7u5bgs1ghwg5ofeqocky250603055959.jpg',
         duration: '5 Nights 6 Days',
         title: 'Fabulous Vietnam',
         location: 'Ho Chi Minh City, Mekong Delta',
@@ -40,7 +40,7 @@ const packages: TourPackage[] = [
         detailUrl: 'tours/fabulous-vietnam-package/'
     },
     {
-        image: 'uploads/tours/popular-vietnam-package.jpg',
+        image: '/uploads/packages/yul08VVfF0hPMk6d0YHIfKXkKyos5Bvpw6c2VYEV250527031610.jpg',
         duration: '6 Nights 7 Days',
         title: 'Popular Vietnam',
         location: 'Hanoi, Sapa, Halong Bay',
@@ -49,7 +49,7 @@ const packages: TourPackage[] = [
         detailUrl: 'tours/popular-vietnam-package/'
     },
     {
-        image: 'uploads/tours/charming-vietnam.jpg',
+        image: '/uploads/packages/9qvmqhqgvhvl5ai2jd2vernedifnqeivdxdgaldk250603061801.jpg',
         duration: '7 Nights 8 Days',
         title: 'Charming Vietnam',
         location: 'North & Central Vietnam',
@@ -65,7 +65,7 @@ export default function VietnamTours() {
         <TourCategoryPage
             title="Vietnam Package"
             subtitle="Discover the timeless charm of Vietnam"
-            bannerImage="https://www.wegomap.com/uploads/categories/vietnam-banner.jpg"
+            bannerImage="/uploads/categories/6f5f3mvihdthwolvbykh1fxl0nbavck38y47ubvs250605123703.jpg"
             packages={packages}
             readMoreHeading="Explore Vietnam with Wegomap"
             readMoreContent={

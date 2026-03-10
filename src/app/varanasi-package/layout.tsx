@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Varanasi Package',
         description: 'Varanasi Holiday Package',
-        images: ['https://www.wegomap.com/uploads/categories/5QFjERrKbfZ74TopsTis4EdOnNVTyfs6B5yRQBwc240904040753.jpg'],
+        images: ['/uploads/categories/5QFjERrKbfZ74TopsTis4EdOnNVTyfs6B5yRQBwc240904040753.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/varanasi-package',

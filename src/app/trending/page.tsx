@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/bali-tour-plan.jpg',
+        image: '/uploads/packages/zzgxrdjxnq0idmh5x2eypanfj6cpoqfz5dz1jntu220406041956.jpg',
         duration: '3N4D Bali',
         title: 'Bali Budget Tour Plan',
         location: 'Indonesia',
@@ -12,7 +12,7 @@ const packages: TourPackage[] = [
         strip: 'Best Seller'
     },
     {
-        image: 'uploads/tours/vietnam.jpg',
+        image: '/uploads/packages/zzgxrdjxnq0idmh5x2eypanfj6cpoqfz5dz1jntu220406041956.jpg',
         duration: '4N5D Vietnam',
         title: 'Vietnam Tour Package',
         location: 'Vietnam',
@@ -22,7 +22,7 @@ const packages: TourPackage[] = [
         strip: 'Most Booked'
     },
     {
-        image: 'uploads/tours/3n4d-thailand-package.jpg',
+        image: '/uploads/packages/zxlqmhgq71iv3xvevzebzywogiwwt6uv7zm2mgos220406082237.jpg',
         duration: '3N4D Thailand',
         title: 'Amazing Thailand',
         location: 'Thailand',
@@ -31,7 +31,7 @@ const packages: TourPackage[] = [
         detailUrl: 'thailand-tour-packages-from-kochi-kerala/'
     },
     {
-        image: 'uploads/tours/dubai-tour-package.jpg',
+        image: '/uploads/packages/tq8vaehurvgrtwpipapx8i5mro0yy5ctudzkakxl240905095614.jpg',
         duration: '4N5D Dubai',
         title: 'Dubai Tour Package',
         location: 'UAE',
@@ -46,7 +46,7 @@ export default function TrendingTours() {
         <TourCategoryPage
             title="Trending Destinations"
             subtitle="Explore the most sought-after holiday spots"
-            bannerImage="https://www.wegomap.com/uploads/categories/trending-destinations-banner.jpg"
+            bannerImage="/uploads/categories/RGxMvYvzCLbM6yh3pdugbvHbBKzFH2R2lBzRjA2d260225042331.jpg"
             packages={packages}
             readMoreHeading="What's Hot in Travel?"
             readMoreContent={

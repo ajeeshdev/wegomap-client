@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Darjeeling Tour Package',
         description: 'DARJEELING',
-        images: ['https://www.wegomap.com/uploads/categories/2z1agsq6wrwibgatjiamea7pftxta7cgalenltcc240904030146.jpg'],
+        images: ['/uploads/categories/2z1agsq6wrwibgatjiamea7pftxta7cgalenltcc240904030146.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/darjeeling',

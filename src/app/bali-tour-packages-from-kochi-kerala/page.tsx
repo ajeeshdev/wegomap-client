@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/bali-tour-plan.jpg',
+        image: '/uploads/packages/xe9jtsf7cqwsux9oqjjcp5btcdtpwcyduqxksib9240827103944.jpg',
         duration: '3 Nights 4 Days',
         title: 'Bali Budget Tour Plan',
         location: 'Ubud, Kuta',
@@ -12,7 +12,7 @@ const packages: TourPackage[] = [
         strip: 'Best Seller'
     },
     {
-        image: 'uploads/tours/4n5d-bali-tour-package.jpg',
+        image: '/uploads/packages/scjv80siga8jttcsryrjx5hfckuzsflpd6ten4ld240827103913.jpg',
         duration: '4 Nights 5 Days',
         title: 'Bali Tour Package',
         location: 'Seminyak, Jimbaran',
@@ -21,7 +21,7 @@ const packages: TourPackage[] = [
         detailUrl: 'tours/4n5d-bali-tour-package/'
     },
     {
-        image: 'uploads/tours/bali-tour-package-1.jpg',
+        image: '/uploads/packages/xe9jtsf7cqwsux9oqjjcp5btcdtpwcyduqxksib9240827103944.jpg',
         duration: '5 Nights 6 Days',
         title: 'Bali Standard tour',
         location: 'Uluwatu, Nusadua',
@@ -30,7 +30,7 @@ const packages: TourPackage[] = [
         detailUrl: 'tours/bali-tour-package-1/'
     },
     {
-        image: 'uploads/tours/bali-package.jpg',
+        image: '/uploads/packages/228m8vaurkhynfrnzxaqra00gehpticlwehmnkuv240827104950.jpg',
         duration: '5 Nights 6 Days',
         title: 'Bali Premium Package',
         location: 'Lempuyang, Tirta Gangga',
@@ -40,7 +40,7 @@ const packages: TourPackage[] = [
         strip: 'Premium'
     },
     {
-        image: 'uploads/tours/4n5d-bali-tour-package-premium.jpg',
+        image: '/uploads/packages/xe9jtsf7cqwsux9oqjjcp5btcdtpwcyduqxksib9240827103944.jpg',
         duration: '4 Nights 5 Days',
         title: 'Bali Premium Package (Best Summer Plan)',
         location: 'Ubud Swing, Tegenungan',
@@ -55,7 +55,7 @@ export default function BaliTours() {
         <TourCategoryPage
             title="Bali Tour Packages"
             subtitle="The island of gods and stunning sunsets"
-            bannerImage="https://www.wegomap.com/uploads/categories/bali-banner.jpg"
+            bannerImage="/uploads/categories/OxYqjL0LqhZkWDzbrEPHes80B62ydktSv747gXm0240827104701.jpg"
             packages={packages}
             readMoreHeading="Plan your Bali Escape"
             readMoreContent={

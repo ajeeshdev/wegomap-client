@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Malaysia Tour Packages',
         description: 'Malaysia Tour Package',
-        images: ['https://www.wegomap.com/uploads/categories/7Er9MHHpU4tIDnHWJm9rmvpELUno6GQ2zdd7pozR240821040000.jpg'],
+        images: ['/uploads/categories/7Er9MHHpU4tIDnHWJm9rmvpELUno6GQ2zdd7pozR240821040000.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/malaysia-tour-packages-from-kochi-kerala',

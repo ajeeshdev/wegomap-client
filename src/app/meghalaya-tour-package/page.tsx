@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/meghalaya.jpg',
+        image: '/uploads/packages/7zw7tf5mlcanzfebdwxti9b3pmhjvoteniv5cozl240904043422.jpg',
         duration: '4 Nights 5 Days',
         title: 'Assam Meghalaya Tour',
         location: 'Shillong, Guwahati',
@@ -18,7 +18,7 @@ export default function MeghalayaTours() {
         <TourCategoryPage
             title="Meghalaya Tour Package"
             subtitle="The abode of clouds"
-            bannerImage="https://www.wegomap.com/uploads/categories/meghalaya-banner.jpg"
+            bannerImage="/uploads/categories/r34Bg3glSVPv3yNqrsdDu6ZdJpx9fBTtZnXmbXI4240904044934.jpg"
             packages={packages}
             readMoreHeading="Explore the Beauty of Meghalaya & Assam"
             readMoreContent={

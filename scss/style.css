@@ -1767,6 +1767,88 @@ header .button-wrapper .login-link:hover {
   border-color: #94a3b8;
   background-color: #f8fafc;
 }
+header .button-wrapper .profileWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+header .button-wrapper .profileWrapper .profileBtn {
+  background: none;
+  border: 1px solid #e2e8f0;
+  padding: 0.4rem;
+  color: #1e293b;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+header .button-wrapper .profileWrapper .profileBtn:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+}
+header .button-wrapper .profileWrapper .profileDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 10px;
+  background: #ffffff;
+  border-radius: 1.25rem;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15);
+  min-width: 260px;
+  padding: 1.25rem 0;
+  z-index: 1000;
+  border: 1px solid #e2e8f0;
+  animation: fadeInDown 0.2s ease-out forwards;
+}
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+header .button-wrapper .profileWrapper .profileDropdown .dropdownItem {
+  padding: 0 1rem;
+}
+header .button-wrapper .profileWrapper .profileDropdown .dropdownItem a,
+header .button-wrapper .profileWrapper .profileDropdown .dropdownItem .logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.875rem 1rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #0f172a;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-align: left;
+}
+header .button-wrapper .profileWrapper .profileDropdown .dropdownItem a:hover,
+header .button-wrapper .profileWrapper .profileDropdown .dropdownItem .logoutBtn:hover {
+  background-color: #f8fafc;
+}
+header .button-wrapper .profileWrapper .profileDropdown .dropdownItem a svg,
+header .button-wrapper .profileWrapper .profileDropdown .dropdownItem .logoutBtn svg {
+  color: #1e293b;
+}
+header .button-wrapper .profileWrapper .profileDropdown .dropdownItem .logoutBtn {
+  font-weight: 600;
+}
+header .button-wrapper .profileWrapper .profileDropdown .dropdownDivider {
+  height: 1px;
+  background-color: #f1f5f9;
+  margin: 1rem 1.5rem;
+}
 header .button-wrapper .modernHamburger {
   display: flex;
   margin-left: 0.5rem;
@@ -7552,6 +7634,1034 @@ footer .footerBottom .socialLinks a:hover {
     box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
   }
 }
+.tourCatPage {
+  background-color: #f8fafc;
+  min-height: 100vh;
+  padding-bottom: 4rem;
+}
+
+.tourCatBanner {
+  position: relative;
+  height: 60vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  .tourCatBanner {
+    height: 70vh;
+  }
+}
+.tourCatBanner .tourCatBannerImg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.tourCatBanner .tourCatBannerImg img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.tourCatBanner .tourCatBannerOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.8));
+  z-index: 1;
+}
+.tourCatBanner .tourCatBannerContent {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #ffffff;
+  padding: 0 1rem;
+  max-width: 800px;
+}
+.tourCatBanner .tourCatBannerContent .tourCatBannerTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+@media (min-width: 768px) {
+  .tourCatBanner .tourCatBannerContent .tourCatBannerTitle {
+    font-size: 4rem;
+  }
+}
+.tourCatBanner .tourCatBannerContent .tourCatBannerSub {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #e2e8f0;
+  margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+  .tourCatBanner .tourCatBannerContent .tourCatBannerSub {
+    font-size: 1.25rem;
+  }
+}
+.tourCatBanner .tourCatBannerContent .tourCatRating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: -moz-max-content;
+  width: max-content;
+  margin: 0 auto;
+}
+.tourCatBanner .tourCatBannerContent .tourCatRating .tourCatRatingScore {
+  font-weight: 800;
+  font-size: 1.125rem;
+}
+.tourCatBanner .tourCatBannerContent .tourCatRating .tourCatStars {
+  color: #fbbf24;
+  letter-spacing: 0.1em;
+}
+.tourCatBanner .tourCatBannerContent .tourCatRating .tourCatReviewCount {
+  font-size: 0.875rem;
+  display: none;
+}
+@media (min-width: 640px) {
+  .tourCatBanner .tourCatBannerContent .tourCatRating .tourCatReviewCount {
+    display: inline-block;
+  }
+}
+
+.tourCatContainer {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+@media (min-width: 640px) {
+  .tourCatContainer {
+    padding: 0 2rem;
+  }
+}
+
+.tourCatPackages {
+  position: relative;
+  z-index: 10;
+  margin-top: -3rem;
+}
+.tourCatPackages .tourCatBookedBadge {
+  background-color: #ffffff;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #334155;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  margin-bottom: 2rem;
+}
+.tourCatPackages .tourCatBookedBadge .tourCatBookedNum {
+  color: #ef4444;
+  font-weight: 800;
+}
+.tourCatPackages .tourCatIntro {
+  color: #475569;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  margin-bottom: 3rem;
+  max-width: 900px;
+}
+.tourCatPackages .tourCatGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media (min-width: 640px) {
+  .tourCatPackages .tourCatGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .tourCatPackages .tourCatGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+}
+.tourCatPackages .tourCatGrid .tourCatCard {
+  background-color: #ffffff;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+.tourCatPackages .tourCatGrid .tourCatCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+.tourCatPackages .tourCatGrid .tourCatCard .tourCatCardImgWrap {
+  position: relative;
+  width: 100%;
+  padding-top: 66.66%;
+  display: block;
+}
+.tourCatPackages .tourCatGrid .tourCatCard .tourCatCardImgWrap img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.tourCatPackages .tourCatGrid .tourCatCard .tourCatCardImgWrap:hover img {
+  transform: scale(1.05);
+}
+.tourCatPackages .tourCatGrid .tourCatCard .tourCatCardImgWrap .tourCatCardStrip {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: #ef4444;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+.tourCatPackages .tourCatGrid .tourCatCard .tourCatCardBody {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.tourCatPackages .tourCatGrid .tourCatCard .tourCatCardBody .tourCatCardDuration {
+  color: #0f172a;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+.tourCatPackages .tourCatGrid .tourCatCard .tourCatCardBody .tourCatCardTitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+  transition: color 0.2s;
+}
+.tourCatPackages .tourCatGrid .tourCatCard .tourCatCardBody .tourCatCardTitle:hover {
+  color: #1673B8;
+}
+.tourCatPackages .tourCatGrid .tourCatCard .tourCatCardBody .tourCatCardLocation {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #64748b;
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+.tourCatPackages .tourCatGrid .tourCatCard .tourCatCardBody .tourCatCardLocation .tourCatDot {
+  color: #cbd5e1;
+  font-size: 0.5rem;
+}
+.tourCatPackages .tourCatGrid .tourCatCard .tourCatCardBody .tourCatCardPricing {
+  margin-top: auto;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.tourCatPackages .tourCatGrid .tourCatCard .tourCatCardBody .tourCatCardPricing .tourCatPrice {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #0f172a;
+}
+.tourCatPackages .tourCatGrid .tourCatCard .tourCatCardBody .tourCatCardPricing .tourCatOrigPrice {
+  font-size: 1rem;
+  color: #94a3b8;
+  text-decoration: line-through;
+}
+.tourCatPackages .tourCatGrid .tourCatCard .tourCatCardBody .tourCatCardPricing .tourCatPerPerson {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+.tourCatPackages .tourCatGrid .tourCatCard .tourCatCardBody .tourCatCardBtns {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 0.75rem;
+}
+.tourCatPackages .tourCatGrid .tourCatCard .tourCatCardBody .tourCatCardBtns .tourCatEnquireBtn {
+  background-color: #1673B8;
+  color: #000;
+  font-weight: 800;
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  transition: all 0.2s;
+}
+.tourCatPackages .tourCatGrid .tourCatCard .tourCatCardBody .tourCatCardBtns .tourCatEnquireBtn:hover {
+  background-color: rgb(16.5533980583, 86.5291262136, 138.4466019417);
+}
+.tourCatPackages .tourCatGrid .tourCatCard .tourCatCardBody .tourCatCardBtns .tourCatDetailsBtn {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  transition: all 0.2s;
+}
+.tourCatPackages .tourCatGrid .tourCatCard .tourCatCardBody .tourCatCardBtns .tourCatDetailsBtn:hover {
+  background-color: #e2e8f0;
+}
+
+.tourCatReadMore {
+  margin: 5rem 0;
+}
+.tourCatReadMore .tourCatReadMoreHeading {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 2rem;
+}
+.tourCatReadMore .tourCatReadMoreHeading .tourCatHeadingHighlight {
+  position: relative;
+  z-index: 1;
+}
+.tourCatReadMore .tourCatReadMoreHeading .tourCatHeadingHighlight::after {
+  content: "";
+  position: absolute;
+  bottom: 0.2rem;
+  left: -0.2rem;
+  right: -0.2rem;
+  height: 0.5rem;
+  background-color: rgba(22, 115, 184, 0.4);
+  z-index: -1;
+}
+.tourCatReadMore .tourCatReadMoreBody p {
+  color: #475569;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+.tourCatReadMore .tourCatReadMoreBody p:last-child {
+  margin-bottom: 0;
+}
+
+.tourCatReviews {
+  background-color: #ffffff;
+  padding: 5rem 0;
+  margin-bottom: 5rem;
+}
+.tourCatReviews .tourCatReviewsTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #0f172a;
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+.tourCatReviews .tourCatReviewSwiper {
+  padding-bottom: 3rem !important;
+}
+.tourCatReviews .tourCatReviewCard {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tourCatReviews .tourCatReviewCard .tourCatReviewAvatar {
+  margin-bottom: 1rem;
+}
+.tourCatReviews .tourCatReviewCard .tourCatReviewAvatar img {
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+.tourCatReviews .tourCatReviewCard .tourCatReviewName {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+.tourCatReviews .tourCatReviewCard .tourCatReviewStars {
+  color: #fbbf24;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+}
+.tourCatReviews .tourCatReviewCard .tourCatReviewText {
+  color: #475569;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  flex-grow: 1;
+  font-style: italic;
+}
+.tourCatReviews .tourCatReviewCard .tourCatGoogleBadge {
+  margin-top: auto;
+  opacity: 0.8;
+}
+
+.tourCatCTA {
+  background-color: #0f172a;
+  padding: 5rem 0;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 2rem;
+  margin: 0 1rem 5rem 1rem;
+}
+@media (min-width: 640px) {
+  .tourCatCTA {
+    margin: 0 2rem 5rem 2rem;
+  }
+}
+.tourCatCTA .tourCatCTALabel {
+  color: #1673B8;
+  font-size: 0.875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+.tourCatCTA .tourCatCTATitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+@media (min-width: 768px) {
+  .tourCatCTA .tourCatCTATitle {
+    font-size: 3.5rem;
+  }
+}
+.tourCatCTA .tourCatCTASub {
+  color: #94a3b8;
+  font-size: 1.125rem;
+  margin-bottom: 3rem;
+}
+.tourCatCTA .tourCatCTABtns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+@media (min-width: 640px) {
+  .tourCatCTA .tourCatCTABtns {
+    flex-direction: row;
+  }
+}
+.tourCatCTA .tourCatCTABtns .tourCatCTAEnquire {
+  background-color: #1673B8;
+  color: #000;
+  font-weight: 800;
+  padding: 1rem 2.5rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.tourCatCTA .tourCatCTABtns .tourCatCTAEnquire:hover {
+  background-color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(22, 115, 184, 0.4);
+}
+.tourCatCTA .tourCatCTABtns .tourCatCTACall {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 1rem 2.5rem;
+  border-radius: 9999px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s;
+}
+.tourCatCTA .tourCatCTABtns .tourCatCTACall:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ── Global Info Banner ── */
+.infoPageBanner {
+  position: relative;
+  height: 50vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  .infoPageBanner {
+    height: 60vh;
+  }
+}
+.infoPageBanner .infoBannerImg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.infoPageBanner .infoBannerImg img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.infoPageBanner .infoBannerOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.4));
+  z-index: 1;
+}
+.infoPageBanner .infoBannerContent {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  max-width: 800px;
+  padding: 0 1.5rem;
+}
+.infoPageBanner .infoBannerContent .infoTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+@media (min-width: 768px) {
+  .infoPageBanner .infoBannerContent .infoTitle {
+    font-size: 4rem;
+  }
+}
+.infoPageBanner .infoBannerContent .infoSubtitle {
+  font-size: 1.125rem;
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+/* ── Info Container & Content ── */
+.infoContainer {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+@media (min-width: 640px) {
+  .infoContainer {
+    padding: 0 2rem;
+  }
+}
+
+.infoBodySection {
+  padding: 5rem 0;
+  min-height: 50vh;
+}
+.infoBodySection .infoLeadText {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: #475569;
+  margin-bottom: 2rem;
+  max-width: 900px;
+}
+.infoBodySection .infoTextRow p {
+  color: #475569;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+.infoBodySection .infoGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+@media (min-width: 768px) {
+  .infoBodySection .infoGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .infoBodySection .infoGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+}
+.infoBodySection .infoGrid .infoCard {
+  background-color: #ffffff;
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.infoBodySection .infoGrid .infoCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #1673B8;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.infoBodySection .infoGrid .infoCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+.infoBodySection .infoGrid .infoCard:hover::before {
+  transform: scaleX(1);
+}
+.infoBodySection .infoGrid .infoCard:hover .infoCardIcon {
+  background-color: rgba(22, 115, 184, 0.2);
+  transform: scale(1.1);
+}
+.infoBodySection .infoGrid .infoCard .infoCardIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 1rem;
+  background-color: #f1f5f9;
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+  color: #0f172a;
+  transition: all 0.3s ease;
+}
+.infoBodySection .infoGrid .infoCard .infoCardNumber {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 4rem;
+  font-weight: 900;
+  color: #f8fafc;
+  line-height: 1;
+  z-index: 0;
+}
+.infoBodySection .infoGrid .infoCard .infoCardTitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+.infoBodySection .infoGrid .infoCard .infoCardDesc {
+  color: #64748b;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Contact Sub-Page Specifics ── */
+.contactGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+@media (min-width: 1024px) {
+  .contactGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.contactBox {
+  background-color: #ffffff;
+  border-radius: 1.5rem;
+  padding: 3rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+.contactBox p {
+  color: #475569;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.contactBox p strong {
+  color: #0f172a;
+  font-weight: 700;
+  min-width: 80px;
+}
+.contactBox p a {
+  color: #1673B8;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.contactBox p a:hover {
+  color: rgb(13.8300970874, 72.2936893204, 115.6699029126);
+}
+
+/* ── Payment Specifics ── */
+.paymentRow {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: #f8fafc;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+  .paymentRow {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+.paymentRow .paymentBankData {
+  flex: 1;
+}
+.paymentRow .paymentBankData .bankName {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 1rem;
+}
+.paymentRow .paymentBankData .bankRow {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  margin-bottom: 0.5rem;
+}
+.paymentRow .paymentBankData .bankRow .bLabel {
+  color: #64748b;
+  font-weight: 500;
+}
+.paymentRow .paymentBankData .bankRow .bVal {
+  color: #0f172a;
+  font-weight: 700;
+}
+.paymentRow .paymentScan {
+  flex-shrink: 0;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.paymentRow .paymentScan img {
+  max-width: 150px;
+  height: auto;
+}
+
+/* ── Authentication Pages (Login, Sign Up) ── */
+.authPage {
+  min-height: 100vh;
+  display: flex;
+  background-color: #f8fafc;
+  /* Global styles reset for this layout */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.authPage .authLeft {
+  display: none;
+  width: 50%;
+  position: relative;
+  background-color: #0f172a;
+  overflow: hidden;
+}
+@media (min-width: 1024px) {
+  .authPage .authLeft {
+    display: block;
+  }
+}
+.authPage .authLeft .authImageWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.authPage .authLeft .authImageWrapper img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  opacity: 0.8;
+}
+.authPage .authLeft .authOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.4) 100%);
+  z-index: 1;
+}
+.authPage .authLeft .authBrand {
+  position: absolute;
+  top: 2.5rem;
+  left: 3rem;
+  z-index: 2;
+  color: white;
+}
+.authPage .authLeft .authBrand .logoText {
+  font-size: 1.75rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.authPage .authLeft .authBrand .logoText span {
+  color: #1673B8;
+}
+.authPage .authLeft .authQuoteBox {
+  position: absolute;
+  bottom: 4rem;
+  left: 3rem;
+  right: 3rem;
+  z-index: 2;
+  color: white;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.authPage .authLeft .authQuoteBox .quoteText {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+.authPage .authLeft .authQuoteBox .quoteAuthor {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: #1673B8;
+}
+.authPage .authLeft .authQuoteBox .quoteRole {
+  font-size: 0.875rem;
+  color: #cbd5e1;
+  margin-top: 0.25rem;
+}
+.authPage .authRight {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+@media (min-width: 1024px) {
+  .authPage .authRight {
+    width: 50%;
+    padding: 4rem;
+  }
+}
+.authPage .authFormContainer {
+  width: 100%;
+  max-width: 440px;
+}
+.authPage .authFormContainer .authMobileLogo {
+  margin-bottom: 2rem;
+  display: block;
+}
+@media (min-width: 1024px) {
+  .authPage .authFormContainer .authMobileLogo {
+    display: none;
+  }
+}
+.authPage .authFormContainer .authMobileLogo .logoText {
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: #0f172a;
+}
+.authPage .authFormContainer .authMobileLogo .logoText span {
+  color: #1673B8;
+}
+.authPage .authFormContainer .authHeader {
+  margin-bottom: 2.5rem;
+}
+.authPage .authFormContainer .authHeader h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+.authPage .authFormContainer .authHeader p {
+  color: #64748b;
+  font-size: 1rem;
+}
+.authPage .authFormContainer .authForm .formGroup {
+  margin-bottom: 1.5rem;
+}
+.authPage .authFormContainer .authForm .formGroup label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.5rem;
+}
+.authPage .authFormContainer .authForm .formGroup .inputWrap {
+  position: relative;
+}
+.authPage .authFormContainer .authForm .formGroup .inputWrap .inputIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+}
+.authPage .authFormContainer .authForm .formGroup .inputWrap input {
+  width: 100%;
+  padding: 0.875rem 1rem 0.875rem 2.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  color: #0f172a;
+  background-color: #ffffff;
+  transition: all 0.2s;
+}
+.authPage .authFormContainer .authForm .formGroup .inputWrap input::-moz-placeholder {
+  color: #94a3b8;
+}
+.authPage .authFormContainer .authForm .formGroup .inputWrap input::placeholder {
+  color: #94a3b8;
+}
+.authPage .authFormContainer .authForm .formGroup .inputWrap input:focus {
+  outline: none;
+  border-color: #0f172a;
+  box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.1);
+}
+.authPage .authFormContainer .authForm .formGroup .inputWrap .passwordToggle {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 0;
+}
+.authPage .authFormContainer .authForm .formGroup .inputWrap .passwordToggle:hover {
+  color: #475569;
+}
+.authPage .authFormContainer .authForm .formOptions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.authPage .authFormContainer .authForm .formOptions .rememberCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+.authPage .authFormContainer .authForm .formOptions .rememberCheckbox input[type=checkbox] {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid #cbd5e1;
+  accent-color: #0f172a;
+}
+.authPage .authFormContainer .authForm .formOptions .rememberCheckbox span {
+  font-size: 0.875rem;
+  color: #475569;
+}
+.authPage .authFormContainer .authForm .formOptions .forgotLink {
+  font-size: 0.875rem;
+  color: #0ea5e9;
+  font-weight: 600;
+  text-decoration: none;
+}
+.authPage .authFormContainer .authForm .formOptions .forgotLink:hover {
+  text-decoration: underline;
+}
+.authPage .authFormContainer .authForm .submitBtn {
+  width: 100%;
+  background-color: #0f172a;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.authPage .authFormContainer .authForm .submitBtn:hover {
+  background-color: #1e293b;
+}
+.authPage .authFormContainer .authDivider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 2rem 0;
+  color: #94a3b8;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.authPage .authFormContainer .authDivider::before, .authPage .authFormContainer .authDivider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #e2e8f0;
+}
+.authPage .authFormContainer .authDivider::before {
+  margin-right: 1rem;
+}
+.authPage .authFormContainer .authDivider::after {
+  margin-left: 1rem;
+}
+.authPage .authFormContainer .socialAuth {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+.authPage .authFormContainer .socialAuth .socialBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.875rem;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.75rem;
+  color: #334155;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.authPage .authFormContainer .socialAuth .socialBtn:hover {
+  background-color: #f8fafc;
+  border-color: #94a3b8;
+}
+.authPage .authFormContainer .socialAuth .socialBtn img {
+  width: 24px;
+  height: 24px;
+}
+.authPage .authFormContainer .authFooter {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #475569;
+}
+.authPage .authFormContainer .authFooter a {
+  color: #0f172a;
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 0.25rem;
+}
+.authPage .authFormContainer .authFooter a:hover {
+  text-decoration: underline;
+}
+
 .not-found {
   padding-top: clamp(80px, 7.97vw, 153px);
   padding-bottom: clamp(80px, 7.97vw, 120px);

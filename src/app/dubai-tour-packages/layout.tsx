@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Dubai Tour Packages',
         description: 'Dubai Holidays',
-        images: ['https://www.wegomap.com/uploads/categories/y7acfjy1zi0t3c9rpn4ftogqxtwytpflgfocfmrq240905095417.jpg'],
+        images: ['/uploads/categories/y7acfjy1zi0t3c9rpn4ftogqxtwytpflgfocfmrq240905095417.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/dubai-tour-packages',

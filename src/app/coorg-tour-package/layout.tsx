@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Coorg Tour Package',
         description: '2N Coorg',
-        images: ['https://www.wegomap.com/uploads/categories/l4zbbjoyo4v19xzlzb4flec9ddgsenpvfhqgyzsg240906100043.jpg'],
+        images: ['/uploads/categories/l4zbbjoyo4v19xzlzb4flec9ddgsenpvfhqgyzsg240906100043.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/coorg-tour-package',

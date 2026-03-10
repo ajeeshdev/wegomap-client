@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Singapore Tour Package',
         description: 'Singapore Tour Package',
-        images: ['https://www.wegomap.com/uploads/categories/KENL2OFT3a7kTbcVoTO8SQYucDDNMiWvx6DeaIEk240827110728.jpg'],
+        images: ['/uploads/categories/KENL2OFT3a7kTbcVoTO8SQYucDDNMiWvx6DeaIEk240827110728.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/singapore-tour-package',

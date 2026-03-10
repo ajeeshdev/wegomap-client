@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/ooty-kodaikanal.jpg',
+        image: '/uploads/packages/ilprye3rqzkqmd7ruvf8uvu2xqgj6p92iwuhnbeh240905040700.jpg',
         duration: '4 Nights 5 Days',
         title: 'Ooty Kodaikanal Package',
         location: 'Ooty, Kodaikanal',
@@ -18,7 +18,7 @@ export default function OotyKodaikanalTours() {
         <TourCategoryPage
             title="Ooty Kodaikanal Tour Packages"
             subtitle="The best of Tamil Nadu hill stations"
-            bannerImage="https://www.wegomap.com/uploads/categories/ooty-kodaikanal-banner.jpg"
+            bannerImage="/uploads/categories/gooqe4hpze2i6jmaewve7pyud8kofwvwpunfxgql240905041417.jpg"
             packages={packages}
             readMoreHeading="Complete Hill Station Experience"
             readMoreContent={

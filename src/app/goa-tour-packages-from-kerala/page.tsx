@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/goa-package-3-days-2-night.jpg',
+        image: '/uploads/packages/q2zgcmko8vaz9urxqizdz53eyfbc8vnjxe2uis9a240905105822.jpg',
         duration: '2 Nights 3 Days',
         title: 'Goa Tour Package',
         location: 'North Goa, South Goa',
@@ -12,7 +12,7 @@ const packages: TourPackage[] = [
         strip: 'Best Seller'
     },
     {
-        image: 'uploads/tours/goa-package-4-days-3-night.jpg',
+        image: '/uploads/packages/q2zgcmko8vaz9urxqizdz53eyfbc8vnjxe2uis9a240905105822.jpg',
         duration: '3 Nights 4 Days',
         title: 'Goa Tour Package',
         location: 'Calangute, Baga, Old Goa',
@@ -21,7 +21,7 @@ const packages: TourPackage[] = [
         detailUrl: 'goa-tour-packages-from-kerala/'
     },
     {
-        image: 'uploads/tours/goa-package-5-days-4-night.jpg',
+        image: '/uploads/packages/q2zgcmko8vaz9urxqizdz53eyfbc8vnjxe2uis9a240905105822.jpg',
         duration: '4 Nights 5 Days',
         title: 'Goa Tour Package',
         location: 'Panaji, Beaches, Cruises',
@@ -36,7 +36,7 @@ export default function GoaTours() {
         <TourCategoryPage
             title="Goa Tour Packages"
             subtitle="Land of sun, sand, and sea"
-            bannerImage="https://www.wegomap.com/uploads/categories/goa-banner.jpg"
+            bannerImage="/uploads/categories/86wg9d29vhkflmuwtyrsof3rfqtcapzgva0ynqlp220406065630.jpg"
             packages={packages}
             readMoreHeading="Plan your perfect Goa Getaway"
             readMoreContent={

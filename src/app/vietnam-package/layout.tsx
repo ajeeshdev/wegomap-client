@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Vietnam Package',
         description: 'Vietnam',
-        images: ['https://www.wegomap.com/uploads/categories/6f5f3mvihdthwolvbykh1fxl0nbavck38y47ubvs250605123703.jpg'],
+        images: ['/uploads/categories/6f5f3mvihdthwolvbykh1fxl0nbavck38y47ubvs250605123703.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/vietnam-package',

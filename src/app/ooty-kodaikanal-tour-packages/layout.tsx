@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Ooty & Kodaikanal Packages',
         description: '2N Ooty, 2N Kodaikanal',
-        images: ['https://www.wegomap.com/uploads/categories/gooqe4hpze2i6jmaewve7pyud8kofwvwpunfxgql240905041417.jpg'],
+        images: ['/uploads/categories/gooqe4hpze2i6jmaewve7pyud8kofwvwpunfxgql240905041417.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/ooty-kodaikanal-tour-packages',

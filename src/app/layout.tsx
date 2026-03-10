@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileNav from "@/components/MobileNav";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import AppGoogleAuthProvider from "@/components/GoogleAuthProvider";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -30,11 +31,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.variable} ${dancingScript.variable} font-sans antialiased text-slate-900 bg-white`}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <MobileNav />
-        <FloatingWhatsApp />
+        <AppGoogleAuthProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+          <MobileNav />
+          <FloatingWhatsApp />
+        </AppGoogleAuthProvider>
       </body>
     </html>
   );

@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/coorg-package.jpg',
+        image: '/uploads/packages/mksp2z9emdc8ymkinijvjc85atc6cbl6wzpq1pam240906105051.jpg',
         duration: '2 Nights 3 Days',
         title: 'Coorg Tour Package',
         location: 'Coorg / Madikeri',
@@ -18,7 +18,7 @@ export default function CoorgTours() {
         <TourCategoryPage
             title="Coorg Tour Package"
             subtitle="The Scotland of India"
-            bannerImage="https://www.wegomap.com/uploads/categories/coorg-banner.jpg"
+            bannerImage="/uploads/categories/l4zbbjoyo4v19xzlzb4flec9ddgsenpvfhqgyzsg240906100043.jpg"
             packages={packages}
             readMoreHeading="Explore Coorg with Wegomap"
             readMoreContent={

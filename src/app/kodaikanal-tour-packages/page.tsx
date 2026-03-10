@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/kodaikanal.jpg',
+        image: '/uploads/packages/zz78tl2qmhwn8woqay4nx44kn3c6nj9bdbfqq11u240906103238.jpg',
         duration: '2 Nights 3 Days',
         title: 'Kodaikanal Tour Packages',
         location: 'Kodaikanal',
@@ -18,7 +18,7 @@ export default function KodaikanalTours() {
         <TourCategoryPage
             title="Kodaikanal Tour Packages"
             subtitle="The gift of the forest"
-            bannerImage="https://www.wegomap.com/uploads/categories/kodaikanal-banner.jpg"
+            bannerImage="/uploads/categories/umwfsgcys5bekqzaaga7nsholfjuuhiqvnal5r4o240905034708.jpg"
             packages={packages}
             readMoreHeading="A Refreshing Trip to Kodaikanal"
             readMoreContent={

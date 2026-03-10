@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/golden-triangle.jpg',
+        image: '/uploads/packages/aiwgy8tafcpau9dgatsmnlnk1yfvugillle8yzbh240905024128.png',
         duration: '5 Nights 6 Days',
         title: 'Golden Triangle Package',
         location: 'Delhi, Agra, Jaipur',
@@ -18,7 +18,7 @@ export default function GoldenTriangleTours() {
         <TourCategoryPage
             title="Golden Triangle Tour Package"
             subtitle="Explore the historic heart of India"
-            bannerImage="https://www.wegomap.com/uploads/categories/golden-triangle-banner.jpg"
+            bannerImage="/uploads/categories/1cs3jcryqwyeiskhq76sy33is8ico6qqnulbrskv240905024238.jpg"
             packages={packages}
             readMoreHeading="India's Iconic Golden Triangle"
             readMoreContent={

@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/ooty-package.jpg',
+        image: '/uploads/packages/8zogew9nlpyyvhabbux8k4nomjvcwhbxul19urz9240905041659.jpg',
         duration: '2 Nights 3 Days',
         title: 'Ooty Tour Packages',
         location: 'Ooty / Nilgiris',
@@ -18,7 +18,7 @@ export default function OotyTours() {
         <TourCategoryPage
             title="Ooty Tour Packages"
             subtitle="The blue mountains"
-            bannerImage="https://www.wegomap.com/uploads/categories/ooty-banner.jpg"
+            bannerImage="/uploads/categories/xivejtmsap5g34sse6prhfkyykvxzhw9lanygtbt240905034008.jpg"
             packages={packages}
             readMoreHeading="A Refreshing Getaway to Ooty"
             readMoreContent={

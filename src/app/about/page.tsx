@@ -10,9 +10,9 @@ import 'swiper/css/effect-fade';
 import PageBanner from '@/components/PageBanner';
 
 const carouselImages = [
-    { src: 'https://www.wegomap.com/assests/site/assets/images/about-1.jpg', alt: 'About Wegomap 1' },
-    { src: 'https://www.wegomap.com/assests/site/assets/images/about-3.jpg', alt: 'About Wegomap 2' },
-    { src: 'https://www.wegomap.com/assests/site/assets/images/about-2.jpg', alt: 'About Wegomap 3' },
+    { src: '/assests/site/assets/images/about-1.jpg', alt: 'About Wegomap 1' },
+    { src: '/assests/site/assets/images/about-3.jpg', alt: 'About Wegomap 2' },
+    { src: '/assests/site/assets/images/about-2.jpg', alt: 'About Wegomap 3' },
 ];
 
 export default function AboutPage() {

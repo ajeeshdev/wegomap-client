@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/3-days-2-night-kerala-package.jpg',
+        image: '/uploads/packages/dw03erik9i4urenemjauu0deqjpcxjf4dsvsaejq220406030155.jpg',
         duration: '2N Munnar Hillstations',
         title: '2N3D Kerala Budget Package',
         location: 'Munnar',
@@ -11,7 +11,7 @@ const packages: TourPackage[] = [
         detailUrl: 'kerala-tour-packages/tours/3-days-2-night-kerala-package/'
     },
     {
-        image: 'uploads/tours/2n3d-kerala-budget-package.jpg',
+        image: '/uploads/packages/omdijhppsytnyos9dzbgrdsw4psir2y12qnt0udf220424115201.jpg',
         duration: '1N Athirapilly / 1N Aleppey',
         title: '2N3D Backwater & Waterfalls',
         location: 'Athirapilly, Alleppey',
@@ -20,7 +20,7 @@ const packages: TourPackage[] = [
         detailUrl: 'kerala-tour-packages/tours/2n3d-kerala-budget-package/'
     },
     {
-        image: 'uploads/tours/kerala-budget-package.jpg',
+        image: '/uploads/packages/omdijhppsytnyos9dzbgrdsw4psir2y12qnt0udf220424115201.jpg',
         duration: '2N Munnar / 1N Aleppey',
         title: '3N4D Hills & Backwater',
         location: 'Munnar, Alleppey',
@@ -29,7 +29,7 @@ const packages: TourPackage[] = [
         detailUrl: 'kerala-tour-packages/tours/kerala-budget-package/'
     },
     {
-        image: 'uploads/tours/2n3d-alleppey-wonderla-park.jpg',
+        image: '/uploads/packages/I47gsL6i77YHg3EspxbupTtCT3FaV5RzBCjNwAxN240907044833.jpg',
         duration: '1N Aleppey / 1N Kochi',
         title: '2N3D Alleppey & Wonderla',
         location: 'Alleppey, Kochi',
@@ -38,7 +38,7 @@ const packages: TourPackage[] = [
         detailUrl: 'kerala-tour-packages/tours/2n3d-alleppey-wonderla-park/'
     },
     {
-        image: 'uploads/tours/2n3d-kerala-luxury-package.jpg',
+        image: '/uploads/packages/dw03erik9i4urenemjauu0deqjpcxjf4dsvsaejq220406030155.jpg',
         duration: '2N Munnar Hillstations',
         title: '2N3D Luxury Hill station Plan',
         location: 'Munnar',
@@ -47,7 +47,7 @@ const packages: TourPackage[] = [
         detailUrl: 'kerala-tour-packages/tours/2n3d-kerala-luxury-package/'
     },
     {
-        image: 'uploads/tours/kerala-season-plan.jpg',
+        image: '/uploads/packages/rTyOuCPG9NxzaC3QrYXuqrJ6EE1uxfPijXWaXQyX221128120851.jpg',
         duration: '2N Munnar / 1N Thekkady / 1N Aleppey',
         title: 'Kerala Season Plan',
         location: 'Munnar, Thekkady, Alleppey',
@@ -56,7 +56,7 @@ const packages: TourPackage[] = [
         detailUrl: 'kerala-tour-packages/tours/kerala-season-plan/'
     },
     {
-        image: 'uploads/tours/4-days-3-night-kerala-package.jpg',
+        image: '/uploads/packages/rsz2kjlf4gfysupoyaqzjgsug665nqxnjcgapu71220406030620.jpg',
         duration: '2N Munnar / 1N Houseboat',
         title: '3N4D Kerala Budget Honeymoon',
         location: 'Munnar, Alleppey',
@@ -65,7 +65,7 @@ const packages: TourPackage[] = [
         detailUrl: 'kerala-tour-packages/tours/4-days-3-night-kerala-package/'
     },
     {
-        image: 'uploads/tours/2n3d-kerala-standard-package.jpg',
+        image: '/uploads/packages/zghmnaohkngpzisdeoffkgyescgmxmzzeymhixt1220424093908.jpg',
         duration: '1N Cherai / 1N Houseboat',
         title: 'Kerala Standard Beach & Houseboat',
         location: 'Cherai, Alleppey',
@@ -74,7 +74,7 @@ const packages: TourPackage[] = [
         detailUrl: 'kerala-tour-packages/tours/2n3d-kerala-standard-package/'
     },
     {
-        image: 'uploads/tours/3n4d-kerala-honeymoon-package.jpg',
+        image: '/uploads/packages/sy0vagizrdt3llotbebojqwemftmafovkq0umv8s220406032045.jpg',
         duration: '2N Munnar / 1N Houseboat',
         title: '3N4D Kerala Standard Honeymoon',
         location: 'Munnar, Alleppey',
@@ -83,7 +83,7 @@ const packages: TourPackage[] = [
         detailUrl: 'kerala-tour-packages/tours/3n4d-kerala-honeymoon-package/'
     },
     {
-        image: 'uploads/tours/4n5d-kerala-budget-package.jpg',
+        image: '/uploads/packages/dw03erik9i4urenemjauu0deqjpcxjf4dsvsaejq220406030155.jpg',
         duration: '2N Munnar / 1N Thekkady / 1N Houseboat',
         title: '4N5D Kerala Budget (Waterfalls)',
         location: 'Munnar, Thekkady, Alleppey',
@@ -98,7 +98,7 @@ export default function KeralaTours() {
         <TourCategoryPage
             title="Kerala Tour Packages"
             subtitle="Explore god's own country with us"
-            bannerImage="https://www.wegomap.com/uploads/categories/Tea-plantation-landscape-Munnar.jpg"
+            bannerImage="/uploads/categories/mkofb4my0uzjne7xzy1gnoaxbdwiovxvoot9eklr220410092321.jpg"
             packages={packages}
             readMoreHeading="Best Kerala Tour Packages from Kochi"
             readMoreContent={

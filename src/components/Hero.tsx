@@ -18,45 +18,45 @@ const slides = [
         subtitle: "A Journey Through Paradise",
         buttonText: "Kerala Packages",
         buttonHref: "/kerala-tour-packages",
-        imgDesktop: "https://www.wegomap.com/uploads/sliders/u4Ls79zJPPnZeU9jFEzsHRnCLiXvXeqdovdlckqM260226031959.jpg",
-        imgMobile: "https://www.wegomap.com/uploads/sliders/u4Ls79zJPPnZeU9jFEzsHRnCLiXvXeqdovdlckqM260226031959-985x500.jpg",
-        imgPortrait: "https://www.wegomap.com/uploads/sliders/u4Ls79zJPPnZeU9jFEzsHRnCLiXvXeqdovdlckqM260226031959-412x915.jpg"
+        imgDesktop: "/uploads/sliders/u4Ls79zJPPnZeU9jFEzsHRnCLiXvXeqdovdlckqM260226031959.jpg",
+        imgMobile: "/uploads/sliders/u4Ls79zJPPnZeU9jFEzsHRnCLiXvXeqdovdlckqM260226031959-985x500.jpg",
+        imgPortrait: "/uploads/sliders/u4Ls79zJPPnZeU9jFEzsHRnCLiXvXeqdovdlckqM260226031959-412x915.jpg"
     },
     {
         title: "Amazing Thailand",
         subtitle: "The Land of Smiles Awaits",
         buttonText: "Thailand Packages",
         buttonHref: "/international-packages",
-        imgDesktop: "https://www.wegomap.com/uploads/sliders/VXL3I4Y7Rvrn4oVcX2IjQXxniHzV4jdbFaFGcFIq250715061723.jpg",
-        imgMobile: "https://www.wegomap.com/uploads/sliders/VXL3I4Y7Rvrn4oVcX2IjQXxniHzV4jdbFaFGcFIq250715061723-985x500.jpg",
-        imgPortrait: "https://www.wegomap.com/uploads/sliders/VXL3I4Y7Rvrn4oVcX2IjQXxniHzV4jdbFaFGcFIq250715061723-412x915.jpg"
+        imgDesktop: "/uploads/sliders/VXL3I4Y7Rvrn4oVcX2IjQXxniHzV4jdbFaFGcFIq250715061723.jpg",
+        imgMobile: "/uploads/sliders/VXL3I4Y7Rvrn4oVcX2IjQXxniHzV4jdbFaFGcFIq250715061723-985x500.jpg",
+        imgPortrait: "/uploads/sliders/VXL3I4Y7Rvrn4oVcX2IjQXxniHzV4jdbFaFGcFIq250715061723-412x915.jpg"
     },
     {
         title: "Sail Away in Luxury",
         subtitle: "Relaxation with Ocean Views",
         buttonText: "View More",
         buttonHref: "/cruise-packages",
-        imgDesktop: "https://www.wegomap.com/uploads/sliders/47i1zjrs0f2dSgQUuuIc3wIBajZyoqVIwDnybQ7L250901035243.jpg",
-        imgMobile: "https://www.wegomap.com/uploads/sliders/47i1zjrs0f2dSgQUuuIc3wIBajZyoqVIwDnybQ7L250901035243-985x500.jpg",
-        imgPortrait: "https://www.wegomap.com/uploads/sliders/47i1zjrs0f2dSgQUuuIc3wIBajZyoqVIwDnybQ7L250901035243-412x915.jpg"
+        imgDesktop: "/uploads/sliders/47i1zjrs0f2dSgQUuuIc3wIBajZyoqVIwDnybQ7L250901035243.jpg",
+        imgMobile: "/uploads/sliders/47i1zjrs0f2dSgQUuuIc3wIBajZyoqVIwDnybQ7L250901035243-985x500.jpg",
+        imgPortrait: "/uploads/sliders/47i1zjrs0f2dSgQUuuIc3wIBajZyoqVIwDnybQ7L250901035243-412x915.jpg"
     },
     {
         title: "Beautiful Malaysia",
         subtitle: "Tropical Trails of Malaysia",
         buttonText: "Malaysian Packages",
         buttonHref: "/international-packages",
-        imgDesktop: "https://www.wegomap.com/uploads/sliders/fubJmwGlkYE1fIaZH8OHcrTQYp1ck3RDDSLhLA27250715061738.jpg",
-        imgMobile: "https://www.wegomap.com/uploads/sliders/fubJmwGlkYE1fIaZH8OHcrTQYp1ck3RDDSLhLA27250715061738-985x500.jpg",
-        imgPortrait: "https://www.wegomap.com/uploads/sliders/fubJmwGlkYE1fIaZH8OHcrTQYp1ck3RDDSLhLA27250715061738-412x915.jpg"
+        imgDesktop: "/uploads/sliders/fubJmwGlkYE1fIaZH8OHcrTQYp1ck3RDDSLhLA27250715061738.jpg",
+        imgMobile: "/uploads/sliders/fubJmwGlkYE1fIaZH8OHcrTQYp1ck3RDDSLhLA27250715061738-985x500.jpg",
+        imgPortrait: "/uploads/sliders/fubJmwGlkYE1fIaZH8OHcrTQYp1ck3RDDSLhLA27250715061738-412x915.jpg"
     },
     {
         title: "Corporate Events",
         subtitle: "Celebrate in Style",
         buttonText: "View more",
         buttonHref: "/corporate-event-management-company-kochi",
-        imgDesktop: "https://www.wegomap.com/uploads/sliders/hA1u3jrSMYiQ4140gXAuTl3ZU0AKikjxagS1mnSy250901042122.jpg",
-        imgMobile: "https://www.wegomap.com/uploads/sliders/hA1u3jrSMYiQ4140gXAuTl3ZU0AKikjxagS1mnSy250901042122-985x500.jpg",
-        imgPortrait: "https://www.wegomap.com/uploads/sliders/hA1u3jrSMYiQ4140gXAuTl3ZU0AKikjxagS1mnSy250901042122-412x915.jpg"
+        imgDesktop: "/uploads/sliders/hA1u3jrSMYiQ4140gXAuTl3ZU0AKikjxagS1mnSy250901042122.jpg",
+        imgMobile: "/uploads/sliders/hA1u3jrSMYiQ4140gXAuTl3ZU0AKikjxagS1mnSy250901042122-985x500.jpg",
+        imgPortrait: "/uploads/sliders/hA1u3jrSMYiQ4140gXAuTl3ZU0AKikjxagS1mnSy250901042122-412x915.jpg"
     }
 ];
 

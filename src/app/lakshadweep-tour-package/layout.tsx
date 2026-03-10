@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Lakshadweep Tour Package',
         description: '3N Agatti island',
-        images: ['https://www.wegomap.com/uploads/categories/vjy7xslqm4mc1yqd6utmyochqman4xalxjfiyzoa240820042745.jpg'],
+        images: ['/uploads/categories/vjy7xslqm4mc1yqd6utmyochqman4xalxjfiyzoa240820042745.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/lakshadweep-tour-package',

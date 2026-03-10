@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/sri-lanka.jpg',
+        image: '/uploads/packages/7mCmQivsI7l0TYGuG2vOOJ6dBjrrM5TevOHyvtq1240820125113.jpg',
         duration: '4 Nights 5 Days',
         title: 'Sri Lanka Package',
         location: 'Colombo, Kandy, Bentota',
@@ -18,7 +18,7 @@ export default function SriLankaTours() {
         <TourCategoryPage
             title="Sri Lanka"
             subtitle="Explore the pearl of the Indian Ocean"
-            bannerImage="https://www.wegomap.com/uploads/categories/sri-lanka-banner.jpg"
+            bannerImage="/uploads/categories/2fsdkcfcklfcdvyblurq0wzrrmyp0rhlhuamkriq240820031509.jpg"
             packages={packages}
             readMoreHeading="Discover Sri Lanka with Wegomap"
             readMoreContent={

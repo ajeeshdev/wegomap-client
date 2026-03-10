@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/bhutan-7d.jpg',
+        image: '/uploads/packages/lsmdanwguapamdapyzttjtog1a5wl6tawqdpxz0o240904035156.png',
         duration: '6 Nights 7 Days',
         title: 'Bhutan Package',
         location: 'Paro, Thimphu, Punakha',
@@ -18,7 +18,7 @@ export default function BhutanTours() {
         <TourCategoryPage
             title="Bhutan Packages"
             subtitle="Explore the land of the thunder dragon"
-            bannerImage="https://www.wegomap.com/uploads/categories/bhutan-banner.jpg"
+            bannerImage="/uploads/categories/5z2forothrchrzckhauy3hq8zxsxchlbx2rncnzx240904035922.jpg"
             packages={packages}
             readMoreHeading="A Spiritual Journey to Bhutan"
             readMoreContent={

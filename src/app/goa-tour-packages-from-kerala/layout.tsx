@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Goa Tour Packages',
         description: 'Explore with us',
-        images: ['https://www.wegomap.com/uploads/categories/86wg9d29vhkflmuwtyrsof3rfqtcapzgva0ynqlp220406065630.jpg'],
+        images: ['/uploads/categories/86wg9d29vhkflmuwtyrsof3rfqtcapzgva0ynqlp220406065630.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/goa-tour-packages-from-kerala',

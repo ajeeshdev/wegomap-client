@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/deluxe-houseboat.jpg',
+        image: '/uploads/tours/deluxe-houseboat.jpg',
         duration: '1 Night / 21 Hours',
         title: 'Deluxe Houseboat',
         location: 'Alleppey / Kumarakom',
@@ -12,7 +12,7 @@ const packages: TourPackage[] = [
         strip: 'Popular'
     },
     {
-        image: 'uploads/tours/premium-houseboat.jpg',
+        image: '/uploads/tours/premium-houseboat.jpg',
         duration: '1 Night / 21 Hours',
         title: 'Premium Houseboat',
         location: 'Alleppey Backwaters',
@@ -22,7 +22,7 @@ const packages: TourPackage[] = [
         strip: 'Top Rated'
     },
     {
-        image: 'uploads/tours/luxury-houseboat.jpg',
+        image: '/uploads/tours/luxury-houseboat.jpg',
         duration: '1 Night / 21 Hours',
         title: 'Luxury Houseboat',
         location: 'Alleppey / Kumarakom',
@@ -38,7 +38,7 @@ export default function BoatHouse() {
         <TourCategoryPage
             title="Kerala Alleppey Boat House"
             subtitle="Cruise through the serene backwaters"
-            bannerImage="https://www.wegomap.com/uploads/categories/houseboat-banner.jpg"
+            bannerImage="/uploads/categories/houseboat-banner.jpg"
             packages={packages}
             readMoreHeading="Houseboat Packages in Alleppey"
             readMoreContent={

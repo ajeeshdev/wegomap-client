@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/rajasthan-5n6d.jpg',
+        image: '/uploads/packages/pxckp21pd9jsmx7demeb2jbi7zgowvjuac5dbkys240904024249.png',
         duration: '5 Nights 6 Days',
         title: 'Rajasthan Tour Package',
         location: 'Jaipur, Jodhpur, Udaipur',
@@ -18,7 +18,7 @@ export default function RajasthanTours() {
         <TourCategoryPage
             title="Rajasthan Tour Package"
             subtitle="The land of kings and colorful traditions"
-            bannerImage="https://www.wegomap.com/uploads/categories/rajasthan-banner.jpg"
+            bannerImage="/uploads/categories/twhsfbqthmna28zogfp3kpedhqd692qv29cqe85u240904024319.jpg"
             packages={packages}
             readMoreHeading="Royal Rajasthan Holiday"
             readMoreContent={

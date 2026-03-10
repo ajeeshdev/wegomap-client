@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Kodaikanal Tour Packages',
         description: '2N Kodaikanal',
-        images: ['https://www.wegomap.com/uploads/categories/umwfsgcys5bekqzaaga7nsholfjuuhiqvnal5r4o240905034708.jpg'],
+        images: ['/uploads/categories/umwfsgcys5bekqzaaga7nsholfjuuhiqvnal5r4o240905034708.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/kodaikanal-tour-packages',

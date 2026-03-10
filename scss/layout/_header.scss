@@ -215,6 +215,98 @@ header {
             }
         }
 
+        .profileWrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            .profileBtn {
+                background: none;
+                border: 1px solid #e2e8f0;
+                padding: 0.4rem;
+                color: #1e293b;
+                cursor: pointer;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s;
+
+                &:hover {
+                    background-color: #f1f5f9;
+                    border-color: #cbd5e1;
+                }
+            }
+
+            .profileDropdown {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                margin-top: 10px;
+                background: #ffffff;
+                border-radius: 1.25rem;
+                box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15);
+                min-width: 260px;
+                padding: 1.25rem 0;
+                z-index: 1000;
+                border: 1px solid #e2e8f0;
+                animation: fadeInDown 0.2s ease-out forwards;
+
+                @keyframes fadeInDown {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-10px);
+                    }
+
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+                .dropdownItem {
+                    padding: 0 1rem;
+
+                    a,
+                    .logoutBtn {
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;
+                        width: 100%;
+                        padding: 0.875rem 1rem;
+                        font-size: 1.05rem;
+                        font-weight: 500;
+                        color: #0f172a;
+                        text-decoration: none;
+                        background: transparent;
+                        border: none;
+                        border-radius: 0.75rem;
+                        cursor: pointer;
+                        transition: background-color 0.2s;
+                        text-align: left;
+
+                        &:hover {
+                            background-color: #f8fafc;
+                        }
+
+                        svg {
+                            color: #1e293b;
+                        }
+                    }
+
+                    .logoutBtn {
+                        font-weight: 600;
+                    }
+                }
+
+                .dropdownDivider {
+                    height: 1px;
+                    background-color: #f1f5f9;
+                    margin: 1rem 1.5rem;
+                }
+            }
+        }
+
         .modernHamburger {
             display: flex;
             margin-left: 0.5rem;

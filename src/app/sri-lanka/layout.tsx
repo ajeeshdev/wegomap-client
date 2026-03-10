@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Sri Lanka Tour Package',
         description: 'Sri Lanka',
-        images: ['https://www.wegomap.com/uploads/categories/2fsdkcfcklfcdvyblurq0wzrrmyp0rhlhuamkriq240820031509.jpg'],
+        images: ['/uploads/categories/2fsdkcfcklfcdvyblurq0wzrrmyp0rhlhuamkriq240820031509.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/sri-lanka',

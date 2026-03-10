@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Bali Tour Packages',
         description: 'Bali Holidays',
-        images: ['https://www.wegomap.com/uploads/categories/OxYqjL0LqhZkWDzbrEPHes80B62ydktSv747gXm0240827104701.jpg'],
+        images: ['/uploads/categories/OxYqjL0LqhZkWDzbrEPHes80B62ydktSv747gXm0240827104701.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/bali-tour-packages-from-kochi-kerala',

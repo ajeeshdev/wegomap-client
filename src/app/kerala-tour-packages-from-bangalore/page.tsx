@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/wayanad-budget-package.jpg',
+        image: '/uploads/packages/dw03erik9i4urenemjauu0deqjpcxjf4dsvsaejq220406030155.jpg',
         duration: '2N Wayanad',
         title: '2N3D Wayanad Budget Package',
         location: 'Wayanad',
@@ -12,7 +12,7 @@ const packages: TourPackage[] = [
         strip: 'Popular from Bangalore'
     },
     {
-        image: 'uploads/tours/3-days-2-night-kerala-package.jpg',
+        image: '/uploads/packages/dw03erik9i4urenemjauu0deqjpcxjf4dsvsaejq220406030155.jpg',
         duration: '2N Munnar Hillstations',
         title: '2N3D Munnar Budget Package',
         location: 'Munnar',
@@ -21,7 +21,7 @@ const packages: TourPackage[] = [
         detailUrl: 'kerala-tour-packages/tours/3-days-2-night-kerala-package/'
     },
     {
-        image: 'uploads/tours/kerala-budget-package.jpg',
+        image: '/uploads/packages/omdijhppsytnyos9dzbgrdsw4psir2y12qnt0udf220424115201.jpg',
         duration: '2N Munnar / 1N Aleppey',
         title: '3N4D Hills & Backwater',
         location: 'Munnar, Alleppey',
@@ -36,7 +36,7 @@ export default function BangaloreTours() {
         <TourCategoryPage
             title="Kerala Tour Packages from Bangalore"
             subtitle="Convenient trips starting from the Garden City"
-            bannerImage="https://www.wegomap.com/uploads/categories/scenic-road-trip-kerala.jpg"
+            bannerImage="/uploads/categories/0D5D01EuAa4VNFvV73Ny1Pepw8fd0KT3N7z6tXqW230904030332.jpg"
             packages={packages}
             readMoreHeading="Plan your Kerala Trip from Bangalore"
             readMoreContent={

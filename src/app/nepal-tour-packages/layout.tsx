@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Nepal Tour Packages',
         description: 'Explore with us',
-        images: ['https://www.wegomap.com/uploads/categories/zuq5qozfb1bxlyyr84azxkajfabeigl2udrfhhxa220406065441.jpg'],
+        images: ['/uploads/categories/zuq5qozfb1bxlyyr84azxkajfabeigl2udrfhhxa220406065441.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/nepal-tour-packages',

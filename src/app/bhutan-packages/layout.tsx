@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Bhutan Package',
         description: '6N 7D Bhutan',
-        images: ['https://www.wegomap.com/uploads/categories/5z2forothrchrzckhauy3hq8zxsxchlbx2rncnzx240904035922.jpg'],
+        images: ['/uploads/categories/5z2forothrchrzckhauy3hq8zxsxchlbx2rncnzx240904035922.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/bhutan-packages',

@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/stunning-andaman.jpg',
+        image: '/uploads/packages/OVelXuVa9Ge2qLrMY1o1mfCD1n7qiYDQ9LJWeqos250527122712.webp',
         duration: '4 Nights 5 Days',
         title: 'Stunning Andaman',
         location: 'Port Blair, Havelock Island',
@@ -11,7 +11,7 @@ const packages: TourPackage[] = [
         detailUrl: 'andaman-packages/'
     },
     {
-        image: 'uploads/tours/6n-andaman.jpg',
+        image: '/uploads/packages/OVelXuVa9Ge2qLrMY1o1mfCD1n7qiYDQ9LJWeqos250527122712.webp',
         duration: '6 Nights 7 Days',
         title: '6N Andaman',
         location: 'Port Blair, Havelock, Neil Island',
@@ -27,7 +27,7 @@ export default function AndamanTours() {
         <TourCategoryPage
             title="Andaman Packages"
             subtitle="Explore the emerald islands of India"
-            bannerImage="https://www.wegomap.com/uploads/categories/andaman-banner.jpg"
+            bannerImage="/uploads/categories/x8mupizywhx0lbujzpvsk6qrznf18bixirysodea240904050124.jpg"
             packages={packages}
             readMoreHeading="Plan your Andaman Getaway"
             readMoreContent={

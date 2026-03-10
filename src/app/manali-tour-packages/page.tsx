@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/manali-package.jpg',
+        image: '/uploads/packages/j6cozrh2jgnksv5hsfoj9m6emdicmwtvtvqvnqu8240829050035.jpg',
         duration: '4 Nights 5 Days',
         title: 'Manali Package',
         location: 'Manali, Solang Valley, Rohtang Pass',
@@ -12,7 +12,7 @@ const packages: TourPackage[] = [
         strip: 'Trending'
     },
     {
-        image: 'uploads/tours/shimla-manali-package.jpg',
+        image: '/uploads/packages/j6cozrh2jgnksv5hsfoj9m6emdicmwtvtvqvnqu8240829050035.jpg',
         duration: '5 Nights 6 Days',
         title: 'Shimla Manali Package',
         location: 'Shimla, Manali',
@@ -27,7 +27,7 @@ export default function ManaliTours() {
         <TourCategoryPage
             title="Manali Tour Packages"
             subtitle="Deep valleys and high mountain ranges"
-            bannerImage="https://www.wegomap.com/uploads/categories/manali-banner.jpg"
+            bannerImage="/uploads/categories/ofsorzqr2izti1rwgjqjaxxp4iws07ct9heovkwj220406065835.jpg"
             packages={packages}
             readMoreHeading="Explore the Beauty of Himachal"
             readMoreContent={

@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/3n4d-kerala-honeymoon-package.jpg',
+        image: '/uploads/packages/sy0vagizrdt3llotbebojqwemftmafovkq0umv8s220406032045.jpg',
         duration: '2N Munnar / 1N Houseboat',
         title: '3N4D Kerala Standard Honeymoon',
         location: 'Munnar, Alleppey',
@@ -12,7 +12,7 @@ const packages: TourPackage[] = [
         strip: 'Best Seller'
     },
     {
-        image: 'uploads/tours/5-days-4-night-kerala-package.jpg',
+        image: '/uploads/packages/cyf2pdk4hgscfe1ycccv9vomyxa2ouxijfumcvet220406031111.jpg',
         duration: '2N Munnar / 1N Thekkady / 1N Houseboat',
         title: '4N5D Kerala Romantic Honeymoon',
         location: 'Munnar, Thekkady, Alleppey',
@@ -22,7 +22,7 @@ const packages: TourPackage[] = [
         strip: 'Romantic'
     },
     {
-        image: 'uploads/tours/4-days-3-night-kerala-package.jpg',
+        image: '/uploads/packages/rsz2kjlf4gfysupoyaqzjgsug665nqxnjcgapu71220406030620.jpg',
         duration: '2N Munnar / 1N Houseboat',
         title: '3N4D Kerala Budget Honeymoon',
         location: 'Munnar, Alleppey',
@@ -31,7 +31,7 @@ const packages: TourPackage[] = [
         detailUrl: 'kerala-tour-packages/tours/4-days-3-night-kerala-package/'
     },
     {
-        image: 'uploads/tours/5n6d-kerala-honeymoon-pacakge.jpg',
+        image: '/uploads/packages/qfhrulmsizm7j0pr8zsw7moxvjs7kcerxcppvmll220406033026.jpg',
         duration: '1N Cherai / 2N Munnar / 1N Thekkady',
         title: '5N6D Kerala Beach Plan',
         location: 'Cherai, Munnar, Thekkady',
@@ -40,7 +40,7 @@ const packages: TourPackage[] = [
         detailUrl: 'kerala-tour-packages/tours/5n6d-kerala-honeymoon-pacakge/'
     },
     {
-        image: 'uploads/tours/4n5d-kerala-premium-private-pool-package.jpg',
+        image: '/uploads/packages/dw03erik9i4urenemjauu0deqjpcxjf4dsvsaejq220406030155.jpg',
         duration: '2N Munnar / 1N Thekkady / 1N Houseboat',
         title: '4N5D Kerala Premium Private Pool',
         location: 'Munnar, Thekkady, Alleppey',
@@ -56,7 +56,7 @@ export default function HoneymoonTours() {
         <TourCategoryPage
             title="Kerala Honeymoon Packages"
             subtitle="Plan your romantic getaway in God's Own Country"
-            bannerImage="https://www.wegomap.com/uploads/categories/romantic-couple-honeymoon-kerala.jpg"
+            bannerImage="/uploads/categories/ubqf5mc4ve1g6yqwmnsyiyek9fkld9akyp6g2lar220406065334.jpg"
             packages={packages}
             readMoreHeading="Romantic Kerala Honeymoon Trips"
             readMoreContent={

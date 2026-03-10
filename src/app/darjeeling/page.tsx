@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/gangtok-darjeeling.jpg',
+        image: '/uploads/packages/klidzvonwfqlp6nyvhmnkkon6g6cobwkxaxxloxn240904040120.png',
         duration: '4 Nights 5 Days',
         title: 'Gangtok Darjeeling Package',
         location: 'Gangtok, Darjeeling',
@@ -18,7 +18,7 @@ export default function DarjeelingTours() {
         <TourCategoryPage
             title="Darjeeling Tour Package"
             subtitle="The queen of hill stations"
-            bannerImage="https://www.wegomap.com/uploads/categories/darjeeling-banner.jpg"
+            bannerImage="/uploads/categories/2z1agsq6wrwibgatjiamea7pftxta7cgalenltcc240904030146.jpg"
             packages={packages}
             readMoreHeading="Explore North East India"
             readMoreContent={

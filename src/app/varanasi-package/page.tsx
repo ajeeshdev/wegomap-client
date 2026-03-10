@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/varanasi.jpg',
+        image: '/uploads/packages/qi7pkr3vs0suxdbur0ua8iidcuqzfurzuls3ugyb240904042707.jpg',
         duration: '3 Nights 4 Days',
         title: 'Varanasi Package',
         location: 'Varanasi, Ayodhya',
@@ -18,7 +18,7 @@ export default function VaranasiTours() {
         <TourCategoryPage
             title="Varanasi Package"
             subtitle="The spiritual capital of India"
-            bannerImage="https://www.wegomap.com/uploads/categories/varanasi-banner.jpg"
+            bannerImage="/uploads/categories/5QFjERrKbfZ74TopsTis4EdOnNVTyfs6B5yRQBwc240904040753.jpg"
             packages={packages}
             readMoreHeading="A Spiritual Journey to Varanasi & Ayodhya"
             readMoreContent={

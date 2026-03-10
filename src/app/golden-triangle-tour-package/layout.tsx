@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Golden Triangle Tour Package',
         description: 'Golden Triangle',
-        images: ['https://www.wegomap.com/uploads/categories/1cs3jcryqwyeiskhq76sy33is8ico6qqnulbrskv240905024238.jpg'],
+        images: ['/uploads/categories/1cs3jcryqwyeiskhq76sy33is8ico6qqnulbrskv240905024238.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/golden-triangle-tour-package',

@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/leh-ladakh.jpg',
+        image: '/uploads/packages/k7ksmqay9clwp5rfdoeab7b3ucmsrsijxaxstr6d240904032017.png',
         duration: '5 Nights 6 Days',
         title: 'Leh Ladakh Tour Package',
         location: 'Leh, Nubra Valley, Pangong Lake',
@@ -18,7 +18,7 @@ export default function LehTours() {
         <TourCategoryPage
             title="Leh Ladakh Tour Package"
             subtitle="The land of high passes"
-            bannerImage="https://www.wegomap.com/uploads/categories/leh-banner.jpg"
+            bannerImage="/uploads/categories/d4rzq89o8xu3a9ejgnhkfes4r5lpqvsfgtldzmoi240904033509.jpg"
             packages={packages}
             readMoreHeading="Adventure in Ladakh"
             readMoreContent={

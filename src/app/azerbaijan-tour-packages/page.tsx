@@ -2,7 +2,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
 const packages: TourPackage[] = [
     {
-        image: 'uploads/tours/budgeted-azerbaijan.jpg',
+        image: '/uploads/packages/bngpjquzmy5datq8m8jfqwb8fgk5lprdnfefmbn3250131025302.jpg',
         duration: '3 Nights 4 Days',
         title: 'Budgeted Azerbaijan',
         location: 'Baku City',
@@ -11,7 +11,7 @@ const packages: TourPackage[] = [
         detailUrl: 'azerbaijan-tour-packages/'
     },
     {
-        image: 'uploads/tours/peaceful-azerbaijan.jpg',
+        image: '/uploads/packages/jp9ooiwngbh8movmdimg17ub2uzgpbpk1gkzieiv250203034840.jpg',
         duration: '4 Nights 5 Days',
         title: 'Peaceful Azerbaijan',
         location: 'Baku, Gabala',
@@ -21,7 +21,7 @@ const packages: TourPackage[] = [
         strip: 'Best Seller'
     },
     {
-        image: 'uploads/tours/charming-azerbaijan.jpg',
+        image: '/uploads/packages/aimiy5pemefnkwre8qabxdtffsbhyleibck3xs92250131032303.jpg',
         duration: '4 Nights 5 Days',
         title: 'Charming Azerbaijan',
         location: 'Baku, Guba, Gabala',
@@ -37,7 +37,7 @@ export default function AzerbaijanTours() {
         <TourCategoryPage
             title="Azerbaijan Tour Packages"
             subtitle="Explore the Land of Fire"
-            bannerImage="https://www.wegomap.com/uploads/categories/azerbaijan-banner.jpg"
+            bannerImage="/uploads/categories/twlgefqv2zwvq2gs99ix4ozzi3n9r41z9xbotxid250131024536.jpg"
             packages={packages}
             readMoreHeading="Discover Azerbaijan with Wegomap"
             readMoreContent={

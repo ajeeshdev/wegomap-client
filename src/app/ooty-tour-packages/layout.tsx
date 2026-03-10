@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Ooty Tour Packages',
         description: '2 Nights Ooty',
-        images: ['https://www.wegomap.com/uploads/categories/xivejtmsap5g34sse6prhfkyykvxzhw9lanygtbt240905034008.jpg'],
+        images: ['/uploads/categories/xivejtmsap5g34sse6prhfkyykvxzhw9lanygtbt240905034008.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/ooty-tour-packages',

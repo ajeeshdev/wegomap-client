@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Manali Tour Packages',
         description: 'Explore with us',
-        images: ['https://www.wegomap.com/uploads/categories/ofsorzqr2izti1rwgjqjaxxp4iws07ct9heovkwj220406065835.jpg'],
+        images: ['/uploads/categories/ofsorzqr2izti1rwgjqjaxxp4iws07ct9heovkwj220406065835.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/manali-tour-packages',

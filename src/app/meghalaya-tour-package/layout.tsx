@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Meghalaya Tour Package',
         description: 'Meghalaya Tour Package',
-        images: ['https://www.wegomap.com/uploads/categories/r34Bg3glSVPv3yNqrsdDu6ZdJpx9fBTtZnXmbXI4240904044934.jpg'],
+        images: ['/uploads/categories/r34Bg3glSVPv3yNqrsdDu6ZdJpx9fBTtZnXmbXI4240904044934.jpg'],
     },
     alternates: {
         canonical: 'https://www.wegomap.com/meghalaya-tour-package',

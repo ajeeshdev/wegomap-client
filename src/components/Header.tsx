@@ -1,8 +1,8 @@
 "use client";
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { X, ChevronDown, ChevronRight } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { X, ChevronDown, ChevronRight, User, Heart, Info, Users, Contact } from 'lucide-react';
 import Image from 'next/image';
 
 const keralaSubItems = [
@@ -75,6 +75,21 @@ export default function Header() {
     const [scrolled, setScrolled] = useState(false);
     const [activeMobileMenu, setActiveMobileMenu] = useState<string | null>(null);
     const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userProfile, setUserProfile] = useState<any>(null);
+    const [isProfileOpen, setIsProfileOpen] = useState(false);
+    const profileRef = useRef<HTMLDivElement>(null);
+
+    // Close profile dropdown when clicking outside
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (profileRef.current && !profileRef.current.contains(event.target as Node)) {
+                setIsProfileOpen(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -83,6 +98,41 @@ export default function Header() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    // Handle Auth State
+    useEffect(() => {
+        const checkAuth = () => {
+            const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            setIsLoggedIn(loggedIn);
+            if (loggedIn) {
+                const profile = localStorage.getItem('userProfile');
+                if (profile) {
+                    try {
+                        setUserProfile(JSON.parse(profile));
+                    } catch (e) { }
+                }
+            } else {
+                setUserProfile(null);
+            }
+        };
+        checkAuth(); // Initial check
+
+        window.addEventListener('storage', checkAuth);
+        window.addEventListener('authChange', checkAuth);
+        return () => {
+            window.removeEventListener('storage', checkAuth);
+            window.removeEventListener('authChange', checkAuth);
+        };
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userProfile');
+        setIsLoggedIn(false);
+        setUserProfile(null);
+        setIsProfileOpen(false);
+        window.dispatchEvent(new Event('authChange'));
+    };
 
     const toggleMobileMenu = (name: string) => {
         setActiveMobileMenu(activeMobileMenu === name ? null : name);
@@ -144,13 +194,77 @@ export default function Header() {
                     </nav>
 
                     {/* Action Buttons */}
-                    <div className="button-wrapper hidden lg:flex">
-                        <Link href="/enquire" className="enquire-link">
-                            Enquire Now
-                        </Link>
-                        <Link href="/login" className="login-link">
-                            Log In
-                        </Link>
+                    <div className="button-wrapper hidden lg:flex" ref={profileRef}>
+                        {isLoggedIn ? (
+                            <div className="profileWrapper">
+                                <button
+                                    onClick={() => setIsProfileOpen(!isProfileOpen)}
+                                    className="profileBtn"
+                                    aria-label="Profile Menu"
+                                    style={{ padding: userProfile?.picture ? '0' : '0.4rem', overflow: 'hidden' }}
+                                >
+                                    {userProfile?.picture ? (
+                                        <Image
+                                            src={userProfile.picture}
+                                            alt={userProfile.name || "Profile"}
+                                            width={36}
+                                            height={36}
+                                            style={{ objectFit: 'cover' }}
+                                        />
+                                    ) : (
+                                        <User size={28} strokeWidth={1.5} />
+                                    )}
+                                </button>
+
+                                {isProfileOpen && (
+                                    <div className="profileDropdown">
+                                        {userProfile?.name && (
+                                            <div className="dropdownItem" style={{ pointerEvents: 'none', paddingBottom: '0.75rem', borderBottom: '1px solid #f1f5f9', marginBottom: '0.5rem' }}>
+                                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                    <span style={{ fontWeight: 700, fontSize: '1.2rem', color: '#0f172a' }}>{userProfile.name}</span>
+                                                    <span style={{ fontSize: '0.85rem', color: '#64748b' }}>{userProfile.email}</span>
+                                                </div>
+                                            </div>
+                                        )}
+                                        <div className="dropdownItem">
+                                            <Link href="/wishlist" onClick={() => setIsProfileOpen(false)}>
+                                                <Heart size={20} /> wishlist
+                                            </Link>
+                                        </div>
+                                        <div className="dropdownItem">
+                                            <Link href="/my-booking" onClick={() => setIsProfileOpen(false)}>
+                                                <Info size={20} /> My booking
+                                            </Link>
+                                        </div>
+                                        <div className="dropdownItem">
+                                            <Link href="/partner-with-us" onClick={() => setIsProfileOpen(false)}>
+                                                <Users size={20} /> Partner with us
+                                            </Link>
+                                        </div>
+                                        <div className="dropdownItem">
+                                            <Link href="/contact" onClick={() => setIsProfileOpen(false)}>
+                                                <Contact size={20} /> Contact us
+                                            </Link>
+                                        </div>
+                                        <div className="dropdownDivider"></div>
+                                        <div className="dropdownItem">
+                                            <button onClick={handleLogout} className="logoutBtn">
+                                                Log out
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            <>
+                                <Link href="/enquire" className="enquire-link">
+                                    Enquire Now
+                                </Link>
+                                <Link href="/login" className="login-link">
+                                    Log In
+                                </Link>
+                            </>
+                        )}
 
                         <button
                             className={`modernHamburger ${isOpen ? 'active' : ''}`}
