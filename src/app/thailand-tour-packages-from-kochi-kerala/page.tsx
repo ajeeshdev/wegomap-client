@@ -1,74 +1,69 @@
-import TourCategoryPage from '@/components/TourCategoryPage';
+import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
-export default function ThailandPage() {
+const packages: TourPackage[] = [
+    {
+        image: 'uploads/tours/thailand-delight.jpg',
+        duration: '3 Nights 4 Days',
+        title: 'Thailand Delight',
+        location: 'Bangkok, Pattaya',
+        price: '₹ 22,000',
+        originalPrice: '₹ 24,500',
+        detailUrl: 'tours/thailand-tour-package-premium/'
+    },
+    {
+        image: 'uploads/tours/3n4d-thailand-package.jpg',
+        duration: '3 Nights 4 Days',
+        title: 'Amazing Thailand',
+        location: 'Bangkok, Pattaya',
+        price: '₹ 24,400',
+        originalPrice: '₹ 28,000',
+        detailUrl: 'tours/3n4d-thailand-package/',
+        strip: 'Best Seller'
+    },
+    {
+        image: 'uploads/tours/thailand-premium.jpg',
+        duration: '4 Nights 5 Days',
+        title: 'Thailand Premium',
+        location: 'Bangkok, Pattaya, Coral Island',
+        price: '₹ 29,500',
+        originalPrice: '₹ 32,500',
+        detailUrl: 'tours/thailand-premium/'
+    },
+    {
+        image: 'uploads/tours/thailand-phuket-krabi.jpg',
+        duration: '4 Nights 5 Days',
+        title: 'Thailand Phuket & Krabi',
+        location: 'Phuket, Krabi',
+        price: '₹ 29,999',
+        originalPrice: '₹ 34,000',
+        detailUrl: 'tours/thailand-phuket-krabi/',
+        strip: 'Trending'
+    },
+    {
+        image: 'uploads/tours/thailand-tour-package.jpg',
+        duration: '6 Nights 7 Days',
+        title: 'Thailand Tour Package',
+        location: 'Bangkok, Pattaya, Phuket',
+        price: '₹ 52,999',
+        originalPrice: '₹ 56,000',
+        detailUrl: 'tours/thailand-tour-package/'
+    }
+];
+
+export default function ThailandTours() {
     return (
         <TourCategoryPage
             title="Thailand Tour Packages"
-            subtitle="Explore with us"
-            bannerImage="https://www.wegomap.com/uploads/categories/8fimn8i11x1d6lhyiqx3s8dw9ang49kfv6ayvhxt220406065511.jpg"
-            bookCount={28}
-            packages={[
-                {
-                    image: 'uploads/categories/8fimn8i11x1d6lhyiqx3s8dw9ang49kfv6ayvhxt220406065511.jpg',
-                    duration: '3 Nights 4 Days',
-                    title: 'Thailand Delight',
-                    location: '2N Pattaya / 1N Bangkok',
-                    price: '₹ 29,999',
-                    originalPrice: '₹ 36,000',
-                    strip: 'BEST SELLER',
-                    detailUrl: 'thailand-tour-packages-from-kochi-kerala/tours/thailand-tour-package-premium/',
-                },
-                {
-                    image: 'uploads/categories/8fimn8i11x1d6lhyiqx3s8dw9ang49kfv6ayvhxt220406065511.jpg',
-                    duration: '3 Nights 4 Days',
-                    title: 'Amazing Thailand',
-                    location: '2N Pattaya / 1N Bangkok',
-                    price: '₹ 32,999',
-                    originalPrice: '₹ 40,000',
-                    strip: 'WEGOMAP CHOICE',
-                    detailUrl: 'thailand-tour-packages-from-kochi-kerala/tours/3n4d-thailand-package/',
-                },
-                {
-                    image: 'uploads/categories/8fimn8i11x1d6lhyiqx3s8dw9ang49kfv6ayvhxt220406065511.jpg',
-                    duration: '4 Nights 5 Days',
-                    title: 'Thailand Premium',
-                    location: '2N Pattaya / 2N Bangkok',
-                    price: '₹ 38,999',
-                    originalPrice: '₹ 46,000',
-                    strip: 'BEST SELLING PACKAGES',
-                    detailUrl: 'thailand-tour-packages-from-kochi-kerala/tours/thailand-premium/',
-                },
-                {
-                    image: 'uploads/categories/8fimn8i11x1d6lhyiqx3s8dw9ang49kfv6ayvhxt220406065511.jpg',
-                    duration: '4 Nights 5 Days',
-                    title: 'Thailand Phuket & Krabi',
-                    location: '2N Phuket / 2N Krabi',
-                    price: '₹ 42,999',
-                    originalPrice: '₹ 50,000',
-                    strip: 'TRENDING PACKAGE',
-                    detailUrl: 'thailand-tour-packages-from-kochi-kerala/tours/thailand-phuket-krabi/',
-                },
-                {
-                    image: 'uploads/categories/8fimn8i11x1d6lhyiqx3s8dw9ang49kfv6ayvhxt220406065511.jpg',
-                    duration: '6 Nights 7 Days',
-                    title: 'Thailand Tour Package',
-                    location: '2N Phuket / 2N Pattaya / 2N Bangkok',
-                    price: '₹ 55,999',
-                    originalPrice: '₹ 65,000',
-                    strip: 'TRENDING PACKAGE',
-                    detailUrl: 'thailand-tour-packages-from-kochi-kerala/tours/thailand-tour-package/',
-                },
-                {
-                    image: 'uploads/categories/8fimn8i11x1d6lhyiqx3s8dw9ang49kfv6ayvhxt220406065511.jpg',
-                    duration: '6 Nights 7 Days',
-                    title: 'Thailand Premium Package',
-                    location: '2N Phuket / 2N Pattaya / 2N Bangkok',
-                    price: '₹ 62,999',
-                    originalPrice: '₹ 75,000',
-                    strip: 'SPECIAL PACKAGE',
-                    detailUrl: 'thailand-tour-packages-from-kochi-kerala/tours/thailand-tour-package-premium-1/',
-                },
-            ]}
+            subtitle="Land of smiles and beautiful beaches"
+            bannerImage="https://www.wegomap.com/uploads/categories/thailand-banner.jpg"
+            packages={packages}
+            readMoreHeading="Explore the Best of Thailand"
+            readMoreContent={
+                <>
+                    <p>Thailand is a versatile destination offering everything from vibrant city life to pristine beaches and rich cultural heritage. Our Thailand tour packages from Kochi and other parts of India are perfectly curated to give you an unforgettable holiday.</p>
+                    <p>Experience the bustling markets of Bangkok, the beautiful shores of Pattaya, and the tropical paradise of Phuket and Krabi. We handle your flights, hotels, and local tours so you can enjoy a stress-free vacation.</p>
+                </>
+            }
         />
     );
 }

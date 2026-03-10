@@ -1,33 +1,41 @@
-import TourCategoryPage from '@/components/TourCategoryPage';
+import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
-export default function AndamanPage() {
+const packages: TourPackage[] = [
+    {
+        image: 'uploads/tours/stunning-andaman.jpg',
+        duration: '4 Nights 5 Days',
+        title: 'Stunning Andaman',
+        location: 'Port Blair, Havelock Island',
+        price: '₹ 25,000',
+        originalPrice: '₹ 28,000',
+        detailUrl: 'andaman-packages/'
+    },
+    {
+        image: 'uploads/tours/6n-andaman.jpg',
+        duration: '6 Nights 7 Days',
+        title: '6N Andaman',
+        location: 'Port Blair, Havelock, Neil Island',
+        price: '₹ 30,999',
+        originalPrice: '₹ 34,000',
+        detailUrl: 'andaman-packages/',
+        strip: 'Popular'
+    }
+];
+
+export default function AndamanTours() {
     return (
         <TourCategoryPage
             title="Andaman Packages"
-            subtitle="Andaman Holidays"
-            bannerImage="https://www.wegomap.com/uploads/categories/x8mupizywhx0lbujzpvsk6qrznf18bixirysodea240904050124.jpg"
-            bookCount={28}
-            packages={[
-                {
-                    image: 'uploads/categories/x8mupizywhx0lbujzpvsk6qrznf18bixirysodea240904050124.jpg',
-                    duration: '4 Nights 5 Days',
-                    title: '4N5D Andaman Tour Packages',
-                    location: 'Stunning Andaman',
-                    price: '₹ 19,999',
-                    originalPrice: '₹ 25,000',
-                    detailUrl: 'andaman-packages/tours/4n5d-andaman-tour-packages/',
-                },
-                {
-                    image: 'uploads/categories/x8mupizywhx0lbujzpvsk6qrznf18bixirysodea240904050124.jpg',
-                    duration: '6 Nights 7 Days',
-                    title: 'Andaman Packages',
-                    location: '6N Andaman',
-                    price: '₹ 28,999',
-                    originalPrice: '₹ 35,000',
-                    strip: 'BEST SELLING PACKAGES',
-                    detailUrl: 'andaman-packages/tours/andaman-packages/',
-                },
-            ]}
+            subtitle="Explore the emerald islands of India"
+            bannerImage="https://www.wegomap.com/uploads/categories/andaman-banner.jpg"
+            packages={packages}
+            readMoreHeading="Plan your Andaman Getaway"
+            readMoreContent={
+                <>
+                    <p>Andaman and Nicobar Islands are a dream destination for beach lovers and water sports enthusiasts. Our Andaman tour packages offer a perfect mix of history, adventure, and relaxation.</p>
+                    <p>Visit the historic Cellular Jail, relax on the world-famous Radhanagar Beach in Havelock, and explore the coral reefs of Neil Island. We provide complete packages including ferry transfers, hotel stays, and sightseeing tours.</p>
+                </>
+            }
         />
     );
 }

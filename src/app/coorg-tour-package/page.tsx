@@ -1,34 +1,32 @@
-import TourCategoryPage from '@/components/TourCategoryPage';
+import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
-export default function CoorgPage() {
+const packages: TourPackage[] = [
+    {
+        image: 'uploads/tours/coorg-package.jpg',
+        duration: '2 Nights 3 Days',
+        title: 'Coorg Tour Package',
+        location: 'Coorg / Madikeri',
+        price: '₹ 11,500',
+        originalPrice: '₹ 13,000',
+        detailUrl: 'coorg-tour-package/',
+        strip: 'Popular'
+    }
+];
+
+export default function CoorgTours() {
     return (
         <TourCategoryPage
             title="Coorg Tour Package"
-            subtitle="2N Coorg"
-            bannerImage="https://www.wegomap.com/uploads/categories/l4zbbjoyo4v19xzlzb4flec9ddgsenpvfhqgyzsg240906100043.jpg"
-            bookCount={28}
-            packages={[
-                {
-                    image: 'uploads/categories/l4zbbjoyo4v19xzlzb4flec9ddgsenpvfhqgyzsg240906100043.jpg',
-                    duration: '2 Nights 3 Days',
-                    title: 'Coorg Tour Package',
-                    location: '2N Coorg',
-                    price: '₹ 7,999',
-                    originalPrice: '₹ 10,000',
-                    strip: 'BEST SELLING PACKAGES',
-                    detailUrl: 'coorg-tour-package/tours/coorg-tour-package/',
-                },
-                {
-                    image: 'uploads/categories/l4zbbjoyo4v19xzlzb4flec9ddgsenpvfhqgyzsg240906100043.jpg',
-                    duration: '3 Nights 4 Days',
-                    title: 'Coorg - Mysore',
-                    location: '2N Coorg / 1N Mysore',
-                    price: '₹ 10,999',
-                    originalPrice: '₹ 14,000',
-                    strip: 'TRENDING PACKAGE',
-                    detailUrl: 'coorg-tour-package/tours/coorg-mysore/',
-                },
-            ]}
+            subtitle="The Scotland of India"
+            bannerImage="https://www.wegomap.com/uploads/categories/coorg-banner.jpg"
+            packages={packages}
+            readMoreHeading="Explore Coorg with Wegomap"
+            readMoreContent={
+                <>
+                    <p>Coorg is a paradise for those who love nature and tranquility. Known as the 'Scotland of India', it offers lush green landscapes, mist-covered hills, and vast coffee estates.</p>
+                    <p>Our Coorg tour packages include visits to Raja's Seat, Abbey Falls, and the Golden Temple (Bylakuppe). We offer cozy homestays and luxurious resorts to make your trip special.</p>
+                </>
+            }
         />
     );
 }

@@ -1,24 +1,32 @@
-import TourCategoryPage from '@/components/TourCategoryPage';
+import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
-export default function GoldenTrianglePage() {
+const packages: TourPackage[] = [
+    {
+        image: 'uploads/tours/golden-triangle.jpg',
+        duration: '5 Nights 6 Days',
+        title: 'Golden Triangle Package',
+        location: 'Delhi, Agra, Jaipur',
+        price: '₹ 23,999',
+        originalPrice: '₹ 25,950',
+        detailUrl: 'golden-triangle-tour-package/',
+        strip: 'Culture'
+    }
+];
+
+export default function GoldenTriangleTours() {
     return (
         <TourCategoryPage
             title="Golden Triangle Tour Package"
-            subtitle="Golden Triangle"
-            bannerImage="https://www.wegomap.com/uploads/categories/1cs3jcryqwyeiskhq76sy33is8ico6qqnulbrskv240905024238.jpg"
-            bookCount={22}
-            packages={[
-                {
-                    image: 'uploads/packages/aiwgy8tafcpau9dgatsmnlnk1yfvugillle8yzbh240905024128.png',
-                    duration: '5 Nights 6 Days',
-                    title: 'Golden Triangle Package',
-                    location: '2N Delhi / 1N Agra / 2N Jaipur',
-                    price: '₹ 23,999',
-                    originalPrice: '₹ 25,950',
-                    strip: 'Trending Package',
-                    detailUrl: 'tours/golden-triangle-package/',
-                },
-            ]}
+            subtitle="Explore the historic heart of India"
+            bannerImage="https://www.wegomap.com/uploads/categories/golden-triangle-banner.jpg"
+            packages={packages}
+            readMoreHeading="India's Iconic Golden Triangle"
+            readMoreContent={
+                <>
+                    <p>The Golden Triangle is the most popular tourist circuit in India, connecting the capital city of Delhi, the city of Taj Mahal - Agra, and the vibrant Pink City of Jaipur.</p>
+                    <p>Witness the architectural brilliance of the Mughals and the Rajputs. Our package covers all the major landmarks including the Red Fort, India Gate, Taj Mahal, and Amer Fort. Wegomap provides premium guides and comfortable stays for this cultural journey.</p>
+                </>
+            }
         />
     );
 }

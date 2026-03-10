@@ -1,24 +1,32 @@
-import TourCategoryPage from '@/components/TourCategoryPage';
+import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
-export default function OotyPage() {
+const packages: TourPackage[] = [
+    {
+        image: 'uploads/tours/ooty-package.jpg',
+        duration: '2 Nights 3 Days',
+        title: 'Ooty Tour Packages',
+        location: 'Ooty / Nilgiris',
+        price: '₹ 14,599',
+        originalPrice: '₹ 16,500',
+        detailUrl: 'ooty-tour-packages/',
+        strip: 'Popular'
+    }
+];
+
+export default function OotyTours() {
     return (
         <TourCategoryPage
             title="Ooty Tour Packages"
-            subtitle="2 Nights Ooty"
-            bannerImage="https://www.wegomap.com/uploads/categories/xivejtmsap5g34sse6prhfkyykvxzhw9lanygtbt240905034008.jpg"
-            bookCount={28}
-            packages={[
-                {
-                    image: 'uploads/categories/xivejtmsap5g34sse6prhfkyykvxzhw9lanygtbt240905034008.jpg',
-                    duration: '2 Nights 3 Days',
-                    title: 'Ooty Tour Packages',
-                    location: '2N Ooty',
-                    price: '₹ 8,999',
-                    originalPrice: '₹ 11,000',
-                    strip: 'TRENDING PACKAGES',
-                    detailUrl: 'ooty-tour-packages/tours/ooty-tour-packages/',
-                },
-            ]}
+            subtitle="The blue mountains"
+            bannerImage="https://www.wegomap.com/uploads/categories/ooty-banner.jpg"
+            packages={packages}
+            readMoreHeading="A Refreshing Getaway to Ooty"
+            readMoreContent={
+                <>
+                    <p>Ooty, also known as Udhagamandalam, is the most popular hill station in South India. Our Ooty tour packages take you through its sprawling tea gardens, beautiful botanical gardens, and scenic Ooty Lake.</p>
+                    <p>Experience the heritage Nilgiri Mountain Railway (Toy Train) and enjoy the panoramic views from Doddabetta Peak. Wegomap ensures a memorable stay with the best hotel recommendations.</p>
+                </>
+            }
         />
     );
 }

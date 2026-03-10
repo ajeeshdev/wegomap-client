@@ -1,117 +1,92 @@
-"use client";
-
-import Image from 'next/image';
 import Link from 'next/link';
-import { MoveRight } from 'lucide-react';
-import PageBanner from '@/components/PageBanner';
+import Image from 'next/image';
 
 const services = [
     {
-        icon: 'https://www.wegomap.com/assests/site/assets/images/icon-service-1.png',
         title: 'Tour Packages',
-        description: 'We can plan holidays to the destinations around the world.',
-        href: null,
+        desc: 'Customized domestic and international tour plans tailored to your budget and preferences.',
+        icon: '🌴',
+        link: '/packages'
     },
     {
-        icon: 'https://www.wegomap.com/assests/site/assets/images/icon-service-4.png',
-        title: 'Events',
-        description: 'We can host events with your family, friends or colleagues at any destination.',
-        href: '/events',
+        title: 'Corporate Events',
+        desc: 'Professional event management in Kochi for product launches, conferences, and team-building.',
+        icon: '🤝',
+        link: '/corporate-event-management-company-kochi'
     },
     {
-        icon: 'https://www.wegomap.com/assests/site/assets/images/icon-service-5.png',
-        title: 'Hotels',
-        description: 'We have good relationship in between so many resorts and hotels.',
-        href: null,
+        title: 'Hotel Booking',
+        desc: 'Partnered with over 500+ handpicked hotels across India to provide you the best stays.',
+        icon: '🏨',
+        link: '/contact'
     },
     {
-        icon: 'https://www.wegomap.com/assests/site/assets/images/icon-service-3.png',
-        title: 'Flights',
-        description: 'We can book domestic and international flights with our professional Ticketing team.',
-        href: null,
+        title: 'Flight Booking',
+        desc: 'Instant flight tickets for domestic and international sectors at competitive rates.',
+        icon: '✈️',
+        link: '/contact'
     },
     {
-        icon: 'https://www.wegomap.com/assests/site/assets/images/icon-service-2.png',
-        title: 'Visa',
-        description: 'We can provide you Tourist Visa assistance.',
-        href: null,
+        title: 'Visa Assistance',
+        desc: 'Hassle-free visa processing for major tourist destinations including UAE, Thailand, and Europe.',
+        icon: '🛂',
+        link: '/contact'
     },
     {
-        icon: 'https://www.wegomap.com/assests/site/assets/images/icon-service-6.png',
-        title: 'Shop',
-        description: 'You can buy Kerala Spices and Souvenirs from our cart.',
-        href: null,
-    },
-];
-
-const subServices = [
-    {
-        title: 'Kerala Houseboat Service',
-        description: 'Explore the tranquil backwaters of Alleppey aboard our curated houseboats — an experience unlike any other.',
-        href: '/kerala-alleppey-boat-house',
-        tag: 'Alleppey Backwaters',
-    },
-    {
-        title: 'Kerala Taxi Service',
-        description: 'Comfortable, reliable and affordable taxi and cab services across Kerala for all your travel needs.',
-        href: '/kerala-taxi-service',
-        tag: 'All Kerala',
-    },
+        title: 'Taxi Service',
+        desc: 'Reliable and safe taxi services across Kerala with experienced multi-lingual drivers.',
+        icon: '🚕',
+        link: '/kerala-taxi-service'
+    }
 ];
 
 export default function ServicesPage() {
     return (
         <div className="servicesPage">
-            <PageBanner
-                title="Our Services"
-                subtitle="Everything you need for a perfect trip — all under one roof."
-                breadcrumbs={[{ label: 'Services' }]}
-            />
-
-            <div className="homeContainer">
-
-                {/* Main 6-card grid */}
-                <div className="servicesGrid">
-                    {services.map((service, i) => (
-                        <div key={i} className="serviceCard">
-                            <div className="serviceIconWrap">
-                                <Image
-                                    src={service.icon}
-                                    alt={service.title}
-                                    width={56}
-                                    height={56}
-                                    unoptimized
-                                />
-                            </div>
-                            <h3 className="serviceTitle">{service.title}</h3>
-                            <p className="serviceDesc">{service.description}</p>
-                            {service.href && (
-                                <Link href={service.href} className="serviceLink">
-                                    Learn more <MoveRight size={14} />
-                                </Link>
-                            )}
-                        </div>
-                    ))}
+            <section className="servicesBanner">
+                <div className="servicesBannerImg">
+                    <Image
+                        src="https://www.wegomap.com/uploads/categories/services-banner.jpg"
+                        alt="Our Services"
+                        fill
+                        style={{ objectFit: 'cover' }}
+                        priority
+                        unoptimized
+                    />
+                    <div className="servicesOverlay" />
                 </div>
+                <div className="servicesBannerContent">
+                    <h1 className="servicesTitle">Our Services</h1>
+                    <p className="servicesSub">Comprehensive Solutions for All Your Travel Needs</p>
+                </div>
+            </section>
 
-                {/* Sub-service detail pages */}
-                <div className="subServicesSection">
-                    <h2 className="subServicesHeading">Specialised Services</h2>
-                    <div className="subServicesGrid">
-                        {subServices.map((s, i) => (
-                            <Link key={i} href={s.href} className="subServiceCard">
-                                <span className="subServiceTag">{s.tag}</span>
-                                <h3>{s.title}</h3>
-                                <p>{s.description}</p>
-                                <span className="subServiceCta">
-                                    Explore <MoveRight size={16} />
-                                </span>
-                            </Link>
+            <section className="servicesGridSection">
+                <div className="homeContainer">
+                    <div className="servicesGrid">
+                        {services.map((s, i) => (
+                            <div key={i} className="serviceCard">
+                                <span className="serviceIcon">{s.icon}</span>
+                                <h2 className="serviceCardTitle">{s.title}</h2>
+                                <p className="serviceCardDesc">{s.desc}</p>
+                                <Link href={s.link} className="serviceLink">
+                                    Learn More →
+                                </Link>
+                            </div>
                         ))}
                     </div>
                 </div>
+            </section>
 
-            </div>
+            <section className="servicesCTA">
+                <div className="homeContainer">
+                    <div className="servicesCTABox">
+                        <h2>Need a custom solution?</h2>
+                        <p>Talk to our experts today and let us help you plan your next big event or trip.</p>
+                        <Link href="/contact" className="servicesEnquire">Get in Touch</Link>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 }

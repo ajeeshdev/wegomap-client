@@ -1,44 +1,50 @@
-import TourCategoryPage from '@/components/TourCategoryPage';
+import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
-export default function GoaPage() {
+const packages: TourPackage[] = [
+    {
+        image: 'uploads/tours/goa-package-3-days-2-night.jpg',
+        duration: '2 Nights 3 Days',
+        title: 'Goa Tour Package',
+        location: 'North Goa, South Goa',
+        price: '₹ 8,499',
+        originalPrice: '₹ 10,500',
+        detailUrl: 'trending/tours/goa-package-3-days-2-night/',
+        strip: 'Best Seller'
+    },
+    {
+        image: 'uploads/tours/goa-package-4-days-3-night.jpg',
+        duration: '3 Nights 4 Days',
+        title: 'Goa Tour Package',
+        location: 'Calangute, Baga, Old Goa',
+        price: '₹ 12,899',
+        originalPrice: '₹ 14,000',
+        detailUrl: 'goa-tour-packages-from-kerala/'
+    },
+    {
+        image: 'uploads/tours/goa-package-5-days-4-night.jpg',
+        duration: '4 Nights 5 Days',
+        title: 'Goa Tour Package',
+        location: 'Panaji, Beaches, Cruises',
+        price: '₹ 13,999',
+        originalPrice: '₹ 15,500',
+        detailUrl: 'goa-tour-packages-from-kerala/'
+    }
+];
+
+export default function GoaTours() {
     return (
         <TourCategoryPage
             title="Goa Tour Packages"
-            subtitle="Explore with us"
-            bannerImage="https://www.wegomap.com/uploads/categories/86wg9d29vhkflmuwtyrsof3rfqtcapzgva0ynqlp220406065630.jpg"
-            bookCount={28}
-            packages={[
-                {
-                    image: 'uploads/categories/86wg9d29vhkflmuwtyrsof3rfqtcapzgva0ynqlp220406065630.jpg',
-                    duration: '2 Nights 3 Days',
-                    title: 'Goa Tour Package',
-                    location: '1N South Goa / 1N North Goa',
-                    price: '₹ 9,999',
-                    originalPrice: '₹ 12,500',
-                    strip: 'BEST SUMMER PLAN',
-                    detailUrl: 'goa-tour-packages-from-kerala/tours/goa-package-3-days-2-night/',
-                },
-                {
-                    image: 'uploads/categories/86wg9d29vhkflmuwtyrsof3rfqtcapzgva0ynqlp220406065630.jpg',
-                    duration: '3 Nights 4 Days',
-                    title: 'Goa Tour Package',
-                    location: '1N South Goa / 2N North Goa',
-                    price: '₹ 12,999',
-                    originalPrice: '₹ 16,000',
-                    strip: 'BEST SELLER',
-                    detailUrl: 'goa-tour-packages-from-kerala/tours/goa-tour-package-1/',
-                },
-                {
-                    image: 'uploads/categories/86wg9d29vhkflmuwtyrsof3rfqtcapzgva0ynqlp220406065630.jpg',
-                    duration: '4 Nights 5 Days',
-                    title: 'Goa Tour Package',
-                    location: '2N South Goa / 2N North Goa',
-                    price: '₹ 15,999',
-                    originalPrice: '₹ 20,000',
-                    strip: 'TRENDING',
-                    detailUrl: 'goa-tour-packages-from-kerala/tours/goa-tour-package/',
-                },
-            ]}
+            subtitle="Land of sun, sand, and sea"
+            bannerImage="https://www.wegomap.com/uploads/categories/goa-banner.jpg"
+            packages={packages}
+            readMoreHeading="Plan your perfect Goa Getaway"
+            readMoreContent={
+                <>
+                    <p>Goa is the ultimate destination for beach lovers and party enthusiasts. Our Goa tour packages from Kochi and other parts of Kerala offer a perfect blend of relaxation and excitement.</p>
+                    <p>Explore the historic churches of Old Goa, relax on the pristine beaches of South Goa, or experience the vibrant nightlife of North Goa. We provide comfortable stays and customized itineraries to suit your preferences.</p>
+                </>
+            }
         />
     );
 }

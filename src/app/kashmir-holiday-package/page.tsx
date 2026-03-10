@@ -1,34 +1,41 @@
-import TourCategoryPage from '@/components/TourCategoryPage';
+import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
-export default function KashmirPage() {
+const packages: TourPackage[] = [
+    {
+        image: 'uploads/tours/kashmir-4n5d.jpg',
+        duration: '4 Nights 5 Days',
+        title: 'Kashmir Holiday',
+        location: 'Srinagar, Gulmarg, Pahalgam',
+        price: '₹ 21,999',
+        originalPrice: '₹ 25,000',
+        detailUrl: 'kashmir-holiday-package/'
+    },
+    {
+        image: 'uploads/tours/kashmir-5n6d.jpg',
+        duration: '5 Nights 6 Days',
+        title: 'Kashmir Holiday Package',
+        location: 'Srinagar, Gulmarg, Sonamarg, Pahalgam',
+        price: '₹ 27,999',
+        originalPrice: '₹ 30,000',
+        detailUrl: 'kashmir-holiday-package/',
+        strip: 'Best Seller'
+    }
+];
+
+export default function KashmirTours() {
     return (
         <TourCategoryPage
             title="Kashmir Holiday Package"
-            subtitle="5N Srinagar"
-            bannerImage="https://www.wegomap.com/uploads/categories/vsgopcdmooaxqkjltfnahzvl4vqe1fdioxawg2yt240829024046.jpg"
-            bookCount={28}
-            packages={[
-                {
-                    image: 'uploads/categories/vsgopcdmooaxqkjltfnahzvl4vqe1fdioxawg2yt240829024046.jpg',
-                    duration: '4 Nights 5 Days',
-                    title: 'Kashmir Holiday',
-                    location: '4N SRINAGAR',
-                    price: '₹ 22,999',
-                    originalPrice: '₹ 28,000',
-                    strip: 'BEST WINTER PLAN',
-                    detailUrl: 'kashmir-holiday-package/tours/4n5d-kashmir-holiday-package/',
-                },
-                {
-                    image: 'uploads/categories/vsgopcdmooaxqkjltfnahzvl4vqe1fdioxawg2yt240829024046.jpg',
-                    duration: '5 Nights 6 Days',
-                    title: 'Kashmir Holiday Package',
-                    location: '5N Srinagar',
-                    price: '₹ 27,999',
-                    originalPrice: '₹ 34,000',
-                    strip: 'BEST SELLING PACKAGES',
-                    detailUrl: 'kashmir-holiday-package/tours/kashmir-holiday-package/',
-                },
-            ]}
+            subtitle="Paradise on Earth"
+            bannerImage="https://www.wegomap.com/uploads/categories/kashmir-banner.jpg"
+            packages={packages}
+            readMoreHeading="Plan your Kashmir Trip"
+            readMoreContent={
+                <>
+                    <p>Kashmir is often described as heaven on earth, and for good reason. Our Kashmir holiday packages take you through the stunning valleys, serene lakes, and snow-capped peaks of the Himalayas.</p>
+                    <p>Enjoy a Shikara ride on Dal Lake, explore the meadows of Gulmarg, and visit the beautiful river-side town of Pahalgam. We offer comfortable houseboat stays and premium hotel options for an unforgettable Kashmiri experience.</p>
+                </>
+            }
         />
     );
 }

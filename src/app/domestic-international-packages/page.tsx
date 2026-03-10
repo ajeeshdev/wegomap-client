@@ -1,0 +1,78 @@
+import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
+
+const packages: TourPackage[] = [
+    {
+        image: 'uploads/tours/manali-package.jpg',
+        duration: '4N5D Manali',
+        title: 'Manali Tour Packages',
+        location: 'Himachal Pradesh',
+        price: '₹ 18,999',
+        originalPrice: '₹ 20,100',
+        detailUrl: 'manali-tour-packages/',
+        strip: 'Trending'
+    },
+    {
+        image: 'uploads/tours/goa-package-3-days-2-night.jpg',
+        duration: '2N3D Goa',
+        title: 'Goa Tour Packages',
+        location: 'Goa',
+        price: '₹ 8,499',
+        originalPrice: '₹ 10,500',
+        detailUrl: 'goa-tour-packages-from-kerala/',
+        strip: 'Best Seller'
+    },
+    {
+        image: 'uploads/tours/bali-tour-plan.jpg',
+        duration: '3N4D Bali',
+        title: 'Bali Tour Packages',
+        location: 'Indonesia',
+        price: '₹ 16,999',
+        originalPrice: '₹ 19,000',
+        detailUrl: 'bali-tour-packages-from-kochi-kerala/'
+    },
+    {
+        image: 'uploads/tours/3n4d-thailand-package.jpg',
+        duration: '3N4D Thailand',
+        title: 'Thailand Tour Packages',
+        location: 'Thailand',
+        price: '₹ 24,400',
+        originalPrice: '₹ 28,000',
+        detailUrl: 'thailand-tour-packages-from-kochi-kerala/'
+    },
+    {
+        image: 'uploads/tours/dubai-tour-package.jpg',
+        duration: '4N5D Dubai',
+        title: 'Dubai Tour Packages',
+        location: 'UAE',
+        price: '₹ 41,600',
+        originalPrice: '₹ 56,600',
+        detailUrl: 'dubai-tour-packages/'
+    },
+    {
+        image: 'uploads/tours/maldives-tour-package.jpg',
+        duration: '4N5D Maldives',
+        title: 'Maldives Tour Packages',
+        location: 'Maldives',
+        price: '₹ 73,999',
+        originalPrice: '₹ 80,000',
+        detailUrl: 'maldives-tour-packages-from-kochi-kerala/'
+    }
+];
+
+export default function DomesticIntlTours() {
+    return (
+        <TourCategoryPage
+            title="Domestic & International Packages"
+            subtitle="Explore breathtaking destinations across the globe"
+            bannerImage="https://www.wegomap.com/uploads/categories/city-lights-international.jpg"
+            packages={packages}
+            readMoreHeading="Custom International Holidays"
+            readMoreContent={
+                <>
+                    <p>Wegomap provides exceptional travel experiences beyond Kerala. From the snow-capped mountains of Manali to the exotic beaches of Bali and the futuristic skyline of Dubai, we bring the world closer to you.</p>
+                    <p>Our international tour packages are curated with attention to detail, including visa assistance, insurance, and local guided tours. We bridge the gap between your dream destination and your budget.</p>
+                </>
+            }
+        />
+    );
+}

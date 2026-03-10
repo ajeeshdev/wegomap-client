@@ -1,23 +1,32 @@
-import TourCategoryPage from '@/components/TourCategoryPage';
+import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
-export default function CoorgMysoreOotyPage() {
+const packages: TourPackage[] = [
+    {
+        image: 'uploads/tours/coorg-mysore-ooty.jpg',
+        duration: '5 Nights 6 Days',
+        title: 'Coorg Mysore Ooty Package',
+        location: 'Coorg, Mysore, Ooty',
+        price: '₹ 23,999',
+        originalPrice: '₹ 25,700',
+        detailUrl: 'coorg-mysore-ooty/',
+        strip: 'Best Seller'
+    }
+];
+
+export default function CoorgMysoreOoty() {
     return (
         <TourCategoryPage
-            title="Coorg / Mysore / Ooty"
-            subtitle="2N Coorg /1N Mysore /2N Ooty"
-            bannerImage="https://www.wegomap.com/uploads/categories/neqghtvqmhem7lqiiniilprz8hoskpvtcyb82xo1240905031746.jpg"
-            bookCount={28}
-            packages={[
-                {
-                    image: 'uploads/categories/neqghtvqmhem7lqiiniilprz8hoskpvtcyb82xo1240905031746.jpg',
-                    duration: '5 Nights 6 Days',
-                    title: 'Coorg Mysore Ooty Package',
-                    location: '2N Coorg / 1N Mysore / 2N Ooty',
-                    price: '₹ 16,999',
-                    originalPrice: '₹ 21,000',
-                    detailUrl: 'coorg-mysore-ooty/tours/coorg-mysore-ooty-package/',
-                },
-            ]}
+            title="Coorg Mysore Ooty"
+            subtitle="The spice capital and the queen of hills"
+            bannerImage="https://www.wegomap.com/uploads/categories/coorg-mysore-ooty-banner.jpg"
+            packages={packages}
+            readMoreHeading="Complete South India Tour"
+            readMoreContent={
+                <>
+                    <p>Experience the best of Karnataka and Tamil Nadu with our Coorg, Mysore, and Ooty tour package. This itinerary takes you through the coffee plantations of Coorg, the royal heritage of Mysore, and the scenic beauty of Ooty.</p>
+                    <p>Wegomap ensures a comfortable journey with premium hotel stays, private vehicle transfers, and well-planned sightseeing tours. Ideal for families and nature lovers.</p>
+                </>
+            }
         />
     );
 }

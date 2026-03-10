@@ -1,34 +1,32 @@
-import TourCategoryPage from '@/components/TourCategoryPage';
+import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
-export default function MalaysiaPage() {
+const packages: TourPackage[] = [
+    {
+        image: 'uploads/tours/malaysia.jpg',
+        duration: '3 Nights 4 Days',
+        title: 'Malaysia Tour Package',
+        location: 'Kuala Lumpur, Genting Highlands',
+        price: '₹ 19,499',
+        originalPrice: '₹ 22,500',
+        detailUrl: 'malaysia-tour-packages-from-kochi-kerala/',
+        strip: 'Best Seller'
+    }
+];
+
+export default function MalaysiaTours() {
     return (
         <TourCategoryPage
             title="Malaysia Tour Packages"
-            subtitle="Malaysia Tour Package"
-            bannerImage="https://www.wegomap.com/uploads/categories/7Er9MHHpU4tIDnHWJm9rmvpELUno6GQ2zdd7pozR240821040000.jpg"
-            bookCount={28}
-            packages={[
-                {
-                    image: 'uploads/categories/7Er9MHHpU4tIDnHWJm9rmvpELUno6GQ2zdd7pozR240821040000.jpg',
-                    duration: '3 Nights 4 Days',
-                    title: 'Malaysia Tour Package',
-                    location: '3N Malaysia',
-                    price: '₹ 35,999',
-                    originalPrice: '₹ 42,000',
-                    strip: 'TRENDING',
-                    detailUrl: 'malaysia-tour-packages-from-kochi-kerala/tours/malaysia-tour-package/',
-                },
-                {
-                    image: 'uploads/categories/7Er9MHHpU4tIDnHWJm9rmvpELUno6GQ2zdd7pozR240821040000.jpg',
-                    duration: '5 Nights 6 Days',
-                    title: 'Malaysia with Penang',
-                    location: '3N Kuala Lampur / 2N Penang',
-                    price: '₹ 49,999',
-                    originalPrice: '₹ 58,000',
-                    strip: 'TRENDING',
-                    detailUrl: 'malaysia-tour-packages-from-kochi-kerala/tours/malaysia-with-penang/',
-                },
-            ]}
+            subtitle="Truly Asia experience"
+            bannerImage="https://www.wegomap.com/uploads/categories/malaysia-banner.jpg"
+            packages={packages}
+            readMoreHeading="Explore Malaysia with Wegomap"
+            readMoreContent={
+                <>
+                    <p>Malaysia is a melting pot of cultures, offering everything from futuristic skyscrapers to tropical rainforests. Our Malaysia tour packages from Kochi are curated to give you the best of city life and nature.</p>
+                    <p>Visit the iconic Petronas Twin Towers in Kuala Lumpur, enjoy the world-class theme parks in Genting Highlands, and experience the cultural diversity of the region. We provide assistance with Malaysia visas and flights.</p>
+                </>
+            }
         />
     );
 }

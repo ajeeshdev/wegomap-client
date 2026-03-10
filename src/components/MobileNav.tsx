@@ -5,8 +5,8 @@ import { Briefcase, Calendar, Ship, CreditCard, Phone } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 const navItems = [
-    { name: 'Tours', href: '/tours', icon: Briefcase },
-    { name: 'Events', href: '/events', icon: Calendar },
+    { name: 'Tours', href: '/packages', icon: Briefcase },
+    { name: 'Events', href: '/corporate-event-management-company-kochi', icon: Calendar },
     { name: 'Cruises', href: '/cruise-packages', icon: Ship },
     { name: 'Payment', href: '/payment', icon: CreditCard },
     { name: 'Contact', href: '/contact', icon: Phone },

@@ -1,24 +1,32 @@
-import TourCategoryPage from '@/components/TourCategoryPage';
+import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
-export default function LehLadakhPage() {
+const packages: TourPackage[] = [
+    {
+        image: 'uploads/tours/leh-ladakh.jpg',
+        duration: '5 Nights 6 Days',
+        title: 'Leh Ladakh Tour Package',
+        location: 'Leh, Nubra Valley, Pangong Lake',
+        price: '₹ 16,999',
+        originalPrice: '₹ 22,000',
+        detailUrl: 'leh-ladakh-tour-package/',
+        strip: 'Adventurous'
+    }
+];
+
+export default function LehTours() {
     return (
         <TourCategoryPage
             title="Leh Ladakh Tour Package"
-            subtitle="Leh Ladakh Holidays"
-            bannerImage="https://www.wegomap.com/uploads/categories/d4rzq89o8xu3a9ejgnhkfes4r5lpqvsfgtldzmoi240904033509.jpg"
-            bookCount={28}
-            packages={[
-                {
-                    image: 'uploads/categories/d4rzq89o8xu3a9ejgnhkfes4r5lpqvsfgtldzmoi240904033509.jpg',
-                    duration: '5 Nights 6 Days',
-                    title: 'Leh Ladakh Tour Package',
-                    location: '3N Leh / 2N Ladakh',
-                    price: '₹ 27,999',
-                    originalPrice: '₹ 34,000',
-                    strip: 'TRENDING',
-                    detailUrl: 'leh-ladakh-tour-package/tours/leh-ladakh-tour-package/',
-                },
-            ]}
+            subtitle="The land of high passes"
+            bannerImage="https://www.wegomap.com/uploads/categories/leh-banner.jpg"
+            packages={packages}
+            readMoreHeading="Adventure in Ladakh"
+            readMoreContent={
+                <>
+                    <p>Leh Ladakh is a destination like no other, offering dramatic landscapes, high-altitude passes, and ancient monasteries. Our Ladakh tour packages are designed for those seeking both adventure and peace.</p>
+                    <p>Cross the world's highest motorable roads, witness the stunning blue waters of Pangong Lake, and explore the unique desert landscape of Nubra Valley. Wegomap ensures a safe and well-planned journey with experienced local guides.</p>
+                </>
+            }
         />
     );
 }

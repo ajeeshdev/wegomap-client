@@ -1,34 +1,41 @@
-import TourCategoryPage from '@/components/TourCategoryPage';
+import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 
-export default function ManaliPage() {
+const packages: TourPackage[] = [
+    {
+        image: 'uploads/tours/manali-package.jpg',
+        duration: '4 Nights 5 Days',
+        title: 'Manali Package',
+        location: 'Manali, Solang Valley, Rohtang Pass',
+        price: '₹ 18,999',
+        originalPrice: '₹ 20,100',
+        detailUrl: 'trending/tours/manali-package/',
+        strip: 'Trending'
+    },
+    {
+        image: 'uploads/tours/shimla-manali-package.jpg',
+        duration: '5 Nights 6 Days',
+        title: 'Shimla Manali Package',
+        location: 'Shimla, Manali',
+        price: '₹ 18,999',
+        originalPrice: '₹ 21,500',
+        detailUrl: 'manali-tour-packages/'
+    }
+];
+
+export default function ManaliTours() {
     return (
         <TourCategoryPage
             title="Manali Tour Packages"
-            subtitle="Explore with us"
-            bannerImage="https://www.wegomap.com/uploads/categories/ofsorzqr2izti1rwgjqjaxxp4iws07ct9heovkwj220406065835.jpg"
-            bookCount={28}
-            packages={[
-                {
-                    image: 'uploads/categories/ofsorzqr2izti1rwgjqjaxxp4iws07ct9heovkwj220406065835.jpg',
-                    duration: '4 Nights 5 Days',
-                    title: 'Manali Package',
-                    location: '4N Manali',
-                    price: '₹ 18,999',
-                    originalPrice: '₹ 22,000',
-                    strip: 'BEST SELLING PACKAGES',
-                    detailUrl: 'manali-tour-packages/tours/manali-package/',
-                },
-                {
-                    image: 'uploads/categories/ofsorzqr2izti1rwgjqjaxxp4iws07ct9heovkwj220406065835.jpg',
-                    duration: '5 Nights 6 Days',
-                    title: 'Shimla Manali Package',
-                    location: '3N Manali / 2N Shimla',
-                    price: '₹ 22,999',
-                    originalPrice: '₹ 28,000',
-                    strip: 'BEST WINTER PLAN',
-                    detailUrl: 'manali-tour-packages/tours/5n6d-manali-package/',
-                },
-            ]}
+            subtitle="Deep valleys and high mountain ranges"
+            bannerImage="https://www.wegomap.com/uploads/categories/manali-banner.jpg"
+            packages={packages}
+            readMoreHeading="Explore the Beauty of Himachal"
+            readMoreContent={
+                <>
+                    <p>Manali is one of the most popular hill stations in India, known for its stunning landscapes, snow-capped mountains, and adventure sports. Our Manali tour packages are designed to give you the best experience of this Himalayan paradise.</p>
+                    <p>From the snow at Rohtang Pass to the serene Solang Valley and the ancient Hadimba Temple, we cover all the major attractions. We also offer customized packages for honeymooners and families.</p>
+                </>
+            }
         />
     );
 }
