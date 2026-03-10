@@ -1,0 +1,37 @@
+:root {
+    --primary-color: #1673B8;
+    --secondary-color: #8CC647;
+}
+
+// Colors
+$primaryColor: #1673B8 !default;
+$secondaryColor: #FF6B35 !default;
+$colorForDarkBg: #AEADAD !default;
+$colorForGreyBg: #3E444A !default;
+$colorForFooter: #787878 !default;
+$gradient-theme: linear-gradient(90deg, #1673B8 50%, #8CC647 75%);
+$gradient: linear-gradient(90deg, #1673B8 0%, #FB7F33 75%, #fff 100%);
+$gradient: linear-gradient(90deg, #1673B8 0%, #FB7F33 75%, #fff 100%);
+$bg-gradient: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+
+$greyBg: #EFEFEF !default;
+$grey: #D9D9D9 !default;
+$white: #fff !default;
+
+$black: #0A1119;
+$red: #F1582C;
+$cosmicOrange: #FF6B35 !default;
+$yellow: #E2FF06 !default;
+$accentColor: #4B535D !default;
+
+// Shadows
+
+// Alert Colors
+$success: #28a745 !default;
+$info: #17a2b8 !default;
+$warning: #ffc107 !default;
+$danger: #dc3545 !default;
+
+// Typography
+$primary-font: "Outfit", sans-serif;
+$writing-font: var(--font-writing), cursive;

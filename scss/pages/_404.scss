@@ -1,0 +1,136 @@
+.not-found{
+
+        padding-top: clamp(80px, 7.97vw, 153px);
+        padding-bottom: clamp(80px, 7.97vw, 120px);
+    
+   
+    img{
+
+        margin-bottom:  clamp(30px, 3.3vw, 62px);
+            width: 70.726%;
+        @include min(768){
+            width: 34.31%;
+        }
+    }
+    h1{
+        margin-bottom: clamp(15px, 1.41vw, 27px);
+    }
+    span{
+        line-height: normal;
+        font-weight: 400;
+        font-size: 22px;
+        @include min(768){
+            font-size: 24px;
+        }
+        @include min(992){
+            font-size: 28px;
+        }
+        @include min(1200){
+            font-size: 30px;
+        }
+        @include min(1280){
+            font-size: 32px;
+        }
+        @include min(1440){
+            font-size: 34px;
+        }
+    }
+
+    p{
+        color: #3E444A;
+        line-height: 160%;
+        margin-left: auto;
+        margin-right: auto;
+    //  width: 32.218%;
+    width: 80%;
+    @include min(768){
+        width: clamp(498px, 32.084vw, 616px);
+
+    }
+   
+
+    }
+    h1{
+        color: $black;
+        line-height: 100% ;
+        font-weight: 700;
+        font-size: clamp(18px, 1.9vw, 36px);
+        @include max(575){
+            margin-bottom: 20px;
+        }
+
+        
+    }
+    .buttonwrapper{
+        margin-top: clamp(18px, 2.14vw, 41px);
+        gap:  clamp(7px, 0.7vw, 13px);
+        a{
+            border-radius: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            height: 42px;
+            padding: 17px 30px;
+            &:first-child{
+                background: #FFA600;
+            }
+        }
+        a+ a{
+            color: #4B535D;
+           border: 1px solid #7B7675;
+
+
+            &:hover{
+            }
+        }
+    }
+       ~ .footer-cta{
+        display: none;
+    }
+}
+
+
+
+
+
+// =================Thank you=========================
+section.thank-you{
+ 
+        padding-top: clamp(80px, 7.97vw, 153px);
+        padding-bottom: clamp(80px, 7.97vw, 120px);
+           ~ .footer-cta{
+        display: none;
+    }
+
+        h1{
+            font-weight: 700;
+                 margin-bottom: clamp(8px, 0.94vw, 18px);
+
+        }
+
+
+ picture{
+    margin-bottom:clamp(10px, 2.11vw, 40.5px);
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+    @include min(768){
+            width: 21.429%;
+
+    }
+
+        img{
+        width: 100%;
+        height: auto;
+    }
+ }
+ p{
+    color: #3E444A;
+    line-height:  160% ;
+
+     margin-bottom: clamp(10px, 2.1vw, 36px);
+ }
+  
+}

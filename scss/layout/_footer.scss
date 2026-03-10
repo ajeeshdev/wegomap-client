@@ -1,0 +1,87 @@
+// Footer Styles
+
+footer {
+    background-color: #000;
+    color: #fff;
+    padding-top: 3rem;
+    padding-bottom: 2.5rem;
+
+    .footerTop {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 2.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        gap: 3rem;
+
+        @media (min-width: 768px) {
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 5rem;
+        }
+
+        h3 {
+            font-size: 0.875rem; // sm
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            li a {
+                color: #94a3b8; // slate-400
+                text-decoration: none;
+                transition: color 0.2s;
+
+                &:hover {
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    .footerBottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        padding-top: 2rem;
+
+        @media (min-width: 768px) {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        p {
+            font-size: 0.875rem;
+            color: #64748b; // slate-500
+        }
+
+        .socialLinks {
+            display: flex;
+            gap: 1rem;
+
+            a {
+                width: 2.5rem;
+                height: 2.5rem;
+                border-radius: 9999px;
+                background-color: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                transition: all 0.2s;
+
+                &:hover {
+                    background-color: #fff;
+                    color: #000;
+                }
+            }
+        }
+    }
+}

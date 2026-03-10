@@ -1,0 +1,435 @@
+
+.siteEnquiryForm{
+  @media (min-width: 768px) and (max-width: 991px) {
+  .modal-dialog {
+    max-width: 720px;
+  }
+
+  }
+  @media (max-width: 767px) {
+  .modal-dialog {
+    max-width: 100%;
+    margin: 10px;
+  }}
+.modal-dialog {
+  max-width: 936px;
+}
+.modal-content {
+  border-radius: 20px;
+  box-shadow: 0 0 10px 10px rgba(54, 54, 54, 0.11);
+  padding: clamp(25px, 2.3959vw, 46px);
+}
+  label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    strong {
+      text-decoration: underline;
+      font-weight: 400 !important;
+      margin-bottom: 8px;
+    }
+
+  }
+}
+.modal-content {
+
+
+  // .d-flex {
+  //   gap: 5px;
+  // }
+
+  .formGroup,
+  .upload-area-container,
+  .uploaded-files:has(.file-item) {
+    margin-bottom:  clamp(15px, 1.24999vw, 24px);
+  }
+
+
+  small {
+    font-weight: 300;
+    line-height: 125%;
+    color: #4B535D;
+    font-size: clamp(12px, 0.834vw, 16px);
+  }
+
+  .title {
+    line-height: 100%;
+    padding-top: 15px;
+    font-size: clamp(20px, 1.46vw, 28px);
+    font-weight: 500;
+    margin-bottom: clamp(20px, 2.11vw, 42px);
+  }
+
+  /* ================= FILE ITEM ================= */
+  .file-item {
+    position: relative;
+    width: 48.695%;
+    border-radius: 5px;
+    border: 1px solid #C9C9C9;
+    background: #FFF;
+    padding: 12px;
+
+    .remove-file {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      background: unset;
+    }
+  }
+
+  /* ================= INPUTS ================= */
+  input,select{
+      &:focus{
+      box-shadow: unset;
+          border: 1px solid #C9C9C9;
+      // border: unset;
+    }
+  }
+  input[type="text"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="email"],
+  textarea,select {
+  
+    border: 1px solid #C9C9C9;
+    border-radius: 5px;
+    font-weight: 200;
+    color: #4B535D;
+
+    &::placeholder {
+      color: #4B535D;
+    }
+  }
+
+    input[type="text"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="email"],select {
+    height:clamp(35px, 3.6459vw, 70px);
+  }
+
+  textarea {
+    height: clamp(70px, 7.44799vw, 143px);
+  }
+
+  .file-size {
+    display: block;
+    color: #4B535D;
+    font-weight: 300;
+    margin-bottom: 9px;
+    font-size: clamp(12px, 0.81vw, 16px);
+  }
+
+  .file-icon {
+    border-radius: 5px;
+    background: #F2F2F2;
+    width:  clamp(30px, 2.61vw, 50px) ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    @include min(992){    gap: 5px;}
+    @include min(1200){    gap: 6px;}
+    @include min(1350){    gap: 7px;}
+    @include min(1440){    gap: 8px;}
+    @include min(1600){    gap: 9px;}
+    @include min(1900){    gap: 10px;}
+
+    + div {
+      width: 83%;
+    }
+
+    svg {
+      width: 28px;
+      height: auto;
+    }
+  }
+
+  /* ================= PROGRESS ================= */
+  .progress {
+    height: 6px;
+
+    i {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: #FFA600;
+      box-shadow: 0 0 6px rgba(255, 166, 0, 0.6);
+      transition: width 0.3s ease;
+    }
+  }
+
+  /* ================= CLOSE BUTTON ================= */
+  .btn-close {
+    position: absolute;
+    right: clamp(10px, 3.23vw, 46px);
+    top: clamp(10px, 3.23vw, 46px);
+    width: clamp(30px, 3.23vw, 50px);
+    height: clamp(30px, 3.23vw, 50px);
+    border-radius: 50%;
+    background: #D0DBE6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+
+    svg {
+      width: clamp(10px, 3.23vw, 11px);
+    }
+  }
+
+  /* ================= UPLOAD AREA ================= */
+  .upload-area-container {
+    border-radius: 10px;
+    border: 1px dashed #C9C9C9;
+    background: #FFF;
+    padding: clamp(15px, 1.9792vw, 38px);
+  }
+
+  .upload-icon {
+    display: flex;
+    width: fit-content;
+    margin: 0 auto 12px;
+    background: #EEE;
+    border-radius: 50%;
+    padding: clamp(12px, 0.81vw, 16px);
+
+    svg{
+      height: auto;
+      width: clamp(24px, 2.5vw, 48px);
+    }
+;
+  }
+
+  .file-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    @include min(992){    gap: 5px;}
+    @include min(1200){    gap: 6px;}
+    @include min(1350){    gap: 7px;}
+    @include min(1440){    gap: 8px;}
+    @include min(1600){    gap: 9px;}
+    @include min(1900){    gap: 10px;}
+
+    p {
+      width: 95%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  /* ================= BUTTON GROUP ================= */
+  .buttonGroup {
+    display: flex;
+    gap: 9px;
+    margin-top: 15px;
+
+    button {
+      border-radius: 80px;
+      display: flex;
+      align-items: center;
+      line-height: 125%;
+          height: 33px;
+    padding: 0 21px;
+    @include min(992){
+          height: 36px;
+    padding: 0 26px;
+    }
+    @include min(1200){
+          height: 38px;
+    padding: 0 28px;
+    }
+    @include min(1350){
+        height: 42px;
+      padding: 0 30px;
+    
+    }
+  }
+
+    button + button {
+      border: 1px solid #D9D9D9;
+      color: #4F5762;
+
+      &:hover {
+        background: #4F5762;
+        color: #fff;
+        border-color: #7a7a7a;
+      }
+    }
+  }
+
+  /* ================= COLORS ================= */
+
+
+  // form {
+  //   gap: 18px 0;
+  // }
+
+  /* ================= GRID ================= */
+  .col--4 {
+    width: 100%;
+
+    @include min(768) {
+      width: 48.277%;
+    }
+
+    @include min(992) {
+      width: 32.277%;
+    }
+  }
+
+  .col--6 {
+    width: 100%;
+
+    @include min(768) {
+      width: 48.886%;
+    }
+  }
+}
+
+/* ==================================================
+   RESPONSIVE FIXES (REAL ONES)
+================================================== */
+
+/* MOBILE */
+@media (max-width: 767px) {
+
+  .modal-content {
+    padding: 20px;
+  }
+
+  .file-item {
+    width: 100%;
+  }
+
+    input[type="text"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="email"] {
+    height: 48px;
+  }
+
+  textarea {
+    height: 120px;
+  }
+
+  .upload-area-container {
+    padding: 20px;
+  }
+
+  .file-icon + div {
+    width: calc(100% - 52px);
+  }
+
+  .buttonGroup {
+    // flex-direction: column;
+
+    button {
+      // width: 100%;
+      // justify-content: center;
+    }
+  }
+}
+
+/* TABLET */
+@media (min-width: 768px) and (max-width: 991px) {
+
+  .file-item {
+    width: 100%;
+  }
+
+    input[type="text"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="email"] {
+    height: 56px;
+  }
+
+  textarea {
+    height: 135px;
+  }
+}
+
+
+.careerForm {
+  .heading {
+    font-weight: 300;
+    line-height:  118.519% ;
+    margin-bottom:  clamp(20px, 3.74999vw, 72px);
+    font-size: clamp(22px, 2.89vw, 54px) ;
+
+  }
+  .modal-dialog {
+        margin-left: auto;
+    margin-right: 0;
+    margin-top: 0;
+    max-width: 83%;
+    @include min(768){
+      max-width: 70.465%;
+    }
+    @include min(992){
+      max-width: 51.465%;
+    }
+    .modal-content{
+      padding-left: clamp(25px, 3.74999vw, 70px);
+      padding-right: clamp(25px, 3.74999vw, 70px);
+      padding-top: clamp(19px, 3.12499vw, 38px);
+      padding-bottom: clamp(30px, 3.12499vw, 60px);
+
+    }
+
+  }
+  .word-count{
+    text-align: right;
+    color: #4B535D;
+    font-weight: 200;
+    margin-top: 12px;
+  }
+  .attachment{
+    gap: 12px;
+     p{
+    width: fit-content;
+  }
+  }
+  .custom-upload{
+    .d-flex{
+      gap: 12px;
+    }
+  }
+  .selected-file{
+    margin-left: 40px;
+  }
+  .file-info{
+    color: #4B535D;
+    font-weight: 200;
+    font-size: 12px;
+    margin-top: 8px;
+    @include min(768){font-size: 13px;}
+    @include min(992){font-size: 13.5px;}
+    @include min(1200){font-size: 14px;}
+    @include min(1350){font-size: 14.5px;}
+    @include min(1440){font-size: 15px;}
+    @include min(1600){font-size: 15.5px;}
+    @include min(1900){font-size: 16px;}
+  }
+  .form-check-label{
+    line-height:  140% ;
+    font-weight: 200;
+    a{
+      color: #FFA600;
+      font-weight: 200;
+text-decoration: underline;
+    }
+  }
+}
+  .bgYellow {
+    background: $primaryColor;
+  }
+
+  .bgCancel {
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+  }

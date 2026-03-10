@@ -1,0 +1,22 @@
+// Global Utilities
+
+.glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.container {
+    width: 87%;
+    max-width: 87%;
+    margin: 0 auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    @media (min-width: 768px) {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+// Any other global utilities from globals.css or elsewhere

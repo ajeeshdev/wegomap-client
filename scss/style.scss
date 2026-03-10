@@ -1,0 +1,43 @@
+// Helpers
+@import "../scss/helpers/variables";
+@import "../scss/helpers/media-queries";
+@import "../scss/helpers/mixins";
+@import "../scss/helpers/font-kit";
+@import "../scss/helpers/utilities";
+
+
+//Layout
+@import "../scss/layout/reset";
+@import "../scss/layout/header";
+@import "../scss/layout/footer";
+@import "../scss/layout/offcanvas-menu";
+// Components
+@import "../scss/pages/modal";
+@import "../scss/components/star-rating-svg";
+@import "../scss/components/animations";
+@import "../scss/components/filter-sidebar";
+@import "../scss/components/page-banner";
+
+
+
+//pages
+@import "../scss/pages/style";
+@import "../scss/pages/home";
+@import "../scss/pages/about-us";
+@import "../scss/pages/terms";
+@import "../scss/pages/contact";
+@import "../scss/pages/services";
+@import "../scss/pages/package-details";
+@import "../scss/pages/404";
+
+@import "../scss/pages/blog";
+@import "../scss/pages/events";
+
+
+@import "../scss/components/floatingbutton";
+
+
+// Base 
+// @import "../scss/base/buttons";
+@import "../scss/base/font-settings";
+// @import "../scss/base/forms";

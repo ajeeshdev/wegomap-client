@@ -1,0 +1,32 @@
+.policy{
+  @extend .commonPadding-120;
+  ~ .footer-cta{display: none;}
+  ol,ul{
+    li{
+      color: $black;
+       font-size: clamp(18px, 1.3vw, 24px);
+
+    }
+  }
+  ol{
+    li{
+      list-style:decimal
+    }
+  }
+  h1{
+    font-weight: 600;
+  }
+  h3{
+    color: $black;
+      font-size: clamp(18px, 1.3vw, 24px);
+       margin-bottom: clamp(10px, 1vw, 18px);
+  }
+  p
+   + h3,li + li{
+           margin-top: clamp(12px, 1.25vw, 24px);
+
+  }
+  p a, li a{
+    color: #FFA600;
+  }
+}

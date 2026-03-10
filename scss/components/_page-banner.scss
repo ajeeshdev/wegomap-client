@@ -1,0 +1,135 @@
+// Page Banner & Breadcrumb — shared inner page component
+
+.pageBanner {
+    position: relative;
+    padding-top: 6.5rem; // clear fixed header
+    padding-bottom: 1.5rem;
+    background: #fff;
+    border-bottom: 1px solid #f1f5f9;
+    overflow: hidden;
+    min-height: 0;
+}
+
+/* Ghost watermark — large faded page name behind the title */
+.pageBannerGhost {
+    position: absolute;
+    right: -1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: clamp(4rem, 12vw, 9rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #f1f5f9;
+    text-transform: uppercase;
+    user-select: none;
+    pointer-events: none;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+/* Inner layout */
+.pageBannerInner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Orange accent pill above the title */
+.pageBannerAccent {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: $cosmicOrange;
+    margin-bottom: 0.2rem;
+
+    &::before {
+        content: '';
+        display: inline-block;
+        width: 20px;
+        height: 2px;
+        background: $cosmicOrange;
+        border-radius: 2px;
+    }
+}
+
+/* Title */
+.pageBannerTitle {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 0;
+
+    @media (min-width: 768px) {
+        font-size: 2.25rem;
+    }
+}
+
+/* Subtitle */
+.pageBannerSubtitle {
+    color: #64748b;
+    font-size: 0.85rem;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-top: 0.1rem;
+    max-width: 480px;
+}
+
+/* Breadcrumb */
+.pageBreadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #f1f5f9;
+}
+
+.breadcrumbGroup {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.breadcrumbSep {
+    color: #cbd5e1;
+    flex-shrink: 0;
+}
+
+.breadcrumbItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #94a3b8;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s ease;
+
+    &.breadcrumbHome {
+        color: #64748b;
+
+        &:hover {
+            color: #0f172a;
+        }
+    }
+
+    &:hover {
+        color: #0f172a;
+    }
+
+    &.active {
+        color: $cosmicOrange;
+        font-weight: 700;
+        cursor: default;
+    }
+}
