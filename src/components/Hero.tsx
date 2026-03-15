@@ -1,9 +1,11 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
-import { Search, MapPin } from 'lucide-react';
+import { API_URL } from '@/config';
+import { useState, useEffect, useRef, useMemo } from 'react';
+import { Search, MapPin, X, Clock } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade } from 'swiper/modules';
 
@@ -12,57 +14,55 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 
-const slides = [
-    {
-        title: "Gods Own Kerala",
-        subtitle: "A Journey Through Paradise",
-        buttonText: "Kerala Packages",
-        buttonHref: "/kerala-tour-packages",
-        imgDesktop: "/uploads/sliders/u4Ls79zJPPnZeU9jFEzsHRnCLiXvXeqdovdlckqM260226031959.jpg",
-        imgMobile: "/uploads/sliders/u4Ls79zJPPnZeU9jFEzsHRnCLiXvXeqdovdlckqM260226031959-985x500.jpg",
-        imgPortrait: "/uploads/sliders/u4Ls79zJPPnZeU9jFEzsHRnCLiXvXeqdovdlckqM260226031959-412x915.jpg"
-    },
-    {
-        title: "Amazing Thailand",
-        subtitle: "The Land of Smiles Awaits",
-        buttonText: "Thailand Packages",
-        buttonHref: "/international-packages",
-        imgDesktop: "/uploads/sliders/VXL3I4Y7Rvrn4oVcX2IjQXxniHzV4jdbFaFGcFIq250715061723.jpg",
-        imgMobile: "/uploads/sliders/VXL3I4Y7Rvrn4oVcX2IjQXxniHzV4jdbFaFGcFIq250715061723-985x500.jpg",
-        imgPortrait: "/uploads/sliders/VXL3I4Y7Rvrn4oVcX2IjQXxniHzV4jdbFaFGcFIq250715061723-412x915.jpg"
-    },
-    {
-        title: "Sail Away in Luxury",
-        subtitle: "Relaxation with Ocean Views",
-        buttonText: "View More",
-        buttonHref: "/cruise-packages",
-        imgDesktop: "/uploads/sliders/47i1zjrs0f2dSgQUuuIc3wIBajZyoqVIwDnybQ7L250901035243.jpg",
-        imgMobile: "/uploads/sliders/47i1zjrs0f2dSgQUuuIc3wIBajZyoqVIwDnybQ7L250901035243-985x500.jpg",
-        imgPortrait: "/uploads/sliders/47i1zjrs0f2dSgQUuuIc3wIBajZyoqVIwDnybQ7L250901035243-412x915.jpg"
-    },
-    {
-        title: "Beautiful Malaysia",
-        subtitle: "Tropical Trails of Malaysia",
-        buttonText: "Malaysian Packages",
-        buttonHref: "/international-packages",
-        imgDesktop: "/uploads/sliders/fubJmwGlkYE1fIaZH8OHcrTQYp1ck3RDDSLhLA27250715061738.jpg",
-        imgMobile: "/uploads/sliders/fubJmwGlkYE1fIaZH8OHcrTQYp1ck3RDDSLhLA27250715061738-985x500.jpg",
-        imgPortrait: "/uploads/sliders/fubJmwGlkYE1fIaZH8OHcrTQYp1ck3RDDSLhLA27250715061738-412x915.jpg"
-    },
-    {
-        title: "Corporate Events",
-        subtitle: "Celebrate in Style",
-        buttonText: "View more",
-        buttonHref: "/corporate-event-management-company-kochi",
-        imgDesktop: "/uploads/sliders/hA1u3jrSMYiQ4140gXAuTl3ZU0AKikjxagS1mnSy250901042122.jpg",
-        imgMobile: "/uploads/sliders/hA1u3jrSMYiQ4140gXAuTl3ZU0AKikjxagS1mnSy250901042122-985x500.jpg",
-        imgPortrait: "/uploads/sliders/hA1u3jrSMYiQ4140gXAuTl3ZU0AKikjxagS1mnSy250901042122-412x915.jpg"
-    }
-];
-
 export default function Hero() {
+    const router = useRouter();
     const searchRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     const [isSticky, setIsSticky] = useState(false);
+    const [query, setQuery] = useState('');
+    const [showSuggestions, setShowSuggestions] = useState(false);
+    const [activeSuggestion, setActiveSuggestion] = useState(-1);
+
+    const [slides, setSlides] = useState<any[]>([]);
+    const [searchIndex, setSearchIndex] = useState<any[]>([]);
+
+    useEffect(() => {
+        // Fetch dynamic sliders
+        fetch(`${API_URL}/sliders`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.success && data.data.length > 0) {
+                    const dynamicSlides = data.data.map((s: any) => ({
+                        title: s.title || '',
+                        subtitle: s.subtitle || "Explore the world with Wegomap",
+                        buttonText: "Discover Now",
+                        buttonHref: s.link || '/packages',
+                        imgDesktop: s.image || '',
+                        imgMobile: s.image || '',
+                        imgPortrait: s.image || ''
+                    }));
+                    setSlides(dynamicSlides);
+                }
+            })
+            .catch(err => console.error("Failed to load sliders", err));
+
+        // Fetch packages for the search index
+        fetch(`${API_URL}/packages`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    const dynamicSearchIndex = data.data.map((pkg: any) => ({
+                        type: 'package' as const,
+                        title: pkg.title,
+                        href: `/packages/${pkg.slug || pkg._id}`,
+                        image: pkg.thumb || (pkg.images && pkg.images[0]) || '',
+                        meta: pkg.duration || pkg.location,
+                    }));
+                    setSearchIndex(dynamicSearchIndex);
+                }
+            })
+            .catch(err => console.error("Failed to load search index", err));
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -91,63 +91,176 @@ export default function Hero() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Close suggestions on outside click
+    useEffect(() => {
+        const handler = (e: MouseEvent) => {
+            if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+                setShowSuggestions(false);
+            }
+        };
+        document.addEventListener('mousedown', handler);
+        return () => document.removeEventListener('mousedown', handler);
+    }, []);
+
+    const suggestions = useMemo(() => {
+        if (!query.trim() || query.length < 1) return [];
+        const q = query.toLowerCase();
+        return searchIndex
+            .filter(item => item.title.toLowerCase().includes(q) || (item.meta && item.meta.toLowerCase().includes(q)))
+            .slice(0, 6);
+    }, [query, searchIndex]);
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (!showSuggestions || suggestions.length === 0) return;
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            setActiveSuggestion(prev => Math.min(prev + 1, suggestions.length - 1));
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            setActiveSuggestion(prev => Math.max(prev - 1, -1));
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (activeSuggestion >= 0) {
+                router.push(suggestions[activeSuggestion].href);
+                setShowSuggestions(false);
+            } else {
+                router.push(`/tours?q=${encodeURIComponent(query)}`);
+                setShowSuggestions(false);
+            }
+        } else if (e.key === 'Escape') {
+            setShowSuggestions(false);
+        }
+    };
+
     return (
         <section className="heroSection">
             <div className="homeContainer">
                 <div className="heroBanner group">
-                    <Swiper
-                        modules={[Autoplay, EffectFade]}
-                        effect="fade"
-                        autoplay={{ delay: 5000, disableOnInteraction: false }}
-                        loop={true}
-                        className="heroSwiper"
-                    >
-                        {slides.map((slide, idx) => (
-                            <SwiperSlide key={idx}>
-                                <div className="slideContent">
-                                    <div className="imageWrapper">
-                                        <picture>
-                                            <source media="(max-width: 480px)" srcSet={slide.imgPortrait} />
-                                            <source media="(max-width: 768px)" srcSet={slide.imgMobile} />
-                                            <Image
-                                                src={slide.imgDesktop}
-                                                alt={slide.title}
-                                                fill
-                                                className="object-cover"
-                                                priority={idx === 0}
-                                            />
-                                        </picture>
-                                        <div className="overlay" />
-                                    </div>
+                    {slides.length > 0 ? (
+                        <Swiper
+                            modules={[Autoplay, EffectFade]}
+                            effect="fade"
+                            autoplay={{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+                            loop={true}
+                            className="heroSwiper"
+                        >
+                            {slides.map((slide, idx) => (
+                                <SwiperSlide key={idx}>
+                                    <div className="slideContent">
+                                        <div className="imageWrapper">
+                                            <picture>
+                                                <source media="(max-width: 480px)" srcSet={slide.imgPortrait || slide.imgDesktop} />
+                                                <source media="(max-width: 768px)" srcSet={slide.imgMobile || slide.imgDesktop} />
+                                                <Image
+                                                    src={slide.imgDesktop || '/assests/site/assets/images/placeholder.jpg'}
+                                                    alt={slide.title || 'Slide'}
+                                                    fill
+                                                    className="object-cover"
+                                                    priority={idx === 0}
+                                                    unoptimized
+                                                />
+                                            </picture>
+                                            <div className="overlay" />
+                                        </div>
 
-                                    <div className="contentOverlay">
-                                        <h1>{slide.title}</h1>
-                                        <p className="heroSubheading">{slide.subtitle}</p>
-                                        <Link href={slide.buttonHref} className="heroPackageBtn">{slide.buttonText}</Link>
+                                        <div className="contentOverlay">
+                                            <h1>{slide.title}</h1>
+                                            <p className="heroSubheading">{slide.subtitle}</p>
+                                            {slide.buttonHref && (
+                                                <Link href={slide.buttonHref} className="heroPackageBtn">{slide.buttonText}</Link>
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    ) : (
+                        <div className="h-[60vh] bg-slate-900 flex items-center justify-center rounded-[32px] overflow-hidden">
+                            <div className="w-12 h-12 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
+                        </div>
+                    )}
 
-                    {/* Pill Search Bar overlapping bottom */}
+                    {/* Pill Search Bar with Live Suggestions */}
                     <div className={`heroSearchWrapper ${isSticky ? 'is-sticky' : ''}`} ref={searchRef}>
-                        <div className="searchPill">
+                        <div className={`searchPill ${showSuggestions && suggestions.length > 0 ? 'has-suggestions' : ''}`}>
                             <div className="inputArea">
                                 <MapPin size={20} className="locationIcon" />
                                 <input
+                                    ref={inputRef}
                                     type="text"
-                                    placeholder="Search Destination"
+                                    placeholder="Search Destination or Package…"
+                                    value={query}
+                                    onChange={e => {
+                                        setQuery(e.target.value);
+                                        setShowSuggestions(true);
+                                        setActiveSuggestion(-1);
+                                    }}
+                                    onFocus={() => query.length > 0 && setShowSuggestions(true)}
+                                    onKeyDown={handleKeyDown}
                                 />
+                                {query && (
+                                    <button
+                                        className="searchClearBtn"
+                                        onClick={() => { setQuery(''); setShowSuggestions(false); inputRef.current?.focus(); }}
+                                    >
+                                        <X size={16} />
+                                    </button>
+                                )}
                             </div>
-                            <button className="submitBtn">
+                            <button
+                                className="submitBtn"
+                                onClick={() => {
+                                    if (query.trim()) {
+                                        router.push(`/tours?q=${encodeURIComponent(query)}`);
+                                        setShowSuggestions(false);
+                                    }
+                                }}
+                            >
                                 <Search size={22} />
                             </button>
                         </div>
+
+                        {/* Suggestions Dropdown */}
+                        {showSuggestions && suggestions.length > 0 && (
+                            <div className="searchSuggestions">
+                                {suggestions.map((s, i) => (
+                                    <Link
+                                        key={i}
+                                        href={s.href}
+                                        className={`suggestionItem ${i === activeSuggestion ? 'active' : ''}`}
+                                        onClick={() => setShowSuggestions(false)}
+                                    >
+                                        <div className="suggestionImg">
+                                            {s.image ? (
+                                                <Image src={s.image} alt={s.title} fill style={{ objectFit: 'cover' }} unoptimized />
+                                            ) : (
+                                                <div className="w-full h-full bg-slate-200 flex items-center justify-center"><MapPin size={14} className="text-slate-400" /></div>
+                                            )}
+                                        </div>
+                                        <div className="suggestionText">
+                                            <span className="suggestionTitle">{s.title}</span>
+                                            {s.meta && <span className="suggestionMeta">
+                                                {s.type === 'package' ? <Clock size={11} /> : <MapPin size={11} />}
+                                                {s.meta}
+                                            </span>}
+                                        </div>
+                                        <span className={`suggestionBadge ${s.type}`}>
+                                            {s.type === 'category' ? 'Category' : 'Package'}
+                                        </span>
+                                    </Link>
+                                ))}
+                                <Link
+                                    href={`/tours?q=${encodeURIComponent(query)}`}
+                                    className="suggestionViewAll"
+                                    onClick={() => setShowSuggestions(false)}
+                                >
+                                    <Search size={14} /> View all results for "<strong>{query}</strong>"
+                                </Link>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
         </section>
     );
 }
-

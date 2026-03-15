@@ -1,3 +1,6 @@
+// Bootstrap
+// @import "bootstrap/scss/bootstrap";
+
 // Helpers
 @import "../scss/helpers/variables";
 @import "../scss/helpers/media-queries";
@@ -22,6 +25,7 @@
 
 //pages
 @import "../scss/pages/style";
+
 @import "../scss/pages/home";
 @import "../scss/pages/about-us";
 @import "../scss/pages/terms";
@@ -29,15 +33,20 @@
 @import "../scss/pages/services";
 @import "../scss/pages/package-details";
 @import "../scss/pages/tour-category";
+@import "../scss/pages/all-tours";
 @import "../scss/pages/info-pages";
 @import "../scss/pages/auth";
+@import "../scss/pages/payment";
+@import "../scss/pages/contact";
 @import "../scss/pages/404";
 
 @import "../scss/pages/blog";
+@import "../scss/pages/faq";
 @import "../scss/pages/events";
 
 
 @import "../scss/components/floatingbutton";
+@import "../scss/components/myrabot";
 
 
 // Base 

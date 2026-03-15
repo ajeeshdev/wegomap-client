@@ -1,33 +1,76 @@
 "use client";
 
+import { API_URL } from '@/config';
 import { useEffect, useState } from 'react';
-import { Clock, MoveRight, User } from 'lucide-react';
+import { Clock, MoveRight, Calendar, Tag } from 'lucide-react';
 import Link from 'next/link';
-import PageBanner from '@/components/PageBanner';
+import Image from 'next/image';
+import DynamicPageBanner from '@/components/DynamicPageBanner';
+import { siteData } from '@/data/siteData';
 
 interface Blog {
-    _id: string;
+    _id?: string;
+    id?: string;
     title: string;
     slug: string;
-    category: string;
-    author: string;
-    publishDate: string;
+    category?: string;
+    author?: string;
+    publishDate?: string;
+    date?: string;
     excerpt: string;
+    image?: string;
+    featuredImage?: string;
+}
+
+// Map siteData blogs to a unified shape, sorted newest-first
+function sortByDateDesc(blogs: Blog[]): Blog[] {
+    return [...blogs].sort((a, b) => {
+        const da = new Date(a.publishDate || a.date || 0).getTime();
+        const db = new Date(b.publishDate || b.date || 0).getTime();
+        return db - da;
+    });
+}
+
+const staticBlogs: Blog[] = sortByDateDesc(
+    siteData.blogs.map((b: any) => ({
+        id: b.id,
+        _id: b.id,
+        title: b.title,
+        slug: b.slug,
+        excerpt: b.excerpt,
+        image: b.image,
+        date: b.date,
+        category: 'Travel Guide',
+        author: 'Wegomap',
+    }))
+);
+
+function formatDate(dateStr?: string): string {
+    if (!dateStr) return '';
+    try {
+        return new Date(dateStr).toLocaleDateString('en-IN', {
+            year: 'numeric', month: 'short', day: 'numeric'
+        });
+    } catch {
+        return dateStr;
+    }
 }
 
 export default function BlogsPage() {
-    const [blogs, setBlogs] = useState<Blog[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [blogs, setBlogs] = useState<Blog[]>(staticBlogs);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         async function getBlogs() {
             try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs`);
+                const res = await fetch(`${API_URL}/blogs`);
                 const data = await res.json();
-                if (data.success) {
-                    setBlogs(data.data);
+                if (data.success && data.data.length > 0) {
+                    setBlogs(sortByDateDesc(data.data));
                 }
+                // else keep the static blogs
             } catch (err) {
+                // Network error – static blogs are already set
                 console.error(err);
             } finally {
                 setLoading(false);
@@ -38,9 +81,9 @@ export default function BlogsPage() {
 
     return (
         <div className="blogsPage">
-            <PageBanner
-                title="Travel Blogs"
-                subtitle="Insider tips, destination guides, and travel stories to inspire your next journey."
+            <DynamicPageBanner
+                fallbackTitle="Travel Blogs"
+                fallbackSubtitle="Insider tips, destination guides, and travel stories to inspire your next journey."
                 breadcrumbs={[{ label: 'Blogs' }]}
             />
             <div className="homeContainer">
@@ -56,13 +99,24 @@ export default function BlogsPage() {
                     </div>
                 ) : (
                     <div className="blogsGrid">
-                        {blogs.map((blog) => (
-                            <article key={blog._id} className="blogArticle">
+                        {blogs.map((blog, idx) => (
+                            <article key={blog._id || blog.id || idx} className="blogArticle">
                                 <Link href={`/blogs/${blog.slug}`}>
                                     <div className="imageWrapper">
-                                        <div className="patternBg">
-                                            <div className="text">WEGOMAP TRAVEL STORIES</div>
-                                        </div>
+                                        {(blog.featuredImage || blog.image) ? (
+                                            <Image
+                                                src={blog.featuredImage || blog.image || ''}
+                                                alt={blog.title}
+                                                fill
+                                                style={{ objectFit: 'cover' }}
+                                                unoptimized
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                            />
+                                        ) : (
+                                            <div className="patternBg">
+                                                <div className="text">WEGOMAP TRAVEL STORIES</div>
+                                            </div>
+                                        )}
                                         <div className="categoryBadge">
                                             {blog.category || 'Travel Guide'}
                                         </div>
@@ -70,11 +124,17 @@ export default function BlogsPage() {
 
                                     <div className="blogContent">
                                         <div className="metaRow">
-                                            <span className="metaItem"><User size={14} /> {blog.author || 'Admin'}</span>
-                                            <span className="metaItem"><Clock size={14} /> {new Date(blog.publishDate).toLocaleDateString()}</span>
+                                            <span className="metaItem">
+                                                <Tag size={13} />
+                                                {blog.author || 'Wegomap'}
+                                            </span>
+                                            <span className="metaItem">
+                                                <Calendar size={13} />
+                                                {formatDate(blog.publishDate || blog.date)}
+                                            </span>
                                         </div>
                                         <h3>{blog.title}</h3>
-                                        <p className="excerpt">{blog.excerpt || "Exciting story of travel experiences..."}</p>
+                                        <p className="excerpt">{blog.excerpt || 'Exciting story of travel experiences...'}</p>
 
                                         <div className="readMore">
                                             Read Full Story <MoveRight size={20} />
@@ -83,12 +143,6 @@ export default function BlogsPage() {
                                 </Link>
                             </article>
                         ))}
-                    </div>
-                )}
-
-                {!loading && blogs.length === 0 && (
-                    <div className="emptyState">
-                        <h3>Stories are being written...</h3>
                     </div>
                 )}
             </div>

@@ -1,14 +1,43 @@
 @import "tailwindcss";
 
+@layer base {
+  .tour-description-content {
+    @apply text-slate-600 leading-relaxed;
+  }
+
+  .tour-description-content p {
+    @apply mb-4;
+  }
+
+  .tour-description-content ul {
+    @apply list-disc ml-6 mb-4;
+  }
+
+  .tour-description-content li {
+    @apply mb-2;
+  }
+
+  .tour-description-content h1,
+  .tour-description-content h2,
+  .tour-description-content h3,
+  .tour-description-content h4 {
+    @apply font-black text-slate-900 uppercase italic tracking-tighter mt-8 mb-4;
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #0f172a;
-  --primary: #FFD52B;
+  --primary: #1673B8;
+  --secondary: #8CC647;
+  --cosmic-orange: #FF6B35;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-cosmic-orange: var(--cosmic-orange);
   --font-sans: var(--font-outfit);
 }

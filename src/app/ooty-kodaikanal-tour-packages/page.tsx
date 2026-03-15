@@ -1,32 +1,43 @@
+import type { Metadata } from 'next';
 import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
+import { categoryMappings } from '@/data/categoryMappings';
+import { packagesData } from '@/data/packages';
+import { categoryData } from '@/data/categoryData';
 
-const packages: TourPackage[] = [
-    {
-        image: '/uploads/packages/ilprye3rqzkqmd7ruvf8uvu2xqgj6p92iwuhnbeh240905040700.jpg',
-        duration: '4 Nights 5 Days',
-        title: 'Ooty Kodaikanal Package',
-        location: 'Ooty, Kodaikanal',
-        price: '₹ 15,999',
-        originalPrice: '₹ 19,000',
-        detailUrl: 'ooty-kodaikanal-tour-packages/',
-        strip: 'Popular'
-    }
-];
+const categorySlug = 'ooty-kodaikanal-tour-packages';
+const data = categoryData[categorySlug] || {};
 
-export default function OotyKodaikanalTours() {
+export const metadata: Metadata = {
+  title: data.seoTitle || data.title,
+  description: data.seoMeta || data.subtitle,
+  keywords: data.seoKeys,
+};
+
+const packageSlugs = categoryMappings[categorySlug] || [];
+
+const packages: TourPackage[] = packageSlugs.map(slug => {
+    const pkg = (packagesData as any)[slug];
+    if (!pkg) return null;
+    return {
+        image: pkg.image,
+        duration: pkg.duration || pkg.location,
+        title: pkg.title,
+        location: pkg.location,
+        price: pkg.price,
+        originalPrice: pkg.oldPrice,
+        detailUrl: `/packages/${slug}`
+    };
+}).filter((p): p is TourPackage => p !== null);
+
+export default function Page() {
     return (
         <TourCategoryPage
-            title="Ooty Kodaikanal Tour Packages"
-            subtitle="The best of Tamil Nadu hill stations"
-            bannerImage="/uploads/categories/gooqe4hpze2i6jmaewve7pyud8kofwvwpunfxgql240905041417.jpg"
+            title={data.title || "Tours"}
+            subtitle={data.subtitle || ""}
+            bannerImage={data.bannerImage || "/uploads/categories/default.jpg"}
             packages={packages}
-            readMoreHeading="Complete Hill Station Experience"
-            readMoreContent={
-                <>
-                    <p>Combine the beauty of the Nilgiris and the Palani Hills with our Ooty and Kodaikanal tour package. This itinerary is perfect for those who love the mountains and pleasant weather.</p>
-                    <p>Wegomap provides well-planned transportation between the two hill stations and premium accommodations in both locations. Enjoy the lakes, gardens, and viewpoints with our expert local assistance.</p>
-                </>
-            }
+            readMoreHeading={data.contentTitle || ""}
+            readMoreContent={data.contentDesc}
         />
     );
 }

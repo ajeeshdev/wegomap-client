@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Ship, Star, Award, Map, Anchor } from 'lucide-react';
+import DynamicPageBanner from '@/components/DynamicPageBanner';
 
 const cruiseOptions = [
     {
@@ -43,41 +44,37 @@ const cruiseOptions = [
 
 export default function CruisePackagesPage() {
     return (
-        <div className="infoPageWrapper">
-            <section className="infoPageBanner">
-                <div className="infoBannerImg">
-                    <Image
-                        src="/uploads/categories/kenl2oft3a7ktbcvoTO8SQYucDDNMiWvx6DeaIEk240827110728.jpg"
-                        alt="Cruise Packages"
-                        fill
-                        style={{ objectFit: 'cover' }}
-                        priority
-                        unoptimized
-                    />
-                    <div className="infoBannerOverlay" />
-                </div>
-                <div className="infoBannerContent">
-                    <h1 className="infoTitle">Cruise Packages</h1>
-                    <p className="infoSubtitle">Discover Luxury on the Sea</p>
-                </div>
-            </section>
+        <div className="cruisePackagesPage">
+            <DynamicPageBanner
+                fallbackTitle="Cruise Packages"
+                fallbackSubtitle="Discover Luxury on the Sea"
+                fallbackImage="/uploads/categories/kenl2oft3a7ktbcvoTO8SQYucDDNMiWvx6DeaIEk240827110728.jpg"
+                breadcrumbs={[{ label: 'Cruise Packages' }]}
+            />
 
             <section className="infoBodySection">
-                <div className="infoContainer">
+                <div className="homeContainer">
                     <center>
                         <div style={{ maxWidth: '800px', marginBottom: '4rem' }}>
-                            <h2 className="infoLeadText" style={{ color: '#0f172a', fontWeight: '800', fontSize: '2rem', marginBottom: '1rem' }}>Our Cruise Services</h2>
-                            <p className="infoTextRow" style={{ color: '#475569', fontSize: '1.25rem' }}>
-                                Unforgettable journeys on world-class cruise ships. Embark on an adventure unlike any other across exotic destinations globe-wide.
-                            </p>
+                            <div className="headerSection">
+                                <span className="subTitle">Sea Voyages</span>
+                                <h2>Our Cruise <span>Services.</span></h2>
+                                <p className="description">
+                                    Unforgettable journeys on world-class cruise ships. Embark on an adventure unlike any other across exotic destinations globe-wide.
+                                </p>
+                            </div>
                             <br />
-                            <Link href="/contact" style={{ background: '#FFD52B', color: '#000', padding: '1rem 2.5rem', borderRadius: '50px', fontWeight: '800', textDecoration: 'none' }}>
+                            <Link href="/contact" className="actionBtn" style={{ background: '#FF6B35', color: '#fff', padding: '1rem 2.5rem', borderRadius: '50px', fontWeight: '800', textDecoration: 'none', display: 'inline-block' }}>
                                 Enquire Now
                             </Link>
                         </div>
                     </center>
 
-                    <h2 className="infoLeadText" style={{ color: '#0f172a', fontWeight: '800', fontSize: '1.8rem', marginBottom: '1rem' }}>Royal Caribbean Cruise Highlights</h2>
+                    <div className="headerSection" style={{ textAlign: 'left', marginBottom: '2rem' }}>
+                        <span className="subTitle" style={{ marginLeft: '0' }}>Highlights</span>
+                        <h2 style={{ fontSize: '2rem' }}>Cruise <span>Highlights.</span></h2>
+                    </div>
+
                     <div className="infoGrid">
                         {cruiseOptions.map((opt, i) => (
                             <div key={i} className="infoCard">

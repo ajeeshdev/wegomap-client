@@ -1,7 +1,8 @@
 "use client";
 
 import Link from 'next/link';
-import { Home, ChevronRight } from 'lucide-react';
+import Image from 'next/image';
+import { Home, ChevronRight, ArrowLeft } from 'lucide-react';
 
 export interface BreadcrumbItem {
     label: string;
@@ -12,44 +13,86 @@ interface PageBannerProps {
     title: string;
     subtitle?: string;
     breadcrumbs: BreadcrumbItem[];
+    backgroundImage?: string;
+    showBack?: boolean;
 }
 
-export default function PageBanner({ title, subtitle, breadcrumbs }: PageBannerProps) {
+export default function PageBanner({ title, subtitle, breadcrumbs, backgroundImage, showBack = true }: PageBannerProps) {
+    const router = typeof window !== 'undefined' ? require('next/navigation').useRouter() : null;
+
     return (
-        <div className="pageBanner">
-            {/* Ghost watermark */}
-            <span className="pageBannerGhost" aria-hidden="true">{title}</span>
+        <div className={`pageBanner ${backgroundImage ? 'hasImage' : 'noImage'}`}>
+            {/* Background Decorative Text */}
+            <div className="bannerBgText">{title}</div>
 
-            <div className="homeContainer pageBannerInner">
-                {/* Orange accent label */}
-                <span className="pageBannerAccent">Wegomap</span>
+            {backgroundImage && (
+                <div className="pageBannerImg">
+                    <Image
+                        src={backgroundImage}
+                        alt={title}
+                        fill
+                        style={{ objectFit: 'cover' }}
+                        priority
+                        unoptimized
+                    />
+                </div>
+            )}
 
-                {/* Title */}
-                <h1 className="pageBannerTitle">{title}</h1>
+            <div className="pageBannerOverlay" />
 
-                {/* Optional subtitle */}
-                {subtitle && <p className="pageBannerSubtitle">{subtitle}</p>}
+            <div className="pageBannerInner">
+                <div className="cosmicContainer">
+                    <div className="pageBannerTop">
+                        <nav className="pageBreadcrumb" aria-label="breadcrumb">
+                            <Link href="/" className="breadcrumbItem breadcrumbHome">
+                                <Home size={13} />
+                                <span>Home</span>
+                            </Link>
 
-                {/* Breadcrumb */}
-                <nav className="pageBreadcrumb" aria-label="breadcrumb">
-                    <Link href="/" className="breadcrumbItem breadcrumbHome">
-                        <Home size={13} />
-                        <span>Home</span>
-                    </Link>
+                            {breadcrumbs.map((crumb, i) => (
+                                <span key={i} className="breadcrumbGroup">
+                                    <ChevronRight size={13} className="breadcrumbSep" />
+                                    {crumb.href && i < breadcrumbs.length - 1 ? (
+                                        <Link href={crumb.href} className="breadcrumbItem">
+                                            {crumb.label}
+                                        </Link>
+                                    ) : (
+                                        <span className="breadcrumbItem active">{crumb.label}</span>
+                                    )}
+                                </span>
+                            ))}
+                        </nav>
 
-                    {breadcrumbs.map((crumb, i) => (
-                        <span key={i} className="breadcrumbGroup">
-                            <ChevronRight size={13} className="breadcrumbSep" />
-                            {crumb.href && i < breadcrumbs.length - 1 ? (
-                                <Link href={crumb.href} className="breadcrumbItem">
-                                    {crumb.label}
-                                </Link>
+                        {showBack && (
+                            <button 
+                                onClick={() => router?.back()}
+                                className="bannerBackBtn"
+                            >
+                                <ArrowLeft size={14} />
+                                <span>Go Back</span>
+                            </button>
+                        )}
+                    </div>
+
+                    <div className="pageBannerContent">
+                        <h1 className="pageBannerTitle">
+                            {title.includes('\n') ? (
+                                title.split('\n').map((line, i) => (
+                                    <span key={i} className={i === 1 ? 'italicText' : ''}>
+                                        {line} {i === 0 && <br />}
+                                    </span>
+                                ))
                             ) : (
-                                <span className="breadcrumbItem active">{crumb.label}</span>
+                                <>
+                                    {title.split(' ').slice(0, -2).join(' ')} <br />
+                                    <span className="italicText">{title.split(' ').slice(-2).join(' ')}</span>
+                                </>
                             )}
-                        </span>
-                    ))}
-                </nav>
+                        </h1>
+
+                        {subtitle && <p className="pageBannerSubtitle">{subtitle}</p>}
+                    </div>
+                </div>
             </div>
         </div>
     );

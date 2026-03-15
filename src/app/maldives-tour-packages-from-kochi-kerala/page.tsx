@@ -1,41 +1,43 @@
+import type { Metadata } from 'next';
 import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
+import { categoryMappings } from '@/data/categoryMappings';
+import { packagesData } from '@/data/packages';
+import { categoryData } from '@/data/categoryData';
 
-const packages: TourPackage[] = [
-    {
-        image: '/uploads/packages/h1xw5ekx8qsl0hyos8pethtm6u8fjkbjksewkdyd240905033121.jpg',
-        duration: '3 Nights 4 Days',
-        title: 'Maldives Tour Package (3Night)',
-        location: 'Island Resort / Beach Villa',
-        price: '₹ 26,999',
-        originalPrice: '₹ 29,000',
-        detailUrl: 'tours/malaysia-3-nights-4-days/'
-    },
-    {
-        image: '/uploads/packages/h1xw5ekx8qsl0hyos8pethtm6u8fjkbjksewkdyd240905033121.jpg',
-        duration: '4 Nights 5 Days',
-        title: 'Maldives Tour Package (4N)',
-        location: 'Water Villa / Private Resort',
-        price: '₹ 73,999',
-        originalPrice: '₹ 80,000',
-        detailUrl: 'tours/maldives-tour-package/',
-        strip: 'Luxury'
-    }
-];
+const categorySlug = 'maldives-tour-packages-from-kochi-kerala';
+const data = categoryData[categorySlug] || {};
 
-export default function MaldivesTours() {
+export const metadata: Metadata = {
+  title: data.seoTitle || data.title,
+  description: data.seoMeta || data.subtitle,
+  keywords: data.seoKeys,
+};
+
+const packageSlugs = categoryMappings[categorySlug] || [];
+
+const packages: TourPackage[] = packageSlugs.map(slug => {
+    const pkg = (packagesData as any)[slug];
+    if (!pkg) return null;
+    return {
+        image: pkg.image,
+        duration: pkg.duration || pkg.location,
+        title: pkg.title,
+        location: pkg.location,
+        price: pkg.price,
+        originalPrice: pkg.oldPrice,
+        detailUrl: `/packages/${slug}`
+    };
+}).filter((p): p is TourPackage => p !== null);
+
+export default function Page() {
     return (
         <TourCategoryPage
-            title="Maldives Tour Packages"
-            subtitle="Pristine white beaches and turquoise lagoons"
-            bannerImage="/uploads/categories/nyuzwvgb639wz6mbjratshvfzdtm9tgxbpivpjqs220406065555.jpg"
+            title={data.title || "Tours"}
+            subtitle={data.subtitle || ""}
+            bannerImage={data.bannerImage || "/uploads/categories/default.jpg"}
             packages={packages}
-            readMoreHeading="Exclusive Maldives Holiday"
-            readMoreContent={
-                <>
-                    <p>The Maldives is the ultimate romantic destination, offering seclusion, luxury, and breathtaking natural beauty. Our Maldives tour packages from Kochi are designed for honeymooners and travelers looking for a serene island escape.</p>
-                    <p>Stay in stunning over-water villas, enjoy private beach dinners, and explore the vibrant underwater world with snorkeling and diving. We work with the best resorts in the Maldives to bring you all-inclusive packages at competitive prices.</p>
-                </>
-            }
+            readMoreHeading={data.contentTitle || ""}
+            readMoreContent={data.contentDesc}
         />
     );
 }

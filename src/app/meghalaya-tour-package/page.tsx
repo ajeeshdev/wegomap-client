@@ -1,32 +1,43 @@
+import type { Metadata } from 'next';
 import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
+import { categoryMappings } from '@/data/categoryMappings';
+import { packagesData } from '@/data/packages';
+import { categoryData } from '@/data/categoryData';
 
-const packages: TourPackage[] = [
-    {
-        image: '/uploads/packages/7zw7tf5mlcanzfebdwxti9b3pmhjvoteniv5cozl240904043422.jpg',
-        duration: '4 Nights 5 Days',
-        title: 'Assam Meghalaya Tour',
-        location: 'Shillong, Guwahati',
-        price: '₹ 26,999',
-        originalPrice: '₹ 29,500',
-        detailUrl: 'meghalaya-tour-package/',
-        strip: 'Nature'
-    }
-];
+const categorySlug = 'meghalaya-tour-package';
+const data = categoryData[categorySlug] || {};
 
-export default function MeghalayaTours() {
+export const metadata: Metadata = {
+  title: data.seoTitle || data.title,
+  description: data.seoMeta || data.subtitle,
+  keywords: data.seoKeys,
+};
+
+const packageSlugs = categoryMappings[categorySlug] || [];
+
+const packages: TourPackage[] = packageSlugs.map(slug => {
+    const pkg = (packagesData as any)[slug];
+    if (!pkg) return null;
+    return {
+        image: pkg.image,
+        duration: pkg.duration || pkg.location,
+        title: pkg.title,
+        location: pkg.location,
+        price: pkg.price,
+        originalPrice: pkg.oldPrice,
+        detailUrl: `/packages/${slug}`
+    };
+}).filter((p): p is TourPackage => p !== null);
+
+export default function Page() {
     return (
         <TourCategoryPage
-            title="Meghalaya Tour Package"
-            subtitle="The abode of clouds"
-            bannerImage="/uploads/categories/r34Bg3glSVPv3yNqrsdDu6ZdJpx9fBTtZnXmbXI4240904044934.jpg"
+            title={data.title || "Tours"}
+            subtitle={data.subtitle || ""}
+            bannerImage={data.bannerImage || "/uploads/categories/default.jpg"}
             packages={packages}
-            readMoreHeading="Explore the Beauty of Meghalaya & Assam"
-            readMoreContent={
-                <>
-                    <p>Meghalaya is famous for its stunning waterfalls, mysterious caves, and the cleanest village in Asia. Our tour package takes you to the heart of North East India, covering both Assam and Meghalaya.</p>
-                    <p>Visit the Kamakhya Temple in Guwahati, relax in the "Scotland of the East" - Shillong, and experience the natural wonders of Cherrapunji and Mawlynnong. Wegomap provides well-managed tours for nature lovers and families.</p>
-                </>
-            }
+            readMoreHeading={data.contentTitle || ""}
+            readMoreContent={data.contentDesc}
         />
     );
 }

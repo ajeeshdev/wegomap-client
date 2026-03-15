@@ -6,17 +6,21 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.container {
-    width: 87%;
-    max-width: 87%;
+.homeContainer {
+    width: 92%;
+    max-width: 95%;
     margin: 0 auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 0 2rem;
 
-    @media (min-width: 768px) {
-        padding-left: 2rem;
-        padding-right: 2rem;
+    @media (max-width: 768px) {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 1rem;
     }
 }
 
 // Any other global utilities from globals.css or elsewhere
+
+.whitespace-pre-line {
+    white-space: pre-line;
+}

@@ -1,32 +1,43 @@
+import type { Metadata } from 'next';
 import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
+import { categoryMappings } from '@/data/categoryMappings';
+import { packagesData } from '@/data/packages';
+import { categoryData } from '@/data/categoryData';
 
-const packages: TourPackage[] = [
-    {
-        image: '/uploads/packages/7mCmQivsI7l0TYGuG2vOOJ6dBjrrM5TevOHyvtq1240820125113.jpg',
-        duration: '4 Nights 5 Days',
-        title: 'Sri Lanka Package',
-        location: 'Colombo, Kandy, Bentota',
-        price: '₹ 53,999',
-        originalPrice: '₹ 57,200',
-        detailUrl: 'sri-lanka/',
-        strip: 'Trending'
-    }
-];
+const categorySlug = 'sri-lanka';
+const data = categoryData[categorySlug] || {};
 
-export default function SriLankaTours() {
+export const metadata: Metadata = {
+  title: data.seoTitle || data.title,
+  description: data.seoMeta || data.subtitle,
+  keywords: data.seoKeys,
+};
+
+const packageSlugs = categoryMappings[categorySlug] || [];
+
+const packages: TourPackage[] = packageSlugs.map(slug => {
+    const pkg = (packagesData as any)[slug];
+    if (!pkg) return null;
+    return {
+        image: pkg.image,
+        duration: pkg.duration || pkg.location,
+        title: pkg.title,
+        location: pkg.location,
+        price: pkg.price,
+        originalPrice: pkg.oldPrice,
+        detailUrl: `/packages/${slug}`
+    };
+}).filter((p): p is TourPackage => p !== null);
+
+export default function Page() {
     return (
         <TourCategoryPage
-            title="Sri Lanka"
-            subtitle="Explore the pearl of the Indian Ocean"
-            bannerImage="/uploads/categories/2fsdkcfcklfcdvyblurq0wzrrmyp0rhlhuamkriq240820031509.jpg"
+            title={data.title || "Tours"}
+            subtitle={data.subtitle || ""}
+            bannerImage={data.bannerImage || "/uploads/categories/default.jpg"}
             packages={packages}
-            readMoreHeading="Discover Sri Lanka with Wegomap"
-            readMoreContent={
-                <>
-                    <p>Sri Lanka is a tropical paradise with a history that spans thousands of years. Our Sri Lanka tour packages offer a mix of pristine beaches, lush tea plantations, and ancient cultural sites.</p>
-                    <p>Visit the hill city of Kandy, relax on the gold-en beaches of Bentota, and explore the bustling streets of Colombo. Wegomap provides customized tour plans that include flights, visa assistance, and private transfers.</p>
-                </>
-            }
+            readMoreHeading={data.contentTitle || ""}
+            readMoreContent={data.contentDesc}
         />
     );
 }

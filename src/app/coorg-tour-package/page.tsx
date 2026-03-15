@@ -1,32 +1,43 @@
+import type { Metadata } from 'next';
 import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
+import { categoryMappings } from '@/data/categoryMappings';
+import { packagesData } from '@/data/packages';
+import { categoryData } from '@/data/categoryData';
 
-const packages: TourPackage[] = [
-    {
-        image: '/uploads/packages/mksp2z9emdc8ymkinijvjc85atc6cbl6wzpq1pam240906105051.jpg',
-        duration: '2 Nights 3 Days',
-        title: 'Coorg Tour Package',
-        location: 'Coorg / Madikeri',
-        price: '₹ 11,500',
-        originalPrice: '₹ 13,000',
-        detailUrl: 'coorg-tour-package/',
-        strip: 'Popular'
-    }
-];
+const categorySlug = 'coorg-tour-package';
+const data = categoryData[categorySlug] || {};
 
-export default function CoorgTours() {
+export const metadata: Metadata = {
+  title: data.seoTitle || data.title,
+  description: data.seoMeta || data.subtitle,
+  keywords: data.seoKeys,
+};
+
+const packageSlugs = categoryMappings[categorySlug] || [];
+
+const packages: TourPackage[] = packageSlugs.map(slug => {
+    const pkg = (packagesData as any)[slug];
+    if (!pkg) return null;
+    return {
+        image: pkg.image,
+        duration: pkg.duration || pkg.location,
+        title: pkg.title,
+        location: pkg.location,
+        price: pkg.price,
+        originalPrice: pkg.oldPrice,
+        detailUrl: `/packages/${slug}`
+    };
+}).filter((p): p is TourPackage => p !== null);
+
+export default function Page() {
     return (
         <TourCategoryPage
-            title="Coorg Tour Package"
-            subtitle="The Scotland of India"
-            bannerImage="/uploads/categories/l4zbbjoyo4v19xzlzb4flec9ddgsenpvfhqgyzsg240906100043.jpg"
+            title={data.title || "Tours"}
+            subtitle={data.subtitle || ""}
+            bannerImage={data.bannerImage || "/uploads/categories/default.jpg"}
             packages={packages}
-            readMoreHeading="Explore Coorg with Wegomap"
-            readMoreContent={
-                <>
-                    <p>Coorg is a paradise for those who love nature and tranquility. Known as the 'Scotland of India', it offers lush green landscapes, mist-covered hills, and vast coffee estates.</p>
-                    <p>Our Coorg tour packages include visits to Raja's Seat, Abbey Falls, and the Golden Temple (Bylakuppe). We offer cozy homestays and luxurious resorts to make your trip special.</p>
-                </>
-            }
+            readMoreHeading={data.contentTitle || ""}
+            readMoreContent={data.contentDesc}
         />
     );
 }

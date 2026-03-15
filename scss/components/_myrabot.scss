@@ -1,0 +1,66 @@
+.myrabot-container {
+    position: fixed;
+    bottom: 100px; // Above WhatsApp icon or on the other side? 
+    // Usually WhatsApp is on the right. User said "bottom right of the website".
+    // If WhatsApp is also at bottom right, they might overlap.
+    // WhatsApp is at bottom: 24px. I'll put MyraBot above it or next to it.
+    // Let's put it at bottom: 100px, right: 24px.
+    right: 24px;
+    z-index: 999;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    &:hover {
+        transform: scale(1.1) translateY(-5px);
+    }
+
+    .myrabot-image {
+        position: relative;
+        z-index: 2;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15)); // Soften the image shadow since we have a dedicated bottom shadow
+        user-select: none;
+        pointer-events: none;
+        display: block;
+    }
+
+    .myrabot-shadow {
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 45px;
+        height: 12px;
+        background: rgba(0, 0, 0, 0.25);
+        border-radius: 50%;
+        filter: blur(5px);
+        z-index: 1;
+        transition: all 0.3s ease;
+    }
+
+    &:hover {
+        transform: translateY(-8px);
+        
+        .myrabot-shadow {
+            width: 35px;
+            background: rgba(0, 0, 0, 0.15);
+            filter: blur(7px);
+            transform: translateX(-50%) translateY(8px);
+        }
+    }
+
+    // On mobile screens, elevate it even more if bottom nav exists
+    @media (max-width: 1023px) {
+        bottom: calc(140px + env(safe-area-inset-bottom, 0px));
+        right: 16px;
+        
+        .myrabot-image {
+            width: 60px !important;
+            height: 60px !important;
+        }
+
+        .myrabot-shadow {
+            width: 38px;
+            height: 10px;
+        }
+    }
+}

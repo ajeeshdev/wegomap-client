@@ -1,15 +1,15 @@
 "use client";
 
 import Link from 'next/link';
-import { Briefcase, Calendar, Ship, CreditCard, Phone } from 'lucide-react';
+import { Home, Briefcase, Calendar, Bot, User } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 const navItems = [
+    { name: 'Home', href: '/', icon: Home },
     { name: 'Tours', href: '/packages', icon: Briefcase },
     { name: 'Events', href: '/corporate-event-management-company-kochi', icon: Calendar },
-    { name: 'Cruises', href: '/cruise-packages', icon: Ship },
-    { name: 'Payment', href: '/payment', icon: CreditCard },
-    { name: 'Contact', href: '/contact', icon: Phone },
+    { name: 'AI Chatbot', href: '/chatbot', icon: Bot },
+    { name: 'Profile', href: '/profile', icon: User },
 ];
 
 export default function MobileNav() {

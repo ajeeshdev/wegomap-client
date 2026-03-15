@@ -1,51 +1,43 @@
+import type { Metadata } from 'next';
 import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
+import { categoryMappings } from '@/data/categoryMappings';
+import { packagesData } from '@/data/packages';
+import { categoryData } from '@/data/categoryData';
 
-const packages: TourPackage[] = [
-    {
-        image: '/uploads/packages/bngpjquzmy5datq8m8jfqwb8fgk5lprdnfefmbn3250131025302.jpg',
-        duration: '3 Nights 4 Days',
-        title: 'Budgeted Azerbaijan',
-        location: 'Baku City',
-        price: '₹ 31,000',
-        originalPrice: '₹ 33,000',
-        detailUrl: 'azerbaijan-tour-packages/'
-    },
-    {
-        image: '/uploads/packages/jp9ooiwngbh8movmdimg17ub2uzgpbpk1gkzieiv250203034840.jpg',
-        duration: '4 Nights 5 Days',
-        title: 'Peaceful Azerbaijan',
-        location: 'Baku, Gabala',
-        price: '₹ 33,000',
-        originalPrice: '₹ 35,000',
-        detailUrl: 'azerbaijan-tour-packages/',
-        strip: 'Best Seller'
-    },
-    {
-        image: '/uploads/packages/aimiy5pemefnkwre8qabxdtffsbhyleibck3xs92250131032303.jpg',
-        duration: '4 Nights 5 Days',
-        title: 'Charming Azerbaijan',
-        location: 'Baku, Guba, Gabala',
-        price: '₹ 37,500',
-        originalPrice: '₹ 39,500',
-        detailUrl: 'azerbaijan-tour-packages/',
-        strip: 'Premium'
-    }
-];
+const categorySlug = 'azerbaijan-tour-packages';
+const data = categoryData[categorySlug] || {};
 
-export default function AzerbaijanTours() {
+export const metadata: Metadata = {
+  title: data.seoTitle || data.title,
+  description: data.seoMeta || data.subtitle,
+  keywords: data.seoKeys,
+};
+
+const packageSlugs = categoryMappings[categorySlug] || [];
+
+const packages: TourPackage[] = packageSlugs.map(slug => {
+    const pkg = (packagesData as any)[slug];
+    if (!pkg) return null;
+    return {
+        image: pkg.image,
+        duration: pkg.duration || pkg.location,
+        title: pkg.title,
+        location: pkg.location,
+        price: pkg.price,
+        originalPrice: pkg.oldPrice,
+        detailUrl: `/packages/${slug}`
+    };
+}).filter((p): p is TourPackage => p !== null);
+
+export default function Page() {
     return (
         <TourCategoryPage
-            title="Azerbaijan Tour Packages"
-            subtitle="Explore the Land of Fire"
-            bannerImage="/uploads/categories/twlgefqv2zwvq2gs99ix4ozzi3n9r41z9xbotxid250131024536.jpg"
+            title={data.title || "Tours"}
+            subtitle={data.subtitle || ""}
+            bannerImage={data.bannerImage || "/uploads/categories/default.jpg"}
             packages={packages}
-            readMoreHeading="Discover Azerbaijan with Wegomap"
-            readMoreContent={
-                <>
-                    <p>Azerbaijan is a fascinating destination where Eastern tradition meets Western modernity. Our Azerbaijan tour packages from Kochi and other cities offer a unique glimpse into this beautiful country.</p>
-                    <p>Explore the futuristic skyline of Baku, the ancient cobblestoned streets of Icherisheher, and the stunning mountain landscapes of Gabala and Guba. We provide full support for Azerbaijan visas and customized itineraries.</p>
-                </>
-            }
+            readMoreHeading={data.contentTitle || ""}
+            readMoreContent={data.contentDesc}
         />
     );
 }

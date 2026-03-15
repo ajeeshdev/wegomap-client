@@ -1,0 +1,402 @@
+"use client";
+
+import { API_URL } from '@/config';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { Save, ArrowLeft, Image as ImageIcon, Info, Map, List, Search, Trash2, Globe, Sparkles, Clock, ShieldCheck, Layers, Tag, IndianRupee, Zap, MapPin, Shield as Safe } from 'lucide-react';
+import ImageUpload from '@/components/admin/ImageUpload';
+import MultiImageUpload from '@/components/admin/MultiImageUpload';
+import { toast } from 'react-hot-toast';
+
+export default function CreatePackage() {
+  const router = useRouter();
+
+  const [loading, setLoading] = useState(false);
+  const [categories, setCategories] = useState<any[]>([]);
+  const [formData, setFormData] = useState<any>({
+    title: '', pcode: '', subtitle: '', slabel: '', location: '', description: '',
+    price: '', oldamt: '', per: '/ Person', duration: '', highlights: [],
+    inclusions: [], exclusions: [], terms: '', category: '',
+    images: [], thumb: '', onoffer: false, isBestSeller: false,
+    itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: ''
+  });
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await fetch(`${API_URL}/categories`, {
+          headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+        });
+        const data = await res.json();
+        if (data.success) {
+          const unique = Array.from(new Map(data.data.map((item: any) => [
+            (item.title || item.name || '').toLowerCase(),
+            item
+          ])).values());
+          setCategories(unique);
+        }
+      } catch (err) { console.error('Failed to fetch categories', err); }
+    };
+    fetchCategories();
+  }, []);
+
+  const handleSubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await fetch(`${API_URL}/packages`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify(formData)
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success('Package created successfully!');
+        router.push('/admin/packages');
+      } else {
+        toast.error(data.error || 'Creation failed');
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error('Request failed');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="space-y-8 animate-in fade-in duration-700">
+      {/* Header Section */}
+      <div className="admin-page-header">
+        <div className="flex items-center gap-4">
+          <button onClick={() => router.push('/admin/packages')} className="p-3 bg-white rounded-xl border border-slate-200 hover:bg-slate-50 transition-all hover:scale-110 active:scale-95 text-slate-500 shadow-sm">
+            <ArrowLeft size={20} />
+          </button>
+          <div>
+            <h2 className="admin-page-title">
+              <div className="admin-page-title-indicator"></div>
+              Add New Package
+            </h2>
+            <p className="admin-page-subtitle mt-1 text-slate-400">Create a new tour or holiday package.</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <button onClick={() => router.push('/admin/packages')} className="admin-btn admin-btn-secondary">
+            Discard
+          </button>
+          <button
+            onClick={() => handleSubmit()}
+            disabled={loading}
+            className="admin-btn admin-btn-primary h-11"
+          >
+            <Safe size={18} /> {loading ? 'Saving...' : 'Save Package'}
+          </button>
+        </div>
+      </div>
+
+      <div className="admin-form-grid">
+        {/* Main Content Area (Central) */}
+        <div className="space-y-8">
+
+          {/* Basic Details Section */}
+          <div className="admin-form-card space-y-12">
+            <h3 className="admin-form-section-title">
+              <div className="admin-page-title-indicator bg-blue-600"></div>
+              Basic Details
+            </h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+              <div className="admin-form-group md:col-span-2">
+                <label className="admin-form-label flex items-center gap-2"> <Layers size={12} className="text-blue-500" /> Package Title</label>
+                <input type="text" value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} className="admin-form-input text-lg font-bold h-12" placeholder="e.g. Kerala Backwaters Magic" />
+              </div>
+              <div className="admin-form-group">
+                <label className="admin-form-label">Subtitle / Tagline</label>
+                <input type="text" value={formData.subtitle} onChange={e => setFormData({ ...formData, subtitle: e.target.value })} className="admin-form-input" placeholder="e.g. Venice of the East" />
+              </div>
+              <div className="admin-form-group">
+                <label className="admin-form-label flex items-center gap-2"> <Zap size={12} className="text-rose-500" /> Promotion Text</label>
+                <input type="text" value={formData.slabel} onChange={e => setFormData({ ...formData, slabel: e.target.value })} className="admin-form-input font-black text-rose-500 uppercase tracking-widest placeholder:text-rose-200" placeholder="e.g. SPECIAL OFFER" />
+              </div>
+              <div className="admin-form-group">
+                <label className="admin-form-label flex items-center gap-2"> <MapPin size={12} className="text-rose-500" /> Location</label>
+                <input type="text" value={formData.location} onChange={e => setFormData({ ...formData, location: e.target.value })} className="admin-form-input font-bold" placeholder="e.g. Alleppey, Kerala" />
+              </div>
+              <div className="admin-form-group">
+                <label className="admin-form-label flex items-center gap-2"> <Clock size={12} className="text-sky-500" /> Duration</label>
+                <input type="text" value={formData.duration} onChange={e => setFormData({ ...formData, duration: e.target.value })} className="admin-form-input font-bold" placeholder="e.g. 3 Days / 2 Nights" />
+              </div>
+            </div>
+          </div>
+
+          {/* Pricing & Content Section */}
+          <div className="admin-form-card space-y-12">
+            <h3 className="admin-form-section-title">
+              <div className="admin-page-title-indicator bg-emerald-500"></div>
+              Pricing & Description
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
+              <div className="admin-form-group">
+                <label className="admin-form-label text-blue-600">Price (₹)</label>
+                <div className="relative">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">₹</div>
+                  <input type="number" value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} className="admin-form-input pl-10 font-black text-slate-900 text-lg" />
+                </div>
+              </div>
+              <div className="admin-form-group">
+                <label className="admin-form-label text-slate-400">Regular Price</label>
+                <div className="relative">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 font-bold">₹</div>
+                  <input type="number" value={formData.oldamt} onChange={e => setFormData({ ...formData, oldamt: e.target.value })} className="admin-form-input pl-10 font-black text-slate-400 line-through opacity-70" />
+                </div>
+              </div>
+              <div className="admin-form-group">
+                <label className="admin-form-label">Price Per</label>
+                <input type="text" value={formData.per} onChange={e => setFormData({ ...formData, per: e.target.value })} className="admin-form-input font-bold" placeholder="e.g. / Per Person" />
+              </div>
+            </div>
+
+            <div className="admin-form-group pt-4 border-t border-slate-50">
+              <label className="admin-form-label mb-4 block">Description</label>
+              <div className="bg-slate-50/50 rounded-2xl p-2 border border-slate-100 shadow-inner">
+                <textarea rows={6} value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })} className="admin-form-textarea leading-relaxed text-slate-700 font-medium focus:bg-white h-48" placeholder="Enter detailed package overview..."></textarea>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-slate-50">
+              <div className="admin-form-group">
+                <label className="admin-form-label text-emerald-600 flex items-center gap-2"> <Sparkles size={12} /> Package Inclusions</label>
+                <div className="bg-emerald-50/10 rounded-2xl p-2 border border-emerald-100/50 shadow-inner">
+                  <textarea rows={6} value={formData.inclusions?.join('\n')} onChange={e => setFormData({ ...formData, inclusions: e.target.value.split('\n') })} className="admin-form-textarea !bg-transparent border-none font-medium text-slate-700 h-40" placeholder="e.g. Luxury Breakfast included..."></textarea>
+                </div>
+              </div>
+              <div className="admin-form-group">
+                <label className="admin-form-label text-rose-600 flex items-center gap-2"> <Trash2 size={12} /> Package Exclusions</label>
+                <div className="bg-rose-50/10 rounded-2xl p-2 border border-rose-100/50 shadow-inner">
+                  <textarea rows={6} value={formData.exclusions?.join('\n')} onChange={e => setFormData({ ...formData, exclusions: e.target.value.split('\n') })} className="admin-form-textarea !bg-transparent border-none font-medium text-slate-700 h-40" placeholder="e.g. Personal expenses..."></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Gallery Assets Section */}
+          <div className="admin-form-card space-y-12">
+            <h3 className="admin-form-section-title">
+              <div className="admin-page-title-indicator bg-purple-500"></div>
+              Gallery Assets
+            </h3>
+            <div className="pt-4">
+              <MultiImageUpload
+                value={formData.images}
+                onChange={(urls) => setFormData({ ...formData, images: urls })}
+                label="Gallery Assets"
+              />
+            </div>
+          </div>
+
+          {/* Itinerary Section */}
+          <div className="admin-form-card space-y-12">
+            <div className="flex justify-between items-center border-b border-slate-50 pb-6 mb-2">
+              <h3 className="admin-form-section-title border-none pb-0 mb-0">
+                <div className="admin-page-title-indicator bg-indigo-600"></div>
+                Detailed Itinerary
+              </h3>
+              <button
+                type="button"
+                onClick={() => setFormData({ ...formData, itinerary: [...(formData.itinerary || []), { day: (formData.itinerary?.length || 0) + 1, title: '', description: '' }] })}
+                className="admin-btn admin-btn-primary h-10 px-6 text-[10px]"
+              >
+                + Add Day
+              </button>
+            </div>
+            <div className="space-y-8 pt-4">
+              {formData.itinerary?.map((item: any, idx: number) => (
+                <div key={idx} className="bg-slate-50/30 p-8 rounded-3xl border border-slate-100 relative group transition-all duration-300 hover:bg-white hover:shadow-sm">
+                  <div className="absolute -left-4 top-8 w-12 h-12 bg-white border border-slate-200 shadow-sm rounded-xl flex flex-col items-center justify-center font-bold text-indigo-600 transition-all group-hover:bg-indigo-600 group-hover:text-white group-hover:border-indigo-600">
+                    <span className="text-[7px] uppercase opacity-50 mb-0.5">Day</span>
+                    <span className="text-xl leading-none">{item.day || idx + 1}</span>
+                  </div>
+                  <div className="pl-12 space-y-6">
+                    <div className="admin-form-group">
+                      <label className="admin-form-label text-[10px] uppercase tracking-widest text-slate-400">Activity Title</label>
+                      <input type="text" value={item.title} onChange={e => {
+                        const newItin = [...formData.itinerary];
+                        newItin[idx].title = e.target.value;
+                        setFormData({ ...formData, itinerary: newItin });
+                      }} className="w-full bg-transparent border-b border-slate-100 py-3 focus:border-indigo-600 outline-none font-bold text-xl text-slate-900 transition-all" placeholder="e.g. Arrival at Cochin" />
+                    </div>
+                    <div className="admin-form-group">
+                      <label className="admin-form-label text-[10px] uppercase tracking-widest text-slate-400">Description</label>
+                      <textarea value={item.description} onChange={e => {
+                        const newItin = [...formData.itinerary];
+                        newItin[idx].description = e.target.value;
+                        setFormData({ ...formData, itinerary: newItin });
+                      }} className="w-full bg-transparent border-none p-0 min-h-[80px] shadow-none focus:ring-0 leading-relaxed text-slate-600 font-medium text-sm" placeholder="Describe the journey..."></textarea>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setFormData({ ...formData, itinerary: formData.itinerary.filter((_: any, i: number) => i !== idx) })}
+                    className="absolute top-6 right-6 w-8 h-8 rounded-full flex items-center justify-center text-slate-200 hover:bg-rose-50 hover:text-rose-500 transition-all opacity-0 group-hover:opacity-100 border border-transparent hover:border-rose-100"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
+              ))}
+              {(!formData.itinerary || formData.itinerary.length === 0) && (
+                <div className="text-center py-20 border-2 border-dashed border-slate-100 rounded-3xl bg-slate-50/30">
+                  <div className="admin-icon-box bg-white mx-auto mb-4 border border-slate-100 w-16 h-16 rounded-2xl shadow-sm">
+                    <Map size={32} className="text-slate-200" />
+                  </div>
+                  <p className="text-slate-300 font-bold uppercase tracking-widest text-[10px] italic">No itinerary defined yet</p>
+                </div>
+              )}
+            </div>
+          </div>
+
+        </div>
+
+        {/* Sidebar Navigation & Meta (Right Side) */}
+        <div className="admin-form-sidebar">
+
+          <div className="admin-form-card p-8 space-y-10">
+            {/* Main Thumbnail */}
+            <div className="group/media">
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-8">
+                <div className="w-1 h-3 bg-purple-500 rounded-full shadow-[0_0_8px_rgba(168,85,247,0.4)]"></div>
+                Primary Thumbnail
+              </h4>
+              <div className="bg-slate-50/50 rounded-2xl p-2 border border-slate-100 transition-all hover:bg-white hover:shadow-sm">
+                <ImageUpload
+                  value={formData.thumb}
+                  onChange={(url) => setFormData({ ...formData, thumb: url })}
+                  label="Thumbnail"
+                />
+              </div>
+            </div>
+
+            {/* Package Details */}
+            <div className="pt-10 border-t border-slate-50">
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-8">
+                <div className="w-1 h-3 bg-blue-500 rounded-full"></div>
+                Package Categorization
+              </h4>
+              <div className="space-y-6">
+                <div className="admin-form-group">
+                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold"> <Tag size={10} className="text-blue-500" /> Category</label>
+                  <select
+                    value={formData.category}
+                    onChange={e => setFormData({ ...formData, category: e.target.value })}
+                    className="admin-form-input font-bold text-slate-900 h-10 text-[11px] bg-white"
+                  >
+                    <option value="">Select Category</option>
+                    {categories.map((cat: any) => (
+                      <option key={cat._id} value={cat.title || cat.name}>
+                        {cat.title || cat.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="admin-form-group">
+                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold"> <Tag size={10} className="text-sky-500" /> Package Code</label>
+                  <input
+                    type="text"
+                    value={formData.pcode}
+                    onChange={e => setFormData({ ...formData, pcode: e.target.value.toUpperCase() })}
+                    className="admin-form-input font-mono font-bold text-blue-600 h-10 text-[11px] uppercase"
+                    placeholder="WM-KRL-001"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Status box */}
+            <div className="pt-10 border-t border-slate-50">
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-6">
+                <div className="w-1 h-3 bg-rose-500 rounded-full"></div>
+                Publication
+              </h4>
+              <div className="space-y-3">
+                <label className="flex items-center justify-between cursor-pointer group/stat p-3 hover:bg-slate-50 rounded-xl transition-all border border-transparent hover:border-slate-100">
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 transition-colors leading-none">Special Offer</span>
+                  </div>
+                  <input type="checkbox" checked={formData.onoffer} onChange={e => setFormData({ ...formData, onoffer: e.target.checked })} className="sr-only peer" />
+                  <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-rose-500 transition-all relative">
+                    <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-4.5 shadow-sm"></div>
+                  </div>
+                </label>
+
+                <label className="flex items-center justify-between cursor-pointer group/stat p-3 hover:bg-slate-50 rounded-xl transition-all border border-transparent hover:border-slate-100">
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 transition-colors leading-none">Bestseller</span>
+                  </div>
+                  <input type="checkbox" checked={formData.isBestSeller} onChange={e => setFormData({ ...formData, isBestSeller: e.target.checked })} className="sr-only peer" />
+                  <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-blue-600 transition-all relative">
+                    <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-4.5 shadow-sm"></div>
+                  </div>
+                </label>
+              </div>
+
+              <div className="mt-8">
+                <div className="flex items-center gap-3 bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
+                  <div className="w-8 h-8 rounded-xl bg-blue-100/50 flex items-center justify-center text-blue-600 shrink-0">
+                    <Clock size={16} />
+                  </div>
+                  <div>
+                    <div className="text-[9px] font-bold uppercase tracking-widest text-slate-400 leading-none">Sync System</div>
+                    <div className="admin-status-badge admin-status-badge-success bg-white mt-1">Ready</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* SEO section */}
+            <div className="pt-10 border-t border-slate-50">
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-8">
+                <div className="w-1 h-3 bg-emerald-500 rounded-full"></div>
+                SEO Settings
+              </h4>
+              <div className="space-y-6">
+                <div className="admin-form-group">
+                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold"> <Search size={10} className="text-emerald-500" /> Page SEO Title</label>
+                  <input type="text" value={formData.seo_title} onChange={e => setFormData({ ...formData, seo_title: e.target.value })} className="admin-form-input font-bold text-slate-900 h-10 text-[11px]" placeholder="e.g. Best Kerala Tour Package | Wegomap" />
+                </div>
+
+                <div className="admin-form-group">
+                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold"> <Globe size={10} className="text-blue-500" /> URL Slug</label>
+                  <input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} className="admin-form-input font-bold text-slate-900 h-10 text-[11px]" placeholder="e.g. kerala-backwaters-magic" />
+                </div>
+
+                <div className="admin-form-group">
+                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold"> <Layers size={10} className="text-indigo-500" /> Meta Description</label>
+                  <textarea rows={3} value={formData.seo_meta} onChange={e => setFormData({ ...formData, seo_meta: e.target.value })} className="admin-form-textarea text-[11px] font-bold text-slate-700 leading-relaxed min-h-[80px] py-2" placeholder="Describe the page for search engines..."></textarea>
+                </div>
+              </div>
+
+              {/* Google Preview (Simplified for Sidebar) */}
+              <div className="mt-8 bg-slate-900 rounded-3xl p-6 border border-white/5 overflow-hidden group/google">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+                  <div className="text-[9px] font-bold text-slate-500 uppercase tracking-widest font-mono">Crawler View</div>
+                </div>
+                <h5 className="text-blue-400 font-bold text-sm leading-snug mb-2 line-clamp-2">
+                  {formData.seo_title || formData.title || 'Untitled Package'}
+                </h5>
+                <p className="text-slate-500 text-[10px] leading-relaxed line-clamp-2">
+                  {formData.seo_meta || 'No description provided...'}
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,32 +1,43 @@
+import type { Metadata } from 'next';
 import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
+import { categoryMappings } from '@/data/categoryMappings';
+import { packagesData } from '@/data/packages';
+import { categoryData } from '@/data/categoryData';
 
-const packages: TourPackage[] = [
-    {
-        image: '/uploads/packages/vbpwushzobsqylb8s1z1uhvlgken5enhwzdly3x5240905024552.jpg',
-        duration: '5 Nights 6 Days',
-        title: 'Coorg Mysore Ooty Package',
-        location: 'Coorg, Mysore, Ooty',
-        price: '₹ 23,999',
-        originalPrice: '₹ 25,700',
-        detailUrl: 'coorg-mysore-ooty/',
-        strip: 'Best Seller'
-    }
-];
+const categorySlug = 'coorg-mysore-ooty';
+const data = categoryData[categorySlug] || {};
 
-export default function CoorgMysoreOoty() {
+export const metadata: Metadata = {
+  title: data.seoTitle || data.title,
+  description: data.seoMeta || data.subtitle,
+  keywords: data.seoKeys,
+};
+
+const packageSlugs = categoryMappings[categorySlug] || [];
+
+const packages: TourPackage[] = packageSlugs.map(slug => {
+    const pkg = (packagesData as any)[slug];
+    if (!pkg) return null;
+    return {
+        image: pkg.image,
+        duration: pkg.duration || pkg.location,
+        title: pkg.title,
+        location: pkg.location,
+        price: pkg.price,
+        originalPrice: pkg.oldPrice,
+        detailUrl: `/packages/${slug}`
+    };
+}).filter((p): p is TourPackage => p !== null);
+
+export default function Page() {
     return (
         <TourCategoryPage
-            title="Coorg Mysore Ooty"
-            subtitle="The spice capital and the queen of hills"
-            bannerImage="/uploads/categories/neqghtvqmhem7lqiiniilprz8hoskpvtcyb82xo1240905031746.jpg"
+            title={data.title || "Tours"}
+            subtitle={data.subtitle || ""}
+            bannerImage={data.bannerImage || "/uploads/categories/default.jpg"}
             packages={packages}
-            readMoreHeading="Complete South India Tour"
-            readMoreContent={
-                <>
-                    <p>Experience the best of Karnataka and Tamil Nadu with our Coorg, Mysore, and Ooty tour package. This itinerary takes you through the coffee plantations of Coorg, the royal heritage of Mysore, and the scenic beauty of Ooty.</p>
-                    <p>Wegomap ensures a comfortable journey with premium hotel stays, private vehicle transfers, and well-planned sightseeing tours. Ideal for families and nature lovers.</p>
-                </>
-            }
+            readMoreHeading={data.contentTitle || ""}
+            readMoreContent={data.contentDesc}
         />
     );
 }

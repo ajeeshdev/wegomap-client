@@ -2,134 +2,195 @@
 
 .pageBanner {
     position: relative;
-    padding-top: 6.5rem; // clear fixed header
-    padding-bottom: 1.5rem;
-    background: #fff;
-    border-bottom: 1px solid #f1f5f9;
-    overflow: hidden;
-    min-height: 0;
-}
-
-/* Ghost watermark — large faded page name behind the title */
-.pageBannerGhost {
-    position: absolute;
-    right: -1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: clamp(4rem, 12vw, 9rem);
-    font-weight: 900;
-    letter-spacing: -0.04em;
-    color: #f1f5f9;
-    text-transform: uppercase;
-    user-select: none;
-    pointer-events: none;
-    white-space: nowrap;
-    line-height: 1;
-}
-
-/* Inner layout */
-.pageBannerInner {
-    position: relative;
-    z-index: 2;
+    height: 60vh;
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-/* Orange accent pill above the title */
-.pageBannerAccent {
-    display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.7rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: $cosmicOrange;
-    margin-bottom: 0.2rem;
-
-    &::before {
-        content: '';
-        display: inline-block;
-        width: 20px;
-        height: 2px;
-        background: $cosmicOrange;
-        border-radius: 2px;
-    }
-}
-
-/* Title */
-.pageBannerTitle {
-    font-size: 1.75rem;
-    font-weight: 800;
-    color: #0f172a;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    margin-bottom: 0;
+    overflow: hidden;
+    background-color: #0f172a;
 
     @media (min-width: 768px) {
-        font-size: 2.25rem;
+        height: 70vh;
+        margin-top: 85px;
     }
-}
 
-/* Subtitle */
-.pageBannerSubtitle {
-    color: #64748b;
-    font-size: 0.85rem;
-    font-weight: 400;
-    line-height: 1.5;
-    margin-top: 0.1rem;
-    max-width: 480px;
-}
+    &.noImage {
+        height: 40vh;
 
-/* Breadcrumb */
-.pageBreadcrumb {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.2rem;
-    margin-top: 0.75rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid #f1f5f9;
-}
-
-.breadcrumbGroup {
-    display: flex;
-    align-items: center;
-    gap: 0.2rem;
-}
-
-.breadcrumbSep {
-    color: #cbd5e1;
-    flex-shrink: 0;
-}
-
-.breadcrumbItem {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #94a3b8;
-    text-decoration: none;
-    letter-spacing: 0.02em;
-    transition: color 0.2s ease;
-
-    &.breadcrumbHome {
-        color: #64748b;
-
-        &:hover {
-            color: #0f172a;
+        @media (min-width: 768px) {
+            height: 45vh;
         }
     }
 
-    &:hover {
-        color: #0f172a;
+    .pageBannerImg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+
+        @media (min-width: 1024px) {
+            width: 70%;
+            clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+        }
     }
 
-    &.active {
-        color: $cosmicOrange;
+    .pageBannerOverlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, #0f172a 0%, #0f172a 30%, rgba(15, 23, 42, 0.4) 60%, rgba(15, 23, 42, 0) 100%);
+        z-index: 1;
+
+        @media (max-width: 1023px) {
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.8));
+        }
+    }
+
+    .bannerBgText {
+        position: absolute;
+        bottom: -2rem;
+        left: 2rem;
+        font-size: 15rem;
+        font-weight: 950;
+        color: rgba(255, 255, 255, 0.03);
+        line-height: 1;
+        text-transform: uppercase;
+        font-style: italic;
+        pointer-events: none;
+        z-index: 0;
+        white-space: nowrap;
+
+        @media (max-width: 1023px) {
+            display: none;
+        }
+    }
+
+    .pageBannerInner {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        padding: 0;
+    }
+
+    .pageBannerTop {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .bannerBackBtn {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.75rem 1.2rem;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-radius: 9999px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #fff;
+        font-size: 0.7rem;
         font-weight: 700;
-        cursor: default;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        svg {
+            color: $cosmicOrange;
+        }
+    }
+
+    .pageBannerContent {
+        margin-top: 2rem;
+
+        .pageBannerTitle {
+            font-size: 3rem;
+            font-weight: 950;
+            line-height: 0.95;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+            color: #ffffff;
+            span{
+                display: block;
+                letter-spacing: normal;
+            }
+
+            @media (min-width: 768px) {
+                font-size: 5rem;
+            }
+
+            .italicText {
+                color: transparent;
+                -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+                display: block;
+                font-style: italic;
+                letter-spacing: normal;
+            }
+        }
+
+        .pageBannerSubtitle {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            border-left: 4px solid $cosmicOrange;
+            padding: 0.5rem 0 0.5rem 1.5rem;
+            background: linear-gradient(90deg, rgba($cosmicOrange, 0.1) 0%, transparent 100%);
+        }
+    }
+
+    .pageBreadcrumb {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-radius: 9999px;
+        width: max-content;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+
+        .breadcrumbItem {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #cbd5e1;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+
+            &:hover {
+                color: #ffffff;
+            }
+
+            &.active {
+                color: $cosmicOrange;
+            }
+        }
+
+        .breadcrumbSep {
+            color: rgba(255, 255, 255, 0.3);
+        }
     }
 }

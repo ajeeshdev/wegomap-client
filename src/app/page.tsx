@@ -20,13 +20,26 @@ import {
   Info,
   Users,
   Twitter,
+  Globe,
+  Zap,
+  MessageSquare,
+  Sparkles,
+  HelpCircle,
+  Compass,
+  ShieldCheck,
+  Mail,
+  Home as HomeIcon,
+  Contact
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination, EffectFade } from 'swiper/modules';
 import Hero from "@/components/Hero";
+import { API_URL } from "@/config";
+import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -34,19 +47,15 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 
-function WishlistButton() {
-  const [selected, setSelected] = useState(false);
+function WishlistButton({ id, wishlist, toggleWishlist }: { id: string, wishlist: string[], toggleWishlist: (id: string, e: React.MouseEvent) => void }) {
+  const isSelected = wishlist.includes(id);
   return (
     <button
-      className={`wishlistBtn ${selected ? 'selected' : ''}`}
+      className={`wishlistBtn ${isSelected ? 'selected' : ''}`}
       aria-label="Add to wishlist"
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        setSelected(!selected);
-      }}
+      onClick={(e) => toggleWishlist(id, e)}
     >
-      <Heart size={18} fill={selected ? "currentColor" : "none"} />
+      <Heart size={18} fill={isSelected ? "currentColor" : "none"} />
     </button>
   );
 }
@@ -54,418 +63,213 @@ function WishlistButton() {
 export default function Home() {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [showMore, setShowMore] = useState(false);
-  const services = [
-    { name: "Services", icon: Info, active: false, href: "/services" },
-    { name: "Tours", icon: MapPin, active: true, href: "/tours" },
-    { name: "Events", icon: Calendar, active: false, href: "/events" },
-    { name: "Cruises", icon: Ship, active: false, href: "/cruise-packages" },
-    { name: "Blogs", icon: FileText, active: false, href: "/blogs" },
-    { name: "Contact", icon: Phone, active: false, href: "/contact" },
-  ];
+  const [loading, setLoading] = useState(true);
+  const [stickyLinks, setStickyLinks] = useState<any[]>([]);
+  const [stickySettings, setStickySettings] = useState({ brandTitle: 'Your world', brandSubtitle: 'Your way' });
 
-  const firstMinuteOffers = [
-    {
-      title: "Singapore",
-      price: "₹ 57999",
-      oldPrice: "₹ 63000",
-      duration: "~4N Singapore",
-      image: "/uploads/packages/OTjBGqS0xBCOI56684Km9l8U9dDL3iREc709JrNC221107123611.jpg"
-    },
-    {
-      title: "Dubai",
-      price: "₹ 38900",
-      oldPrice: "₹ 53200",
-      duration: "~3N Dubai",
-      image: "/uploads/packages/3yngixh95sghzyzg1ohbiacvmi1uygketv25zb4e220424115201.jpg"
-    },
-    {
-      title: "Gangtok Darjeeling",
-      price: "₹ 23999",
-      oldPrice: "₹ 26500",
-      duration: "~2N Gangtok / 2N Darjeeling",
-      image: "/uploads/packages/eyclyJYpPSt9S1s3jrz52KXBd3i84loz4g9TRuOJ220425115126.jpg"
-    },
-  ];
+  const [packages, setPackages] = useState<any[]>([]);
+  const [destinations, setDestinations] = useState<any[]>([]);
+  const [testimonials, setTestimonials] = useState<any[]>([]);
+  const [homePage, setHomePage] = useState<any>(null);
+  const [corporatePage, setCorporatePage] = useState<any>(null);
+  const [homeSections, setHomeSections] = useState<any[]>([]);
+  const [corporateEvents, setCorporateEvents] = useState<any[]>([]);
+  const [specialEvents, setSpecialEvents] = useState<any[]>([]);
+  const [wishlist, setWishlist] = useState<string[]>([]);
+  const router = useRouter();
 
-  const domesticPackages = [
-    {
-      title: "Goa Tour Package",
-      price: "₹ 8,499",
-      oldPrice: "₹ 10,500",
-      duration: "2 Nights 3 Days ~ 1N South Goa / 1N North Goa",
-      image: "/uploads/packages/zzgxrdjxnq0idmh5x2eypanfj6cpoqfz5dz1jntu220406041956.jpg"
-    },
-    {
-      title: "Kodaikanal Tour Package",
-      price: "₹ 8,999",
-      oldPrice: "₹ 10,600",
-      duration: "2 Nights 3 Days ~ 2N Kodaikanal",
-      image: "/uploads/packages/zz78tl2qmhwn8woqay4nx44kn3c6nj9bdbfqq11u240906103238.jpg"
-    },
-    {
-      title: "Coorg Tour Package",
-      price: "₹ 11,999",
-      oldPrice: "₹ 12,900",
-      duration: "2 Nights 3 Days ~ 2N Coorg",
-      image: "/uploads/packages/mksp2z9emdc8ymkinijvjc85atc6cbl6wzpq1pam240906105051.jpg"
-    },
-    {
-      title: "Goa Tour Package (Premium)",
-      price: "₹ 12,899",
-      oldPrice: "₹ 15,000",
-      duration: "3 Nights 4 Days ~ 1N South Goa / 2N North Goa",
-      image: "/uploads/packages/3fb0vs45lzgs7p2uxdksfennausfud9ktfpzy1lv240905105628.jpg"
-    },
-    {
-      title: "Ooty Tour Packages",
-      price: "₹ 14,599",
-      oldPrice: "₹ 16,500",
-      duration: "2 Nights 3 Days ~ 2N Ooty",
-      image: "/uploads/packages/8zogew9nlpyyvhabbux8k4nomjvcwhbxul19urz9240905041659.jpg"
-    },
-    {
-      title: "Coorg - Mysore",
-      price: "₹ 14,999",
-      oldPrice: "₹ 15,800",
-      duration: "3 Nights 4 Days ~ 2N Coorg / 1N Mysore",
-      image: "/uploads/packages/uczkmux2qyzzobrnbbgyaty8vldnpkx9izdegbb0240905031606.jpg"
-    },
-    {
-      title: "Ooty Kodaikanal Package",
-      price: "₹ 15,999",
-      oldPrice: "₹ 19,000",
-      duration: "4 Nights 5 Days ~ 2N Ooty / 2N Kodaikanal",
-      image: "/uploads/packages/ilprye3rqzkqmd7ruvf8uvu2xqgj6p92iwuhnbeh240905040700.jpg"
-    },
-    {
-      title: "Leh Ladakh Tour Package",
-      price: "₹ 16,999",
-      oldPrice: "₹ 22,000",
-      duration: "5 Nights 6 Days ~ 3N Leh 2N Ladakh",
-      image: "/uploads/packages/k7ksmqay9clwp5rfdoeab7b3ucmsrsijxaxstr6d240904032017.png"
-    },
-    {
-      title: "Shimla Manali Package",
-      price: "₹ 18,999",
-      oldPrice: "₹ 22,000",
-      duration: "5 Nights 6 Days ~ 3N Manali / 2 Shimla",
-      image: "/uploads/packages/wushxjjxw6lplnqh61wesqoeyvkawbkph3pxpylf220406075733.jpg"
-    },
-    {
-      title: "Rajasthan Tour Package",
-      price: "₹ 21,999",
-      oldPrice: "₹ 29,000",
-      duration: "5 Nights 6 Days ~ 2N JAIPUR / 1N JODHPUR / 2N UDAIPUR",
-      image: "/uploads/packages/pxckp21pd9jsmx7demeb2jbi7zgowvjuac5dbkys240904024249.png"
-    },
-    {
-      title: "Kashmir Holiday",
-      price: "₹ 21,999",
-      oldPrice: "₹ 25,000",
-      duration: "4 Nights 5 Days ~ 4N SRINAGAR",
-      image: "/uploads/packages/ujztwngbfjmhebzweiqwdeoaqrbbnix7wrswsbc7240829021419.jpg"
-    },
-    {
-      title: "Varanasi Package",
-      price: "₹ 21,999",
-      oldPrice: "₹ 23,900",
-      duration: "3 Nights 4 Days ~ 2N Varanasi / 1N Ayodya",
-      image: "/uploads/packages/qi7pkr3vs0suxdbur0ua8iidcuqzfurzuls3ugyb240904042707.jpg"
-    },
-    {
-      title: "Lakshadweep Package",
-      price: "₹ 22,999",
-      oldPrice: "₹ 24,500",
-      duration: "3 Nights 4 Days ~ 3N Agatti island",
-      image: "/uploads/packages/rqeuFriCXbjmlMkRh6UmXGJka06Jt1bLAWQFexJD240821035047.jpeg"
-    },
-    {
-      title: "Golden Triangle Package",
-      price: "₹ 23,999",
-      oldPrice: "₹ 25,950",
-      duration: "5 Nights 6 Days ~ 2N Delhi / 1N Agra / 2N Jaipur",
-      image: "/uploads/packages/aiwgy8tafcpau9dgatsmnlnk1yfvugillle8yzbh240905024128.png"
-    },
-    {
-      title: "Gangtok Darjeeling Package",
-      price: "₹ 23,999",
-      oldPrice: "₹ 26,500",
-      duration: "4 Nights 5 Days ~ 2N GANGTOK / 2N DARJEELING",
-      image: "/uploads/packages/klidzvonwfqlp6nyvhmnkkon6g6cobwkxaxxloxn240904040120.png"
-    },
-    {
-      title: "Assam Meghalaya Tour",
-      price: "₹ 26,999",
-      oldPrice: "₹ 29,500",
-      duration: "4 Nights 5 Days ~ 3N SHILLONG / 1N GUWAHATI",
-      image: "/uploads/packages/7zw7tf5mlcanzfebdwxti9b3pmhjvoteniv5cozl240904043422.jpg"
-    },
-    {
-      title: "Andaman Packages",
-      price: "₹ 30,999",
-      oldPrice: "₹ 34,000",
-      duration: "6 Nights 7 Days ~ 6N Andaman",
-      image: "/uploads/packages/sn5u9loaltgduhnit3mwbvi9j6kqwztfark0i6zp240904050028.jpg"
-    },
-  ];
-
-  const internationalPackages = [
-    {
-      title: "Bali Budget Tour Plan",
-      price: "₹ 16,999",
-      oldPrice: "₹ 19,000",
-      duration: "3 Nights 4 Days ~ 3N Bali",
-      image: "/uploads/packages/xe9jtsf7cqwsux9oqjjcp5btcdtpwcyduqxksib9240827103944.jpg"
-    },
-    {
-      title: "Malaysia Tour Package",
-      price: "₹ 19,499",
-      oldPrice: "₹ 22,500",
-      duration: "3 Nights 4 Days ~ 3N Malaysia",
-      image: "/uploads/packages/sc3sabi8yshgcivodgcqgboalmhdvwdanrukaopu240904025152.png"
-    },
-    {
-      title: "Bali Tour Package",
-      price: "₹ 21,999",
-      oldPrice: "₹ 25,000",
-      duration: "4 Nights 5 Days ~ 4N Bali",
-      image: "/uploads/packages/scjv80siga8jttcsryrjx5hfckuzsflpd6ten4ld240827103913.jpg"
-    },
-    {
-      title: "Thailand Delight",
-      price: "₹ 22,000",
-      oldPrice: "₹ 24,500",
-      duration: "3 Nights 4 Days ~ 2N Pattaya / 1N Bangkok",
-      image: "/uploads/packages/U58KmFr2waHgoZCqz2YiipHY43bHX1lDH2R4cWqg240822120232.jpg"
-    },
-    {
-      title: "Nepal Tour Package",
-      price: "₹ 23,999",
-      oldPrice: "₹ 26,000",
-      duration: "4 Nights 5 Days ~ 1N Kathmandu / 2N Pokhra / 1N Kathmandu",
-      image: "/uploads/packages/vb1q7giz8knrotcrratjypfxzoti0rjraf4quymy220406072547.jpg"
-    },
-    {
-      title: "Amazing Thailand",
-      price: "₹ 24,400",
-      oldPrice: "₹ 28,000",
-      duration: "3 Nights 4 Days ~ 2N Pattaya / 1N Bangkok",
-      image: "/uploads/packages/zxlqmhgq71iv3xvevzebzywogiwwt6uv7zm2mgos220406082237.jpg"
-    },
-    {
-      title: "Maldives Tour Package",
-      price: "₹ 26,999",
-      oldPrice: "₹ 29,000",
-      duration: "3 Nights 4 Days ~ 3Night Maldives",
-      image: "/uploads/packages/4thguktpn5o2ucp34ebcjxknujlhwn4h13ncv7sz240905033236.jpg"
-    },
-    {
-      title: "Bali Standard tour",
-      price: "₹ 27,999",
-      oldPrice: "₹ 32,000",
-      duration: "5 Nights 6 Days ~ 5N Bali",
-      image: "/uploads/packages/firux1ir0nnix84mzytacsprhbo120ca8u6wgi8p240827103800.jpg"
-    },
-    {
-      title: "Thailand Phuket & Krabi",
-      price: "₹ 29,999",
-      oldPrice: "₹ 34,000",
-      duration: "4 Nights 5 Days ~ 2N Phuket / 2N Krabi",
-      image: "/uploads/packages/Uzi8MYAjx3MwWWmNS2soW9x9IzESbmt0I4wN42Xx240822120635.jpg"
-    },
-    {
-      title: "Malaysia with Penang",
-      price: "₹ 32,999",
-      oldPrice: "₹ 36,000",
-      duration: "5 Nights 6 Days ~ 3N Kuala Lampur / 2N Penang",
-      image: "/uploads/packages/0ati8uaniug6kxou673hhovknfvootd18qawatkt240821040447.jpg"
-    },
-    {
-      title: "Bali Premium Package",
-      price: "₹ 33,999",
-      oldPrice: "₹ 36,300",
-      duration: "5 Nights 6 Days ~ 5N Bali",
-      image: "/uploads/packages/wwm9ddc5cqusj4gix2j2fbfzbmcl2t6m0po7pone240827103732.jpg"
-    },
-    {
-      title: "Singapore Tour Package",
-      price: "₹ 40,999",
-      oldPrice: "₹ 45,000",
-      duration: "3 Nights 4 Days ~ 3N Singapore",
-      image: "/uploads/packages/UyAaRcBgpPlkxEK3RrWnka7GXHewlsUUSR01LFce240827051128.jpg"
-    },
-    {
-      title: "Bhutan Package",
-      price: "₹ 44,999",
-      oldPrice: "₹ 48,000",
-      duration: "6 Nights 7 Days ~ 2N PHUENTSHOLING / 1N THIMPHU/ 1N PUNAKHA / 2N PARO",
-      image: "/uploads/packages/lsmdanwguapamdapyzttjtog1a5wl6tawqdpxz0o240904035156.png"
-    },
-    {
-      title: "Dubai Package (Ultimate)",
-      price: "₹ 50,400",
-      oldPrice: "₹ 65,100",
-      duration: "6 Nights 7 Days ~ 6N Dubai",
-      image: "/uploads/packages/kbtqjlCKQNNuhMP0GPgbaNNl1ewhvNSCNEVgh0Vm260130012049.jpg"
-    },
-    {
-      title: "Thailand Tour Package",
-      price: "₹ 52,999",
-      oldPrice: "₹ 56,000",
-      duration: "6 Nights 7 Days ~ 2N Phuket / 2N Pattaya / 2N Bangkok",
-      image: "/uploads/packages/ItyyJiyjRVdzXZVfc8LFGxEVs3MYHasDqQdY48Ff240822120710.jpg"
-    },
-    {
-      title: "Sri Lanka Package",
-      price: "₹ 53,999",
-      oldPrice: "₹ 57,200",
-      duration: "4 Nights 5 Days ~ 1N Kandy / 1N Nuwara Eliya / 1N Bentota / Kosgoda",
-      image: "/uploads/packages/7mCmQivsI7l0TYGuG2vOOJ6dBjrrM5TevOHyvtq1240820125113.jpg"
-    },
-  ];
-
-  const keralaPackages = [
-    {
-      title: "2N3D Alleppey & Wonderla",
-      price: "₹ 9,799",
-      oldPrice: "₹ 11,200",
-      duration: "2 Nights 3 Days ~ 1N Aleppey Backwaters/ 1N Kochi",
-      image: "/uploads/packages/abkbjEzdDJ9VLYaQ5MT3iV5OvTvb2psVAaJYe1hy240907044413.jpg"
-    },
-    {
-      title: "4N5D Kerala Romantic Honeymoon",
-      price: "₹ 17,999",
-      oldPrice: "₹ 20,000",
-      duration: "4 Nights 5 Days ~ 2N Munnar Hillstations/ 1N Thekkady Wildlife / 1N Houseboat",
-      image: "/uploads/packages/nmnnyxi7pbaiwzcutnk9fyulcamz2filjxbt2j2k220406045909.jpg"
-    },
-    {
-      title: "3N4D Kerala Budget Honeymoon",
-      price: "₹ 11,999",
-      oldPrice: "₹ 13,500",
-      duration: "3 Nights 4 Days ~ 2N Munnar Hillstations /1N Houseboat",
-      image: "/uploads/packages/fwmmj9yj7optu1hsaosbrtbjdarcwgvoe9wp5acc220406045952.jpg"
-    },
-    {
-      title: "Premium Kerala Hills & Backwater Resort",
-      price: "₹ 15,999",
-      oldPrice: "₹ 17,800",
-      duration: "4 Nights 5 Days ~ 2N Munnar Hillstations/1N Thekkady Wildlife/1N Aleppey Backwaters",
-      image: "/uploads/packages/OTjBGqS0xBCOI56684Km9l8U9dDL3iREc709JrNC221107123611.jpg"
-    },
-    {
-      title: "2N3D Kerala Budget Package",
-      price: "₹ 5,999",
-      oldPrice: "₹ 7,500",
-      duration: "2 Nights 3 Days ~ 2N Munnar Hillstations",
-      image: "/uploads/packages/kzjuwvmnhygemcaefnxrya48l51pto5rxpxo7gvs220406050027.jpg"
-    },
-    {
-      title: "6N7D Kerala Complete plan",
-      price: "₹ 21,899",
-      oldPrice: "₹ 24,500",
-      duration: "6 Nights 7 Days ~ 2N Munnar Hill stations/ 1N Thekkady Wildlife / 2N Kovalam Beach/ 1N Houseboat",
-      image: "/uploads/packages/zja1pt0i2lbcucy9tznq16bfyowcqhnwcidjs5mo220406045725.jpg"
-    },
-    {
-      title: "5N6D Kerala Plan with Waterfalls",
-      price: "₹ 18,999",
-      oldPrice: "₹ 21,500",
-      duration: "5 Nights 6 Days ~ 1N Athirapilly Waterfalls / 2N Munnar Hillstations/ 1N Thekkady Wildlife / 1N Boat",
-      image: "/uploads/packages/batvwtb8nluzpz5vmpkoyax96caq7y0ot5tbkpr5220406045801.jpg"
-    },
-    {
-      title: "6N7D Kerala Standard Holiday",
-      price: "₹ 22,999",
-      oldPrice: "₹ 25,700",
-      duration: "6 Nights 7 Days ~ 2N Munnar Hillstations/ 1N Thekkady Wildlife / 2NKovalam Beach/ 1N Houseboat",
-      image: "/uploads/packages/tjuvehl1nqbrldkbvtm7eub4jcyaaad5ikxxibdt220409120211.jpg"
-    },
-    {
-      title: "2N3D Backwater & Waterfalls",
-      price: "₹ 7,299",
-      oldPrice: "₹ 7,800",
-      duration: "2 Nights 3 Days ~ 1N Athirapilly Waterfalls/ 1N Aleppey Backwaters",
-      image: "/uploads/packages/3yngixh95sghzyzg1ohbiacvmi1uygketv25zb4e220424115201.jpg"
-    },
-    {
-      title: "2N3D Luxury Hill station Plan",
-      price: "₹ 9,999",
-      oldPrice: "₹ 11,700",
-      duration: "2 Nights 3 Days ~ 2N Munnar Hillstations",
-      image: "/uploads/packages/aVs4UMTkFpPAH1pP4ozfKuEfYnuBD5fV7ZcWlcGR220424075049.jpg"
+  const fetchWishlist = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const res = await fetch(`${API_URL}/auth/me`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.headers.get('content-type')?.includes('application/json')) {
+          const data = await res.json();
+          if (data.success && data.data.wishlist) {
+            setWishlist(data.data.wishlist);
+          }
+        }
+      } catch (e) {
+        console.error('Error fetching wishlist status:', e);
+      }
     }
+  };
+
+  const toggleWishlist = async (id: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+      toast.error('Please login to save tours');
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_URL}/auth/wishlist/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      if (res.headers.get('content-type')?.includes('application/json')) {
+        const data = await res.json();
+        if (data.success) {
+          setWishlist(data.data);
+          toast.success(data.message);
+        }
+      }
+    } catch (err) {
+      toast.error('Failed to update wishlist');
+    }
+  };
+
+  useEffect(() => {
+    fetchWishlist();
+  }, []);
+
+  const services = [
+    { name: "Services", icon: "Info", href: "/services" },
+    { name: "Tours", icon: "MapPin", active: true, href: "/tours" },
+    { name: "Events", icon: "Calendar", href: "/events" },
+    { name: "Cruises", icon: "Ship", href: "/cruise-packages" },
+    { name: "Blogs", icon: "FileText", href: "/blogs" },
+    { name: "Contact", icon: "Phone", href: "/contact" },
   ];
 
-  const kochiExperiences = [
-    { title: "Kerala Food", image: "/uploads/destinations/54c1yzegz8yndi3wr4aedkrdcvrapspxzn02zeyd220406045151.jpg" },
-    { title: "Festivals", image: "/uploads/destinations/zr4z4uhg1xdf34rgd8ccwdysgry0fy0tlweh2dch220406045218.jpg" },
-    { title: "Theyyam", image: "/uploads/destinations/iq1hpx7ojqzean478ysmsj4dwhsalpaqm9hnfaxf220406045238.jpg" },
-    { title: "Kathakali", image: "/uploads/destinations/plcpazhr52apoikmimeh6phatkg5ostf3j62wb8w220406045259.jpg" },
-  ];
+  const IconMap: Record<string, any> = {
+    Home: HomeIcon, Info, Users, Phone, Mail, MapPin, Heart, Package, Calendar, 
+    Ship, Globe, Zap, MessageSquare, HelpCircle, Star, Compass, FileText, Search, Contact, ClipboardList: FileText
+  };
 
-  const testimonials = [
-    {
-      name: "Imran Shariff",
-      role: "Verified Traveler",
-      avatar: "/uploads/testimonials/lECdwnqz0sFj4Pcwi4IenLB5m6kVr82TaOfU35Ib260228022926.png",
-      quote: "Exploring munnar without wegomap was impossible... It was great experience to share everything was awesome service provided by them and specially tempo traveler driver binu bhai was very honest and humble in whole trip and made it true ... I recommend to everyone.."
-    },
-    {
-      name: "Sumit Kumar Sinha",
-      role: "Family Trip",
-      avatar: "/uploads/testimonials/e9LVL1MpqxfB7dYYZjbfgT9c6PctXAF277MdMGPt260228022430.png",
-      quote: "Wegomaps provided an outstanding Kerala experience, surpassing expectations. From well-curated itineraries showcasing diverse landscapes to impeccable accommodations, every detail was meticulously planned. Cultural experiences in Munnar and Kumarkom houseboat was great. Knowledgeable and friendly driver Mr Prajeesh added delight to the journey, and seamless logistics ensured a worry-free trip. He exactly knew just when and where to stop and where not to. For an extraordinary and hassle-free Kerala adventure, I highly recommend Wegomap."
-    },
-    {
-      name: "Komanpally Ravindra",
-      role: "Verified Traveler",
-      avatar: "/uploads/testimonials/qX82Z9vyeZBLSPm0L3VseevrrkLdPtcQSaNC8sHj260228021643.png",
-      quote: "That was an awesome trip to Kerala with WEGOMAP fathima really helped us a lot in every aspect….and the driver Ajmal was too friendly and made our journey with comfort and safety….one thing I can assure about wegomap is safety is there first priority….thank you wegomap….The journey not over yet …..The journey just started with you"
-    },
-    {
-      name: "Suresh K",
-      role: "Group Trip",
-      avatar: "/uploads/testimonials/5KYj0KGZVjbwoQFwps9kcGMQLjyZkW0s6IMbzUrN260228021237.png",
-      quote: "wegompa tour and events was very well organized our trip, very good hotel,boathouse and trip route map in kerala we enjoy very well thanks to team and special thanks to fathim, she supporting well and continuously follow up with our group in trip.."
-    },
-    {
-      name: "V T Vishwanath",
-      role: "Honeymoon Trip",
-      avatar: "/uploads/testimonials/GMzo4CeZOh1IOz5n8gGAor2nPKlQCqURaIoTsyyE260226040945.png",
-      quote: "Really good travel service by WEGOMAP. Athira from WEGOMAP helped us to plan Munnar and Thekkady Kerala honeymoon trip. It was a really good experience. Nice driver come tour guide. Good accommodation and car has been provided for the trip. Thanks 😊. Go for it. Few of the photos has been added here."
-    },
-    {
-      name: "Pooja Singh",
-      role: "Verified Traveler",
-      avatar: "/uploads/testimonials/ZRyfMmqrgi6Hd4QW1Pv2Op6vPqTeAC5qhuJQOUuw260226035449.png",
-      quote: "Had a fabulous experience, the itinerary was well planned. The hotels were located at best places. Fathima was amazing the way she explained the package. We have not faced any issues in any way in our entire trip. Thanks Wegomap for planning this amazing experience and i have already suggested a few of my friends to plan their trips with you. Much appreciated👍👌"
-    },
-    {
-      name: "Ravina Vaishnav",
-      role: "Verified Traveler",
-      avatar: "/uploads/testimonials/58IAT9y5Gjf79jB6uTSuvSgQI7aaPZ4XYnWaoasI260226035056.png",
-      quote: "Whole trip was good and our driver jithin methew was too good and friendly and our advisers miss fatima will very coperative. Best service ever.. we will enjoy too much very memorable trip for us ..."
-    },
-    {
-      name: "Prakash Kamath",
-      role: "Group Trip",
-      avatar: "/uploads/testimonials/jjL4Qm93bdEIbxXgHnPCGtrz6Gx9LS6N8QU3hvEj260226034728.png",
-      quote: "Tour was very fantastic and wego tour advisor was easily approachable whenever required. Daily feedback calls were given by Mr Jithin from wegomap and the car vehicle arranged was also superb and Cab driver Mr Jahfar (Bro) was very innocent and humble person with nature and had safe ride."
-    },
-    {
-      name: "Vishesh Maity",
-      role: "Family Trip",
-      avatar: "/uploads/testimonials/5gx8E8RQimgCGiohTY51b6YPb7vd4CWNYgn13X7A260226033830.jpg",
-      quote: "We booked a 6N/7D package with Wegomap Tour, and it was an absolutely amazing experience! Everything — from the stay, food, and transportation to the overall planning — was perfectly organized. It truly turned out to be a memorable trip for our family. And our travel advisor (alen) was very friendly."
-    },
-    {
-      name: "Suri Tiruvayipati",
-      role: "Budget Traveler",
-      avatar: "/uploads/testimonials/AYOZ4IhehTkYEFUq8Bx46q3ATXhnyjikDOiKzbyb260226033444.jpg",
-      quote: "Hi, This is Surya, from Visakhapatnam, AP,.... in Pongal Holidays we went kerala Trip Through Wegomap Tours and Traves... Our Travel Agent Fathima Madam Given best plan with budget Friendly Package for 4 days and 3 night Package.... She Fallow us every day and given perfect planning for Visit of Sight seens and Alloted best hotels... Especially The House boat Facilities is Good.... Thanks to Wegomap and Fathima Garu.."
-    },
-  ];
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const [pkgsRes, destsRes, testRes, pagesRes, optsRes, corpEventsRes, specEventsRes] = await Promise.all([
+          fetch(`${API_URL}/packages`),
+          fetch(`${API_URL}/destinations`),
+          fetch(`${API_URL}/testimonials`),
+          fetch(`${API_URL}/pages`),
+          fetch(`${API_URL}/options`),
+          fetch(`${API_URL}/events`),
+          fetch(`${API_URL}/special-events`)
+        ]);
+
+        const safeJson = async (res: Response) => {
+            if (res.headers.get('content-type')?.includes('application/json')) {
+                return await res.json();
+            }
+            return { success: false, data: [] };
+        };
+
+        const pkgsData = await safeJson(pkgsRes);
+        const destsData = await safeJson(destsRes);
+        const testData = await safeJson(testRes);
+        const pagesData = await safeJson(pagesRes);
+        const optsData = await safeJson(optsRes);
+        const corpEventsData = await safeJson(corpEventsRes);
+        const specEventsData = await safeJson(specEventsRes);
+
+        if (pkgsData.success) setPackages(pkgsData.data);
+        if (destsData.success) setDestinations(destsData.data);
+        if (corpEventsData.success) setCorporateEvents(corpEventsData.data);
+        if (specEventsData.success) setSpecialEvents(specEventsData.data);
+        
+        if (testData.success) {
+            const apiUrl = API_URL || '';
+            setTestimonials(testData.data.map((t: any) => ({
+                name: t.name || t.title,
+                role: t.location || t.designation || 'Verified Traveler',
+                avatar: t.image ? (t.image.startsWith('http') ? t.image : `${apiUrl.replace('/api', '')}${t.image}`) : 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=200',
+                quote: t.review || t.text || t.description || 'Great experience!'
+            })));
+        }
+
+        if (pagesData.success) {
+            const home = pagesData.data.find((p: any) => p.slug === 'home');
+            const corporate = pagesData.data.find((p: any) => p.slug === 'corporate-event-management-company-kochi');
+            if (home) setHomePage(home);
+            if (corporate) setCorporatePage(corporate);
+
+            if (home && typeof document !== 'undefined') {
+                document.title = home.seo_title || document.title;
+            }
+        }
+
+        if (optsData.success) {
+            const styOpt = optsData.data.find((o: any) => o.key === 'sticky_links');
+            if (styOpt) try { setStickyLinks(JSON.parse(styOpt.value)); } catch(e) {}
+
+            const stySetOpt = optsData.data.find((o: any) => o.key === 'sticky_settings');
+            if (stySetOpt) try { setStickySettings(JSON.parse(stySetOpt.value)); } catch(e) {}
+
+            const homeSecOpt = optsData.data.find((o: any) => o.key === 'home_sections');
+            if (homeSecOpt) try { setHomeSections(JSON.parse(homeSecOpt.value)); } catch(e) {}
+        }
+      } catch (err) {
+        console.error("Failed to load CMS data:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, []);
+
+  // Compute categorized packages based on dynamic data
+  // Convert _id to href and extract basic features
+  const parsedPackages = packages.map(pkg => ({
+      ...pkg,
+      title: pkg.title,
+      price: pkg.price ? `₹${pkg.price.toLocaleString()}` : 'N/A',
+      oldPrice: pkg.oldamt ? `₹${Number(pkg.oldamt).toLocaleString()}` : null,
+      image: pkg.thumb || (pkg.images && pkg.images[0]) || '/bg-placeholder.jpg',
+      href: `/packages/${pkg.slug || pkg._id}`
+  }));
+
+  const firstMinuteOffers = parsedPackages.filter(p => p.onoffer).slice(0, 8);
+  
+  const isInternational = (title: string, category: string, location: string) => {
+      const search = `${title} ${category} ${location}`.toLowerCase();
+      return search.includes('dubai') || search.includes('thailand') || 
+             search.includes('singapore') || search.includes('malaysia') || 
+             search.includes('bali') || search.includes('vietnam') || 
+             search.includes('bhutan') || search.includes('nepal') || 
+             search.includes('international');
+  };
+
+  const isKerala = (title: string, category: string, location: string) => {
+      const search = `${title} ${category} ${location}`.toLowerCase();
+      return search.includes('kerala') || search.includes('kochi') || 
+             search.includes('munnar') || search.includes('alleppey') || 
+             search.includes('wayanad');
+  };
+
+  const internationalPackages = parsedPackages.filter(p => isInternational(p.title, p.category || '', p.location || '')).slice(0, 10);
+  const keralaPackages = parsedPackages.filter(p => isKerala(p.title, p.category || '', p.location || '')).slice(0, 10);
+  
+  // Anything else is domestic (or just those that aren't international or kerala)
+  const domesticPackages = parsedPackages.filter(p => 
+      !isInternational(p.title, p.category || '', p.location || '') && 
+      !isKerala(p.title, p.category || '', p.location || '')
+  ).slice(0, 10);
+
+  // Map destinations
+  const kochiExperiences = destinations.map(d => ({
+      title: d.name || d.title || 'Experience',
+      image: d.image || d.thumb || '/bg-placeholder.jpg',
+      href: `/tours?q=${encodeURIComponent(d.name || d.title || '')}`
+  }));
+
+  if (loading) {
+      return (
+          <div className="min-h-screen flex items-center justify-center bg-white flex-col gap-4">
+              <div className="w-16 h-16 border-4 border-cosmic-orange border-t-transparent rounded-full animate-spin"></div>
+              <p className="font-black text-slate-400 uppercase tracking-widest text-xs">Loading Experience...</p>
+          </div>
+      );
+  }
 
   return (
     <div className="flex flex-col bg-white">
@@ -476,13 +280,13 @@ export default function Home() {
         <div className="homeContainer">
           <div className="navInner">
             <div className="brandTag">
-              <span>Your way</span>
-              <strong>Your world</strong>
+              <span>{stickySettings.brandSubtitle}</span>
+              <strong>{stickySettings.brandTitle}</strong>
             </div>
 
             <nav className="quickNav">
-              {services.map((service, index) => {
-                const Icon = service.icon;
+              {(stickyLinks.length > 0 ? stickyLinks : services).map((service, index) => {
+                const Icon = IconMap[service.icon] || Info;
                 return (
                   <Link
                     key={index}
@@ -500,17 +304,19 @@ export default function Home() {
       </div>
 
       {/* Kerala Tour Operator Section */}
+      {(homeSections.find(s => s.id === 'kerala')?.enabled ?? true) && keralaPackages.length > 0 && (
       <section className="sectionPadding bg-gradient-bottom">
         <div className="homeContainer">
-          <div className="sectionHeader flex items-center justify-between">
+          <div className="sectionHeader flex items-center justify-center mb-8">
             <div className="titleArea">
-              <span className="sectionSubtitle">Explore Our Best</span>
-              <h1 className="sliderTitle mb-2">
-                Kerala Tour Operator
-              </h1>
-              <p className="sectionHeaderDescription px-0 mb-8 max-w-2xl">
-                Experience the beauty of God&apos;s Own Country with Kerala&apos;s best tour operator. As a trusted Kerala travel agency, we specialize in crafting unforgettable journeys.
-              </p>
+              <span className="sectionSubtitle">{homeSections.find(s => s.id === 'kerala')?.subtitle || "Explore Our Best"}</span>
+              <h2 className="sliderTitle">
+                {homeSections.find(s => s.id === 'kerala')?.title || "Kerala Tour Operator"}
+              </h2>
+              <div 
+                className="sectionHeaderDescription mt-2 mb-0 max-w-2xl text-[13px] leading-relaxed italic text-slate-500"
+                dangerouslySetInnerHTML={{ __html: homeSections.find(s => s.id === 'kerala')?.description || "Experience the beauty of God's Own Country with Kerala's best tour operator." }}
+              />
             </div>
             <Link href="/kerala-tour-packages" className="viewAllBtn">
               View All <ArrowRight size={18} />
@@ -518,14 +324,14 @@ export default function Home() {
           </div>
           <Swiper
             modules={[Autoplay, Navigation, Pagination]}
-            spaceBetween={24}
-            slidesPerView={1.15}
+            spaceBetween={16}
+            slidesPerView={2.2}
             navigation={{
               prevEl: '.kerala-prev',
               nextEl: '.kerala-next',
             }}
-            loop={true}
-            autoplay={{ delay: 3500, disableOnInteraction: false }}
+            loop={keralaPackages.length > 3}
+            autoplay={{ delay: 3500, disableOnInteraction: false, pauseOnMouseEnter: true }}
             pagination={{
               el: '.kerala-pagination',
               type: 'progressbar',
@@ -551,26 +357,29 @@ export default function Home() {
             breakpoints={{
               640: { slidesPerView: 2, spaceBetween: 24 },
               1024: { slidesPerView: 3, spaceBetween: 30 },
-              1280: { slidesPerView: 3, spaceBetween: 30 }
+              1280: { slidesPerView: 4, spaceBetween: 30 }
             }}
             className="packageSlider"
           >
-            {keralaPackages.map((item, idx) => (
+            {keralaPackages.map((item: any, idx) => (
               <SwiperSlide key={idx} className="h-auto">
-                <div className="packageCardKerala group">
-                  <Image src={item.image} alt={item.title} fill className="object-cover" />
-                  <div className="overlay"></div>
-                  <div className="cardContent">
-                    <div className="topSection">
-                      <h4 className="packageTitle">{item.title.replace(/ Package$/i, '')}</h4>
-                      <p className="packageSubtitle">Package</p>
-                    </div>
-                    <div className="bottomSection">
-                      <span className="oldPrice">{item.oldPrice}</span>
-                      <span className="currentPrice">{item.price}<small> / Person</small></span>
+                <Link href={item.href || "/packages"} className="block h-full">
+                  <div className="packageCardKerala group">
+                    <Image src={item.image} alt={item.title} fill className="object-cover" unoptimized />
+                    <div className="overlay"></div>
+                    <div className="cardContent">
+                      <div className="topSection">
+                        <h4 className="packageTitle">{item.title.replace(/ Package$/i, '')}</h4>
+                        <p className="packageSubtitle">Package</p>
+                      </div>
+                      <div className="bottomSection">
+                        {item.oldPrice && <span className="oldPrice">{item.oldPrice}</span>}
+                        <span className="currentPrice">{item.price}<small> / Person</small></span>
+                      </div>
+                      <WishlistButton id={item._id} wishlist={wishlist} toggleWishlist={toggleWishlist} />
                     </div>
                   </div>
-                </div>
+                </Link>
               </SwiperSlide>
             ))}
           </Swiper>
@@ -592,32 +401,129 @@ export default function Home() {
           </div>
         </div>
       </section>
+      )}
 
       {/* First Minute Offers */}
-
-
-      {/* Domestic Packages Slider */}
-      <section className="sectionPadding bg-gradient-bottom">
+      {(homeSections.find(s => s.id === 'offers')?.enabled ?? true) && firstMinuteOffers.length > 0 && (
+      <section className="sectionPadding bg-white">
         <div className="homeContainer">
-          <div className="sectionHeader flex items-center justify-between mb-8">
+          <div className="sectionHeader flex items-center justify-center mb-8">
             <div className="titleArea">
-              <span className="sectionSubtitle">Incredible India</span>
-              <h2 className="sliderTitle">Domestic Packages</h2>
+              <span className="sectionSubtitle">{homeSections.find(s => s.id === 'offers')?.subtitle || "Limited Time Offers"}</span>
+              <h2 className="sliderTitle">{homeSections.find(s => s.id === 'offers')?.title || "First Minute Offers"}</h2>
+              {homeSections.find(s => s.id === 'offers')?.description && (
+                <p className="mt-2 text-slate-500 max-w-2xl text-[13px] leading-relaxed italic">{homeSections.find(s => s.id === 'offers')?.description}</p>
+              )}
             </div>
-            <Link href="/domestic-packages" className="viewAllBtn">
+            <Link href="/trending" className="viewAllBtn">
               View All <ArrowRight size={18} />
             </Link>
           </div>
           <Swiper
             modules={[Autoplay, Navigation, Pagination]}
-            spaceBetween={24}
-            slidesPerView={1.15}
+            spaceBetween={16}
+            slidesPerView={2.2}
+            navigation={{
+              prevEl: '.first-prev',
+              nextEl: '.first-next',
+            }}
+            loop={firstMinuteOffers.length > 3}
+            autoplay={{ delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+            pagination={{
+              el: '.first-pagination',
+              type: 'progressbar',
+            }}
+            onSwiper={(swiper) => {
+              setTimeout(() => {
+                if (swiper && !swiper.destroyed && swiper.params) {
+                  if (swiper.params.navigation && typeof swiper.params.navigation !== 'boolean') {
+                    swiper.params.navigation.prevEl = '.first-prev';
+                    swiper.params.navigation.nextEl = '.first-next';
+                  }
+                  if (swiper.params.pagination && typeof swiper.params.pagination !== 'boolean') {
+                    swiper.params.pagination.el = '.first-pagination';
+                  }
+                  swiper.navigation?.init();
+                  swiper.navigation?.update();
+                  swiper.pagination?.init();
+                  swiper.pagination?.update();
+                }
+              });
+            }}
+            breakpoints={{
+              640: { slidesPerView: 2, spaceBetween: 24 },
+              1024: { slidesPerView: 4, spaceBetween: 30 },
+            }}
+            className="packageSlider"
+          >
+            {firstMinuteOffers.map((item: any, idx) => (
+              <SwiperSlide key={idx} className="h-auto">
+                <Link href={item.href || "/packages"} className="block h-full">
+                  <div className="packageCardSmall group">
+                    <div className="imageWrapper">
+                      <Image src={item.image} alt={item.title} fill className="object-cover" unoptimized />
+                      <div className="priceTag">
+                        {item.oldPrice && <span className="oldPrice">{item.oldPrice}</span>}
+                        <span className="currentPrice">{item.price}<small>/ PERSON</small></span>
+                      </div>
+                      <WishlistButton id={item._id} wishlist={wishlist} toggleWishlist={toggleWishlist} />
+                    </div>
+                    <div className="cardContent">
+                      <h4 className="packageTitle">{item.title}</h4>
+                      <div className="actionIcon"><ChevronRight size={20} /></div>
+                    </div>
+                  </div>
+                </Link>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          <div className="sliderNavigation">
+            <div className="progressWrapper">
+              <div className="first-pagination customPagination"></div>
+            </div>
+            <div className="navButtons">
+              <div className="navBtn first-prev"><ArrowLeft size={20} /></div>
+              <div className="navBtn first-next"><ArrowRight size={20} /></div>
+            </div>
+          </div>
+
+          <div className="viewAllMobileContainer">
+            <Link href="/trending" className="viewAllBtnMobile">
+              View All <ArrowRight size={18} />
+            </Link>
+          </div>
+        </div>
+      </section>
+      )}
+
+
+      {/* Domestic Packages Slider */}
+      {(homeSections.find(s => s.id === 'domestic')?.enabled ?? true) && domesticPackages.length > 0 && (
+      <section className="sectionPadding bg-gradient-bottom">
+        <div className="homeContainer">
+          <div className="sectionHeader flex items-center justify-center mb-8">
+            <div className="titleArea">
+              <span className="sectionSubtitle">{homeSections.find(s => s.id === 'domestic')?.subtitle || "Incredible India"}</span>
+              <h2 className="sliderTitle">{homeSections.find(s => s.id === 'domestic')?.title || "Domestic Packages"}</h2>
+              {homeSections.find(s => s.id === 'domestic')?.description && (
+                <p className="mt-2 text-slate-500 max-w-2xl text-[13px] leading-relaxed">{homeSections.find(s => s.id === 'domestic')?.description}</p>
+              )}
+            </div>
+            <Link href="/domestic-tour-packages" className="viewAllBtn">
+              View All <ArrowRight size={18} />
+            </Link>
+          </div>
+          <Swiper
+            modules={[Autoplay, Navigation, Pagination]}
+            spaceBetween={16}
+            slidesPerView={2.2}
             navigation={{
               prevEl: '.domestic-prev',
               nextEl: '.domestic-next',
             }}
-            loop={true}
-            autoplay={{ delay: 4000, disableOnInteraction: false }}
+            loop={domesticPackages.length > 3}
+            autoplay={{ delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true }}
             pagination={{
               el: '.domestic-pagination',
               type: 'progressbar',
@@ -642,26 +548,28 @@ export default function Home() {
             breakpoints={{
               640: { slidesPerView: 2, spaceBetween: 24 },
               1024: { slidesPerView: 3, spaceBetween: 30 },
-              1280: { slidesPerView: 3, spaceBetween: 30 }
+              1280: { slidesPerView: 4, spaceBetween: 30 }
             }}
             className="packageSlider"
           >
-            {domesticPackages.map((item, idx) => (
+            {domesticPackages.map((item: any, idx) => (
               <SwiperSlide key={idx} className="h-auto">
-                <div className="packageCardSmall group">
-                  <div className="imageWrapper">
-                    <Image src={item.image} alt={item.title} fill className="object-cover" />
-                    <div className="priceTag">
-                      <span className="oldPrice">{item.oldPrice}</span>
-                      <span className="currentPrice">{item.price}<small>/ PERSON</small></span>
+                <Link href={item.href || "/packages"} className="block h-full">
+                  <div className="packageCardSmall group">
+                    <div className="imageWrapper">
+                      <Image src={item.image} alt={item.title} fill className="object-cover" unoptimized />
+                      <div className="priceTag">
+                        {item.oldPrice && <span className="oldPrice">{item.oldPrice}</span>}
+                        <span className="currentPrice">{item.price}<small>/ PERSON</small></span>
+                      </div>
+                      <WishlistButton id={item._id} wishlist={wishlist} toggleWishlist={toggleWishlist} />
                     </div>
-                    <WishlistButton />
+                    <div className="cardContent">
+                      <h4 className="packageTitle">{item.title}</h4>
+                      <div className="actionIcon"><ChevronRight size={20} /></div>
+                    </div>
                   </div>
-                  <div className="cardContent">
-                    <h4 className="packageTitle">{item.title}</h4>
-                    <div className="actionIcon"><ChevronRight size={20} /></div>
-                  </div>
-                </div>
+                </Link>
               </SwiperSlide>
             ))}
           </Swiper>
@@ -677,35 +585,40 @@ export default function Home() {
           </div>
 
           <div className="viewAllMobileContainer">
-            <Link href="/domestic-packages" className="viewAllBtnMobile">
+            <Link href="/domestic-tour-packages" className="viewAllBtnMobile">
               View All <ArrowRight size={18} />
             </Link>
           </div>
         </div>
       </section>
+      )}
 
       {/* International Packages Slider */}
+      {(homeSections.find(s => s.id === 'international')?.enabled ?? true) && internationalPackages.length > 0 && (
       <section className="sectionPadding bg-slate-50">
         <div className="homeContainer">
-          <div className="sectionHeader flex items-center justify-between mb-8">
+          <div className="sectionHeader flex items-center justify-center mb-8">
             <div className="titleArea">
-              <span className="sectionSubtitle">Explore The World</span>
-              <h2 className="sliderTitle">International Packages</h2>
+              <span className="sectionSubtitle">{homeSections.find(s => s.id === 'international')?.subtitle || "Explore The World"}</span>
+              <h2 className="sliderTitle">{homeSections.find(s => s.id === 'international')?.title || "International Packages"}</h2>
+              {homeSections.find(s => s.id === 'international')?.description && (
+                <p className="mt-2 text-slate-500 max-w-2xl text-[13px] leading-relaxed">{homeSections.find(s => s.id === 'international')?.description}</p>
+              )}
             </div>
-            <Link href="/international-packages" className="viewAllBtn">
+            <Link href="/international-tour-packages" className="viewAllBtn">
               View All <ArrowRight size={18} />
             </Link>
           </div>
           <Swiper
             modules={[Autoplay, Navigation, Pagination]}
-            spaceBetween={24}
-            slidesPerView={1.15}
+            spaceBetween={16}
+            slidesPerView={2.2}
             navigation={{
               prevEl: '.intl-prev',
               nextEl: '.intl-next',
             }}
-            loop={true}
-            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            loop={internationalPackages.length > 3}
+            autoplay={{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }}
             pagination={{
               el: '.intl-pagination',
               type: 'progressbar',
@@ -730,26 +643,28 @@ export default function Home() {
             breakpoints={{
               640: { slidesPerView: 2, spaceBetween: 24 },
               1024: { slidesPerView: 3, spaceBetween: 30 },
-              1280: { slidesPerView: 3, spaceBetween: 30 }
+              1280: { slidesPerView: 4, spaceBetween: 30 }
             }}
             className="packageSlider"
           >
-            {internationalPackages.map((item, idx) => (
+            {internationalPackages.map((item: any, idx) => (
               <SwiperSlide key={idx} className="h-auto">
-                <div className="packageCardSmall group">
-                  <div className="imageWrapper">
-                    <Image src={item.image} alt={item.title} fill className="object-cover" />
-                    <div className="priceTag">
-                      <span className="oldPrice">{item.oldPrice}</span>
-                      <span className="currentPrice">{item.price}<small>/ PERSON</small></span>
+                <Link href={item.href || "/packages"} className="block h-full">
+                  <div className="packageCardSmall group">
+                    <div className="imageWrapper">
+                      <Image src={item.image} alt={item.title} fill className="object-cover" unoptimized />
+                      <div className="priceTag">
+                        {item.oldPrice && <span className="oldPrice">{item.oldPrice}</span>}
+                        <span className="currentPrice">{item.price}<small>/ PERSON</small></span>
+                      </div>
+                      <WishlistButton id={item._id} wishlist={wishlist} toggleWishlist={toggleWishlist} />
                     </div>
-                    <WishlistButton />
+                    <div className="cardContent">
+                      <h4 className="packageTitle">{item.title}</h4>
+                      <div className="actionIcon"><ChevronRight size={20} /></div>
+                    </div>
                   </div>
-                  <div className="cardContent">
-                    <h4 className="packageTitle">{item.title}</h4>
-                    <div className="actionIcon"><ChevronRight size={20} /></div>
-                  </div>
-                </div>
+                </Link>
               </SwiperSlide>
             ))}
           </Swiper>
@@ -765,40 +680,42 @@ export default function Home() {
           </div>
 
           <div className="viewAllMobileContainer">
-            <Link href="/international-packages" className="viewAllBtnMobile">
+            <Link href="/international-tour-packages" className="viewAllBtnMobile">
               View All <ArrowRight size={18} />
             </Link>
           </div>
         </div>
       </section>
+      )}
 
       {/* Kochi Based Travel Agency Section */}
+      {homeSections.find(s => s.id === 'kochi')?.enabled && kochiExperiences.length > 0 && (
       <section className="sectionPadding bg-gradient-bottom">
         <div className="homeContainer">
-          <div className="sectionHeader flex items-center justify-between">
+          <div className="sectionHeader flex items-center justify-center mb-8">
             <div className="titleArea">
-              <span className="sectionSubtitle">Local Expertise</span>
-              <h2 className="sliderTitle mb-2">
-                Kochi Based Travel Agency
+              <span className="sectionSubtitle">{homeSections.find(s => s.id === 'kochi')?.subtitle || "Local Expertise"}</span>
+              <h2 className="sliderTitle">
+                {homeSections.find(s => s.id === 'kochi')?.title || "Kochi Based Travel Agency"}
               </h2>
-              <p className="sectionHeaderDescription px-0 mb-8 max-w-4xl">
-                As a premier travel agency in Kerala, we craft personalized tours that immerse you in the cultural and natural wonders of the region. Discover Kerala&apos;s vibrant festivals, rich cuisine, and stunning destinations with your expert travel agency in Kochi - Wegomap.
-              </p>
+              {homeSections.find(s => s.id === 'kochi')?.description && (
+                <p className="mt-2 text-slate-500 max-w-2xl text-[13px] leading-relaxed italic">{homeSections.find(s => s.id === 'kochi')?.description}</p>
+              )}
             </div>
-            <Link href="/tours" className="viewAllBtn">
+            <Link href="/kerala-tour-packages" className="viewAllBtn">
               View All <ArrowRight size={18} />
             </Link>
           </div>
           <Swiper
             modules={[Autoplay, Navigation, Pagination]}
-            spaceBetween={24}
-            slidesPerView={1.15}
+            spaceBetween={16}
+            slidesPerView={2.2}
             navigation={{
               prevEl: '.kochi-prev',
               nextEl: '.kochi-next',
             }}
-            loop={false}
-            autoplay={{ delay: 4500, disableOnInteraction: false }}
+            loop={kochiExperiences.length > 4}
+            autoplay={{ delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true }}
             pagination={{
               el: '.kochi-pagination',
               type: 'progressbar',
@@ -829,17 +746,19 @@ export default function Home() {
           >
             {kochiExperiences.map((item, idx) => (
               <SwiperSlide key={idx} className="h-auto">
-                <div className="packageCardLocation group">
-                  <div className="imageWrapper">
-                    <Image src={item.image} alt={item.title} fill className="object-cover" />
-                  </div>
-                  <div className="cardContent">
-                    <h4 className="locationTitle">{item.title}</h4>
-                    <div className="actionIcon">
-                      <ChevronRight size={20} />
+                <Link href={item.href} className="block h-full cursor-pointer">
+                    <div className="packageCardLocation group">
+                    <div className="imageWrapper">
+                        <Image src={item.image} alt={item.title} fill className="object-cover" unoptimized />
                     </div>
-                  </div>
-                </div>
+                    <div className="cardContent">
+                        <h4 className="locationTitle">{item.title}</h4>
+                        <div className="actionIcon">
+                        <ChevronRight size={20} />
+                        </div>
+                    </div>
+                    </div>
+                </Link>
               </SwiperSlide>
             ))}
           </Swiper>
@@ -855,97 +774,242 @@ export default function Home() {
           </div>
 
           <div className="viewAllMobileContainer">
-            <Link href="/tours" className="viewAllBtnMobile">
+            <Link href="/kerala-tour-packages" className="viewAllBtnMobile">
               View All <ArrowRight size={18} />
             </Link>
           </div>
         </div>
       </section>
+      )}
 
 
 
       {/* Refined Corporate Events Section */}
+      {(homeSections.find(s => s.id === 'corporate')?.enabled ?? true) && (
       <section className="corporateModernSection sectionPadding">
         <div className="homeContainer">
-          <div className="sectionHeader">
-            <span className="sectionSubtitle">MICE & Events</span>
-            <h2 className="sliderTitle">Redefining Corporate Experiences</h2>
-            <p className="leadDescription">
-              Wegomap delivers world-class event management. We curate bespoke experiences that define your business legacy in Kochi and beyond.
-            </p>
+          <div className="sectionHeader flex items-center justify-center mb-8">
+            <div className="titleArea">
+              <span className="sectionSubtitle">{homeSections.find(s => s.id === 'corporate')?.subtitle || "MICE & Events"}</span>
+              <h2 className="sliderTitle">{homeSections.find(s => s.id === 'corporate')?.title || "Redefining Corporate Experiences"}</h2>
+              <div 
+                  className="sectionHeaderDescription mt-2 mb-0 max-w-2xl text-[13px] leading-relaxed italic text-slate-500"
+                  dangerouslySetInnerHTML={{ __html: homeSections.find(s => s.id === 'corporate')?.description || "Wegomap delivers world-class event management services in Kochi and beyond." }}
+              />
+            </div>
+            <Link href="/corporate-event-management-company-kochi" className="viewAllBtn">
+              View All <ArrowRight size={18} />
+            </Link>
           </div>
 
-          <div className="corporateFeatureGrid">
-            <div className="featureCard">
-              <div className="imageBox">
-                <Image
-                  src="/assests/site/assets/images/event.jpg"
-                  alt="Corporate Event"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="cardInfo">
-                <div className="icon"><Building2 size={24} /></div>
-                <h4>MICE & Conferences</h4>
-                <p>Sophisticated infrastructure & logistics managed by experts.</p>
-              </div>
-            </div>
+          <Swiper
+            modules={[Autoplay, Navigation, Pagination]}
+            spaceBetween={16}
+            slidesPerView={2.2}
+            navigation={{
+              prevEl: '.event-prev',
+              nextEl: '.event-next',
+            }}
+            loop={true}
+            autoplay={{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+            pagination={{
+              el: '.event-pagination',
+              type: 'progressbar',
+            }}
+            breakpoints={{
+                  640: { slidesPerView: 2, spaceBetween: 24 },
+              1024: { slidesPerView: 3, spaceBetween: 30 },
+              1280: { slidesPerView: 4, spaceBetween: 30 }
+            }}
+            onSwiper={(swiper) => {
+              setTimeout(() => {
+                if (swiper && !swiper.destroyed && swiper.params) {
+                  if (swiper.params.navigation && typeof swiper.params.navigation !== 'boolean') {
+                    swiper.params.navigation.prevEl = '.event-prev';
+                    swiper.params.navigation.nextEl = '.event-next';
+                  }
+                  if (swiper.params.pagination && typeof swiper.params.pagination !== 'boolean') {
+                    swiper.params.pagination.el = '.event-pagination';
+                  }
+                  swiper.navigation?.init();
+                  swiper.navigation?.update();
+                  swiper.pagination?.init();
+                  swiper.pagination?.update();
+                }
+              });
+            }}
+            className="eventSlider"
+          >
+            {corporateEvents.map((event: any, idx: number) => {
+              const Icon = Calendar;
+              return (
+                <SwiperSlide key={idx} className="h-auto">
+                  <Link href={`/events/${event.slug || event._id}`} className="block h-full cursor-pointer">
+                    <div className="packageCardSmall eventCard group h-full">
+                      <div className="imageWrapper">
+                        <Image
+                          src={event.images?.[0] || "/assests/site/assets/images/event.jpg"}
+                          alt={event.title}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-700"
+                          unoptimized
+                        />
+                        <div className="cardIcon">
+                          <Icon size={24} strokeWidth={1.5} />
+                        </div>
+                      </div>
+                      <div className="cardContent">
+                        <h4 className="title">{event.title}</h4>
+                        <div className="footer">
+                         <div className="actionIcon"><ChevronRight size={20} /></div>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
 
-            <div className="featureCard featured">
-              <div className="imageBox">
-                <Image
-                  src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=1200"
-                  alt="Grand Event"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="cardInfo">
-                <div className="icon"><Star size={24} /></div>
-                <h4>Gala Celebrations</h4>
-                <p>Elegantly crafted award nights and grand corporate galas.</p>
-              </div>
+          <div className="sliderNavigation">
+            <div className="progressWrapper">
+              <div className="event-pagination customPagination"></div>
             </div>
-
-            <div className="featureCard">
-              <div className="imageBox">
-                <Image
-                  src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80&w=1200"
-                  alt="Business Retreat"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="cardInfo">
-                <div className="icon"><Users size={24} /></div>
-                <h4>Business Retreats</h4>
-                <p>Exclusive team building experiences in serene Kerala backwaters.</p>
-              </div>
+            <div className="navButtons">
+              <div className="navBtn event-prev"><ArrowLeft size={20} /></div>
+              <div className="navBtn event-next"><ArrowRight size={20} /></div>
             </div>
           </div>
         </div>
       </section>
+      )}
 
+      {/* Special Events Section */}
+      {homeSections.find(s => s.id === 'special_events')?.enabled && specialEvents.length > 0 && (
+      <section className="sectionPadding bg-slate-50/50">
+        <div className="homeContainer">
+          <div className="sectionHeader flex items-center justify-center mb-8">
+            <div className="titleArea">
+              <span className="sectionSubtitle">{homeSections.find(s => s.id === 'special_events')?.subtitle || "Experience More"}</span>
+              <h2 className="sliderTitle">
+                {homeSections.find(s => s.id === 'special_events')?.title || "Special Events & Activities"}
+              </h2>
+              {homeSections.find(s => s.id === 'special_events')?.description && (
+                <p className="mt-2 text-slate-500 max-w-2xl text-[13px] leading-relaxed italic">{homeSections.find(s => s.id === 'special_events')?.description}</p>
+              )}
+            </div>
+            <Link href="/special-events" className="viewAllBtn">
+              View All <ArrowRight size={18} />
+            </Link>
+          </div>
 
+          <Swiper
+            modules={[Autoplay, Navigation, Pagination]}
+            spaceBetween={16}
+            slidesPerView={2.2}
+            navigation={{
+              prevEl: '.special-prev',
+              nextEl: '.special-next',
+            }}
+            loop={specialEvents.length > 3}
+            autoplay={{ delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+            pagination={{
+              el: '.special-pagination',
+              type: 'progressbar',
+            }}
+            onSwiper={(swiper) => {
+              setTimeout(() => {
+                if (swiper && !swiper.destroyed && swiper.params) {
+                  if (swiper.params.navigation && typeof swiper.params.navigation !== 'boolean') {
+                    swiper.params.navigation.prevEl = '.special-prev';
+                    swiper.params.navigation.nextEl = '.special-next';
+                  }
+                  if (swiper.params.pagination && typeof swiper.params.pagination !== 'boolean') {
+                    swiper.params.pagination.el = '.special-pagination';
+                  }
+                  swiper.navigation?.init();
+                  swiper.navigation?.update();
+                  swiper.pagination?.init();
+                  swiper.pagination?.update();
+                }
+              });
+            }}
+            breakpoints={{
+           640: { slidesPerView: 2, spaceBetween: 24 },
+              1024: { slidesPerView: 3, spaceBetween: 30 },
+              1280: { slidesPerView: 4, spaceBetween: 30 }
+            }}
+            className="specialEventsSlider"
+          >
+            {specialEvents.map((event: any, idx: number) => (
+              <SwiperSlide key={idx} className="h-auto">
+                <Link href={`/special-events/${event.slug || event._id}`} className="block h-full">
+                  <div className="packageCardSmall group h-full">
+                    <div className="imageWrapper">
+                      <Image 
+                        src={event.images?.[0] || "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800"} 
+                        alt={event.title} 
+                        fill 
+                        className="object-cover" 
+                        unoptimized 
+                      />
+                      <div className="priceTag">
+                        <span className="currentPrice" style={{ color: '#fff', fontSize: '0.75rem' }}>
+                          {event.date ? new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'SPECIAL'}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="cardContent">
+                      <h4 className="packageTitle line-clamp-1">{event.title || event.name}</h4>
+                      <p className="text-[11px] text-slate-400 mt-1 flex items-center gap-1 uppercase tracking-tight">
+                        <MapPin size={10} className="text-purple-500" /> {event.location || 'Special Location'}
+                      </p>
+                      <div className="actionIcon"><ChevronRight size={20} /></div>
+                    </div>
+                  </div>
+                </Link>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          <div className="sliderNavigation">
+            <div className="progressWrapper">
+              <div className="special-pagination customPagination"></div>
+            </div>
+            <div className="navButtons">
+              <div className="navBtn special-prev"><ArrowLeft size={20} /></div>
+              <div className="navBtn special-next"><ArrowRight size={20} /></div>
+            </div>
+          </div>
+
+          <div className="viewAllMobileContainer">
+            <Link href="/special-events" className="viewAllBtnMobile">
+              View All <ArrowRight size={18} />
+            </Link>
+          </div>
+        </div>
+      </section>
+      )}
 
       {/* Luxe Modern Strip Testimonial */}
+      {(homeSections.find(s => s.id === 'testimonials')?.enabled ?? true) && testimonials.length > 0 && (
       <section className="testimonialLuxeStrip bg-slate-50 sectionPadding">
         <div className="homeContainer">
           <div className="sectionHeader">
-            <span className="sectionSubtitle">Review</span>
+            <span className="sectionSubtitle">{homeSections.find(s => s.id === 'testimonials')?.subtitle || "Review"}</span>
             <h2 className="sliderTitle">
-              What our clients say
+              {homeSections.find(s => s.id === 'testimonials')?.title || "What our clients say"}
             </h2>
           </div>
           <div className="stripCard">
             <div className="travelerSide">
               <div className="avatar">
                 <Image
-                  src={testimonials[activeTestimonial].avatar}
-                  alt={testimonials[activeTestimonial].name}
+                  src={testimonials[activeTestimonial]?.avatar || 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=200'}
+                  alt={testimonials[activeTestimonial]?.name}
                   fill
                   className="object-cover"
+                  unoptimized
                 />
               </div>
               <div className="rating">
@@ -954,8 +1018,8 @@ export default function Home() {
                 ))}
               </div>
               <div className="clientDetails">
-                <h4>{testimonials[activeTestimonial].name}</h4>
-                <p>{testimonials[activeTestimonial].role}</p>
+                <h4>{testimonials[activeTestimonial]?.name}</h4>
+                <p>{testimonials[activeTestimonial]?.role}</p>
               </div>
             </div>
 
@@ -967,15 +1031,14 @@ export default function Home() {
               fadeEffect={{ crossFade: true }}
               spaceBetween={0}
               slidesPerView={1}
-              loop={true}
-              autoplay={{ delay: 6000, disableOnInteraction: false }}
+              loop={testimonials.length > 1}
+              autoplay={{ delay: 6000, disableOnInteraction: false, pauseOnMouseEnter: true }}
               onSlideChange={(swiper) => setActiveTestimonial(swiper.realIndex)}
               className="testimonialSwiper"
             >
               {testimonials.map((t, i) => (
                 <SwiperSlide key={i}>
-                  <div className="reviewText">
-                    {t.quote}
+                  <div className="reviewText" dangerouslySetInnerHTML={{__html: t.quote}}>
                   </div>
                 </SwiperSlide>
               ))}
@@ -1003,39 +1066,37 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>      {/* Requested Kerala Specialist Thin Section */}
+      </section>
+      )}
+
+      {/* Requested Kerala Specialist Thin Section */}
+      {(homeSections.find(s => s.id === 'seo')?.enabled ?? true) && (
       <section className="services-list readmore-section set-padding-md pb-5 bg-white">
         <div className="homeContainer">
           <div className="row">
             <div className="col-xl-12 mx-auto">
               <div className="sectionHeader">
-                <span className="sectionSubtitle">Kerala Specialist</span>
-                <h2 className="sliderTitle mb-8">Best Tour Operator in Kerala</h2>
+                <span className="sectionSubtitle">{homeSections.find(s => s.id === 'seo')?.subtitle || "Kerala Specialist"}</span>
+                <h2 className="sliderTitle mb-8">{homeSections.find(s => s.id === 'seo')?.title || homePage?.title || "Best Tour Operator in Kerala"}</h2>
               </div>
               <div className="readMoreWrapper text-center">
                 <div className={`readmore-content ${showMore ? 'is-expanded' : ''}`}>
-                  <p className="mb-4">
-                    Experience the magic of God&apos;s Own Country with Wegomap, your reliable Kerala travel partner. Based in Kochi, we are a premier Kerala tour operator dedicated to crafting unforgettable travel experiences. Whether you dream of serene backwaters, lush tea gardens, or pristine beaches, we ensure your journey is as beautiful as the destination.
-                  </p>
+                  <div 
+                    className="mb-4"
+                    dangerouslySetInnerHTML={{ __html: homeSections.find(s => s.id === 'seo')?.description || (homePage?.content && homePage.content !== 'file' ? homePage.content : "Experience the magic of God's Own Country with Wegomap.") }}
+                  />
                   <div className="extraText">
                     <p>
-                      At Wegomap, we pride ourselves on being the best travel agency for personalized tours that cater to your interests. Our packages include everything from romantic honeymoons and adventurous treks to relaxing family vacations and rejuvenating wellness retreats. As a Kochi-based tour operator, we have in-depth local knowledge to provide you with the most authentic experiences. We offer a range of services to make your trip seamless, including transportation, accommodation, and guided tours. Our team of experts is here to ensure every detail is taken care of, so you can focus on making memories. Whether you&apos;re exploring Kerala for the first time or revisiting its wonders, we strive to make your journey seamless and unforgettable. With Wegomap, you&apos;re not just booking a trip; you&apos;re investing in a lifetime of memories. Contact us today and let the best Kerala travel agency plan your perfect getaway. Explore Kerala with Wegomap and see why we&apos;re recognized as a leading Kerala tour operator!
+                        At Wegomap, we pride ourselves on being the best travel agency for personalized tours that cater to your interests. Our packages include everything from romantic honeymoons and adventurous treks to relaxing family vacations and rejuvenating wellness retreats. As a Kochi-based tour operator, we have in-depth local knowledge to provide you with the most authentic experiences. We offer a range of services to make your trip seamless, including transportation, accommodation, and guided tours. Our team of experts is here to ensure every detail is taken care of, so you can focus on making memories. Whether you're exploring Kerala for the first time or revisiting its wonders, we strive to make your journey seamless and unforgettable. With Wegomap, you're not just booking a trip; you're investing in a lifetime of memories. Contact us today and let the best Kerala travel agency plan your perfect getaway. Explore Kerala with Wegomap and see why we're recognized as a leading Kerala tour operator!
                     </p>
                   </div>
-                </div>
-                <div className="mt-8">
-                  <span
-                    className="read-more-btn"
-                    onClick={() => setShowMore(!showMore)}
-                  >
-                    {showMore ? 'Read Less' : 'Read More'}
-                  </span>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+      )}
 
     </div>
   );

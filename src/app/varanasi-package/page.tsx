@@ -1,32 +1,43 @@
+import type { Metadata } from 'next';
 import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
+import { categoryMappings } from '@/data/categoryMappings';
+import { packagesData } from '@/data/packages';
+import { categoryData } from '@/data/categoryData';
 
-const packages: TourPackage[] = [
-    {
-        image: '/uploads/packages/qi7pkr3vs0suxdbur0ua8iidcuqzfurzuls3ugyb240904042707.jpg',
-        duration: '3 Nights 4 Days',
-        title: 'Varanasi Package',
-        location: 'Varanasi, Ayodhya',
-        price: '₹ 21,999',
-        originalPrice: '₹ 23,900',
-        detailUrl: 'varanasi-package/',
-        strip: 'Spiritual'
-    }
-];
+const categorySlug = 'varanasi-package';
+const data = categoryData[categorySlug] || {};
 
-export default function VaranasiTours() {
+export const metadata: Metadata = {
+  title: data.seoTitle || data.title,
+  description: data.seoMeta || data.subtitle,
+  keywords: data.seoKeys,
+};
+
+const packageSlugs = categoryMappings[categorySlug] || [];
+
+const packages: TourPackage[] = packageSlugs.map(slug => {
+    const pkg = (packagesData as any)[slug];
+    if (!pkg) return null;
+    return {
+        image: pkg.image,
+        duration: pkg.duration || pkg.location,
+        title: pkg.title,
+        location: pkg.location,
+        price: pkg.price,
+        originalPrice: pkg.oldPrice,
+        detailUrl: `/packages/${slug}`
+    };
+}).filter((p): p is TourPackage => p !== null);
+
+export default function Page() {
     return (
         <TourCategoryPage
-            title="Varanasi Package"
-            subtitle="The spiritual capital of India"
-            bannerImage="/uploads/categories/5QFjERrKbfZ74TopsTis4EdOnNVTyfs6B5yRQBwc240904040753.jpg"
+            title={data.title || "Tours"}
+            subtitle={data.subtitle || ""}
+            bannerImage={data.bannerImage || "/uploads/categories/default.jpg"}
             packages={packages}
-            readMoreHeading="A Spiritual Journey to Varanasi & Ayodhya"
-            readMoreContent={
-                <>
-                    <p>Varanasi and Ayodhya are two of the most sacred cities in India. Our Varanasi tour package offers a deeply spiritual experience, taking you through the ancient ghats of the Ganges and the historic temples of Ayodhya.</p>
-                    <p>Experience the mesmerising Ganga Aarti in the evening, enjoy a boat ride at sunrise, and explore the rich cultural heritage of one of the world's oldest continuously inhabited cities. Wegomap ensures a comfortable and well-guided spiritual tour.</p>
-                </>
-            }
+            readMoreHeading={data.contentTitle || ""}
+            readMoreContent={data.contentDesc}
         />
     );
 }

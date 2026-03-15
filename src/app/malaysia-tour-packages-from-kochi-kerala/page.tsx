@@ -1,32 +1,43 @@
+import type { Metadata } from 'next';
 import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
+import { categoryMappings } from '@/data/categoryMappings';
+import { packagesData } from '@/data/packages';
+import { categoryData } from '@/data/categoryData';
 
-const packages: TourPackage[] = [
-    {
-        image: '/uploads/packages/sc3sabi8yshgcivodgcqgboalmhdvwdanrukaopu240904025152.png',
-        duration: '3 Nights 4 Days',
-        title: 'Malaysia Tour Package',
-        location: 'Kuala Lumpur, Genting Highlands',
-        price: '₹ 19,499',
-        originalPrice: '₹ 22,500',
-        detailUrl: 'malaysia-tour-packages-from-kochi-kerala/',
-        strip: 'Best Seller'
-    }
-];
+const categorySlug = 'malaysia-tour-packages-from-kochi-kerala';
+const data = categoryData[categorySlug] || {};
 
-export default function MalaysiaTours() {
+export const metadata: Metadata = {
+  title: data.seoTitle || data.title,
+  description: data.seoMeta || data.subtitle,
+  keywords: data.seoKeys,
+};
+
+const packageSlugs = categoryMappings[categorySlug] || [];
+
+const packages: TourPackage[] = packageSlugs.map(slug => {
+    const pkg = (packagesData as any)[slug];
+    if (!pkg) return null;
+    return {
+        image: pkg.image,
+        duration: pkg.duration || pkg.location,
+        title: pkg.title,
+        location: pkg.location,
+        price: pkg.price,
+        originalPrice: pkg.oldPrice,
+        detailUrl: `/packages/${slug}`
+    };
+}).filter((p): p is TourPackage => p !== null);
+
+export default function Page() {
     return (
         <TourCategoryPage
-            title="Malaysia Tour Packages"
-            subtitle="Truly Asia experience"
-            bannerImage="/uploads/categories/7Er9MHHpU4tIDnHWJm9rmvpELUno6GQ2zdd7pozR240821040000.jpg"
+            title={data.title || "Tours"}
+            subtitle={data.subtitle || ""}
+            bannerImage={data.bannerImage || "/uploads/categories/default.jpg"}
             packages={packages}
-            readMoreHeading="Explore Malaysia with Wegomap"
-            readMoreContent={
-                <>
-                    <p>Malaysia is a melting pot of cultures, offering everything from futuristic skyscrapers to tropical rainforests. Our Malaysia tour packages from Kochi are curated to give you the best of city life and nature.</p>
-                    <p>Visit the iconic Petronas Twin Towers in Kuala Lumpur, enjoy the world-class theme parks in Genting Highlands, and experience the cultural diversity of the region. We provide assistance with Malaysia visas and flights.</p>
-                </>
-            }
+            readMoreHeading={data.contentTitle || ""}
+            readMoreContent={data.contentDesc}
         />
     );
 }

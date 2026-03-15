@@ -1,141 +1,76 @@
 // Package Detail Page Styles
 
 .packageDetailPage {
-    padding-top: 5rem; // pt-20
-    background-color: #fff;
+    padding-top: 0;
+    background-color: #fbfbfb; // Softer off-white
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-    .heroHeader {
+    // iOS-Style Variables
+    --ios-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+    --ios-blur: blur(20px);
+    --ios-radius: 3rem;
+
+    .tourStatsRow {
+        background: #fff;
+        border-bottom: 1px solid #f1f5f9;
         position: relative;
-        height: 60vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        background-color: #0f172a;
-
-        .overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(31, 41, 55, 0.6), rgba(17, 24, 39, 0.6));
-            z-index: 1;
-        }
-
-        .bgText {
-            position: absolute;
-            inset: 0;
+        z-index: 10;
+        
+        .tourStatsGrid {
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0.1;
-            font-size: 200px;
-            font-weight: 900;
-            color: rgba(255, 255, 255, 0.05);
-            white-space: nowrap;
-            overflow: hidden;
-            pointer-events: none;
-            font-style: italic;
-            letter-spacing: -0.05em;
-            text-transform: uppercase;
-            user-select: none;
-            z-index: 0;
+            padding: 30px 0;
+            gap: 20px;
+
+            @media (max-width: 768px) {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 40px 20px;
+                gap: 24px;
+            }
         }
 
-        .heroContent {
-            position: relative;
-            z-index: 10;
-            text-align: center;
+        .tStat {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
 
-            .backBtn {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.5rem;
-                margin-bottom: 2.5rem;
-                font-size: 0.75rem;
-                font-weight: 900;
+            @media (max-width: 768px) {
+                border-left: none !important;
+                padding-left: 0 !important;
+            }
+
+            .tLabel {
+                font-size: 10px;
+                font-weight: 800;
+                color: #64748b;
+                text-transform: uppercase;
                 letter-spacing: 0.1em;
-                text-transform: uppercase;
-                color: $primaryColor;
-                text-decoration: none;
-                background-color: rgba(255, 255, 255, 0.05);
-                padding: 0.75rem 1.5rem;
-                border-radius: 9999px;
-                border: 1px solid rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(10px);
-                transition: all 0.3s;
-
-                &:hover {
-                    color: #fff;
-                    background-color: rgba(255, 255, 255, 0.1);
-                }
             }
 
-            h1 {
-                font-size: 2.25rem;
+            .tValue {
+                font-size: 1.1rem;
                 font-weight: 900;
-                color: #fff;
-                line-height: 1.2;
-                margin-bottom: 2rem;
-                letter-spacing: -0.05em;
-                text-transform: uppercase;
-
-                @media (min-width: 768px) {
-                    font-size: 4.375rem;
-                }
-            }
-
-            .infoGrid {
+                color: #0f172a;
                 display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 2.5rem;
+                align-items: center;
+                gap: 8px;
 
-                .infoItem {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
+                svg {
+                    color: $cosmicOrange;
+                }
 
-                    &.borderSide {
-                        @media (min-width: 768px) {
-                            border-left: 1px solid rgba(255, 255, 255, 0.1);
-                            border-right: 1px solid rgba(255, 255, 255, 0.1);
-                            padding-left: 2.5rem;
-                            padding-right: 2.5rem;
-                        }
-                    }
-
-                    .label {
-                        color: #94a3b8;
-                        font-size: 10px;
-                        font-weight: 900;
-                        text-transform: uppercase;
-                        letter-spacing: 0.1em;
-                        margin-bottom: 0.25rem;
-                    }
-
-                    .value {
-                        color: #fff;
-                        font-weight: 900;
-                        font-size: 1.125rem;
-                        display: flex;
-                        align-items: center;
-                        gap: 0.5rem;
-
-                        svg {
-                            color: $primaryColor;
-                        }
-
-                        &.priceValue {
-                            color: $primaryColor;
-                        }
-                    }
+                &.priceValue {
+                    color: $cosmicOrange;
                 }
             }
         }
     }
 
     .mainContent {
-        padding-top: 6rem;
-        padding-bottom: 6rem;
+        padding-top: 4rem; // Reduced from 6rem
+        padding-bottom: 4rem;
 
         .contentGrid {
             display: grid;
@@ -148,8 +83,8 @@
 
             .detailsCol {
                 .overviewBox {
-                    margin-bottom: 5rem;
-                    padding: 3rem;
+                    margin-bottom: 3rem; // Reduced from 5rem
+                    padding: 2rem; // Reduced from 3rem
                     background-color: #f9fafb;
                     border-radius: 60px;
                     position: relative;
@@ -245,7 +180,7 @@
                 }
 
                 .sectionTitle {
-                    font-size: 0.75rem;
+                    font-size: 2rem;
                     font-weight: 900;
                     color: #0f172a;
                     margin-bottom: 2.5rem;
@@ -256,8 +191,8 @@
                 .highlightsGrid {
                     display: grid;
                     grid-template-columns: 1fr;
-                    gap: 1.5rem;
-                    margin-bottom: 5rem;
+                    gap: 1rem; // Reduced from 1.5rem
+                    margin-bottom: 3rem; // Reduced from 5rem
 
                     @media (min-width: 768px) {
                         grid-template-columns: 1fr 1fr;
@@ -297,6 +232,7 @@
                 }
 
                 .itinerarySection {
+                    margin-bottom: 40px;
                     .itineraryTitle {
                         font-size: 1.5rem;
                         font-weight: 900;
@@ -374,14 +310,16 @@
                 .bookingCard {
                     position: sticky;
                     top: 10rem;
-                    background-color: #0f172a;
-                    color: #fff;
-                    padding: 3rem;
-                    border-radius: 50px;
-                    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+                    background-color: rgba(255, 255, 255, 0.7);
+                    backdrop-filter: var(--ios-blur);
+                    -webkit-backdrop-filter: var(--ios-blur);
+                    color: #0f172a;
+                    padding: 2.5rem;
+                    border-radius: var(--ios-radius);
+                    box-shadow: var(--ios-shadow);
                     overflow: hidden;
-                    border: 1px solid rgba(255, 255, 255, 0.05);
-                    transition: all 0.3s;
+                    border: 1px solid rgba(255, 255, 255, 0.8);
+                    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 
                     &:hover {
                         border-color: rgba(255, 255, 255, 0.1);
@@ -402,7 +340,7 @@
                     h4 {
                         font-size: 1.5rem;
                         font-weight: 900;
-                        margin-bottom: 2.5rem;
+                        margin-bottom: 1.5rem;
                         line-height: 1.2;
 
                         span {
@@ -414,8 +352,7 @@
                         display: flex;
                         align-items: center;
                         gap: 1.5rem;
-                        margin-bottom: 3rem;
-                        padding: 2.5rem 0;
+                        margin-bottom: 1rem;
                         border-top: 1px solid rgba(255, 255, 255, 0.05);
                         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
@@ -445,16 +382,11 @@
 
                         .iconBox {
                             margin-left: auto;
-                            padding: 1rem;
-                            background-color: rgba(255, 255, 255, 0.05);
-                            border-radius: 1rem;
-                            border: 1px solid rgba(255, 255, 255, 0.05);
+                            padding: 0.75rem;
+                            background-color: rgba($cosmicOrange, 0.1);
+                            color: $cosmicOrange;
+                            border-radius: 0.75rem;
                             transition: all 0.3s;
-
-                            &:hover {
-                                background-color: $primaryColor;
-                                color: #000;
-                            }
                         }
                     }
 
@@ -484,21 +416,105 @@
                                 transform: scale(0.95);
                             }
                         }
+                    }
 
-                        .pdfBtn {
-                            width: 100%;
-                            padding: 1.5rem;
-                            background-color: rgba(255, 255, 255, 0.05);
-                            border: 1px solid rgba(255, 255, 255, 0.1);
+                    .enquiryForm {
+                        margin-top: 2rem;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1.25rem;
+
+                        .formField {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 0.5rem;
+
+                            label {
+                                font-size: 0.75rem;
+                                font-weight: 800;
+                                text-transform: uppercase;
+                                letter-spacing: 0.05em;
+                                color: #64748b;
+                                margin-left: 0.5rem;
+                            }
+
+                            .inputWrap {
+                                position: relative;
+                                display: flex;
+                                align-items: center;
+
+                                svg {
+                                    position: absolute;
+                                    left: 1.25rem;
+                                    color: #94a3b8;
+                                    pointer-events: none;
+                                }
+
+                                input {
+                                    width: 100%;
+                                    padding: 1.25rem 1.25rem 1.25rem 3.5rem;
+                                    background: rgba(255, 255, 255, 0.5);
+                                    border: 1px solid rgba(0, 0, 0, 0.05);
+                                    border-radius: 1.5rem;
+                                    font-size: 0.875rem;
+                                    font-weight: 600;
+                                    transition: all 0.3s;
+
+                                    &:focus {
+                                        outline: none;
+                                        background: #fff;
+                                        border-color: $primaryColor;
+                                        box-shadow: 0 0 0 4px rgba($primaryColor, 0.1);
+                                    }
+                                }
+                            }
+                        }
+
+                        .submitBtn {
+                            margin-top: 0.5rem;
+                            padding: 1.25rem; // Reduced
+                            background-color: $cosmicOrange; // Using Cosmic Orange
                             color: #fff;
                             font-weight: 900;
-                            border-radius: 1.875rem;
+                            border-radius: 1.25rem;
+                            border: none;
                             cursor: pointer;
+                            font-size: 0.875rem;
+                            text-transform: uppercase;
+                            letter-spacing: 0.1em;
+                            box-shadow: 0 10px 25px -5px rgba($cosmicOrange, 0.3);
                             transition: all 0.3s;
 
                             &:hover {
-                                background-color: rgba(255, 255, 255, 0.1);
+                                transform: translateY(-2px);
+                                box-shadow: 0 15px 30px -5px rgba($cosmicOrange, 0.5);
                             }
+
+                            &:active {
+                                transform: scale(0.97);
+                            }
+                        }
+                    }
+
+                    .pdfBtn {
+                        width: 100%;
+                        padding: 1rem;
+                        background-color: transparent;
+                        border: 1px solid rgba(0, 0, 0, 0.05);
+                        color: #64748b;
+                        font-family: inherit;
+                        font-size: 0.75rem;
+                        font-weight: 800;
+                        text-transform: uppercase;
+                        letter-spacing: 0.1em;
+                        border-radius: 1.25rem;
+                        cursor: pointer;
+                        margin-top: 1.5rem;
+                        transition: all 0.3s;
+
+                        &:hover {
+                            background-color: #f8fafc;
+                            color: $primaryColor;
                         }
                     }
 
@@ -559,4 +575,8 @@
     100% {
         box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
     }
+}
+
+.padding-h{
+    padding-top: 30px;
 }

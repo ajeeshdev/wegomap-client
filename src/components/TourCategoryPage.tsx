@@ -1,13 +1,21 @@
 "use client";
 
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { MapPin, User, Mail, Phone, X, Heart } from 'lucide-react';
+import { API_URL } from '@/config';
+import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 export interface TourPackage {
+    _id?: string;
+    slug?: string;
     image: string;
     duration: string;
     title: string;
@@ -29,16 +37,8 @@ export interface TourCategoryPageProps {
     readMoreHeading?: string;
 }
 
-const testimonials = [
-    { name: 'Imran Shariff', img: '/uploads/testimonials/lECdwnqz0sFj4Pcwi4IenLB5m6kVr82TaOfU35Ib260228022926.png', text: 'Exploring Munnar without wegomap was impossible... It was a great experience. Everything was awesome — service, the tempo traveler driver Binu bhai was very honest and humble in the whole trip. I recommend to everyone.' },
-    { name: 'Sumit Kumar Sinha', img: '/uploads/testimonials/e9LVL1MpqxfB7dYYZjbfgT9c6PctXAF277MdMGPt260228022430.png', text: 'Wegomaps provided an outstanding Kerala experience, surpassing expectations. From well-curated itineraries to impeccable accommodations, every detail was meticulously planned. I highly recommend Wegomap.' },
-    { name: 'Komanpally Ravindra', img: '/uploads/testimonials/qX82Z9vyeZBLSPm0L3VseevrrkLdPtcQSaNC8sHj260228021643.png', text: 'That was an awesome trip to Kerala with WEGOMAP. Fathima really helped us a lot in every aspect. The driver Ajmal was too friendly and made our journey with comfort and safety. Thank you Wegomap.' },
-    { name: 'Suresh K', img: '/uploads/testimonials/5KYj0KGZVjbwoQFwps9kcGMQLjyZkW0s6IMbzUrN260228021237.png', text: 'Wegomap tour and events was very well organized our trip. Very good hotel, boathouse and trip route in Kerala. We enjoyed very well. Thanks to team and special thanks to Fathima, she was very supportive.' },
-    { name: 'V T Vishwanath', img: '/uploads/testimonials/GMzo4CeZOh1IOz5n8gGAor2nPKlQCqURaIoTsyyE260226040945.png', text: 'Really good travel service by WEGOMAP. Athira from WEGOMAP helped us to plan our Munnar and Thekkady Kerala honeymoon trip. Nice driver cum tour guide. Good accommodation and car provided. Thanks!' },
-    { name: 'Pooja Singh', img: '/uploads/testimonials/ZRyfMmqrgi6Hd4QW1Pv2Op6vPqTeAC5qhuJQOUuw260226035449.png', text: 'Had a fabulous experience, the itinerary was well planned. The hotels were located at best places. Fathima was amazing. We have not faced any issues in our entire trip. Thanks Wegomap!' },
-    { name: 'Ravina Vaishnav', img: '/uploads/testimonials/58IAT9y5Gjf79jB6uTSuvSgQI7aaPZ4XYnWaoasI260226035056.png', text: 'Whole trip was good and our driver Jithin Mathew was too good and friendly and our adviser Miss Fatima was very cooperative. Best service ever. We enjoyed too much — very memorable trip for us.' },
-    { name: 'Vishesh Maity', img: '/uploads/testimonials/5gx8E8RQimgCGiohTY51b6YPb7vd4CWNYgn13X7A260226033830.jpg', text: 'We booked a 6N/7D package with Wegomap Tour, and it was an absolutely amazing experience! Everything — from the stay, food, and transportation to the overall planning — was perfectly organized.' },
-];
+import DynamicPageBanner from './DynamicPageBanner';
+import { testimonialsData as testimonials } from '@/data/testimonialsData';
 
 export default function TourCategoryPage({
     title,
@@ -49,43 +49,83 @@ export default function TourCategoryPage({
     readMoreContent,
     readMoreHeading,
 }: TourCategoryPageProps) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedPackage, setSelectedPackage] = useState('');
+    const [wishlist, setWishlist] = useState<string[]>([]);
+    const router = useRouter();
+
+    useEffect(() => {
+        const fetchWishlist = async () => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                try {
+                    const res = await fetch(`${API_URL}/auth/me`, {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    const data = await res.json();
+                    if (data.success && data.data.wishlist) {
+                        setWishlist(data.data.wishlist);
+                    }
+                } catch (e) {
+                    console.error('Error fetching wishlist status:', e);
+                }
+            }
+        };
+        fetchWishlist();
+    }, []);
+
+    const toggleWishlist = async (id: string, e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const token = localStorage.getItem('token');
+        if (!token) {
+            toast.error('Please login to save tours');
+            return;
+        }
+
+        try {
+            const res = await fetch(`${API_URL}/auth/wishlist/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            const data = await res.json();
+            if (data.success) {
+                setWishlist(data.data);
+                toast.success(data.message);
+            }
+        } catch (err) {
+            toast.error('Failed to update wishlist');
+        }
+    };
+
+    const handleQuickPlan = (pkgTitle: string) => {
+        setSelectedPackage(pkgTitle);
+        setIsModalOpen(true);
+    };
+
+    const handleFormSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        alert(`Request sent for package: ${selectedPackage}`);
+        setIsModalOpen(false);
+    };
+
     return (
         <div className="tourCatPage">
 
             {/* ── Banner / Hero ── */}
-            <section className="tourCatBanner">
-                <div className="tourCatBannerImg">
-                    <Image
-                        src={bannerImage}
-                        alt={title}
-                        fill
-                        style={{ objectFit: 'cover' }}
-                        priority
-                        unoptimized
-                    />
-                    <div className="tourCatBannerOverlay" />
-                </div>
-                <div className="tourCatBannerContent">
-                    <h1 className="tourCatBannerTitle">{title}</h1>
-                    <p className="tourCatBannerSub">{subtitle}</p>
-                    <div className="tourCatRating">
-                        <Image
-                            src="/assests/site/assets/images/google-logo.svg"
-                            alt="Google"
-                            width={60}
-                            height={20}
-                            unoptimized
-                        />
-                        <span className="tourCatRatingScore">4.8</span>
-                        <span className="tourCatStars">★★★★★</span>
-                        <span className="tourCatReviewCount">450 Google reviews</span>
-                    </div>
-                </div>
-            </section>
+            <DynamicPageBanner
+                fallbackTitle={title}
+                fallbackSubtitle={subtitle}
+                fallbackImage={bannerImage}
+                breadcrumbs={[{ label: title }]}
+            />
 
             {/* ── Package Listings ── */}
             <section className="tourCatPackages">
-                <div className="tourCatContainer">
+                <div className="cosmicContainer">
                     <div className="tourCatBookedBadge">
                         <span className="tourCatBookedNum">{bookCount}</span> tours booked in the last 24 hours.
                     </div>
@@ -98,7 +138,7 @@ export default function TourCategoryPage({
                     <div className="tourCatGrid">
                         {packages.map((pkg, i) => (
                             <div key={i} className="tourCatCard">
-                                <Link href={`https://www.wegomap.com/${pkg.detailUrl}`} target="_blank" className="tourCatCardImgWrap">
+                                <Link href={pkg.detailUrl ? (pkg.detailUrl.startsWith('/') ? pkg.detailUrl : `/${pkg.detailUrl}`) : `/packages/${pkg.slug || pkg._id || ''}`} className="tourCatCardImgWrap">
                                     <Image
                                         src={pkg.image}
                                         alt={pkg.title}
@@ -111,14 +151,20 @@ export default function TourCategoryPage({
                                             🏷️ {pkg.strip}
                                         </span>
                                     )}
+                                    <button 
+                                        onClick={(e) => toggleWishlist(pkg._id || '', e)}
+                                        className={`tourCatWishlistBtn ${wishlist.includes(pkg._id || '') ? 'active' : ''}`}
+                                    >
+                                        <Heart size={18} fill={wishlist.includes(pkg._id || '') ? "currentColor" : "none"} />
+                                    </button>
                                 </Link>
                                 <div className="tourCatCardBody">
                                     <p className="tourCatCardDuration">{pkg.duration}</p>
-                                    <Link href={`https://www.wegomap.com/${pkg.detailUrl}`} target="_blank">
+                                    <Link href={pkg.detailUrl ? (pkg.detailUrl.startsWith('/') ? pkg.detailUrl : `/${pkg.detailUrl}`) : `/packages/${pkg.slug || pkg._id || ''}`}>
                                         <h2 className="tourCatCardTitle">{pkg.title}</h2>
                                     </Link>
                                     <div className="tourCatCardLocation">
-                                        <span className="tourCatDot">●</span> {pkg.location}
+                                        <span className="tourCatDot">•</span> {pkg.location}
                                     </div>
                                     <div className="tourCatCardPricing">
                                         <span className="tourCatPrice">{pkg.price}</span>
@@ -126,10 +172,15 @@ export default function TourCategoryPage({
                                         <span className="tourCatPerPerson">per Person</span>
                                     </div>
                                     <div className="tourCatCardBtns">
-                                        <Link href="/contact" className="tourCatEnquireBtn">
+                                        <button
+                                            type="button"
+                                            onClick={() => handleQuickPlan(pkg.title)}
+                                            className="tourCatEnquireBtn"
+                                            style={{ backgroundColor: '#FF6B35' }}
+                                        >
                                             Get a Quick Plan
-                                        </Link>
-                                        <Link href={`https://www.wegomap.com/${pkg.detailUrl}`} target="_blank" className="tourCatDetailsBtn">
+                                        </button>
+                                        <Link href={pkg.detailUrl ? (pkg.detailUrl.startsWith('/') ? pkg.detailUrl : `/${pkg.detailUrl}`) : `/packages/${pkg.slug || pkg._id || ''}`} className="tourCatDetailsBtn">
                                             Details
                                         </Link>
                                     </div>
@@ -150,7 +201,11 @@ export default function TourCategoryPage({
                             </h2>
                         )}
                         <div className="tourCatReadMoreBody">
-                            {readMoreContent}
+                            {typeof readMoreContent === 'string' ? (
+                                <div dangerouslySetInnerHTML={{ __html: readMoreContent }} />
+                            ) : (
+                                readMoreContent
+                            )}
                         </div>
                     </div>
                 </section>
@@ -158,7 +213,7 @@ export default function TourCategoryPage({
 
             {/* ── Testimonials ── */}
             <section className="tourCatReviews">
-                <div className="tourCatContainer">
+                <div className="cosmicContainer">
                     <h2 className="tourCatReviewsTitle">Our Happy Clients</h2>
                     <Swiper
                         modules={[Autoplay, Pagination]}
@@ -206,12 +261,12 @@ export default function TourCategoryPage({
 
             {/* ── Footer CTA ── */}
             <section className="tourCatCTA">
-                <div className="tourCatContainer">
-                    <p className="tourCatCTALabel">GREAT PLACES TO VISIT</p>
+                <div className="cosmicContainer">
+                    <p className="tourCatCTALabel" style={{ color: '#FF6B35' }}>GREAT PLACES TO VISIT</p>
                     <h2 className="tourCatCTATitle">Planning your next trip?</h2>
                     <p className="tourCatCTASub">Talk to our experts and get a detailed plan for your next trip</p>
                     <div className="tourCatCTABtns">
-                        <Link href="/contact" className="tourCatCTAEnquire">Enquire Now</Link>
+                        <Link href="/contact" className="tourCatCTAEnquire" style={{ backgroundColor: '#FF6B35' }}>Enquire Now</Link>
                         <a href="tel:+918590370566" className="tourCatCTACall">
                             📞 Talk With Us
                         </a>
@@ -219,6 +274,124 @@ export default function TourCategoryPage({
                 </div>
             </section>
 
+            {/* Quick Plan Modal Popup */}
+            {isModalOpen && (
+                <div className="tourCatModalOverlay">
+                    {/* Backdrop */}
+                    <div
+                        className="tourCatModalBackdrop"
+                        onClick={() => setIsModalOpen(false)}
+                    />
+
+                    {/* Modal Content */}
+                    <div className="tourCatModalContent">
+
+                        {/* Close button */}
+                        <button
+                            onClick={() => setIsModalOpen(false)}
+                            className="tourCatModalCloseBtn"
+                        >
+                            <X size={20} />
+                        </button>
+
+                        {/* Left Side: Creative Visual */}
+                        <div className="tourCatModalLeft">
+                            <div className="tourCatModalGradient"></div>
+                            <div className="tourCatModalBlur1"></div>
+                            <div className="tourCatModalBlur2"></div>
+
+                            {/* Visual Content */}
+                            <div className="tourCatModalVisual">
+                                <div className="tourCatModalIconWrap">
+                                    <MapPin size={32} />
+                                </div>
+                                <h3 className="italic">
+                                    Pack <br />Your <br /><span>Bags.</span>
+                                </h3>
+                                <p>
+                                    Leave the planning to us. We'll craft the perfect itinerary tailored just for you.
+                                </p>
+                            </div>
+
+                            <div className="tourCatModalStatus">
+                                <div className="tourCatStatusDot"></div>
+                                <span>Travel Experts Available</span>
+                            </div>
+                        </div>
+
+                        {/* Right Side: Form */}
+                        <div className="tourCatModalRight">
+                            <div className="tourCatModalHeader">
+                                <h2>Quick Plan Request</h2>
+                                <p>Get a response within 2 hours.</p>
+                            </div>
+
+                            <form onSubmit={handleFormSubmit} className="tourCatModalForm">
+                                {/* Disabled Package Field */}
+                                <div className="tourCatModalSelectedPkg">
+                                    <div className="tourCatPkgIcon">
+                                        <MapPin size={18} />
+                                    </div>
+                                    <div>
+                                        <label>Destination Package</label>
+                                        <div className="tourCatPkgName">{selectedPackage}</div>
+                                    </div>
+                                </div>
+
+                                {/* Form Grid */}
+                                <div className="tourCatModalFormGrid">
+                                    {/* Full Name */}
+                                    <div className="tourCatModalField">
+                                        <label>Full Name</label>
+                                        <div className="tourCatModalInputWrap">
+                                            <User size={16} />
+                                            <input
+                                                type="text"
+                                                placeholder="John Doe"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Phone Number */}
+                                    <div className="tourCatModalField">
+                                        <label>Phone Number</label>
+                                        <div className="tourCatModalInputWrap">
+                                            <Phone size={16} />
+                                            <input
+                                                type="tel"
+                                                placeholder="+91 9876543210"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Email Address */}
+                                <div className="tourCatModalField">
+                                    <label>Email Address</label>
+                                    <div className="tourCatModalInputWrap">
+                                        <Mail size={16} />
+                                        <input
+                                            type="email"
+                                            placeholder="john@example.com"
+                                            required
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Submit Button */}
+                                <button
+                                    type="submit"
+                                    className="tourCatModalSubmitBtn"
+                                >
+                                    Get My Itinerary Now
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

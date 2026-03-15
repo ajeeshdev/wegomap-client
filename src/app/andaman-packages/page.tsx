@@ -1,41 +1,43 @@
+import type { Metadata } from 'next';
 import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
+import { categoryMappings } from '@/data/categoryMappings';
+import { packagesData } from '@/data/packages';
+import { categoryData } from '@/data/categoryData';
 
-const packages: TourPackage[] = [
-    {
-        image: '/uploads/packages/OVelXuVa9Ge2qLrMY1o1mfCD1n7qiYDQ9LJWeqos250527122712.webp',
-        duration: '4 Nights 5 Days',
-        title: 'Stunning Andaman',
-        location: 'Port Blair, Havelock Island',
-        price: '₹ 25,000',
-        originalPrice: '₹ 28,000',
-        detailUrl: 'andaman-packages/'
-    },
-    {
-        image: '/uploads/packages/OVelXuVa9Ge2qLrMY1o1mfCD1n7qiYDQ9LJWeqos250527122712.webp',
-        duration: '6 Nights 7 Days',
-        title: '6N Andaman',
-        location: 'Port Blair, Havelock, Neil Island',
-        price: '₹ 30,999',
-        originalPrice: '₹ 34,000',
-        detailUrl: 'andaman-packages/',
-        strip: 'Popular'
-    }
-];
+const categorySlug = 'andaman-packages';
+const data = categoryData[categorySlug] || {};
 
-export default function AndamanTours() {
+export const metadata: Metadata = {
+  title: data.seoTitle || data.title,
+  description: data.seoMeta || data.subtitle,
+  keywords: data.seoKeys,
+};
+
+const packageSlugs = categoryMappings[categorySlug] || [];
+
+const packages: TourPackage[] = packageSlugs.map(slug => {
+    const pkg = (packagesData as any)[slug];
+    if (!pkg) return null;
+    return {
+        image: pkg.image,
+        duration: pkg.duration || pkg.location,
+        title: pkg.title,
+        location: pkg.location,
+        price: pkg.price,
+        originalPrice: pkg.oldPrice,
+        detailUrl: `/packages/${slug}`
+    };
+}).filter((p): p is TourPackage => p !== null);
+
+export default function Page() {
     return (
         <TourCategoryPage
-            title="Andaman Packages"
-            subtitle="Explore the emerald islands of India"
-            bannerImage="/uploads/categories/x8mupizywhx0lbujzpvsk6qrznf18bixirysodea240904050124.jpg"
+            title={data.title || "Tours"}
+            subtitle={data.subtitle || ""}
+            bannerImage={data.bannerImage || "/uploads/categories/default.jpg"}
             packages={packages}
-            readMoreHeading="Plan your Andaman Getaway"
-            readMoreContent={
-                <>
-                    <p>Andaman and Nicobar Islands are a dream destination for beach lovers and water sports enthusiasts. Our Andaman tour packages offer a perfect mix of history, adventure, and relaxation.</p>
-                    <p>Visit the historic Cellular Jail, relax on the world-famous Radhanagar Beach in Havelock, and explore the coral reefs of Neil Island. We provide complete packages including ferry transfers, hotel stays, and sightseeing tours.</p>
-                </>
-            }
+            readMoreHeading={data.contentTitle || ""}
+            readMoreContent={data.contentDesc}
         />
     );
 }
