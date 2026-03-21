@@ -17,7 +17,7 @@ export default function DestinationsAdmin() {
       const res = await fetch(`${API_URL}/destinations`);
       const json = await res.json();
       if (json.success) setData(json.data);
-    } catch (err) { console.error(err); } 
+    } catch (err) { console.error(err); }
     finally { setLoading(false); }
   };
 
@@ -25,7 +25,7 @@ export default function DestinationsAdmin() {
     if (!confirm('Are you sure you want to delete this destination? This action cannot be undone.')) return;
     try {
       const res = await fetch(`${API_URL}/destinations/${id}`, {
-        method: 'DELETE', 
+        method: 'DELETE',
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       });
       const json = await res.json();
@@ -35,7 +35,7 @@ export default function DestinationsAdmin() {
     } catch (err) { console.error('Failed to delete', err); }
   }
 
-  const filteredData = data.filter((item: any) => 
+  const filteredData = data.filter((item: any) =>
     (item.title || item.name || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
     (item.slug || '').toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -47,16 +47,16 @@ export default function DestinationsAdmin() {
         <div>
           <h2 className="admin-page-title">
             <div className="admin-page-title-indicator"></div>
-           Destinations
+            Destinations
           </h2>
           <p className="admin-page-subtitle">Manage all your travel destinations and local guides here.</p>
         </div>
         <div className="flex items-center gap-4">
           <div className="admin-search-container">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
-            <input 
-              type="text" 
-              placeholder="Search destinations..." 
+            <input
+              type="text"
+              placeholder="Search destinations..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="admin-search-input"
@@ -92,18 +92,18 @@ export default function DestinationsAdmin() {
                     <td className="cms-table-cell">
                       <div className="flex items-center gap-4">
                         <div className="admin-icon-enclosure overflow-hidden">
-                           {item.image ? (
-                               <img src={item.image} alt="" className="w-full h-full object-cover" />
-                           ) : (
-                               <MapPin size={22} strokeWidth={2} />
-                           )}
+                          {item.image ? (
+                            <img src={item.image} alt="" className="w-small h-small object-cover" />
+                          ) : (
+                            <MapPin size={22} strokeWidth={2} />
+                          )}
                         </div>
                         <div className="min-w-0">
                           <div className="cms-cell-title">
                             {item.title || item.name}
                           </div>
                           <div className="cms-meta-badge">
-                               <Globe size={10} /> ID: <span className="font-mono">{String(item._id).toUpperCase().slice(-8)}</span>
+                            <Globe size={10} /> ID: <span className="font-mono">{String(item._id).toUpperCase().slice(-8)}</span>
                           </div>
                         </div>
                       </div>
@@ -153,33 +153,33 @@ export default function DestinationsAdmin() {
 
       {/* Stats Footer */}
       {!loading && filteredData.length > 0 && (
-          <div className="admin-form-card bg-slate-900 border-slate-800 p-8 relative overflow-hidden group mt-10">
-               <div className="absolute top-0 right-0 w-[600px] h-full bg-blue-500/5 -skew-x-12 translate-x-32 group-hover:translate-x-24 transition-transform duration-1000"></div>
-               <div className="relative z-10 flex items-center justify-between">
-                   <div className="flex items-center gap-8">
-                       <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white border border-white/20 backdrop-blur-md">
-                           <Globe size={32} />
-                       </div>
-                       <div>
-                           <h4 className="text-white font-bold text-lg tracking-tight uppercase mb-1">Destinations Summary</h4>
-                           <div className="flex items-center gap-4">
-                               <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400 border-r border-white/10 pr-4">
-                                  <ShieldCheck size={12} className="text-emerald-500" /> Atlas Synced
-                               </div>
-                               <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400">
-                                  <Zap size={12} className="text-blue-500" /> Routing Live
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-                   <div className="flex items-center gap-12 pr-6">
-                        <div className="text-right">
-                            <h5 className="text-3xl font-black text-white leading-none">{(filteredData.length).toString().padStart(2, '0')}</h5>
-                            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-2">Total Nodes</p>
-                        </div>
-                   </div>
-               </div>
+        <div className="admin-form-card bg-slate-900 border-slate-800 p-8 relative overflow-hidden group mt-10">
+          <div className="absolute top-0 right-0 w-[600px] h-full bg-blue-500/5 -skew-x-12 translate-x-32 group-hover:translate-x-24 transition-transform duration-1000"></div>
+          <div className="relative z-10 flex items-center justify-between">
+            <div className="flex items-center gap-8">
+              <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white border border-white/20 backdrop-blur-md">
+                <Globe size={32} />
+              </div>
+              <div>
+                <h4 className="text-white font-bold text-lg tracking-tight uppercase mb-1">Destinations Summary</h4>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400 border-r border-white/10 pr-4">
+                    <ShieldCheck size={12} className="text-emerald-500" /> Atlas Synced
+                  </div>
+                  <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400">
+                    <Zap size={12} className="text-blue-500" /> Routing Live
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-12 pr-6">
+              <div className="text-right">
+                <h5 className="text-3xl font-black text-white leading-none">{(filteredData.length).toString().padStart(2, '0')}</h5>
+                <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-2">Total Nodes</p>
+              </div>
+            </div>
           </div>
+        </div>
       )}
     </div>
   );

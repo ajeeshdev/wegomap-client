@@ -34,6 +34,7 @@ export default function Page() {
         <TourCategoryPage
             title={data.title || "Tours"}
             subtitle={data.subtitle || ""}
+            preTitle="God's Own Country"
             bannerImage={data.bannerImage || "/uploads/categories/default.jpg"}
             packages={packages}
             readMoreHeading={data.contentTitle || ""}

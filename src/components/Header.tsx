@@ -3,15 +3,15 @@
 import Link from 'next/link';
 import { API_URL } from '@/config';
 import { useState, useEffect, useRef } from 'react';
-import { 
-    X, ChevronDown, ChevronRight, User, Heart, Info, Users, Contact, 
-    Home, Search, Phone, Mail, MapPin, Package, Calendar, 
+import {
+    X, ChevronDown, ChevronRight, User, Heart, Info, Users, Contact,
+    Home, Search, Phone, Mail, MapPin, Package, Calendar,
     Ship, Globe, Zap, MessageSquare, HelpCircle, Compass, Star, FileText
 } from 'lucide-react';
 import Image from 'next/image';
 
 const IconMap: Record<string, any> = {
-    Home, Info, Users, Phone, Mail, MapPin, Heart, Package, Calendar, 
+    Home, Info, Users, Phone, Mail, MapPin, Heart, Package, Calendar,
     Ship, Globe, Zap, MessageSquare, HelpCircle, Star, Compass, FileText, Search, Contact, ClipboardList: FileText
 };
 
@@ -103,6 +103,7 @@ export default function Header() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userProfile, setUserProfile] = useState<any>(null);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
+    const [logo, setLogo] = useState('/assets/images/logo.png');
     const profileRef = useRef<HTMLDivElement>(null);
 
     // Close profile dropdown when clicking outside
@@ -129,7 +130,7 @@ export default function Header() {
         const checkAuth = () => {
             const token = localStorage.getItem('token');
             const profile = localStorage.getItem('userProfile');
-            
+
             if (token && profile) {
                 setIsLoggedIn(true);
                 try {
@@ -184,6 +185,11 @@ export default function Header() {
                             setFinalSidebarLinks(mergedS);
                         }
                     }
+
+                    const logoOpt = json.data.find((o: any) => o.key === 'site_logo');
+                    if (logoOpt && logoOpt.value) {
+                        setLogo(logoOpt.value);
+                    }
                 }
             } catch (err) {
                 console.error('Failed to fetch nav', err);
@@ -217,13 +223,12 @@ export default function Header() {
                 <div className="headerInner">
                     {/* Logo */}
                     <Link href="/" className="brand">
-                        <Image
-                            src="/assets/images/logo.png"
+                        <img
+                            src={logo}
                             alt="Wegomap"
                             width={180}
                             height={45}
                             className="h-8 md:h-11 w-auto object-contain"
-                            priority
                         />
                     </Link>
 
@@ -357,7 +362,7 @@ export default function Header() {
                                     alt="Menu"
                                     width={40}
                                     height={40}
-                                    className="w-full h-full object-contain p-1"
+                                    className="w-small h-small object-contain p-1"
                                 />
                             )}
                         </button>
@@ -381,7 +386,7 @@ export default function Header() {
                                     alt="Menu"
                                     width={40}
                                     height={40}
-                                    className="w-full h-full object-contain p-1"
+                                    className="w-small h-small object-contain p-1"
                                 />
                             )}
                         </button>
@@ -398,8 +403,8 @@ export default function Header() {
             <div className={`sideMenu ${isOpen ? 'open' : ''}`}>
                 <div className="sideMenuContent">
                     <div className="sideMenuHeader">
-                        <Image
-                            src="/assets/images/logo.png"
+                        <img
+                            src={logo}
                             alt="Wegomap"
                             width={140}
                             height={35}
@@ -420,10 +425,10 @@ export default function Header() {
                                             <ChevronDown size={18} className={`transform transition-transform ${activeMobileMenu === link.name ? 'rotate-180' : ''}`} />
                                         </span>
                                     ) : (
-                                    <Link href={link.href} className="flex items-center">
-                                        {link.icon && <DynamicIcon name={link.icon} size={20} className="mr-3 text-slate-400 group-hover:text-indigo-500 transition-colors" />}
-                                        {link.name}
-                                    </Link>
+                                        <Link href={link.href} className="flex items-center">
+                                            {link.icon && <DynamicIcon name={link.icon} size={20} className="mr-3 text-slate-400 group-hover:text-indigo-500 transition-colors" />}
+                                            {link.name}
+                                        </Link>
                                     )}
                                 </div>
 

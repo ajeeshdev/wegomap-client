@@ -48,6 +48,7 @@ export default function CruisePackagesPage() {
             <DynamicPageBanner
                 fallbackTitle="Cruise Packages"
                 fallbackSubtitle="Discover Luxury on the Sea"
+                fallbackPreTitle="Luxury Voyages"
                 fallbackImage="/uploads/categories/kenl2oft3a7ktbcvoTO8SQYucDDNMiWvx6DeaIEk240827110728.jpg"
                 breadcrumbs={[{ label: 'Cruise Packages' }]}
             />

@@ -30,6 +30,7 @@ export interface TourPackage {
 export interface TourCategoryPageProps {
     title: string;
     subtitle: string;
+    preTitle?: string;
     bannerImage: string;
     bookCount?: number;
     packages: TourPackage[];
@@ -43,6 +44,7 @@ import { testimonialsData as testimonials } from '@/data/testimonialsData';
 export default function TourCategoryPage({
     title,
     subtitle,
+    preTitle,
     bannerImage,
     bookCount = 25,
     packages,
@@ -119,13 +121,14 @@ export default function TourCategoryPage({
             <DynamicPageBanner
                 fallbackTitle={title}
                 fallbackSubtitle={subtitle}
+                fallbackPreTitle={preTitle}
                 fallbackImage={bannerImage}
                 breadcrumbs={[{ label: title }]}
             />
 
             {/* ── Package Listings ── */}
             <section className="tourCatPackages">
-                <div className="cosmicContainer">
+                <div className="homeContainer">
                     <div className="tourCatBookedBadge">
                         <span className="tourCatBookedNum">{bookCount}</span> tours booked in the last 24 hours.
                     </div>
@@ -213,7 +216,7 @@ export default function TourCategoryPage({
 
             {/* ── Testimonials ── */}
             <section className="tourCatReviews">
-                <div className="cosmicContainer">
+                <div className="homeContainer">
                     <h2 className="tourCatReviewsTitle">Our Happy Clients</h2>
                     <Swiper
                         modules={[Autoplay, Pagination]}
@@ -223,8 +226,8 @@ export default function TourCategoryPage({
                         slidesPerView={1}
                         spaceBetween={24}
                         breakpoints={{
-                            640: { slidesPerView: 2 },
-                            1024: { slidesPerView: 3 },
+                            1024: { slidesPerView: 2 },
+                            1280: { slidesPerView: 3 },
                         }}
                         className="tourCatReviewSwiper"
                     >
@@ -261,7 +264,7 @@ export default function TourCategoryPage({
 
             {/* ── Footer CTA ── */}
             <section className="tourCatCTA">
-                <div className="cosmicContainer">
+                <div className="homeContainer">
                     <p className="tourCatCTALabel" style={{ color: '#FF6B35' }}>GREAT PLACES TO VISIT</p>
                     <h2 className="tourCatCTATitle">Planning your next trip?</h2>
                     <p className="tourCatCTASub">Talk to our experts and get a detailed plan for your next trip</p>

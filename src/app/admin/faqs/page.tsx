@@ -88,8 +88,8 @@ export default function FAQsAdmin() {
         <div className="cms-page-wrapper">
             {/* Create Section */}
             <div className="cms-listing-card relative">
-                <div className="p-8 pb-0 border-b border-slate-50">
-                    <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest">
+                <div className="p-4 pb-0 border-b border-slate-50">
+                    <h3 className="text-[11px] font-black text-slate-900 uppercase tracking-widest">
                         Add New FAQ
                     </h3>
                 </div>
@@ -125,14 +125,14 @@ export default function FAQsAdmin() {
                                 placeholder="Enter the answer..." 
                                 value={newFaq.answer}
                                 onChange={e => setNewFaq({...newFaq, answer: e.target.value})}
-                                className="cms-textarea !min-h-[80px]"
+                                className="cms-textarea !min-h-[60px]"
                                 rows={2}
                             />
                             <button 
                                 type="submit"
-                                className="admin-btn admin-btn-primary h-16 px-10 shrink-0 flex items-center justify-center"
+                                className="admin-btn admin-btn-primary h-10 px-6 shrink-0 flex items-center justify-center"
                             >
-                                <span className="text-[12px] font-black uppercase tracking-widest text-[#000]">Add FAQ</span>
+                                <span className="text-[10px] font-black uppercase tracking-widest text-[#000]">Add FAQ</span>
                             </button>
                         </div>
                     </div>
@@ -141,29 +141,29 @@ export default function FAQsAdmin() {
 
             {/* Manage Section */}
             <div className="cms-section-header">
-                <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white shadow-lg">
-                        <Layers size={20} />
+                <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center text-white shadow-md">
+                        <Layers size={16} />
                     </div>
                     <div>
                         <h3 className="cms-section-title">FAQ List</h3>
-                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-0.5">{data.length} Total items</p>
+                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mt-0.5">{data.length} Total items</p>
                     </div>
                 </div>
                 <button 
                     onClick={handleSaveAll}
                     disabled={saving || loading}
-                    className="admin-btn admin-btn-primary h-12 px-8 flex items-center gap-3"
+                    className="admin-btn admin-btn-primary h-10 px-6 flex items-center gap-2"
                 >
                     {saving ? (
                         <>
-                            <div className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin"></div>
-                            <span>Saving...</span>
+                            <div className="w-3 h-3 border-2 border-black/20 border-t-black rounded-full animate-spin"></div>
+                            <span className="text-[10px]">Saving...</span>
                         </>
                     ) : (
                         <>
-                            <ShieldCheck size={18} /> 
-                            <span>Save All Changes</span>
+                            <ShieldCheck size={14} /> 
+                            <span className="text-[10px]">Save Changes</span>
                         </>
                     )}
                 </button>
@@ -171,9 +171,9 @@ export default function FAQsAdmin() {
             
             <div className="cms-listing-card">
                 {loading ? (
-                    <div className="p-32 flex flex-col items-center gap-4">
-                        <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Loading...</p>
+                    <div className="p-16 flex flex-col items-center gap-3">
+                        <div className="w-8 h-8 border-3 border-primary border-t-transparent rounded-full animate-spin"></div>
+                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Loading...</p>
                     </div>
                 ) : (
                     <div className="overflow-x-auto">

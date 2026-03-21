@@ -75,7 +75,7 @@ export default function EditSetting() {
       {/* Header Section */}
       <div className="admin-page-header">
         <div className="flex items-center gap-4">
-          <button onClick={() => router.push('/admin/settings')} className="p-3 bg-white rounded-xl border border-slate-200 hover:bg-slate-50 transition-all hover:scale-110 active:scale-95 text-slate-500 shadow-sm">
+          <button onClick={() => router.push('/admin/settings')} className="admin-back-btn">
             <ArrowLeft size={20} />
           </button>
           <div className="min-w-0">
@@ -160,7 +160,7 @@ export default function EditSetting() {
                 <div className="w-1 h-3 bg-blue-500 rounded-full"></div>
                 System Info
               </h4>
-              <div className="space-y-4">
+              <div className="admin-space-y-4">
                 <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100 group">
                   <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600 shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all">
                     <ShieldCheck size={16} />

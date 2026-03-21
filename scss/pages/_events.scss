@@ -290,3 +290,317 @@
         }
     }
 }
+
+// Event Detail Page
+.eventDetailPage {
+    background-color: #fff;
+    color: #0f172a;
+
+    .eventHero {
+        position: relative;
+        height: 80vh;
+        min-height: 600px;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 6rem;
+        overflow: hidden;
+        background-color: #000;
+
+        .heroImageWrapper {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            img {
+                object-fit: cover;
+                opacity: 0.7;
+            }
+        }
+
+        .heroOverlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.4) 40%, transparent 100%);
+            z-index: 1;
+        }
+
+        .heroContent {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+
+            .backBtn {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.6rem 1.25rem;
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 1rem;
+                color: #fff;
+                font-size: 10px;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: 0.2em;
+                text-decoration: none;
+                margin-bottom: 2rem;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background: #fff;
+                    color: #0c1221;
+                }
+            }
+
+            .dateBadge {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.5rem 1.25rem;
+                background: rgba($cosmicOrange, 0.2);
+                border: 1px solid rgba($cosmicOrange, 0.3);
+                border-radius: 99px;
+                color: $cosmicOrange;
+                font-size: 0.75rem;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: 0.2em;
+                margin-bottom: 1.5rem;
+            }
+
+            .mainTitle {
+                font-size: 4rem;
+                font-weight: 950;
+                color: #fff;
+                line-height: 0.9;
+                letter-spacing: -0.05em;
+                text-transform: uppercase;
+                margin-bottom: 1.5rem;
+
+                @media (min-width: 768px) {
+                    font-size: 7rem;
+                }
+            }
+
+            .subheading {
+                font-family: var(--font-writing);
+                font-size: 2.25rem;
+                color: #fff;
+                margin-bottom: 0;
+                opacity: 0.9;
+                transform: rotate(-2deg);
+                display: block;
+            }
+        }
+    }
+
+    .eventContentBody {
+        padding: 6rem 0;
+        
+        .metaGrid {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid #f1f5f9;
+            margin-bottom: 4rem;
+
+            .metaItem {
+                display: flex;
+                flex-direction: column;
+                gap: 0.25rem;
+
+                label {
+                    font-size: 9px;
+                    font-weight: 900;
+                    color: #94a3b8;
+                    text-transform: uppercase;
+                    letter-spacing: 0.15em;
+                }
+
+                span {
+                    font-size: 0.9rem;
+                    font-weight: 900;
+                    color: #0c1221;
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    text-transform: uppercase;
+
+                    svg {
+                        color: $cosmicOrange;
+                    }
+                }
+            }
+
+            .divider {
+                width: 1px;
+                height: 2.5rem;
+                background-color: #f1f5f9;
+            }
+        }
+
+        .descriptionArea {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: #475569;
+
+            p {
+                margin-bottom: 2rem;
+            }
+
+            h2, h3 {
+                font-weight: 900;
+                color: #0c1221;
+                text-transform: uppercase;
+                letter-spacing: -0.02em;
+                margin: 3rem 0 1.5rem;
+            }
+
+            h2 { font-size: 2.25rem; }
+            h3 { font-size: 1.5rem; }
+        }
+
+        .featuresList {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem;
+
+            @media (max-width: 767px) {
+                grid-template-columns: 1fr;
+            }
+
+            .featureCard {
+                display: flex;
+                align-items: center;
+                gap: 1.25rem;
+                padding: 1.5rem;
+                background-color: #f8fafc;
+                border-radius: 1.5rem;
+                border: 1px solid #f1f5f9;
+
+                .icon {
+                    width: 2.75rem;
+                    height: 2.75rem;
+                    background-color: #fff;
+                    border-radius: 1rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #10b981;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+                }
+
+                span {
+                    font-size: 11px;
+                    font-weight: 900;
+                    color: #475569;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                }
+            }
+        }
+
+        .bookingSidebar {
+            position: sticky;
+            top: 100px;
+            background-color: #0c1221;
+            padding: 3rem;
+            border-radius: 3rem;
+            color: #fff;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 150px;
+                height: 150px;
+                background: radial-gradient(circle, rgba($cosmicOrange, 0.15) 0%, transparent 70%);
+                border-radius: 50%;
+                filter: blur(20px);
+            }
+
+            h4 {
+                font-size: 2rem;
+                font-weight: 950;
+                text-transform: uppercase;
+                letter-spacing: -0.02em;
+                margin-bottom: 1rem;
+                line-height: 1.1;
+            }
+
+            p {
+                font-size: 0.875rem;
+                color: #94a3b8;
+                margin-bottom: 2.5rem;
+                line-height: 1.6;
+            }
+
+            .stats {
+                margin-bottom: 2.5rem;
+                padding-bottom: 2.5rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+                .statItem {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 0.75rem 0;
+                    
+                    label {
+                        font-size: 10px;
+                        font-weight: 700;
+                        color: #64748b;
+                        text-transform: uppercase;
+                        letter-spacing: 0.1em;
+                        font-style: italic;
+                    }
+
+                    span {
+                        font-size: 11px;
+                        font-weight: 900;
+                        color: #fff;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+
+            .bookBtn {
+                width: 100%;
+                height: 4.5rem;
+                background-color: $cosmicOrange;
+                color: #fff;
+                border-radius: 1.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+                font-size: 0.8rem;
+                font-weight: 900;
+                text-transform: uppercase;
+                letter-spacing: 0.2em;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                box-shadow: 0 10px 25px rgba($cosmicOrange, 0.3);
+
+                &:hover {
+                    background-color: #fff;
+                    color: $cosmicOrange;
+                    transform: translateY(-3px);
+                }
+
+                svg {
+                    transition: transform 0.3s ease;
+                }
+
+                &:hover svg {
+                    transform: translateX(5px);
+                }
+            }
+        }
+    }
+}

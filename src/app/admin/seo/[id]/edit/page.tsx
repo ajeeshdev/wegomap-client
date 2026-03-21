@@ -66,7 +66,7 @@ export default function EditSEO() {
     <div className="space-y-12 animate-in fade-in duration-500">
       <div className="admin-page-header">
         <div className="flex items-center gap-4">
-          <button onClick={() => router.push('/admin/seo')} className="p-3 bg-white rounded-xl border border-slate-200 hover:bg-slate-50 transition-all hover:scale-110 active:scale-95 text-slate-500 shadow-sm">
+          <button onClick={() => router.push('/admin/seo')} className="admin-back-btn">
             <ArrowLeft size={20} />
           </button>
           <div>
@@ -94,7 +94,7 @@ export default function EditSEO() {
       <div className="max-w-7xl mx-auto mt-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-8">
-                <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-8">
+                <div className="admin-card-panel">
                     <h3 className="text-sm uppercase tracking-wider font-bold text-slate-400 flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-indigo-500"></div>
                         Core Metadata
@@ -144,7 +144,7 @@ export default function EditSEO() {
                     </div>
                 </div>
 
-                <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-8">
+                <div className="admin-card-panel">
                     <h3 className="text-sm uppercase tracking-wider font-bold text-slate-400 flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-amber-500"></div>
                         Advanced Tags
@@ -199,12 +199,12 @@ export default function EditSEO() {
                     <p className="text-[10px] text-slate-400 italic text-center">Preview may vary based on search engine algorithms.</p>
                 </div>
 
-                <div className="bg-slate-900 rounded-2xl p-8 space-y-6 shadow-xl shadow-slate-200/50">
-                    <div className="flex items-center gap-2 text-white font-bold text-xs uppercase tracking-wider">
+                <div className="admin-dark-card">
+                    <div className="admin-dark-card-header">
                         <Info size={14} className="text-blue-400" />
                         Quick Strategy
                     </div>
-                    <div className="space-y-4">
+                    <div className="admin-space-y-4">
                         <div className="space-y-1">
                             <h4 className="text-xs font-bold text-slate-200">Titles & Focus</h4>
                             <p className="text-[11px] text-slate-400 leading-relaxed">Ensure your primary keyword appears near the beginning of the SEO title.</p>

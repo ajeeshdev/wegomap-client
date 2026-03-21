@@ -92,7 +92,7 @@ export default function EditPage() {
  {/* Header Section */}
  <div className="flex items-center justify-between">
  <div className="flex items-center gap-4">
- <button onClick={() => router.push('/admin/pages')} className="p-3 bg-white rounded-2xl border border-slate-200 hover:bg-slate-50 transition-all hover:scale-110 active:scale-95 text-slate-500 shadow-sm">
+ <button onClick={() => router.push('/admin/pages')} className="admin-back-btn">
  <ArrowLeft size={20} />
  </button>
  <div>
@@ -141,7 +141,7 @@ export default function EditPage() {
  <h4 className="text-xs font-semibold uppercase tracking-wider text-indigo-400 mb-4 flex items-center gap-2">
  <Clock size={12} /> Registry
  </h4>
- <div className="space-y-4">
+ <div className="admin-space-y-4">
  <div className="space-y-2">
  <label className="text-[9px] font-semibold uppercase tracking-wider text-slate-500">Publication Status</label>
  <select 

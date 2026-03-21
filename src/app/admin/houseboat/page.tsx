@@ -134,9 +134,9 @@ export default function HouseboatPricingAdmin() {
           ))}
         </div>
 
-        <div className="flex items-center justify-between bg-white/50 backdrop-blur-md p-6 rounded-2xl border border-slate-200/60 sticky bottom-8 shadow-2xl shadow-slate-200/40 z-50 mt-4">
+        <div className="admin-sticky-action-bar">
             <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-500">
+                <div className="admin-action-bar-icon">
                     <ShieldCheck size={20} />
                 </div>
                 <div>
@@ -165,20 +165,20 @@ export default function HouseboatPricingAdmin() {
 
       {/* Stats Overview */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 mb-10">
-          <div className="p-8 rounded-3xl bg-blue-600 text-white relative overflow-hidden">
-               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
-               <h5 className="text-[10px] font-bold uppercase tracking-widest opacity-60">Total Tiers</h5>
-               <p className="text-4xl font-black mt-2">03</p>
+          <div className="admin-stat-card admin-stat-card--primary">
+               <div className="admin-card-corner admin-card-corner--strong"></div>
+               <h5 className="admin-stat-label">Total Tiers</h5>
+               <p className="admin-stat-value">03</p>
           </div>
-          <div className="p-8 rounded-3xl bg-slate-900 text-white relative overflow-hidden">
-               <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16"></div>
-               <h5 className="text-[10px] font-bold uppercase tracking-widest opacity-60">Tier Coverage</h5>
-               <p className="text-4xl font-black mt-2">100%</p>
+          <div className="admin-stat-card admin-stat-card--slate">
+               <div className="admin-card-corner"></div>
+               <h5 className="admin-stat-label">Tier Coverage</h5>
+               <p className="admin-stat-value">100%</p>
           </div>
-          <div className="p-8 rounded-3xl bg-emerald-500 text-white relative overflow-hidden">
-               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
-               <h5 className="text-[10px] font-bold uppercase tracking-widest opacity-60">Visibility</h5>
-               <p className="text-4xl font-black mt-2">Live</p>
+          <div className="admin-stat-card admin-stat-card--emerald">
+               <div className="admin-card-corner admin-card-corner--strong"></div>
+               <h5 className="admin-stat-label">Visibility</h5>
+               <p className="admin-stat-value">Live</p>
           </div>
       </div>
     </div>

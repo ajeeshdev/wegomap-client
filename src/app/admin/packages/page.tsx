@@ -47,7 +47,7 @@ export default function PackagesAdmin() {
     }
   }
 
-  const filteredPackages = packages.filter((pkg: any) => 
+  const filteredPackages = packages.filter((pkg: any) =>
     (pkg.title || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
     (pkg.location || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
     (pkg.category || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -68,9 +68,9 @@ export default function PackagesAdmin() {
         <div className="cms-search-bar">
           <div className="cms-search-input-wrap">
             <Search className="cms-search-icon" size={16} />
-            <input 
-              type="text" 
-              placeholder="Search packages..." 
+            <input
+              type="text"
+              placeholder="Search packages..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="cms-search-input"
@@ -110,7 +110,7 @@ export default function PackagesAdmin() {
                           {pkg.thumb || (pkg.images && pkg.images[0]) ? (
                             <img src={pkg.thumb || pkg.images[0]} alt="" />
                           ) : (
-                            <div className="w-full h-full flex items-center justify-center text-slate-300">
+                            <div className="w-small h-small flex items-center justify-center text-slate-300">
                               <Layers size={24} />
                             </div>
                           )}
@@ -121,14 +121,14 @@ export default function PackagesAdmin() {
                           </div>
                           <div className="cms-cell-meta">
                             <span className="cms-meta-badge">
-                               <ShieldCheck size={9} style={{ color: '#3b82f6' }} /> #{pkg.pcode || 'UNTYPED'}
+                              <ShieldCheck size={9} style={{ color: '#3b82f6' }} /> #{pkg.pcode || 'UNTYPED'}
                             </span>
                             <span className="cms-meta-badge">
-                               <Layers size={9} style={{ color: '#0ea5e9' }} /> {pkg.slug || 'no-slug'}
+                              <Layers size={9} style={{ color: '#0ea5e9' }} /> {pkg.slug || 'no-slug'}
                             </span>
                             {pkg.onoffer && (
                               <span className="px-1.5 py-0.5 bg-rose-50 text-rose-500 rounded-lg text-[8px] font-black uppercase tracking-tighter border border-rose-100 flex items-center gap-1">
-                                 <Zap size={8} className="fill-current" /> Special Offer
+                                <Zap size={8} className="fill-current" /> Special Offer
                               </span>
                             )}
                           </div>
@@ -186,37 +186,37 @@ export default function PackagesAdmin() {
 
       {/* Summary Matrix */}
       {!loading && filteredPackages.length > 0 && (
-          <div className="admin-form-card bg-slate-900 border-slate-800 p-8 relative overflow-hidden group">
-               <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-bl-full blur-[80px]"></div>
-               <div className="relative z-10 flex items-center justify-between">
-                   <div className="flex items-center gap-6">
-                       <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white border border-white/20 backdrop-blur-md">
-                           <Sparkles size={28} />
-                       </div>
-                       <div>
-                           <h4 className="text-white font-bold text-lg tracking-tight uppercase">Package Inventory</h4>
-                           <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-1">All active travel packages and itineraries published on your website.</p>
-                       </div>
-                   </div>
-                   <div className="flex items-center gap-8 pr-12">
-                        <div className="text-center">
-                            <h5 className="text-2xl font-bold text-white leading-none">{(filteredPackages.length).toString().padStart(2, '0')}</h5>
-                            <p className="text-[8px] font-bold text-slate-500 uppercase tracking-[0.2em] mt-2">Active Packages</p>
-                        </div>
-                        <div className="w-px h-10 bg-white/10"></div>
-                        <div className="flex flex-col gap-1.5">
-                             <div className="flex items-center gap-2">
-                                 <ShieldCheck size={10} className="text-emerald-500" />
-                                 <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Inventory Secure</span>
-                             </div>
-                             <div className="flex items-center gap-2">
-                                 <Zap size={10} className="text-blue-500" />
-                                 <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Pricing Core Active</span>
-                             </div>
-                        </div>
-                   </div>
-               </div>
+        <div className="admin-form-card bg-slate-900 border-slate-800 p-8 relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-bl-full blur-[80px]"></div>
+          <div className="relative z-10 flex items-center justify-between">
+            <div className="flex items-center gap-6">
+              <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white border border-white/20 backdrop-blur-md">
+                <Sparkles size={28} />
+              </div>
+              <div>
+                <h4 className="text-white font-bold text-lg tracking-tight uppercase">Package Inventory</h4>
+                <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-1">All active travel packages and itineraries published on your website.</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-8 pr-12">
+              <div className="text-center">
+                <h5 className="text-2xl font-bold text-white leading-none">{(filteredPackages.length).toString().padStart(2, '0')}</h5>
+                <p className="text-[8px] font-bold text-slate-500 uppercase tracking-[0.2em] mt-2">Active Packages</p>
+              </div>
+              <div className="w-px h-10 bg-white/10"></div>
+              <div className="flex flex-col gap-1.5">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck size={10} className="text-emerald-500" />
+                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Inventory Secure</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Zap size={10} className="text-blue-500" />
+                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Pricing Core Active</span>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
       )}
     </div>
   );

@@ -64,6 +64,7 @@ export default function PaymentPage() {
             <DynamicPageBanner
                 fallbackTitle="Payment Options"
                 fallbackSubtitle="Secure and hassle-free payment channels for your dream trip."
+                fallbackPreTitle="Secure Transactions"
                 breadcrumbs={[{ label: 'Payment' }]}
             />
 

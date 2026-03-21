@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { API_URL } from '@/config';
@@ -11,7 +11,27 @@ export default function AdminLogin() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [logo, setLogo] = useState('');
+    const [siteTitle, setSiteTitle] = useState('WEGOMAP');
     const router = useRouter();
+
+    useEffect(() => {
+        const fetchSettings = async () => {
+            try {
+                const res = await fetch(`${API_URL}/options`);
+                const json = await res.json();
+                if (json.success && json.data) {
+                    const logoOpt = json.data.find((o: any) => o.key === 'site_logo');
+                    const titleOpt = json.data.find((o: any) => o.key === 'site_title');
+                    if (logoOpt) setLogo(logoOpt.value);
+                    if (titleOpt) setSiteTitle(titleOpt.value);
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        fetchSettings();
+    }, []);
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -73,11 +93,15 @@ export default function AdminLogin() {
                 {/* Visual Side */}
                 <div className="p-12 hidden lg:flex flex-col justify-between bg-gradient-to-br from-slate-900 to-slate-950 border-r border-slate-800">
                     <div>
-                        <div className="flex items-center gap-2 mb-12">
-                            <div className="w-10 h-10 bg-cosmic-orange rounded-xl flex items-center justify-center">
-                                <Globe className="text-white" size={24} />
-                            </div>
-                            <span className="text-2xl font-black italic text-white tracking-tighter">WEGOMAP</span>
+                        <div className="flex items-center gap-3 mb-12">
+                            {logo ? (
+                                <img src={logo} alt={siteTitle} className="h-10 w-auto object-contain" />
+                            ) : (
+                                <div className="w-10 h-10 bg-cosmic-orange rounded-xl flex items-center justify-center">
+                                    <Globe className="text-white" size={24} />
+                                </div>
+                            )}
+                            <span className="text-2xl font-black italic text-white tracking-tighter uppercase">{siteTitle}</span>
                         </div>
                         <h1 className="text-4xl font-bold text-white mb-6 leading-tight">
                             Control Center for <br/>Your <span className="text-primary">Travel Business</span>.
@@ -107,8 +131,12 @@ export default function AdminLogin() {
 
                 {/* Form Side */}
                 <div className="p-8 md:p-16 flex flex-col justify-center bg-white lg:bg-transparent">
-                    <div className="mb-10 lg:hidden text-center">
-                        <h1 className="text-2xl font-black italic text-primary">WEGOMAP CMS</h1>
+                    <div className="mb-10 lg:hidden text-center flex flex-col items-center gap-4">
+                        {logo ? (
+                            <img src={logo} alt={siteTitle} className="h-12 w-auto object-contain" />
+                        ) : (
+                            <h1 className="text-2xl font-black italic text-primary uppercase">{siteTitle} CMS</h1>
+                        )}
                     </div>
                     
                     <div className="mb-8">

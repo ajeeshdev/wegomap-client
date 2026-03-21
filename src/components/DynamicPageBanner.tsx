@@ -8,21 +8,30 @@ import PageBanner from './PageBanner';
 interface BannerData {
     title?: string;
     subtitle?: string;
+    preTitle?: string;
     image?: string;
     showBack?: boolean;
 }
 
 interface DynamicPageBannerProps {
+    title?: string;
+    subtitle?: string;
     fallbackTitle?: string;
     fallbackSubtitle?: string;
+    fallbackPreTitle?: string;
     fallbackImage?: string;
+    variant?: 'default' | 'thin';
     breadcrumbs: { label: string; href?: string }[];
 }
 
 export default function DynamicPageBanner({ 
+    title,
+    subtitle,
     fallbackTitle, 
     fallbackSubtitle, 
+    fallbackPreTitle,
     fallbackImage,
+    variant = 'default',
     breadcrumbs 
 }: DynamicPageBannerProps) {
     const pathname = usePathname();
@@ -61,6 +70,7 @@ export default function DynamicPageBanner({
                 if (pData.success && pData.data) {
                     merged.title = pData.data.banner_title || pData.data.title;
                     merged.subtitle = pData.data.banner_subtitle || pData.data.subtitle;
+                    merged.preTitle = pData.data.banner_pre_title;
                 }
                 
                 setBanner(Object.keys(merged).length > 0 ? merged : null);
@@ -75,11 +85,13 @@ export default function DynamicPageBanner({
 
     return (
         <PageBanner
-            title={banner?.title || fallbackTitle || "Explore Your Journey"}
-            subtitle={banner?.subtitle || fallbackSubtitle}
+            title={title || banner?.title || fallbackTitle || "Explore Your Journey"}
+            subtitle={subtitle || banner?.subtitle || fallbackSubtitle}
+            preTitle={banner?.preTitle || fallbackPreTitle || (breadcrumbs.length > 0 ? breadcrumbs[breadcrumbs.length - 1].label : 'Explore')}
             backgroundImage={banner?.image || fallbackImage}
             breadcrumbs={breadcrumbs}
             showBack={banner?.showBack ?? true}
+            variant={variant}
         />
     );
 }

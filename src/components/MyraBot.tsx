@@ -6,7 +6,7 @@ import Image from 'next/image';
 export default function MyraBot() {
     return (
         <div className="myrabot-container">
-            <Image 
+            {/* <Image 
                 src="/assets/images/myrabot.webp" 
                 alt="Myra Bot" 
                 width={70} 
@@ -15,7 +15,7 @@ export default function MyraBot() {
                 priority
                 unoptimized
             />
-            <div className="myrabot-shadow"></div>
+            <div className="myrabot-shadow"></div> */}
         </div>
     );
 }

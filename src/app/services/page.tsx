@@ -69,22 +69,25 @@ export default function ServicesPage() {
             <DynamicPageBanner
                 fallbackTitle="Our Services"
                 fallbackSubtitle="Traveling – It leaves you speechless, then turns you into a storyteller."
+                fallbackPreTitle="Premium Offerings"
                 fallbackImage="/assets/images/banners/about-banner.png"
                 breadcrumbs={[{ label: 'Services' }]}
+                variant="thin"
             />
 
             {/* Main Content */}
             <section className="infoBodySection px-4 md:px-0 py-20 pb-40">
                 <div className="homeContainer">
-                    <div className="max-w-3xl mx-auto text-center mb-24">
-                        <span className="text-[10px] font-black text-blue-600 uppercase tracking-[0.3em] mb-4 block">{pageContent.subtitle}</span>
-                        <h2 className="text-4xl md:text-5xl font-black text-slate-900 uppercase italic tracking-tighter mb-8 leading-[1.1]">
-                            {pageContent.title} <br />
-                            <span className="text-orange-500">{pageContent.highlightText}</span>
-                        </h2>
-                        <p className="text-slate-500 font-bold text-lg leading-relaxed">
-                            {pageContent.description}
-                        </p>
+                    <div className="sectionHeader flex items-center justify-center mb-20">
+                        <div className="titleArea">
+                            <span className="sectionSubtitle">{pageContent.subtitle}</span>
+                            <h2 className="sliderTitle">
+                                {pageContent.title} <span className="text-orange-500 italic">{pageContent.highlightText}</span>
+                            </h2>
+                            <div className="sectionHeaderDescription mt-4 max-w-3xl text-slate-500 font-medium leading-relaxed">
+                                {pageContent.description}
+                            </div>
+                        </div>
                     </div>
 
                     {loading ? (

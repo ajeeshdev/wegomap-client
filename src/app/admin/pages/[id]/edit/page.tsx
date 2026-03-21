@@ -68,7 +68,7 @@ export default function EditPage() {
     <div className="space-y-12 animate-in fade-in duration-500">
       <div className="admin-page-header">
         <div className="flex items-center gap-4">
-          <button onClick={() => router.push('/admin/pages')} className="p-3 bg-white rounded-xl border border-slate-200 hover:bg-slate-50 transition-all hover:scale-110 active:scale-95 text-slate-500 shadow-sm">
+          <button onClick={() => router.push('/admin/pages')} className="admin-back-btn">
             <ArrowLeft size={20} />
           </button>
           <div>

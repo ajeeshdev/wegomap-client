@@ -83,7 +83,7 @@ export default function EditDestination() {
       {/* Header Section */}
       <div className="admin-page-header">
         <div className="flex items-center gap-6">
-          <button onClick={() => router.push('/admin/destinations')} className="p-3.5 bg-white rounded-2xl border border-slate-200 hover:bg-slate-50 transition-all hover:scale-110 active:scale-95 text-slate-500 shadow-sm">
+          <button onClick={() => router.push('/admin/destinations')} className="admin-back-btn">
             <ArrowLeft size={22} />
           </button>
           <div className="min-w-0">

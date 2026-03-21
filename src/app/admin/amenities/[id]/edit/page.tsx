@@ -75,7 +75,7 @@ export default function EditAmenity() {
       {/* Header Section */}
       <div className="admin-page-header">
         <div className="flex items-center gap-6">
-          <button onClick={() => router.push('/admin/amenities')} className="p-3.5 bg-white rounded-2xl border border-slate-200 hover:bg-slate-50 transition-all hover:scale-110 active:scale-95 text-slate-500 shadow-sm">
+          <button onClick={() => router.push('/admin/amenities')} className="admin-back-btn">
             <ArrowLeft size={22} />
           </button>
           <div className="min-w-0">
@@ -108,11 +108,11 @@ export default function EditAmenity() {
           <div className="admin-form-card">
             <div className="relative z-10 space-y-12">
               <h3 className="admin-form-section-title">
-                <div className="w-2 h-8 bg-indigo-600 rounded-full shadow-[0_0_12px_rgba(37,99,235,0.4)]"></div>
+                <div className="admin-section-icon admin-section-icon--indigo"></div>
                 Amenity Details
               </h3>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-4">
+              <div className="admin-form-grid-2 admin-form-grid-2--compact">
                 <div className="admin-form-group">
                   <label className="admin-form-label flex items-center gap-3 mb-4">
                     <Type size={18} className="text-blue-500" /> Amenity Name
@@ -205,7 +205,7 @@ export default function EditAmenity() {
                <div className="admin-icon-box bg-white/10 text-white w-24 h-24 rounded-[40px] border border-white/20 backdrop-blur-3xl group-hover:bg-indigo-600 group-hover:border-indigo-500 transition-all duration-700 shadow-2xl transform group-hover:scale-125 group-hover:-rotate-12">
                  <Zap size={40} className="animate-pulse" />
                </div>
-               <div className="space-y-4">
+               <div className="admin-space-y-4">
                  <div className="text-[10px] font-black text-white uppercase tracking-[0.5em] mb-4 leading-none opacity-60">Preview</div>
                  <p className="text-[12px] font-black text-slate-400 uppercase tracking-[0.2em] px-6 leading-relaxed italic opacity-80 min-h-[3rem] line-clamp-2">
                     {formData.title || 'Facility Resource Index'}

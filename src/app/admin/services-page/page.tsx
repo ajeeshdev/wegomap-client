@@ -95,7 +95,7 @@ export default function ServicesSettingsPage() {
         <div className="space-y-10 animate-in fade-in duration-500">
             <div className="admin-page-header">
                 <div>
-                    <h2 className="admin-page-title text-2xl font-black text-slate-900 tracking-tight italic uppercase">
+                    <h2 className="admin-page-title admin-page-title--section">
                         <div className="admin-page-title-indicator"></div>
                         Services Page <span className="text-blue-600">Configuration</span>
                     </h2>
@@ -116,98 +116,67 @@ export default function ServicesSettingsPage() {
                 </div>
             </div>
 
-            <div className="admin-form-grid" style={{ gridTemplateColumns: '1fr 340px' }}>
-                {/* Main Content Column */}
-                <div className="space-y-8">
+            <div className="max-w-5xl mx-auto space-y-8">
+                {/* Main Content Area */}
+                <div className="admin-form-card">
+                    <h3 className="admin-form-section-title">
+                        <div className="admin-section-icon admin-section-icon--sm admin-section-icon--blue"></div>
+                        Main Page Headers
+                    </h3>
                     
-                    {/* Intro Section */}
-                    <div className="admin-form-card">
-                        <h3 className="admin-form-section-title">
-                            <div className="w-1.5 h-6 bg-blue-600 rounded-full"></div>
-                            Main Page Headers
-                        </h3>
-                        
-                        <div className="space-y-6">
+                    <div className="space-y-6">
+                        <div className="admin-form-group">
+                            <label className="admin-form-label mb-2 flex items-center gap-2">
+                                <Type size={14} className="text-blue-500" /> Section Subtitle
+                            </label>
+                            <input 
+                                type="text"
+                                value={content.intro.subtitle}
+                                onChange={e => setContent({ ...content, intro: { ...content.intro, subtitle: e.target.value } })}
+                                className="admin-form-input font-bold"
+                                placeholder="e.g. Comprehensive Solutions"
+                            />
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div className="admin-form-group">
                                 <label className="admin-form-label mb-2 flex items-center gap-2">
-                                    <Type size={14} className="text-blue-500" /> Section Subtitle
+                                    <Type size={14} className="text-slate-400" /> Title (First Part)
                                 </label>
                                 <input 
                                     type="text"
-                                    value={content.intro.subtitle}
-                                    onChange={e => setContent({ ...content, intro: { ...content.intro, subtitle: e.target.value } })}
+                                    value={content.intro.title}
+                                    onChange={e => setContent({ ...content, intro: { ...content.intro, title: e.target.value } })}
                                     className="admin-form-input font-bold"
-                                    placeholder="e.g. Comprehensive Solutions"
+                                    placeholder="e.g. Your journey,"
                                 />
                             </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div className="admin-form-group">
-                                    <label className="admin-form-label mb-2 flex items-center gap-2">
-                                        <Type size={14} className="text-slate-400" /> Title (First Part)
-                                    </label>
-                                    <input 
-                                        type="text"
-                                        value={content.intro.title}
-                                        onChange={e => setContent({ ...content, intro: { ...content.intro, title: e.target.value } })}
-                                        className="admin-form-input font-bold"
-                                        placeholder="e.g. Your journey,"
-                                    />
-                                </div>
-                                <div className="admin-form-group">
-                                    <label className="admin-form-label mb-2 flex items-center gap-2">
-                                        <Sparkles size={14} className="text-orange-500" /> Title (Highlight Part)
-                                    </label>
-                                    <input 
-                                        type="text"
-                                        value={content.intro.highlightText}
-                                        onChange={e => setContent({ ...content, intro: { ...content.intro, highlightText: e.target.value } })}
-                                        className="admin-form-input font-bold text-orange-600 border-orange-100 bg-orange-50/30"
-                                        placeholder="e.g. our expertise."
-                                    />
-                                </div>
-                            </div>
-
                             <div className="admin-form-group">
                                 <label className="admin-form-label mb-2 flex items-center gap-2">
-                                    <AlignLeft size={14} className="text-slate-400" /> Main Description
+                                    <Sparkles size={14} className="text-orange-500" /> Title (Highlight Part)
                                 </label>
-                                <textarea 
-                                    rows={5}
-                                    value={content.intro.description}
-                                    onChange={e => setContent({ ...content, intro: { ...content.intro, description: e.target.value } })}
-                                    className="admin-form-input leading-relaxed"
-                                    placeholder="Describe your services scope..."
+                                <input 
+                                    type="text"
+                                    value={content.intro.highlightText}
+                                    onChange={e => setContent({ ...content, intro: { ...content.intro, highlightText: e.target.value } })}
+                                    className="admin-form-input font-bold text-orange-600 border-orange-100 bg-orange-50/30"
+                                    placeholder="e.g. our expertise."
                                 />
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                {/* Sidebar Column */}
-                <div className="space-y-8">
-                    <div className="admin-form-card p-8 bg-slate-900 text-white border-none shadow-2xl">
-                        <div className="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center mb-6 shadow-lg shadow-blue-600/20">
-                            <Info size={24} />
+                        <div className="admin-form-group">
+                            <label className="admin-form-label mb-2 flex items-center gap-2">
+                                <AlignLeft size={14} className="text-slate-400" /> Main Description
+                            </label>
+                            <textarea 
+                                rows={5}
+                                value={content.intro.description}
+                                onChange={e => setContent({ ...content, intro: { ...content.intro, description: e.target.value } })}
+                                className="admin-form-input leading-relaxed"
+                                placeholder="Describe your services scope..."
+                            />
                         </div>
-                        <h4 className="text-lg font-black uppercase tracking-tight mb-4 italic">Page Sync</h4>
-                        <p className="text-xs text-slate-400 leading-relaxed font-bold uppercase tracking-widest">
-                            These fields control the main headings on your public <span className="text-blue-400">Services</span> page. 
-                            <br /><br />
-                            The actual service cards (Stay, Cabs, Houseboats) are managed in the <span className="text-orange-400 font-black">All Services</span> section.
-                        </p>
-                    </div>
-
-                    <div className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-[32px] border border-blue-100/50">
-                        <div className="flex items-center gap-3 mb-4">
-                            <div className="w-8 h-8 rounded-xl bg-white border border-blue-100 flex items-center justify-center text-blue-600">
-                                <ShieldCheck size={16} />
-                            </div>
-                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Deployment Safety</span>
-                        </div>
-                        <p className="text-[10px] text-slate-500 font-medium leading-relaxed">
-                            Publishing will instantly update the public headers. Ensure all spelling and highlights are accurate.
-                        </p>
                     </div>
                 </div>
             </div>

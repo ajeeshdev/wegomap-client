@@ -34,6 +34,7 @@ export default function Page() {
         <TourCategoryPage
             title={data.title || "Domestic Tour Packages"}
             subtitle={data.subtitle || "Explore India"}
+            preTitle="Incredible India"
             bannerImage={data.bannerImage || "/uploads/categories/default.jpg"}
             packages={packages}
             readMoreHeading={data.contentTitle || ""}

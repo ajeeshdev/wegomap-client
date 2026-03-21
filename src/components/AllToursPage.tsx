@@ -222,6 +222,7 @@ export default function AllToursPage() {
             <DynamicPageBanner
                 fallbackTitle="Explore All\nDestinations."
                 fallbackSubtitle={`Browse ${allCombinedPackages.length}+ handpicked packages — from Kerala backwaters to international escapes.`}
+                fallbackPreTitle="Curated Journeys"
                 breadcrumbs={[{ label: 'All Packages' }]}
             />
 

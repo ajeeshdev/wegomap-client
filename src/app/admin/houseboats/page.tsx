@@ -17,7 +17,7 @@ export default function HouseboatsAdmin() {
       const res = await fetch(`${API_URL}/houseboats`);
       const json = await res.json();
       if (json.success) setData(json.data);
-    } catch (err) { console.error(err); } 
+    } catch (err) { console.error(err); }
     finally { setLoading(false); }
   };
 
@@ -25,7 +25,7 @@ export default function HouseboatsAdmin() {
     if (!confirm('Are you sure you want to delete this houseboat? This will remove it from your website.')) return;
     try {
       const res = await fetch(`${API_URL}/houseboats/${id}`, {
-        method: 'DELETE', 
+        method: 'DELETE',
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       });
       const json = await res.json();
@@ -35,7 +35,7 @@ export default function HouseboatsAdmin() {
     } catch (err) { console.error('Failed to delete', err); }
   }
 
-  const filteredData = data.filter((item: any) => 
+  const filteredData = data.filter((item: any) =>
     (item.title || item.name || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
     (item.category || '').toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -54,9 +54,9 @@ export default function HouseboatsAdmin() {
         <div className="flex items-center gap-3 w-full md:w-auto">
           <div className="relative flex-1 md:w-64">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
-            <input 
-              type="text" 
-              placeholder="Search houseboats..." 
+            <input
+              type="text"
+              placeholder="Search houseboats..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="admin-search-input pl-11 h-11"
@@ -92,12 +92,12 @@ export default function HouseboatsAdmin() {
                     <td className="px-8 py-6">
                       <div className="flex items-center gap-4">
                         <div className="w-16 h-16 rounded-2xl bg-indigo-50/30 flex items-center justify-center text-indigo-600 border border-indigo-100/50 flex-shrink-0 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-700 shadow-sm overflow-hidden relative">
-                           {item.thumb ? (
-                               <img src={item.thumb} alt="" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 opacity-80 group-hover:opacity-100" />
-                           ) : (
-                               <Ship size={24} className="group-hover:-rotate-12 transition-transform duration-500" />
-                           )}
-                           <div className="absolute inset-0 bg-indigo-600/0 group-hover:bg-indigo-600/5 transition-colors"></div>
+                          {item.thumb ? (
+                            <img src={item.thumb} alt="" className="w-small h-small object-cover grayscale group-hover:grayscale-0 transition-all duration-700 opacity-80 group-hover:opacity-100" />
+                          ) : (
+                            <Ship size={24} className="group-hover:-rotate-12 transition-transform duration-500" />
+                          )}
+                          <div className="absolute inset-0 bg-indigo-600/0 group-hover:bg-indigo-600/5 transition-colors"></div>
                         </div>
                         <div className="min-w-0">
                           <div className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors uppercase text-[11px] tracking-tight leading-tight line-clamp-1">
@@ -105,7 +105,7 @@ export default function HouseboatsAdmin() {
                           </div>
                           <div className="flex items-center gap-3 mt-2 leading-none">
                             <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5 leading-none">
-                               <ShieldCheck size={9} className="text-emerald-500" /> ID: #{String(item._id).toUpperCase().slice(-6)}
+                              <ShieldCheck size={9} className="text-emerald-500" /> ID: #{String(item._id).toUpperCase().slice(-6)}
                             </span>
                           </div>
                         </div>
@@ -156,37 +156,37 @@ export default function HouseboatsAdmin() {
 
       {/* Summary Matrix */}
       {!loading && filteredData.length > 0 && (
-          <div className="admin-form-card bg-slate-900 border-slate-800 p-8 relative overflow-hidden group">
-               <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-bl-full blur-[80px]"></div>
-               <div className="relative z-10 flex items-center justify-between">
-                   <div className="flex items-center gap-6">
-                       <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white border border-white/20 backdrop-blur-md">
-                           <Waves size={28} />
-                       </div>
-                       <div>
-                           <h4 className="text-white font-bold text-lg tracking-tight uppercase">Houseboat Summary</h4>
-                           <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-1">Total houseboats available on your website.</p>
-                       </div>
-                   </div>
-                   <div className="flex items-center gap-8 pr-12">
-                        <div className="text-center">
-                            <h5 className="text-2xl font-bold text-white leading-none">{String(filteredData.length).padStart(2, '0')}</h5>
-                            <p className="text-[8px] font-bold text-slate-500 uppercase tracking-[0.2em] mt-2">Total Houseboats</p>
-                        </div>
-                        <div className="w-px h-10 bg-white/10"></div>
-                        <div className="flex flex-col gap-1.5">
-                             <div className="flex items-center gap-2">
-                                 <ShieldCheck size={10} className="text-emerald-500" />
-                                 <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">System Active</span>
-                             </div>
-                             <div className="flex items-center gap-2">
-                                 <Zap size={10} className="text-blue-500" />
-                                 <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Live Pricing</span>
-                             </div>
-                        </div>
-                   </div>
-               </div>
+        <div className="admin-form-card bg-slate-900 border-slate-800 p-8 relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-bl-full blur-[80px]"></div>
+          <div className="relative z-10 flex items-center justify-between">
+            <div className="flex items-center gap-6">
+              <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white border border-white/20 backdrop-blur-md">
+                <Waves size={28} />
+              </div>
+              <div>
+                <h4 className="text-white font-bold text-lg tracking-tight uppercase">Houseboat Summary</h4>
+                <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-1">Total houseboats available on your website.</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-8 pr-12">
+              <div className="text-center">
+                <h5 className="text-2xl font-bold text-white leading-none">{String(filteredData.length).padStart(2, '0')}</h5>
+                <p className="text-[8px] font-bold text-slate-500 uppercase tracking-[0.2em] mt-2">Total Houseboats</p>
+              </div>
+              <div className="w-px h-10 bg-white/10"></div>
+              <div className="flex flex-col gap-1.5">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck size={10} className="text-emerald-500" />
+                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">System Active</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Zap size={10} className="text-blue-500" />
+                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Live Pricing</span>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
       )}
     </div>
   );

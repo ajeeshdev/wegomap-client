@@ -73,6 +73,7 @@ export default function ContactPage() {
             <DynamicPageBanner
                 fallbackTitle="Contact Us"
                 fallbackSubtitle="We'd love to hear from you. Feel free to reach out for bookings and inquiries."
+                fallbackPreTitle="Get In Touch"
                 breadcrumbs={[{ label: 'Contact Us' }]}
             />
 

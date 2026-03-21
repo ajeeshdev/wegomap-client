@@ -50,7 +50,9 @@ $primaryGold: #FFD52B;
             display: grid;
             grid-template-columns: 1fr;
             gap: 50px;
-
+                @include max(767){
+                    gap: 0;
+                }
             @media (min-width: 1024px) {
                 grid-template-columns: 1.2fr 0.8fr;
             }
@@ -135,15 +137,16 @@ $primaryGold: #FFD52B;
             margin-bottom: 15px;
             display: block;
         }
-
+ 
         h2 {
             font-size: clamp(1.75rem, 4vw, 2.5rem);
             font-weight: 800;
             margin-bottom: 50px;
             color: #1a1a1a;
-
+            
             span {
                 color: $cosmicOrange;
+                font-size: clamp(1.75rem, 4vw, 2.5rem);
                 background: linear-gradient(120deg, $primaryGold 0%, $cosmicOrange 100%);
                 -webkit-background-clip: text;
                 background-clip: text;

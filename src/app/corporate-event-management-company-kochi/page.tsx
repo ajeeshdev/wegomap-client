@@ -9,6 +9,7 @@ export default function EventsPage() {
             <DynamicPageBanner
                 fallbackTitle="Corporate Event Management\nCompany in Kochi"
                 fallbackSubtitle="Planning Impactful & Seamless Corporate Events"
+                fallbackPreTitle="Professional Excellence"
                 fallbackImage="/uploads/categories/ubqf5mc4ve1g6yqwmnsyiyek9fkld9akyp6g2lar220406065334.jpg"
                 breadcrumbs={[{ label: 'Corporate Events' }]}
             />

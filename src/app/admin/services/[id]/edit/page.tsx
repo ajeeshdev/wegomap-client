@@ -80,7 +80,7 @@ export default function EditService() {
         <div className="space-y-12 animate-in fade-in duration-1000">
             <div className="admin-page-header">
                 <div className="flex items-center gap-6">
-                    <button onClick={() => router.push('/admin/services')} className="p-3.5 bg-white rounded-2xl border border-slate-200 hover:bg-slate-50 transition-all hover:scale-110 active:scale-95 text-slate-500 shadow-sm">
+                    <button onClick={() => router.push('/admin/services')} className="admin-back-btn">
                         <ArrowLeft size={22} />
                     </button>
                     <div className="min-w-0">
@@ -109,7 +109,7 @@ export default function EditService() {
                 <div className="space-y-8">
                     <div className="admin-form-card">
                         <h3 className="admin-form-section-title">
-                            <div className="w-2 h-8 bg-blue-600 rounded-full"></div>
+                            <div className="admin-section-icon admin-section-icon--blue"></div>
                             Service Specifications
                         </h3>
 
@@ -211,14 +211,7 @@ export default function EditService() {
                                 </select>
                             </div>
 
-                            <div className="p-6 bg-blue-50/50 rounded-3xl border border-blue-100/50">
-                                <div className="flex items-center gap-2 text-blue-600 font-bold uppercase tracking-widest text-[9px] mb-2">
-                                    <Clock size={12} /> Sync Info
-                                </div>
-                                <p className="text-[10px] text-slate-500 font-medium leading-relaxed">
-                                    Updating this node will synchronously update the public facing services table.
-                                </p>
-                            </div>
+                             {/* Decorative Sections Removed */}
                         </div>
                     </div>
                 </div>

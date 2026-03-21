@@ -85,7 +85,7 @@ export default function EditHouseboat() {
       {/* Header Section */}
       <div className="admin-page-header">
         <div className="flex items-center gap-4">
-          <button onClick={() => router.push('/admin/houseboats')} className="p-3 bg-white rounded-xl border border-slate-200 hover:bg-slate-50 transition-all hover:scale-110 active:scale-95 text-slate-500 shadow-sm">
+          <button onClick={() => router.push('/admin/houseboats')} className="admin-back-btn">
             <ArrowLeft size={20} />
           </button>
           <div className="min-w-0">
@@ -118,7 +118,7 @@ export default function EditHouseboat() {
           <div className="admin-form-card">
             <div className="relative z-10 space-y-12">
               <h3 className="admin-form-section-title">
-                <div className="w-1.5 h-6 bg-blue-600 rounded-full"></div>
+                <div className="admin-section-icon admin-section-icon--sm admin-section-icon--blue"></div>
                 Houseboat Details
               </h3>
 

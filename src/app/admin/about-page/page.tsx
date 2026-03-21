@@ -120,11 +120,10 @@ export default function AboutSettingsPage() {
         <div className="space-y-10 animate-in fade-in duration-500">
             <div className="admin-page-header">
                 <div>
-                    <h2 className="admin-page-title text-2xl font-black text-slate-900 tracking-tight italic uppercase">
+                    <h2 className="admin-page-title admin-page-title--section">
                         <div className="admin-page-title-indicator"></div>
-                        About Us <span className="text-blue-600">Configuration</span>
+                        About Us
                     </h2>
-                    <p className="admin-page-subtitle">Manage narrative content, brand story, and publicity metrics</p>
                 </div>
                 <div className="flex items-center gap-4">
                     <Link href="/admin/pages/69b2119212e7a77684ef09ff/edit" className="admin-btn admin-btn-secondary">
@@ -148,7 +147,6 @@ export default function AboutSettingsPage() {
                     {/* Hero Section */}
                     <div className="admin-form-card">
                         <h3 className="admin-form-section-title">
-                            <div className="w-1.5 h-6 bg-blue-600 rounded-full"></div>
                             Hero Banner Content
                         </h3>
                         
@@ -181,7 +179,6 @@ export default function AboutSettingsPage() {
                     {/* Storytelling Section */}
                     <div className="admin-form-card">
                         <h3 className="admin-form-section-title">
-                            <div className="w-1.5 h-6 bg-indigo-600 rounded-full"></div>
                             Our Story Narrative
                         </h3>
 
@@ -226,11 +223,10 @@ export default function AboutSettingsPage() {
                     {/* Core Values */}
                     <div className="admin-form-card">
                         <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-6">
-                            <div className="w-1 h-3 bg-rose-500 rounded-full"></div>
                             Core Values
                         </h4>
 
-                        <div className="space-y-4">
+                        <div className="admin-space-y-4">
                             {content.values.map((value, index) => (
                                 <div key={index} className="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-3">
                                     <div className="flex items-center justify-between">
@@ -245,7 +241,7 @@ export default function AboutSettingsPage() {
                                             newValues[index].title = e.target.value;
                                             setContent({ ...content, values: newValues });
                                         }}
-                                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-800 outline-none focus:border-rose-500 transition-colors"
+                                        className="w-full bg-white border border-slate-200 rounded-lg px-4 py-3 text-xs font-bold text-slate-800 outline-none focus:border-rose-500 transition-colors"
                                         placeholder="Title"
                                     />
                                     <textarea 
@@ -256,7 +252,7 @@ export default function AboutSettingsPage() {
                                             newValues[index].description = e.target.value;
                                             setContent({ ...content, values: newValues });
                                         }}
-                                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-[10px] font-medium text-slate-500 outline-none focus:border-rose-500 transition-colors resize-none"
+                                        className="w-full bg-white border border-slate-200 rounded-lg px-4 py-3 text-[10px] font-medium text-slate-500 outline-none focus:border-rose-500 transition-colors resize-none"
                                         placeholder="Description..."
                                     />
                                 </div>
@@ -266,8 +262,7 @@ export default function AboutSettingsPage() {
 
                     {/* Stats */}
                     <div className="admin-form-card">
-                        <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-6">
-                            <div className="w-1 h-3 bg-amber-500 rounded-full"></div>
+                        <h4 className="text-[10px] mt-4 font-black uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-6">
                             Publicity Stats
                         </h4>
 
@@ -299,19 +294,6 @@ export default function AboutSettingsPage() {
                         </div>
                     </div>
 
-                    <div className="p-6 bg-blue-600 rounded-3xl text-white shadow-xl shadow-blue-500/20">
-                        <div className="flex items-start gap-4">
-                            <div className="p-2 bg-white/20 rounded-xl">
-                                <ShieldCheck size={20} />
-                            </div>
-                            <div>
-                                <h4 className="font-bold mb-1 text-xs uppercase tracking-wider">CMS Security</h4>
-                                <p className="text-[10px] text-blue-100 leading-relaxed font-medium">
-                                    Changes are processed instantly. Verify narrative structure before publishing to live production.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

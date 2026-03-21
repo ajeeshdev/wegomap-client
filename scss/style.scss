@@ -1,3 +1,4 @@
+html { scroll-behavior: smooth; }
 // Bootstrap
 // @import "bootstrap/scss/bootstrap";
 
@@ -20,6 +21,8 @@
 @import "../scss/components/animations";
 @import "../scss/components/filter-sidebar";
 @import "../scss/components/page-banner";
+@import "../scss/components/landing-page";
+@import "../scss/components/hotel-landing-page";
 
 
 

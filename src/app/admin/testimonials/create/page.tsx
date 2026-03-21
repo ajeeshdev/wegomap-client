@@ -49,7 +49,7 @@ export default function CreateTestimonial() {
       {/* Header Section */}
       <div className="admin-page-header">
         <div className="flex items-center gap-6">
-          <button onClick={() => router.push('/admin/testimonials')} className="p-3.5 bg-white rounded-2xl border border-slate-200 hover:bg-slate-50 transition-all hover:scale-110 active:scale-95 text-slate-500 shadow-sm">
+          <button onClick={() => router.push('/admin/testimonials')} className="admin-back-btn">
             <ArrowLeft size={22} />
           </button>
           <div className="min-w-0">
@@ -80,11 +80,11 @@ export default function CreateTestimonial() {
           <div className="admin-form-card">
             <div className="relative z-10 space-y-12">
               <h3 className="admin-form-section-title">
-                <div className="w-2 h-8 bg-amber-500 rounded-full shadow-[0_0_12px_rgba(245,158,11,0.4)]"></div>
+                <div className="admin-section-icon admin-section-icon--amber"></div>
                 Customer Details
               </h3>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              <div className="admin-form-grid-2">
                 <div className="admin-form-group">
                   <label className="admin-form-label flex items-center gap-3 mb-4">
                     <User size={14} className="text-blue-500" /> Customer Name
@@ -178,7 +178,7 @@ export default function CreateTestimonial() {
               <div className="admin-icon-box bg-white/10 text-white w-24 h-24 rounded-[40px] border border-white/20 backdrop-blur-3xl group-hover:bg-rose-600 group-hover:border-rose-500 transition-all duration-700 shadow-2xl transform group-hover:scale-110">
                 <Sparkles size={40} className="animate-pulse" />
               </div>
-              <div className="space-y-4">
+              <div className="admin-space-y-4">
                 <div className="text-[10px] font-black text-white uppercase tracking-[0.4em] leading-none mb-2 opacity-60">Visibility</div>
                 <p className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] px-8 leading-relaxed italic line-clamp-2 opacity-60">Testimonials will be shown on the website immediately after saving.</p>
                 <div className="flex items-center justify-center gap-3 mt-6">

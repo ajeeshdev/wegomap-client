@@ -47,8 +47,8 @@ export default function MultiImageUpload({ value, onChange, label = "Gallery Ass
         const data = await res.json();
 
         if (data.success) {
-          const imageUrl = data.data.startsWith('http') 
-            ? data.data 
+          const imageUrl = data.data.startsWith('http')
+            ? data.data
             : `${API_URL.replace('/api', '')}${data.data}`;
           newUrls.push(imageUrl);
         }
@@ -77,11 +77,11 @@ export default function MultiImageUpload({ value, onChange, label = "Gallery Ass
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
         {value.map((url, index) => (
           <div key={index} className="relative group rounded-[32px] overflow-hidden border-2 border-slate-100 shadow-sm aspect-square bg-slate-50 transition-all hover:shadow-xl hover:-translate-y-1">
-            <img src={url} alt={`Gallery ${index}`} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+            <img src={url} alt={`Gallery ${index}`} className="w-small h-small object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
             <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <button
                 onClick={() => removeImage(index)}
-                className="p-2 bg-rose-500 text-white rounded-xl shadow-lg hover:scale-110 active:scale-95 transition-all"
+                className="admin-remove-btn"
                 title="Deconstruct Asset"
               >
                 <X size={16} />
@@ -100,7 +100,7 @@ export default function MultiImageUpload({ value, onChange, label = "Gallery Ass
             accept="image/*"
             onChange={handleFileChange}
             disabled={uploading}
-            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+            className="absolute inset-0 w-small h-small opacity-0 cursor-pointer z-10"
           />
           <div className={`
             h-full border-2 border-dashed rounded-[32px] flex flex-col items-center justify-center gap-3 transition-all duration-500
@@ -129,11 +129,11 @@ export default function MultiImageUpload({ value, onChange, label = "Gallery Ass
       <div className="pt-4 border-t border-slate-50">
         <p className="text-[9px] font-bold text-slate-300 uppercase tracking-widest mb-3 italic">Raw Tectonic Gallery Manifest (Manual Calibration)</p>
         <div className="bg-slate-50/50 rounded-[32px] p-2 border border-slate-100 shadow-inner group-hover:bg-white transition-all">
-          <textarea 
-            rows={4} 
-            value={value.join('\n')} 
-            onChange={e => onChange(e.target.value.split('\n').filter(l => l))} 
-            className="admin-form-textarea !bg-transparent border-none font-mono text-[9px] leading-relaxed text-indigo-900 h-32" 
+          <textarea
+            rows={4}
+            value={value.join('\n')}
+            onChange={e => onChange(e.target.value.split('\n').filter(l => l))}
+            className="admin-form-textarea !bg-transparent border-none font-mono text-[9px] leading-relaxed text-indigo-900 h-32"
             placeholder="Analytical list of URIs..."
           ></textarea>
         </div>

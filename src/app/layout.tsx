@@ -15,10 +15,37 @@ const dancingScript = Dancing_Script({
   variable: "--font-writing",
 });
 
-export const metadata: Metadata = {
-  title: "Best Kerala Tour Packages | Wegomap",
-  description: "Experience the magic of God’s Own Country with Wegomap, your reliable Kerala travel partner.",
-};
+import { API_URL } from "@/config";
+
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    const res = await fetch(`${API_URL}/options`, { next: { revalidate: 60 } });
+    const json = await res.json();
+    
+    if (json.success && json.data) {
+      const titleOpt = json.data.find((o: any) => o.key === 'site_title');
+      const favOpt = json.data.find((o: any) => o.key === 'site_favicon');
+      const descOpt = json.data.find((o: any) => o.key === 'site_description');
+      
+      return {
+        title: titleOpt?.value || "Best Kerala Tour Packages | Wegomap",
+        description: descOpt?.value || "Experience the magic of God’s Own Country with Wegomap, your reliable Kerala travel partner.",
+        icons: {
+          icon: favOpt?.value || "/favicon.ico",
+          shortcut: favOpt?.value || "/favicon.ico",
+          apple: favOpt?.value || "/favicon.ico",
+        }
+      };
+    }
+  } catch (err) {
+    console.error("Metadata fetch error:", err);
+  }
+
+  return {
+    title: "Best Kerala Tour Packages | Wegomap",
+    description: "Experience the magic of God’s Own Country with Wegomap, your reliable Kerala travel partner.",
+  };
+}
 
 import LayoutWrapper from "@/components/LayoutWrapper";
 import { Toaster } from 'react-hot-toast';

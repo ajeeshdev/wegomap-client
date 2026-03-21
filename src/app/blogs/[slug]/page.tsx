@@ -7,6 +7,7 @@ import { Clock, Hash, User, ArrowLeft, Send, Share2, Tag, Calendar } from 'lucid
 import Link from 'next/link';
 import Image from 'next/image';
 import { siteData } from '@/data/siteData';
+import './blog-detail.scss';
 
 interface Blog {
     _id?: string;
@@ -80,115 +81,69 @@ export default function BlogDetailPage() {
     }, [slug]);
 
     if (loading) return (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
-            <div style={{
-                width: 64, height: 64, borderRadius: '50%',
-                border: '6px solid #f3f3f3',
-                borderTop: '6px solid #FF6B35',
-                animation: 'spin 1s linear infinite'
-            }} />
-            <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+        <div className="blog-detail-page">
+            <div className="loading-container">
+                <div className="spinner" />
+            </div>
         </div>
     );
 
     if (!blog) return (
-        <div style={{ paddingTop: 160, textAlign: 'center', color: '#999', fontWeight: 700, fontSize: '1.2rem', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-            Blog post not found
+        <div className="blog-detail-page">
+            <div className="not-found-container">
+                Blog post not found
+            </div>
         </div>
     );
 
     const publishDate = formatDate(blog.publishDate || blog.date);
 
     return (
-        <article style={{ paddingTop: 80, background: '#fff' }}>
+        <article className="blog-detail-page">
             {/* Hero */}
-            <section style={{
-                position: 'relative',
-                minHeight: '55vh',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                overflow: 'hidden',
-                background: '#0f172a'
-            }}>
+            <section className="hero-section">
                 {(blog.featuredImage || blog.image) && (
                     <Image
                         src={blog.featuredImage || blog.image || ''}
                         alt={blog.title}
                         fill
-                        style={{ objectFit: 'cover', opacity: 0.3 }}
+                        className="hero-image"
                         unoptimized
                     />
                 )}
                 {/* gradient overlay */}
-                <div style={{
-                    position: 'absolute', inset: 0,
-                    background: 'linear-gradient(to bottom, rgba(15,23,42,0.6) 0%, rgba(15,23,42,0.95) 100%)'
-                }} />
+                <div className="hero-overlay" />
 
                 {/* watermark */}
-                <div style={{
-                    position: 'absolute', inset: 0,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: 160, fontWeight: 900, color: 'rgba(255,255,255,0.03)',
-                    pointerEvents: 'none', userSelect: 'none',
-                    letterSpacing: '-0.05em', textTransform: 'uppercase', fontStyle: 'italic'
-                }}>
+                <div className="hero-watermark">
                     WEGOMAP
                 </div>
 
-                <div style={{
-                    position: 'relative', zIndex: 10,
-                    maxWidth: 900, margin: '0 auto', padding: '60px 24px',
-                    textAlign: 'center'
-                }}>
-                    <Link href="/blogs" style={{
-                        display: 'inline-flex', alignItems: 'center', gap: 8,
-                        marginBottom: 32,
-                        color: '#FF6B35', fontWeight: 800, fontSize: '0.75rem',
-                        textTransform: 'uppercase', letterSpacing: '0.15em',
-                        textDecoration: 'none',
-                        background: 'rgba(255,255,255,0.08)',
-                        padding: '10px 20px', borderRadius: 999,
-                        border: '1px solid rgba(255,255,255,0.1)',
-                        backdropFilter: 'blur(8px)',
-                        transition: 'all 0.3s'
-                    }}>
+                <div className=" hero-content homeContainer">
+                    <Link href="/blogs" className="back-link">
                         <ArrowLeft size={14} /> All Stories
                     </Link>
 
-                    <span style={{
-                        display: 'inline-block', marginBottom: 20,
-                        background: 'rgba(255,107,53,0.15)',
-                        color: '#FF6B35', fontWeight: 800, fontSize: '0.7rem',
-                        textTransform: 'uppercase', letterSpacing: '0.15em',
-                        padding: '6px 16px', borderRadius: 999,
-                        border: '1px solid rgba(255,107,53,0.25)'
-                    }}>
+                    <span className="category-badge">
                         {blog.category || 'Travel Guide'}
                     </span>
 
-                    <h1 style={{
-                        fontSize: 'clamp(1.8rem, 5vw, 3.5rem)',
-                        fontWeight: 900, color: '#fff',
-                        lineHeight: 1.15, marginBottom: 32,
-                        letterSpacing: '-0.02em'
-                    }}>
+                    <h1 className="hero-title">
                         {blog.title}
                     </h1>
 
-                    <div style={{ display: 'flex', justifyContent: 'center', gap: 32, flexWrap: 'wrap' }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-                            <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em' }}>Author</span>
-                            <span style={{ color: '#fff', fontWeight: 800, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <div className="meta-info">
+                        <div className="meta-item">
+                            <span className="label">Author</span>
+                            <span className="value">
                                 <User size={14} color="#FF6B35" /> {blog.author || 'Wegomap'}
                             </span>
                         </div>
 
                         {publishDate && (
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-                                <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em' }}>Published</span>
-                                <span style={{ color: '#fff', fontWeight: 800, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: 6 }}>
+                            <div className="meta-item">
+                                <span className="label">Published</span>
+                                <span className="value">
                                     <Calendar size={14} color="#FF6B35" /> {publishDate}
                                 </span>
                             </div>
@@ -198,194 +153,97 @@ export default function BlogDetailPage() {
             </section>
 
             {/* Main Content */}
-            <section style={{ padding: '80px 0' }}>
-                <div className="homeContainer" style={{ maxWidth: 1200 }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 48 }}>
-                        {/* on wider screens use CSS grid */}
-                        <style>{`
-                            @media (min-width: 1024px) {
-                                .blogDetailGrid { display: grid !important; grid-template-columns: 60px 1fr 340px !important; gap: 48px !important; }
-                            }
-                        `}</style>
+            <section className="main-content">
+                <div className="homeContainer">
+                    <div className="blog-detail-grid">
+                        {/* Share sidebar (hidden on mobile) */}
+                        <aside className="share-sidebar">
+                            <span className="share-label">Share</span>
+                            <button className="share-btn"
+                                onClick={() => navigator.share?.({ title: blog.title, url: window.location.href })}>
+                                <Share2 size={18} />
+                            </button>
+                            <button className="share-btn">
+                                <Hash size={18} />
+                            </button>
+                        </aside>
 
-                        <div className="blogDetailGrid" style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
-                            {/* Share sidebar (hidden on mobile) */}
-                            <aside style={{ display: 'none' }} className="blogShareSidebar">
-                                <style>{`.blogShareSidebar { display: none; } @media (min-width: 1024px) { .blogShareSidebar { display: flex !important; flex-direction: column; align-items: center; gap: 24px; position: sticky; top: 100px; height: fit-content; padding-top: 8px; } }`}</style>
-                                <span style={{ writingMode: 'vertical-rl', textOrientation: 'mixed', fontSize: '0.6rem', fontWeight: 800, color: '#ccc', textTransform: 'uppercase', letterSpacing: '0.15em' }}>Share</span>
-                                <button style={{ padding: 14, background: '#f8f8f8', borderRadius: 16, color: '#999', border: 'none', cursor: 'pointer', transition: 'all 0.3s' }}
-                                    onClick={() => navigator.share?.({ title: blog.title, url: window.location.href })}>
-                                    <Share2 size={18} />
-                                </button>
-                                <button style={{ padding: 14, background: '#f8f8f8', borderRadius: 16, color: '#999', border: 'none', cursor: 'pointer', transition: 'all 0.3s' }}>
-                                    <Hash size={18} />
-                                </button>
-                            </aside>
+                        {/* Article body */}
+                        <main className="article-body">
+                            {/* Excerpt highlight */}
+                            <blockquote className="excerpt-quote">
+                                "{blog.excerpt || 'Exciting story of travel experiences with deep insights into the local culture.'}"
+                            </blockquote>
 
-                            {/* Article body */}
-                            <main>
-                                {/* Excerpt highlight */}
-                                <blockquote style={{
-                                    padding: '32px 40px',
-                                    background: '#fafafa',
-                                    borderRadius: 24,
-                                    borderLeft: '4px solid #FF6B35',
-                                    marginBottom: 48,
-                                    fontStyle: 'italic',
-                                    fontSize: '1.1rem',
-                                    lineHeight: 1.8,
-                                    color: '#555',
-                                    fontWeight: 500
-                                }}>
-                                    "{blog.excerpt || 'Exciting story of travel experiences with deep insights into the local culture.'}"
-                                </blockquote>
+                            {/* Blog content – render HTML from backend or siteData */}
+                            <div
+                                className="blog-content-render"
+                                dangerouslySetInnerHTML={{ __html: blog.content }}
+                            />
 
-                                {/* Blog content – render HTML from backend or siteData */}
-                                <div
-                                    className="blogContent"
-                                    dangerouslySetInnerHTML={{ __html: blog.content }}
-                                    style={{
-                                        fontSize: '1rem',
-                                        lineHeight: 1.9,
-                                        color: '#333'
-                                    }}
-                                />
+                            {/* Tags */}
+                            <div className="tags-container">
+                                {['Kerala Tourism', 'Wegomap Guide', 'Travel Tips'].map(tag => (
+                                    <span key={tag} className="tag-badge">{tag}</span>
+                                ))}
+                            </div>
+                        </main>
 
-                                {/* Tags */}
-                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 48, paddingTop: 32, borderTop: '1px solid #f0f0f0' }}>
-                                    {['Kerala Tourism', 'Wegomap Guide', 'Travel Tips'].map(tag => (
-                                        <span key={tag} style={{
-                                            padding: '6px 18px',
-                                            background: '#f5f5f5',
-                                            borderRadius: 999,
-                                            fontSize: '0.7rem',
-                                            fontWeight: 800,
-                                            textTransform: 'uppercase',
-                                            letterSpacing: '0.1em',
-                                            color: '#666'
-                                        }}>{tag}</span>
-                                    ))}
+                        {/* Right sidebar */}
+                        <aside className="right-sidebar">
+                            <div className="sidebar-sticky">
+                                {/* Newsletter */}
+                                <div className="newsletter-card">
+                                    <div className="decoration-glow" />
+                                    <h4>
+                                        Join Our<br />
+                                        <span>Travel Newsletter.</span>
+                                    </h4>
+                                    <p>
+                                        Get weekly travel inspiration and exclusive deals.
+                                    </p>
+                                    <form onSubmit={(e) => { e.preventDefault(); alert('Thank you for subscribing!'); }} className="newsletter-form">
+                                        <input
+                                            type="email"
+                                            placeholder="your@email.com"
+                                        />
+                                        <button className="submit-btn">
+                                            Subscribe <Send size={14} />
+                                        </button>
+                                    </form>
                                 </div>
-                            </main>
 
-                            {/* Right sidebar */}
-                            <aside>
-                                <div style={{ position: 'sticky', top: 100, display: 'flex', flexDirection: 'column', gap: 24 }}>
-                                    {/* Newsletter */}
-                                    <div style={{
-                                        padding: 36, background: '#0f172a', color: '#fff',
-                                        borderRadius: 28, overflow: 'hidden', position: 'relative'
-                                    }}>
-                                        <div style={{
-                                            position: 'absolute', top: -20, right: -20,
-                                            width: 100, height: 100,
-                                            background: 'rgba(255,107,53,0.12)',
-                                            borderRadius: '50%', filter: 'blur(20px)'
-                                        }} />
-                                        <h4 style={{ fontWeight: 900, fontSize: '1.1rem', marginBottom: 12, lineHeight: 1.4 }}>
-                                            Join Our<br />
-                                            <span style={{ color: '#FF6B35' }}>Travel Newsletter.</span>
-                                        </h4>
-                                        <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem', lineHeight: 1.7, marginBottom: 20 }}>
-                                            Get weekly travel inspiration and exclusive deals.
-                                        </p>
-                                        <form onSubmit={(e) => { e.preventDefault(); alert('Thank you for subscribing!'); }} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                                            <input
-                                                type="email"
-                                                placeholder="your@email.com"
-                                                style={{
-                                                    padding: '12px 16px',
-                                                    background: 'rgba(255,255,255,0.07)',
-                                                    border: '1px solid rgba(255,255,255,0.12)',
-                                                    borderRadius: 12,
-                                                    color: '#fff',
-                                                    fontSize: '0.85rem',
-                                                    outline: 'none'
-                                                }}
-                                            />
-                                            <button style={{
-                                                padding: '14px 0',
-                                                background: '#FF6B35',
-                                                color: '#fff',
-                                                fontWeight: 800, fontSize: '0.8rem',
-                                                borderRadius: 12, border: 'none',
-                                                cursor: 'pointer',
-                                                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                                                letterSpacing: '0.05em', textTransform: 'uppercase'
-                                            }}>
-                                                Subscribe <Send size={14} />
-                                            </button>
-                                        </form>
-                                    </div>
-
-                                    {/* Related Blogs */}
-                                    <div style={{
-                                        padding: 28, background: '#fff',
-                                        borderRadius: 28, border: '1px solid #f0f0f0',
-                                        boxShadow: '0 4px 24px rgba(0,0,0,0.05)'
-                                    }}>
-                                        <h4 style={{ fontWeight: 900, fontSize: '1rem', marginBottom: 20, color: '#1a1a1a' }}>Related Stories</h4>
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                                            {staticBlogs
-                                                .filter(b => b.slug !== slug)
-                                                .slice(0, 4)
-                                                .map(relBlog => (
-                                                    <Link key={relBlog.id} href={`/blogs/${relBlog.slug}`} style={{
-                                                        display: 'flex', alignItems: 'center', gap: 12,
-                                                        padding: 12, borderRadius: 16,
-                                                        textDecoration: 'none',
-                                                        transition: 'all 0.2s',
-                                                        border: '1px solid transparent'
-                                                    }}
-                                                        onMouseEnter={e => (e.currentTarget.style.background = '#fafafa')}
-                                                        onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
-                                                    >
-                                                        <div style={{
-                                                            width: 56, height: 56, borderRadius: 12,
-                                                            overflow: 'hidden', flexShrink: 0,
-                                                            background: '#f0f0f0', position: 'relative'
-                                                        }}>
-                                                            {relBlog.image && (
-                                                                <Image src={relBlog.image} alt={relBlog.title} fill style={{ objectFit: 'cover' }} unoptimized />
-                                                            )}
+                                {/* Related Blogs */}
+                                <div className="related-blogs-card">
+                                    <h4>Related Stories</h4>
+                                    <div className="related-list">
+                                        {staticBlogs
+                                            .filter(b => b.slug !== slug)
+                                            .slice(0, 4)
+                                            .map(relBlog => (
+                                                <Link key={relBlog.id} href={`/blogs/${relBlog.slug}`} className="related-item">
+                                                    <div className="image-wrap">
+                                                        {relBlog.image && (
+                                                            <Image src={relBlog.image} alt={relBlog.title} fill unoptimized />
+                                                        )}
+                                                    </div>
+                                                    <div className="content-wrap">
+                                                        <div className="tag">
+                                                            Travel Guide
                                                         </div>
-                                                        <div>
-                                                            <div style={{ fontSize: '0.65rem', fontWeight: 700, color: '#FF6B35', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>
-                                                                Travel Guide
-                                                            </div>
-                                                            <div style={{ fontSize: '0.82rem', fontWeight: 700, color: '#1a1a1a', lineHeight: 1.3 }}>
-                                                                {relBlog.title.length > 50 ? relBlog.title.slice(0, 50) + '…' : relBlog.title}
-                                                            </div>
+                                                        <div className="title">
+                                                            {relBlog.title.length > 50 ? relBlog.title.slice(0, 50) + '…' : relBlog.title}
                                                         </div>
-                                                    </Link>
-                                                ))}
-                                        </div>
+                                                    </div>
+                                                </Link>
+                                            ))}
                                     </div>
                                 </div>
-                            </aside>
-                        </div>
+                            </div>
+                        </aside>
                     </div>
                 </div>
             </section>
-
-            {/* Blog content styles */}
-            <style>{`
-                .blogContent p { margin-bottom: 1.2em; }
-                .blogContent h1, .blogContent h2, .blogContent h3, .blogContent h4 {
-                    font-weight: 800; color: #1a1a1a; margin: 2em 0 0.8em;
-                    line-height: 1.3;
-                }
-                .blogContent h2 { font-size: 1.5rem; }
-                .blogContent h3 { font-size: 1.25rem; }
-                .blogContent h4 { font-size: 1.1rem; }
-                .blogContent ul, .blogContent ol { padding-left: 1.5em; margin-bottom: 1.2em; }
-                .blogContent li { margin-bottom: 0.5em; }
-                .blogContent a { color: #FF6B35; text-decoration: none; font-weight: 600; }
-                .blogContent a:hover { text-decoration: underline; }
-                .blogContent strong { font-weight: 700; color: #1a1a1a; }
-                .blogContent img { max-width: 100%; border-radius: 16px; margin: 1.5em 0; }
-                .blogContent blockquote { border-left: 3px solid #FF6B35; padding-left: 1em; color: #666; }
-            `}</style>
         </article>
     );
 }

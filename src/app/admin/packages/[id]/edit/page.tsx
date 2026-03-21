@@ -108,7 +108,7 @@ export default function EditPackage() {
       {/* Header Section */}
       <div className="admin-page-header">
         <div className="flex items-center gap-4">
-          <button onClick={() => router.push('/admin/packages')} className="p-3 bg-white rounded-xl border border-slate-200 hover:bg-slate-50 transition-all hover:scale-110 active:scale-95 text-slate-500 shadow-sm">
+          <button onClick={() => router.push('/admin/packages')} className="admin-back-btn">
             <ArrowLeft size={20} />
           </button>
           <div className="min-w-0">

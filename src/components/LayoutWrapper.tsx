@@ -13,8 +13,10 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     // Pages that should NOT show the main header/footer
     const isAuthPage = pathname === '/login' || pathname === '/admin-login';
     const isAdminPage = pathname?.startsWith('/admin');
+    const isPackagesPage = pathname?.startsWith('/packages/');
+    const isHotelPage = pathname?.startsWith('/hotels/');
 
-    if (isAuthPage || isAdminPage) {
+    if (isAuthPage || isAdminPage || isPackagesPage || isHotelPage) {
         return <>{children}</>;
     }
 

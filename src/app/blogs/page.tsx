@@ -84,6 +84,7 @@ export default function BlogsPage() {
             <DynamicPageBanner
                 fallbackTitle="Travel Blogs"
                 fallbackSubtitle="Insider tips, destination guides, and travel stories to inspire your next journey."
+                fallbackPreTitle="Insider Stories"
                 breadcrumbs={[{ label: 'Blogs' }]}
             />
             <div className="homeContainer">

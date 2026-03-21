@@ -176,7 +176,7 @@ export default function MenusPage() {
                                     <div className="w-full md:w-1/4 space-y-2.5">
                                         <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-1">Icon</label>
                                         <div className="flex items-center gap-3">
-                                            <div className="w-11 h-11 flex items-center justify-center bg-white border border-slate-200 rounded-xl text-indigo-500 shadow-sm group-hover:border-indigo-300 transition-colors">
+                                            <div className="w-11 h-11 flex items-center justify-center bg-white  border-slate-200 rounded-xl text-indigo-500 shadow-sm group-hover:border-indigo-300 transition-colors">
                                                 <DynamicIcon name={item.icon} size={18} />
                                             </div>
                                             <select 
@@ -241,7 +241,7 @@ export default function MenusPage() {
                                 <p className="text-[11px] text-slate-400 font-medium ml-4 mt-1">Shortcuts appearing below the hero on scroll</p>
                             </div>
                             
-                            <div className="flex flex-wrap items-end gap-6 p-5 bg-slate-50 rounded-2xl border border-slate-100 shadow-sm">
+                            <div className="flex flex-wrap items-end gap-6 p-5 bg-slate-50 rounded-2xl  border-slate-100 shadow-sm">
                                 <div className="space-y-2.5">
                                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-1 flex items-center gap-1.5">
                                         <Sparkles size={11} strokeWidth={2.5} className="text-rose-400" /> Brand Main Title
@@ -275,7 +275,7 @@ export default function MenusPage() {
 
                         <div className="space-y-3">
                             {stickyLinks.map((item: any, idx: number) => (
-                                <div key={idx} className="flex flex-col md:flex-row items-end gap-x-4 gap-y-6 p-6 bg-slate-50/50 rounded-2xl border border-slate-100 hover:border-rose-200 hover:bg-white transition-all duration-300 group">
+                                <div key={idx} className="flex flex-col md:flex-row items-end gap-x-4 gap-y-6 p-6 bg-slate-50/50 rounded-2xl  border-slate-100 hover:border-rose-200 hover:bg-white transition-all duration-300 group">
                                     <div className="w-full md:w-1/4 space-y-2.5">
                                         <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-1">Label</label>
                                         <input 
@@ -383,7 +383,7 @@ export default function MenusPage() {
 
                         <div className="space-y-3">
                             {footerLinks.map((item: any, idx: number) => (
-                                <div key={idx} className="flex flex-col md:flex-row items-end gap-x-4 gap-y-6 p-6 bg-slate-50/50 rounded-2xl border border-slate-100 hover:border-emerald-200 hover:bg-white transition-all duration-300 group">
+                                <div key={idx} className="flex flex-col md:flex-row items-end gap-x-4 gap-y-6 p-6 bg-slate-50/50 rounded-2xl  border-slate-100 hover:border-emerald-200 hover:bg-white transition-all duration-300 group">
                                     <div className="w-full md:w-1/3 space-y-2.5">
                                         <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-1">Label</label>
                                         <input 
@@ -436,7 +436,7 @@ export default function MenusPage() {
                     </div>
 
                     {/* Aesthetic Tip */}
-                    <div className="p-5 bg-indigo-50/50 rounded-2xl border border-indigo-100 flex items-start gap-4">
+                    <div className="p-5 bg-indigo-50/50 rounded-2xl  border-indigo-100 flex items-start gap-4">
                         <div className="w-10 h-10 flex items-center justify-center bg-indigo-100 text-indigo-600 rounded-xl shrink-0">
                             <Sparkles size={20} />
                         </div>

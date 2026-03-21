@@ -34,6 +34,7 @@ export default function Page() {
         <TourCategoryPage
             title={data.title || "International Tour Packages"}
             subtitle={data.subtitle || "Explore the World"}
+            preTitle="Global Expeditions"
             bannerImage={data.bannerImage || "/uploads/categories/default.jpg"}
             packages={packages}
             readMoreHeading={data.contentTitle || ""}

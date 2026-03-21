@@ -85,8 +85,9 @@ export default function AboutPage() {
 
             {/* ── Page Banner (Custom fallback for About) ── */}
             <DynamicPageBanner
-                fallbackTitle={data.banner.title}
-                fallbackSubtitle={data.banner.subtitle}
+                title={data.banner.title}
+                subtitle={data.banner.subtitle}
+                fallbackPreTitle="Our Legacy"
                 fallbackImage="/assets/images/banners/about-banner.png"
                 breadcrumbs={[{ label: 'About Us' }]}
             />

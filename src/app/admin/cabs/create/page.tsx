@@ -52,7 +52,7 @@ export default function CreateCab() {
       {/* Header Section */}
       <div className="admin-page-header">
         <div className="flex items-center gap-6">
-          <button onClick={() => router.push('/admin/cabs')} className="p-3.5 bg-white rounded-2xl border border-slate-200 hover:bg-slate-50 transition-all hover:scale-110 active:scale-95 text-slate-500 shadow-sm">
+          <button onClick={() => router.push('/admin/cabs')} className="admin-back-btn">
             <ArrowLeft size={22} />
           </button>
           <div className="min-w-0">
@@ -83,11 +83,11 @@ export default function CreateCab() {
           <div className="admin-form-card">
             <div className="relative z-10 space-y-12">
               <h3 className="admin-form-section-title">
-                <div className="w-2 h-8 bg-amber-500 rounded-full shadow-[0_0_12px_rgba(245,158,11,0.4)]"></div>
+                <div className="admin-section-icon admin-section-icon--amber"></div>
                 Vehicle Specifications
               </h3>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              <div className="admin-form-grid-2">
                 <div className="admin-form-group">
                   <label className="admin-form-label flex items-center gap-3 mb-4">
                     <Type size={14} className="text-blue-500" /> Vehicle Model / Title

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Save, ArrowLeft, Ticket, Type, Image as ImageIcon, Sparkles, Link as LinkIcon, Info, Briefcase, Zap, Globe, ShieldCheck, Clock, Layers } from 'lucide-react';
 import ImageUpload from '@/components/admin/ImageUpload';
 import RichTextEditor from '@/components/admin/Editor';
+import '../../cms-premium.scss';
 
 export default function CreateEvent() {
   const router = useRouter();
@@ -48,150 +49,70 @@ export default function CreateEvent() {
   };
 
   return (
-    <div className="space-y-12 animate-in fade-in duration-1000">
-      {/* Header Section */}
-      <div className="admin-page-header">
-        <div className="flex items-center gap-6">
-          <button onClick={() => router.push('/admin/events')} className="p-3.5 bg-white rounded-2xl border border-slate-200 hover:bg-slate-50 transition-all hover:scale-110 active:scale-95 text-slate-500 shadow-sm">
-            <ArrowLeft size={22} />
-          </button>
-          <div className="min-w-0">
-            <h2 className="admin-page-title">
-              <div className="admin-page-title-indicator"></div>
-              Add New
-            </h2>
-            <p className="admin-page-subtitle mt-1 text-slate-400">Add a new tour or event to your website.</p>
-          </div>
+    <div className="property-edit-container animate-in fade-in duration-700">
+      <div className="property-edit-header">
+        <div className="header-left">
+           <button onClick={() => router.push('/admin/events')} className="back-btn"><ArrowLeft size={18} /></button>
+           <div className="title-area">
+              <h1 className="serif">Add New Event</h1>
+              <div className="status-badge">STATUS: <span className="active">{formData.status.toUpperCase()}</span></div>
+           </div>
         </div>
-        <div className="flex items-center gap-4">
-          <button onClick={() => router.push('/admin/events')} className="admin-btn admin-btn-secondary">
-            Discard
-          </button>
-          <button 
-            onClick={() => handleSubmit()} 
-            disabled={loading}
-            className="admin-btn admin-btn-primary h-12 px-8"
-          >
-            <ShieldCheck size={20} /> {loading ? 'Saving...' : 'Save'}
-          </button>
+        <div className="header-actions">
+           <button onClick={() => handleSubmit()} disabled={loading} className="save-btn"><ShieldCheck size={16} /> {loading ? 'Saving...' : 'Save Event'}</button>
         </div>
       </div>
 
-      <div className="admin-form-grid">
-        {/* Main Content Form */}
-        <div className="lg:col-span-3 space-y-12">
-          <div className="admin-form-card">
-            <div className="relative z-10 space-y-12">
-              <h3 className="admin-form-section-title">
-                <div className="w-2 h-8 bg-rose-500 rounded-full shadow-[0_0_12px_rgba(244,63,94,0.4)]"></div>
-                Details
-              </h3>
+      <div className="property-edit-layout">
+        <div className="tabs-sidebar">
+           <button className="tab-btn active">
+              <Ticket size={16} /> <span>Main Info</span>
+           </button>
+           
+           <div className="mt-8 pt-8 border-t border-slate-100 px-4">
+              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-4">Event Status</label>
+              <select value={formData.status} onChange={e => setFormData({ ...formData, status: e.target.value })} className="admin-form-select !bg-white">
+                <option value="Active">🟢 Visible</option>
+                <option value="Hidden">🔴 Hidden</option>
+              </select>
 
-              <div className="space-y-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                  <div className="admin-form-group">
-                    <label className="admin-form-label flex items-center gap-3 mb-4">
-                      <Type size={14} className="text-blue-500" /> Name
-                    </label>
-                    <input 
-                      type="text" 
-                      value={formData.title} 
-                      onChange={e => setFormData({ ...formData, title: e.target.value })} 
-                      className="admin-form-input text-2xl font-black uppercase tracking-tight h-16 px-8 rounded-3xl" 
-                      placeholder="e.g. KERALA BOAT RACING CORE MANIFEST..." 
-                    />
-                  </div>
-                  <div className="admin-form-group">
-                    <label className="admin-form-label flex items-center gap-3 mb-4">
-                      <Layers size={14} className="text-sky-500" /> URL Slug
-                    </label>
-                    <input 
-                      type="text" 
-                      value={formData.slug} 
-                      onChange={e => setFormData({ ...formData, slug: e.target.value })} 
-                      className="admin-form-input font-bold h-16 px-8 rounded-3xl bg-slate-50/50" 
-                      placeholder="e.g. boat-racing-event" 
-                    />
-                    <p className="text-[9px] font-bold text-slate-400 mt-3 uppercase tracking-widest leading-relaxed italic opacity-70">Optional. Auto-generated from name if left empty.</p>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-8 border-t border-slate-50">
-                  <div className="admin-form-group">
-                    <label className="admin-form-label flex items-center gap-3 mb-4 font-black text-[11px] uppercase tracking-[0.2em] opacity-60">
-                      <Sparkles size={14} className="text-amber-500" /> Heading
-                    </label>
-                    <input 
-                      type="text" 
-                      value={formData.heroHeading} 
-                      onChange={e => setFormData({ ...formData, heroHeading: e.target.value })} 
-                      className="admin-form-input font-black h-16 px-8 rounded-3xl" 
-                      placeholder="SPLASH YOUR HEART OUT..." 
-                    />
-                  </div>
-                  <div className="admin-form-group">
-                    <label className="admin-form-label flex items-center gap-3 mb-4 font-black text-[11px] uppercase tracking-[0.2em] opacity-60">
-                      <Info size={14} className="text-sky-500" /> Subtext
-                    </label>
-                    <input 
-                      type="text" 
-                      value={formData.heroSubtext} 
-                      onChange={e => setFormData({ ...formData, heroSubtext: e.target.value })} 
-                      className="admin-form-input font-bold h-16 px-8 rounded-3xl" 
-                      placeholder="Experience the magic of tradition..." 
-                    />
-                  </div>
-                </div>
+              <div className="mt-8">
+                 <ImageUpload value={formData.image} onChange={(url) => setFormData({ ...formData, image: url })} label="Cover Media" />
               </div>
-
-              <div className="admin-form-group pt-12 border-t border-slate-50">
-                <label className="admin-form-label flex items-center gap-3 mb-8">
-                  <Briefcase size={16} className="text-slate-400" /> Description
-                </label>
-                <div className="bg-slate-50/50 rounded-[48px] p-2.5 border-2 border-slate-100 shadow-inner overflow-hidden">
-                  <RichTextEditor 
-                    value={formData.description} 
-                    onChange={(description) => setFormData({ ...formData, description })} 
-                    height={450}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
+           </div>
         </div>
 
-        {/* Sidebar Assets */}
-        <div className="admin-form-sidebar">
-          <div className="admin-form-card p-8 space-y-10">
-            <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 flex items-center gap-3">
-              <div className="w-1.5 h-4 bg-blue-500 rounded-full"></div>
-              Media
-            </h4>
-            <div className="space-y-8">
-                <div className="space-y-10 pt-4">
-                  <ImageUpload 
-                    value={formData.image}
-                    onChange={(url) => setFormData({ ...formData, image: url })}
-                    label="Cover Image"
-                  />
-                </div>
-
-              <div className="pt-8 border-t border-slate-50">
-                <label className="admin-form-label text-[10px] font-black uppercase tracking-[0.2em] mb-4 opacity-60 block">Status</label>
-                <select 
-                  value={formData.status} 
-                  onChange={e => setFormData({ ...formData, status: e.target.value })}
-                  className="admin-form-select font-black bg-slate-50 border-slate-100 rounded-2xl h-14 uppercase text-[10px] tracking-widest cursor-pointer hover:bg-white transition-all shadow-sm focus:ring-8 focus:ring-blue-500/5 text-center"
-                >
-                  <option value="Active">Visible</option>
-                  <option value="Hidden">Hidden</option>
-                </select>
+        <div className="content-area">
+           <div className="space-y-6">
+              <div className="editor-card">
+                 <div className="card-header"><h4 className="serif">Event Identity</h4></div>
+                 <div className="grid grid-cols-2 gap-6">
+                    <div className="admin-form-group">
+                       <label>Event Name</label>
+                       <input type="text" value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} placeholder="KERALA BOAT RACING..." className="text-xl font-bold" />
+                    </div>
+                    <div className="admin-form-group">
+                       <label>URL Slug</label>
+                       <input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} placeholder="boat-racing-event" className="font-mono text-indigo-600" />
+                    </div>
+                 </div>
               </div>
-            </div>
-          </div>
 
-          {/* Decorative Sections Removed for Simplicity */}
+              <div className="editor-card">
+                 <div className="card-header"><h4 className="serif">Hero Display</h4></div>
+                 <div className="grid grid-cols-2 gap-6">
+                    <div className="admin-form-group"><label>Display Heading</label><input type="text" value={formData.heroHeading} onChange={e => setFormData({ ...formData, heroHeading: e.target.value })} /></div>
+                    <div className="admin-form-group"><label>Hero Subtext</label><input type="text" value={formData.heroSubtext} onChange={e => setFormData({ ...formData, heroSubtext: e.target.value })} /></div>
+                 </div>
+              </div>
+
+              <div className="editor-card">
+                 <div className="card-header"><h4 className="serif">Event Narrative</h4></div>
+                 <div className="bg-slate-50/30 rounded-2xl border border-slate-100 overflow-hidden">
+                    <RichTextEditor value={formData.description} onChange={(description) => setFormData({ ...formData, description })} height={450} />
+                 </div>
+              </div>
+           </div>
         </div>
       </div>
     </div>

@@ -4,11 +4,13 @@ import Link from 'next/link';
 import { ChevronDown, Package, FileText, Users, Home, Settings, LogOut,
   MapPin, Car, Anchor, MessageSquare, HelpCircle,
   Image as ImageIcon, List, File, CheckCircle, Sliders,
-  PartyPopper, Calendar, Inbox, Briefcase, Globe
+  PartyPopper, Calendar, Inbox, Briefcase, Globe, Layout
  } from 'lucide-react';
  import { usePathname, useRouter } from 'next/navigation';
  import { useEffect, useState } from 'react';
+ import { API_URL } from '@/config';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './admin.css';
 import './cms-common.css';
 
@@ -16,6 +18,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
+  const [logo, setLogo] = useState('');
+  const [siteTitle, setSiteTitle] = useState('Wegomap');
+  const [favicon, setFavicon] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -38,12 +43,41 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     } catch (e) {
         router.push('/admin-login');
     }
+    fetchSettings();
   }, [router]);
+
+  const fetchSettings = async () => {
+    try {
+      const res = await fetch(`${API_URL}/options`);
+      const json = await res.json();
+      if (json.success && json.data) {
+        const logoOpt = json.data.find((o: any) => o.key === 'site_logo');
+        const titleOpt = json.data.find((o: any) => o.key === 'site_title');
+        const favOpt = json.data.find((o: any) => o.key === 'site_favicon');
+        
+        if (logoOpt) setLogo(logoOpt.value);
+        if (titleOpt) setSiteTitle(titleOpt.value);
+        if (favOpt && favOpt.value) {
+          setFavicon(favOpt.value);
+          // Dynamic Favicon Update
+          const link: any = document.querySelector("link[rel*='icon']") || document.createElement('link');
+          link.type = 'image/x-icon';
+          link.rel = 'shortcut icon';
+          link.href = favOpt.value;
+          document.getElementsByTagName('head')[0].appendChild(link);
+        }
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({
     'Blogs': true,
     'Packages': false,
     'Home': true,
+    'Landing Page': true,
+    'Hotel Landing Page': true,
     'Site Pages': false,
     'Advanced': false,
     'General Settings': true,
@@ -103,6 +137,25 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         { label: 'Home Page Layout', href: '/admin/home-settings' },
         { label: 'Banner Sliders', href: '/admin/sliders' },
         { label: 'SEO Settings', href: '/admin/pages/69b2119212e7a77684ef09fd/edit' },
+      ]
+    },
+    { 
+      label: 'Landing Page', 
+      href: '/admin/landing-page', 
+      icon: Layout,
+      subItems: [
+        { label: 'All Pages', href: '/admin/landing-page' },
+        { label: 'Add New Page', href: '/admin/landing-page/create' },
+        { label: 'Testimonials', href: '/admin/testimonials' },
+      ]
+    },
+    { 
+      label: 'Hotels', 
+      href: '/admin/hotel-landing-page', 
+      icon: Layout,
+      subItems: [
+        { label: 'All Hotel Pages', href: '/admin/hotel-landing-page' },
+        { label: 'Add New Page', href: '/admin/hotel-landing-page/create' },
       ]
     },
     { 
@@ -189,8 +242,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         
         {/* Branding */}
         <div className="admin-sidebar-header">
-          <div className="admin-logo-icon">W</div>
-          <h2 className="admin-logo-text">Wegomap</h2>
+          {logo ? (
+            <img src={logo} alt={siteTitle} className="h-10 w-auto object-contain mx-auto lg:ml-0" />
+          ) : (
+            <>
+              <div className="admin-logo-icon">{siteTitle.charAt(0)}</div>
+              <h2 className="admin-logo-text">{siteTitle}</h2>
+            </>
+          )}
         </div>
 
         {/* Navigation */}
@@ -221,7 +280,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                         const isSubActive = pathname === sub.href;
                         return (
                           <Link 
-                            key={sub.href}
+                            key={sub.label}
                             href={sub.href}
                             className={`admin-submenu-item ${isSubActive ? 'active' : ''}`}
                           >

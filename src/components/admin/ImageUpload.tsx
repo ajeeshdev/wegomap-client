@@ -2,15 +2,18 @@
 
 import { API_URL } from '@/config';
 import { useState } from 'react';
-import { Upload, X, ImageIcon, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { Upload, X, Globe, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 
 interface ImageUploadProps {
   value: string;
   onChange: (url: string) => void;
   label?: string;
+  size?: 'standard' | 'small' | 'icon';
+  hideUrlInput?: boolean;
+  hideRemove?: boolean;
 }
 
-export default function ImageUpload({ value, onChange, label = "Featured Image" }: ImageUploadProps) {
+export default function ImageUpload({ value, onChange, label = "Featured Image", size = 'standard', hideUrlInput = true, hideRemove = false }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -49,8 +52,8 @@ export default function ImageUpload({ value, onChange, label = "Featured Image" 
 
       if (data.success) {
         // Construct the full URL if the backend returns a relative path
-        const imageUrl = data.data.startsWith('http') 
-          ? data.data 
+        const imageUrl = data.data.startsWith('http')
+          ? data.data
           : `${API_URL.replace('/api', '')}${data.data}`;
         onChange(imageUrl);
       } else {
@@ -64,33 +67,73 @@ export default function ImageUpload({ value, onChange, label = "Featured Image" 
     }
   };
 
-  const removeImage = () => {
+  const removeImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
     onChange('');
   };
 
   return (
-    <div className="space-y-4">
-      <label className="admin-form-label">
-        <ImageIcon size={14} className="text-blue-500" /> {label}
-      </label>
+    <div className="space-y-3">
+      {label ? (
+        <div className="flex items-center justify-between">
+            <label className="admin-form-label !mb-0 flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-indigo-600"></div>
+                {label}
+            </label>
+            {value && !hideRemove && (
+                <button 
+                   onClick={removeImage}
+                   className="text-[10px] font-black text-rose-500 uppercase tracking-widest hover:text-rose-600 transition-colors flex items-center gap-1.5"
+                >
+                   <X size={10} strokeWidth={3} /> Remove
+                </button>
+            )}
+        </div>
+      ) : null}
 
       {value ? (
-        <div className="relative group rounded-xl overflow-hidden border border-slate-200 aspect-video bg-slate-50">
-          <img src={value} alt="Preview" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <button
-              onClick={removeImage}
-              className="p-3 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-rose-500 transition-all active:scale-95 shadow-lg"
-              title="Remove image"
-            >
-              <X size={20} />
-            </button>
+        <div className={`relative group overflow-hidden rounded-2xl border-2 border-slate-100 bg-slate-50 transition-all hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-500/5 ${size === 'icon' ? 'w-24 h-24 mx-auto' :
+            size === 'small' ? 'aspect-[4/3]' :
+              'aspect-video'
+          }`}>
+          <img src={value} alt="Preview" className={`w-full h-full ${size === 'icon' ? 'object-contain p-2' : 'object-cover'}`} />
+          
+          <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+             <div className="bg-white/95 backdrop-blur-sm rounded-xl p-3 flex items-center justify-between shadow-lg border border-indigo-50">
+                <div className="flex items-center gap-2">
+                   <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
+                       <CheckCircle2 size={12} strokeWidth={3} />
+                   </div>
+                   <span className="text-[10px] font-black text-slate-700 uppercase tracking-tight">Active Image</span>
+                </div>
+                
+                <div className="relative">
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                        disabled={uploading}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                    />
+                    <button className="bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-indigo-700 transition-all flex items-center gap-2">
+                        {uploading ? <Loader2 size={10} className="animate-spin" /> : <Upload size={10} strokeWidth={3} />}
+                        Change
+                    </button>
+                </div>
+             </div>
           </div>
-          <div className="absolute bottom-3 right-3">
-             <span className="admin-status-badge admin-status-badge-success bg-white shadow-sm">
-                <CheckCircle2 size={10} /> Uploaded
-             </span>
-          </div>
+
+          {!hideRemove && (
+            <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+              <button
+                 onClick={removeImage}
+                className="w-8 h-8 bg-rose-500 text-white rounded-lg flex items-center justify-center shadow-lg hover:bg-rose-600 transition-all active:scale-90"
+                title="Remove image"
+              >
+                <X size={14} strokeWidth={3} />
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <div className="relative group">
@@ -102,21 +145,21 @@ export default function ImageUpload({ value, onChange, label = "Featured Image" 
             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
           />
           <div className={`
-            border-2 border-dashed rounded-xl p-6 flex flex-col items-center justify-center gap-3 transition-all duration-300
-            ${uploading ? 'bg-blue-50/50 border-blue-200' : 'bg-slate-50/50 border-slate-200 group-hover:bg-white group-hover:border-blue-400 group-hover:shadow-lg group-hover:shadow-blue-500/5'}
+            border-2 border-dashed rounded-2xl p-10 flex flex-col items-center justify-center gap-4 transition-all duration-300
+            ${uploading ? 'bg-indigo-50/50 border-indigo-200' : 'bg-slate-50/50 border-slate-200 group-hover:bg-white group-hover:border-indigo-400 group-hover:shadow-2xl group-hover:shadow-indigo-500/10'}
           `}>
             <div className={`
-              admin-icon-enclosure
-              ${uploading ? 'bg-blue-600 text-white' : 'bg-white text-slate-400'}
+              w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500
+              ${uploading ? 'bg-indigo-600 text-white animate-bounce' : 'bg-white text-indigo-400 shadow-sm group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white'}
             `}>
-              {uploading ? <Loader2 size={24} className="animate-spin" /> : <Upload size={20} />}
+              {uploading ? <Loader2 size={24} className="animate-spin" /> : <Upload size={22} strokeWidth={2.5} />}
             </div>
             <div className="text-center">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-900">
-                {uploading ? 'Uploading...' : 'Click to upload'}
+              <p className="text-[11px] font-black uppercase tracking-[0.15em] text-slate-900 group-hover:text-indigo-600 transition-colors">
+                {uploading ? 'Processing Architecture...' : 'Click to upload media'}
               </p>
-              <p className="text-[9px] font-medium text-slate-400 uppercase tracking-widest mt-1">
-                PNG, JPG or WebP
+              <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-2 bg-slate-100 px-3 py-1 rounded-full group-hover:bg-indigo-50 group-hover:text-indigo-400 transition-colors">
+                High-res JPG, PNG or WebP
               </p>
             </div>
           </div>
@@ -124,21 +167,28 @@ export default function ImageUpload({ value, onChange, label = "Featured Image" 
       )}
 
       {error && (
-        <div className="flex items-center gap-2 px-3 py-2 bg-rose-50 border border-rose-100 rounded-lg text-rose-600 animate-in fade-in duration-300">
-          <AlertCircle size={12} className="shrink-0" />
-          <p className="text-[9px] font-bold uppercase tracking-widest">{error}</p>
+        <div className="flex items-center gap-3 px-4 py-3 bg-rose-50 border border-rose-100 rounded-xl text-rose-600 animate-in slide-in-from-top-2">
+          <AlertCircle size={14} className="shrink-0" strokeWidth={3} />
+          <p className="text-[10px] font-black uppercase tracking-tight">{error}</p>
         </div>
       )}
-      
-      <div className="pt-1">
-        <input 
-          type="text" 
-          value={value} 
-          onChange={e => onChange(e.target.value)} 
-          placeholder="Or paste image URL here..."
-          className="admin-form-input text-[11px] h-9 px-3 rounded-lg opacity-60 hover:opacity-100 focus:opacity-100 transition-all font-mono" 
-        />
-      </div>
+
+      {!hideUrlInput && (
+        <div className="pt-2">
+          <div className="relative">
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+                  <Globe size={10} />
+              </div>
+              <input
+                type="text"
+                placeholder="External Image URL..."
+                value={value}
+                onChange={e => onChange(e.target.value)}
+                className="admin-form-input !pl-8 text-[10px] h-9 rounded-lg font-mono bg-slate-50 border-slate-100 focus:bg-white"
+              />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

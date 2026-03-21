@@ -86,7 +86,7 @@ export default function EditSpecialEvent() {
       {/* Header Section */}
       <div className="admin-page-header">
         <div className="flex items-center gap-6">
-          <button onClick={() => router.push('/admin/special-events')} className="p-3.5 bg-white rounded-2xl border border-slate-200 hover:bg-slate-50 transition-all hover:scale-110 active:scale-95 text-slate-500 shadow-sm">
+          <button onClick={() => router.push('/admin/special-events')} className="admin-back-btn">
             <ArrowLeft size={22} />
           </button>
           <div className="min-w-0">
@@ -119,12 +119,12 @@ export default function EditSpecialEvent() {
           <div className="admin-form-card">
             <div className="relative z-10 space-y-12">
               <h3 className="admin-form-section-title">
-                <div className="w-2 h-8 bg-rose-500 rounded-full shadow-[0_0_12px_rgba(244,63,94,0.4)]"></div>
+                <div className="admin-section-icon admin-section-icon--rose"></div>
                 Details
               </h3>
 
               <div className="space-y-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div className="admin-form-grid-2">
                   <div className="admin-form-group">
                     <label className="admin-form-label flex items-center gap-3 mb-4">
                       <Type size={14} className="text-blue-500" /> Name
@@ -151,7 +151,7 @@ export default function EditSpecialEvent() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-8 border-t border-slate-50">
+                <div className="admin-form-grid-2 admin-form-grid-2--bordered">
                   <div className="admin-form-group">
                     <label className="admin-form-label flex items-center gap-3 mb-4 font-black text-[11px] uppercase tracking-[0.2em] opacity-60">
                       <Sparkles size={14} className="text-amber-500" /> Heading

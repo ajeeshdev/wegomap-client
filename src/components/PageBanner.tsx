@@ -1,5 +1,6 @@
 "use client";
 
+import React, { Fragment } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Home, ChevronRight, ArrowLeft } from 'lucide-react';
@@ -12,16 +13,26 @@ export interface BreadcrumbItem {
 interface PageBannerProps {
     title: string;
     subtitle?: string;
+    preTitle?: string;
     breadcrumbs: BreadcrumbItem[];
     backgroundImage?: string;
     showBack?: boolean;
+    variant?: 'default' | 'thin';
 }
 
-export default function PageBanner({ title, subtitle, breadcrumbs, backgroundImage, showBack = true }: PageBannerProps) {
+export default function PageBanner({ 
+    title, 
+    subtitle, 
+    preTitle, 
+    breadcrumbs, 
+    backgroundImage, 
+    showBack = true,
+    variant = 'default' 
+}: PageBannerProps) {
     const router = typeof window !== 'undefined' ? require('next/navigation').useRouter() : null;
 
     return (
-        <div className={`pageBanner ${backgroundImage ? 'hasImage' : 'noImage'}`}>
+        <div className={`pageBanner ${backgroundImage ? 'hasImage' : 'noImage'} variant-${variant}`}>
             {/* Background Decorative Text */}
             <div className="bannerBgText">{title}</div>
 
@@ -41,7 +52,7 @@ export default function PageBanner({ title, subtitle, breadcrumbs, backgroundIma
             <div className="pageBannerOverlay" />
 
             <div className="pageBannerInner">
-                <div className="cosmicContainer">
+                <div className="homeContainer">
                     <div className="pageBannerTop">
                         <nav className="pageBreadcrumb" aria-label="breadcrumb">
                             <Link href="/" className="breadcrumbItem breadcrumbHome">
@@ -75,22 +86,22 @@ export default function PageBanner({ title, subtitle, breadcrumbs, backgroundIma
                     </div>
 
                     <div className="pageBannerContent">
+                        {preTitle && <div className="pageBannerPreTitle">{preTitle}</div>}
                         <h1 className="pageBannerTitle">
                             {title.includes('\n') ? (
                                 title.split('\n').map((line, i) => (
-                                    <span key={i} className={i === 1 ? 'italicText' : ''}>
-                                        {line} {i === 0 && <br />}
-                                    </span>
+                                    <Fragment key={i}>
+                                        {line} {i === 0}
+                                    </Fragment>
                                 ))
                             ) : (
                                 <>
-                                    {title.split(' ').slice(0, -2).join(' ')} <br />
-                                    <span className="italicText">{title.split(' ').slice(-2).join(' ')}</span>
+                                    {title.split(' ').slice(0, -2).join(' ')} 
+                                    {title.split(' ').slice(-2).join(' ')}
                                 </>
                             )}
                         </h1>
-
-                        {subtitle && <p className="pageBannerSubtitle">{subtitle}</p>}
+                        {subtitle && <p className="pageBannerDescription">{subtitle}</p>}
                     </div>
                 </div>
             </div>

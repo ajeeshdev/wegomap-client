@@ -56,6 +56,7 @@ export default function EventsListingPage() {
             <DynamicPageBanner
                 fallbackTitle="Special\nEvents"
                 fallbackSubtitle="Discover unique festivals, cultural celebrations, and exclusive activities across our destinations."
+                fallbackPreTitle="Memorable Moments"
                 fallbackImage="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=2000"
                 breadcrumbs={[{ label: 'Events' }]}
             />

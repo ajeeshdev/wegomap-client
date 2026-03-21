@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { API_URL } from '@/config';
-import { Save, Building2, Phone, Mail, FileText, MapPin, Share2, Globe, Clock, Zap, ExternalLink, ShieldAlert, Sparkles, MessageSquare, ShieldCheck, Terminal, Layers, Image as ImageIcon, Link as LinkIcon, Plus, Trash2, User } from 'lucide-react';
+import { ExternalLink, ShieldCheck } from 'lucide-react';
 import ImageUpload from '@/components/admin/ImageUpload';
 import { toast } from 'react-hot-toast';
 
@@ -17,7 +17,9 @@ export default function SiteOptionsPage() {
         analytics_script: '',
         google_rating: '',
         google_reviews: '',
-        maintenance_mode: false
+        maintenance_mode: false,
+        site_logo: '',
+        site_favicon: ''
     });
 
     const [contact, setContact] = useState({
@@ -158,85 +160,90 @@ export default function SiteOptionsPage() {
                     
                     {/* General Section */}
                     <div className="admin-form-card">
-                        <div className="space-y-8">
-                            <h3 className="admin-form-section-title">
-                                <div className="admin-page-title-indicator bg-blue-600"></div>
-                                General Settings
-                            </h3>
-                            
+                        <div className="space-y-6">
                             <div className="admin-form-group">
-                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                    <Globe size={12} className="text-blue-500" /> Site Name
-                                </label>
+                                <label className="admin-form-label">Site name</label>
                                 <input 
                                     type="text" 
                                     value={general.site_title}
                                     onChange={e => setGeneral({...general, site_title: e.target.value})}
-                                    className="admin-form-input text-lg font-bold h-12 focus:border-blue-500/50" 
-                                    placeholder="e.g. Wegomap International"
+                                    className="admin-form-input" 
                                 />
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="admin-form-group">
-                                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-1 mb-3 flex items-center gap-2">
-                                        <Sparkles size={12} strokeWidth={2.5} className="text-amber-500" /> Google Rating
-                                    </label>
+                                    <label className="admin-form-label">Site logo</label>
+                                    <div className="border border-slate-200 rounded-lg p-3 bg-slate-50/50">
+                                        <ImageUpload 
+                                            value={general.site_logo}
+                                            onChange={url => setGeneral({...general, site_logo: url})}
+                                            label=""
+                                            size="small"
+                                            hideUrlInput
+                                        />
+                                    </div>
+                                    <p className="text-xs text-slate-500 mt-1">Transparent PNG. Used for login and header.</p>
+                                </div>
+                                <div className="admin-form-group">
+                                    <label className="admin-form-label">Favicon</label>
+                                    <div className="border border-slate-200 rounded-lg p-3 bg-slate-50/50">
+                                        <ImageUpload 
+                                            value={general.site_favicon}
+                                            onChange={url => setGeneral({...general, site_favicon: url})}
+                                            label=""
+                                            size="icon"
+                                            hideUrlInput
+                                        />
+                                    </div>
+                                    <p className="text-xs text-slate-500 mt-1">Square icon (32×32 or 64×64). Browser tab.</p>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="admin-form-group">
+                                    <label className="admin-form-label">Google rating</label>
                                     <input 
                                         type="text" 
                                         value={general.google_rating}
                                         onChange={e => setGeneral({...general, google_rating: e.target.value})}
-                                        className="admin-form-input !bg-slate-50/50 h-11 font-bold focus:border-amber-500/50"
-                                        placeholder="e.g. 4.9"
+                                        className="admin-form-input"
                                     />
                                 </div>
                                 <div className="admin-form-group">
-                                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-1 mb-3 flex items-center gap-2">
-                                        <MessageSquare size={12} strokeWidth={2.5} className="text-indigo-500" /> Total Reviews
-                                    </label>
+                                    <label className="admin-form-label">Total reviews</label>
                                     <input 
                                         type="text" 
                                         value={general.google_reviews}
                                         onChange={e => setGeneral({...general, google_reviews: e.target.value})}
-                                        className="admin-form-input !bg-slate-50/50 h-11 font-bold focus:border-indigo-500/50"
-                                        placeholder="e.g. 1024"
+                                        className="admin-form-input"
                                     />
                                 </div>
                             </div>
 
-                             <div className="admin-form-group pt-6">
-                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-1 mb-3 flex items-center gap-2">
-                                    <Terminal size={12} strokeWidth={2.5} className="text-slate-500" /> Google Analytics / Tracking Scripts
-                                </label>
-                                <div className="bg-slate-900 rounded-2xl p-1.5 shadow-inner">
-                                    <textarea 
-                                        value={general.analytics_script}
-                                        onChange={e => setGeneral({...general, analytics_script: e.target.value})}
-                                        rows={6}
-                                        className="admin-form-input !bg-transparent !border-none !text-slate-300 font-mono text-[11px] p-5 min-h-[180px] focus:ring-0"
-                                        placeholder="Paste Google Analytics or Facebook Pixel code here..."
-                                    />
-                                </div>
+                            <div className="admin-form-group">
+                                <label className="admin-form-label">Google Analytics / tracking scripts</label>
+                                <textarea 
+                                    value={general.analytics_script}
+                                    onChange={e => setGeneral({...general, analytics_script: e.target.value})}
+                                    rows={5}
+                                    className="admin-form-input font-mono text-sm bg-slate-900 text-slate-300 border-slate-700"
+                                />
                             </div>
 
-                            <div className="pt-8 mt-8 border-t border-slate-100 flex items-center justify-between bg-rose-50/30 -mx-7 -mb-7 p-7 transition-colors rounded-b-2xl">
-                                <div className="flex items-center gap-5">
-                                    <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-rose-500 border border-rose-100 shadow-sm">
-                                        <ShieldAlert size={22} strokeWidth={2.5} />
-                                    </div>
-                                    <div>
-                                        <label className="text-sm font-black text-rose-900 block uppercase tracking-tight">Maintenance Mode</label>
-                                        <p className="text-[11px] text-rose-700/60 font-medium">Instantly put the entire site into "Under Construction" mode</p>
-                                    </div>
+                            <div className="pt-6 mt-6 border-t border-slate-200 flex items-center justify-between">
+                                <div>
+                                    <label className="admin-form-label block">Maintenance mode</label>
+                                    <p className="text-xs text-slate-500 mt-0.5">Show &quot;Under Construction&quot; on the site</p>
                                 </div>
-                                <label className="relative cursor-pointer group scale-125 mr-2">
+                                <label className="relative inline-block w-11 h-6 cursor-pointer">
                                     <input 
                                         type="checkbox" 
-                                        checked={general.maintenance_mode}
+                                        checked={general.maintenance_mode === true || String(general.maintenance_mode) === 'true' || String(general.maintenance_mode) === '1'}
                                         onChange={e => setGeneral({...general, maintenance_mode: e.target.checked})}
                                         className="sr-only peer"
                                     />
-                                    <div className="w-14 h-7 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:bg-rose-500 transition-all after:content-[''] after:absolute after:top-[3px] after:left-[4px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-7 shadow-sm"></div>
+                                    <span className="block w-full h-full bg-slate-200 rounded-full peer-checked:bg-rose-500 transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:w-5 after:h-5 after:bg-white after:rounded-full after:shadow after:transition-transform peer-checked:after:translate-x-5"></span>
                                 </label>
                             </div>
                         </div>
@@ -244,100 +251,46 @@ export default function SiteOptionsPage() {
 
                     {/* Contact Section */}
                     <div className="admin-form-card">
-                        <div className="space-y-8">
-                            <h3 className="admin-form-section-title">
-                                <div className="admin-page-title-indicator bg-emerald-500"></div>
-                                Contact Information
-                            </h3>
+                        <div className="space-y-6">
+                            <h3 className="admin-form-section-title text-base font-semibold text-slate-800">Contact</h3>
 
                             <div className="admin-form-group">
-                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                    <MapPin size={12} className="text-emerald-500" /> Address
-                                </label>
+                                <label className="admin-form-label">Address</label>
                                 <textarea 
                                     value={contact.address}
                                     onChange={e => setContact({...contact, address: e.target.value})}
-                                    rows={3}
-                                    className="admin-form-input !bg-slate-50/30 p-5 min-h-[110px] focus:border-emerald-500/50 leading-relaxed" 
-                                    placeholder="Enter physical address..."
+                                    rows={2}
+                                    className="admin-form-input"
                                 />
                             </div>
                             
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 <div className="admin-form-group">
-                                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                        <Phone size={12} className="text-blue-500" /> Phone 1 (Primary)
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        value={contact.phone1}
-                                        onChange={e => setContact({...contact, phone1: e.target.value})}
-                                        className="admin-form-input h-11 focus:border-blue-500/50"
-                                        placeholder="+91..."
-                                    />
+                                    <label className="admin-form-label">Phone (primary)</label>
+                                    <input type="text" value={contact.phone1} onChange={e => setContact({...contact, phone1: e.target.value})} className="admin-form-input" />
                                 </div>
                                 <div className="admin-form-group">
-                                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                        <Phone size={12} className="text-slate-400" /> Phone 2 (Support)
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        value={contact.phone2}
-                                        onChange={e => setContact({...contact, phone2: e.target.value})}
-                                        className="admin-form-input h-11 focus:border-slate-400/50"
-                                        placeholder="+91..."
-                                    />
+                                    <label className="admin-form-label">Phone (support)</label>
+                                    <input type="text" value={contact.phone2} onChange={e => setContact({...contact, phone2: e.target.value})} className="admin-form-input" />
                                 </div>
                                 <div className="admin-form-group">
-                                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                        <Layers size={12} className="text-emerald-500" /> WhatsApp Number
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        value={contact.whatsapp}
-                                        onChange={e => setContact({...contact, whatsapp: e.target.value})}
-                                        className="admin-form-input h-11 font-bold text-emerald-600 focus:border-emerald-600/50"
-                                        placeholder="+91..."
-                                    />
+                                    <label className="admin-form-label">WhatsApp</label>
+                                    <input type="text" value={contact.whatsapp} onChange={e => setContact({...contact, whatsapp: e.target.value})} className="admin-form-input" />
                                 </div>
                             </div>
                             
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-slate-50">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-slate-100">
                                 <div className="admin-form-group">
-                                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                        <Mail size={12} className="text-indigo-500" /> Email 1 (Info)
-                                    </label>
-                                    <input 
-                                        type="email" 
-                                        value={contact.email1}
-                                        onChange={e => setContact({...contact, email1: e.target.value})}
-                                        className="admin-form-input h-11 focus:border-indigo-500/50"
-                                        placeholder="info@..."
-                                    />
+                                    <label className="admin-form-label">Email (info)</label>
+                                    <input type="email" value={contact.email1} onChange={e => setContact({...contact, email1: e.target.value})} className="admin-form-input" />
                                 </div>
                                 <div className="admin-form-group">
-                                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                        <Mail size={12} className="text-rose-500" /> Email 2 (Booking)
-                                    </label>
-                                    <input 
-                                        type="email" 
-                                        value={contact.email2}
-                                        onChange={e => setContact({...contact, email2: e.target.value})}
-                                        className="admin-form-input h-11 focus:border-rose-500/50"
-                                        placeholder="booking@..."
-                                    />
+                                    <label className="admin-form-label">Email (booking)</label>
+                                    <input type="email" value={contact.email2} onChange={e => setContact({...contact, email2: e.target.value})} className="admin-form-input" />
                                 </div>
                                 <div className="admin-form-group">
-                                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                        <Mail size={12} className="text-slate-400" /> Email 3 (Admin)
-                                    </label>
-                                    <input 
-                                        type="email" 
-                                        value={contact.email3}
-                                        onChange={e => setContact({...contact, email3: e.target.value})}
-                                        className="admin-form-input h-11 focus:border-slate-400/50"
-                                        placeholder="admin@..."
-                                    />
+                                    <label className="admin-form-label">Email (admin)</label>
+                                    <input type="email" value={contact.email3} onChange={e => setContact({...contact, email3: e.target.value})} className="admin-form-input" />
                                 </div>
                             </div>
                         </div>
@@ -346,165 +299,65 @@ export default function SiteOptionsPage() {
 
                     {/* Social Section */}
                     <div className="admin-form-card">
-                        <div className="space-y-8">
-                            <h3 className="admin-form-section-title">
-                                <div className="admin-page-title-indicator bg-amber-500"></div>
-                                Social Media Links
-                            </h3>
+                        <div className="space-y-6">
+                            <h3 className="admin-form-section-title text-base font-semibold text-slate-800">Social links</h3>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="admin-form-group">
-                                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                        <Share2 size={12} className="text-blue-600" /> Facebook URL
-                                    </label>
-                                    <input 
-                                        type="url" 
-                                        value={social.facebook}
-                                        onChange={e => setSocial({...social, facebook: e.target.value})}
-                                        className="admin-form-input h-11 focus:border-blue-600/50"
-                                        placeholder="https://facebook.com/..."
-                                    />
+                                    <label className="admin-form-label">Facebook</label>
+                                    <input type="url" value={social.facebook} onChange={e => setSocial({...social, facebook: e.target.value})} className="admin-form-input" />
                                 </div>
                                 <div className="admin-form-group">
-                                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                        <Share2 size={12} className="text-pink-500" /> Instagram URL
-                                    </label>
-                                    <input 
-                                        type="url" 
-                                        value={social.instagram}
-                                        onChange={e => setSocial({...social, instagram: e.target.value})}
-                                        className="admin-form-input h-11 focus:border-pink-500/50"
-                                        placeholder="https://instagram.com/..."
-                                    />
+                                    <label className="admin-form-label">Instagram</label>
+                                    <input type="url" value={social.instagram} onChange={e => setSocial({...social, instagram: e.target.value})} className="admin-form-input" />
                                 </div>
                                 <div className="admin-form-group">
-                                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                        <Share2 size={12} className="text-rose-600" /> Pinterest URL
-                                    </label>
-                                    <input 
-                                        type="url" 
-                                        value={social.pinterest}
-                                        onChange={e => setSocial({...social, pinterest: e.target.value})}
-                                        className="admin-form-input h-11 focus:border-rose-600/50"
-                                        placeholder="https://pinterest.com/..."
-                                    />
+                                    <label className="admin-form-label">Pinterest</label>
+                                    <input type="url" value={social.pinterest} onChange={e => setSocial({...social, pinterest: e.target.value})} className="admin-form-input" />
                                 </div>
                                 <div className="admin-form-group">
-                                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                        <Share2 size={12} className="text-blue-700" /> LinkedIn URL
-                                    </label>
-                                    <input 
-                                        type="url" 
-                                        value={social.linkedin}
-                                        onChange={e => setSocial({...social, linkedin: e.target.value})}
-                                        className="admin-form-input h-11 focus:border-blue-700/50"
-                                        placeholder="https://linkedin.com/..."
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="pt-8 border-t border-slate-50 flex items-center justify-center">
-                                <div className="flex items-center gap-3 py-3 px-6 bg-slate-50 rounded-2xl border border-slate-100 italic opacity-80 text-[11px] text-slate-500">
-                                    <Zap size={14} className="text-amber-500" />
-                                    Changes will be reflected across the entire website instantly after saving.
+                                    <label className="admin-form-label">LinkedIn</label>
+                                    <input type="url" value={social.linkedin} onChange={e => setSocial({...social, linkedin: e.target.value})} className="admin-form-input" />
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     {/* Footer Section */}
-                    <div className="admin-form-card mt-10">
-                        <div className="space-y-8">
-                            <h3 className="admin-form-section-title">
-                                <div className="admin-page-title-indicator bg-indigo-500"></div>
-                                Footer Configuration
-                            </h3>
+                    <div className="admin-form-card">
+                        <div className="space-y-6">
+                            <h3 className="admin-form-section-title text-base font-semibold text-slate-800">Footer</h3>
 
                             <div className="admin-form-group">
-                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                    <MessageSquare size={12} className="text-indigo-500" /> Animated Quote Text
-                                </label>
-                                <textarea 
-                                    value={footer.footer_quote}
-                                    onChange={e => setFooter({...footer, footer_quote: e.target.value})}
-                                    rows={2}
-                                    className="admin-form-input !bg-slate-50/30 p-5 focus:border-indigo-500/50 leading-relaxed font-serif text-lg italic" 
-                                    placeholder="Traveling – It leaves you speechless..."
-                                />
+                                <label className="admin-form-label">Quote text</label>
+                                <textarea value={footer.footer_quote} onChange={e => setFooter({...footer, footer_quote: e.target.value})} rows={2} className="admin-form-input" />
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="admin-form-group">
-                                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                        <User size={12} className="text-slate-400" /> Quote Author
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        value={footer.footer_author}
-                                        onChange={e => setFooter({...footer, footer_author: e.target.value})}
-                                        className="admin-form-input h-11 focus:border-indigo-500/50"
-                                        placeholder="e.g. Ibn Battuta"
-                                    />
+                                    <label className="admin-form-label">Quote author</label>
+                                    <input type="text" value={footer.footer_author} onChange={e => setFooter({...footer, footer_author: e.target.value})} className="admin-form-input" />
                                 </div>
                                 <div className="admin-form-group">
-                                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                        <Sparkles size={12} className="text-amber-500" /> Footer Subtitle
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        value={footer.footer_reveal_text}
-                                        onChange={e => setFooter({...footer, footer_reveal_text: e.target.value})}
-                                        className="admin-form-input h-11 focus:border-amber-500/50 uppercase tracking-widest"
-                                        placeholder="GREAT PLACES TO VISIT"
-                                    />
+                                    <label className="admin-form-label">Footer subtitle</label>
+                                    <input type="text" value={footer.footer_reveal_text} onChange={e => setFooter({...footer, footer_reveal_text: e.target.value})} className="admin-form-input" />
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="admin-form-group">
-                                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                        <Building2 size={12} className="text-blue-500" /> Call to Action Title
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        value={footer.footer_cta_title}
-                                        onChange={e => setFooter({...footer, footer_cta_title: e.target.value})}
-                                        className="admin-form-input h-11 font-bold focus:border-blue-500/50"
-                                        placeholder="Planning your next trip?"
-                                    />
+                                    <label className="admin-form-label">CTA title</label>
+                                    <input type="text" value={footer.footer_cta_title} onChange={e => setFooter({...footer, footer_cta_title: e.target.value})} className="admin-form-input" />
                                 </div>
                                 <div className="admin-form-group">
-                                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                        <Zap size={12} className="text-blue-400" /> Call to Action Subtitle
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        value={footer.footer_cta_subtitle}
-                                        onChange={e => setFooter({...footer, footer_cta_subtitle: e.target.value})}
-                                        className="admin-form-input h-11 focus:border-blue-400/50"
-                                        placeholder="Talk to our experts..."
-                                    />
+                                    <label className="admin-form-label">CTA subtitle</label>
+                                    <input type="text" value={footer.footer_cta_subtitle} onChange={e => setFooter({...footer, footer_cta_subtitle: e.target.value})} className="admin-form-input" />
                                 </div>
                             </div>
 
-                            <div className="admin-form-group pt-4">
-                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                    <ShieldCheck size={12} className="text-emerald-500" /> Copyright Notice
-                                </label>
-                                <input 
-                                    type="text" 
-                                    value={footer.footer_copyright}
-                                    onChange={e => setFooter({...footer, footer_copyright: e.target.value})}
-                                    className="admin-form-input h-11 focus:border-emerald-500/50"
-                                    placeholder="© 2026 Wegomap. All rights reserved."
-                                />
-                            </div>
-
-                            <div className="pt-8 border-t border-slate-50 flex items-center justify-center">
-                                <div className="flex items-center gap-3 py-3 px-6 bg-slate-50 rounded-2xl border border-slate-100 italic opacity-80 text-[11px] text-slate-500">
-                                    <Layers size={14} className="text-indigo-500" />
-                                    Footer content updates will be reflected across all pages immediately.
-                                </div>
+                            <div className="admin-form-group">
+                                <label className="admin-form-label">Copyright</label>
+                                <input type="text" value={footer.footer_copyright} onChange={e => setFooter({...footer, footer_copyright: e.target.value})} className="admin-form-input" />
                             </div>
                         </div>
                     </div>

@@ -99,7 +99,7 @@
     .sectionSubtitle {
         display: inline-block;
         font-family: var(--font-writing);
-        font-size: 2.25rem;
+        font-size: 1.5rem;
         background: $gradient;
         -webkit-background-clip: text;
         background-clip: text;
@@ -109,6 +109,10 @@
         z-index: 10;
         transform: rotate(-3deg);
         padding-right: 1.5rem;
+        @include min(992){
+            font-size: 2.25rem;
+
+        }
     }
 
     h1.sliderTitle,
@@ -973,6 +977,16 @@
             height: 100px;
             background: linear-gradient(to bottom, transparent, #e2e8f0, transparent);
             flex-shrink: 0;
+        }
+
+        // Landing-page testimonials variant:
+        // when we render traveler profile inside each Swiper slide (2-up desktop),
+        // we need the slide to behave like the original stripCard layout.
+        .lp-testimonialSlide {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 50px;
         }
 
         .testimonialSwiper {
