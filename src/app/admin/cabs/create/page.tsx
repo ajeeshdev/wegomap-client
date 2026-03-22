@@ -90,7 +90,7 @@ export default function CreateCab() {
               <div className="admin-form-grid-2">
                 <div className="admin-form-group">
                   <label className="admin-form-label flex items-center gap-3 mb-4">
-                    <Type size={14} className="text-blue-500" /> Vehicle Model / Title
+                    <Type size={14} className="text-orange-500" /> Vehicle Model / Title
                   </label>
                   <input 
                     type="text" 
@@ -117,7 +117,7 @@ export default function CreateCab() {
                       type="text" 
                       value={formData.slug} 
                       onChange={e => setFormData({ ...formData, slug: e.target.value })} 
-                      className="admin-form-input pl-12 font-mono text-[12px] text-blue-600 font-black h-16 rounded-3xl" 
+                      className="admin-form-input pl-12 font-mono text-[12px] text-orange-600 font-black h-16 rounded-3xl" 
                       placeholder="toyota-innova-crysta-blueprint" 
                     />
                   </div>
@@ -126,7 +126,7 @@ export default function CreateCab() {
 
               <div className="admin-form-group pt-12 border-t border-slate-50">
                 <label className="admin-form-label flex items-center gap-3 mb-8">
-                  <Briefcase size={16} className="text-indigo-600" /> Description & Features
+                  <Briefcase size={16} className="text-orange-600" /> Description & Features
                 </label>
                 <div className="bg-slate-50/50 rounded-[48px] p-2.5 border-2 border-slate-100 shadow-inner overflow-hidden">
                   <RichTextEditor 
@@ -144,7 +144,7 @@ export default function CreateCab() {
         <div className="admin-form-sidebar">
           <div className="admin-form-card p-8 space-y-10">
             <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 flex items-center gap-3">
-              <div className="w-1.5 h-4 bg-blue-500 rounded-full"></div>
+              <div className="w-1.5 h-4 bg-orange-500 rounded-full"></div>
               Pricing & Type
             </h4>
             <div className="space-y-8">
@@ -153,7 +153,7 @@ export default function CreateCab() {
                 <select 
                   value={formData.type} 
                   onChange={e => setFormData({ ...formData, type: e.target.value })}
-                  className="admin-form-select font-black bg-slate-50 border-slate-100 rounded-2xl h-14 uppercase text-[10px] tracking-widest cursor-pointer hover:bg-white transition-all shadow-sm focus:ring-8 focus:ring-blue-500/5 text-center"
+                  className="admin-form-select font-black bg-slate-50 border-slate-100 rounded-2xl h-14 uppercase text-[10px] tracking-widest cursor-pointer hover:bg-white transition-all shadow-sm focus:ring-8 focus:ring-orange-500/5 text-center"
                 >
                   <option value="Hatchback">Compact / Hatchback</option>
                   <option value="Sedan">Sedan</option>
@@ -178,7 +178,7 @@ export default function CreateCab() {
                     type="number" 
                     value={formData.price} 
                     onChange={e => setFormData({ ...formData, price: e.target.value })} 
-                    className="admin-form-input font-black h-14 text-center rounded-2xl bg-slate-50 border-slate-100 focus:bg-white text-blue-600" 
+                    className="admin-form-input font-black h-14 text-center rounded-2xl bg-slate-50 border-slate-100 focus:bg-white text-orange-600" 
                     placeholder="0"
                   />
                 </div>

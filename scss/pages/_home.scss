@@ -582,7 +582,7 @@
     border-bottom: 1px solid #f1f5f9;
     padding: 0.75rem 0;
     position: sticky;
-    top: 61px; // Aligns below the scrolled header
+    top: 75px; // Aligns below the scrolled header
     z-index: 990; // Just below the main header
     transition: all 0.3s ease;
     display: none;
@@ -3055,7 +3055,6 @@
 // Requested Kerala Specialist Thin Section
 // 9. SEO / READ MORE SECTION
 .services-list.readmore-section {
-    padding: 100px 0;
     background: #fff;
     position: relative;
 

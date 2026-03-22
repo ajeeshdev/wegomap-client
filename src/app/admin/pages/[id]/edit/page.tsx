@@ -99,7 +99,7 @@ export default function EditPage() {
           <div className="admin-form-card">
             <div className="space-y-8">
               <h3 className="admin-form-section-title">
-                <div className="admin-page-title-indicator bg-blue-600"></div>
+                <div className="admin-page-title-indicator bg-orange-600"></div>
                 Primary Content
               </h3>
 
@@ -170,7 +170,7 @@ export default function EditPage() {
               </div>
 
               <div className="admin-form-group">
-                <label className="text-xs font-semibold uppercase tracking-wider text-blue-600 ml-1">Description</label>
+                <label className="text-xs font-semibold uppercase tracking-wider text-orange-600 ml-1">Description</label>
                 <textarea 
                   rows={4}
                   value={formData.seo_description}
@@ -206,7 +206,7 @@ export default function EditPage() {
 
           <div className="admin-form-card bg-slate-50 border-none p-6">
             <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600 shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center text-orange-600 shrink-0">
                 <Sparkles size={16} />
               </div>
               <div className="space-y-1">

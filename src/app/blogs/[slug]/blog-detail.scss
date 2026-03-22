@@ -4,12 +4,18 @@
 
   .hero-section {
     position: relative;
-    min-height: 55vh;
+    height: 250px;
+    min-height: 250px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     background: #0f172a;
+
+    @media (min-width: 768px) {
+        height: 380px; // Slightly taller to accommodate blog meta
+        min-height: 380px;
+    }
 
     .hero-image {
       object-fit: cover;

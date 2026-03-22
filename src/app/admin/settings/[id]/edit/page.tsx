@@ -64,7 +64,7 @@ export default function EditSetting() {
 
   if (loading) return (
     <div className="admin-form-card flex flex-col items-center justify-center p-24 gap-6">
-      <div className="w-16 h-16 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin shadow-2xl shadow-indigo-500/20"></div>
+      <div className="w-16 h-16 border-4 border-orange-600 border-t-transparent rounded-full animate-spin shadow-2xl shadow-orange-500/20"></div>
       <p className="font-black text-slate-400 uppercase tracking-[0.3em] text-[10px]">Retrieving tectonic parameter manuscript...</p>
     </div>
   );
@@ -109,7 +109,7 @@ export default function EditSetting() {
             <div className="space-y-10">
               <div className="flex items-center justify-between border-b border-slate-100 pb-6">
                   <h3 className="admin-form-section-title !mb-0 border-none">
-                    <div className="admin-page-title-indicator bg-blue-600"></div>
+                    <div className="admin-page-title-indicator bg-orange-600"></div>
                     Configuration Data (JSON)
                   </h3>
                   <div className="bg-emerald-50 text-emerald-600 px-4 py-1.5 rounded-lg text-[10px] font-bold border border-emerald-100 flex items-center gap-2 shadow-sm">
@@ -120,7 +120,7 @@ export default function EditSetting() {
 
               <div className="admin-form-group">
                 <label className="admin-form-label flex items-center gap-2 mb-4">
-                  <Terminal size={14} className="text-blue-500" /> JSON Content
+                  <Terminal size={14} className="text-orange-500" /> JSON Content
                 </label>
                 <div className="bg-slate-900 rounded-3xl p-6 border-2 border-slate-800 shadow-xl relative group">
                   <div className="absolute top-4 right-6 hidden group-hover:block transition-all">
@@ -129,14 +129,14 @@ export default function EditSetting() {
                   <textarea 
                     value={jsonInput} 
                     onChange={e => setJsonInput(e.target.value)} 
-                    className="w-full bg-transparent border-none outline-none focus:ring-0 font-mono text-sm text-blue-300 leading-relaxed min-h-[500px] scrollbar-hidden caret-white" 
+                    className="w-full bg-transparent border-none outline-none focus:ring-0 font-mono text-sm text-orange-300 leading-relaxed min-h-[500px] scrollbar-hidden caret-white" 
                     rows={20}
                   ></textarea>
                 </div>
               </div>
               
               <div className="p-6 bg-slate-50 border border-slate-100 rounded-2xl flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-blue-500 shadow-sm border border-slate-100 shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-orange-500 shadow-sm border border-slate-100 shrink-0">
                     <Zap size={20} />
                   </div>
                   <div className="space-y-1">
@@ -157,12 +157,12 @@ export default function EditSetting() {
           <div className="admin-form-card p-6 space-y-8 sticky top-32">
             <div>
               <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2 mb-6">
-                <div className="w-1 h-3 bg-blue-500 rounded-full"></div>
+                <div className="w-1 h-3 bg-orange-500 rounded-full"></div>
                 System Info
               </h4>
               <div className="admin-space-y-4">
                 <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100 group">
-                  <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600 shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                  <div className="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center text-orange-600 shrink-0 group-hover:bg-orange-600 group-hover:text-white transition-all">
                     <ShieldCheck size={16} />
                   </div>
                   <div className="min-w-0">

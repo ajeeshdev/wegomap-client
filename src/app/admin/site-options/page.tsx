@@ -118,12 +118,10 @@ export default function SiteOptionsPage() {
     };
 
 
-    if (loading) return (
         <div className="admin-form-card flex flex-col items-center justify-center p-24 gap-6">
-            <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-            <p className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Loading...</p>
+            <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+            <p className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Loading Settings...</p>
         </div>
-    );
 
     return (
         <div className="pb-24 space-y-10 animate-in fade-in duration-500">
@@ -140,14 +138,14 @@ export default function SiteOptionsPage() {
                     <Link 
                         href="/"
                         target="_blank"
-                        className="admin-btn-small bg-slate-100 text-slate-600 hover:bg-slate-200 px-5"
+                        className="admin-btn h-11 px-6 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 hover:shadow-lg hover:shadow-slate-200/50 transition-all flex items-center justify-center gap-2"
                     >
                          <ExternalLink size={14} /> View Live Site
                     </Link>
                     <button 
                         onClick={handleSave}
                         disabled={saving}
-                        className="admin-btn admin-btn-primary h-11 px-10 shadow-lg shadow-blue-200/50"
+                        className="admin-btn admin-btn-primary h-11 px-10 shadow-lg shadow-orange-200/50"
                     >
                         <ShieldCheck size={18} /> {saving ? 'Saving...' : 'Save All Settings'}
                     </button>
@@ -179,7 +177,8 @@ export default function SiteOptionsPage() {
                                             value={general.site_logo}
                                             onChange={url => setGeneral({...general, site_logo: url})}
                                             label=""
-                                            size="small"
+                                            size="landscape"
+                                            objectFit="contain"
                                             hideUrlInput
                                         />
                                     </div>

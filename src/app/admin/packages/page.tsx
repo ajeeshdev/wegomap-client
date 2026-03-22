@@ -85,7 +85,7 @@ export default function PackagesAdmin() {
       {/* Content Table */}
       {loading ? (
         <div className="admin-form-card flex flex-col items-center justify-center p-20 gap-4">
-          <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
           <p className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Loading packages...</p>
         </div>
       ) : (
@@ -187,7 +187,7 @@ export default function PackagesAdmin() {
       {/* Summary Matrix */}
       {!loading && filteredPackages.length > 0 && (
         <div className="admin-form-card bg-slate-900 border-slate-800 p-8 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-bl-full blur-[80px]"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-bl-full blur-[80px]"></div>
           <div className="relative z-10 flex items-center justify-between">
             <div className="flex items-center gap-6">
               <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white border border-white/20 backdrop-blur-md">
@@ -210,7 +210,7 @@ export default function PackagesAdmin() {
                   <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Inventory Secure</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Zap size={10} className="text-blue-500" />
+                  <Zap size={10} className="text-orange-500" />
                   <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Pricing Core Active</span>
                 </div>
               </div>

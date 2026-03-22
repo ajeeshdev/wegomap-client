@@ -176,6 +176,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       href: '/admin/events', 
       icon: Calendar,
       subItems: [
+        { label: 'Page Intro Settings', href: '/admin/events-settings' },
         { label: 'All Events', href: '/admin/events' },
         { label: 'Add New', href: '/admin/events/create' },
       ]
@@ -190,14 +191,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       ]
     },
     { 
-      label: 'Inquiries', 
+      label: 'Enquiries', 
       href: '/admin/leads', 
       icon: Inbox,
       subItems: [
-        { label: 'All Leads', href: '/admin/leads' },
+        { label: 'All Enquiries', href: '/admin/leads' },
         { label: 'All Contact', href: '/admin/contacts' },
       ]
     },
+    { label: 'Customers', href: '/admin/customers', icon: Users },
     { label: 'Houseboat', href: '/admin/houseboat', icon: Anchor },
     { label: 'Cabs', href: '/admin/cabs', icon: Car },
     { label: 'Faqs', href: '/admin/faqs', icon: HelpCircle },
@@ -236,7 +238,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   ];
 
   return (
-    <div className="admin-layout selection:bg-blue-500/20">
+    <div className="admin-layout selection:bg-orange-500/20">
       {/* Sidebar */}
       <div className="admin-sidebar shadow-sm">
         

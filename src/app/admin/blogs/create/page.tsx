@@ -117,13 +117,13 @@ export default function CreateBlog() {
           {/* Article Content Section */}
           <div className="admin-form-card space-y-10">
             <h3 className="admin-form-section-title">
-              <div className="admin-page-title-indicator bg-blue-600"></div>
+              <div className="admin-page-title-indicator bg-orange-600"></div>
               Post Content
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
               <div className="admin-form-group md:col-span-2">
-                <label className="admin-form-label flex items-center gap-2"> <FileText size={12} className="text-blue-500" /> Title</label>
+                <label className="admin-form-label flex items-center gap-2"> <FileText size={12} className="text-orange-500" /> Title</label>
                 <input
                   type="text"
                   value={formData.title}
@@ -145,13 +145,13 @@ export default function CreateBlog() {
                   type="text"
                   value={formData.slug}
                   onChange={e => setFormData({ ...formData, slug: e.target.value })}
-                  className="admin-form-input font-medium h-12 text-blue-600 bg-slate-50/50"
+                  className="admin-form-input font-medium h-12 text-orange-600 bg-slate-50/50"
                   placeholder="best-time-to-visit-kerala"
                 />
               </div>
 
               <div className="admin-form-group md:col-span-2 pt-4 border-t border-slate-50">
-                <label className="admin-form-label flex items-center gap-2 mb-4"> <Layers size={14} className="text-blue-500" /> Content</label>
+                <label className="admin-form-label flex items-center gap-2 mb-4"> <Layers size={14} className="text-orange-500" /> Content</label>
                 <div className="bg-slate-50/30 rounded-2xl p-1 border border-slate-100 shadow-inner">
                   <RichTextEditor
                     value={formData.content}
@@ -205,7 +205,7 @@ export default function CreateBlog() {
             {/* Featured Image */}
             <div className="group/media">
               <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-8">
-                <div className="w-1 h-3 bg-purple-500 rounded-full"></div>
+                <div className="w-1 h-3 bg-orange-500 rounded-full"></div>
                 Featured Image
               </h4>
               <div className="bg-slate-50/50 rounded-2xl p-2 border border-slate-100">
@@ -220,12 +220,12 @@ export default function CreateBlog() {
             {/* Post details */}
             <div className="pt-10 border-t border-slate-50">
               <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-8">
-                <div className="w-1 h-3 bg-blue-500 rounded-full"></div>
+                <div className="w-1 h-3 bg-orange-500 rounded-full"></div>
                 Metadata
               </h4>
               <div className="space-y-6">
                 <div className="admin-form-group">
-                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <Tag size={10} className="text-blue-500" /> Category</label>
+                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <Tag size={10} className="text-orange-500" /> Category</label>
                   <select
                     value={formData.category}
                     onChange={e => setFormData({ ...formData, category: e.target.value })}
@@ -241,7 +241,7 @@ export default function CreateBlog() {
                 </div>
 
                 <div className="admin-form-group">
-                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <Clock size={10} className="text-indigo-500" /> Publish Date</label>
+                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <Clock size={10} className="text-orange-500" /> Publish Date</label>
                   <input
                     type="date"
                     value={formData.publishDate}
@@ -282,7 +282,7 @@ export default function CreateBlog() {
                 </div>
 
                 <div className="admin-form-group">
-                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <Layers size={10} className="text-indigo-500" /> Meta Description</label>
+                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <Layers size={10} className="text-orange-500" /> Meta Description</label>
                   <textarea
                     rows={3}
                     value={formData.seo_meta}
@@ -296,7 +296,7 @@ export default function CreateBlog() {
 
             <div className="pt-10 border-t border-slate-50">
               <div className="flex items-center gap-3 bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
-                <div className="w-8 h-8 rounded-xl bg-blue-100/50 flex items-center justify-center text-blue-600 shrink-0">
+                <div className="w-8 h-8 rounded-xl bg-orange-100/50 flex items-center justify-center text-orange-600 shrink-0">
                   <Clock size={16} />
                 </div>
                 <div>

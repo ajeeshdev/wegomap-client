@@ -49,7 +49,7 @@ export default function SEOAdmin() {
       <div className="admin-page-header">
         <div>
           <h2 className="admin-page-title text-2xl font-bold flex items-center gap-2">
-            <Globe className="text-indigo-600" size={24} />
+            <Globe className="text-orange-600" size={24} />
             SEO Management
           </h2>
           <p className="admin-page-subtitle mt-1 text-slate-500">Optimize search engine presence for your main website pages</p>
@@ -59,7 +59,7 @@ export default function SEOAdmin() {
             <input 
                 type="text" 
                 placeholder="Search pages..." 
-                className="admin-form-input pl-10 w-64 h-11 bg-white border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/20"
+                className="admin-form-input pl-10 w-64 h-11 bg-white border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -68,7 +68,7 @@ export default function SEOAdmin() {
 
       {loading ? (
         <div className="admin-form-card flex flex-col items-center justify-center p-20 gap-4 bg-white rounded-2xl border border-slate-100 shadow-sm mt-8">
-          <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
           <p className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Synchronizing SEO Data...</p>
         </div>
       ) : (
@@ -88,10 +88,10 @@ export default function SEOAdmin() {
                 {sortedData.map((item: any, index: number) => {
                     const hasSEO = item.seo_title && (item.seo_description || item.seo_meta);
                     return (
-                        <tr key={item._id} className="group hover:bg-indigo-50/30 transition-colors">
+                        <tr key={item._id} className="group hover:bg-orange-50/30 transition-colors">
                             <td className="px-8 py-5 text-slate-400 text-xs font-medium">{index + 1}</td>
                             <td className="px-6 py-5">
-                            <div className="font-bold text-slate-900 text-sm group-hover:text-indigo-600 transition-colors">
+                            <div className="font-bold text-slate-900 text-sm group-hover:text-orange-600 transition-colors">
                                 {item.title || item.slug}
                             </div>
                             <div className="text-[10px] text-slate-400 mt-1 font-mono">/{item.slug}</div>
@@ -115,7 +115,7 @@ export default function SEOAdmin() {
                             <td className="px-8 py-5 text-right">
                             <Link 
                                 href={`/admin/seo/${item._id}/edit`} 
-                                className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-xl text-indigo-600 hover:bg-indigo-600 hover:text-white transition-all shadow-sm active:scale-95 text-xs font-bold"
+                                className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-xl text-orange-600 hover:bg-orange-600 hover:text-white transition-all shadow-sm active:scale-95 text-xs font-bold"
                             >
                                 <Globe size={14} /> Configure
                             </Link>

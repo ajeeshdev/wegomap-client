@@ -4,12 +4,19 @@
 }
 .blog-detail-page .hero-section {
   position: relative;
-  min-height: 55vh;
+  height: 250px;
+  min-height: 250px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   background: #0f172a;
+}
+@media (min-width: 768px) {
+  .blog-detail-page .hero-section {
+    height: 380px;
+    min-height: 380px;
+  }
 }
 .blog-detail-page .hero-section .hero-image {
   -o-object-fit: cover;

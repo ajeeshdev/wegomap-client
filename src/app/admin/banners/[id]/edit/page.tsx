@@ -107,7 +107,7 @@ export default function EditBanner() {
         <div className="space-y-8">
           <div className="admin-form-card">
             <h3 className="admin-form-section-title">
-              <div className="admin-section-icon admin-section-icon--blue"></div>
+              <div className="admin-section-icon admin-section-icon--orange"></div>
               Banner Content & Identity
             </h3>
 
@@ -115,7 +115,7 @@ export default function EditBanner() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="admin-form-group">
                   <label className="admin-form-label flex items-center gap-3 mb-3">
-                    <Layout size={14} className="text-blue-500" /> Page Identification Name
+                    <Layout size={14} className="text-orange-500" /> Page Identification Name
                   </label>
                   <input 
                     type="text" 
@@ -145,7 +145,7 @@ export default function EditBanner() {
 
               <div className="admin-form-group">
                 <label className="admin-form-label flex items-center gap-3 mb-3">
-                  <Type size={14} className="text-blue-500" /> Primary Banner Headline
+                  <Type size={14} className="text-orange-500" /> Primary Banner Headline
                 </label>
                 <input 
                   type="text" 
@@ -183,7 +183,7 @@ export default function EditBanner() {
         <div className="admin-form-sidebar">
           <div className="admin-form-card p-8 space-y-8">
             <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2">
-              <div className="w-1 h-3 bg-blue-500 rounded-full"></div>
+              <div className="w-1 h-3 bg-orange-500 rounded-full"></div>
               Banner Options
             </h4>
             

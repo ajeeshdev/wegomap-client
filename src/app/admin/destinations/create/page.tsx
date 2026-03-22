@@ -91,7 +91,7 @@ export default function CreateDestination() {
                     </div>
                     <div className="admin-form-group">
                        <label>URL Slug</label>
-                       <input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} placeholder="munnar" className="font-mono text-indigo-600" />
+                       <input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} placeholder="munnar" className="font-mono text-orange-600" />
                     </div>
                  </div>
               </div>

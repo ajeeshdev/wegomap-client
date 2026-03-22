@@ -189,7 +189,7 @@ export default function Home() {
 
         if (pagesData.success) {
             const home = pagesData.data.find((p: any) => p.slug === 'home');
-            const corporate = pagesData.data.find((p: any) => p.slug === 'corporate-event-management-company-kochi');
+            const corporate = pagesData.data.find((p: any) => p.slug === 'events');
             if (home) setHomePage(home);
             if (corporate) setCorporatePage(corporate);
 
@@ -797,7 +797,7 @@ export default function Home() {
                   dangerouslySetInnerHTML={{ __html: homeSections.find(s => s.id === 'corporate')?.description || "Wegomap delivers world-class event management services in Kochi and beyond." }}
               />
             </div>
-            <Link href="/corporate-event-management-company-kochi" className="viewAllBtn">
+            <Link href="/events" className="viewAllBtn">
               View All <ArrowRight size={18} />
             </Link>
           </div>
@@ -995,7 +995,7 @@ export default function Home() {
 
       {/* Requested Kerala Specialist Thin Section */}
       {(homeSections.find(s => s.id === 'seo')?.enabled ?? true) && (
-      <section className="services-list readmore-section set-padding-md pb-5 bg-white">
+      <section className="services-list readmore-section commonPadding bg-white">
         <div className="homeContainer">
           <div className="row">
             <div className="col-xl-12 mx-auto">

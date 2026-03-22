@@ -124,7 +124,7 @@ export default function ServicesAdminPage() {
             <div className="admin-table-container">
                 {loading ? (
                     <div className="cms-empty-state">
-                        <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                        <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
                         <p className="cms-empty-text">Loading Service Modules...</p>
                     </div>
                 ) : (

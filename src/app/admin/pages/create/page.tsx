@@ -111,7 +111,7 @@ export default function CreatePage() {
                        </div>
                        <div className="admin-form-group">
                           <label>Public URL Path</label>
-                          <div className="relative"><span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono">/</span><input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} className="pl-6 font-mono text-indigo-600" /></div>
+                          <div className="relative"><span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono">/</span><input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} className="pl-6 font-mono text-orange-600" /></div>
                        </div>
                     </div>
                  </div>
@@ -144,7 +144,7 @@ export default function CreatePage() {
                     <div className="card-header border-slate-800"><h4 className="serif text-white">Google Search Preview</h4></div>
                     <div className="p-8">
                        <div className="max-w-xl">
-                          <h4 className="text-blue-400 text-xl font-bold mb-1">{formData.seo_title || formData.title || 'Page Title'}</h4>
+                          <h4 className="text-orange-400 text-xl font-bold mb-1">{formData.seo_title || formData.title || 'Page Title'}</h4>
                           <p className="text-emerald-500 text-xs font-mono mb-2">https://wegomap.digital/{formData.slug || 'url-slug'}</p>
                           <p className="text-slate-400 text-sm italic">{formData.seo_description || 'No description provided.'}</p>
                        </div>

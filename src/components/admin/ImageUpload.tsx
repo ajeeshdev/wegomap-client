@@ -8,12 +8,13 @@ interface ImageUploadProps {
   value: string;
   onChange: (url: string) => void;
   label?: string;
-  size?: 'standard' | 'small' | 'icon';
+  size?: 'standard' | 'small' | 'icon' | 'landscape';
+  objectFit?: 'cover' | 'contain';
   hideUrlInput?: boolean;
   hideRemove?: boolean;
 }
 
-export default function ImageUpload({ value, onChange, label = "Featured Image", size = 'standard', hideUrlInput = true, hideRemove = false }: ImageUploadProps) {
+export default function ImageUpload({ value, onChange, label = "Featured Image", size = 'standard', objectFit = 'cover', hideUrlInput = true, hideRemove = false }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -76,57 +77,58 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
     <div className="space-y-3">
       {label ? (
         <div className="flex items-center justify-between">
-            <label className="admin-form-label !mb-0 flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-indigo-600"></div>
-                {label}
-            </label>
-            {value && !hideRemove && (
-                <button 
-                   onClick={removeImage}
-                   className="text-[10px] font-black text-rose-500 uppercase tracking-widest hover:text-rose-600 transition-colors flex items-center gap-1.5"
-                >
-                   <X size={10} strokeWidth={3} /> Remove
-                </button>
-            )}
+          <label className="admin-form-label !mb-0 flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-orange-600"></div>
+            {label}
+          </label>
+          {value && !hideRemove && (
+            <button
+              onClick={removeImage}
+              className="text-[10px] font-black text-rose-500 uppercase tracking-widest hover:text-rose-600 transition-colors flex items-center gap-1.5"
+            >
+              <X size={10} strokeWidth={3} /> Remove
+            </button>
+          )}
         </div>
       ) : null}
 
       {value ? (
-        <div className={`relative group overflow-hidden rounded-2xl border-2 border-slate-100 bg-slate-50 transition-all hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-500/5 ${size === 'icon' ? 'w-24 h-24 mx-auto' :
-            size === 'small' ? 'aspect-[4/3]' :
+        <div className={`relative group overflow-hidden rounded-2xl border-2 border-slate-100 bg-slate-50 transition-all hover:border-orange-200 hover:shadow-xl hover:shadow-orange-500/5 ${size === 'icon' ? 'w-24 h-24 mx-auto' :
+          size === 'small' ? 'aspect-[4/3]' :
+            size === 'landscape' ? 'aspect-[3/1]' :
               'aspect-video'
           }`}>
-          <img src={value} alt="Preview" className={`w-full h-full ${size === 'icon' ? 'object-contain p-2' : 'object-cover'}`} />
-          
+          <img src={value} alt="Preview" className={`w-full h-full ${size === 'icon' ? 'object-contain p-2' : (objectFit === 'contain' ? 'object-contain' : 'object-cover')}`} />
+
           <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-             <div className="bg-white/95 backdrop-blur-sm rounded-xl p-3 flex items-center justify-between shadow-lg border border-indigo-50">
-                <div className="flex items-center gap-2">
-                   <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
-                       <CheckCircle2 size={12} strokeWidth={3} />
-                   </div>
-                   <span className="text-[10px] font-black text-slate-700 uppercase tracking-tight">Active Image</span>
+            <div className="bg-white/95 backdrop-blur-sm rounded-xl p-3 flex items-center justify-between shadow-lg border border-orange-50">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
+                  <CheckCircle2 size={12} strokeWidth={3} />
                 </div>
-                
-                <div className="relative">
-                    <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleFileChange}
-                        disabled={uploading}
-                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                    />
-                    <button className="bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-indigo-700 transition-all flex items-center gap-2">
-                        {uploading ? <Loader2 size={10} className="animate-spin" /> : <Upload size={10} strokeWidth={3} />}
-                        Change
-                    </button>
-                </div>
-             </div>
+                <span className="text-[10px] font-black text-slate-700 uppercase tracking-tight">Active Image</span>
+              </div>
+
+              <div className="relative">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  disabled={uploading}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                />
+                <button className="bg-orange-600 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-orange-700 transition-all flex items-center gap-2">
+                  {uploading ? <Loader2 size={10} className="animate-spin" /> : <Upload size={10} strokeWidth={3} />}
+                  Change
+                </button>
+              </div>
+            </div>
           </div>
 
           {!hideRemove && (
             <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
               <button
-                 onClick={removeImage}
+                onClick={removeImage}
                 className="w-8 h-8 bg-rose-500 text-white rounded-lg flex items-center justify-center shadow-lg hover:bg-rose-600 transition-all active:scale-90"
                 title="Remove image"
               >
@@ -146,19 +148,19 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
           />
           <div className={`
             border-2 border-dashed rounded-2xl p-10 flex flex-col items-center justify-center gap-4 transition-all duration-300
-            ${uploading ? 'bg-indigo-50/50 border-indigo-200' : 'bg-slate-50/50 border-slate-200 group-hover:bg-white group-hover:border-indigo-400 group-hover:shadow-2xl group-hover:shadow-indigo-500/10'}
+            ${uploading ? 'bg-orange-50/50 border-orange-200' : 'bg-slate-50/50 border-slate-200 group-hover:bg-white group-hover:border-orange-400 group-hover:shadow-2xl group-hover:shadow-orange-500/10'}
           `}>
             <div className={`
               w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500
-              ${uploading ? 'bg-indigo-600 text-white animate-bounce' : 'bg-white text-indigo-400 shadow-sm group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white'}
+              ${uploading ? 'bg-orange-600 text-white animate-bounce' : 'bg-white text-orange-400 shadow-sm group-hover:scale-110 group-hover:bg-orange-600 group-hover:text-white'}
             `}>
               {uploading ? <Loader2 size={24} className="animate-spin" /> : <Upload size={22} strokeWidth={2.5} />}
             </div>
             <div className="text-center">
-              <p className="text-[11px] font-black uppercase tracking-[0.15em] text-slate-900 group-hover:text-indigo-600 transition-colors">
+              <p className="text-[11px] font-black uppercase tracking-[0.15em] text-slate-900 group-hover:text-orange-600 transition-colors">
                 {uploading ? 'Processing Architecture...' : 'Click to upload media'}
               </p>
-              <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-2 bg-slate-100 px-3 py-1 rounded-full group-hover:bg-indigo-50 group-hover:text-indigo-400 transition-colors">
+              <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-2 bg-slate-100 px-3 py-1 rounded-full group-hover:bg-orange-50 group-hover:text-orange-400 transition-colors">
                 High-res JPG, PNG or WebP
               </p>
             </div>
@@ -176,16 +178,16 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
       {!hideUrlInput && (
         <div className="pt-2">
           <div className="relative">
-              <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
-                  <Globe size={10} />
-              </div>
-              <input
-                type="text"
-                placeholder="External Image URL..."
-                value={value}
-                onChange={e => onChange(e.target.value)}
-                className="admin-form-input !pl-8 text-[10px] h-9 rounded-lg font-mono bg-slate-50 border-slate-100 focus:bg-white"
-              />
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+              <Globe size={10} />
+            </div>
+            <input
+              type="text"
+              placeholder="External Image URL..."
+              value={value}
+              onChange={e => onChange(e.target.value)}
+              className="admin-form-input !pl-8 text-[10px] h-9 rounded-lg font-mono bg-slate-50 border-slate-100 focus:bg-white"
+            />
           </div>
         </div>
       )}

@@ -87,7 +87,7 @@ export default function CreateTestimonial() {
               <div className="admin-form-grid-2">
                 <div className="admin-form-group">
                   <label className="admin-form-label flex items-center gap-3 mb-4">
-                    <User size={14} className="text-blue-500" /> Customer Name
+                    <User size={14} className="text-orange-500" /> Customer Name
                   </label>
                   <input 
                     type="text" 
@@ -132,7 +132,7 @@ export default function CreateTestimonial() {
         <div className="admin-form-sidebar">
           <div className="admin-form-card p-8 space-y-10">
              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 flex items-center gap-3">
-              <div className="w-1.5 h-4 bg-blue-500 rounded-full"></div>
+              <div className="w-1.5 h-4 bg-orange-500 rounded-full"></div>
               Rating
             </h4>
             

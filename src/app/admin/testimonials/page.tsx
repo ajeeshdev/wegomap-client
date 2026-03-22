@@ -136,7 +136,7 @@ export default function TestimonialsAdmin() {
                     </td>
                     <td className="px-8 py-7 text-right">
                       <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-4 group-hover:translate-x-0">
-                        <Link href={`/admin/testimonials/${item._id}/edit`} className="p-3 bg-white border border-slate-200 rounded-2xl text-blue-600 hover:bg-blue-600 hover:text-white transition-all shadow-sm active:scale-95 group/edit" title="Edit">
+                        <Link href={`/admin/testimonials/${item._id}/edit`} className="p-3 bg-white border border-slate-200 rounded-2xl text-orange-600 hover:bg-orange-600 hover:text-white transition-all shadow-sm active:scale-95 group/edit" title="Edit">
                           <Edit size={18} className="group-hover/edit:rotate-12 transition-transform duration-500" />
                         </Link>
                         <button onClick={() => handleDelete(item._id)} className="p-3 bg-white border border-slate-200 rounded-2xl text-rose-500 hover:bg-rose-500 hover:text-white transition-all shadow-sm active:scale-95 shrink-0" title="Delete">
@@ -181,7 +181,7 @@ export default function TestimonialsAdmin() {
                     <ShieldCheck size={16} className="text-emerald-500" /> VERIFIED
                   </div>
                   <div className="flex items-center gap-3 text-slate-500 text-[10px] font-black uppercase tracking-[0.3em] leading-none">
-                    <Zap size={16} className="text-blue-500 animate-pulse" /> LIVE CONTENT
+                    <Zap size={16} className="text-orange-500 animate-pulse" /> LIVE CONTENT
                   </div>
                 </div>
               </div>

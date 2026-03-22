@@ -3274,26 +3274,29 @@ footer .footerBottom .socialLinks a:hover {
 
 .pageBanner {
   position: relative;
-  height: 60vh;
+  height: 250px;
+  min-height: 250px;
   width: 100%;
   display: flex;
   align-items: center;
   overflow: hidden;
   background-color: #0f172a;
   margin-top: 60px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 @media (min-width: 768px) {
   .pageBanner {
-    height: 70vh;
+    height: 480px;
     margin-top: 85px;
   }
 }
 .pageBanner.noImage {
-  height: 40vh;
+  height: 200px;
+  min-height: 200px;
 }
 @media (min-width: 768px) {
   .pageBanner.noImage {
-    height: 45vh;
+    height: 480px;
   }
 }
 .pageBanner .pageBannerImg {
@@ -3315,24 +3318,28 @@ footer .footerBottom .socialLinks a:hover {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
-  opacity: 0.6;
+  opacity: 0.5;
+  transition: transform 0.8s ease;
+}
+.pageBanner:hover .pageBannerImg img {
+  transform: scale(1.05);
 }
 .pageBanner .pageBannerOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, #0f172a 0%, #0f172a 30%, rgba(15, 23, 42, 0.4) 60%, rgba(15, 23, 42, 0) 100%);
+  background: linear-gradient(90deg, #0f172a 0%, #0f172a 35%, rgba(15, 23, 42, 0.4) 65%, rgba(15, 23, 42, 0) 100%);
   z-index: 1;
 }
 @media (max-width: 1023px) {
   .pageBanner .pageBannerOverlay {
-    background: linear-gradient(to bottom, rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.8));
+    background: linear-gradient(to bottom, rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.9));
   }
 }
 .pageBanner .bannerBgText {
   position: absolute;
-  bottom: -2rem;
+  bottom: -1rem;
   left: 2rem;
-  font-size: 15rem;
+  font-size: 8rem;
   font-weight: 950;
   color: rgba(255, 255, 255, 0.03);
   line-height: 1;
@@ -3341,6 +3348,7 @@ footer .footerBottom .socialLinks a:hover {
   pointer-events: none;
   z-index: 0;
   white-space: nowrap;
+  transition: all 0.5s ease;
 }
 @media (max-width: 1023px) {
   .pageBanner .bannerBgText {
@@ -3386,17 +3394,17 @@ footer .footerBottom .socialLinks a:hover {
   color: #FF6B35;
 }
 .pageBanner .pageBannerContent {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 .pageBanner .pageBannerContent .pageBannerPreTitle {
   display: inline-block;
   font-family: var(--font-writing);
-  font-size: 2rem;
+  font-size: 1.5rem;
   background: linear-gradient(90deg, #1673B8 0%, #FB7F33 75%, #fff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: rem;
+  margin-bottom: 0.5rem;
   position: relative;
   z-index: 10;
   transform: rotate(-3deg);
@@ -3404,14 +3412,14 @@ footer .footerBottom .socialLinks a:hover {
 }
 @media (min-width: 768px) {
   .pageBanner .pageBannerContent .pageBannerPreTitle {
-    font-size: 3rem;
+    font-size: 2rem;
   }
 }
 .pageBanner .pageBannerContent .pageBannerTitle {
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 950;
-  line-height: 0.95;
-  margin-bottom: 1.5rem;
+  line-height: 1;
+  margin-bottom: 0.75rem;
   letter-spacing: -0.05em;
   text-transform: uppercase;
   color: #ffffff;
@@ -3422,7 +3430,7 @@ footer .footerBottom .socialLinks a:hover {
 }
 @media (min-width: 768px) {
   .pageBanner .pageBannerContent .pageBannerTitle {
-    font-size: 4rem;
+    font-size: 3.5rem;
   }
 }
 .pageBanner .pageBannerContent .pageBannerTitle .italicText {
@@ -3434,31 +3442,31 @@ footer .footerBottom .socialLinks a:hover {
   line-height: 1;
 }
 .pageBanner .pageBannerContent .pageBannerDescription {
-  font-size: 1.125rem;
-  font-weight: 700;
+  font-size: 0.95rem;
+  font-weight: 600;
   color: #ffffff;
-  margin-bottom: 2.5rem;
-  max-width: 600px;
+  margin-bottom: 1.5rem;
+  max-width: 500px;
   border-left: 4px solid #FF6B35;
-  padding: 0.5rem 0 0.5rem 1.75rem;
+  padding: 0.25rem 0 0.25rem 1.5rem;
   background: linear-gradient(90deg, rgba(255, 107, 53, 0.1) 0%, transparent 100%);
   line-height: 1.6;
   opacity: 0.9;
 }
 @media (max-width: 767px) {
   .pageBanner .pageBannerContent .pageBannerDescription {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     padding: 0.25rem 0 0.25rem 1rem;
   }
 }
 .pageBanner .pageBannerContent .pageBannerSubtitle {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
   max-width: 500px;
   border-left: 4px solid #FF6B35;
-  padding: 0.5rem 0 0.5rem 1.5rem;
+  padding: 0.4rem 0 0.4rem 1.25rem;
   background: linear-gradient(90deg, rgba(255, 107, 53, 0.1) 0%, transparent 100%);
 }
 .pageBanner .pageBreadcrumb {
@@ -3478,7 +3486,7 @@ footer .footerBottom .socialLinks a:hover {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
   color: #cbd5e1;
   text-decoration: none;
@@ -3493,6 +3501,22 @@ footer .footerBottom .socialLinks a:hover {
 }
 .pageBanner .pageBreadcrumb .breadcrumbSep {
   color: rgba(255, 255, 255, 0.3);
+}
+.pageBanner.variant-large {
+  height: 60vh;
+}
+@media (min-width: 768px) {
+  .pageBanner.variant-large {
+    height: 70vh;
+  }
+}
+.pageBanner.variant-large .bannerBgText {
+  font-size: 15rem;
+}
+@media (min-width: 768px) {
+  .pageBanner.variant-large .pageBannerContent .pageBannerTitle {
+    font-size: 5rem;
+  }
 }
 
 :root {
@@ -11676,16 +11700,19 @@ button.wishlistBtn {
 
 .tourCatBanner {
   position: relative;
-  height: 70vh;
+  height: 250px;
+  min-height: 250px;
   width: 100%;
   display: flex;
   align-items: center;
   overflow: hidden;
   background-color: #0f172a;
+  margin-top: 60px;
 }
 @media (min-width: 768px) {
   .tourCatBanner {
-    height: 85vh;
+    height: 350px;
+    margin-top: 85px;
   }
 }
 .tourCatBanner .tourCatBannerImg {
@@ -11754,17 +11781,17 @@ button.wishlistBtn {
   }
 }
 .tourCatBanner .tourCatBannerContent .tourCatBannerTitle {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 950;
-  line-height: 0.95;
-  margin-bottom: 1.5rem;
+  line-height: 1;
+  margin-bottom: 0.75rem;
   letter-spacing: -0.05em;
   text-transform: uppercase;
   font-style: italic;
 }
 @media (min-width: 768px) {
   .tourCatBanner .tourCatBannerContent .tourCatBannerTitle {
-    font-size: 6rem;
+    font-size: 4rem;
   }
 }
 .tourCatBanner .tourCatBannerContent .tourCatBannerTitle span {
@@ -11772,15 +11799,16 @@ button.wishlistBtn {
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
   display: block;
   letter-spacing: normal;
+  line-height: 1;
 }
 .tourCatBanner .tourCatBannerContent .tourCatBannerSub {
-  font-size: 1.125rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
   max-width: 500px;
   border-left: 4px solid #FF6B35;
-  padding: 0.5rem 0 0.5rem 1.5rem;
+  padding: 0.4rem 0 0.4rem 1.25rem;
   background: linear-gradient(90deg, rgba(255, 107, 53, 0.1) 0%, transparent 100%);
 }
 .tourCatBanner .tourCatBannerContent .tourCatRating {
@@ -13275,12 +13303,13 @@ button.wishlistBtn {
 }
 .infoBodySection .infoGrid .infoCard {
   background-color: #ffffff;
-  border-radius: 1.5rem;
+  border-radius: 2rem;
   padding: 2.5rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
   position: relative;
   overflow: hidden;
+  border: 1px solid #f1f5f9;
 }
 .infoBodySection .infoGrid .infoCard::before {
   content: "";
@@ -13289,21 +13318,23 @@ button.wishlistBtn {
   left: 0;
   width: 100%;
   height: 4px;
-  background-color: #1673B8;
+  background-color: #FF6B35;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.4s ease;
 }
 .infoBodySection .infoGrid .infoCard:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-12px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+  border-color: rgba(255, 107, 53, 0.2);
 }
 .infoBodySection .infoGrid .infoCard:hover::before {
   transform: scaleX(1);
 }
 .infoBodySection .infoGrid .infoCard:hover .infoCardIcon {
-  background-color: rgba(22, 115, 184, 0.2);
-  transform: scale(1.1);
+  background-color: rgba(255, 107, 53, 0.1);
+  transform: scale(1.1) rotate(5deg);
+  color: #FF6B35;
 }
 .infoBodySection .infoGrid .infoCard .infoCardIcon {
   display: flex;

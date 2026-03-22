@@ -25,6 +25,11 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
       {
+        protocol: 'https',
+        hostname: 'api.demo.wegomap.com',
+        pathname: '/uploads/**',
+      },
+      {
         protocol: 'http',
         hostname: '127.0.0.1',
         port: '5001',

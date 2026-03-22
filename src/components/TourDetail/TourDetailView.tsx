@@ -21,6 +21,13 @@ export default function TourDetailView({ id }: { id: string }) {
     const [activeAccordion, setActiveAccordion] = useState<number>(0);
     const [scrolled, setScrolled] = useState(false);
     const [wishlist, setWishlist] = useState<string[]>([]);
+    const [formData, setFormData] = useState({
+        name: '',
+        phone: '',
+        date: '',
+        guests: ''
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -183,6 +190,36 @@ export default function TourDetailView({ id }: { id: string }) {
         }
         if (id) getPackage();
     }, [id]);
+    
+    const handleFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        try {
+            const res = await fetch(`${API_URL}/leads`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: formData.name,
+                    phone: formData.phone,
+                    message: `Date: ${formData.date}, Guests: ${formData.guests}`,
+                    destination: pkg?.title,
+                    source: 'Website',
+                    url: typeof window !== "undefined" ? window.location.href : ""
+                })
+            });
+            const data = await res.json();
+            if (data.success) {
+                toast.success('Inquiry sent successfully!');
+                setFormData({ name: '', phone: '', date: '', guests: '' });
+            } else {
+                toast.error(data.error || 'Failed to send inquiry');
+            }
+        } catch (err) {
+            toast.error('Failed to send inquiry');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     if (loading) return (
         <div className="flex items-center justify-center min-h-screen bg-white">
@@ -378,37 +415,66 @@ export default function TourDetailView({ id }: { id: string }) {
                                     </div>
                                 </div>
 
-                                <form className="enquiryForm">
+                                <form className="enquiryForm" onSubmit={handleFormSubmit}>
                                     <div className="formField">
                                         <label>Full Name</label>
                                         <div className="inputWrap">
                                             <User size={18} />
-                                            <input type="text" placeholder="John Doe" required />
+                                            <input 
+                                                type="text" 
+                                                placeholder="John Doe" 
+                                                required 
+                                                value={formData.name}
+                                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                            />
                                         </div>
                                     </div>
                                     <div className="formField">
                                         <label>Phone Number</label>
                                         <div className="inputWrap">
                                             <Phone size={18} />
-                                            <input type="tel" placeholder="+91 80860 00000" required />
+                                            <input 
+                                                type="tel" 
+                                                placeholder="+91 80860 00000" 
+                                                required 
+                                                value={formData.phone}
+                                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                            />
                                         </div>
                                     </div>
                                     <div className="formField">
                                         <label>Travel Date</label>
                                         <div className="inputWrap">
                                             <Calendar size={18} />
-                                            <input type="text" placeholder="Approx. Date" onFocus={(e) => e.target.type = 'date'} onBlur={(e) => e.target.type = 'text'} />
+                                            <input 
+                                                type="text" 
+                                                placeholder="Approx. Date" 
+                                                onFocus={(e) => e.target.type = 'date'} 
+                                                onBlur={(e) => e.target.type = 'text'} 
+                                                value={formData.date}
+                                                onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                                            />
                                         </div>
                                     </div>
                                     <div className="formField">
                                         <label>Guests</label>
                                         <div className="inputWrap">
                                             <Users size={18} />
-                                            <input type="number" placeholder="No. of Adults" min="1" />
+                                            <input 
+                                                type="number" 
+                                                placeholder="No. of Adults" 
+                                                min="1" 
+                                                value={formData.guests}
+                                                onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
+                                            />
                                         </div>
                                     </div>
-                                    <button type="submit" className="submitBtn">
-                                        Request Itinerary
+                                    <button 
+                                        type="submit" 
+                                        className="submitBtn"
+                                        disabled={isSubmitting}
+                                    >
+                                        {isSubmitting ? 'Sending...' : 'Request Itinerary'}
                                     </button>
                                 </form>
 

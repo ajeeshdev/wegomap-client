@@ -4,134 +4,194 @@ import { API_URL } from '@/config';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Calendar, MapPin, ChevronRight, ArrowRight, Sparkles, Clock, Users, Ticket } from 'lucide-react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import { Calendar, MapPin, ArrowRight, Clock, Users, Ticket, Phone, ShieldCheck, Globe, Zap, MessageSquare, ChevronRight } from 'lucide-react';
 import DynamicPageBanner from '@/components/DynamicPageBanner';
 
-export default function EventsListingPage() {
+export default function EventsCombinedPage() {
     const [events, setEvents] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    const [pageContent, setPageContent] = useState<any>(null);
 
     useEffect(() => {
-        const fetchEvents = async () => {
+        const fetchAllData = async () => {
             try {
-                const [eventsRes, specRes] = await Promise.all([
+                const [eventsRes, specRes, optionsRes] = await Promise.all([
                     fetch(`${API_URL}/events`),
-                    fetch(`${API_URL}/special-events`)
+                    fetch(`${API_URL}/special-events`),
+                    fetch(`${API_URL}/options`)
                 ]);
                 const eventsData = await eventsRes.json();
                 const specData = await specRes.json();
+                const optionsData = await optionsRes.json();
                 
                 let allEvents: any[] = [];
                 if (eventsData.success) allEvents = [...allEvents, ...eventsData.data.map((e: any) => ({ ...e, type: 'Corporate' }))];
                 if (specData.success) allEvents = [...allEvents, ...specData.data.map((e: any) => ({ ...e, type: 'Special' }))];
                 
                 setEvents(allEvents);
+
+                if (optionsData.success && optionsData.data) {
+                    const opt = optionsData.data.find((o: any) => o.key === 'events_page_settings');
+                    if (opt) setPageContent(JSON.parse(opt.value));
+                }
             } catch (err) {
-                console.error("Failed to fetch events:", err);
+                console.error("Failed to fetch events data:", err);
             } finally {
                 setLoading(false);
             }
         };
-        fetchEvents();
+        fetchAllData();
     }, []);
 
-    if (loading) {
-        return (
-            <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-                <div className="flex flex-col items-center gap-4">
-                    <div className="w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
-                    <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">Loading Special Events...</p>
-                </div>
-            </div>
-        );
-    }
+    const corporate = pageContent?.corporate || {
+        subtitle: "Event Specialists",
+        title: "PREMIUM EVENT MANAGEMENT IN KERALA.",
+        description1: "At Wegomap, we redefine what it means to host an extraordinary gathering. Whether you're orchestrating a flagship corporate summit in Kochi or a milestone cultural celebration, our event management team blends creative vision with flawless technical execution.",
+        description2: "From high-impact venue selection and advanced staging to seamless guest logistics and digital engagement, we manage every layer of the experience. We don't just plan events; we create lasting impressions.",
+        statLabel: "Venues Partnered",
+        statCount: "100+"
+    };
+
+    const special = pageContent?.special || {
+        subtitle: "Curative Calendar",
+        title: "DISCOVER OUR CURATED CALENDAR.",
+        description: "From niche networking summits to grand public festivities, explore the events defined by Wegomap's signature excellence."
+    };
 
     return (
-        <main className="min-h-screen bg-white">
-            <Header />
+        <main className="eventsPage bg-white">
             
-            {/* Hero Section */}
+            {/* 1. Hero Banner */}
             <DynamicPageBanner
-                fallbackTitle="Special\nEvents"
-                fallbackSubtitle="Discover unique festivals, cultural celebrations, and exclusive activities across our destinations."
-                fallbackPreTitle="Memorable Moments"
-                fallbackImage="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=2000"
+                fallbackTitle="Experience the\nUnforgettable"
+                fallbackSubtitle="Wegomap orchestrates world-class corporate summits, cultural festivals, and bespoke celebrations across Kerala."
+                fallbackPreTitle="Premium Event Management"
+                fallbackImage="/uploads/categories/ubqf5mc4ve1g6yqwmnsyiyek9fkld9akyp6g2lar220406065334.jpg"
                 breadcrumbs={[{ label: 'Events' }]}
+                variant="standard"
             />
 
-            {/* Listing Grid */}
-            <section className="py-24 bg-white">
-                <div className="max-w-[1400px] mx-auto px-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                        {events.map((event, idx) => (
-                            <Link 
-                                key={event._id} 
-                                href={event.type === 'Special' ? `/special-events/${event.slug || event._id}` : `/events/${event.slug || event._id}`}
-                                className="group block"
-                                style={{ animationDelay: `${idx * 100}ms` }}
-                            >
-                                <div className="relative aspect-[4/5] rounded-[32px] overflow-hidden bg-slate-100 shadow-2xl shadow-slate-200/50 group-hover:shadow-purple-200/50 transition-all duration-700">
-                                    <Image 
-                                        src={event.images?.[0] || "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800"} 
-                                        alt={event.title}
-                                        fill
-                                        className="object-cover group-hover:scale-110 transition-transform duration-1000"
-                                        unoptimized
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
-                                    
-                                    <div className="absolute top-6 left-6 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-white text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
-                                        <Calendar size={12} className="text-purple-400" />
-                                        {event.date ? new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : 'Upcoming'}
-                                    </div>
+            {/* 2. Intro Section */}
+            <section className="events-intro">
+                <div className="homeContainer">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                        <div className="introContent">
+                            <div className="sectionHeader">
+                                <span className="sectionSubtitle">{corporate.subtitle}</span>
+                                <h2 className="sliderTitle">
+                                    {corporate.title}
+                                </h2>
+                            </div>
+                            
+                            <div className="contentBody">
+                                <p>{corporate.description1}</p>
+                                <p>{corporate.description2}</p>
+                            </div>
+                        </div>
 
-                                    {/* Type Badge */}
-                                    <div className={`absolute top-6 right-6 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${
-                                        event.type === 'Corporate' 
-                                        ? 'bg-blue-500/20 border-blue-500/30 text-blue-300' 
-                                        : 'bg-purple-500/20 border-purple-500/30 text-purple-300'
-                                    }`}>
-                                        {event.type}
-                                    </div>
+                        {/* Image Column on Right */}
+                        <div className="introImage">
+                            <div className="imageContainer">
+                                <Image
+                                    src="/uploads/premium-event-setup.png"
+                                    alt="Premium Corporate Event Specialist"
+                                    fill
+                                    unoptimized
+                                />
+                            </div>
+                            
+                            {/* Floating Highlight Card */}
+                            <div className="floatingStat">
+                                <div className="icon">
+                                    <Users size={28} />
+                                </div>
+                                <div className="info">
+                                    <span className="count">{corporate.statCount}</span>
+                                    <span className="label">{corporate.statLabel}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-                                    {/* Content Overlay */}
-                                    <div className="absolute bottom-0 left-0 right-0 p-8 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-700">
-                                        <div className="flex items-center gap-3 text-purple-400 text-[10px] font-black uppercase tracking-[0.2em] mb-3">
-                                            <MapPin size={12} /> {event.location || 'Special Location'}
+            {/* 3. Event Listing Section */}
+            <section className="events-listing">
+                <div className="homeContainer">
+                    <div className="sectionHeader !text-center !mx-auto mb-20 max-w-2xl">
+                        <div className="titleArea">
+                            <span className="sectionSubtitle">{special.subtitle}</span>
+                            <h2 className="sliderTitle">{special.title}</h2>
+                            <p className="sectionHeaderDescription mt-4 opacity-70">
+                                {special.description}
+                            </p>
+                        </div>
+                    </div>
+
+                    {loading ? (
+                        <div className="flex items-center justify-center py-20">
+                            <div className="w-12 h-12 border-4 border-slate-200 border-t-orange-500 rounded-full animate-spin"></div>
+                        </div>
+                    ) : (
+                        <div className="eventsGrid">
+                            {events.map((event, idx) => (
+                                <Link 
+                                    key={event._id} 
+                                    href={event.type === 'Special' ? `/special-events/${event.slug || event._id}` : `/events/${event.slug || event._id}`}
+                                    className="block h-full"
+                                >
+                                    <div className="packageCardSmall group h-full flex flex-col">
+                                        <div className="imageWrapper">
+                                            <Image
+                                                src={event.images?.[0] || "/assests/site/assets/images/event.jpg"}
+                                                alt={event.title}
+                                                fill
+                                                unoptimized
+                                            />
+                                            {/* Category Tag */}
+                                            <div className={`category-tag ${event.type === 'Corporate' ? 'corporate' : 'special'}`}>
+                                                {event.type}
+                                            </div>
                                         </div>
-                                        <h3 className="text-2xl md:text-3xl font-black text-white mb-4 leading-tight group-hover:text-purple-400 transition-colors">
-                                            {event.title}
-                                        </h3>
-                                        <div className="flex items-center justify-between">
-                                            <div className="flex items-center gap-4 text-slate-300 text-[11px] font-bold uppercase tracking-widest border-t border-white/10 pt-4 w-full">
-                                                <span className="flex items-center gap-2"><Clock size={12} /> Full Day</span>
-                                                <span className="flex items-center gap-2"><Users size={12} /> Limited Slots</span>
-                                                <div className="ml-auto w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-500">
-                                                    <ArrowRight size={18} />
+                                        
+                                        <div className="cardContent flex-1 flex flex-col">
+                                            <div className="location-meta flex items-center gap-2 mb-2 text-slate-400 font-semibold uppercase text-[10px] tracking-wider">
+                                                <MapPin size={12} className="text-orange-500" /> {event.location || 'Kochi, Kerala'}
+                                            </div>
+                                            <h4 className="packageTitle line-clamp-2 text-lg font-black text-slate-900 leading-tight">
+                                                {event.title}
+                                            </h4>
+                                            
+                                            <div className="flex items-center justify-between mt-auto pt-4">
+                                                <div className="flex items-center gap-2 font-black text-[10px] uppercase tracking-widest text-slate-400 group-hover:text-orange-500 transition-colors">
+                                                    Join Event <ArrowRight size={14} />
+                                                </div>
+                                                <div className="actionIcon !relative !right-0 !top-0 !transform-none !m-0">
+                                                    <ChevronRight size={18} />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </Link>
-                        ))}
-                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    )}
 
-                    {events.length === 0 && (
+                    {!loading && events.length === 0 && (
                         <div className="py-24 text-center">
-                            <div className="w-24 h-24 bg-slate-50 border border-slate-100 rounded-[32px] flex items-center justify-center mx-auto mb-8">
+                            <div className="w-24 h-24 bg-white border border-slate-100 rounded-[3rem] shadow-2xl flex items-center justify-center mx-auto mb-8 relative">
                                 <Ticket size={40} className="text-slate-200" />
+                                <div className="absolute top-0 right-0 w-6 h-6 bg-orange-500 rounded-full border-4 border-white"></div>
                             </div>
-                            <h3 className="text-2xl font-black text-slate-900 mb-2 uppercase tracking-tight">No Events Found</h3>
-                            <p className="text-slate-400 font-medium">We're currently planning more amazing experiences. Check back soon!</p>
+                            <h3 className="text-2xl font-black text-slate-900 mb-2 uppercase tracking-tight">No Active Events Found</h3>
+                            <p className="text-slate-400 font-medium max-w-md mx-auto">We're currently curating more premium experiences. Our calendar updates weekly!</p>
+                            <Link href="/contact" className="inline-block mt-8 text-xs font-black uppercase tracking-widest text-orange-500 border-b-2 border-orange-500 pb-1 hover:text-orange-600 hover:border-orange-600 transition-all">
+                                Get Early Access &rarr;
+                            </Link>
                         </div>
                     )}
                 </div>
             </section>
-
-            <Footer />
         </main>
     );
 }

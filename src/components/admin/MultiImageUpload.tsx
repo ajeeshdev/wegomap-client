@@ -71,7 +71,7 @@ export default function MultiImageUpload({ value, onChange, label = "Gallery Ass
   return (
     <div className="space-y-6">
       <label className="admin-form-label text-[10px] flex items-center gap-3 mb-2 font-black uppercase tracking-[0.2em] opacity-60">
-        <ImageIcon size={14} className="text-purple-500" /> {label}
+        <ImageIcon size={14} className="text-orange-500" /> {label}
       </label>
 
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
@@ -104,11 +104,11 @@ export default function MultiImageUpload({ value, onChange, label = "Gallery Ass
           />
           <div className={`
             h-full border-2 border-dashed rounded-[32px] flex flex-col items-center justify-center gap-3 transition-all duration-500
-            ${uploading ? 'bg-indigo-50/50 border-indigo-200 animate-pulse' : 'bg-slate-50 border-slate-200 hover:bg-white hover:border-indigo-400 hover:shadow-xl hover:shadow-indigo-500/10'}
+            ${uploading ? 'bg-orange-50/50 border-orange-200 animate-pulse' : 'bg-slate-50 border-slate-200 hover:bg-white hover:border-orange-400 hover:shadow-xl hover:shadow-orange-500/10'}
           `}>
             <div className={`
               w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm transition-all duration-700
-              ${uploading ? 'bg-indigo-600 text-white' : 'bg-white text-slate-400 border border-slate-100 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white'}
+              ${uploading ? 'bg-orange-600 text-white' : 'bg-white text-slate-400 border border-slate-100 group-hover:scale-110 group-hover:bg-orange-600 group-hover:text-white'}
             `}>
               {uploading ? <Loader2 size={24} className="animate-spin" /> : <Plus size={24} />}
             </div>
@@ -133,7 +133,7 @@ export default function MultiImageUpload({ value, onChange, label = "Gallery Ass
             rows={4}
             value={value.join('\n')}
             onChange={e => onChange(e.target.value.split('\n').filter(l => l))}
-            className="admin-form-textarea !bg-transparent border-none font-mono text-[9px] leading-relaxed text-indigo-900 h-32"
+            className="admin-form-textarea !bg-transparent border-none font-mono text-[9px] leading-relaxed text-orange-900 h-32"
             placeholder="Analytical list of URIs..."
           ></textarea>
         </div>

@@ -91,7 +91,7 @@ export default function CreateSpecialEvent() {
                 <div className="admin-form-grid-2">
                   <div className="admin-form-group">
                     <label className="admin-form-label flex items-center gap-3 mb-4">
-                      <Type size={14} className="text-blue-500" /> Name
+                      <Type size={14} className="text-orange-500" /> Name
                     </label>
                     <input 
                       type="text" 
@@ -165,7 +165,7 @@ export default function CreateSpecialEvent() {
         <div className="admin-form-sidebar">
           <div className="admin-form-card p-8 space-y-10">
             <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 flex items-center gap-3">
-              <div className="w-1.5 h-4 bg-blue-500 rounded-full"></div>
+              <div className="w-1.5 h-4 bg-orange-500 rounded-full"></div>
               Media
             </h4>
             <div className="space-y-8">
@@ -182,7 +182,7 @@ export default function CreateSpecialEvent() {
                 <select 
                   value={formData.status} 
                   onChange={e => setFormData({ ...formData, status: e.target.value })}
-                  className="admin-form-select font-black bg-slate-50 border-slate-100 rounded-2xl h-14 uppercase text-[10px] tracking-widest cursor-pointer hover:bg-white transition-all shadow-sm focus:ring-8 focus:ring-blue-500/5 text-center"
+                  className="admin-form-select font-black bg-slate-50 border-slate-100 rounded-2xl h-14 uppercase text-[10px] tracking-widest cursor-pointer hover:bg-white transition-all shadow-sm focus:ring-8 focus:ring-orange-500/5 text-center"
                 >
                   <option value="Active">Visible</option>
                   <option value="Hidden">Hidden</option>

@@ -20,7 +20,7 @@ interface DynamicPageBannerProps {
     fallbackSubtitle?: string;
     fallbackPreTitle?: string;
     fallbackImage?: string;
-    variant?: 'default' | 'thin';
+    variant?: 'standard' | 'large';
     breadcrumbs: { label: string; href?: string }[];
 }
 
@@ -31,7 +31,7 @@ export default function DynamicPageBanner({
     fallbackSubtitle, 
     fallbackPreTitle,
     fallbackImage,
-    variant = 'default',
+    variant = 'standard',
     breadcrumbs 
 }: DynamicPageBannerProps) {
     const pathname = usePathname();

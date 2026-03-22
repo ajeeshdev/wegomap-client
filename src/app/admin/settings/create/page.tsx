@@ -72,15 +72,15 @@ export default function CreateSetting() {
           <div className="admin-form-card">
             <div className="relative z-10 space-y-12">
               <h3 className="admin-form-section-title">
-                <div className="admin-section-icon admin-section-icon--blue"></div>
+                <div className="admin-section-icon admin-section-icon--orange"></div>
                 Structural JSON Matrix Definition
               </h3>
 
               <div className="admin-form-group">
                 <label className="admin-form-label flex items-center gap-3 mb-8">
-                  <Terminal size={18} className="text-blue-500" /> Administrative JSON Payload Manuscript (Definitions)
+                  <Terminal size={18} className="text-orange-500" /> Administrative JSON Payload Manuscript (Definitions)
                 </label>
-                <div className="bg-slate-900 rounded-[56px] p-10 border-4 border-slate-800 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.4)] relative group transition-all hover:shadow-indigo-500/10 hover:border-indigo-900/40">
+                <div className="bg-slate-900 rounded-[56px] p-10 border-4 border-slate-800 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.4)] relative group transition-all hover:shadow-orange-500/10 hover:border-orange-900/40">
                   <div className="absolute top-8 right-12 flex items-center gap-4 opacity-40 group-hover:opacity-100 transition-opacity">
                      <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_12px_rgba(16,185,129,0.8)]"></div>
                      <span className="text-[11px] font-black font-mono text-emerald-500 uppercase tracking-[0.3em]">SYNTAX: JSON_CORE_V4</span>
@@ -88,15 +88,15 @@ export default function CreateSetting() {
                   <textarea 
                     value={jsonInput} 
                     onChange={e => setJsonInput(e.target.value)} 
-                    className="w-full bg-transparent border-none outline-none focus:ring-0 font-mono text-base text-indigo-300 leading-relaxed min-h-[500px] scrollbar-hidden caret-white" 
+                    className="w-full bg-transparent border-none outline-none focus:ring-0 font-mono text-base text-orange-300 leading-relaxed min-h-[500px] scrollbar-hidden caret-white" 
                     rows={20}
                     placeholder='{ "key": "value" }'
                   ></textarea>
                 </div>
               </div>
               
-              <div className="p-10 bg-slate-50 border-2 border-slate-100 rounded-[48px] flex items-start gap-8 shadow-inner group/tip transition-all hover:bg-white hover:border-blue-100 hover:shadow-2xl hover:shadow-slate-200/40">
-                  <div className="w-16 h-16 rounded-3xl bg-white flex items-center justify-center text-blue-500 shadow-lg border border-slate-100 group-hover/tip:bg-indigo-600 group-hover/tip:text-white transition-all duration-700 transform group-hover/tip:scale-110">
+              <div className="p-10 bg-slate-50 border-2 border-slate-100 rounded-[48px] flex items-start gap-8 shadow-inner group/tip transition-all hover:bg-white hover:border-orange-100 hover:shadow-2xl hover:shadow-slate-200/40">
+                  <div className="w-16 h-16 rounded-3xl bg-white flex items-center justify-center text-orange-500 shadow-lg border border-slate-100 group-hover/tip:bg-orange-600 group-hover/tip:text-white transition-all duration-700 transform group-hover/tip:scale-110">
                     <Zap size={32} className="animate-pulse" />
                   </div>
                   <div className="space-y-3">
@@ -116,12 +116,12 @@ export default function CreateSetting() {
         <div className="admin-form-sidebar">
           <div className="admin-form-card p-8 space-y-10">
             <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 flex items-center gap-3">
-              <div className="w-1.5 h-4 bg-blue-500 rounded-full"></div>
+              <div className="w-1.5 h-4 bg-orange-500 rounded-full"></div>
               Structural Protocol Stack
             </h4>
             <div className="space-y-8">
-              <div className="flex items-center gap-5 bg-slate-50/50 p-6 rounded-[32px] border-2 border-slate-100 overflow-hidden group/lock hover:bg-white transition-all shadow-sm hover:border-indigo-100 hover:shadow-xl">
-                <div className="w-12 h-12 rounded-2xl bg-blue-100/50 flex items-center justify-center text-blue-600 shrink-0 group-hover/lock:bg-blue-600 group-hover/lock:text-white transition-all duration-700 shadow-sm">
+              <div className="flex items-center gap-5 bg-slate-50/50 p-6 rounded-[32px] border-2 border-slate-100 overflow-hidden group/lock hover:bg-white transition-all shadow-sm hover:border-orange-100 hover:shadow-xl">
+                <div className="w-12 h-12 rounded-2xl bg-orange-100/50 flex items-center justify-center text-orange-600 shrink-0 group-hover/lock:bg-orange-600 group-hover/lock:text-white transition-all duration-700 shadow-sm">
                   <ShieldCheck size={24} />
                 </div>
                 <div>
@@ -142,10 +142,10 @@ export default function CreateSetting() {
             </div>
           </div>
 
-          <div className="admin-form-card p-12 bg-slate-900 border-slate-800 relative overflow-hidden h-80 group shadow-2xl shadow-indigo-950/20 mt-6 text-center">
-             <div className="absolute top-0 right-0 w-56 h-56 bg-indigo-500/10 rounded-bl-full blur-[70px]"></div>
+          <div className="admin-form-card p-12 bg-slate-900 border-slate-800 relative overflow-hidden h-80 group shadow-2xl shadow-orange-950/20 mt-6 text-center">
+             <div className="absolute top-0 right-0 w-56 h-56 bg-orange-500/10 rounded-bl-full blur-[70px]"></div>
              <div className="relative z-10 flex flex-col items-center justify-center gap-10 py-4 h-full">
-               <div className="admin-icon-box bg-white/10 text-white w-24 h-24 rounded-[40px] border border-white/20 backdrop-blur-3xl group-hover:bg-indigo-600 group-hover:border-indigo-500 transition-all duration-700 shadow-2xl transform group-hover:scale-125 group-hover:rotate-12">
+               <div className="admin-icon-box bg-white/10 text-white w-24 h-24 rounded-[40px] border border-white/20 backdrop-blur-3xl group-hover:bg-orange-600 group-hover:border-orange-500 transition-all duration-700 shadow-2xl transform group-hover:scale-125 group-hover:rotate-12">
                  <Layers size={40} className="animate-pulse" />
                </div>
                <div className="admin-space-y-4">

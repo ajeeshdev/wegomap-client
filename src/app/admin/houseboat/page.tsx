@@ -68,7 +68,7 @@ export default function HouseboatPricingAdmin() {
 
   if (loading) return (
     <div className="cms-page-wrapper flex items-center justify-center p-20">
-      <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+      <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
     </div>
   );
 
@@ -88,7 +88,7 @@ export default function HouseboatPricingAdmin() {
         <div className="grid grid-cols-1 gap-8">
           {['deluxe', 'premium', 'luxury'].map((cat) => (
             <div key={cat} className="admin-card group">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-bl-full -mr-16 -mt-16 group-hover:bg-blue-50 transition-colors duration-500"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-bl-full -mr-16 -mt-16 group-hover:bg-orange-50 transition-colors duration-500"></div>
               
               <div className="flex flex-col md:flex-row gap-12 relative z-10">
                 <div className="w-full md:w-1/3">

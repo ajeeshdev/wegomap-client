@@ -122,7 +122,7 @@ export default function EditTestimonial() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
                 <div className="admin-form-group">
                   <label className="admin-form-label flex items-center gap-2 mb-3">
-                    <User size={12} className="text-blue-500" /> Full Name
+                    <User size={12} className="text-orange-500" /> Full Name
                   </label>
                   <input 
                     type="text" 
@@ -167,7 +167,7 @@ export default function EditTestimonial() {
         <div className="admin-form-sidebar">
           <div className="admin-form-card p-8 space-y-10">
              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 flex items-center gap-3">
-              <div className="w-1.5 h-4 bg-blue-500 rounded-full"></div>
+              <div className="w-1.5 h-4 bg-orange-500 rounded-full"></div>
               Rating
             </h4>
             
@@ -213,13 +213,13 @@ export default function EditTestimonial() {
             </div>
           </div>
 
-          <div className="admin-form-card p-10 bg-slate-900 border-slate-800 relative overflow-hidden group shadow-2xl shadow-blue-950/20 mt-6">
+          <div className="admin-form-card p-10 bg-slate-900 border-slate-800 relative overflow-hidden group shadow-2xl shadow-orange-950/20 mt-6">
             <div className="relative z-10 flex items-center gap-6">
-              <div className="w-16 h-16 rounded-[28px] bg-white/10 flex items-center justify-center text-white border border-white/20 backdrop-blur-3xl group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-700 shadow-2xl">
+              <div className="w-16 h-16 rounded-[28px] bg-white/10 flex items-center justify-center text-white border border-white/20 backdrop-blur-3xl group-hover:bg-orange-600 group-hover:border-orange-500 transition-all duration-700 shadow-2xl">
                 <ShieldCheck size={28} />
               </div>
               <div className="flex-1">
-                <div className="text-[10px] font-black text-blue-400 uppercase tracking-[0.3em] mb-1">Status</div>
+                <div className="text-[10px] font-black text-orange-400 uppercase tracking-[0.3em] mb-1">Status</div>
                 <p className="text-[11px] font-bold text-white uppercase tracking-wider">Live & Visible</p>
                 <div className="flex items-center gap-2 mt-4 opacity-40">
                   <Layers size={12} className="text-slate-400" />

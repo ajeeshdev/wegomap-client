@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { API_URL } from '@/config';
 import { Mail, Lock, ArrowRight, User, Globe, ShieldCheck } from 'lucide-react';
 
+import './login.css';
+
 export default function AdminLogin() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -83,99 +85,98 @@ export default function AdminLogin() {
     };
 
     return (
-        <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4 relative overflow-hidden">
-            {/* Background Effects */}
-            <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-cosmic-orange/10 rounded-full blur-[120px]"></div>
-            <div className="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px]"></div>
+        <div className="login-screen-wrapper">
+            {/* Background Glows */}
+            <div className="login-glow-1"></div>
+            <div className="login-glow-2"></div>
             
-            <div className="w-full max-w-[1000px] grid lg:grid-cols-2 bg-slate-900/50 backdrop-blur-xl rounded-[2.5rem] border border-slate-800 overflow-hidden shadow-2xl relative z-10">
+            <div className="login-card">
                 
-                {/* Visual Side */}
-                <div className="p-12 hidden lg:flex flex-col justify-between bg-gradient-to-br from-slate-900 to-slate-950 border-r border-slate-800">
+                {/* Brand Experience Side */}
+                <div className="login-visual-side">
                     <div>
-                        <div className="flex items-center gap-3 mb-12">
+                        <div className="login-logo-area">
                             {logo ? (
-                                <img src={logo} alt={siteTitle} className="h-10 w-auto object-contain" />
+                                <img src={logo} alt={siteTitle} style={{ height: '40px', width: 'auto', objectFit: 'contain', marginBottom: '1.5rem' }} />
                             ) : (
-                                <div className="w-10 h-10 bg-cosmic-orange rounded-xl flex items-center justify-center">
+                                <div className="login-logo-box">
                                     <Globe className="text-white" size={24} />
                                 </div>
                             )}
-                            <span className="text-2xl font-black italic text-white tracking-tighter uppercase">{siteTitle}</span>
+                            <div className="login-site-name">{siteTitle}</div>
+                            <div style={{ fontSize: '9px', fontWeight: '900', color: '#FF6B35', textTransform: 'uppercase', letterSpacing: '0.3em', marginTop: '4px' }}>Administration</div>
                         </div>
-                        <h1 className="text-4xl font-bold text-white mb-6 leading-tight">
-                            Control Center for <br/>Your <span className="text-primary">Travel Business</span>.
+                        
+                        <h1 className="login-welcome-text">
+                            Command your <br/>
+                            <span>Travel Empire</span>.
                         </h1>
-                        <p className="text-slate-400 text-lg font-medium leading-relaxed">
-                            Effortlessly manage your travel packages, respond to customer inquiries, and grow your brand with the Wegomap CMS.
+                        <p className="login-subtitle">
+                           High-performance management for your travel bookings, itineraries and customer experiences.
                         </p>
                     </div>
 
-                    <div className="space-y-6">
-                        <div className="flex items-center gap-4 text-slate-300">
-                            <ShieldCheck className="text-emerald-500" size={20} />
-                            <span className="text-sm font-bold uppercase tracking-widest text-[10px]">Safe & Secure Official Access</span>
-                        </div>
-                        <div className="flex -space-x-3">
-                            {[1, 2, 3, 4].map((i) => (
-                                <div key={i} className="w-8 h-8 rounded-full border-2 border-slate-900 bg-slate-800 flex items-center justify-center text-[10px] font-bold text-slate-400">
-                                    {String.fromCharCode(64 + i)}
-                                </div>
-                            ))}
-                            <div className="pl-6 text-[10px] font-bold text-slate-500 flex items-center uppercase tracking-widest">
-                                Recent Admin Logins
+                    <div style={{ paddingTop: '2.5rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: 'rgba(255,255,255,0.6)' }}>
+                            <div style={{ width: '2rem', height: '2rem', borderRadius: '50%', background: 'rgba(16,185,129,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <ShieldCheck style={{ color: '#10b981' }} size={16} />
                             </div>
+                            <span style={{ fontSize: '10px', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '0.2em' }}>Verified Admin Access</span>
                         </div>
                     </div>
                 </div>
 
-                {/* Form Side */}
-                <div className="p-8 md:p-16 flex flex-col justify-center bg-white lg:bg-transparent">
-                    <div className="mb-10 lg:hidden text-center flex flex-col items-center gap-4">
+                {/* Secure Authentication Side */}
+                <div className="login-form-side">
+                    {/* Mobile Logo Only */}
+                    <div style={{ marginBottom: '3.5rem', textAlign: 'center', display: 'block' }} className="lg:hidden">
                         {logo ? (
-                            <img src={logo} alt={siteTitle} className="h-12 w-auto object-contain" />
+                            <img src={logo} alt={siteTitle} style={{ height: '56px', width: 'auto', objectFit: 'contain', margin: '0 auto' }} />
                         ) : (
-                            <h1 className="text-2xl font-black italic text-primary uppercase">{siteTitle} CMS</h1>
+                            <div className="login-logo-box" style={{ margin: '0 auto 1.5rem' }}>
+                                <Globe className="text-white" size={32} />
+                            </div>
                         )}
+                        <h1 style={{ fontSize: '1.5rem', fontWeight: '900', fontStyle: 'italic', color: '#FF6B35', textTransform: 'uppercase', letterSpacing: '-0.05em' }}>{siteTitle} CMS</h1>
                     </div>
                     
-                    <div className="mb-8">
-                        <h2 className="text-2xl font-bold text-white lg:text-white text-slate-900 mb-2">Welcome Back</h2>
-                        <p className="text-slate-500 font-medium">Please sign in to access your dashboard</p>
+                    <div className="login-form-header">
+                        <h2>Welcome Back</h2>
+                        <p>Sign in to your dashboard</p>
                     </div>
 
                     {error && (
-                        <div className="bg-red-500/10 border border-red-500/20 text-red-500 p-4 rounded-xl mb-6 text-sm font-medium">
+                        <div className="login-error-msg">
                             {error}
                         </div>
                     )}
 
-                    <form onSubmit={handleLogin} className="space-y-6">
-                        <div className="space-y-2">
-                            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
-                            <div className="relative">
-                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                    <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                        <div className="login-input-group">
+                            <label className="login-input-label">Admin Email</label>
+                            <div className="login-input-wrapper">
+                                <Mail className="login-input-icon" size={18} />
                                 <input
                                     type="email"
                                     required
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-4 rounded-2xl bg-slate-50 lg:bg-slate-800/50 border border-slate-200 lg:border-slate-700 text-slate-900 lg:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                                    placeholder="your@email.com"
+                                    className="login-input-field"
+                                    placeholder="admin@wegomap.com"
                                 />
                             </div>
                         </div>
 
-                        <div className="space-y-2">
-                            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Security Password</label>
-                            <div className="relative">
-                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                        <div className="login-input-group">
+                            <label className="login-input-label">Security Password</label>
+                            <div className="login-input-wrapper">
+                                <Lock className="login-input-icon" size={18} />
                                 <input
                                     type="password"
                                     required
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-4 rounded-2xl bg-slate-50 lg:bg-slate-800/50 border border-slate-200 lg:border-slate-700 text-slate-900 lg:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                                    className="login-input-field"
                                     placeholder="••••••••"
                                 />
                             </div>
@@ -184,16 +185,18 @@ export default function AdminLogin() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-primary hover:bg-primary-dark text-black font-black py-4 rounded-2xl transition-all flex items-center justify-center gap-2 group shadow-xl shadow-black/5 disabled:opacity-50"
+                            className="login-submit-btn"
                         >
-                            {loading ? 'Confirming...' : 'Sign In Now'}
-                            {!loading && <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />}
+                            {loading ? 'Validating...' : 'Access Command Center'}
+                            {!loading && <ArrowRight size={18} strokeWidth={3} />}
                         </button>
                     </form>
 
-                    <div className="mt-12 text-center">
-                        <Link href="/" className="text-slate-500 hover:text-primary transition-colors text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-2">
-                            <User size={14} /> Finish & Exit
+                    <div className="login-footer">
+                        <Link href="/" className="login-exit-link">
+                             <div className="login-exit-divider"></div>
+                             Exit to Live Site
+                             <div className="login-exit-divider"></div>
                         </Link>
                     </div>
                 </div>

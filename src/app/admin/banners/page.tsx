@@ -51,7 +51,7 @@ export default function BannersAdmin() {
         </div>
         <div className="flex items-center gap-4 w-full md:w-auto">
           <div className="relative flex-1 md:w-80 group">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 transition-colors" size={16} />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-orange-500 transition-colors" size={16} />
             <input
               type="text"
               placeholder="Search page banners..."
@@ -65,7 +65,7 @@ export default function BannersAdmin() {
 
       {loading ? (
         <div className="admin-form-card flex flex-col items-center justify-center p-20 gap-4">
-          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
           <p className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Loading banners...</p>
         </div>
       ) : (
@@ -85,7 +85,7 @@ export default function BannersAdmin() {
                 <div className="admin-tile-overlay"></div>
 
                 <div className="absolute inset-x-6 bottom-6">
-                  <div className="mb-2 bg-blue-600 w-fit px-2 py-1 rounded text-[9px] text-white font-bold uppercase tracking-wider">
+                  <div className="mb-2 bg-orange-600 w-fit px-2 py-1 rounded text-[9px] text-white font-bold uppercase tracking-wider">
                     {item.pageName}
                   </div>
                   <h3 className="text-white font-bold text-xl leading-tight line-clamp-2">{item.title}</h3>
@@ -96,9 +96,9 @@ export default function BannersAdmin() {
                 <div className="admin-space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                      <Layout size={12} className="text-blue-500" /> Path
+                      <Layout size={12} className="text-orange-500" /> Path
                     </div>
-                    <div className="text-[10px] font-bold text-slate-900 border-b border-blue-200">
+                    <div className="text-[10px] font-bold text-slate-900 border-b border-orange-200">
                       {item.pagePath}
                     </div>
                   </div>

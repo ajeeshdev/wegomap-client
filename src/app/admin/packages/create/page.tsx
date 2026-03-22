@@ -121,7 +121,7 @@ export default function CreatePackage() {
                     <label className="flex items-center justify-between cursor-pointer group">
                        <span className="text-[10px] font-bold text-slate-500">Bestseller</span>
                        <input type="checkbox" checked={formData.isBestSeller} onChange={e => setFormData({ ...formData, isBestSeller: e.target.checked })} className="sr-only peer" />
-                       <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-blue-600 transition-all relative"><div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-4.5"></div></div>
+                       <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-orange-600 transition-all relative"><div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-4.5"></div></div>
                     </label>
                  </div>
               </div>
@@ -172,7 +172,7 @@ export default function CreatePackage() {
                  <div className="editor-card">
                     <div className="card-header"><h4 className="serif">Pricing Strategy</h4></div>
                     <div className="grid grid-cols-3 gap-6">
-                       <div className="admin-form-group"><label>Offer Price (₹)</label><input type="number" value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} className="font-black text-indigo-600 text-lg" /></div>
+                       <div className="admin-form-group"><label>Offer Price (₹)</label><input type="number" value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} className="font-black text-orange-600 text-lg" /></div>
                        <div className="admin-form-group"><label>Regular Price (₹)</label><input type="number" value={formData.oldamt} onChange={e => setFormData({ ...formData, oldamt: e.target.value })} className="font-bold text-slate-400 line-through" /></div>
                        <div className="admin-form-group"><label>Price Frequency</label><input type="text" value={formData.per} onChange={e => setFormData({ ...formData, per: e.target.value })} /></div>
                     </div>
@@ -196,13 +196,13 @@ export default function CreatePackage() {
                  <div className="editor-card">
                     <div className="card-header flex justify-between items-center">
                        <h4 className="serif">Activity Plan</h4>
-                       <button type="button" onClick={() => setFormData({ ...formData, itinerary: [...(formData.itinerary || []), { day: (formData.itinerary?.length || 0) + 1, title: '', description: '' }] })} className="px-4 py-2 bg-indigo-600 text-white rounded-full text-[10px] font-bold">+ Add Day</button>
+                       <button type="button" onClick={() => setFormData({ ...formData, itinerary: [...(formData.itinerary || []), { day: (formData.itinerary?.length || 0) + 1, title: '', description: '' }] })} className="px-4 py-2 bg-orange-600 text-white rounded-full text-[10px] font-bold">+ Add Day</button>
                     </div>
                     <div className="space-y-4 py-4">
                        {formData.itinerary?.map((item: any, idx: number) => (
                           <div key={idx} className="p-6 bg-slate-50/50 rounded-2xl border border-slate-100 relative group">
                              <div className="flex gap-6">
-                                <div className="w-12 h-12 bg-white rounded-xl border flex flex-col items-center justify-center font-bold text-indigo-600 shrink-0">
+                                <div className="w-12 h-12 bg-white rounded-xl border flex flex-col items-center justify-center font-bold text-orange-600 shrink-0">
                                    <span className="text-[7px] uppercase opacity-50">Day</span>
                                    <span>{item.day || idx + 1}</span>
                                 </div>
@@ -237,7 +237,7 @@ export default function CreatePackage() {
                     <div className="card-header"><h4 className="serif">Indexing Settings</h4></div>
                     <div className="space-y-4">
                        <div className="admin-form-group"><label>Meta Title</label><input type="text" value={formData.seo_title} onChange={e => setFormData({ ...formData, seo_title: e.target.value })} /></div>
-                       <div className="admin-form-group"><label>URL Slug</label><input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} className="font-mono text-blue-600" /></div>
+                       <div className="admin-form-group"><label>URL Slug</label><input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} className="font-mono text-orange-600" /></div>
                        <div className="admin-form-group"><label>Meta Description</label><textarea rows={4} value={formData.seo_meta} onChange={e => setFormData({ ...formData, seo_meta: e.target.value })} /></div>
                     </div>
                  </div>
@@ -246,7 +246,7 @@ export default function CreatePackage() {
                     <div className="card-header border-slate-800"><h4 className="serif text-white">Crawler View</h4></div>
                     <div className="p-8">
                        <div className="max-w-xl">
-                          <h4 className="text-blue-400 text-xl font-bold mb-1">{formData.seo_title || formData.title || 'Untitled Package'}</h4>
+                          <h4 className="text-orange-400 text-xl font-bold mb-1">{formData.seo_title || formData.title || 'Untitled Package'}</h4>
                           <p className="text-emerald-500 text-xs font-mono mb-2">https://wegomap.digital/packages/{formData.slug || 'url-slug'}</p>
                           <p className="text-slate-400 text-sm italic">{formData.seo_meta || 'No description provided.'}</p>
                        </div>

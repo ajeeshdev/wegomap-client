@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 const navItems = [
     { name: 'Home', href: '/', icon: Home },
     { name: 'Tours', href: '/packages', icon: Briefcase },
-    { name: 'Events', href: '/corporate-event-management-company-kochi', icon: Calendar },
+    { name: 'Events', href: '/events', icon: Calendar },
     { name: 'AI Chatbot', href: '/chatbot', icon: Bot },
     { name: 'Profile', href: '/profile', icon: User },
 ];

@@ -17,11 +17,12 @@ import "./cms-dashboard.css";
 export default function AdminDashboard() {
   const [stats, setStats] = useState({ packages: 0, blogs: 0, leads: 0 });
   const [loading, setLoading] = useState(true);
+  const [siteLogo, setSiteLogo] = useState("");
 
   useEffect(() => {
-    const fetchStats = async () => {
+    const fetchDashboardData = async () => {
       try {
-        const [pRes, bRes, lRes] = await Promise.all([
+        const [pRes, bRes, lRes, oRes] = await Promise.all([
           fetch(`${API_URL}/packages`),
           fetch(`${API_URL}/blogs`),
           fetch(`${API_URL}/leads`, {
@@ -29,6 +30,7 @@ export default function AdminDashboard() {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           }),
+          fetch(`${API_URL}/options`)
         ]);
 
         const safeJson = async (res: Response) => {
@@ -38,11 +40,17 @@ export default function AdminDashboard() {
           return { success: false, data: [] };
         };
 
-        const [pData, bData, lData] = await Promise.all([
+        const [pData, bData, lData, oData] = await Promise.all([
           safeJson(pRes),
           safeJson(bRes),
           safeJson(lRes),
+          safeJson(oRes),
         ]);
+
+        if (oData.success && oData.data) {
+          const logoOpt = oData.data.find((o: any) => o.key === 'site_logo');
+          if (logoOpt) setSiteLogo(logoOpt.value);
+        }
 
         setStats({
           packages: pData?.count ?? pData?.data?.length ?? 0,
@@ -50,12 +58,12 @@ export default function AdminDashboard() {
           leads: lData?.count ?? lData?.data?.length ?? 0,
         });
       } catch (err) {
-        console.error("Error fetching dashboard stats", err);
+        console.error("Error fetching dashboard data", err);
       } finally {
         setLoading(false);
       }
     };
-    fetchStats();
+    fetchDashboardData();
   }, []);
 
   const cards = [
@@ -83,67 +91,81 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div id="cms-dashboard">
-      <header>
-        <div>
-          <h1>Welcome back</h1>
-          <p>Here&apos;s what&apos;s happening with your site</p>
+    <div id="cms-dashboard" className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+      <header className="dashboard-header-centered flex flex-col items-center mb-16 pt-8">
+     
+
+        {/* Centered Actions */}
+        <div className="header-actions flex items-center justify-center gap-4 mt-8">
+          <Link href="/" target="_blank" className="admin-btn admin-btn-secondary !rounded-full !px-8">
+            <Globe size={16} /> <span>Site Preview</span>
+          </Link>
+          <Link href="/admin/packages/create" className="admin-btn admin-btn-primary !rounded-full !px-8 hover:!rotate-[-2deg]">
+            <Plus size={18} /> <span>New Package</span>
+          </Link>
         </div>
-        <nav>
-          <Link href="/" target="_blank">
-            <Globe size={18} />
-            View website
-          </Link>
-          <Link href="/admin/packages/create">
-            <Plus size={20} />
-            Add package
-          </Link>
-        </nav>
       </header>
 
-      <section className="stats">
-        {cards.map((card) => {
-          const Icon = card.icon;
-          const count =
-            card.label === "Travel Packages"
-              ? stats.packages
-              : card.label === "Blog Posts"
-                ? stats.blogs
-                : stats.leads;
-
-          return (
-            <Link key={card.label} href={card.href} className="stat-card">
-              <div className="stat-icon">
-                <Icon size={28} strokeWidth={2} />
-              </div>
-              <div className="stat-body">
-                <h3>{card.label}</h3>
-                <div className="stat-value">
-                  {loading ? (
-                    <span className="stat-loader" />
-                  ) : (
-                    count
-                  )}
+      <div className="dashboard-grid space-y-12">
+        {/* Core Stats Overview */}
+        <section className="stats-grid grid grid-cols-1 md:grid-cols-3 gap-8">
+          {cards.map((card) => {
+            const Icon = card.icon;
+            return (
+              <Link key={card.label} href={card.href} className="stat-card-premium group">
+                <div className="card-top flex justify-between items-start mb-6">
+                  <div className="icon-box group-hover:bg-orange-500 group-hover:text-white transition-all duration-500">
+                    <Icon size={24} />
+                  </div>
+                  <div className="trend text-[10px] font-black uppercase text-emerald-500 bg-emerald-50 px-2 py-1 rounded-lg">
+                    Live
+                  </div>
                 </div>
-                <p>{card.desc}</p>
-              </div>
-              <span className="stat-link">
-                Manage <ArrowRight size={14} />
-              </span>
-            </Link>
-          );
-        })}
-      </section>
+                <div className="card-info">
+                  <span className="label text-[11px] font-black uppercase tracking-widest text-slate-400 mb-1 block">
+                    {card.label}
+                  </span>
+                  <div className="value text-4xl font-black text-slate-950 mb-4">
+                    {loading ? <div className="h-10 w-20 bg-slate-100 animate-pulse rounded-lg" /> : card.count}
+                  </div>
+                  <p className="description text-xs font-semibold text-slate-500">{card.desc}</p>
+                </div>
+                <div className="card-footer mt-6 pt-6 border-t border-slate-50 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-orange-500">Manage Data</span>
+                  <ArrowRight size={14} className="text-orange-500" />
+                </div>
+              </Link>
+            );
+          })}
+        </section>
 
-      <section className="quick-links">
-        <h2>Quick actions</h2>
-        <div className="quick-links-grid">
-          <Link href="/admin/packages/create">Add new package</Link>
-          <Link href="/admin/blogs/create">Write a blog post</Link>
-          <Link href="/admin/leads">Check inquiries</Link>
-          <Link href="/admin/destinations">Edit destinations</Link>
-        </div>
-      </section>
+        {/* Action Center */}
+        <section className="quick-actions-panel pt-8">
+          <div className="panel-header flex flex-col items-center gap-3 mb-10">
+            <div className="w-8 h-1.5 bg-orange-500 rounded-full mb-2"></div>
+            <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight">Quick Actions</h2>
+            <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">Execute frequent management tasks</p>
+          </div>
+          <div className="actions-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Link href="/admin/packages/create" className="action-button group">
+              <div className="action-icon bg-orange-50 text-orange-600 group-hover:bg-orange-600 group-hover:text-white"><Plus size={18} /></div>
+              <span className="font-black text-sm text-slate-700">Add Package</span>
+            </Link>
+            <Link href="/admin/blogs/create" className="action-button group">
+              <div className="action-icon bg-orange-50 text-orange-600 group-hover:bg-orange-600 group-hover:text-white"><FileText size={18} /></div>
+              <span className="font-black text-sm text-slate-700">Write Blog</span>
+            </Link>
+            <Link href="/admin/leads" className="action-button group">
+              <div className="action-icon bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white"><Zap size={18} /></div>
+              <span className="font-black text-sm text-slate-700">Check Leads</span>
+            </Link>
+            <Link href="/admin/destinations" className="action-button group">
+              <div className="action-icon bg-orange-50 text-orange-600 group-hover:bg-orange-600 group-hover:text-white"><Globe size={18} /></div>
+              <span className="font-black text-sm text-slate-700">Destinations</span>
+            </Link>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

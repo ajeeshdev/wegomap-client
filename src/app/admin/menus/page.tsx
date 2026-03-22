@@ -91,7 +91,7 @@ export default function MenusPage() {
 
     if (loading) return (
         <div className="admin-form-card flex flex-col items-center justify-center p-24 gap-6">
-            <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
             <p className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Loading navigation menus...</p>
         </div>
     );
@@ -102,7 +102,7 @@ export default function MenusPage() {
             <div className="admin-page-header">
                 <div>
                     <h2 className="admin-page-title">
-                        <div className="admin-page-title-indicator bg-indigo-600"></div>
+                        <div className="admin-page-title-indicator bg-orange-600"></div>
                         Navigation Menus
                     </h2>
                     <p className="admin-page-subtitle mt-1">Configure your website's header, mobile hamburger and footer navigation</p>
@@ -126,14 +126,14 @@ export default function MenusPage() {
                         <div className="flex items-center justify-between mb-8 pb-6 border-b border-slate-100">
                             <div>
                                 <h3 className="admin-form-section-title">
-                                    <div className="admin-page-title-indicator bg-indigo-500"></div>
+                                    <div className="admin-page-title-indicator bg-orange-500"></div>
                                     Hamburger Menu (Mobile)
                                 </h3>
                                 <p className="text-[11px] text-slate-400 font-medium ml-4 mt-1">Links appearing in the mobile sidebar drawer</p>
                             </div>
                             <button 
                                 onClick={() => setSidebarLinks([...sidebarLinks, { name: '', href: '', icon: 'ChevronRight' }])}
-                                className="admin-btn-small bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white px-4 py-2.5"
+                                className="admin-btn-small bg-orange-50 text-orange-600 hover:bg-orange-600 hover:text-white px-4 py-2.5"
                             >
                                 <Plus size={14} strokeWidth={2.5} /> Add Menu Item
                             </button>
@@ -141,7 +141,7 @@ export default function MenusPage() {
 
                         <div className="space-y-3">
                             {sidebarLinks.map((item: any, idx: number) => (
-                                <div key={idx} className="flex flex-col md:flex-row items-end gap-x-4 gap-y-6 p-6 bg-slate-50/50  hover:border-indigo-200 hover:bg-white transition-all duration-300 group">
+                                <div key={idx} className="flex flex-col md:flex-row items-end gap-x-4 gap-y-6 p-6 bg-slate-50/50  hover:border-orange-200 hover:bg-white transition-all duration-300 group">
                                     <div className="w-full md:w-1/4 space-y-2.5">
                                         <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-1">Label</label>
                                         <input 
@@ -176,7 +176,7 @@ export default function MenusPage() {
                                     <div className="w-full md:w-1/4 space-y-2.5">
                                         <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-1">Icon</label>
                                         <div className="flex items-center gap-3">
-                                            <div className="w-11 h-11 flex items-center justify-center bg-white  border-slate-200 rounded-xl text-indigo-500 shadow-sm group-hover:border-indigo-300 transition-colors">
+                                            <div className="w-11 h-11 flex items-center justify-center bg-white  border-slate-200 rounded-xl text-orange-500 shadow-sm group-hover:border-orange-300 transition-colors">
                                                 <DynamicIcon name={item.icon} size={18} />
                                             </div>
                                             <select 
@@ -436,13 +436,13 @@ export default function MenusPage() {
                     </div>
 
                     {/* Aesthetic Tip */}
-                    <div className="p-5 bg-indigo-50/50 rounded-2xl  border-indigo-100 flex items-start gap-4">
-                        <div className="w-10 h-10 flex items-center justify-center bg-indigo-100 text-indigo-600 rounded-xl shrink-0">
+                    <div className="p-5 bg-orange-50/50 rounded-2xl  border-orange-100 flex items-start gap-4">
+                        <div className="w-10 h-10 flex items-center justify-center bg-orange-100 text-orange-600 rounded-xl shrink-0">
                             <Sparkles size={20} />
                         </div>
                         <div>
-                            <p className="text-sm text-indigo-900 font-bold mb-0.5 mt-0.5">Pro Tip: Streamlined Navigation</p>
-                            <p className="text-[12px] text-indigo-700/80 leading-relaxed italic">
+                            <p className="text-sm text-orange-900 font-bold mb-0.5 mt-0.5">Pro Tip: Streamlined Navigation</p>
+                            <p className="text-[12px] text-orange-700/80 leading-relaxed italic">
                                 Keep labels short and descriptive. Visual icons help users scan navigation faster. 
                                 The <strong>Secondary Sticky Nav</strong> is specifically designed to drive engagement for high-traffic pages like Blogs, Trending, or Contact on Desktop.
                             </p>

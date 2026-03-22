@@ -88,6 +88,12 @@ export default function AllToursPage() {
     const [cmsPackages, setCmsPackages] = useState<PackageCard[]>([]);
     const [loading, setLoading] = useState(true);
     const [wishlist, setWishlist] = useState<string[]>([]);
+    const [formData, setFormData] = useState({
+        name: '',
+        phone: '',
+        email: ''
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -210,10 +216,33 @@ export default function AllToursPage() {
         setIsModalOpen(true);
     };
 
-    const handleFormSubmit = (e: React.FormEvent) => {
+    const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        alert(`Request sent for: ${selectedPackage}`);
-        setIsModalOpen(false);
+        setIsSubmitting(true);
+        try {
+            const res = await fetch(`${API_URL}/leads`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    ...formData,
+                    destination: selectedPackage,
+                    source: 'Website',
+                    url: typeof window !== "undefined" ? window.location.href : ""
+                })
+            });
+            const data = await res.json();
+            if (data.success) {
+                toast.success('Request sent successfully!');
+                setIsModalOpen(false);
+                setFormData({ name: '', phone: '', email: '' });
+            } else {
+                toast.error(data.error || 'Failed to send request');
+            }
+        } catch (err) {
+            toast.error('Failed to send request');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -430,14 +459,26 @@ export default function AllToursPage() {
                                         <label>Full Name</label>
                                         <div className="tourCatModalInputWrap">
                                             <User size={16} />
-                                            <input type="text" placeholder="John Doe" required />
+                                            <input 
+                                                type="text" 
+                                                placeholder="John Doe" 
+                                                required 
+                                                value={formData.name}
+                                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                            />
                                         </div>
                                     </div>
                                     <div className="tourCatModalField">
                                         <label>Phone Number</label>
                                         <div className="tourCatModalInputWrap">
                                             <Phone size={16} />
-                                            <input type="tel" placeholder="+91 9876543210" required />
+                                            <input 
+                                                type="tel" 
+                                                placeholder="+91 9876543210" 
+                                                required 
+                                                value={formData.phone}
+                                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -446,12 +487,22 @@ export default function AllToursPage() {
                                     <label>Email Address</label>
                                     <div className="tourCatModalInputWrap">
                                         <Mail size={16} />
-                                        <input type="email" placeholder="john@example.com" required />
+                                        <input 
+                                            type="email" 
+                                            placeholder="john@example.com" 
+                                            required 
+                                            value={formData.email}
+                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                        />
                                     </div>
                                 </div>
 
-                                <button type="submit" className="tourCatModalSubmitBtn">
-                                    Get My Itinerary Now
+                                <button 
+                                    type="submit" 
+                                    className="tourCatModalSubmitBtn"
+                                    disabled={isSubmitting}
+                                >
+                                    {isSubmitting ? 'Sending...' : 'Get My Itinerary Now'}
                                 </button>
                             </form>
                         </div>

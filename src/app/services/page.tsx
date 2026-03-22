@@ -1,67 +1,50 @@
 "use client";
 
 import { API_URL } from '@/config';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import * as LucideIcons from 'lucide-react';
-import { Briefcase, Building, Plane, Globe, MapPin, Anchor } from 'lucide-react';
+import { Plus, Check, Scissors, Layers, Settings, HelpCircle, ArrowRight, Sparkles } from 'lucide-react';
 import DynamicPageBanner from '@/components/DynamicPageBanner';
 
-interface Service {
-    _id: string;
-    title: string;
-    description: string;
-    icon: string;
-    link: string;
-    order: number;
-}
-
+// Mock Icon Display Component
 const IconDisplay = ({ iconName }: { iconName: string }) => {
-    // @ts-ignore
-    const IconComponent = LucideIcons[iconName] || LucideIcons.Globe;
-    return <IconComponent size={32} />;
+    switch (iconName) {
+        case 'Plus': return <Plus size={32} />;
+        case 'Check': return <Check size={32} />;
+        case 'Scissors': return <Scissors size={32} />;
+        case 'Layers': return <Layers size={32} />;
+        case 'Settings': return <Settings size={32} />;
+        case 'HelpCircle': return <HelpCircle size={32} />;
+        default: return <Settings size={32} />;
+    }
+};
+
+const pageContent = {
+    title: "Comprehensive",
+    highlightText: "Solutions.",
+    subtitle: "YOUR JOURNEY, YOUR EXPERTISE.",
+    description: "Discover our range of professional travel services designed to make your journey seamless, from hotel bookings to event management and private transport."
 };
 
 export default function ServicesPage() {
-    const [services, setServices] = useState<Service[]>([]);
-    const [pageContent, setPageContent] = useState({
-        subtitle: "Comprehensive Solutions",
-        title: "Your journey,",
-        highlightText: "our expertise.",
-        description: "Wegomap offers comprehensive solutions for all your travel needs. From booking your initial transport to finding the perfect accommodation, our dedicated team manages everything so you can focus on building beautiful memories."
-    });
+    const [services, setServices] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        async function loadContent() {
+        const fetchServices = async () => {
             try {
-                const [servicesRes, optionsRes] = await Promise.all([
-                    fetch(`${API_URL}/services`),
-                    fetch(`${API_URL}/options`)
-                ]);
-
-                const servicesData = await servicesRes.json();
-                if (servicesData.success) {
-                    setServices(servicesData.data.filter((s: any) => s.status === 'Active'));
-                }
-
-                const optionsData = await optionsRes.json();
-                if (optionsData.success) {
-                    const contentOpt = optionsData.data.find((o: any) => o.key === 'services_page_content');
-                    if (contentOpt) {
-                        try {
-                            const parsed = JSON.parse(contentOpt.value);
-                            if (parsed.intro) setPageContent(parsed.intro);
-                        } catch (e) {}
-                    }
+                const res = await fetch(`${API_URL}/services`);
+                const data = await res.json();
+                if (data.success) {
+                    setServices(data.data);
                 }
             } catch (err) {
-                console.error('Error loading data:', err);
+                console.error("Failed to fetch services:", err);
             } finally {
                 setLoading(false);
             }
-        }
-        loadContent();
+        };
+        fetchServices();
     }, []);
 
     return (
@@ -72,7 +55,7 @@ export default function ServicesPage() {
                 fallbackPreTitle="Premium Offerings"
                 fallbackImage="/assets/images/banners/about-banner.png"
                 breadcrumbs={[{ label: 'Services' }]}
-                variant="thin"
+                variant="standard"
             />
 
             {/* Main Content */}
@@ -91,12 +74,11 @@ export default function ServicesPage() {
                     </div>
 
                     {loading ? (
-                        <div className="w-full py-20 flex flex-col items-center gap-4">
-                            <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-                            <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Synchronizing Service Grid...</p>
+                        <div className="flex items-center justify-center py-20">
+                            <div className="w-12 h-12 border-4 border-slate-200 border-t-orange-500 rounded-full animate-spin"></div>
                         </div>
                     ) : (
-                        <div className="infoGrid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div className="infoGrid">
                             {services.map((s, i) => (
                                 <div key={s._id} className="infoCard group hover:scale-[1.02] transition-all duration-500">
                                     <Link href={s.link || '/contact'} style={{ display: 'block', textDecoration: 'none' }}>
@@ -111,6 +93,9 @@ export default function ServicesPage() {
                             ))}
                         </div>
                     )}
+
+                    {/* Additional Sub-services or CTA */}
+        
                 </div>
             </section>
         </div>

@@ -167,6 +167,12 @@ export default function LandingPageView({
   const [quickPlanOpen, setQuickPlanOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState("");
   const [wishlist, setWishlist] = useState<string[]>([]);
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [faqItems, setFaqItems] = useState<FaqItem[]>([]);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
@@ -312,10 +318,33 @@ export default function LandingPageView({
     setQuickPlanOpen(true);
   };
 
-  const handleQuickPlanSubmit = (e: React.FormEvent) => {
+  const handleQuickPlanSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Request sent for: ${selectedPackage || "package"}`);
-    setQuickPlanOpen(false);
+    setIsSubmitting(true);
+    try {
+      const res = await fetch(`${API_URL}/leads`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          destination: selectedPackage || data.title,
+          source: 'Landing Page',
+          url: typeof window !== "undefined" ? window.location.href : "",
+        }),
+      });
+      const json = await res.json();
+      if (json.success) {
+        toast.success("Request sent successfully!");
+        setQuickPlanOpen(false);
+        setFormData({ name: "", phone: "", email: "" });
+      } else {
+        toast.error(json.error || "Failed to send request");
+      }
+    } catch (err) {
+      toast.error("Failed to send request");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const testimonialSliderSettings = {
@@ -862,6 +891,8 @@ export default function LandingPageView({
                     type="text"
                     placeholder="John Doe"
                     className="lp-modalInput"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   />
                 </div>
 
@@ -874,6 +905,8 @@ export default function LandingPageView({
                     type="tel"
                     placeholder="+91 9876543210"
                     className="lp-modalInput"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   />
                 </div>
               </div>
@@ -895,7 +928,7 @@ export default function LandingPageView({
                   type="submit"
                   className="lp-modalSubmitButton"
                 >
-                 Book Now
+                 {isSubmitting ? "Sending..." : "Book Now"}
                 </button>
               </div>
 

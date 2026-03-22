@@ -9,15 +9,18 @@
 
 .tourCatBanner {
     position: relative;
-    height: 70vh;
+    height: 250px;
+    min-height: 250px;
     width: 100%;
     display: flex;
     align-items: center;
     overflow: hidden;
     background-color: #0f172a;
+    margin-top: 60px;
 
     @media (min-width: 768px) {
-        height: 85vh;
+        height: 350px;
+        margin-top: 85px;
     }
 
     .tourCatBannerImg {
@@ -85,16 +88,16 @@
         }
 
         .tourCatBannerTitle {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 950;
-            line-height: 0.95;
-            margin-bottom: 1.5rem;
+            line-height: 1;
+            margin-bottom: 0.75rem;
             letter-spacing: -0.05em;
             text-transform: uppercase;
             font-style: italic;
 
             @media (min-width: 768px) {
-                font-size: 6rem;
+                font-size: 4rem;
             }
 
             span {
@@ -102,18 +105,19 @@
                 -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
                 display: block;
                 letter-spacing: normal;
+                line-height: 1;
             }
         }
 
         .tourCatBannerSub {
-            font-size: 1.125rem;
-            font-weight: 700; // Increased weight
-            color: #ffffff; // Changed to full white for visibility
-            margin-bottom: 2.5rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
             max-width: 500px;
             border-left: 4px solid $cosmicOrange;
-            padding: 0.5rem 0 0.5rem 1.5rem;
-            background: linear-gradient(90deg, rgba($cosmicOrange, 0.1) 0%, transparent 100%); // Subtle highlight
+            padding: 0.4rem 0 0.4rem 1.25rem;
+            background: linear-gradient(90deg, rgba($cosmicOrange, 0.1) 0%, transparent 100%);
         }
 
         .tourCatRating {

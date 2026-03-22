@@ -71,7 +71,7 @@ export default function EditSEO() {
           </button>
           <div>
             <h2 className="admin-page-title text-2xl font-bold flex items-center gap-2">
-              <Globe className="text-indigo-600" size={24} />
+              <Globe className="text-orange-600" size={24} />
               Configure SEO: <span className="text-slate-400 ml-1 font-medium italic">{formData.title}</span>
             </h2>
             <p className="admin-page-subtitle mt-1 text-slate-500">Manage metadata and search engine optimization for this node</p>
@@ -84,7 +84,7 @@ export default function EditSEO() {
           <button 
             onClick={handleSubmit} 
             disabled={saving}
-            className="admin-btn bg-indigo-600 text-white hover:bg-indigo-700 h-11 px-6 flex items-center gap-2 rounded-xl shadow-lg shadow-indigo-100 active:scale-95 transition-all font-bold"
+            className="admin-btn bg-orange-600 text-white hover:bg-orange-700 h-11 px-6 flex items-center gap-2 rounded-xl shadow-lg shadow-orange-100 active:scale-95 transition-all font-bold"
           >
             <Save size={18} /> {saving ? 'Updating...' : 'Update SEO'}
           </button>
@@ -96,7 +96,7 @@ export default function EditSEO() {
             <div className="lg:col-span-2 space-y-8">
                 <div className="admin-card-panel">
                     <h3 className="text-sm uppercase tracking-wider font-bold text-slate-400 flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-indigo-500"></div>
+                        <div className="w-1.5 h-1.5 rounded-full bg-orange-500"></div>
                         Core Metadata
                     </h3>
                     
@@ -107,7 +107,7 @@ export default function EditSEO() {
                                 type="text" 
                                 value={formData.seo_title}
                                 onChange={e => setFormData({...formData, seo_title: e.target.value})}
-                                className="w-full h-12 px-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm"
+                                className="w-full h-12 px-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm"
                                 placeholder="Recommended: 50-60 characters"
                             />
                             <div className="flex justify-between items-center px-1">
@@ -122,7 +122,7 @@ export default function EditSEO() {
                                 rows={4}
                                 value={formData.seo_description}
                                 onChange={e => setFormData({...formData, seo_description: e.target.value})}
-                                className="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm resize-none"
+                                className="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm resize-none"
                                 placeholder="Recommended: 150-160 characters"
                             />
                             <div className="flex justify-between items-center px-1">
@@ -137,7 +137,7 @@ export default function EditSEO() {
                                 rows={3}
                                 value={formData.seo_keys}
                                 onChange={e => setFormData({...formData, seo_keys: e.target.value})}
-                                className="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm resize-none"
+                                className="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm resize-none"
                                 placeholder="Separate with commas..."
                             />
                         </div>
@@ -157,7 +157,7 @@ export default function EditSEO() {
                                 rows={5}
                                 value={formData.seo_meta}
                                 onChange={e => setFormData({...formData, seo_meta: e.target.value})}
-                                className="w-full p-4 bg-slate-900 text-indigo-300 border border-slate-800 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/20 transition-all text-xs font-mono resize-none"
+                                className="w-full p-4 bg-slate-900 text-orange-300 border border-slate-800 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 transition-all text-xs font-mono resize-none"
                                 placeholder='e.g. <meta name="robots" content="index, follow" />'
                             />
                         </div>
@@ -168,7 +168,7 @@ export default function EditSEO() {
                                 type="text" 
                                 value={formData.seo_canonical}
                                 onChange={e => setFormData({...formData, seo_canonical: e.target.value})}
-                                className="w-full h-12 px-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm font-mono"
+                                className="w-full h-12 px-4 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm font-mono"
                                 placeholder="https://wegomap.com/..."
                             />
                         </div>
@@ -177,8 +177,8 @@ export default function EditSEO() {
             </div>
 
             <div className="space-y-8">
-                <div className="bg-white p-6 rounded-2xl border border-indigo-100 shadow-sm space-y-6">
-                    <div className="flex items-center gap-2 text-indigo-700 font-bold text-xs uppercase tracking-wider">
+                <div className="bg-white p-6 rounded-2xl border border-orange-100 shadow-sm space-y-6">
+                    <div className="flex items-center gap-2 text-orange-700 font-bold text-xs uppercase tracking-wider">
                         <Sparkles size={14} />
                         SERP Preview
                     </div>
@@ -189,7 +189,7 @@ export default function EditSEO() {
                                 wegomap.com › {formData.slug}
                             </div>
                         </div>
-                        <div className="text-blue-700 text-lg font-medium group-hover:underline underline-offset-2 break-words leading-tight">
+                        <div className="text-orange-700 text-lg font-medium group-hover:underline underline-offset-2 break-words leading-tight">
                             {formData.seo_title || formData.title || 'Untitled Page'}
                         </div>
                         <div className="text-slate-600 text-[13px] line-clamp-2 leading-relaxed break-words">
@@ -201,7 +201,7 @@ export default function EditSEO() {
 
                 <div className="admin-dark-card">
                     <div className="admin-dark-card-header">
-                        <Info size={14} className="text-blue-400" />
+                        <Info size={14} className="text-orange-400" />
                         Quick Strategy
                     </div>
                     <div className="admin-space-y-4">

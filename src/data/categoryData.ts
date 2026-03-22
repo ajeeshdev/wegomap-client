@@ -251,16 +251,16 @@ export const categoryData: Record<string, any> = {
         "seoKeys": "Alappuzha backwater tour",
         "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/test-blog-3\" />"
     },
-    "corporate-event-management-company-kochi": {
+    "events": {
         "id": 34,
-        "slug": "corporate-event-management-company-kochi",
+        "slug": "events",
         "title": "Corporate Events Management",
         "subtitle": "events",
         "text": "file",
         "seoTitle": "Corporate Event Management Company in Kochi | Wegomap Events",
         "seoMeta": "Looking for a corporate event management company with flexibility, proper time management & assured quality at a desirable budget? Contact us now.",
         "seoKeys": "corporate event management company",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/corporate-event-management-company-kochi/\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/events/\" />"
     },
     "privacy-policy": {
         "id": 39,

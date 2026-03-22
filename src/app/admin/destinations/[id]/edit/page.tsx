@@ -73,7 +73,7 @@ export default function EditDestination() {
 
   if (loading) return (
     <div className="admin-form-card flex flex-col items-center justify-center p-24 gap-6">
-      <div className="w-16 h-16 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin shadow-2xl shadow-indigo-500/20"></div>
+      <div className="w-16 h-16 border-4 border-orange-600 border-t-transparent rounded-full animate-spin shadow-2xl shadow-orange-500/20"></div>
       <p className="font-black text-slate-400 uppercase tracking-[0.3em] text-[10px]">Navigating to cartographic global quadrant...</p>
     </div>
   );
@@ -117,13 +117,13 @@ export default function EditDestination() {
           {/* Basic Details Section */}
           <div className="admin-form-card space-y-10">
             <h3 className="admin-form-section-title">
-              <div className="admin-page-title-indicator bg-blue-600"></div>
+              <div className="admin-page-title-indicator bg-orange-600"></div>
               Location Details
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
               <div className="admin-form-group">
-                <label className="admin-form-label flex items-center gap-2"> <MapPin size={12} className="text-blue-500" /> Title</label>
+                <label className="admin-form-label flex items-center gap-2"> <MapPin size={12} className="text-orange-500" /> Title</label>
                 <input
                   type="text"
                   value={formData.title}
@@ -138,13 +138,13 @@ export default function EditDestination() {
                   type="text"
                   value={formData.slug}
                   onChange={e => setFormData({ ...formData, slug: e.target.value })}
-                  className="admin-form-input font-medium h-12 text-blue-600 bg-slate-50/50"
+                  className="admin-form-input font-medium h-12 text-orange-600 bg-slate-50/50"
                   placeholder="munnar"
                 />
               </div>
 
               <div className="admin-form-group md:col-span-2 pt-4 border-t border-slate-50">
-                <label className="admin-form-label flex items-center gap-2 mb-4"> <Layers size={14} className="text-blue-500" /> Description</label>
+                <label className="admin-form-label flex items-center gap-2 mb-4"> <Layers size={14} className="text-orange-500" /> Description</label>
                 <div className="bg-slate-50/30 rounded-2xl p-1 border border-slate-100 shadow-inner">
                   <RichTextEditor
                     value={formData.content}
@@ -177,7 +177,7 @@ export default function EditDestination() {
             {/* Featured Image */}
             <div className="group/media">
               <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-8">
-                <div className="w-1 h-3 bg-purple-500 rounded-full"></div>
+                <div className="w-1 h-3 bg-orange-500 rounded-full"></div>
                 Featured Image
               </h4>
               <div className="bg-slate-50/50 rounded-2xl p-2 border border-slate-100">
@@ -209,7 +209,7 @@ export default function EditDestination() {
 
               <div className="mt-10">
                 <div className="flex items-center gap-3 bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
-                  <div className="w-8 h-8 rounded-xl bg-blue-100/50 flex items-center justify-center text-blue-600 shrink-0">
+                  <div className="w-8 h-8 rounded-xl bg-orange-100/50 flex items-center justify-center text-orange-600 shrink-0">
                     <Clock size={16} />
                   </div>
                   <div>

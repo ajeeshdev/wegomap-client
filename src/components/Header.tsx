@@ -87,7 +87,7 @@ const navLinks = [
         href: '#',
         dropdown: tourItems
     },
-    { name: 'Events', href: '/corporate-event-management-company-kochi' },
+    { name: 'Events', href: '/events' },
     { name: 'Cruises', href: '/cruise-packages' },
     { name: 'Payment', href: '/payment' },
     { name: 'Blogs', href: '/blogs' },

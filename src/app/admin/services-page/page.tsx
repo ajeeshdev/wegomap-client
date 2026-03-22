@@ -97,9 +97,9 @@ export default function ServicesSettingsPage() {
                 <div>
                     <h2 className="admin-page-title admin-page-title--section">
                         <div className="admin-page-title-indicator"></div>
-                        Services Page <span className="text-blue-600">Configuration</span>
+                        Services Page <span className="text-black">Configuration</span>
                     </h2>
-                    <p className="admin-page-subtitle">Configure the welcome text and headings for the services page</p>
+                    <p className="admin-page-subtitle text-slate-500 font-bold">Configure the welcome text and headings for the services page</p>
                 </div>
                 <div className="flex items-center gap-4">
                     <Link href="/admin/services" className="admin-btn admin-btn-secondary">
@@ -120,20 +120,20 @@ export default function ServicesSettingsPage() {
                 {/* Main Content Area */}
                 <div className="admin-form-card">
                     <h3 className="admin-form-section-title">
-                        <div className="admin-section-icon admin-section-icon--sm admin-section-icon--blue"></div>
-                        Main Page Headers
+                        <div className="admin-section-icon admin-section-icon--sm admin-section-icon--amber"></div>
+                        <span className="text-black font-black">Main Page Headers</span>
                     </h3>
                     
                     <div className="space-y-6">
                         <div className="admin-form-group">
                             <label className="admin-form-label mb-2 flex items-center gap-2">
-                                <Type size={14} className="text-blue-500" /> Section Subtitle
+                                <Info size={14} className="text-orange-500" /> <span className="text-black font-black">Section Subtitle</span>
                             </label>
                             <input 
                                 type="text"
                                 value={content.intro.subtitle}
                                 onChange={e => setContent({ ...content, intro: { ...content.intro, subtitle: e.target.value } })}
-                                className="admin-form-input font-bold"
+                                className="admin-form-input font-black text-black"
                                 placeholder="e.g. Comprehensive Solutions"
                             />
                         </div>
@@ -141,25 +141,25 @@ export default function ServicesSettingsPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div className="admin-form-group">
                                 <label className="admin-form-label mb-2 flex items-center gap-2">
-                                    <Type size={14} className="text-slate-400" /> Title (First Part)
+                                    <Type size={14} className="text-slate-400" /> <span className="text-black font-black">Title (First Part)</span>
                                 </label>
                                 <input 
                                     type="text"
                                     value={content.intro.title}
                                     onChange={e => setContent({ ...content, intro: { ...content.intro, title: e.target.value } })}
-                                    className="admin-form-input font-bold"
+                                    className="admin-form-input font-black text-black"
                                     placeholder="e.g. Your journey,"
                                 />
                             </div>
                             <div className="admin-form-group">
                                 <label className="admin-form-label mb-2 flex items-center gap-2">
-                                    <Sparkles size={14} className="text-orange-500" /> Title (Highlight Part)
+                                    <Sparkles size={14} className="text-orange-500" /> <span className="text-black font-black">Title (Highlight Part)</span>
                                 </label>
                                 <input 
                                     type="text"
                                     value={content.intro.highlightText}
                                     onChange={e => setContent({ ...content, intro: { ...content.intro, highlightText: e.target.value } })}
-                                    className="admin-form-input font-bold text-orange-600 border-orange-100 bg-orange-50/30"
+                                    className="admin-form-input font-black text-orange-600 border-orange-100 bg-orange-50/10"
                                     placeholder="e.g. our expertise."
                                 />
                             </div>
@@ -167,13 +167,13 @@ export default function ServicesSettingsPage() {
 
                         <div className="admin-form-group">
                             <label className="admin-form-label mb-2 flex items-center gap-2">
-                                <AlignLeft size={14} className="text-slate-400" /> Main Description
+                                <AlignLeft size={14} className="text-slate-400" /> <span className="text-black font-black">Main Description</span>
                             </label>
                             <textarea 
                                 rows={5}
                                 value={content.intro.description}
                                 onChange={e => setContent({ ...content, intro: { ...content.intro, description: e.target.value } })}
-                                className="admin-form-input leading-relaxed"
+                                className="admin-form-input font-bold text-black leading-relaxed"
                                 placeholder="Describe your services scope..."
                             />
                         </div>

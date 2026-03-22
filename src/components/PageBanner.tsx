@@ -17,7 +17,7 @@ interface PageBannerProps {
     breadcrumbs: BreadcrumbItem[];
     backgroundImage?: string;
     showBack?: boolean;
-    variant?: 'default' | 'thin';
+    variant?: 'standard' | 'large';
 }
 
 export default function PageBanner({ 
@@ -27,7 +27,7 @@ export default function PageBanner({
     breadcrumbs, 
     backgroundImage, 
     showBack = true,
-    variant = 'default' 
+    variant = 'standard' 
 }: PageBannerProps) {
     const router = typeof window !== 'undefined' ? require('next/navigation').useRouter() : null;
 
