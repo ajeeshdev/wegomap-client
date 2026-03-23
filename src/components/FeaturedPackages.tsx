@@ -161,7 +161,7 @@ export default function FeaturedPackages() {
                                     <div className="aspect-[4/5] relative overflow-hidden">
                                         {pkg.images && pkg.images.length > 0 ? (
                                             <Image
-                                                src={getImageUrl(pkg.images[0])}
+                                                src={getImageUrl(pkg.images?.[0] || (pkg as any).image || (pkg as any).thumb)}
                                                 alt={pkg.title}
                                                 fill
                                                 className="object-cover group-hover:scale-110 transition-transform duration-700"
@@ -248,7 +248,7 @@ export default function FeaturedPackages() {
                                 <div className="aspect-square w-full bg-slate-100 rounded-[3rem] overflow-hidden mb-8 relative border border-slate-50 hover:border-blue-100 transition-all">
                                     {pkg.images && pkg.images.length > 0 ? (
                                         <Image
-                                            src={getImageUrl(pkg.images[0])}
+                                            src={getImageUrl(pkg.images?.[0] || (pkg as any).image || (pkg as any).thumb)}
                                             alt={pkg.title}
                                             fill
                                             className="object-cover group-hover:scale-110 transition-transform duration-700"

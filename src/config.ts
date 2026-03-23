@@ -1,6 +1,6 @@
 export const API_URL = (process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBLIC_API_URL.trim() !== '')  
     ? process.env.NEXT_PUBLIC_API_URL.replace(/\/+$/, '').trim() // Remove any trailing slashes
-    : 'http://127.0.0.1:5001/api';
+    : 'https://api-demo.wegomap.com/api'; // Always use the demo API as default for now
 
 // Derive uploads base URL from API URL (remove /api suffix)
 // If API_URL is https://api.domain.com/api -> UPLOADS_URL is https://api.domain.com
@@ -8,19 +8,21 @@ export const UPLOADS_URL = API_URL.replace(/\/api\/?$/, '');
 
 /**
  * Resolves an image path to a full URL using the correct base.
- * - Handles absolute URLs from www.wegomap.com -> replaces with current UPLOADS_URL (api-demo.wegomap.com)
+ * - Handles absolute URLs from wegomap.com -> replaces with current UPLOADS_URL
  * - Handles relative /uploads/... paths -> prepends UPLOADS_URL
  * - Handles already-correct absolute URLs -> returns as-is
  */
 export const getImageUrl = (src: string | null | undefined): string => {
     if (!src) return '/bg-placeholder.jpg';
     
-    let resolved = src;
+    // Convert to string and trim
+    let resolved = String(src).trim();
 
-    // 1. Handle production domain migration
-    // If it points to the old site, rewrite it to our uploads base
-    if (resolved.includes('www.wegomap.com')) {
-        resolved = resolved.replace('https://www.wegomap.com', UPLOADS_URL);
+    // 1. Handle production domain migration (absolute URLs)
+    // We want to replace any wegomap.com domain with our current UPLOADS_URL
+    const domainPattern = /^https?:\/\/(www\.)?wegomap\.com/i;
+    if (domainPattern.test(resolved)) {
+        resolved = resolved.replace(domainPattern, UPLOADS_URL);
     }
     
     // 2. Handle relative paths starting with /uploads or uploads/
@@ -29,8 +31,7 @@ export const getImageUrl = (src: string | null | undefined): string => {
         resolved = `${UPLOADS_URL}${cleanPath}`;
     }
     
-    // 3. Fallback for potential double slashes and protocol issues
+    // 3. Fallback for potential double slashes (e.g., https://domain.com//uploads)
+    // but preserving the protocol's double slash
     return resolved.replace(/([^:]\/)\/+/g, "$1");
 };
-
-

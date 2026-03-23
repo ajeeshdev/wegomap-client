@@ -160,7 +160,7 @@ export default function AllToursPage() {
                         duration: pkg.duration,
                         price: pkg.price ? `₹${pkg.price.toLocaleString()}` : 'N/A',
                         oldPrice: pkg.oldamt ? `₹${Number(pkg.oldamt).toLocaleString()}` : null,
-                        image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || '/bg-placeholder.jpg'),
+                        image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || pkg.image || '/bg-placeholder.jpg'),
                         categories: [pkg.category?.toLowerCase() || 'all']
                     }));
                     setCmsPackages(mapped);
