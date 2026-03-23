@@ -31,7 +31,7 @@
   margin-top: 0.25rem;
 }
 .property-edit-container .property-edit-header .status-badge span {
-  color: #10b981;
+  color: var(--primary);
 }
 .property-edit-container .property-edit-layout {
   display: grid;
@@ -89,9 +89,9 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 .property-edit-container .tabs-sidebar .tab-btn.active {
-  background: #0f172a;
+  background: var(--primary);
   color: #fff;
-  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.1);
+  box-shadow: 0 10px 20px rgba(255, 107, 53, 0.2);
 }
 .property-edit-container .tabs-sidebar .tab-btn.active .icon-wrap {
   background: rgba(255, 255, 255, 0.1);
@@ -147,9 +147,9 @@
   transition: all 0.2s ease;
 }
 .property-edit-container .admin-form-group input:focus, .property-edit-container .admin-form-group select:focus, .property-edit-container .admin-form-group textarea:focus {
-  border-color: #0f172a;
+  border-color: var(--primary);
   background: #fff;
-  box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.05);
 }
 .property-edit-container .admin-form-group input::-moz-placeholder, .property-edit-container .admin-form-group select::-moz-placeholder, .property-edit-container .admin-form-group textarea::-moz-placeholder {
   color: #94a3b8;
@@ -204,7 +204,7 @@
   gap: 0.5rem;
   padding: 0.5rem 1rem;
   border-radius: 8px;
-  background: #0f172a;
+  background: var(--primary);
   color: #fff;
   font-size: 0.75rem;
   font-weight: 700;
@@ -213,7 +213,7 @@
   transition: all 0.2s ease;
 }
 .property-edit-container .add-item-btn:hover {
-  background: #000;
+  background: var(--primary);
   transform: translateY(-2px);
 }
 .property-edit-container .gallery-grid {
@@ -222,7 +222,7 @@
   gap: 1.25rem;
 }
 .property-edit-container .save-btn {
-  background: #0f172a;
+  background: var(--primary);
   color: #fff;
   height: 48px;
   padding: 0 2rem;
@@ -232,12 +232,12 @@
   align-items: center;
   gap: 0.75rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.2);
+  box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
 }
 .property-edit-container .save-btn:hover {
-  background: #000;
+  background: #e65a00;
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
 }
 .property-edit-container .serif {
   font-family: "DM Serif Display", "Georgia", serif;
@@ -273,7 +273,7 @@
   transition: all 0.2s ease;
 }
 .property-edit-container .custom-picker .picker-toggle:hover {
-  border-color: #0f172a;
+  border-color: var(--primary);
   background: #fff;
 }
 .property-edit-container .custom-picker .picker-dropdown {
@@ -312,9 +312,9 @@
 }
 .property-edit-container .custom-picker .picker-dropdown .picker-option:hover {
   background: #f8fafc;
-  color: #0f172a;
+  color: var(--primary);
 }
 .property-edit-container .custom-picker .picker-dropdown .picker-option.active {
-  background: #0f172a;
+  background: var(--primary);
   color: #fff;
 }/*# sourceMappingURL=cms-premium.css.map */
