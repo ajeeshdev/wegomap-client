@@ -337,7 +337,7 @@ export default function AllToursPage() {
                             <Link href={`/packages/${pkg.slug}`} className="allTourCardImgLink">
                                 <div className="allTourCardImg">
                                     <Image
-                                        src={pkg.image}
+                                        src={getImageUrl(pkg.image)}
                                         alt={pkg.title}
                                         fill
                                         style={{ objectFit: 'cover' }}
