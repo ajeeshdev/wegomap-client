@@ -5,4 +5,4 @@
 :HL["/_next/static/media/406d3fc8d5ec9f59-s.p.3f4cab70.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/chunks/f7eb669682772961.css","style"]
 :HL["/_next/static/chunks/30718e32e17299a4.css","style"]
-0:{"buildId":"dYxbRyQSKuNRx1y6OVwXg","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"golden-triangle-tour-package","paramType":null,"paramKey":"golden-triangle-tour-package","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
+0:{"buildId":"Hx3QvRSEO3t3Fv9ZHLh4X","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"golden-triangle-tour-package","paramType":null,"paramKey":"golden-triangle-tour-package","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}

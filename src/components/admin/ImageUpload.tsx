@@ -1,6 +1,6 @@
 "use client";
 
-import { API_URL } from '@/config';
+import { API_URL, UPLOADS_URL } from '@/config';
 import { useState } from 'react';
 import { Upload, X, Globe, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 
@@ -55,7 +55,7 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
         // Construct the full URL if the backend returns a relative path
         const imageUrl = data.data.startsWith('http')
           ? data.data
-          : `${API_URL.replace('/api', '')}${data.data}`;
+          : `${UPLOADS_URL}${data.data}`;
         onChange(imageUrl);
       } else {
         setError(data.error || 'Upload failed');

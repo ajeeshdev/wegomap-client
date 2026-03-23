@@ -1,6 +1,6 @@
 "use client";
 
-import { API_URL } from '@/config';
+import { API_URL, UPLOADS_URL } from '@/config';
 import { useState } from 'react';
 import { Upload, X, ImageIcon, CheckCircle2, AlertCircle, Loader2, Plus, GripVertical } from 'lucide-react';
 
@@ -49,7 +49,7 @@ export default function MultiImageUpload({ value, onChange, label = "Gallery Ass
         if (data.success) {
           const imageUrl = data.data.startsWith('http')
             ? data.data
-            : `${API_URL.replace('/api', '')}${data.data}`;
+            : `${UPLOADS_URL}${data.data}`;
           newUrls.push(imageUrl);
         }
       } catch (err) {
