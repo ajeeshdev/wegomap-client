@@ -1,0 +1,15 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/leh-ladakh-tour-package/layout,_N_T_/leh-ladakh-tour-package/page,_N_T_/leh-ladakh-tour-package"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/leh-ladakh-tour-package/__PAGE__",
+    "/leh-ladakh-tour-package",
+    "/_index",
+    "/_head"
+  ]
+}

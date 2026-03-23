@@ -1,0 +1,3 @@
+module.exports=[92801,a=>{"use strict";function b({children:a}){return a}a.s(["default",()=>b,"metadata",0,{title:"Kerala Honeymoon Packages",description:"Find the best Kerala honeymoon packages at affordable prices. Enjoy a romantic getaway in Munnar, Alleppey, and more with our custom tour plans.",keywords:"Kerala honeymoon packages, Munnar honeymoon, Alleppey houseboat honeymoon, romantic Kerala trips"}])}];
+
+//# sourceMappingURL=frontend_src_app_kerala-honeymoon-packages_layout_tsx_7926def6._.js.map

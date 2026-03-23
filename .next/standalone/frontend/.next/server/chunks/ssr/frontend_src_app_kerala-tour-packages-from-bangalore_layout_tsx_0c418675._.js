@@ -1,0 +1,3 @@
+module.exports=[14040,a=>{"use strict";function b({children:a}){return a}a.s(["default",()=>b,"metadata",0,{title:"Kerala Tour Packages from Bangalore",description:"Explore Kerala with our affordable tour packages from Bangalore. Custom itineraries for Wayanad, Munnar, and more with easy travel options.",keywords:"Kerala tour packages from Bangalore, Bangalore to Wayanad, Bangalore to Munnar, weekend trips from Bangalore"}])}];
+
+//# sourceMappingURL=frontend_src_app_kerala-tour-packages-from-bangalore_layout_tsx_0c418675._.js.map

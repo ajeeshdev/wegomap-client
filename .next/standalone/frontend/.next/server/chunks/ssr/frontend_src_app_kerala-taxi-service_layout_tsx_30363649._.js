@@ -1,0 +1,3 @@
+module.exports=[89978,a=>{"use strict";var b=a.i(18332);function c({children:a}){return(0,b.jsx)(b.Fragment,{children:a})}a.s(["default",()=>c,"metadata",0,{title:"Kerala Taxi Service | Kerala Taxi Packages | Wegomap",description:"Looking for a reliable Kerala taxi service? Wegomap Tours offers affordable taxi packages for sightseeing, airport transfers, and outstation trips in Kerala.",keywords:"kerala taxi service, kerala taxi packages",alternates:{canonical:"https://www.wegomap.com/kerala-taxi-service/"}}])}];
+
+//# sourceMappingURL=frontend_src_app_kerala-taxi-service_layout_tsx_30363649._.js.map
