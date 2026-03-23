@@ -8,7 +8,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Best Kerala Tour Packages | Plan Your Trip with Wegomap",
         "seoMeta": "WeGoMap - Discover customized Kerala tour packages with Wegomap. Enjoy houseboat stays, backwaters, hill stations, and more. Book your perfect Kerala trip today!",
         "seoKeys": "Kerala Tour Packages Best Kerala Tour Packages, kerala travel agency,",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com\" />"
     },
     "blogs": {
         "id": 2,
@@ -19,7 +19,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Kerala Trip Package | Explore God\u00e2\u0080\u0099s Own Country with Wegomap",
         "seoMeta": "Kerala Trip Package by Wegomap Offers a Perfect Mix of Nature, Culture, and Comfort. Enjoy Personalized Travel Plans for a Relaxing and Memorable Vacation.",
         "seoKeys": "Kerala Tour Packages\r\nKerala Honeymoon Packages\r\nKerala Holiday Packages\r\nKerala Packages for Couple\r\nBest Kerala Tour Packages\r\nBest Kerala Honeymoon Packages\r\nKerala Travel Packages\r\nKerala Tour Packages for Couple",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/blogs\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/blogs\" />"
     },
     "about": {
         "id": 4,
@@ -30,7 +30,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Best Kerala Holiday Packages | Top Travel Deals by Wegomap",
         "seoMeta": "Explore the best Kerala Holiday Packages with Wegomap. Enjoy unique travel deals and unforgettable experiences in the stunning landscapes of Kerala!",
         "seoKeys": "Best Kerala Holiday Packages , Holiday Packages in kerala",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/about/\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/about/\" />"
     },
     "404": {
         "id": 5,
@@ -41,7 +41,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Oops! Page Not Found - 404 Error",
         "seoMeta": "",
         "seoKeys": "",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/404\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/404\" />"
     },
     "contact": {
         "id": 6,
@@ -52,7 +52,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Contact -  Kerala Trip Package | Explore God\u00e2\u0080\u0099s Own Country with Wegomap",
         "seoMeta": "Kerala Trip Package by Wegomap Offers a Perfect Mix of Nature, Culture, and Comfort. Enjoy Personalized Travel Plans for a Relaxing and Memorable Vacation.",
         "seoKeys": "Kerala Trip Package . best Kerala Trip Package , trusted Kerala Trip Package , leading Kerala Trip Package",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/contact\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/contact\" />"
     },
     "services": {
         "id": 7,
@@ -63,7 +63,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Kerala\u00e2\u0080\u0099s best couple packages  | Travel Deals by Wegomap",
         "seoMeta": "Discover Kerala\u00e2\u0080\u0099s best couple packages with Wegomap. Enjoy romantic escapes, cozy stays, and personalized experiences for your perfect getaway.",
         "seoKeys": "Kerala\u00e2\u0080\u0099s best couple packages  , Kerala Packages for Couple  , trusted agency in Couple  Packages for Kerala",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/services/\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/services/\" />"
     },
     "payment": {
         "id": 8,
@@ -74,7 +74,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "How to Make Payment for Tours | Wegomap Tours",
         "seoMeta": "We offer multiple payment options for our customers. You can pay via net banking or upi facility. Contact us before making any payments.",
         "seoKeys": "",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/payment/\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/payment/\" />"
     },
     "tours": {
         "id": 9,
@@ -85,7 +85,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Kerala Honeymoon Packages | Romantic Getaways by Wegomap",
         "seoMeta": "Book your dream honeymoon with Wegomap\u00e2\u0080\u0099s Kerala Honeymoon Packages. Enjoy romantic escapes, cozy stays, and unforgettable experiences for couples.",
         "seoKeys": "Kerala Honeymoon Packages , best  Kerala Honeymoon Packages , trusted  Honeymoon Package agency in kochi",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/tours\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/tours\" />"
     },
     "kerala-tour-packages": {
         "id": 10,
@@ -111,7 +111,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Best Domestic Tour Packages in India | Wegomap Tours",
         "seoMeta": "Discover the diverse landscapes of India with our handpicked domestic tour packages. From beaches to mountains, explore India with Wegomap.",
         "seoKeys": "domestic tour packages, india tours, holiday packages india",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/domestic-tour-packages\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/domestic-tour-packages\" />",
         "bannerImage": "/uploads/categories/auvy9thxlogxhhxy3zqofaonrhj91o4babncqjvi220406070159.jpg",
         "contentTitle": "Domestic Holiday Packages",
         "contentImage": null,
@@ -126,7 +126,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Best International Tour Packages | Global Holiday Deals | Wegomap",
         "seoMeta": "Book your dream international vacation with Wegomap. Explore top global destinations like Dubai, Thailand, Bali, and more with our curated packages.",
         "seoKeys": "international tour packages, global tours, world travel packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/international-tour-packages\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/international-tour-packages\" />",
         "bannerImage": "/uploads/categories/nyuzwvgb639wz6mbjratshvfzdtm9tgxbpivpjqs220406065555.jpg",
         "contentTitle": "International Holiday Packages",
         "contentImage": null,
@@ -141,7 +141,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Manali Tour Packages from Kerala | Kullu Manali Packages",
         "seoMeta": "Kullu Manali Packages - Contact us to get the best deals on Manali Tour Packages from Kerala. All inclusive packages starting from Rs.18,999/-",
         "seoKeys": "Manali Tour Packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/manali-tour-packages\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/manali-tour-packages\" />",
         "bannerImage": "/uploads/categories/ofsorzqr2izti1rwgjqjaxxp4iws07ct9heovkwj220406065835.jpg",
         "contentTitle": null,
         "contentImage": null,
@@ -156,7 +156,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Goa Tour Packages From Kerala | Goa Packages",
         "seoMeta": "Affordable Goa Packages - Contact us to get the best deals on Goa Tour Packages from Kerala. All inclusive packages starting from Rs.8499/-",
         "seoKeys": "goa packages, goa packages from kerala, goa tour packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/goa-tour-packages/\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/goa-tour-packages/\" />",
         "bannerImage": "/uploads/categories/86wg9d29vhkflmuwtyrsof3rfqtcapzgva0ynqlp220406065630.jpg",
         "contentTitle": "Goa Tour Packages from Kerala",
         "contentImage": null,
@@ -171,7 +171,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Maldives Tour Packages from Kochi | Best Maldives Packages",
         "seoMeta": "Affordable Maldives Packages - Contact us to get the best deals on Maldives Tour Packages from Kochi. All inclusive packages starting from Rs.26,999/-",
         "seoKeys": "Maldives Tour Packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/maldives-tour-packages\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/maldives-tour-packages\" />",
         "bannerImage": "/uploads/categories/nyuzwvgb639wz6mbjratshvfzdtm9tgxbpivpjqs220406065555.jpg",
         "contentTitle": null,
         "contentImage": null,
@@ -186,7 +186,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Thailand Tour Packages from Kerala | Thailand Trip from Kerala",
         "seoMeta": "Affordable Thailand Packages - Contact us to get the best deals on Thailand Tour Packages from Kerala. All inclusive packages starting from Rs.25,999/-",
         "seoKeys": "thailand trip fro kerala, thailand tour packages from kerala",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/thailand-tour-packages\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/thailand-tour-packages\" />",
         "bannerImage": "/uploads/categories/8fimn8i11x1d6lhyiqx3s8dw9ang49kfv6ayvhxt220406065511.jpg",
         "contentTitle": "Thailand Tour Packages from Kochi",
         "contentImage": null,
@@ -201,7 +201,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Nepal Tour Packages | Wegomap Tours",
         "seoMeta": "Nepal Tour Packages stating from Rs.23,999/- Contact us to get the best deals on Nepal tour packages - Honeymoon and family packages.",
         "seoKeys": "Nepal Tour Packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/nepal-tour-packages\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/nepal-tour-packages\" />",
         "bannerImage": "/uploads/categories/zuq5qozfb1bxlyyr84azxkajfabeigl2udrfhhxa220406065441.jpg",
         "contentTitle": null,
         "contentImage": null,
@@ -216,7 +216,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Kerala Tour Packages with Best Prices",
         "seoMeta": "Explore Kerala tour packages with best prices. Enjoy Munnar hills, Alleppey backwaters, beaches, and relaxing holidays. Book now.",
         "seoKeys": "Kerala Tour Packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/destination\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/destination\" />"
     },
     "blog-1": {
         "id": 24,
@@ -227,7 +227,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Cherai Beach",
         "seoMeta": "Peace and Calm Beach near to Kochi, Cherai beach is a promising spot for Kerala tourism which attracts tourists from around the world. Chinese fishing net is one of the major attractions.",
         "seoKeys": "Cherai Beach tourist attraction",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/blog-1\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/blog-1\" />"
     },
     "blog-new1": {
         "id": 27,
@@ -238,7 +238,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Athirapilly",
         "seoMeta": "Trekking enthusiasts can experience the beauty of nature. It can also be a paradise for bird watchers. Athirapilly also gives nature a loves to have a jungle safari experience.",
         "seoKeys": "Athirapilly Waterfalls",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/blog-new1\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/blog-new1\" />"
     },
     "test-blog-3": {
         "id": 30,
@@ -249,7 +249,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Alappuzha Backwater",
         "seoMeta": "Alappuzha is Known as Venice of East, By taking Alleppey Houseboat packages you can cover almost all locations in one go.",
         "seoKeys": "Alappuzha backwater tour",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/test-blog-3\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/test-blog-3\" />"
     },
     "events": {
         "id": 34,
@@ -260,7 +260,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Corporate Event Management Company in Kochi | Wegomap Events",
         "seoMeta": "Looking for a corporate event management company with flexibility, proper time management & assured quality at a desirable budget? Contact us now.",
         "seoKeys": "corporate event management company",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/events/\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/events/\" />"
     },
     "privacy-policy": {
         "id": 39,
@@ -271,7 +271,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Wegomap \u00e2\u0080\u0093 User Data Protection & Cookies Policy",
         "seoMeta": "Read Wegomap\u00e2\u0080\u0099s Privacy Policy to understand how we collect, use, and protect your personal information. Learn about cookies, data security, and user privacy practices.",
         "seoKeys": "Privacy Policy, Wegomap, Data Protection, Cookies, User Data",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/privacy-policy\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/privacy-policy\" />"
     },
     "terms-and-conditions": {
         "id": 40,
@@ -282,7 +282,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Terms and Conditions | Wegomap \u00e2\u0080\u0093 Booking, Hotel & Travel Policies",
         "seoMeta": "Read Wegomap\u00e2\u0080\u0099s Terms and Conditions to understand hotel booking policies, room availability, check-in and check-out timings, extra charges, and travel conditions.",
         "seoKeys": "Wegomap terms and conditions",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/terms-and-conditions\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/terms-and-conditions\" />"
     },
     "refund-policy": {
         "id": 41,
@@ -293,7 +293,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Cancellation & Refund Policy for Kerala Tour Packages | Easy Refund Terms",
         "seoMeta": "Read our Kerala tour package cancellation and refund policy. Know refund terms, cancellation charges, timelines, and advance payment conditions for hassle-free travel planning.",
         "seoKeys": "Kerala tour cancellation policy",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/refund-policy\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/refund-policy\" />"
     },
     "kerala-honeymoon-packages": {
         "id": 42,
@@ -304,7 +304,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Kerala Tour Packages for Couple With Price | Kerala Honeymoon Packages",
         "seoMeta": "Romantic Kerala honeymoon packages starting from Rs.5999/- Kerala tour packages for couples from local tour operator in Kerala.",
         "seoKeys": "kerala honeymoon packages, kerala tour packages for couple with price, kerala tour packages for couples",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/kerala-honeymoon-packages/\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/kerala-honeymoon-packages/\" />",
         "bannerImage": "/uploads/categories/ubqf5mc4ve1g6yqwmnsyiyek9fkld9akyp6g2lar220406065334.jpg",
         "contentTitle": "Kerala Tour Packages for Couples",
         "contentImage": null,
@@ -319,7 +319,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Kerala Tour Packages for Family with Price | Kerala Family Packages",
         "seoMeta": "Kerala family tour packages starting from Rs.5999 per person. Book Kerala tour packages for family from local tour operator in Kerala. Contact us today.",
         "seoKeys": "kerala family tour packages, kerala tour packages for family with price",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/kerala-family-tour-packages/\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/kerala-family-tour-packages/\" />",
         "bannerImage": "/uploads/categories/o6xdubpsa3zfofx28b8iqnzym9zajlm3uau8ouuu220406065405.jpg",
         "contentTitle": "Kerala Tour Packages for Family",
         "contentImage": null,
@@ -334,7 +334,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Aleppey Houseboat",
         "seoMeta": "The Kerala Traditional food can be experienced and it is definitely a must-try that Kerala Backwaters at Aleppey offers you, If you are a Fishing freak you will be getting an opportunity to polish your skill at Fishing.",
         "seoKeys": "Alappuzha houseboat",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/aleppey-houseboat\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/aleppey-houseboat\" />"
     },
     "kanyakumari": {
         "id": 45,
@@ -345,7 +345,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Kanyakumari",
         "seoMeta": "You can see 3 seas meeting at the Arabian Sea, Bay of Bengal and the Indian Ocean. and experience the mystery of these 3\u00c3\u0082\u00c2\u00a0 not mixing each other.",
         "seoKeys": "Kanyakumari tourism",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/kanyakumari\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/kanyakumari\" />"
     },
     "kochi": {
         "id": 46,
@@ -356,7 +356,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Kochi",
         "seoMeta": "Kerala Tour packages are starting mainly from Cochin Airport (COK). Kochi is known for its Cultural and trade background for a very long.",
         "seoKeys": "Kerala Tour packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/kochi\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/kochi\" />"
     },
     "kovalam": {
         "id": 47,
@@ -367,7 +367,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Kovalam",
         "seoMeta": "The ride through the Kovalam highway can be refreshing. You will be getting a wide variety of Seafood from restaurants around",
         "seoKeys": "Kovalam tour packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/kovalam\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/kovalam\" />"
     },
     "kumarakam": {
         "id": 48,
@@ -378,7 +378,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Kumarakam",
         "seoMeta": "The Kettuvallam which means a boat that used by localities mainly for fishing and transporting goods eventually turned out as Luxury Houseboats.",
         "seoKeys": "Kumarakom tour packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/kumarakam\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/kumarakam\" />"
     },
     "munnar": {
         "id": 49,
@@ -389,7 +389,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Best Hill Station in Kerala for Honeymoon",
         "seoMeta": "Munnar the mother of evergreen tea plantations is also well known for its high-quality homemade chocolates The majority of Visitors opt Munnar for Honeymoon packages and Family Holidays.",
         "seoKeys": "Munnar tour packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/munnar\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/munnar\" />"
     },
     "thekkady": {
         "id": 50,
@@ -400,7 +400,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Thekkady",
         "seoMeta": "A jeep safari will give you a chance to experience the wildlife. Kerala tour packages offer various eco-tourism programmes like nature walk, jungle camp, bamboo rafting by which one can explore the true essence of nature.",
         "seoKeys": "Thekkady tourism",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/thekkady\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/thekkady\" />"
     },
     "varkala": {
         "id": 51,
@@ -411,7 +411,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Varkala",
         "seoMeta": "Varkala owns the worlds largest bird sculpture - Jadayupara, which stands for the protection, safety and Honour of women. There are so many cafes and restaurants at Varkala that can give you a joyful experience.",
         "seoKeys": "Varkala tourism",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/varkala\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/varkala\" />"
     },
     "wayanad": {
         "id": 52,
@@ -422,7 +422,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Wayanad",
         "seoMeta": "These mountains are located in the Western Ghats and Nature lovers can experience wild activities like Trekking, Safaries, Camping and other water sports",
         "seoKeys": "Wayanad tour packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/wayanad\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/wayanad\" />"
     },
     "thankyou": {
         "id": 53,
@@ -433,7 +433,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Get Best Kerala Tour Package Deals | Expert Travel Assistance",
         "seoMeta": "Connect with our Kerala tour specialists for personalized package deals tailored to your travel needs. Experience the best of Kerala with expert guidance and unbeatable offers.",
         "seoKeys": "Kerala tour packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/thankyou\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/thankyou\" />"
     },
     "kerala-tour-packages-from-bangalore": {
         "id": 54,
@@ -444,7 +444,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Best Kerala Tour Packages from Bangalore | Wegomap Tours",
         "seoMeta": "Affordable & Best Kerala Tour Packages from Bangalore - Wegomap is a local Kerala tour operator providing bachelor, couple and family packages to Kerala from Bangalore.",
         "seoKeys": "kerala packages from bangalore \r\nKerala Tourism Packages for Couple\r\nBest Tour Operators for Kerala\r\nKerala Holiday Packages\r\nKerala Packages for Couple",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/\" />",
         "bannerImage": "/uploads/categories/0D5D01EuAa4VNFvV73Ny1Pepw8fd0KT3N7z6tXqW230904030332.jpg",
         "contentTitle": "Kerala Tour Packages from Bangalore \u00e2\u0080\u0093 Explore God\u00e2\u0080\u0099s Own Country",
         "contentImage": null,
@@ -459,7 +459,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Top Kerala Tour Operator | Trusted Kerala Travel Agency",
         "seoMeta": "Experience the beauty of God's Own Country with Kerala\u00e2\u0080\u0099s best tour operator. Customized Kerala tours and packages crafted to create unforgettable journeys just for you.",
         "seoKeys": "Kerala tour operator",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/\" />"
     },
     "kerala-tour-package": {
         "id": 56,
@@ -470,7 +470,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Kerala Holiday Tour Packages | Kerala Honeymoon Packages",
         "seoMeta": "Discover enchanting Kerala with our curated tour packages. Explore Munnar, Thekkady, Alleppey Houseboats & More. Book your Kerala Holiday Package now!",
         "seoKeys": "kerala-tour-package",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/kerala-tour-package\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/kerala-tour-package\" />"
     },
     "thailand-tour": {
         "id": 57,
@@ -481,7 +481,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Thailand Tour Packages | Uncover the Wonders of Thailand",
         "seoMeta": "Thailand Tour Packages by Wegomap offer exciting adventures, cultural sights, and tropical escapes. Enjoy seamless travel and unforgettable Thai experiences.",
         "seoKeys": "Couple Tour Packages in Kerala\r\nKerala Tourism Packages for Couple\r\nBest Tour Operators for Kerala\r\nFamily Tour to Kerala\r\nKerala Houseboat Booking\r\nHoliday Packages to Kerala\r\nThailand Tour Packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/\" />"
     },
     "keralapeopleplans": {
         "id": 58,
@@ -514,7 +514,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Wegomap Kochi | Trusted Kerala Tour Operator with Custom Packages",
         "seoMeta": "Wegomap is a Kochi-based Kerala tour operator offering quality travel services, trusted hotel partners, and 24/7 customer support. Get custom Kerala tour packages tailored to your budget and needs.",
         "seoKeys": "Wegomap Kerala tour operator",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/ooty-tour-packages\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/ooty-tour-packages\" />",
         "bannerImage": "/uploads/categories/xivejtmsap5g34sse6prhfkyykvxzhw9lanygtbt240905034008.jpg",
         "contentTitle": "",
         "contentImage": null,
@@ -529,7 +529,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Wegomap Kochi | Trusted Kerala Tour Operator & Travel Agency",
         "seoMeta": "Wegomap is a Kochi-based tour operator in Kerala offering quality travel services at the best prices. Enjoy safe holidays with trusted hotel partners, 24/7 support, and custom tour packages to suit your budget.",
         "seoKeys": "Kerala holiday package,kodaikanal tour packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/kodaikanal-tour-packages\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/kodaikanal-tour-packages\" />",
         "bannerImage": "/uploads/categories/umwfsgcys5bekqzaaga7nsholfjuuhiqvnal5r4o240905034708.jpg",
         "contentTitle": "",
         "contentImage": null,
@@ -544,7 +544,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Wegomap | Kochi-Based Kerala Tour Operator & Travel Agency",
         "seoMeta": "Wegomap is a trusted Kochi-based tour operator in Kerala offering quality travel services at the best prices. Enjoy safe holidays with reliable hotel partners, 24/7 customer support, and custom tour packages to match your needs and budget.",
         "seoKeys": "Wegomap tour operator",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/coorg-tour-package\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/coorg-tour-package\" />",
         "bannerImage": "/uploads/categories/l4zbbjoyo4v19xzlzb4flec9ddgsenpvfhqgyzsg240906100043.jpg",
         "contentTitle": "",
         "contentImage": null,
@@ -559,7 +559,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Ooty and Kodaikanal Tour Packages | Ooty Kodaikanal Tours",
         "seoMeta": "Ooty Kodaikanal Packages - Contact us to get the best deals on Ooty and Kodaikanal Tour Packages from the leading South Indian tour operator.",
         "seoKeys": "ooty and kodaikanal tour packages, ooty kodaikanal tour packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/ooty-kodaikanal-tour-packages/\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/ooty-kodaikanal-tour-packages/\" />",
         "bannerImage": "/uploads/categories/gooqe4hpze2i6jmaewve7pyud8kofwvwpunfxgql240905041417.jpg",
         "contentTitle": "",
         "contentImage": null,
@@ -589,7 +589,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Bali Tour Packages from Kochi | Bali Packages from Kerala",
         "seoMeta": "Affordable Bali Packages from Kerala - Contact us to get the best deals on Bali Tour Packages from Kochi. All inclusive packages starting from Rs.16,999/-",
         "seoKeys": "bali packages from kerala, bali tour packages from kochi",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/bali-tour-packages\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/bali-tour-packages\" />",
         "bannerImage": "/uploads/categories/OxYqjL0LqhZkWDzbrEPHes80B62ydktSv747gXm0240827104701.jpg",
         "contentTitle": "Bali Packages from Kochi",
         "contentImage": null,
@@ -604,7 +604,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Best Dubai Tour Packages | Your Ultimate Gateway to Luxury",
         "seoMeta": "Best Dubai Tour Packages by Wegomap offer luxury escapes, desert adventures, and iconic attractions. Enjoy premium stays, seamless travel, and unforgettable moments.",
         "seoKeys": "Dubai tour packages\r\nKerala Tour Packages\r\nKerala Honeymoon Packages\r\nKerala Holiday Packages\r\nKerala Packages for Couple\r\nBest Kerala Tour Packages\r\nBest Kerala Honeymoon Packages\r\nKerala Travel Packages\r\nKerala Tour Packages for Couple",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/dubai-tour-packages\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/dubai-tour-packages\" />",
         "bannerImage": "/uploads/categories/y7acfjy1zi0t3c9rpn4ftogqxtwytpflgfocfmrq240905095417.jpg",
         "contentTitle": "",
         "contentImage": null,
@@ -619,7 +619,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Wegomap Kochi | Reliable Kerala Tour Operator & Travel Agency",
         "seoMeta": "Wegomap is a Kochi-based tour operator in Kerala offering top-quality travel services at the best prices. Enjoy safe holidays with trusted hotel partners, 24/7 customer support, and customized tour packages to suit your needs and budget.",
         "seoKeys": "Kochi travel services",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/andaman-packages\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/andaman-packages\" />",
         "bannerImage": "/uploads/categories/x8mupizywhx0lbujzpvsk6qrznf18bixirysodea240904050124.jpg",
         "contentTitle": "",
         "contentImage": null,
@@ -634,7 +634,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Varanasi Tour Packages | 27 Tours Booked Today | Wegomap",
         "seoMeta": "Book Varanasi tour packages with Wegomap, a trusted Kochi-based tour operator. Enjoy best prices, verified hotels, safe travel services, and 24/7 customer support. Custom packages available to fit your budget.",
         "seoKeys": "Varanasi tour packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/varanasi-package\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/varanasi-package\" />",
         "bannerImage": "/uploads/categories/5QFjERrKbfZ74TopsTis4EdOnNVTyfs6B5yRQBwc240904040753.jpg",
         "contentTitle": "",
         "contentImage": null,
@@ -649,7 +649,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Leh Ladakh Tour Package | Best Price Adventure Trips | Wegomap",
         "seoMeta": "Book your Leh Ladakh tour package with Wegomap and explore breathtaking mountains, monasteries, and high-altitude adventures. Enjoy best prices, trusted hotels, expert planning, and 24/7 customer support.",
         "seoKeys": "Leh Ladakh tour package",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/leh-ladakh-tour-package\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/leh-ladakh-tour-package\" />",
         "bannerImage": "/uploads/categories/d4rzq89o8xu3a9ejgnhkfes4r5lpqvsfgtldzmoi240904033509.jpg",
         "contentTitle": "",
         "contentImage": null,
@@ -664,7 +664,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Kashmir Holiday Package | Best Deals on Kashmir Tours | Wegomap",
         "seoMeta": "Book your Kashmir holiday package with Wegomap and explore the beauty of paradise on earth. Enjoy scenic valleys, houseboats, snow experiences, trusted hotels, best prices, and 24/7 customer support",
         "seoKeys": "Kashmir holiday package",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/kashmir-holiday-package\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/kashmir-holiday-package\" />",
         "bannerImage": "/uploads/categories/vsgopcdmooaxqkjltfnahzvl4vqe1fdioxawg2yt240829024046.jpg",
         "contentTitle": "",
         "contentImage": null,
@@ -679,7 +679,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Bhutan Tour Packages | Peaceful Bhutan Trips & Best Deals | Wegomap",
         "seoMeta": "Explore the beauty and serenity of Bhutan with Wegomap\u00e2\u0080\u0099s Bhutan tour packages. Enjoy scenic landscapes, monasteries, cultural experiences, trusted stays, best prices, and 24/7 customer support.",
         "seoKeys": "Bhutan tour packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/bhutan-packages\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/bhutan-packages\" />",
         "bannerImage": "/uploads/categories/5z2forothrchrzckhauy3hq8zxsxchlbx2rncnzx240904035922.jpg",
         "contentTitle": "",
         "contentImage": null,
@@ -694,7 +694,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Darjeeling Tour Package | Best Deals on Hill Station Tours | Wegomap",
         "seoMeta": "Book your Darjeeling tour package with Wegomap, a trusted Kochi-based tour operator. Enjoy scenic tea gardens, verified hotels, best prices, safe travel services, and 24/7 customer support with custom packages to suit your budget.",
         "seoKeys": "Darjeeling tour package",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/darjeeling\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/darjeeling\" />",
         "bannerImage": "/uploads/categories/2z1agsq6wrwibgatjiamea7pftxta7cgalenltcc240904030146.jpg",
         "contentTitle": "",
         "contentImage": null,
@@ -709,7 +709,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Affordable  Malaysia Tour Packages From Kochi | Malaysia Packages from Kerala",
         "seoMeta": "Affordable Malaysia Tour Packages from Kerala -  Wegomap offer vibrant cities, stunning islands, and rich culture. Enjoy comfortable stays, great deals, and memorable travel moments.",
         "seoKeys": "malaysia tour packages, malaysia tour packages from kochi, malaysia tour packages from kerala",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/malaysia-tour-packages\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/malaysia-tour-packages\" />",
         "bannerImage": "/uploads/categories/7Er9MHHpU4tIDnHWJm9rmvpELUno6GQ2zdd7pozR240821040000.jpg",
         "contentTitle": "",
         "contentImage": null,
@@ -724,7 +724,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Sri Lanka Tour Packages | Best Deals on Sri Lanka Trips | Wegomap",
         "seoMeta": "Book Sri Lanka tour packages with Wegomap, a trusted Kochi-based tour operator. Explore beaches, heritage sites, and wildlife with verified hotels, best prices, safe travel services, and 24/7 customer support. Custom packages available.",
         "seoKeys": "Sri Lanka tour packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/sri-lanka\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/sri-lanka\" />",
         "bannerImage": "/uploads/categories/2fsdkcfcklfcdvyblurq0wzrrmyp0rhlhuamkriq240820031509.jpg",
         "contentTitle": "",
         "contentImage": null,
@@ -739,7 +739,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Lakshadweep Tour Package | Pristine Island Holidays from Kerala | Wegomap",
         "seoMeta": "Explore crystal-clear waters and untouched islands with Wegomap\u00e2\u0080\u0099s Lakshadweep tour packages. As a trusted Kochi-based Kerala tour operator, we offer personalized island holidays with best prices, reliable services, and expert planning for a seamless travel experience.",
         "seoKeys": "Lakshadweep tour package",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/lakshadweep-tour-package\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/lakshadweep-tour-package\" />",
         "bannerImage": "/uploads/categories/vjy7xslqm4mc1yqd6utmyochqman4xalxjfiyzoa240820042745.jpg",
         "contentTitle": "EXPOLRE LAKSHADWEEP ISLANDS",
         "contentImage": null,
@@ -754,7 +754,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Wegomap | Best Kerala Tour Operator & Travel Agency in Kochi",
         "seoMeta": "Wegomap is a Kochi-based tour operator in Kerala offering top-quality travel services at the best prices. Enjoy safe holidays with trusted hotel partners, 24/7 customer support, and custom tour packages tailored to your needs and budget.",
         "seoKeys": "Kochi travel agencY",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/singapore-tour-package\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/singapore-tour-package\" />",
         "bannerImage": "/uploads/categories/KENL2OFT3a7kTbcVoTO8SQYucDDNMiWvx6DeaIEk240827110728.jpg",
         "contentTitle": "",
         "contentImage": null,
@@ -769,7 +769,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Rajasthan Tour Packages | Best Deals on Rajasthan Trips | Wegomap",
         "seoMeta": "Explore the royal heritage of India with Wegomap\u00e2\u0080\u0099s Rajasthan tour packages. Discover forts, palaces, deserts, and cultural experiences with trusted hotels, great prices, and 24/7 support from a Kochi-based tour operator. Custom packages available to suit your needs and budget.",
         "seoKeys": "Rajasthan tour packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/rajasthan-tour-package\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/rajasthan-tour-package\" />",
         "bannerImage": "/uploads/categories/twhsfbqthmna28zogfp3kpedhqd692qv29cqe85u240904024319.jpg",
         "contentTitle": "",
         "contentImage": null,
@@ -784,7 +784,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Golden Triangle Tour Package | Delhi, Agra & Jaipur Tours | Wegomap",
         "seoMeta": "Explore India\u00e2\u0080\u0099s iconic Golden Triangle with Wegomap\u00e2\u0080\u0099s tailored tour packages covering Delhi, Agra, and Jaipur. Enjoy trusted hotels, expert planning, great prices, and 24/7 support from a Kochi-based tour operator. Custom packages available for families, couples, and groups.",
         "seoKeys": "Golden Triangle tour package",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/golden-triangle-tour-package\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/golden-triangle-tour-package\" />",
         "bannerImage": "/uploads/categories/1cs3jcryqwyeiskhq76sy33is8ico6qqnulbrskv240905024238.jpg",
         "contentTitle": "",
         "contentImage": null,
@@ -799,7 +799,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Meghalaya Tour Package from Kerala | Best Meghalaya Trip \u00e2\u0080\u0093 Wegomap",
         "seoMeta": "Explore the beauty of Meghalaya with Wegomap\u00e2\u0080\u0099s affordable tour packages from Kerala. Enjoy waterfalls, living root bridges, caves, and scenic hills with trusted hotels, expert planning, and 24/7 customer support. Book your custom Meghalaya trip today.",
         "seoKeys": "Meghalaya tour package",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/meghalaya-tour-package\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/meghalaya-tour-package\" />",
         "bannerImage": "/uploads/categories/r34Bg3glSVPv3yNqrsdDu6ZdJpx9fBTtZnXmbXI4240904044934.jpg",
         "contentTitle": "",
         "contentImage": null,
@@ -814,7 +814,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Kerala House Boat Packages | Alleppey Boat House Packages",
         "seoMeta": "Explore the best Kerala houseboat packages with Wegomap Tours. Cruise through the serene backwaters of Alleppey and Kumarakom with our premium houseboats. Book now.",
         "seoKeys": "kerala houseboat, alleppey boat house",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/kerala-alleppey-boat-house\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/kerala-alleppey-boat-house\" />"
     },
     "kerala-taxi-service": {
         "id": 82,
@@ -825,7 +825,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Kerala Taxi Service | Kerala Taxi Packages",
         "seoMeta": "Looking for a reliable Kerala taxi service? Wegomap Tours offers affordable taxi packages for sightseeing, airport transfers, and outstation trips in Kerala. Book your ride today!",
         "seoKeys": "kerala taxi service, kerala taxi packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/kerala-taxi-service\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/kerala-taxi-service\" />"
     },
     "private-pool-villas-in-kochi": {
         "id": 83,
@@ -836,7 +836,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Private Pool Villas in Kochi",
         "seoMeta": "Kochi, a beautiful city in Kerala, is renowned for its stunning landscapes, rich culture, and vibrant history. If you're seeking a truly luxurious experience in this enchanting destination, staying in a private pool villa in Kochi is the ultimate way",
         "seoKeys": "private pool villas, private pool villas in kochi",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/private-pool-villas-in-kochi\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/private-pool-villas-in-kochi\" />"
     },
     "bachelor-party-places-in-kerala": {
         "id": 84,
@@ -847,7 +847,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Best Bachelor Party Places in Kerala",
         "seoMeta": "Kerala, famously known as \"God's Own Country,\" is a breathtaking destination that boasts lush greenery, serene backwaters, and a rich cultural heritage. While it\u00e2\u0080\u0099s known for its serene beaches and peaceful getaways, Kerala is also an ideal destinatio",
         "seoKeys": "bachelor party in kerala, bachelor party places in kerala",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/bachelor-party-places-in-kerala/\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/bachelor-party-places-in-kerala/\" />"
     },
     "destination-wedding-in-kerala": {
         "id": 85,
@@ -858,7 +858,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Destination Wedding in Kerala",
         "seoMeta": "A destination wedding is more than just a celebration\u00e2\u0080\u0094it\u00e2\u0080\u0099s an experience that blends romance, beauty, and unforgettable memories. Kerala, fondly known as \"God's Own Country,\" is an idyllic destination for couples looking for a scenic and tranquil bac",
         "seoKeys": "destination wedding in kerala, destination weddings",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/destination-wedding-in-kerala/\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/destination-wedding-in-kerala/\" />"
     },
     "staycation-in-kerala": {
         "id": 86,
@@ -869,7 +869,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Staycation in Kerala",
         "seoMeta": "In today\u00e2\u0080\u0099s fast-paced world, a staycation offers the perfect opportunity to unwind without the stress of long travel plans. And where better to enjoy a serene and rejuvenating break than Kerala, famously known as \"God\u00e2\u0080\u0099s Own Country\"? With its tranqui",
         "seoKeys": "staycation, staycation in kerala",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/staycation-in-kerala/\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/staycation-in-kerala/\" />"
     },
     "azerbaijan-tour-packages": {
         "id": 87,
@@ -880,7 +880,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Azerbaijan Tour Packages from India | Best Azerbaijan Trips \u00e2\u0080\u0093 Wegomap",
         "seoMeta": "Discover the beauty of Azerbaijan with Wegomap\u00e2\u0080\u0099s affordable and customizable tour packages. Explore Baku, mountain landscapes, cultural heritage, Caspian Sea views, and unforgettable experiences. Trusted hotels, expert planning, and 24/7 support \u00e2\u0080\u0094 book your dream Azerbaijan holiday today!",
         "seoKeys": "Azerbaijan tour packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/azerbaijan-tour-packages\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/azerbaijan-tour-packages\" />",
         "bannerImage": "/uploads/categories/twlgefqv2zwvq2gs99ix4ozzi3n9r41z9xbotxid250131024536.jpg",
         "contentTitle": "",
         "contentImage": null,
@@ -895,7 +895,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Wegomap | Best Kerala Honeymoon Packages",
         "seoMeta": "Book the best Kerala honeymoon packages with handpicked resorts, houseboat cruises, and private tours. Create magical moments with your loved one.",
         "seoKeys": "Kerala honeymoon packages,Best kerala honeymoon packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/best-kerala-honeymoon-packages\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/best-kerala-honeymoon-packages\" />"
     },
     "vietnam-package": {
         "id": 89,
@@ -906,7 +906,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Vietnam Tour Package from Kerala | Best Vietnam Trips \u00e2\u0080\u0093 Wegomap",
         "seoMeta": "Plan your Vietnam holiday with Wegomap, a trusted Kerala tour operator. Explore Hanoi, Halong Bay, Da Nang, and Ho Chi Minh City with affordable Vietnam tour packages, handpicked hotels, expert guidance, and 24/7 customer support. Book your customized Vietnam trip from Kerala today.",
         "seoKeys": "Vietnam tour package",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/vietnam-package\" />",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/vietnam-package\" />",
         "bannerImage": "/uploads/categories/6f5f3mvihdthwolvbykh1fxl0nbavck38y47ubvs250605123703.jpg",
         "contentTitle": "",
         "contentImage": null,
@@ -921,7 +921,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Cruise Packages \u00e2\u0080\u0093 Best Cruise Deals & Sea Adventures | Wegomap Tours",
         "seoMeta": "Explore unforgettable cruise packages with Wegomap \u00e2\u0080\u0094 from scenic sea voyages and curated onboard experiences to exclusive deals on international cruises. Book your dream cruise holiday with expert travel support today!",
         "seoKeys": "Cruise Packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/cruise-packages\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/cruise-packages\" />"
     },
     "top-destinations-in-kerala-for-the-best-kerala-honeymoon-packages": {
         "id": 91,
@@ -932,7 +932,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Top Destinations in Kerala for the Best Kerala Honeymoon Packages",
         "seoMeta": "Kerala is one of the most romantic destinations worldwide. It is the combination of beautiful nature, calm waters, and quiet beaches that makes the place ideal for a honeymoon. By selecting the best Kerala honeymoon packages",
         "seoKeys": "Top Destinations in Kerala",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/top-destinations-in-kerala-for-the-best-kerala-honeymoon-packages\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/top-destinations-in-kerala-for-the-best-kerala-honeymoon-packages\" />"
     },
     "best-weekend-kerala-tour-packages-for-short-getaways": {
         "id": 92,
@@ -943,7 +943,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Best Weekend Kerala Tour Packages for Short Getaways",
         "seoMeta": "Weekend journeys make up for short vacations, which allow the person to take a fresh breath, reset, and come back anew.",
         "seoKeys": "Best Weekend Kerala Tour Packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/best-weekend-kerala-tour-packages-for-short-getaways\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/best-weekend-kerala-tour-packages-for-short-getaways\" />"
     },
     "packagesnew": {
         "id": 93,
@@ -965,7 +965,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Kerala Holiday Tour Packages | Kerala Honeymoon Packages",
         "seoMeta": "Discover enchanting Kerala with our curated tour packages. Explore Munnar, Thekkady, Alleppey Houseboats & More. Book your Kerala Holiday Package now!",
         "seoKeys": "",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/kerala-tour-package-new/\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/kerala-tour-package-new/\" />"
     },
     "kerala-family-tour-packages-news": {
         "id": 96,
@@ -976,7 +976,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Kerala  family Tour Packages | Kerala Holiday family Packages",
         "seoMeta": "Plan a perfect getaway with Kerala family Tour Packages that include houseboats, hill stations, wildlife parks, and relaxing beach stays.",
         "seoKeys": "Kerala family tour packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/kerala-family-tour-packages-news\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/kerala-family-tour-packages-news\" />"
     },
     "kerala-family-tour-packages-new": {
         "id": 97,
@@ -987,7 +987,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "kerala-family-tour-packages-new",
         "seoMeta": "",
         "seoKeys": "",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/kerala-family-tour-packages-new/\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/kerala-family-tour-packages-new/\" />"
     },
     "why-kerala-tour-packages-are-perfect-for-family-vacations-and-honeymoon-trips": {
         "id": 99,
@@ -998,7 +998,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Holiday Packages to Kerala | Kerala Trip Package \u00e2\u0080\u0093 Wegomap",
         "seoMeta": "Explore Holiday packages to kerala with Wegomap. Book your kerala trip package with handpicked stays, houseboats, and custom guided tours at great prices.",
         "seoKeys": "Holiday packages to kerala, kerala Trip Package",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/why-kerala-tour-packages-are-perfect-for-family-vacations-and-honeymoon-trips\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/why-kerala-tour-packages-are-perfect-for-family-vacations-and-honeymoon-trips\" />"
     },
     "family-tours-in-dubai-a-complete-holiday-guide-with-wegomap-tours-and-travels": {
         "id": 100,
@@ -1042,7 +1042,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Kerala Tour Packages | Wegomap",
         "seoMeta": "Travel smarter with Wegomap Kerala Tour Packages. Enjoy smooth arrangements, comfortable stays, and unforgettable Kerala memories.",
         "seoKeys": "Kerala Tour Packages,Best Kerala Tour Packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/best-kerala-tour-packages-for-nature-lovers-and-wildlife-enthusiasts\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/best-kerala-tour-packages-for-nature-lovers-and-wildlife-enthusiasts\" />"
     },
     "kerala-houseboat-booking-guide-for-alleppey-backwaters": {
         "id": 106,
@@ -1053,7 +1053,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Kerala Houseboat Booking Guide | Wegomap",
         "seoMeta": "Book your dream backwater stay with Wegomap. Kerala Houseboat Booking made simple, affordable, and reliable. Enjoy scenic cruises, luxury stays, and easy online reservations.",
         "seoKeys": "Kerala Houseboat Booking",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/kerala-houseboat-booking-guide-for-alleppey-backwaters\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/kerala-houseboat-booking-guide-for-alleppey-backwaters\" />"
     },
     "kerala-hill-stations-covered-in-popular-holiday-packages-to-kerala": {
         "id": 107,
@@ -1064,7 +1064,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Wegomap | Popular Holiday Packages to Kerala",
         "seoMeta": "Explore the  holiday packages to Kerala with scenic backwaters, hill stations, beaches, and houseboats. Book your perfect Kerala getaway today.",
         "seoKeys": "Holiday Packages to kerala, Popular Holiday Packages to kerala",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/kerala-hill-stations-covered-in-popular-holiday-packages-to-kerala\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/kerala-hill-stations-covered-in-popular-holiday-packages-to-kerala\" />"
     },
     "festival-experiences-you-can-enjoy-with-a-kerala-trip-package": {
         "id": 108,
@@ -1075,7 +1075,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Scenic Kerala Trip Package for Nature Lovers",
         "seoMeta": "Book a kerala Trip package with Wegomap and explore serene backwaters, green hills, and coastal beauty without stress.",
         "seoKeys": "Kerala Trip Package",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/festival-experiences-you-can-enjoy-with-a-kerala-trip-package\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/festival-experiences-you-can-enjoy-with-a-kerala-trip-package\" />"
     },
     "comparing-budget-and-luxury-holiday-packages-to-kerala": {
         "id": 109,
@@ -1086,7 +1086,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Best Holiday Packages to Kerala \u00e2\u0080\u0093 Backwater & Hill Station Tours",
         "seoMeta": "Explore unforgettable holiday packages to Kerala with Wegomap. Enjoy houseboats, hill stations, beaches, and culture with easy booking and great prices. Plan your trip today.",
         "seoKeys": "Holiday Packages to Kerala",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/comparing-budget-and-luxury-holiday-packages-to-kerala\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/comparing-budget-and-luxury-holiday-packages-to-kerala\" />"
     },
     "trending": {
         "id": 110,
@@ -1112,7 +1112,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Frequently Asked Questions | Wegomap Tours",
         "seoMeta": "Find answers to common questions about tours, bookings, cruises, and payments at Wegomap Tours.",
         "seoKeys": "faq, wegomap faq, tours faq, cruises faq, booking questions",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/faqs/\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/faqs/\" />"
     },
     "thailand-tour-packages-your-ultimate-guide-to-the-land-of-smiles": {
         "id": 113,
@@ -1123,7 +1123,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Thailand Tour Packages: Your Ultimate Guide to the Land of Smiles",
         "seoMeta": "Have you ever dreamed of waking up with a fantastic view of sunrise over the Chao Phraya River, visiting ancient Buddhist temples in the afternoon, and ending your night with a mouthwatering serving of Pad Thai under neon lights.",
         "seoKeys": "Thailand tour Packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/thailand-tour-packages-your-ultimate-guide-to-the-land-of-smiles\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/thailand-tour-packages-your-ultimate-guide-to-the-land-of-smiles\" />"
     },
     "why-malaysia-should-be-your-next-holiday-destination": {
         "id": 114,
@@ -1134,7 +1134,7 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Best Malaysia Tour Packages for an Unforgettable Holiday",
         "seoMeta": "Discover beautiful beaches, vibrant cities, and rich culture with the best Malaysia tour packages. Plan your perfect Malaysia holiday and explore top attractions.",
         "seoKeys": "Malaysia Tour Packages,Malaysia Tour Packages from kerala",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/why-malaysia-should-be-your-next-holiday-destination\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/why-malaysia-should-be-your-next-holiday-destination\" />"
     },
     "dubai-tour-packages-everything-you-need-to-know-before-you-book": {
         "id": 115,
@@ -1145,6 +1145,6 @@ export const categoryData: Record<string, any> = {
         "seoTitle": "Dubai Tour Packages: Everything You Need to Know Before You Book",
         "seoMeta": "Dreaming of golden deserts, towering skyscrapers, and luxury like nowhere else? Here's your complete guide to planning the perfect Dubai trip.",
         "seoKeys": "Dubai Tour Packages",
-        "canonical": "<link rel=\"canonical\" href=\"https://www.wegomap.com/dubai-tour-packages-everything-you-need-to-know-before-you-book\" />"
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/dubai-tour-packages-everything-you-need-to-know-before-you-book\" />"
     }
 };
