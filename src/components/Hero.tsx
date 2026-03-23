@@ -24,6 +24,7 @@ export default function Hero() {
     const [activeSuggestion, setActiveSuggestion] = useState(-1);
 
     const [slides, setSlides] = useState<any[]>([]);
+    const [isLoadingSlides, setIsLoadingSlides] = useState(true);
     const [searchIndex, setSearchIndex] = useState<any[]>([]);
 
     useEffect(() => {
@@ -31,7 +32,7 @@ export default function Hero() {
         fetch(`${API_URL}/sliders`)
             .then(res => res.json())
             .then(data => {
-                if (data.success && data.data.length > 0) {
+                if (data.success && data.data && data.data.length > 0) {
                     const dynamicSlides = data.data.map((s: any) => ({
                         title: s.title || '',
                         subtitle: s.subtitle || "Explore the world with Wegomap",
@@ -42,9 +43,32 @@ export default function Hero() {
                         imgPortrait: getImageUrl(s.image) || ''
                     }));
                     setSlides(dynamicSlides);
+                } else {
+                    // Fallback static slide when database is empty
+                    setSlides([{
+                        title: 'Your world, your way',
+                        subtitle: 'Discover breathtaking destinations with Wegomap',
+                        buttonText: 'Explore Packages',
+                        buttonHref: '/tours',
+                        imgDesktop: '/assests/site/assets/images/placeholder.jpg',
+                        imgMobile: '/assests/site/assets/images/placeholder.jpg',
+                        imgPortrait: '/assests/site/assets/images/placeholder.jpg'
+                    }]);
                 }
             })
-            .catch(err => console.error("Failed to load sliders", err));
+            .catch(err => {
+                console.error("Failed to load sliders", err);
+                setSlides([{
+                    title: 'Your world, your way',
+                    subtitle: 'Discover breathtaking destinations with Wegomap',
+                    buttonText: 'Explore Packages',
+                    buttonHref: '/tours',
+                    imgDesktop: '/assests/site/assets/images/placeholder.jpg',
+                    imgMobile: '/assests/site/assets/images/placeholder.jpg',
+                    imgPortrait: '/assests/site/assets/images/placeholder.jpg'
+                }]);
+            })
+            .finally(() => setIsLoadingSlides(false));
 
         // Fetch packages for the search index
         fetch(`${API_URL}/packages`)
@@ -174,9 +198,13 @@ export default function Hero() {
                                 </SwiperSlide>
                             ))}
                         </Swiper>
-                    ) : (
+                    ) : isLoadingSlides ? (
                         <div className="h-[60vh] bg-slate-900 flex items-center justify-center rounded-[32px] overflow-hidden">
                             <div className="w-12 h-12 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
+                        </div>
+                    ) : (
+                        <div className="h-[60vh] bg-slate-900 flex items-center justify-center rounded-[32px] overflow-hidden">
+                            <h1 className="text-white text-2xl font-bold">Welcome to Wegomap</h1>
                         </div>
                     )}
 
