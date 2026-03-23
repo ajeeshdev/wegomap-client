@@ -46,6 +46,7 @@ const nextConfig: NextConfig = {
   sassOptions: {
     silenceDeprecations: ['import', 'legacy-js-api', 'if-function', 'global-builtin', 'color-functions']
   },
+  output: 'standalone',
 };
 
 export default nextConfig;
