@@ -1,31 +1,36 @@
 export const API_URL = (process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBLIC_API_URL.trim() !== '')  
-    ? process.env.NEXT_PUBLIC_API_URL.trim() 
+    ? process.env.NEXT_PUBLIC_API_URL.replace(/\/+$/, '').trim() // Remove any trailing slashes
     : 'http://127.0.0.1:5001/api';
 
-// Derive uploads base URL from API URL (remove /api suffix, add /uploads)
-export const UPLOADS_URL = API_URL.replace(/\/api$/, '');
+// Derive uploads base URL from API URL (remove /api suffix)
+// If API_URL is https://api.domain.com/api -> UPLOADS_URL is https://api.domain.com
+export const UPLOADS_URL = API_URL.replace(/\/api\/?$/, '');
 
 /**
  * Resolves an image path to a full URL using the correct base.
- * - Handles absolute URLs from www.wegomap.com → replaces with demo API
- * - Handles relative /uploads/... paths → prepends uploads base URL
- * - Handles already-correct absolute URLs → returns as-is
+ * - Handles absolute URLs from www.wegomap.com -> replaces with current UPLOADS_URL (api-demo.wegomap.com)
+ * - Handles relative /uploads/... paths -> prepends UPLOADS_URL
+ * - Handles already-correct absolute URLs -> returns as-is
  */
 export const getImageUrl = (src: string | null | undefined): string => {
-    if (!src) return '';
+    if (!src) return '/bg-placeholder.jpg';
     
-    // Replace old production domain with current API uploads base
-    if (src.includes('www.wegomap.com')) {
-        return src.replace('https://www.wegomap.com', UPLOADS_URL);
+    let resolved = src;
+
+    // 1. Handle production domain migration
+    // If it points to the old site, rewrite it to our uploads base
+    if (resolved.includes('www.wegomap.com')) {
+        resolved = resolved.replace('https://www.wegomap.com', UPLOADS_URL);
     }
     
-    // Handle relative paths like /uploads/... or uploads/...
-    if (src.startsWith('/uploads/') || src.startsWith('uploads/')) {
-        const clean = src.startsWith('/') ? src : `/${src}`;
-        return `${UPLOADS_URL}${clean}`;
+    // 2. Handle relative paths starting with /uploads or uploads/
+    if (resolved.startsWith('/uploads/') || resolved.startsWith('uploads/')) {
+        const cleanPath = resolved.startsWith('/') ? resolved : `/${resolved}`;
+        resolved = `${UPLOADS_URL}${cleanPath}`;
     }
     
-    // Already a full URL or a local asset
-    return src;
+    // 3. Fallback for potential double slashes and protocol issues
+    return resolved.replace(/([^:]\/)\/+/g, "$1");
 };
+
 

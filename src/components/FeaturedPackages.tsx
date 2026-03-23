@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { API_URL } from '@/config';
+import { API_URL, getImageUrl } from '@/config';
 import { IndianRupee, MapPin, ArrowRight, Star, ChevronLeft, ChevronRight, Heart } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
@@ -161,7 +161,7 @@ export default function FeaturedPackages() {
                                     <div className="aspect-[4/5] relative overflow-hidden">
                                         {pkg.images && pkg.images.length > 0 ? (
                                             <Image
-                                                src={pkg.images[0]}
+                                                src={getImageUrl(pkg.images[0])}
                                                 alt={pkg.title}
                                                 fill
                                                 className="object-cover group-hover:scale-110 transition-transform duration-700"
@@ -248,7 +248,7 @@ export default function FeaturedPackages() {
                                 <div className="aspect-square w-full bg-slate-100 rounded-[3rem] overflow-hidden mb-8 relative border border-slate-50 hover:border-blue-100 transition-all">
                                     {pkg.images && pkg.images.length > 0 ? (
                                         <Image
-                                            src={pkg.images[0]}
+                                            src={getImageUrl(pkg.images[0])}
                                             alt={pkg.title}
                                             fill
                                             className="object-cover group-hover:scale-110 transition-transform duration-700"

@@ -19,7 +19,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { API_URL } from "@/config";
+import { API_URL, getImageUrl } from "@/config";
 import { toast } from "react-hot-toast";
 
 interface LandingPageContent {
@@ -379,7 +379,7 @@ export default function LandingPageView({
         <div className="lp-hero-glow lp-hero-glow-2" aria-hidden="true" />
         <div className="lp-hero-glow lp-hero-glow-3" aria-hidden="true" />
         <Image
-          src={data.banner_image || "/bg-placeholder.jpg"}
+          src={getImageUrl(data.banner_image || "/bg-placeholder.jpg")}
           alt=""
           fill
           className="lp-img-cover"
@@ -477,11 +477,11 @@ export default function LandingPageView({
                     <div className="packageCardSmall group">
                       <div className="imageWrapper">
                         <Image
-                          src={
+                          src={getImageUrl(
                             pkg.thumb ||
                             (pkg.images && pkg.images[0]) ||
                             "/bg-placeholder.jpg"
-                          }
+                          )}
                           alt={pkg.title}
                           fill
                           className="object-cover"
@@ -555,7 +555,7 @@ export default function LandingPageView({
                       <div className="lp-testimonialHead">
                         <div className="lp-testimonialAvatar">
                           <Image
-                            src={t.img || "/bg-placeholder.jpg"}
+                            src={getImageUrl(t.img || "/bg-placeholder.jpg")}
                             alt={t.name || "Traveler"}
                             fill
                             className="lp-img-cover"
@@ -587,7 +587,7 @@ export default function LandingPageView({
       <section id="about" className="lp-aboutSection">
         <div className="lp-about-parallax">
           <Image
-            src={data.about_image || data.banner_image || "/bg-placeholder.jpg"}
+            src={getImageUrl(data.about_image || data.banner_image || "/bg-placeholder.jpg")}
             alt="About Background"
             fill
             className="lp-img-cover"
@@ -629,7 +629,7 @@ export default function LandingPageView({
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
               <div key={num} className="lp-partnerLogoWrap">
                 <Image 
-                  src={`https://www.wegomap.com/assests/site/lp/images/logo-${num}.webp`}
+                  src={getImageUrl(`https://www.wegomap.com/assests/site/lp/images/logo-${num}.webp`)}
                   alt={`Partner Logo ${num}`}
                   width={140}
                   height={70}
@@ -682,9 +682,9 @@ export default function LandingPageView({
             <div className="lp-whyImageWrap">
               <div className="lp-whyImageFrame">
                 <Image
-                  src={
+                  src={getImageUrl(
                     data.end_image || data.about_image || data.banner_image || "/bg-placeholder.jpg"
-                  }
+                  )}
                   alt="Why choose us"
                   fill
                   className="lp-img-cover"
@@ -754,7 +754,7 @@ export default function LandingPageView({
       <section className="lp-inquirySection">
         <div className="lp-inquiry-parallax">
           <Image
-            src={data.banner_image || data.about_image || "/bg-placeholder.jpg"}
+            src={getImageUrl(data.banner_image || data.about_image || "/bg-placeholder.jpg")}
             alt="Inquiry Background"
             fill
             className="lp-img-cover"

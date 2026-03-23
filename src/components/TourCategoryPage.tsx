@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, User, Mail, Phone, X, Heart } from 'lucide-react';
-import { API_URL } from '@/config';
+import { API_URL, getImageUrl } from '@/config';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -151,7 +151,7 @@ export default function TourCategoryPage({
                 fallbackTitle={title}
                 fallbackSubtitle={subtitle}
                 fallbackPreTitle={preTitle}
-                fallbackImage={bannerImage}
+                fallbackImage={getImageUrl(bannerImage)}
                 breadcrumbs={[{ label: title }]}
             />
 
@@ -172,7 +172,7 @@ export default function TourCategoryPage({
                             <div key={i} className="tourCatCard">
                                 <Link href={pkg.detailUrl ? (pkg.detailUrl.startsWith('/') ? pkg.detailUrl : `/${pkg.detailUrl}`) : `/packages/${pkg.slug || pkg._id || ''}`} className="tourCatCardImgWrap">
                                     <Image
-                                        src={pkg.image}
+                                        src={getImageUrl(pkg.image)}
                                         alt={pkg.title}
                                         fill
                                         style={{ objectFit: 'cover' }}

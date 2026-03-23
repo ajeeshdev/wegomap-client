@@ -1,6 +1,6 @@
 "use client";
 
-import { API_URL } from '@/config';
+import { API_URL, getImageUrl } from '@/config';
 import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -68,7 +68,7 @@ function buildAllPackages(): PackageCard[] {
             duration: pkg.duration,
             price: pkg.price,
             oldPrice: pkg.oldPrice,
-            image: pkg.image,
+            image: getImageUrl(pkg.image),
             categories: [...cats],
         });
     });
@@ -160,7 +160,7 @@ export default function AllToursPage() {
                         duration: pkg.duration,
                         price: pkg.price ? `₹${pkg.price.toLocaleString()}` : 'N/A',
                         oldPrice: pkg.oldamt ? `₹${Number(pkg.oldamt).toLocaleString()}` : null,
-                        image: pkg.thumb || (pkg.images && pkg.images[0]) || '/bg-placeholder.jpg',
+                        image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || '/bg-placeholder.jpg'),
                         categories: [pkg.category?.toLowerCase() || 'all']
                     }));
                     setCmsPackages(mapped);

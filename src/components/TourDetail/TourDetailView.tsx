@@ -1,19 +1,20 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import { API_URL, getImageUrl } from '@/config';
+import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
+import { packagesData, TourPackageDetail } from '@/data/packages';
+import DynamicPageBanner from '@/components/DynamicPageBanner';
+
 import Image from 'next/image';
+import Link from 'next/link';
 import {
     Clock, MapPin, Check, X, ShieldCheck,
     ChevronDown, Send, ArrowLeft, Sparkles,
     Building2, Car, Utensils, Star, Phone,
     Calendar, Users, Info, User, Heart
 } from 'lucide-react';
-import { API_URL } from '@/config';
-import { toast } from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
-import { packagesData, TourPackageDetail } from '@/data/packages';
-import DynamicPageBanner from '@/components/DynamicPageBanner';
 
 export default function TourDetailView({ id }: { id: string }) {
     const [pkg, setPkg] = useState<TourPackageDetail | null>(null);
@@ -94,7 +95,15 @@ export default function TourDetailView({ id }: { id: string }) {
                 const slug = id;
                 // 1. Check local static data first
                 if (slug && packagesData[slug]) {
-                    setPkg(packagesData[slug]);
+                    const localPkg = packagesData[slug];
+                    setPkg({
+                        ...localPkg,
+                        image: getImageUrl(localPkg.image),
+                        itinerary: localPkg.itinerary.map(item => ({
+                            ...item,
+                            image: item.image ? getImageUrl(item.image) : item.image
+                        }))
+                    });
                     setLoading(false);
                     return;
                 }
@@ -117,10 +126,13 @@ export default function TourDetailView({ id }: { id: string }) {
                         duration: p.duration || 'Flexible',
                         price: p.price ? `₹ ${Number(p.price).toLocaleString()}` : 'Contact for Price',
                         oldPrice: p.oldamt ? `₹ ${Number(p.oldamt).toLocaleString()}` : undefined,
-                        image: p.thumb || (p.images && p.images[0]) || '/bg-placeholder.jpg',
+                        image: getImageUrl(p.thumb || (p.images && p.images[0]) || '/bg-placeholder.jpg'),
                         description: p.description || '',
                         highlights: p.highlights || [],
-                        itinerary: p.itinerary || [],
+                        itinerary: (p.itinerary || []).map((item: any) => ({
+                            ...item,
+                            image: item.image ? getImageUrl(item.image) : item.image
+                        })),
                         inclusions: p.inclusions || [],
                         exclusions: p.exclusions || []
                     });

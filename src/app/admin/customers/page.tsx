@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from 'react';
-import { API_URL } from '@/config';
+import { API_URL, UPLOADS_URL } from '@/config';
 import {
   User, Mail, Phone, ShieldCheck, ShieldAlert, Search,
   UserCheck, UserX, Crown, Users, Upload, Trash2, FileText,
@@ -279,7 +279,7 @@ function PdfModal({
                     </div>
                     <div style={{ display: 'flex', gap: '0.4rem', flexShrink: 0 }}>
                       <a
-                        href={`${API_URL.replace('/api', '')}${pdf.url}`}
+                        href={`${UPLOADS_URL}${pdf.url}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{

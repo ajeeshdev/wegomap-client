@@ -9,7 +9,7 @@ import {
     Compass, Star, Contact, FileText, Download, Eye, Calendar, Package
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
-import { API_URL } from '@/config';
+import { API_URL, UPLOADS_URL } from '@/config';
 
 import './dashboard.css';
 
@@ -75,7 +75,7 @@ export default function UserDashboard() {
         { key: 'bookings', label: 'Booking Details', icon: Package },
     ] as const;
 
-    const BASE_URL = API_URL.replace('/api', '');
+    const BASE_URL = UPLOADS_URL;
 
     return (
         <div className="dashboardPage">
