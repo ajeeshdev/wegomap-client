@@ -1,0 +1,162 @@
+
+> frontend@0.1.0 build
+> next build
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /Users/ajeeshrajan/Documents/wegomap/package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /Users/ajeeshrajan/Documents/wegomap/frontend/package-lock.json
+
+▲ Next.js 16.1.6 (Turbopack)
+- Environments: .env.production
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 5.8s
+  Running TypeScript ...
+  Collecting page data using 9 workers ...
+  Generating static pages using 9 workers (0/105) ...
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+  Generating static pages using 9 workers (26/105) 
+  Generating static pages using 9 workers (52/105) 
+  Generating static pages using 9 workers (78/105) 
+⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+✓ Generating static pages using 9 workers (105/105) in 22.6s
+  Finalizing page optimization ...
+
+Route (app)                                    Revalidate  Expire
+┌ ○ /                                                  1m      1y
+├ ○ /_not-found                                        1m      1y
+├ ƒ /[category]/tours/[id]
+├ ○ /about                                             1m      1y
+├ ○ /admin                                             1m      1y
+├ ○ /admin-login                                       1m      1y
+├ ○ /admin/about-page                                  1m      1y
+├ ○ /admin/amenities                                   1m      1y
+├ ƒ /admin/amenities/[id]/edit
+├ ○ /admin/amenities/create                            1m      1y
+├ ○ /admin/banners                                     1m      1y
+├ ƒ /admin/banners/[id]/edit
+├ ○ /admin/banners/create                              1m      1y
+├ ○ /admin/blogs                                       1m      1y
+├ ƒ /admin/blogs/[id]/edit
+├ ○ /admin/blogs/create                                1m      1y
+├ ○ /admin/cabs                                        1m      1y
+├ ƒ /admin/cabs/[id]/edit
+├ ○ /admin/cabs/create                                 1m      1y
+├ ○ /admin/categories                                  1m      1y
+├ ƒ /admin/categories/[id]/edit
+├ ○ /admin/categories/create                           1m      1y
+├ ○ /admin/customers                                   1m      1y
+├ ○ /admin/destinations                                1m      1y
+├ ƒ /admin/destinations/[id]/edit
+├ ○ /admin/destinations/create                         1m      1y
+├ ○ /admin/events                                      1m      1y
+├ ○ /admin/events-settings                             1m      1y
+├ ƒ /admin/events/[id]/edit
+├ ○ /admin/events/create                               1m      1y
+├ ○ /admin/faqs                                        1m      1y
+├ ƒ /admin/faqs/[id]/edit
+├ ○ /admin/faqs/create                                 1m      1y
+├ ○ /admin/home-settings                               1m      1y
+├ ○ /admin/hotel-landing-page                          1m      1y
+├ ƒ /admin/hotel-landing-page/[id]/edit
+├ ○ /admin/hotel-landing-page/create                   1m      1y
+├ ○ /admin/houseboat                                   1m      1y
+├ ○ /admin/houseboats                                  1m      1y
+├ ƒ /admin/houseboats/[id]/edit
+├ ○ /admin/houseboats/create                           1m      1y
+├ ○ /admin/landing-page                                1m      1y
+├ ƒ /admin/landing-page/[id]
+├ ○ /admin/landing-page/create                         1m      1y
+├ ○ /admin/leads                                       1m      1y
+├ ○ /admin/menus                                       1m      1y
+├ ○ /admin/packages                                    1m      1y
+├ ƒ /admin/packages/[id]/edit
+├ ○ /admin/packages/create                             1m      1y
+├ ○ /admin/pages                                       1m      1y
+├ ƒ /admin/pages/[id]/edit
+├ ○ /admin/pages/%5Bid%5D/edit                         1m      1y
+├ ○ /admin/pages/create                                1m      1y
+├ ○ /admin/seo                                         1m      1y
+├ ƒ /admin/seo/[id]/edit
+├ ○ /admin/services                                    1m      1y
+├ ○ /admin/services-page                               1m      1y
+├ ƒ /admin/services/[id]/edit
+├ ○ /admin/services/create                             1m      1y
+├ ○ /admin/settings                                    1m      1y
+├ ƒ /admin/settings/[id]/edit
+├ ○ /admin/settings/create                             1m      1y
+├ ○ /admin/site-options                                1m      1y
+├ ○ /admin/sliders                                     1m      1y
+├ ƒ /admin/sliders/[id]/edit
+├ ○ /admin/sliders/create                              1m      1y
+├ ○ /admin/special-events                              1m      1y
+├ ƒ /admin/special-events/[id]/edit
+├ ○ /admin/special-events/create                       1m      1y
+├ ○ /admin/testimonials                                1m      1y
+├ ƒ /admin/testimonials/[id]/edit
+├ ○ /admin/testimonials/create                         1m      1y
+├ ○ /andaman-packages                                  1m      1y
+├ ○ /azerbaijan-tour-packages                          1m      1y
+├ ○ /bali-tour-packages-from-kochi-kerala              1m      1y
+├ ○ /bhutan-packages                                   1m      1y
+├ ○ /blogs                                             1m      1y
+├ ƒ /blogs/[slug]
+├ ○ /contact                                           1m      1y
+├ ○ /coorg-mysore-ooty                                 1m      1y
+├ ○ /coorg-tour-package                                1m      1y
+├ ○ /cruise-packages                                   1m      1y
+├ ○ /darjeeling                                        1m      1y
+├ ○ /dashboard                                         1m      1y
+├ ○ /domestic-tour-packages                            1m      1y
+├ ○ /dubai-tour-packages                               1m      1y
+├ ○ /events                                            1m      1y
+├ ƒ /events/[slug]
+├ ○ /faq                                               1m      1y
+├ ○ /goa-tour-packages-from-kerala                     1m      1y
+├ ○ /golden-triangle-tour-package                      1m      1y
+├ ƒ /hotels/[slug]
+├ ○ /international-tour-packages                       1m      1y
+├ ○ /kashmir-holiday-package                           1m      1y
+├ ○ /kerala-alleppey-boat-house                        1m      1y
+├ ○ /kerala-family-tour-packages                       1m      1y
+├ ○ /kerala-honeymoon-packages                         1m      1y
+├ ○ /kerala-taxi-service                               1m      1y
+├ ○ /kerala-tour-packages                              1m      1y
+├ ○ /kerala-tour-packages-from-bangalore               1m      1y
+├ ○ /kodaikanal-tour-packages                          1m      1y
+├ ○ /lakshadweep-tour-package                          1m      1y
+├ ○ /leh-ladakh-tour-package                           1m      1y
+├ ○ /login                                             1m      1y
+├ ○ /malaysia-tour-packages-from-kochi-kerala          1m      1y
+├ ○ /maldives-tour-packages-from-kochi-kerala          1m      1y
+├ ○ /manali-tour-packages                              1m      1y
+├ ○ /meghalaya-tour-package                            1m      1y
+├ ○ /my-booking                                        1m      1y
+├ ○ /nepal-tour-packages                               1m      1y
+├ ○ /ooty-kodaikanal-tour-packages                     1m      1y
+├ ○ /ooty-tour-packages                                1m      1y
+├ ○ /packages                                          1m      1y
+├ ƒ /packages/[slug]
+├ ○ /payment                                           1m      1y
+├ ○ /rajasthan-tour-package                            1m      1y
+├ ○ /services                                          1m      1y
+├ ○ /signup                                            1m      1y
+├ ○ /singapore-tour-package                            1m      1y
+├ ○ /special-events                                    1m      1y
+├ ƒ /special-events/[slug]
+├ ○ /sri-lanka                                         1m      1y
+├ ○ /thailand-tour-packages-from-kochi-kerala          1m      1y
+├ ○ /tours                                             1m      1y
+├ ○ /trending                                          1m      1y
+├ ○ /varanasi-package                                  1m      1y
+├ ○ /vietnam-package                                   1m      1y
+└ ○ /wishlist                                          1m      1y
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
