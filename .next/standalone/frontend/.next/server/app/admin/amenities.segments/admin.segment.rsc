@@ -1,10 +1,10 @@
 1:"$Sreact.fragment"
 2:I[34636,["/_next/static/chunks/6e9ac5b86215ad1c.js","/_next/static/chunks/b42d52e703bf0993.js"],"ClientSegmentRoot"]
-3:I[62473,["/_next/static/chunks/49364253b2a33336.js","/_next/static/chunks/52cfaffe7615d874.js","/_next/static/chunks/166680437cc80275.js","/_next/static/chunks/e000bbf25bac1dd0.js"],"default"]
+3:I[62473,["/_next/static/chunks/49364253b2a33336.js","/_next/static/chunks/52cfaffe7615d874.js","/_next/static/chunks/d6883b7e4d775f8f.js","/_next/static/chunks/e000bbf25bac1dd0.js"],"default"]
 4:I[32035,["/_next/static/chunks/6e9ac5b86215ad1c.js","/_next/static/chunks/b42d52e703bf0993.js"],"default"]
 5:I[91168,["/_next/static/chunks/6e9ac5b86215ad1c.js","/_next/static/chunks/b42d52e703bf0993.js"],"default"]
 :HL["/_next/static/chunks/d43ab978ac5b76ce.css","style"]
 :HL["/_next/static/chunks/937a61042ffd8306.css","style"]
 :HL["/_next/static/chunks/bac448ae30838705.css","style"]
-0:{"buildId":"laGTCRwrEE_YuKoOOAWAF","rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/d43ab978ac5b76ce.css","precedence":"next"}],["$","link","1",{"rel":"stylesheet","href":"/_next/static/chunks/937a61042ffd8306.css","precedence":"next"}],["$","link","2",{"rel":"stylesheet","href":"/_next/static/chunks/bac448ae30838705.css","precedence":"next"}],["$","script","script-0",{"src":"/_next/static/chunks/e000bbf25bac1dd0.js","async":true}]],["$","$L2",null,{"Component":"$3","slots":{"children":["$","$L4",null,{"parallelRouterKey":"children","template":["$","$L5",null,{}]}]},"serverProvidedParams":{"params":{},"promises":["$@6"]}}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"Vh1iMrvyc1d2vyEhx02Tv","rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/d43ab978ac5b76ce.css","precedence":"next"}],["$","link","1",{"rel":"stylesheet","href":"/_next/static/chunks/937a61042ffd8306.css","precedence":"next"}],["$","link","2",{"rel":"stylesheet","href":"/_next/static/chunks/bac448ae30838705.css","precedence":"next"}],["$","script","script-0",{"src":"/_next/static/chunks/e000bbf25bac1dd0.js","async":true}]],["$","$L2",null,{"Component":"$3","slots":{"children":["$","$L4",null,{"parallelRouterKey":"children","template":["$","$L5",null,{}]}]},"serverProvidedParams":{"params":{},"promises":["$@6"]}}]]}],"loading":null,"isPartial":false}
 6:"$0:rsc:props:children:1:props:serverProvidedParams:params"

@@ -37,7 +37,7 @@ import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination, EffectFade } from 'swiper/modules';
 import Hero from "@/components/Hero";
-import { API_URL } from "@/config";
+import { API_URL, getImageUrl } from "@/config";
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 
@@ -182,7 +182,7 @@ export default function Home() {
             setTestimonials(testData.data.map((t: any) => ({
                 name: t.name || t.title,
                 role: t.location || t.designation || 'Verified Traveler',
-                avatar: t.image ? (t.image.startsWith('http') ? t.image : `${apiUrl.replace('/api', '')}${t.image}`) : 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=200',
+                avatar: getImageUrl(t.image) || 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=200',
                 quote: t.review || t.text || t.description || 'Great experience!'
             })));
         }
@@ -224,7 +224,7 @@ export default function Home() {
       title: pkg.title,
       price: pkg.price ? `₹${pkg.price.toLocaleString()}` : 'N/A',
       oldPrice: pkg.oldamt ? `₹${Number(pkg.oldamt).toLocaleString()}` : null,
-      image: pkg.thumb || (pkg.images && pkg.images[0]) || '/bg-placeholder.jpg',
+      image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || '/bg-placeholder.jpg'),
       href: `/packages/${pkg.slug || pkg._id}`
   }));
 
@@ -258,7 +258,7 @@ export default function Home() {
   // Map destinations
   const kochiExperiences = destinations.map(d => ({
       title: d.name || d.title || 'Experience',
-      image: d.image || d.thumb || '/bg-placeholder.jpg',
+      image: getImageUrl(d.image || d.thumb || '/bg-placeholder.jpg'),
       href: `/tours?q=${encodeURIComponent(d.name || d.title || '')}`
   }));
 

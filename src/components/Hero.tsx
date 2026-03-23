@@ -1,6 +1,6 @@
 "use client";
 
-import { API_URL } from '@/config';
+import { API_URL, getImageUrl } from '@/config';
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { Search, MapPin, X, Clock } from 'lucide-react';
 import Image from 'next/image';
@@ -37,9 +37,9 @@ export default function Hero() {
                         subtitle: s.subtitle || "Explore the world with Wegomap",
                         buttonText: "Discover Now",
                         buttonHref: s.link || '/packages',
-                        imgDesktop: s.image || '',
-                        imgMobile: s.image || '',
-                        imgPortrait: s.image || ''
+                        imgDesktop: getImageUrl(s.image) || '',
+                        imgMobile: getImageUrl(s.image) || '',
+                        imgPortrait: getImageUrl(s.image) || ''
                     }));
                     setSlides(dynamicSlides);
                 }
@@ -55,7 +55,7 @@ export default function Hero() {
                         type: 'package' as const,
                         title: pkg.title,
                         href: `/packages/${pkg.slug || pkg._id}`,
-                        image: pkg.thumb || (pkg.images && pkg.images[0]) || '',
+                        image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || ''),
                         meta: pkg.duration || pkg.location,
                     }));
                     setSearchIndex(dynamicSearchIndex);

@@ -4,6 +4,7 @@ import React, { Fragment } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Home, ChevronRight, ArrowLeft } from 'lucide-react';
+import { getImageUrl } from '@/config';
 
 export interface BreadcrumbItem {
     label: string;
@@ -39,7 +40,7 @@ export default function PageBanner({
             {backgroundImage && (
                 <div className="pageBannerImg">
                     <Image
-                        src={backgroundImage}
+                        src={getImageUrl(backgroundImage)}
                         alt={title}
                         fill
                         style={{ objectFit: 'cover' }}
