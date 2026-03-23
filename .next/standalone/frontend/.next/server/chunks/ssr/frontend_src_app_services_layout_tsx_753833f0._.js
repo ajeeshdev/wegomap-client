@@ -1,3 +1,0 @@
-module.exports=[44631,a=>{"use strict";function b({children:a}){return a}a.s(["default",()=>b,"metadata",0,{title:"Travel Services | Wegomap",description:"Explore the wide range of travel and event services offered by Wegomap in Kochi. From hotel bookings to visa assistance and corporate event management.",keywords:"travel services, Kochi event management, hotel booking Kerala, taxi service Kochi, flight booking India"}])}];
-
-//# sourceMappingURL=frontend_src_app_services_layout_tsx_753833f0._.js.map

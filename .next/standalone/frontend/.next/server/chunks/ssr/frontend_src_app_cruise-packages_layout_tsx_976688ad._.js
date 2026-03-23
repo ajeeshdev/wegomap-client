@@ -1,3 +1,0 @@
-module.exports=[14692,a=>{"use strict";function b({children:a}){return a}a.s(["default",()=>b,"metadata",0,{title:"Luxury Cruise Packages",description:"Book luxury cruise packages with Wegomap. Explore Singapore, Dubai, and Europe on the finest sea voyages with Royal Caribbean and more.",keywords:"cruise packages, luxury cruise, Singapore cruise, Royal Caribbean India, sea holiday"}])}];
-
-//# sourceMappingURL=frontend_src_app_cruise-packages_layout_tsx_976688ad._.js.map

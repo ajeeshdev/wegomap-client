@@ -1,3 +1,0 @@
-module.exports=[32394,a=>{"use strict";function b({children:a}){return a}a.s(["default",()=>b,"metadata",0,{title:"Trending Destinations",description:"Check out the most trending travel destinations for your next holiday. From Bali to Vietnam, find the best deals on popular tours with Wegomap.",keywords:"trending travel, Bali tour, Vietnam tour, popular destinations, holiday trends"}])}];
-
-//# sourceMappingURL=frontend_src_app_trending_layout_tsx_c78c45a0._.js.map
