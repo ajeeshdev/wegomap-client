@@ -1,0 +1,17 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/admin/layout,_N_T_/admin/amenities/layout,_N_T_/admin/amenities/create/layout,_N_T_/admin/amenities/create/page,_N_T_/admin/amenities/create"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/admin/amenities/create/__PAGE__",
+    "/admin/amenities/create",
+    "/admin/amenities",
+    "/admin",
+    "/_index",
+    "/_head"
+  ]
+}

@@ -1,0 +1,3 @@
+module.exports=[91024,a=>{"use strict";function b({children:a}){return a}a.s(["default",()=>b,"metadata",0,{title:"Payment Options | Wegomap",description:"Securely pay for your travel bookings with Wegomap. We accept all major payment methods including Google Pay, credit/debit cards, and bank transfers.",keywords:"secure payment, Google Pay UPI, travel booking payment, Kerala tour payment"}])}];
+
+//# sourceMappingURL=frontend_src_app_payment_layout_tsx_6f8c3346._.js.map

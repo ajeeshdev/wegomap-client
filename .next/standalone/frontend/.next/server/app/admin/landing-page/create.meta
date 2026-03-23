@@ -1,0 +1,17 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/admin/layout,_N_T_/admin/landing-page/layout,_N_T_/admin/landing-page/create/layout,_N_T_/admin/landing-page/create/page,_N_T_/admin/landing-page/create"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/admin/landing-page/create/__PAGE__",
+    "/admin/landing-page/create",
+    "/admin/landing-page",
+    "/admin",
+    "/_index",
+    "/_head"
+  ]
+}

@@ -16,6 +16,11 @@
 # next.js
 /.next/
 /out/
+# Un-ignore standalone build so Hostinger can use it at runtime
+!/.next/standalone/
+!/.next/standalone/**
+!/.next/static/
+!/.next/static/**
 
 # production
 /build

@@ -1,0 +1,3 @@
+module.exports=[50126,a=>{"use strict";function b({children:a}){return a}a.s(["default",()=>b,"metadata",0,{title:"Kerala Family Tour Packages",description:"Book the best Kerala family tour packages with Wegomap. Safe, comfortable, and fun holidays for groups and families of all sizes.",keywords:"Kerala family tour packages, family holiday Kerala, group tours Kerala, family vacation packages"}])}];
+
+//# sourceMappingURL=frontend_src_app_kerala-family-tour-packages_layout_tsx_49e5cc80._.js.map

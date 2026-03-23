@@ -1,0 +1,3 @@
+module.exports=[93486,a=>{"use strict";var b=a.i(18332);function c({children:a}){return(0,b.jsx)(b.Fragment,{children:a})}a.s(["default",()=>c,"metadata",0,{title:"Kerala Houseboat Service | Alleppey Backwaters | Wegomap",description:"Book your Alleppey houseboat cruise with Wegomap. Deluxe, Premium & Luxury houseboats at the best rates — direct from owners.",alternates:{canonical:"https://www.wegomap.com/kerala-alleppey-boat-house/"}}])}];
+
+//# sourceMappingURL=frontend_src_app_kerala-alleppey-boat-house_layout_tsx_36e9b209._.js.map

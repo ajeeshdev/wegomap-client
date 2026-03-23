@@ -1,0 +1,15 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/kerala-alleppey-boat-house/layout,_N_T_/kerala-alleppey-boat-house/page,_N_T_/kerala-alleppey-boat-house"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/kerala-alleppey-boat-house/__PAGE__",
+    "/kerala-alleppey-boat-house",
+    "/_index",
+    "/_head"
+  ]
+}

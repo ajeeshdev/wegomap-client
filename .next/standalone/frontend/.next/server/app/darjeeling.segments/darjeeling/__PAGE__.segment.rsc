@@ -1,0 +1,8 @@
+1:"$Sreact.fragment"
+2:I[26601,["/_next/static/chunks/49364253b2a33336.js","/_next/static/chunks/52cfaffe7615d874.js","/_next/static/chunks/166680437cc80275.js","/_next/static/chunks/ab8c34bdb395ec00.js","/_next/static/chunks/c570144b929fd303.js"],"default"]
+3:I[64381,["/_next/static/chunks/6e9ac5b86215ad1c.js","/_next/static/chunks/b42d52e703bf0993.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+:HL["/_next/static/chunks/f7eb669682772961.css","style"]
+:HL["/_next/static/chunks/30718e32e17299a4.css","style"]
+0:{"buildId":"laGTCRwrEE_YuKoOOAWAF","rsc":["$","$1","c",{"children":[["$","$L2",null,{"title":"Darjeeling Tour Package","subtitle":"DARJEELING","bannerImage":"/uploads/categories/2z1agsq6wrwibgatjiamea7pftxta7cgalenltcc240904030146.jpg","packages":[{"image":"/uploads/packages/klidzvonwfqlp6nyvhmnkkon6g6cobwkxaxxloxn240904040120.png","duration":"4 Nights 5 Days","title":"Gangtok Darjeeling Package","location":"2N GANGTOK / 2N DARJEELING","price":"₹ 23999","originalPrice":"₹ 26500","detailUrl":"/packages/special-gangtok-darjeeling-packages"}],"readMoreHeading":"","readMoreContent":""}],[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/f7eb669682772961.css","precedence":"next"}],["$","link","1",{"rel":"stylesheet","href":"/_next/static/chunks/30718e32e17299a4.css","precedence":"next"}],["$","script","script-0",{"src":"/_next/static/chunks/ab8c34bdb395ec00.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/c570144b929fd303.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
+5:null
