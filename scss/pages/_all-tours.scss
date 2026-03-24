@@ -101,7 +101,6 @@
             gap: 0;
             padding: 0.875rem 0;
             flex-wrap: nowrap;
-            // No overflow:hidden here — the pills strip handles its own scroll
         }
 
         .allToursSearch {
@@ -167,7 +166,6 @@
             }
         }
 
-        // Vertical divider between search and pills
         .allToursControlsDivider {
             width: 1px;
             min-width: 1px;
@@ -181,7 +179,6 @@
             }
         }
 
-        // Scrollable pill strip — no wrapping, fades at the right edge
         .allToursFilterPills {
             display: flex;
             gap: 0.5rem;
@@ -193,7 +190,7 @@
             scrollbar-width: none;
             mask-image: linear-gradient(to right, black 85%, transparent 100%);
             -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
-            padding-right: 2rem; // breathing room before fade
+            padding-right: 2rem;
 
             &::-webkit-scrollbar {
                 display: none;
@@ -219,10 +216,6 @@
             transition: all 0.2s;
             flex-shrink: 0;
             margin-left: auto;
-
-            &:hover {
-                background: $cosmicOrange;
-            }
 
             @media (max-width: 767px) {
                 display: flex;
@@ -273,7 +266,6 @@
         }
     }
 
-    // ── Results meta ──
     .allToursResultsMeta {
         display: flex;
         align-items: center;
@@ -299,7 +291,6 @@
         }
     }
 
-    // ── Cards Grid ──
     .allToursGrid {
         display: grid;
         grid-template-columns: 1fr;
@@ -319,47 +310,35 @@
         }
     }
 
-    // ── iOS-Style Card ──
     .allTourCard {
         background: #ffffff;
         border-radius: 28px;
         overflow: hidden;
-        box-shadow:
-            0 1px 2px rgba(0, 0, 0, 0.04),
-            0 4px 20px -4px rgba(0, 0, 0, 0.09),
-            0 0 0 0.5px rgba(0, 0, 0, 0.06);
-        // Spring-physics lift on hover
-        transition:
-            transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1),
-            box-shadow 0.35s ease;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 20px -4px rgba(0, 0, 0, 0.09), 0 0 0 0.5px rgba(0, 0, 0, 0.06);
+        transition: transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
         cursor: pointer;
         display: flex;
         flex-direction: column;
 
         &:hover {
             transform: translateY(-10px) scale(1.015);
-            box-shadow:
-                0 2px 4px rgba(0, 0, 0, 0.04),
-                0 28px 56px -10px rgba(0, 0, 0, 0.16),
-                0 0 0 0.5px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04), 0 28px 56px -10px rgba(0, 0, 0, 0.16), 0 0 0 0.5px rgba(0, 0, 0, 0.06);
 
             .allTourCardImg img {
                 transform: scale(1.07) translateY(-3px);
             }
         }
 
-        // ─ IMAGE ZONE ─
         .allTourCardImgLink {
             display: block;
             position: relative;
-            height: 215px;
+            aspect-ratio: 1 / 1;
             overflow: hidden;
             flex-shrink: 0;
 
             .allTourCardImg {
                 position: absolute;
                 inset: 0;
-
                 img {
                     width: 100%;
                     height: 100%;
@@ -368,20 +347,15 @@
                 }
             }
 
-            // Bottom scrim only
             &::after {
                 content: '';
                 position: absolute;
                 inset: 0;
-                background: linear-gradient(to top,
-                        rgba(0, 0, 0, 0.62) 0%,
-                        rgba(0, 0, 0, 0.12) 42%,
-                        transparent 68%);
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.12) 42%, transparent 68%);
                 z-index: 1;
                 pointer-events: none;
             }
 
-            // SALE badge — frosted glass, top-left
             .allTourCardBadge {
                 position: absolute;
                 top: 0.875rem;
@@ -400,45 +374,6 @@
                 text-transform: uppercase;
             }
 
-            // Price — bottom-left, bold white
-            .allTourCardFloatPrice {
-                position: absolute;
-                bottom: 0.875rem;
-                left: 0.875rem;
-                z-index: 3;
-
-                .floatPriceMain {
-                    display: block;
-                    font-size: 1.5rem;
-                    font-weight: 900;
-                    color: #fff;
-                    line-height: 1;
-                    letter-spacing: -0.03em;
-                    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
-                }
-
-                .floatPriceMeta {
-                    display: flex;
-                    align-items: center;
-                    gap: 0.4rem;
-                    margin-top: 3px;
-
-                    .floatPriceOld {
-                        font-size: 0.7rem;
-                        color: rgba(255, 255, 255, 0.58);
-                        text-decoration: line-through;
-                        font-weight: 600;
-                    }
-
-                    .floatPricePp {
-                        font-size: 0.65rem;
-                        color: rgba(255, 255, 255, 0.6);
-                        font-weight: 700;
-                    }
-                }
-            }
-
-            // Location — frosted glass chip, bottom-right
             .allTourCardLocation {
                 position: absolute;
                 bottom: 0.875rem;
@@ -471,7 +406,6 @@
             }
         }
 
-        // ─ BODY ─
         .allTourCardBody {
             padding: 1.125rem 1.25rem 1.25rem;
             display: flex;
@@ -479,7 +413,6 @@
             flex: 1;
         }
 
-        // Duration accent line
         .allTourCardDuration {
             display: flex;
             align-items: center;
@@ -490,10 +423,6 @@
             text-transform: uppercase;
             letter-spacing: 0.07em;
             margin-bottom: 0.5rem;
-
-            svg {
-                flex-shrink: 0;
-            }
         }
 
         .allTourCardTitle {
@@ -502,29 +431,50 @@
             color: #0f172a;
             line-height: 1.32;
             display: -webkit-box;
-            -webkit-line-clamp: 2;
-            line-clamp: 2;
+            -webkit-line-clamp: 1;
+            line-clamp: 1;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-decoration: none;
             transition: color 0.2s;
             letter-spacing: -0.01em;
             margin: 0 0 auto 0;
-            padding-bottom: 0.875rem;
 
             &:hover {
                 color: $cosmicOrange;
             }
         }
 
-        // Subtle divider
+        .ratingBadge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 9999px;
+            padding: 4px 10px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 950;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+            svg {
+                color: #fbbf24;
+            }
+        }
+
         .allTourCardRule {
             height: 1px;
             background: linear-gradient(to right, #f1f5f9 0%, #e2e8f0 50%, #f1f5f9 100%);
             margin-bottom: 0.875rem;
         }
 
-        // ─ CTA ROW ─
         .allTourCardCta {
             display: grid;
             grid-template-columns: 1fr 1.3fr;
@@ -577,11 +527,9 @@
                     transform: scale(0.96);
                 }
             }
-
         }
     }
 
-    // ── Empty State ──
     .allToursEmpty {
         grid-column: 1 / -1;
         display: flex;
@@ -591,16 +539,8 @@
         padding: 5rem 2rem;
         text-align: center;
 
-        span {
-            font-size: 4rem;
-        }
-
-        p {
-            font-size: 1rem;
-            color: #64748b;
-            font-weight: 600;
-        }
-
+        span { font-size: 4rem; }
+        p { font-size: 1rem; color: #64748b; font-weight: 600; }
         button {
             padding: 0.875rem 2.5rem;
             background: $cosmicOrange;
@@ -611,11 +551,40 @@
             cursor: pointer;
             box-shadow: 0 4px 14px -2px rgba($cosmicOrange, 0.4);
             transition: all 0.2s;
-
-            &:hover {
-                transform: translateY(-2px);
-                filter: brightness(1.1);
-            }
+            &:hover { transform: translateY(-2px); filter: brightness(1.1); }
         }
+    }
+
+    .wishlistBtn {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8fafc;
+        border: 1.5px solid #e2e8f0;
+        color: #94a3b8;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        &:hover {
+            transform: scale(1.1);
+            color: #fb7185;
+            background: #fff;
+        }
+
+        &.selected {
+            background: #fb7185;
+            border-color: #fb7185;
+            color: #fff;
+            animation: heartPop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+    }
+
+    @keyframes heartPop {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.4); }
+        100% { transform: scale(1.1); }
     }
 }

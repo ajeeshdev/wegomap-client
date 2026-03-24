@@ -582,7 +582,7 @@
     border-bottom: 1px solid #f1f5f9;
     padding: 0.75rem 0;
     position: sticky;
-    top: 75px; // Aligns below the scrolled header
+    top: 68px; // Aligns below the scrolled header
     z-index: 990; // Just below the main header
     transition: all 0.3s ease;
     display: none;
@@ -673,7 +673,7 @@
 
         .imageWrapper {
             position: relative;
-            height: 250px;
+            aspect-ratio: 1 / 1;
 
             img {
                 object-fit: cover;
@@ -733,7 +733,7 @@
 }
 
 // 5. CORPORATE EVENTS SECTION
-.corporateModernSection {
+.corporateModernSection, .corporate-events-section {
     padding: 60px 0;
     background: #f8fafc;
 
@@ -1886,14 +1886,9 @@
             .footer-copyright-v2 {
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
+                justify-content: center;
                 padding-top: 2rem;
                 border-top: 1px solid rgba(255, 255, 255, 0.05);
-
-                @media (max-width: 768px) {
-                    flex-direction: column;
-                    gap: 1.5rem;
-                }
 
                 p {
                     font-size: 0.95rem;
@@ -1901,26 +1896,91 @@
                     font-weight: 500;
                     margin: 0;
                     letter-spacing: 0.5px;
-                }
-
-                .back-to-top {
-                    background: none;
-                    border: none;
-                    color: rgba(255, 255, 255, 0.5);
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                    font-size: 0.95rem;
-                    font-weight: 600;
-                    cursor: pointer;
-                    transition: all 0.3s;
-
-                    &:hover {
-                        color: #fff;
-                        transform: translateY(-3px);
-                    }
+                    text-align: center;
                 }
             }
+        }
+    }
+}
+
+// Sticky Back to Top Button
+.back-to-top-sticky {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    width: 50px;
+    height: 50px;
+    background: #0f172a;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 9999;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px) scale(0.8);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    @include max(767){
+        display: none;
+    }
+    padding: 0;
+
+    &.visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0) scale(1);
+    }
+
+    .progress-circle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .arrow-icon {
+        color: #fff;
+        transition: transform 0.3s ease;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: rotate(-45deg); // ArrowUpRight points top-right, rotating -45deg makes it point up
+        
+        svg {
+            stroke-width: 2.5px;
+        }
+    }
+
+    &:hover {
+        transform: translateY(-8px) scale(1.1);
+        background: #1e293b;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+
+        .arrow-icon {
+            transform: rotate(-45deg) translateY(-3px);
+        }
+    }
+
+    @media (max-width: 768px) {
+        right: 20px;
+        bottom: 20px;
+        width: 48px;
+        height: 48px;
+
+        .progress-circle {
+            width: 48px;
+            height: 48px;
+        }
+
+        .arrow-icon svg {
+            width: 20px !important;
+            height: 20px !important;
         }
     }
 }
@@ -1935,6 +1995,7 @@
 
     @media (max-width: 768px) {
         font-size: 2rem;
+        margin-bottom: 0!important;
     }
 
     .highlight {
@@ -2050,8 +2111,8 @@
 
     .imageWrapper {
         position: relative;
-        height: 270px;
-        min-height: 270px; // Maintain image size
+        height: 160px;
+        min-height: 160px; // Maintain image size
         width: 100%;
         overflow: hidden;
 
@@ -2122,6 +2183,34 @@
                 transform: scale(1.1);
             }
         }
+
+        .ratingBadge {
+            position: absolute;
+            bottom: 1.25rem;
+            right: 1rem;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 4px 10px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+
+            span {
+                color: #fff;
+                font-size: 0.7rem;
+                font-weight: 800;
+                letter-spacing: 0.02em;
+            }
+
+            svg {
+                color: #facc15; // Yellow for star
+            }
+        }
     }
 
     .cardContent {
@@ -2138,7 +2227,19 @@
             color: #0f172a;
             margin-bottom: 0.5rem;
             line-height: 1.3;
+            // Prevent overlap with action arrow
+            padding-right: 3rem; 
+            // Default limit: 1 line
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            // Constant height to keep grid aligned
+            min-height: 1.3em; 
         }
+
+
 
         .packageDuration {
             font-size: 0.875rem;
@@ -2238,8 +2339,8 @@
 // 4. KERALA TOUR OPERATOR (Premium Section)
 .packageCardKerala {
     position: relative;
-    height: 260px;
-    border-radius: 1.25rem;
+    height: 380px;
+    border-radius: 4px;
     overflow: hidden;
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -2262,6 +2363,39 @@
         z-index: 2;
         background: linear-gradient(to right, rgba(10, 15, 25, 0.7) 0%, rgba(10, 15, 25, 0.2) 60%, transparent 100%),
             linear-gradient(to top, rgba(10, 15, 25, 0.8) 0%, transparent 70%);
+    }
+
+    .ratingBadge {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        z-index: 4;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        padding: 0.35rem 0.65rem;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.75rem;
+        font-weight: 900;
+        letter-spacing: 0.02em;
+        transition: all 0.4s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+        svg {
+            color: #fbbf24;
+            filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.3));
+        }
+
+        &:hover {
+            background: #fff;
+            color: #0f172a;
+            transform: scale(1.05);
+        }
     }
 
     .cardContent {
@@ -2361,8 +2495,8 @@
     }
 
     @media (max-width: 768px) {
-        height: 300px; // Consistent taller mobile height
-        border-radius: 1rem;
+        height: 320px; 
+        border-radius: 4px;
     }
 }
 
@@ -2397,16 +2531,48 @@
 
     .imageWrapper {
         position: relative;
-        height: 250px;
+        height: 320px;
         width: 100%;
         overflow: hidden;
-        border-radius: 1.5rem;
+        border-radius: 4px;
         margin-bottom: 1.25rem;
         border: 2px solid transparent;
         transition: all 0.4s ease;
 
         img {
             transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .ratingBadge {
+            position: absolute;
+            bottom: 0.75rem;
+            right: 0.75rem;
+            z-index: 4;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border: 1px solid #f1f5f9;
+            color: #0f172a;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+
+            svg {
+                color: #fbbf24;
+                width: 10px;
+                height: 10px;
+            }
+
+            &:hover {
+                background: #0f172a;
+                color: #fff;
+                transform: translateY(-2px);
+            }
         }
     }
 
@@ -2653,8 +2819,12 @@
 }
 
 .packageCardKerala {
-    height: 200px;
+    height: 150px;
     border-radius: 12px;
+    @include min(768){
+        height: 200px;
+        
+    }
 
     .cardContent {
 
@@ -3272,4 +3442,197 @@ button.wishlistBtn {
     position: absolute;
     right: 6px;
 }
+ 
+// Re-implementing Square Cards for Specific Sections
+.corporate-events-section, .special-events-section, .corporateModernSection, .specialEventsSection, .events-listing {
+    .packageCardSmall {
+        aspect-ratio: 1 / 1 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: unset !important;
+        position: relative;
+        overflow: hidden;
+        display: block !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        
+        .imageWrapper {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            margin: 0 !important;
+            height: 100% !important;
+            
+            &::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 40%, transparent 100%);
+                z-index: 2;
+            }
+            
+            img {
+                height: 100% !important;
+                width: 100% !important;
+                object-fit: cover !important;
+            }
+
+            .priceTag {
+                position: absolute !important;
+                top: 1rem !important;
+                left: 1rem !important;
+                bottom: auto !important;
+                right: auto !important;
+                z-index: 10 !important;
+                @include price-tag-premium;
+                background: rgba(255, 255, 255, 0.2) !important;
+                backdrop-filter: blur(8px);
+                border: 1px solid rgba(255, 255, 255, 0.3) !important;
+                padding: 4px 10px !important;
+                border-radius: 8px !important;
+            }
+        }
+        
+        .cardContent {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+            padding: 1.5rem !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: flex-end !important;
+            color: #fff !important;
+            background: transparent !important;
+            pointer-events: none; // Allow clicks on the Link parent
+            
+            .packageTitle, .title {
+                margin: 0 !important;
+                font-size: 1.25rem !important;
+                font-weight: 950 !important;
+                color: #fff !important;
+                line-height: 1.15;
+                text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+                pointer-events: auto;
+                // Square cards: 2 line limit as per user request
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                min-height: 2.4em;
+                padding-right: 3.5rem; // More space for the icon
+            }
+
+            
+            p {
+                margin: 0.5rem 0 0 !important;
+                color: rgba(255,255,255,0.9) !important;
+                font-size: 0.8rem !important;
+                font-weight: 700 !important;
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                pointer-events: auto;
+            }
+            
+            .actionIcon {
+                position: absolute !important;
+                bottom: 1.15rem !important; // Lowered to align center with title
+                right: 1.5rem !important;
+                top: auto !important;
+                left: auto !important;
+                background: $cosmicOrange !important;
+                color: #fff !important;
+                width: 36px !important;
+                height: 36px !important;
+                border-radius: 50% !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+                z-index: 10 !important;
+                pointer-events: auto;
+
+                svg {
+                    width: 20px !important;
+                    height: 20px !important;
+                    stroke: #fff !important;
+                    stroke-width: 3px !important;
+                    display: block;
+                }
+            }
+        }
+
+    }
+}
+
+// Special case: First Minute Offers can show 2 lines
+.firstMinuteOfferSection {
+    .packageCardSmall .packageTitle {
+        -webkit-line-clamp: 2 !important;
+        line-clamp: 2 !important;
+        min-height: 2.6em !important;
+    }
+}
+
+.testimonialSection {
+    .testimonialSwiper {
+        .swiper-wrapper {
+            display: flex;
+            align-items: stretch;
+        }
+
+        .swiper-slide {
+            height: auto;
+            display: flex;
+        }
+    }
+
+    .testimonialCard {
+        background: #fff;
+        padding: 2.5rem;
+        border-radius: 2rem;
+        border: 1px solid #f1f5f9;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+
+        &:hover {
+            transform: translateY(-8px);
+            border-color: rgba($primaryColor, 0.2);
+            box-shadow: 0 20px 40px -20px rgba(0,0,0,0.1);
+        }
+
+        .quoteIcon {
+            color: rgba($primaryColor, 0.2);
+        }
+
+        .testimonialText {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #475569;
+            font-style: italic;
+            flex-grow: 1;
+        }
+
+        .authorArea {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: auto;
+            
+            .authorName {
+                font-size: 0.9rem;
+                font-weight: 800;
+                color: #0f172a;
+                margin-bottom: 2px;
+            }
+        }
+    }
+}
+
+
 

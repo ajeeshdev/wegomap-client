@@ -141,7 +141,7 @@ export default function EventsCombinedPage() {
                                     className="block h-full"
                                 >
                                     <div className="packageCardSmall group h-full flex flex-col">
-                                        <div className="imageWrapper">
+                                        <div className="imageWrapper eventWrapper">
                                             <Image
                                                 src={event.images?.[0] || "/assests/site/assets/images/event.jpg"}
                                                 alt={event.title}

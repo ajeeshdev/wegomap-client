@@ -158,7 +158,7 @@ export default function FeaturedPackages() {
                             <SwiperSlide key={pkg._id}>
                                 <div className="group relative bg-[#f1f5f9] rounded-[2.5rem] overflow-hidden border border-transparent hover:border-blue-100 transition-all duration-500 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)]">
                                     {/* Image Area */}
-                                    <div className="aspect-[4/5] relative overflow-hidden">
+                                    <div className="aspect-square relative overflow-hidden">
                                         {pkg.images && pkg.images.length > 0 ? (
                                             <Image
                                                 src={getImageUrl(pkg.images?.[0] || (pkg as any).image || (pkg as any).thumb)}

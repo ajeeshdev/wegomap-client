@@ -12,6 +12,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import EnquireModal from './EnquireModal';
+
 
 export interface TourPackage {
     _id?: string;
@@ -59,7 +61,8 @@ export default function TourCategoryPage({
         phone: '',
         email: ''
     });
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    // const [isSubmitting, setIsSubmitting] = useState(false);
+
     const router = useRouter();
 
     useEffect(() => {
@@ -115,33 +118,9 @@ export default function TourCategoryPage({
     };
 
     const handleFormSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        try {
-            const res = await fetch(`${API_URL}/leads`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    ...formData,
-                    destination: selectedPackage,
-                    source: 'Website',
-                    url: typeof window !== "undefined" ? window.location.href : ""
-                })
-            });
-            const data = await res.json();
-            if (data.success) {
-                toast.success('Request sent successfully!');
-                setIsModalOpen(false);
-                setFormData({ name: '', phone: '', email: '' });
-            } else {
-                toast.error(data.error || 'Failed to send request');
-            }
-        } catch (err) {
-            toast.error('Failed to send request');
-        } finally {
-            setIsSubmitting(false);
-        }
+        // Redundant as we now use EnquireModal, but kept for compatibility if needed
     };
+
 
     return (
         <div className="tourCatPage">
@@ -298,7 +277,13 @@ export default function TourCategoryPage({
                     <h2 className="tourCatCTATitle">Planning your next trip?</h2>
                     <p className="tourCatCTASub">Talk to our experts and get a detailed plan for your next trip</p>
                     <div className="tourCatCTABtns">
-                        <Link href="/contact" className="tourCatCTAEnquire" style={{ backgroundColor: '#FF6B35' }}>Enquire Now</Link>
+                        <button 
+                            onClick={() => handleQuickPlan('General Inquiry')}
+                            className="tourCatCTAEnquire" 
+                            style={{ backgroundColor: '#FF6B35' }}
+                        >
+                            Enquire Now
+                        </button>
                         <a href="tel:+918590370566" className="tourCatCTACall">
                             📞 Talk With Us
                         </a>
@@ -307,130 +292,12 @@ export default function TourCategoryPage({
             </section>
 
             {/* Quick Plan Modal Popup */}
-            {isModalOpen && (
-                <div className="tourCatModalOverlay">
-                    {/* Backdrop */}
-                    <div
-                        className="tourCatModalBackdrop"
-                        onClick={() => setIsModalOpen(false)}
-                    />
-
-                    {/* Modal Content */}
-                    <div className="tourCatModalContent">
-
-                        {/* Close button */}
-                        <button
-                            onClick={() => setIsModalOpen(false)}
-                            className="tourCatModalCloseBtn"
-                        >
-                            <X size={20} />
-                        </button>
-
-                        {/* Left Side: Creative Visual */}
-                        <div className="tourCatModalLeft">
-                            <div className="tourCatModalGradient"></div>
-                            <div className="tourCatModalBlur1"></div>
-                            <div className="tourCatModalBlur2"></div>
-
-                            {/* Visual Content */}
-                            <div className="tourCatModalVisual">
-                                <div className="tourCatModalIconWrap">
-                                    <MapPin size={32} />
-                                </div>
-                                <h3 className="italic">
-                                    Pack <br />Your <br /><span>Bags.</span>
-                                </h3>
-                                <p>
-                                    Leave the planning to us. We'll craft the perfect itinerary tailored just for you.
-                                </p>
-                            </div>
-
-                            <div className="tourCatModalStatus">
-                                <div className="tourCatStatusDot"></div>
-                                <span>Travel Experts Available</span>
-                            </div>
-                        </div>
-
-                        {/* Right Side: Form */}
-                        <div className="tourCatModalRight">
-                            <div className="tourCatModalHeader">
-                                <h2>Quick Plan Request</h2>
-                                <p>Get a response within 2 hours.</p>
-                            </div>
-
-                            <form onSubmit={handleFormSubmit} className="tourCatModalForm">
-                                {/* Disabled Package Field */}
-                                <div className="tourCatModalSelectedPkg">
-                                    <div className="tourCatPkgIcon">
-                                        <MapPin size={18} />
-                                    </div>
-                                    <div>
-                                        <label>Destination Package</label>
-                                        <div className="tourCatPkgName">{selectedPackage}</div>
-                                    </div>
-                                </div>
-
-                                {/* Form Grid */}
-                                <div className="tourCatModalFormGrid">
-                                    {/* Full Name */}
-                                    <div className="tourCatModalField">
-                                        <label>Full Name</label>
-                                        <div className="tourCatModalInputWrap">
-                                            <User size={16} />
-                                            <input
-                                                type="text"
-                                                placeholder="John Doe"
-                                                required
-                                                value={formData.name}
-                                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                            />
-                                        </div>
-                                    </div>
-
-                                    {/* Phone Number */}
-                                    <div className="tourCatModalField">
-                                        <label>Phone Number</label>
-                                        <div className="tourCatModalInputWrap">
-                                            <Phone size={16} />
-                                            <input
-                                                type="tel"
-                                                placeholder="+91 9876543210"
-                                                required
-                                                value={formData.phone}
-                                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Email Address */}
-                                <div className="tourCatModalField">
-                                    <label>Email Address</label>
-                                    <div className="tourCatModalInputWrap">
-                                        <Mail size={16} />
-                                        <input
-                                            type="email"
-                                            placeholder="john@example.com"
-                                            required
-                                            value={formData.email}
-                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                        />
-                                    </div>
-                                </div>
-
-                                {/* Submit Button */}
-                                <button
-                                    type="submit"
-                                    className="tourCatModalSubmitBtn"
-                                    disabled={isSubmitting}
-                                >
-                                    {isSubmitting ? 'Sending...' : 'Get My Itinerary Now'}
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            )}
+            <EnquireModal 
+                isOpen={isModalOpen} 
+                onClose={() => setIsModalOpen(false)} 
+                packageName={selectedPackage} 
+            />
         </div>
+
     );
 }

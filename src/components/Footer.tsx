@@ -4,6 +4,7 @@ import { API_URL } from '@/config';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Facebook, Instagram, Linkedin, Twitter, Phone, ArrowUpRight } from 'lucide-react';
+import { useEnquiry } from '@/context/EnquiryContext';
 
 export default function Footer() {
     const [options, setOptions] = useState<Record<string, string>>({});
@@ -16,7 +17,11 @@ export default function Footer() {
         const fetchOptions = async () => {
             try {
                 const res = await fetch(`${API_URL}/options`);
+                if (!res.headers.get('content-type')?.includes('application/json')) {
+                    throw new Error(`API returned non-JSON response from ${res.url} (Status: ${res.status})`);
+                }
                 const data = await res.json();
+
                 if (data.success) {
                     const mappedOptions: Record<string, string> = {};
                     data.data.forEach((opt: any) => {
@@ -55,9 +60,24 @@ export default function Footer() {
         return () => clearTimeout(timer);
     }, [displayedText, isDeleting, typingSpeed, fullText]);
 
+    const [scrollProgress, setScrollProgress] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (window.scrollY / totalHeight) * 100;
+            setScrollProgress(progress);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
+
+    const { openEnquiry } = useEnquiry();
 
     return (
         <footer className="mainFooter">
@@ -98,10 +118,13 @@ export default function Footer() {
                                 </p>
 
                                 <div className="cta-container pt-4">
-                                    <Link href="/enquire" className="luxeBtn luxury primary">
+                                    <button 
+                                        onClick={() => openEnquiry("General Inquiry")}
+                                        className="luxeBtn luxury primary"
+                                    >
                                         <span>Enquire Now</span>
                                         <ArrowUpRight size={18} className="cta-icon" />
-                                    </Link>
+                                    </button>
                                     <a href={`tel:${options.phone1 || '+918590370566'}`} className="luxeBtn luxury outline">
                                         <Phone size={18} />
                                         <span>Talk With Us</span>
@@ -109,6 +132,7 @@ export default function Footer() {
                                 </div>
                             </div>
                         </div>
+
 
                         <div className="row">
                             <div className="col-12">
@@ -176,10 +200,6 @@ export default function Footer() {
 
                                     <div className="footer-copyright-v2 pb-4">
                                         <p>{options.footer_copyright || "© 2026 Wegomap. All rights reserved."}</p>
-                                        <button onClick={scrollToTop} className="back-to-top">
-                                            <span>Back to Top</span>
-                                            <ArrowUpRight size={14} />
-                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -187,6 +207,46 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
+            
+            {/* Sticky Back to Top with Scroll Progress */}
+            <button 
+                onClick={scrollToTop} 
+                className={`back-to-top-sticky ${scrollProgress > 5 ? 'visible' : ''}`}
+                aria-label="Back to top"
+            >
+                <svg className="progress-circle" width="56" height="56" viewBox="0 0 100 100">
+                    <circle
+                        cx="50"
+                        cy="50"
+                        r="48"
+                        stroke="rgba(255, 255, 255, 0.1)"
+                        strokeWidth="4"
+                        fill="none"
+                    />
+                    <circle
+                        cx="50"
+                        cy="50"
+                        r="48"
+                        stroke="url(#progressGradient)"
+                        strokeWidth="4"
+                        fill="none"
+                        strokeDasharray="301.59"
+                        strokeDashoffset={301.59 - (301.59 * scrollProgress) / 100}
+                        strokeLinecap="round"
+                        transform="rotate(-90 50 50)"
+                        style={{ transition: 'stroke-dashoffset 0.1s ease-out' }}
+                    />
+                    <defs>
+                        <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#FB923C" />
+                            <stop offset="100%" stopColor="#F97316" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <div className="arrow-icon">
+                    <ArrowUpRight size={24} />
+                </div>
+            </button>
         </footer>
     );
 }

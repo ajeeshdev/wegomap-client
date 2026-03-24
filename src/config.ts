@@ -1,6 +1,9 @@
 export const API_URL = (process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBLIC_API_URL.trim() !== '')  
-    ? process.env.NEXT_PUBLIC_API_URL.replace(/\/+$/, '').trim() // Remove any trailing slashes
-    : 'https://api-demo.wegomap.com/api'; // Always use the demo API as default for now
+    ? process.env.NEXT_PUBLIC_API_URL.replace(/\/+$/, '').trim() 
+    : (typeof window !== 'undefined' && window.location.hostname === 'localhost')
+        ? 'http://localhost:5001/api'
+        : 'https://api-demo.wegomap.com/api';
+
 
 // Derive uploads base URL from API URL (remove /api suffix)
 // If API_URL is https://api.domain.com/api -> UPLOADS_URL is https://api.domain.com

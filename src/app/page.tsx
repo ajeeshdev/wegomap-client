@@ -4,6 +4,7 @@ import {
   Heart,
   Search,
   Star,
+  ChevronLeft,
   ChevronRight,
   MapPin,
   Package,
@@ -37,6 +38,8 @@ import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination, EffectFade } from 'swiper/modules';
 import Hero from "@/components/Hero";
+import OfferBanner from "@/components/OfferBanner";
+import WishlistButton from "@/components/WishlistButton";
 import { API_URL, getImageUrl } from "@/config";
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
@@ -47,18 +50,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 
-function WishlistButton({ id, wishlist, toggleWishlist }: { id: string, wishlist: string[], toggleWishlist: (id: string, e: React.MouseEvent) => void }) {
-  const isSelected = wishlist.includes(id);
-  return (
-    <button
-      className={`wishlistBtn ${isSelected ? 'selected' : ''}`}
-      aria-label="Add to wishlist"
-      onClick={(e) => toggleWishlist(id, e)}
-    >
-      <Heart size={18} fill={isSelected ? "currentColor" : "none"} />
-    </button>
-  );
-}
+
 
 export default function Home() {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
@@ -178,11 +170,10 @@ export default function Home() {
         if (specEventsData.success) setSpecialEvents(specEventsData.data);
         
         if (testData.success) {
-            const apiUrl = API_URL || '';
             setTestimonials(testData.data.map((t: any) => ({
                 name: t.name || t.title,
                 role: t.location || t.designation || 'Verified Traveler',
-                avatar: getImageUrl(t.image) || 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=200',
+                avatar: t.image ? getImageUrl(t.image) : null,
                 quote: t.review || t.text || t.description || 'Great experience!'
             })));
         }
@@ -225,7 +216,9 @@ export default function Home() {
       price: pkg.price ? `₹${pkg.price.toLocaleString()}` : 'N/A',
       oldPrice: pkg.oldamt ? `₹${Number(pkg.oldamt).toLocaleString()}` : null,
       image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || '/bg-placeholder.jpg'),
-      href: `/packages/${pkg.slug || pkg._id}`
+      href: `/packages/${pkg.slug || pkg._id}`,
+      averageRating: pkg.averageRating,
+      reviewCount: pkg.reviewCount
   }));
 
   const firstMinuteOffers = parsedPackages.filter(p => p.onoffer).slice(0, 8);
@@ -259,7 +252,8 @@ export default function Home() {
   const kochiExperiences = destinations.map(d => ({
       title: d.name || d.title || 'Experience',
       image: getImageUrl(d.image || d.thumb || '/bg-placeholder.jpg'),
-      href: `/tours?q=${encodeURIComponent(d.name || d.title || '')}`
+      href: `/tours?q=${encodeURIComponent(d.name || d.title || '')}`,
+      averageRating: d.averageRating || 0
   }));
 
   if (loading) {
@@ -304,115 +298,18 @@ export default function Home() {
       </div>
 
       {/* Kerala Tour Operator Section */}
-      {(homeSections.find(s => s.id === 'kerala')?.enabled ?? true) && keralaPackages.length > 0 && (
-      <section className="sectionPadding bg-gradient-bottom">
-        <div className="homeContainer">
-          <div className="sectionHeader flex items-center justify-center mb-8">
-            <div className="titleArea">
-              <span className="sectionSubtitle">{homeSections.find(s => s.id === 'kerala')?.subtitle || "Explore Our Best"}</span>
-              <h2 className="sliderTitle">
-                {homeSections.find(s => s.id === 'kerala')?.title || "Kerala Tour Operator"}
-              </h2>
-              <div 
-                className="sectionHeaderDescription mt-2 mb-0 max-w-2xl text-[13px] leading-relaxed italic text-slate-500"
-                dangerouslySetInnerHTML={{ __html: homeSections.find(s => s.id === 'kerala')?.description || "Experience the beauty of God's Own Country with Kerala's best tour operator." }}
-              />
-            </div>
-            <Link href="/kerala-tour-packages" className="viewAllBtn">
-              View All <ArrowRight size={18} />
-            </Link>
-          </div>
-          <Swiper
-            modules={[Autoplay, Navigation, Pagination]}
-            spaceBetween={16}
-            slidesPerView={2.2}
-            navigation={{
-              prevEl: '.kerala-prev',
-              nextEl: '.kerala-next',
-            }}
-            loop={keralaPackages.length > 3}
-            autoplay={{ delay: 3500, disableOnInteraction: false, pauseOnMouseEnter: true }}
-            pagination={{
-              el: '.kerala-pagination',
-              type: 'progressbar',
-            }}
-            onSwiper={(swiper) => {
-              // Forced update to ensure dynamic elements are picked up
-              setTimeout(() => {
-                if (swiper && !swiper.destroyed && swiper.params) {
-                  if (swiper.params.navigation && typeof swiper.params.navigation !== 'boolean') {
-                    swiper.params.navigation.prevEl = '.kerala-prev';
-                    swiper.params.navigation.nextEl = '.kerala-next';
-                  }
-                  if (swiper.params.pagination && typeof swiper.params.pagination !== 'boolean') {
-                    swiper.params.pagination.el = '.kerala-pagination';
-                  }
-                  swiper.navigation?.init();
-                  swiper.navigation?.update();
-                  swiper.pagination?.init();
-                  swiper.pagination?.update();
-                }
-              });
-            }}
-            breakpoints={{
-              640: { slidesPerView: 2, spaceBetween: 24 },
-              1024: { slidesPerView: 3, spaceBetween: 30 },
-              1280: { slidesPerView: 4, spaceBetween: 30 }
-            }}
-            className="packageSlider"
-          >
-            {keralaPackages.map((item: any, idx) => (
-              <SwiperSlide key={idx} className="h-auto">
-                <Link href={item.href || "/packages"} className="block h-full">
-                  <div className="packageCardKerala group">
-                    <Image src={item.image} alt={item.title} fill className="object-cover" unoptimized />
-                    <div className="overlay"></div>
-                    <div className="cardContent">
-                      <div className="topSection">
-                        <h4 className="packageTitle">{item.title.replace(/ Package$/i, '')}</h4>
-                        <p className="packageSubtitle">Package</p>
-                      </div>
-                      <div className="bottomSection">
-                        {item.oldPrice && <span className="oldPrice">{item.oldPrice}</span>}
-                        <span className="currentPrice">{item.price}<small> / Person</small></span>
-                      </div>
-                      <WishlistButton id={item._id} wishlist={wishlist} toggleWishlist={toggleWishlist} />
-                    </div>
-                  </div>
-                </Link>
-              </SwiperSlide>
-            ))}
-          </Swiper>
 
-          <div className="sliderNavigation">
-            <div className="progressWrapper">
-              <div className="kerala-pagination customPagination"></div>
-            </div>
-            <div className="navButtons">
-              <div className="navBtn kerala-prev"><ArrowLeft size={20} /></div>
-              <div className="navBtn kerala-next"><ArrowRight size={20} /></div>
-            </div>
-          </div>
 
-          <div className="viewAllMobileContainer">
-            <Link href="/kerala-tour-packages" className="viewAllBtnMobile">
-              View All <ArrowRight size={18} />
-            </Link>
-          </div>
-        </div>
-      </section>
-      )}
-
-      {/* First Minute Offers */}
+      {/* First Minute Offers - Original Card Style */}
       {(homeSections.find(s => s.id === 'offers')?.enabled ?? true) && firstMinuteOffers.length > 0 && (
-      <section className="sectionPadding bg-white">
+      <section className="sectionPadding bg-white firstMinuteOfferSection">
         <div className="homeContainer">
           <div className="sectionHeader flex items-center justify-center mb-8">
             <div className="titleArea">
               <span className="sectionSubtitle">{homeSections.find(s => s.id === 'offers')?.subtitle || "Limited Time Offers"}</span>
               <h2 className="sliderTitle">{homeSections.find(s => s.id === 'offers')?.title || "First Minute Offers"}</h2>
               {homeSections.find(s => s.id === 'offers')?.description && (
-                <p className="mt-2 text-slate-500 max-w-2xl text-[13px] leading-relaxed italic">{homeSections.find(s => s.id === 'offers')?.description}</p>
+                <p className=" text-slate-500 max-w-2xl text-[13px] leading-relaxed italic">{homeSections.find(s => s.id === 'offers')?.description}</p>
               )}
             </div>
             <Link href="/trending" className="viewAllBtn">
@@ -422,7 +319,7 @@ export default function Home() {
           <Swiper
             modules={[Autoplay, Navigation, Pagination]}
             spaceBetween={16}
-            slidesPerView={2.2}
+            slidesPerView={2}
             navigation={{
               prevEl: '.first-prev',
               nextEl: '.first-next',
@@ -452,25 +349,33 @@ export default function Home() {
             }}
             breakpoints={{
               640: { slidesPerView: 2, spaceBetween: 24 },
-              1024: { slidesPerView: 4, spaceBetween: 30 },
+              1024: { slidesPerView: 3, spaceBetween: 30 },
+              1280: { slidesPerView: 4, spaceBetween: 30 }
             }}
             className="packageSlider"
           >
             {firstMinuteOffers.map((item: any, idx) => (
               <SwiperSlide key={idx} className="h-auto">
                 <Link href={item.href || "/packages"} className="block h-full">
-                  <div className="packageCardSmall group">
-                    <div className="imageWrapper">
-                      <Image src={item.image} alt={item.title} fill className="object-cover" unoptimized />
-                      <div className="priceTag">
+                  <div className="packageCardKerala group">
+                    <Image src={item.image} alt={item.title} fill className="object-cover" unoptimized />
+                    <div className="overlay"></div>
+                    {item.averageRating !== undefined && item.averageRating > 0 && (
+                      <div className="ratingBadge">
+                          <Star size={12} fill="currentColor" />
+                          <span>{item.averageRating.toFixed(1)}</span>
+                      </div>
+                    )}
+                    <div className="cardContent">
+                      <div className="topSection">
+                        <h4 className="packageTitle line-clamp-1">{item.title.replace(/ Package$/i, '')}</h4>
+                        <p className="packageSubtitle">Package</p>
+                      </div>
+                      <div className="bottomSection">
                         {item.oldPrice && <span className="oldPrice">{item.oldPrice}</span>}
-                        <span className="currentPrice">{item.price}<small>/ PERSON</small></span>
+                        <span className="currentPrice">{item.price}<small> / Person</small></span>
                       </div>
                       <WishlistButton id={item._id} wishlist={wishlist} toggleWishlist={toggleWishlist} />
-                    </div>
-                    <div className="cardContent">
-                      <h4 className="packageTitle">{item.title}</h4>
-                      <div className="actionIcon"><ChevronRight size={20} /></div>
                     </div>
                   </div>
                 </Link>
@@ -497,6 +402,9 @@ export default function Home() {
       </section>
       )}
 
+      {/* Offer Banners (Image Only Slider) - Added after First Minute Offers */}
+      <OfferBanner />
+
 
       {/* Domestic Packages Slider */}
       {(homeSections.find(s => s.id === 'domestic')?.enabled ?? true) && domesticPackages.length > 0 && (
@@ -507,7 +415,7 @@ export default function Home() {
               <span className="sectionSubtitle">{homeSections.find(s => s.id === 'domestic')?.subtitle || "Incredible India"}</span>
               <h2 className="sliderTitle">{homeSections.find(s => s.id === 'domestic')?.title || "Domestic Packages"}</h2>
               {homeSections.find(s => s.id === 'domestic')?.description && (
-                <p className="mt-2 text-slate-500 max-w-2xl text-[13px] leading-relaxed">{homeSections.find(s => s.id === 'domestic')?.description}</p>
+                <p className="text-slate-500 max-w-2xl text-[13px] leading-relaxed">{homeSections.find(s => s.id === 'domestic')?.description}</p>
               )}
             </div>
             <Link href="/domestic-tour-packages" className="viewAllBtn">
@@ -517,7 +425,7 @@ export default function Home() {
           <Swiper
             modules={[Autoplay, Navigation, Pagination]}
             spaceBetween={16}
-            slidesPerView={2.2}
+            slidesPerView={2}
             navigation={{
               prevEl: '.domestic-prev',
               nextEl: '.domestic-next',
@@ -555,18 +463,25 @@ export default function Home() {
             {domesticPackages.map((item: any, idx) => (
               <SwiperSlide key={idx} className="h-auto">
                 <Link href={item.href || "/packages"} className="block h-full">
-                  <div className="packageCardSmall group">
-                    <div className="imageWrapper">
-                      <Image src={item.image} alt={item.title} fill className="object-cover" unoptimized />
-                      <div className="priceTag">
+                  <div className="packageCardKerala group">
+                    <Image src={item.image} alt={item.title} fill className="object-cover" unoptimized />
+                    <div className="overlay"></div>
+                    {item.averageRating !== undefined && item.averageRating > 0 && (
+                      <div className="ratingBadge">
+                          <Star size={12} fill="currentColor" />
+                          <span>{item.averageRating.toFixed(1)}</span>
+                      </div>
+                    )}
+                    <div className="cardContent">
+                      <div className="topSection">
+                        <h4 className="packageTitle line-clamp-1">{item.title.replace(/ Package$/i, '')}</h4>
+                        <p className="packageSubtitle">Package</p>
+                      </div>
+                      <div className="bottomSection">
                         {item.oldPrice && <span className="oldPrice">{item.oldPrice}</span>}
-                        <span className="currentPrice">{item.price}<small>/ PERSON</small></span>
+                        <span className="currentPrice">{item.price}<small> / Person</small></span>
                       </div>
                       <WishlistButton id={item._id} wishlist={wishlist} toggleWishlist={toggleWishlist} />
-                    </div>
-                    <div className="cardContent">
-                      <h4 className="packageTitle">{item.title}</h4>
-                      <div className="actionIcon"><ChevronRight size={20} /></div>
                     </div>
                   </div>
                 </Link>
@@ -602,7 +517,7 @@ export default function Home() {
               <span className="sectionSubtitle">{homeSections.find(s => s.id === 'international')?.subtitle || "Explore The World"}</span>
               <h2 className="sliderTitle">{homeSections.find(s => s.id === 'international')?.title || "International Packages"}</h2>
               {homeSections.find(s => s.id === 'international')?.description && (
-                <p className="mt-2 text-slate-500 max-w-2xl text-[13px] leading-relaxed">{homeSections.find(s => s.id === 'international')?.description}</p>
+                <p className=" text-slate-500 max-w-2xl text-[13px] leading-relaxed">{homeSections.find(s => s.id === 'international')?.description}</p>
               )}
             </div>
             <Link href="/international-tour-packages" className="viewAllBtn">
@@ -612,7 +527,7 @@ export default function Home() {
           <Swiper
             modules={[Autoplay, Navigation, Pagination]}
             spaceBetween={16}
-            slidesPerView={2.2}
+            slidesPerView={2}
             navigation={{
               prevEl: '.intl-prev',
               nextEl: '.intl-next',
@@ -650,18 +565,25 @@ export default function Home() {
             {internationalPackages.map((item: any, idx) => (
               <SwiperSlide key={idx} className="h-auto">
                 <Link href={item.href || "/packages"} className="block h-full">
-                  <div className="packageCardSmall group">
-                    <div className="imageWrapper">
-                      <Image src={item.image} alt={item.title} fill className="object-cover" unoptimized />
-                      <div className="priceTag">
+                  <div className="packageCardKerala group">
+                    <Image src={item.image} alt={item.title} fill className="object-cover" unoptimized />
+                    <div className="overlay"></div>
+                    {item.averageRating !== undefined && item.averageRating > 0 && (
+                      <div className="ratingBadge">
+                          <Star size={12} fill="currentColor" />
+                          <span>{item.averageRating.toFixed(1)}</span>
+                      </div>
+                    )}
+                    <div className="cardContent">
+                      <div className="topSection">
+                        <h4 className="packageTitle line-clamp-1">{item.title.replace(/ Package$/i, '')}</h4>
+                        <p className="packageSubtitle">Package</p>
+                      </div>
+                      <div className="bottomSection">
                         {item.oldPrice && <span className="oldPrice">{item.oldPrice}</span>}
-                        <span className="currentPrice">{item.price}<small>/ PERSON</small></span>
+                        <span className="currentPrice">{item.price}<small> / Person</small></span>
                       </div>
                       <WishlistButton id={item._id} wishlist={wishlist} toggleWishlist={toggleWishlist} />
-                    </div>
-                    <div className="cardContent">
-                      <h4 className="packageTitle">{item.title}</h4>
-                      <div className="actionIcon"><ChevronRight size={20} /></div>
                     </div>
                   </div>
                 </Link>
@@ -699,7 +621,7 @@ export default function Home() {
                 {homeSections.find(s => s.id === 'kochi')?.title || "Kochi Based Travel Agency"}
               </h2>
               {homeSections.find(s => s.id === 'kochi')?.description && (
-                <p className="mt-2 text-slate-500 max-w-2xl text-[13px] leading-relaxed italic">{homeSections.find(s => s.id === 'kochi')?.description}</p>
+                <p className="text-slate-500 max-w-2xl text-[13px] leading-relaxed italic">{homeSections.find(s => s.id === 'kochi')?.description}</p>
               )}
             </div>
             <Link href="/kerala-tour-packages" className="viewAllBtn">
@@ -750,6 +672,12 @@ export default function Home() {
                     <div className="packageCardLocation group">
                     <div className="imageWrapper">
                         <Image src={item.image} alt={item.title} fill className="object-cover" unoptimized />
+                        {item.averageRating !== undefined && item.averageRating > 0 && (
+                          <div className="ratingBadge">
+                            <Star size={12} fill="currentColor" />
+                            <span>{item.averageRating.toFixed(1)}</span>
+                          </div>
+                        )}
                     </div>
                     <div className="cardContent">
                         <h4 className="locationTitle">{item.title}</h4>
@@ -786,14 +714,14 @@ export default function Home() {
 
       {/* Refined Corporate Events Section */}
       {(homeSections.find(s => s.id === 'corporate')?.enabled ?? true) && (
-      <section className="corporateModernSection sectionPadding">
+      <section className="corporate-events-section sectionPadding bg-white">
         <div className="homeContainer">
           <div className="sectionHeader flex items-center justify-center mb-8">
             <div className="titleArea">
               <span className="sectionSubtitle">{homeSections.find(s => s.id === 'corporate')?.subtitle || "MICE & Events"}</span>
               <h2 className="sliderTitle">{homeSections.find(s => s.id === 'corporate')?.title || "Redefining Corporate Experiences"}</h2>
-              <div 
-                  className="sectionHeaderDescription mt-2 mb-0 max-w-2xl text-[13px] leading-relaxed italic text-slate-500"
+              <div
+                  className="sectionHeaderDescription mb-0 max-w-2xl text-[13px] leading-relaxed italic text-slate-500"
                   dangerouslySetInnerHTML={{ __html: homeSections.find(s => s.id === 'corporate')?.description || "Wegomap delivers world-class event management services in Kochi and beyond." }}
               />
             </div>
@@ -810,8 +738,8 @@ export default function Home() {
               prevEl: '.event-prev',
               nextEl: '.event-next',
             }}
-            loop={true}
-            autoplay={{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+            loop={corporateEvents.length > 3}
+            autoplay={{ delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true }}
             pagination={{
               el: '.event-pagination',
               type: 'progressbar',
@@ -838,37 +766,35 @@ export default function Home() {
                 }
               });
             }}
-            className="eventSlider"
+            className="packageSlider"
           >
-            {corporateEvents.map((event: any, idx: number) => {
-              const Icon = Calendar;
-              return (
-                <SwiperSlide key={idx} className="h-auto">
-                  <Link href={`/events/${event.slug || event._id}`} className="block h-full cursor-pointer">
-                    <div className="packageCardSmall eventCard group h-full">
-                      <div className="imageWrapper">
-                        <Image
-                          src={event.images?.[0] || "/assests/site/assets/images/event.jpg"}
-                          alt={event.title}
-                          fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-700"
-                          unoptimized
-                        />
-                        <div className="cardIcon">
-                          <Icon size={24} strokeWidth={1.5} />
+            {corporateEvents.map((item: any, idx) => (
+              <SwiperSlide key={idx} className="h-auto">
+                <Link href={`/events/${item.slug || item._id}`} className="block h-full">
+                  <div className="packageCardSmall group">
+                    <div className="imageWrapper">
+                      <Image src={item.images?.[0] || "/assests/site/assets/images/event.jpg"} alt={item.title} fill className="object-cover" unoptimized />
+                      {item.averageRating !== undefined && item.averageRating > 0 && (
+                        <div className="ratingBadge">
+                            <Star size={12} fill="currentColor" />
+                            <span>{item.averageRating.toFixed(1)}</span>
                         </div>
-                      </div>
-                      <div className="cardContent">
-                        <h4 className="title">{event.title}</h4>
-                        <div className="footer">
-                         <div className="actionIcon"><ChevronRight size={20} /></div>
+                      )}
+                      <WishlistButton id={item._id} wishlist={wishlist} toggleWishlist={toggleWishlist} />
+                      {item.oldPrice && (
+                        <div className="priceTag">
+                          <span className="oldPrice">{item.oldPrice}</span>
                         </div>
-                      </div>
+                      )}
                     </div>
-                  </Link>
-                </SwiperSlide>
-              );
-            })}
+                    <div className="cardContent">
+                      <h4 className="packageTitle">{item.title}</h4>
+                      <div className="actionIcon"><ChevronRight size={20} /></div>
+                    </div>
+                  </div>
+                </Link>
+              </SwiperSlide>
+            ))}
           </Swiper>
 
           <div className="sliderNavigation">
@@ -886,7 +812,7 @@ export default function Home() {
 
       {/* Special Events Section */}
       {homeSections.find(s => s.id === 'special_events')?.enabled && specialEvents.length > 0 && (
-      <section className="sectionPadding bg-slate-50/50">
+      <section className="special-events-section sectionPadding bg-slate-50/50 ">
         <div className="homeContainer">
           <div className="sectionHeader flex items-center justify-center mb-8">
             <div className="titleArea">
@@ -895,7 +821,7 @@ export default function Home() {
                 {homeSections.find(s => s.id === 'special_events')?.title || "Special Events & Activities"}
               </h2>
               {homeSections.find(s => s.id === 'special_events')?.description && (
-                <p className="mt-2 text-slate-500 max-w-2xl text-[13px] leading-relaxed italic">{homeSections.find(s => s.id === 'special_events')?.description}</p>
+                <p className="text-slate-500 max-w-2xl text-[13px] leading-relaxed italic">{homeSections.find(s => s.id === 'special_events')?.description}</p>
               )}
             </div>
             <Link href="/special-events" className="viewAllBtn">
@@ -945,6 +871,8 @@ export default function Home() {
               <SwiperSlide key={idx} className="h-auto">
                 <Link href={`/special-events/${event.slug || event._id}`} className="block h-full">
                   <div className="packageCardSmall group h-full">
+
+
                     <div className="imageWrapper">
                       <Image 
                         src={event.images?.[0] || "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800"} 
@@ -953,6 +881,12 @@ export default function Home() {
                         className="object-cover" 
                         unoptimized 
                       />
+                      {event.averageRating !== undefined && event.averageRating > 0 && (
+                        <div className="ratingBadge">
+                            <Star size={12} fill="currentColor" />
+                            <span>{event.averageRating.toFixed(1)}</span>
+                        </div>
+                      )}
                       <div className="priceTag">
                         <span className="currentPrice" style={{ color: '#fff', fontSize: '0.75rem' }}>
                           {event.date ? new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'SPECIAL'}
@@ -992,6 +926,58 @@ export default function Home() {
       )}
 
 
+
+      <section className="commonPadding bg-slate-50 testimonialSection">
+        <div className="homeContainer">
+          <div className="sectionHeader flex items-center justify-center mb-8">
+            <div className="titleArea">
+              <span className="sectionSubtitle">Guest Experiences</span>
+              <h2 className="sliderTitle">What Travelers Are Saying</h2>
+            </div>
+          </div>
+          
+          <Swiper
+            modules={[Autoplay, Navigation, Pagination]}
+            spaceBetween={30}
+            slidesPerView={1}
+            loop={testimonials.length > 2}
+            autoplay={{ delay: 6000 }}
+            pagination={{ clickable: true, el: '.test-pagination' }}
+            breakpoints={{
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 }
+            }}
+            className="testimonialSwiper"
+          >
+            {testimonials.map((t, i) => (
+              <SwiperSlide key={i}>
+                <div className="testimonialCard">
+                  <div className="quoteIcon"><MessageSquare size={24} /></div>
+                  <p className="testimonialText">"{t.quote || "Exceptional service and unforgettable memories. Highly recommend Wegomap!"}"</p>
+                  <div className="authorArea">
+                    <div className="authorImg">
+                      <Image 
+                        src={t.avatar || "/assests/site/assets/images/google-review.svg"} 
+                        alt={t.name} 
+                        width={40} 
+                        height={40} 
+                        className="rounded-full"
+                      />
+                    </div>
+                    <div className="authorInfo">
+                      <h4 className="authorName">{t.name || "Happy Traveler"}</h4>
+                      <div className="authorStars flex gap-0.5">
+                        {[...Array(5)].map((_, i) => <Star key={i} size={10} fill="#fbbf24" color="#fbbf24" />)}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <div className="test-pagination mt-8 flex justify-center"></div>
+        </div>
+      </section>
 
       {/* Requested Kerala Specialist Thin Section */}
       {(homeSections.find(s => s.id === 'seo')?.enabled ?? true) && (

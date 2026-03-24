@@ -9,6 +9,8 @@ import {
     Ship, Globe, Zap, MessageSquare, HelpCircle, Compass, Star, FileText
 } from 'lucide-react';
 import Image from 'next/image';
+import EnquireModal from './EnquireModal';
+
 
 const IconMap: Record<string, any> = {
     Home, Info, Users, Phone, Mail, MapPin, Heart, Package, Calendar,
@@ -104,7 +106,9 @@ export default function Header() {
     const [userProfile, setUserProfile] = useState<any>(null);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
     const [logo, setLogo] = useState('/assets/images/logo.png');
+    const [isEnquireOpen, setIsEnquireOpen] = useState(false);
     const profileRef = useRef<HTMLDivElement>(null);
+
 
     // Close profile dropdown when clicking outside
     useEffect(() => {
@@ -160,7 +164,11 @@ export default function Header() {
         const fetchNav = async () => {
             try {
                 const res = await fetch(`${API_URL}/options`);
+                if (!res.headers.get('content-type')?.includes('application/json')) {
+                    throw new Error(`API returned non-JSON response from ${res.url} (Status: ${res.status})`);
+                }
                 const json = await res.json();
+
                 if (json.success) {
                     const hlOpt = json.data.find((o: any) => o.key === 'header_links');
                     if (hlOpt && hlOpt.value) {
@@ -336,9 +344,13 @@ export default function Header() {
                             </div>
                         ) : (
                             <>
-                                <Link href="/enquire" className="enquire-link">
+                                <button 
+                                    onClick={() => setIsEnquireOpen(true)} 
+                                    className="enquire-link"
+                                >
                                     Enquire Now
-                                </Link>
+                                </button>
+
                                 <Link href="/login" className="login-link">
                                     Log In
                                 </Link>
@@ -465,13 +477,16 @@ export default function Header() {
                     </div>
 
                     <div className="sideMenuActions">
-                        <Link
-                            href="/enquire"
+                        <button
+                            onClick={() => {
+                                setIsOpen(false);
+                                setIsEnquireOpen(true);
+                            }}
                             className="enquireBtn"
-                            onClick={() => setIsOpen(false)}
                         >
                             Enquire Now
-                        </Link>
+                        </button>
+
                         <Link
                             href="/login"
                             className="loginBtn"
@@ -482,6 +497,12 @@ export default function Header() {
                     </div>
                 </div>
             </div>
+            <EnquireModal 
+                isOpen={isEnquireOpen} 
+                onClose={() => setIsEnquireOpen(false)} 
+                packageName="General Inquiry" 
+            />
         </header>
+
     );
 }

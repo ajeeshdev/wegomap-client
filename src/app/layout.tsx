@@ -49,6 +49,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 import LayoutWrapper from "@/components/LayoutWrapper";
 import { Toaster } from 'react-hot-toast';
+import { EnquiryProvider } from '@/context/EnquiryContext';
 
 export default function RootLayout({
   children,
@@ -59,9 +60,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${outfit.variable} ${dancingScript.variable} font-sans antialiased text-slate-900 bg-white`}>
         <AppGoogleAuthProvider>
-          <LayoutWrapper>
-            {children}
-          </LayoutWrapper>
+          <EnquiryProvider>
+            <LayoutWrapper>
+              {children}
+            </LayoutWrapper>
+          </EnquiryProvider>
           <BootstrapClient />
           <Toaster position="top-right" containerStyle={{ zIndex: 999999999 }} />
         </AppGoogleAuthProvider>

@@ -89,18 +89,7 @@ export default function PageBanner({
                     <div className="pageBannerContent">
                         {preTitle && <div className="pageBannerPreTitle">{preTitle}</div>}
                         <h1 className="pageBannerTitle">
-                            {title.includes('\n') ? (
-                                title.split('\n').map((line, i) => (
-                                    <Fragment key={i}>
-                                        {line} {i === 0}
-                                    </Fragment>
-                                ))
-                            ) : (
-                                <>
-                                    {title.split(' ').slice(0, -2).join(' ')} 
-                                    {title.split(' ').slice(-2).join(' ')}
-                                </>
-                            )}
+                            {title}
                         </h1>
                         {subtitle && <p className="pageBannerDescription">{subtitle}</p>}
                     </div>

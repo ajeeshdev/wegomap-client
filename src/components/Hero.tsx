@@ -30,7 +30,12 @@ export default function Hero() {
     useEffect(() => {
         // Fetch dynamic sliders
         fetch(`${API_URL}/sliders`)
-            .then(res => res.json())
+            .then(res => {
+                if (!res.headers.get('content-type')?.includes('application/json')) {
+                    throw new Error(`API returned non-JSON response from ${res.url} (Status: ${res.status})`);
+                }
+                return res.json();
+            })
             .then(data => {
                 if (data.success && data.data && data.data.length > 0) {
                     const dynamicSlides = data.data.map((s: any) => ({
@@ -72,7 +77,12 @@ export default function Hero() {
 
         // Fetch packages for the search index
         fetch(`${API_URL}/packages`)
-            .then(res => res.json())
+            .then(res => {
+                if (!res.headers.get('content-type')?.includes('application/json')) {
+                    throw new Error(`API returned non-JSON response from ${res.url} (Status: ${res.status})`);
+                }
+                return res.json();
+            })
             .then(data => {
                 if (data.success) {
                     const dynamicSearchIndex = data.data.map((pkg: any) => ({

@@ -110,6 +110,14 @@
       "namedRegex": "^/admin/landing\\-page/(?<nxtPid>[^/]+?)(?:/)?$"
     },
     {
+      "page": "/admin/offer-banners/[id]/edit",
+      "regex": "^/admin/offer\\-banners/([^/]+?)/edit(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/admin/offer\\-banners/(?<nxtPid>[^/]+?)/edit(?:/)?$"
+    },
+    {
       "page": "/admin/packages/[id]/edit",
       "regex": "^/admin/packages/([^/]+?)/edit(?:/)?$",
       "routeKeys": {
@@ -427,6 +435,18 @@
       "regex": "^/admin/menus(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/admin/menus(?:/)?$"
+    },
+    {
+      "page": "/admin/offer-banners",
+      "regex": "^/admin/offer\\-banners(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/offer\\-banners(?:/)?$"
+    },
+    {
+      "page": "/admin/offer-banners/create",
+      "regex": "^/admin/offer\\-banners/create(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/offer\\-banners/create(?:/)?$"
     },
     {
       "page": "/admin/packages",

@@ -13,11 +13,14 @@ export interface TourPackageDetail {
     price: string;
     oldPrice?: string;
     image: string;
+    images?: string[];
     description: string;
     highlights: string[];
     itinerary: ItineraryDay[];
     inclusions: string[];
     exclusions: string[];
+    averageRating?: number;
+    reviewCount?: number;
 }
 
 export const packagesData: Record<string, TourPackageDetail> = {

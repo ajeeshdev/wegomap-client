@@ -110,7 +110,7 @@ export default function EventDetailPage() {
                 ]}
                 variant="standard"
             />
-
+            
             <div className="homeContainer">
                 <div className="ed-stats-bar">
                     <div className="ed-stat-grid">
@@ -148,27 +148,36 @@ export default function EventDetailPage() {
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
                         
                         <div className="lg:col-span-8">
-                            <div className="ed-overview-card">
-                                <h1 className="ed-card-title">
-                                    <Sparkles size={32} /> Experience Overview.
-                                </h1>
-                                <div className="ed-description">
-                                    <div dangerouslySetInnerHTML={{ __html: firstPara }} className="lead" />
+                            <div className="ed-overview-card !bg-white !shadow-none !border-none !p-0">
+                                <h2 className="text-2xl font-bold mb-6 text-slate-900 border-l-4 border-primary pl-6">
+                                    Event Overview
+                                </h2>
+                                <div className="ed-description !text-slate-600 !text-base leading-relaxed">
+                                    <div dangerouslySetInnerHTML={{ __html: firstPara }} className="lead !text-slate-900 !text-xl !mb-6 leading-relaxed" />
                                     <div dangerouslySetInnerHTML={{ __html: remainingParas }} />
                                 </div>
 
-                                <div className="ed-info-pills">
-                                    <div className="ed-pill">
-                                        <div className="ed-pill-icon ed-pill-blue"><ShieldCheck size={24} /></div>
-                                        <div className="ed-pill-text"><span className="lbl">Assurance</span><span className="val">Verified Event</span></div>
+                                <div className="ed-info-pills grid grid-cols-1 md:grid-cols-3 gap-4 mt-12 bg-slate-50 p-8 rounded-3xl border border-slate-100">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-blue-600 shadow-sm"><ShieldCheck size={24} /></div>
+                                        <div>
+                                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Assurance</div>
+                                            <div className="text-sm font-bold text-slate-900">Verified</div>
+                                        </div>
                                     </div>
-                                    <div className="ed-pill">
-                                        <div className="ed-pill-icon ed-pill-orange"><Zap size={24} /></div>
-                                        <div className="ed-pill-text"><span className="lbl">Production</span><span className="val">Pro Staging</span></div>
+                                    <div className="flex items-center gap-4 border-l border-slate-200 pl-4">
+                                        <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-orange-600 shadow-sm"><Zap size={24} /></div>
+                                        <div>
+                                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Production</div>
+                                            <div className="text-sm font-bold text-slate-900">Pro Staging</div>
+                                        </div>
                                     </div>
-                                    <div className="ed-pill">
-                                        <div className="ed-pill-icon ed-pill-emerald"><Users size={24} /></div>
-                                        <div className="ed-pill-text"><span className="lbl">Guest Policy</span><span className="val">VIP Protocol</span></div>
+                                    <div className="flex items-center gap-4 border-l border-slate-200 pl-4">
+                                        <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-emerald-600 shadow-sm"><Users size={24} /></div>
+                                        <div>
+                                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Guest Policy</div>
+                                            <div className="text-sm font-bold text-slate-900">VIP Access</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -194,47 +203,39 @@ export default function EventDetailPage() {
                         </div>
 
                         <div className="lg:col-span-4 ed-sidebar">
-                            <div className="ed-booking-card">
+                            <div className="ed-booking-card !bg-white !text-slate-900 !border !border-slate-100 !shadow-2xl !rounded-3xl !p-10">
                                 {formStatus === 'success' ? (
                                     <div className="ed-success">
-                                        <div className="icon"><CheckCircle2 size={36} /></div>
-                                        <h5>Registration Sent!</h5>
-                                        <p>Our team will contact you shortly with the event manual.</p>
-                                        <button onClick={() => setFormStatus('idle')} className="reset-btn">Register Next Guestslot</button>
+                                        <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6"><CheckCircle2 size={32} /></div>
+                                        <h5 className="font-bold text-xl uppercase">Registration Sent!</h5>
+                                        <p className="text-slate-500 mt-2">Our team will contact you shortly.</p>
+                                        <button onClick={() => setFormStatus('idle')} className="mt-8 text-primary font-bold uppercase text-xs">Register Custom Guest</button>
                                     </div>
                                 ) : (
                                     <>
-                                        <div className="ed-card-header">
-                                            <h4>Join this <span>Experience.</span></h4>
-                                            <p>Secure your presence at our next curated event series.</p>
+                                        <div className="ed-card-header !mb-8">
+                                            <h4 className="text-2xl font-bold text-slate-900 uppercase italic leading-tight">Apply for <span className="text-primary italic">Admission.</span></h4>
+                                            <p className="text-slate-500 mt-2">Secure your spot at this curated experience.</p>
                                         </div>
-                                        <form onSubmit={handleFormSubmit} className="ed-form">
+                                        <form onSubmit={handleFormSubmit} className="ed-form space-y-5">
                                             <div className="ed-field">
-                                                <label>Full Name</label>
-                                                <div className="ed-input-group">
-                                                    <User size={18} />
-                                                    <input required type="text" placeholder="Enter your full name" />
+                                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 block">Full Name</label>
+                                                <div className="relative">
+                                                    <User size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                                                    <input required type="text" placeholder="Your name" className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-4 pl-12 pr-4 text-slate-900 outline-none focus:border-primary transition-all" />
                                                 </div>
                                             </div>
                                             <div className="ed-field">
-                                                <label>Work Email</label>
-                                                <div className="ed-input-group">
-                                                    <ShieldCheck size={18} />
-                                                    <input required type="email" placeholder="Enter your email" />
+                                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 block">Email Address</label>
+                                                <div className="relative">
+                                                    <ShieldCheck size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                                                    <input required type="email" placeholder="Your email" className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-4 pl-12 pr-4 text-slate-900 outline-none focus:border-primary transition-all" />
                                                 </div>
                                             </div>
-                                            <div className="ed-field">
-                                                <label>Contact Number</label>
-                                                <div className="ed-input-group">
-                                                    <Phone size={18} />
-                                                    <input required type="tel" placeholder="Enter contact number" />
-                                                </div>
-                                            </div>
-                                            <button disabled={formStatus === 'loading'} type="submit" className="ed-submit-btn" >
-                                                {formStatus === 'loading' ? 'Processing...' : 'Apply for Spot'}
-                                                <Send size={16} />
+                                            <button disabled={formStatus === 'loading'} type="submit" className="w-full bg-[#ff5349] text-white py-5 rounded-2xl font-bold uppercase text-xs tracking-widest shadow-xl shadow-rose-100 hover:bg-slate-900 transition-all" >
+                                                {formStatus === 'loading' ? 'Processing...' : 'Reserve my Spot'}
                                             </button>
-                                            <span className="ed-privacy">Privacy protected by Wegomap Premium</span>
+                                            <span className="block text-center text-[10px] font-bold text-slate-400 uppercase mt-4">Verified by Wegomap Events</span>
                                         </form>
                                     </>
                                 )}

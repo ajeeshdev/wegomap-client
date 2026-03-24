@@ -783,7 +783,7 @@ export default function LandingPageView({
                 onClick={() => handleOpenQuickPlan(data.title)}
                 className="lp-inquiryBtnPrimary"
               >
-                Plan My Trip
+               Book  Trip
               </button>
               <a href={`tel:${data.cta_phone?.replace(/\s/g, "") || "+918590370566"}`} className="lp-inquiryBtnSecondary">
                 Call Expert

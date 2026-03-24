@@ -5,9 +5,12 @@ import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Search, MapPin, Clock, Filter, X, User, Mail, Phone, Heart } from 'lucide-react';
+import { Search, MapPin, Clock, Filter, X, User, Mail, Phone, Heart, Star, MessageSquare } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import DynamicPageBanner from '@/components/DynamicPageBanner';
+import EnquireModal from '@/components/EnquireModal';
+import WishlistButton from '@/components/WishlistButton';
+
 import { packagesData } from '@/data/packages';
 import { categoryMappings } from '@/data/categoryMappings';
 
@@ -39,6 +42,8 @@ interface PackageCard {
     oldPrice?: string;
     image: string;
     categories: string[];
+    averageRating?: number;
+    reviewCount?: number;
 }
 
 function buildAllPackages(): PackageCard[] {
@@ -70,6 +75,8 @@ function buildAllPackages(): PackageCard[] {
             oldPrice: pkg.oldPrice,
             image: getImageUrl(pkg.image),
             categories: [...cats],
+            averageRating: pkg.averageRating,
+            reviewCount: pkg.reviewCount,
         });
     });
 
@@ -93,7 +100,8 @@ export default function AllToursPage() {
         phone: '',
         email: ''
     });
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    // const [isSubmitting, setIsSubmitting] = useState(false);
+
     const router = useRouter();
 
     useEffect(() => {
@@ -154,14 +162,16 @@ export default function AllToursPage() {
                 const data = await res.json();
                 if (data.success) {
                     const mapped = data.data.map((pkg: any) => ({
-                        slug: pkg._id, // Use ID as slug for direct backend packages
+                        slug: pkg.slug || pkg._id, // Prioritize human-readable slug if available
                         title: pkg.title,
                         location: pkg.location,
                         duration: pkg.duration,
                         price: pkg.price ? `₹${pkg.price.toLocaleString()}` : 'N/A',
                         oldPrice: pkg.oldamt ? `₹${Number(pkg.oldamt).toLocaleString()}` : null,
                         image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || pkg.image || '/bg-placeholder.jpg'),
-                        categories: [pkg.category?.toLowerCase() || 'all']
+                        categories: [pkg.category?.toLowerCase() || 'all'],
+                        averageRating: pkg.averageRating,
+                        reviewCount: pkg.reviewCount
                     }));
                     setCmsPackages(mapped);
                 }
@@ -175,12 +185,14 @@ export default function AllToursPage() {
     }, []);
 
     const allCombinedPackages = useMemo(() => {
-        // Merge CMS packages with static packages, prioritizing CMS by ID/Slug if needed
+        // Merge CMS packages with static packages, prioritizing CMS by Slug/Title if needed
         const combined = [...cmsPackages];
         const cmsSlugs = new Set(combined.map(p => p.slug));
+        const cmsTitles = new Set(combined.map(p => p.title.toLowerCase()));
         
         ALL_PACKAGES.forEach(p => {
-            if (!cmsSlugs.has(p.slug)) {
+            // Only add static package if it's not already in CMS by slug or title
+            if (!cmsSlugs.has(p.slug) && !cmsTitles.has(p.title.toLowerCase())) {
                 combined.push(p);
             }
         });
@@ -217,33 +229,9 @@ export default function AllToursPage() {
     };
 
     const handleFormSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        try {
-            const res = await fetch(`${API_URL}/leads`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    ...formData,
-                    destination: selectedPackage,
-                    source: 'Website',
-                    url: typeof window !== "undefined" ? window.location.href : ""
-                })
-            });
-            const data = await res.json();
-            if (data.success) {
-                toast.success('Request sent successfully!');
-                setIsModalOpen(false);
-                setFormData({ name: '', phone: '', email: '' });
-            } else {
-                toast.error(data.error || 'Failed to send request');
-            }
-        } catch (err) {
-            toast.error('Failed to send request');
-        } finally {
-            setIsSubmitting(false);
-        }
+        // Redundant as we now use EnquireModal, but kept for compatibility if needed
     };
+
 
     return (
         <div className="allToursPage">
@@ -346,22 +334,12 @@ export default function AllToursPage() {
                                 </div>
                                 {pkg.oldPrice && <span className="allTourCardBadge">SALE</span>}
 
-                                {/* Wishlist Heart Icon */}
-                                <button 
-                                    onClick={(e) => toggleWishlist(pkg.slug, e)}
-                                    className={`absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center shadow-lg transition-all z-20 ${wishlist.includes(pkg.slug) ? 'bg-rose-500 text-white' : 'bg-white/90 backdrop-blur-md text-slate-400 hover:text-rose-500'}`}
-                                >
-                                    <Heart size={16} fill={wishlist.includes(pkg.slug) ? "currentColor" : "none"} />
-                                </button>
-
-                                {/* Price — bottom left */}
-                                <div className="allTourCardFloatPrice">
-                                    <span className="floatPriceMain">{pkg.price}</span>
-                                    <div className="floatPriceMeta">
-                                        {pkg.oldPrice && <span className="floatPriceOld">{pkg.oldPrice}</span>}
-                                        <span className="floatPricePp">/ person</span>
+                                {pkg.averageRating !== undefined && pkg.averageRating > 0 && (
+                                    <div className="ratingBadge">
+                                        <Star size={11} fill="currentColor" />
+                                        <span>{pkg.averageRating.toFixed(1)}</span>
                                     </div>
-                                </div>
+                                )}
 
                                 {/* Location chip — bottom right */}
                                 {pkg.location && (
@@ -379,9 +357,18 @@ export default function AllToursPage() {
                                         <Clock size={11} /> {pkg.duration}
                                     </div>
                                 )}
-                                <Link href={`/packages/${pkg.slug}`} className="allTourCardTitle">
+                                 <Link href={`/packages/${pkg.slug}`} className="allTourCardTitle">
                                     {pkg.title}
                                 </Link>
+
+                                <div className="allTourCardMetaRow flex items-center justify-between mt-2 mb-4">
+                                     <div className="priceInfo">
+                                        <span className="currentPrice text-slate-900 font-black italic text-lg">{pkg.price}</span>
+                                        {pkg.oldPrice && <span className="oldPrice text-slate-400 text-[10px] line-through ml-2 font-bold">{pkg.oldPrice}</span>}
+                                     </div>
+                                     <WishlistButton id={pkg.slug} wishlist={wishlist} toggleWishlist={toggleWishlist} />
+                                </div>
+
                                 <div className="allTourCardRule" />
                                 <div className="allTourCardCta">
                                     <Link href={`/packages/${pkg.slug}`} className="allTourCardDetails">
@@ -401,114 +388,12 @@ export default function AllToursPage() {
             </section>
 
             {/* ── Quick Plan Modal ── */}
-            {isModalOpen && (
-                <div className="tourCatModalOverlay">
-                    <div
-                        className="tourCatModalBackdrop"
-                        onClick={() => setIsModalOpen(false)}
-                    />
-                    <div className="tourCatModalContent">
-                        <button
-                            onClick={() => setIsModalOpen(false)}
-                            className="tourCatModalCloseBtn"
-                        >
-                            <X size={20} />
-                        </button>
-
-                        {/* Left visual panel */}
-                        <div className="tourCatModalLeft">
-                            <div className="tourCatModalGradient" />
-                            <div className="tourCatModalBlur1" />
-                            <div className="tourCatModalBlur2" />
-                            <div className="tourCatModalVisual">
-                                <div className="tourCatModalIconWrap">
-                                    <MapPin size={32} />
-                                </div>
-                                <h3 className="italic">
-                                    Pack <br />Your <br /><span>Bags.</span>
-                                </h3>
-                                <p>Leave the planning to us. We'll craft the perfect itinerary tailored just for you.</p>
-                            </div>
-                            <div className="tourCatModalStatus">
-                                <div className="tourCatStatusDot" />
-                                <span>Travel Experts Available</span>
-                            </div>
-                        </div>
-
-                        {/* Right form panel */}
-                        <div className="tourCatModalRight">
-                            <div className="tourCatModalHeader">
-                                <h2>Quick Plan Request</h2>
-                                <p>Get a response within 2 hours.</p>
-                            </div>
-
-                            <form onSubmit={handleFormSubmit} className="tourCatModalForm">
-                                {/* Selected package */}
-                                <div className="tourCatModalSelectedPkg">
-                                    <div className="tourCatPkgIcon">
-                                        <MapPin size={18} />
-                                    </div>
-                                    <div>
-                                        <label>Destination Package</label>
-                                        <div className="tourCatPkgName">{selectedPackage}</div>
-                                    </div>
-                                </div>
-
-                                <div className="tourCatModalFormGrid">
-                                    <div className="tourCatModalField">
-                                        <label>Full Name</label>
-                                        <div className="tourCatModalInputWrap">
-                                            <User size={16} />
-                                            <input 
-                                                type="text" 
-                                                placeholder="John Doe" 
-                                                required 
-                                                value={formData.name}
-                                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="tourCatModalField">
-                                        <label>Phone Number</label>
-                                        <div className="tourCatModalInputWrap">
-                                            <Phone size={16} />
-                                            <input 
-                                                type="tel" 
-                                                placeholder="+91 9876543210" 
-                                                required 
-                                                value={formData.phone}
-                                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="tourCatModalField">
-                                    <label>Email Address</label>
-                                    <div className="tourCatModalInputWrap">
-                                        <Mail size={16} />
-                                        <input 
-                                            type="email" 
-                                            placeholder="john@example.com" 
-                                            required 
-                                            value={formData.email}
-                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                        />
-                                    </div>
-                                </div>
-
-                                <button 
-                                    type="submit" 
-                                    className="tourCatModalSubmitBtn"
-                                    disabled={isSubmitting}
-                                >
-                                    {isSubmitting ? 'Sending...' : 'Get My Itinerary Now'}
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            )}
+            <EnquireModal 
+                isOpen={isModalOpen} 
+                onClose={() => setIsModalOpen(false)} 
+                packageName={selectedPackage} 
+            />
         </div>
+
     );
 }
