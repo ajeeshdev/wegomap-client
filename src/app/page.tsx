@@ -192,6 +192,7 @@ export default function Home() {
 
             if (home && typeof document !== 'undefined') {
                 document.title = home.seo_title || document.title;
+                document.body.classList.add('is-home');
             }
         }
 
@@ -212,6 +213,11 @@ export default function Home() {
       }
     }
     loadData();
+    return () => {
+        if (typeof document !== 'undefined') {
+            document.body.classList.remove('is-home');
+        }
+    };
   }, []);
 
   // Compute categorized packages based on dynamic data
@@ -341,7 +347,7 @@ export default function Home() {
               prevEl: '.first-prev',
               nextEl: '.first-next',
             }}
-            loop={firstMinuteOffers.length > 3}
+            loop={firstMinuteOffers.length > 5}
             autoplay={{ delay: 3000, disableOnInteraction: false, pauseOnMouseEnter: true }}
             pagination={{
               el: '.first-pagination',
@@ -447,7 +453,7 @@ export default function Home() {
               prevEl: '.domestic-prev',
               nextEl: '.domestic-next',
             }}
-            loop={domesticPackages.length > 3}
+            loop={domesticPackages.length > 5}
             autoplay={{ delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true }}
             pagination={{
               el: '.domestic-pagination',
@@ -549,7 +555,7 @@ export default function Home() {
               prevEl: '.intl-prev',
               nextEl: '.intl-next',
             }}
-            loop={internationalPackages.length > 3}
+            loop={internationalPackages.length > 5}
             autoplay={{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }}
             pagination={{
               el: '.intl-pagination',
@@ -755,7 +761,7 @@ export default function Home() {
               prevEl: '.event-prev',
               nextEl: '.event-next',
             }}
-            loop={corporateEvents.length > 3}
+            loop={corporateEvents.length > 5}
             autoplay={{ delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true }}
             pagination={{
               el: '.event-pagination',
@@ -854,7 +860,7 @@ export default function Home() {
               prevEl: '.special-prev',
               nextEl: '.special-next',
             }}
-            loop={specialEvents.length > 3}
+            loop={specialEvents.length > 5}
             autoplay={{ delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true }}
             pagination={{
               el: '.special-pagination',

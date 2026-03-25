@@ -31,7 +31,7 @@ export default function OfferBanner() {
 
     const settings = {
         centerMode: true,
-        infinite: true,
+        infinite: banners.length > 2,
         centerPadding: "12%", 
         slidesToShow: 1,
         speed: 800,
@@ -71,7 +71,6 @@ export default function OfferBanner() {
                                             alt={banner.title || 'Offer'}
                                             fill
                                             className="object-cover transition-transform duration-700 hover:scale-105"
-                                            unoptimized
                                         />
                                     </Link>
                                 ) : (
@@ -81,7 +80,6 @@ export default function OfferBanner() {
                                             alt={banner.title || 'Offer'}
                                             fill
                                             className="object-cover"
-                                            unoptimized
                                         />
                                     </div>
                                 )}

@@ -10,9 +10,9 @@ header {
     background-color: #fff;
     border-bottom: 1px solid #f1f5f9;
 
-    body.mobile-search-sticky & {
+    body.is-home.mobile-search-sticky & {
         @media (max-width: 768px) {
-            // opacity: 0;
+            opacity: 0;
             // pointer-events: none;
             transition: opacity 0.4s ease-in-out;
         }
