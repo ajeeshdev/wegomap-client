@@ -174,7 +174,7 @@ export default function Home() {
                 name: t.name || t.title,
                 role: t.location || t.designation || 'Verified Traveler',
                 avatar: t.image ? getImageUrl(t.image) : null,
-                quote: t.review || t.text || t.description || 'Great experience!'
+                quote: t.message || t.review || t.text || t.description || 'Great experience!'
             })));
         }
 
@@ -358,7 +358,7 @@ export default function Home() {
               <SwiperSlide key={idx} className="h-auto">
                 <Link href={item.href || "/packages"} className="block h-full">
                   <div className="packageCardKerala group">
-                    <Image src={item.image} alt={item.title} fill className="object-cover" unoptimized />
+                    <Image src={item.image} alt={item.title} fill className="object-cover"  />
                     <div className="overlay"></div>
                     {item.averageRating !== undefined && item.averageRating > 0 && (
                       <div className="ratingBadge">
@@ -464,7 +464,7 @@ export default function Home() {
               <SwiperSlide key={idx} className="h-auto">
                 <Link href={item.href || "/packages"} className="block h-full">
                   <div className="packageCardKerala group">
-                    <Image src={item.image} alt={item.title} fill className="object-cover" unoptimized />
+                    <Image src={item.image} alt={item.title} fill className="object-cover"  />
                     <div className="overlay"></div>
                     {item.averageRating !== undefined && item.averageRating > 0 && (
                       <div className="ratingBadge">
@@ -566,7 +566,7 @@ export default function Home() {
               <SwiperSlide key={idx} className="h-auto">
                 <Link href={item.href || "/packages"} className="block h-full">
                   <div className="packageCardKerala group">
-                    <Image src={item.image} alt={item.title} fill className="object-cover" unoptimized />
+                    <Image src={item.image} alt={item.title} fill className="object-cover"  />
                     <div className="overlay"></div>
                     {item.averageRating !== undefined && item.averageRating > 0 && (
                       <div className="ratingBadge">
@@ -671,7 +671,7 @@ export default function Home() {
                 <Link href={item.href} className="block h-full cursor-pointer">
                     <div className="packageCardLocation group">
                     <div className="imageWrapper">
-                        <Image src={item.image} alt={item.title} fill className="object-cover" unoptimized />
+                        <Image src={item.image} alt={item.title} fill className="object-cover"  />
                         {item.averageRating !== undefined && item.averageRating > 0 && (
                           <div className="ratingBadge">
                             <Star size={12} fill="currentColor" />
@@ -773,7 +773,7 @@ export default function Home() {
                 <Link href={`/events/${item.slug || item._id}`} className="block h-full">
                   <div className="packageCardSmall group">
                     <div className="imageWrapper">
-                      <Image src={item.images?.[0] || "/assests/site/assets/images/event.jpg"} alt={item.title} fill className="object-cover" unoptimized />
+                      <Image src={item.images?.[0] || "/assets/site/assets/images/event.jpg"} alt={item.title} fill className="object-cover"  />
                       {item.averageRating !== undefined && item.averageRating > 0 && (
                         <div className="ratingBadge">
                             <Star size={12} fill="currentColor" />
@@ -879,7 +879,7 @@ export default function Home() {
                         alt={event.title} 
                         fill 
                         className="object-cover" 
-                        unoptimized 
+                         
                       />
                       {event.averageRating !== undefined && event.averageRating > 0 && (
                         <div className="ratingBadge">
@@ -957,7 +957,7 @@ export default function Home() {
                   <div className="authorArea">
                     <div className="authorImg">
                       <Image 
-                        src={t.avatar || "/assests/site/assets/images/google-review.svg"} 
+                        src={t.avatar || "/assets/site/assets/images/google-review.svg"} 
                         alt={t.name} 
                         width={40} 
                         height={40} 

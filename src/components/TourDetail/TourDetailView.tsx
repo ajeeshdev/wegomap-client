@@ -138,7 +138,7 @@ export default function TourDetailView({ id }: { id: string }) {
                         slug: p.slug || p._id,
                         title: p.title,
                         location: p.location || 'Explore',
-                        duration: p.duration || 'Flexible',
+                        duration: p.duration || p.days || 'Flexible Duration',
                         price: p.price ? `₹ ${Number(p.price).toLocaleString()}` : 'Contact for Price',
                         oldPrice: p.oldamt ? `₹ ${Number(p.oldamt).toLocaleString()}` : undefined,
                         image: getImageUrl(p.thumb || (p.images && p.images[0]) || '/bg-placeholder.jpg'),

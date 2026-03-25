@@ -13,9 +13,9 @@ import DynamicPageBanner from '@/components/DynamicPageBanner';
 import { useEffect, useState } from 'react';
 
 const carouselImages = [
-    { src: '/assests/site/assets/images/about-1.jpg', alt: 'About Wegomap 1' },
-    { src: '/assests/site/assets/images/about-3.jpg', alt: 'About Wegomap 2' },
-    { src: '/assests/site/assets/images/about-2.jpg', alt: 'About Wegomap 3' },
+    { src: '/assets/site/assets/images/about-1.jpg', alt: 'About Wegomap 1' },
+    { src: '/assets/site/assets/images/about-3.jpg', alt: 'About Wegomap 2' },
+    { src: '/assets/site/assets/images/about-2.jpg', alt: 'About Wegomap 3' },
 ];
 
 interface AboutData {
@@ -110,7 +110,7 @@ export default function AboutPage() {
                                     fill
                                     style={{ objectFit: 'cover' }}
                                     priority={i === 0}
-                                    unoptimized
+                                    
                                 />
                             </div>
                         </SwiperSlide>
@@ -157,7 +157,7 @@ export default function AboutPage() {
                                         <div className="flex -space-x-3">
                                             {[1,2,3].map(i => (
                                                 <div key={i} className="img-box w-10 h-10 rounded-full bg-slate-200 border-2 border-white overflow-hidden relative">
-                                                    <Image src={`/assests/site/assets/images/about-${i}.jpg`} alt="Team" fill unoptimized style={{ objectFit: 'cover' }} />
+                                                    <Image src={`/assets/site/assets/images/about-${i}.jpg`} alt="Team" fill  style={{ objectFit: 'cover' }} />
                                                 </div>
                                             ))}
                                         </div>

@@ -68,7 +68,7 @@ export default function SpecialEventsListingPage() {
                                     src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=1200"
                                     alt="Special Events Specialist Kerala"
                                     fill
-                                    unoptimized
+                                    
                                 />
                             </div>
                             
@@ -113,7 +113,7 @@ export default function SpecialEventsListingPage() {
                                                 src={event.images?.[0] || "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800"} 
                                                 alt={event.title}
                                                 fill
-                                                unoptimized
+                                                
                                             />
                                             <div className="category-tag special">
                                                 Special Activity

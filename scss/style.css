@@ -3394,6 +3394,7 @@ footer .footerBottom .socialLinks a:hover {
   text-transform: uppercase;
   line-height: 1;
   letter-spacing: -0.02em;
+  white-space: pre-line;
 }
 @media (min-width: 768px) {
   .pageBanner .pageBannerContent .pageBannerTitle {
@@ -3407,6 +3408,7 @@ footer .footerBottom .socialLinks a:hover {
   max-width: 600px;
   border-left: 3px solid #f97316;
   padding-left: 1.5rem;
+  white-space: pre-line;
 }
 
 :root {
@@ -10616,8 +10618,8 @@ button.wishlistBtn {
 }
 .corporate-events-section .packageCardSmall .cardContent .packageTitle, .corporate-events-section .packageCardSmall .cardContent .title, .special-events-section .packageCardSmall .cardContent .packageTitle, .special-events-section .packageCardSmall .cardContent .title, .corporateModernSection .packageCardSmall .cardContent .packageTitle, .corporateModernSection .packageCardSmall .cardContent .title, .specialEventsSection .packageCardSmall .cardContent .packageTitle, .specialEventsSection .packageCardSmall .cardContent .title, .events-listing .packageCardSmall .cardContent .packageTitle, .events-listing .packageCardSmall .cardContent .title {
   margin: 0 !important;
-  font-size: 1.25rem !important;
-  font-weight: 950 !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
   color: #fff !important;
   line-height: 1.15;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
@@ -12025,6 +12027,7 @@ button.wishlistBtn {
   color: #475569;
   font-weight: 400;
   margin-bottom: 1rem;
+  white-space: pre-line;
 }
 .packageDetailPage .mainContent .detailsCol .overviewBox .description p {
   margin-bottom: 1.5rem;
@@ -12059,7 +12062,7 @@ button.wishlistBtn {
   font-size: 0.9rem;
   font-weight: 700;
   color: #0f172a;
-  margfvin-top: 0.5rem;
+  margin-top: 0.5rem;
 }
 .packageDetailPage .mainContent .detailsCol .highlightsGrid {
   display: grid;
@@ -12901,7 +12904,6 @@ button.wishlistBtn {
   font-size: 1.125rem;
   line-height: 1.75;
   margin-bottom: 2rem;
-  max-width: 900px;
 }
 .tourCatPackages .tourCatGrid {
   display: grid;

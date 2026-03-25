@@ -148,6 +148,7 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                     color: #475569;
                     font-weight: 400;
                     margin-bottom: 1rem;
+                    white-space: pre-line;
                     
                     p { margin-bottom: 1.5rem; }
                 }
@@ -180,7 +181,7 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                             font-size: 0.9rem;
                             font-weight: 700;
                             color: $cosmicBlue;
-                            margfvin-top: 0.5rem;
+                            margin-top: 0.5rem;
                         }
                     }
                 }

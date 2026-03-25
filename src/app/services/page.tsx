@@ -34,6 +34,12 @@ export default function ServicesPage() {
         const fetchServices = async () => {
             try {
                 const res = await fetch(`${API_URL}/services`);
+                
+                // Safety check for JSON content-type
+                if (!res.headers.get('content-type')?.includes('application/json')) {
+                    throw new Error(`API returned non-JSON response: ${res.status} ${res.statusText}`);
+                }
+
                 const data = await res.json();
                 if (data.success) {
                     setServices(data.data);

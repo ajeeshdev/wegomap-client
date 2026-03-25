@@ -256,7 +256,7 @@ export default function TourCategoryPage({
                                     <div className="tourCatReviewStars">★★★★★</div>
                                     <p className="tourCatReviewText">{t.text}</p>
                                     <Image
-                                        src="/assests/site/assets/images/google-review.svg"
+                                        src="/assets/site/assets/images/google-review.svg"
                                         alt="Google Review"
                                         width={80}
                                         height={28}

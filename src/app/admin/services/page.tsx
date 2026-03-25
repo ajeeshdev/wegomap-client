@@ -26,6 +26,9 @@ export default function ServicesAdminPage() {
     const fetchServices = async () => {
         try {
             const res = await fetch(`${API_URL}/services`);
+            if (!res.headers.get('content-type')?.includes('application/json')) {
+                throw new Error(`API returned non-JSON response from ${res.url} (Status: ${res.status})`);
+            }
             const data = await res.json();
             if (data.success) {
                 setServices(data.data);
@@ -52,6 +55,9 @@ export default function ServicesAdminPage() {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             });
+            if (!res.headers.get('content-type')?.includes('application/json')) {
+                throw new Error(`API returned non-JSON response from ${res.url} (Status: ${res.status})`);
+            }
             const data = await res.json();
             if (data.success) {
                 toast.success('Service deleted');

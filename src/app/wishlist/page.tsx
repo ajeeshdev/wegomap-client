@@ -157,7 +157,7 @@ export default function WishlistPage() {
                                                     alt={pkg.title}
                                                     fill
                                                     className="cardImage"
-                                                    unoptimized
+                                                    
                                                 />
                                             ) : (
                                                 <div className="absolute inset-0 bg-slate-100 flex items-center justify-center font-black text-slate-300 text-xs">

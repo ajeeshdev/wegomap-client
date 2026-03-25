@@ -112,11 +112,15 @@ export default function AllToursPage() {
                     const res = await fetch(`${API_URL}/auth/me`, {
                         headers: { 'Authorization': `Bearer ${token}` }
                     });
-                    if (res.headers.get('content-type')?.includes('application/json')) {
-                        const data = await res.json();
-                        if (data.success && data.data.wishlist) {
-                            setWishlist(data.data.wishlist);
-                        }
+                    
+                    if (!res.headers.get('content-type')?.includes('application/json')) {
+                        console.warn(`Auth API returned non-JSON response: ${res.status}`);
+                        return;
+                    }
+
+                    const data = await res.json();
+                    if (data.success && data.data.wishlist) {
+                        setWishlist(data.data.wishlist);
                     }
                 } catch (e) {
                     console.error('Error fetching wishlist status:', e);
@@ -143,12 +147,15 @@ export default function AllToursPage() {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            if (res.headers.get('content-type')?.includes('application/json')) {
-                const data = await res.json();
-                if (data.success) {
-                    setWishlist(data.data);
-                    toast.success(data.message);
-                }
+            
+            if (!res.headers.get('content-type')?.includes('application/json')) {
+                throw new Error(`API returned non-JSON response from ${res.url} (Status: ${res.status})`);
+            }
+
+            const data = await res.json();
+            if (data.success) {
+                setWishlist(data.data);
+                toast.success(data.message);
             }
         } catch (err) {
             toast.error('Failed to update wishlist');
@@ -159,6 +166,11 @@ export default function AllToursPage() {
         async function fetchPackages() {
             try {
                 const res = await fetch(`${API_URL}/packages`);
+                
+                if (!res.headers.get('content-type')?.includes('application/json')) {
+                    throw new Error(`API returned non-JSON response from ${res.url} (Status: ${res.status})`);
+                }
+
                 const data = await res.json();
                 if (data.success) {
                     const mapped = data.data.map((pkg: any) => ({
@@ -194,6 +206,7 @@ export default function AllToursPage() {
             // Only add static package if it's not already in CMS by slug or title
             if (!cmsSlugs.has(p.slug) && !cmsTitles.has(p.title.toLowerCase())) {
                 combined.push(p);
+                cmsSlugs.add(p.slug);
             }
         });
         return combined;
@@ -319,8 +332,8 @@ export default function AllToursPage() {
                         <button onClick={() => { setActiveFilter('all'); setSearchQuery(''); }}>Clear Filters</button>
                     </div>
                 ) : (
-                    filtered.map(pkg => (
-                        <div key={pkg.slug} className="allTourCard">
+                    filtered.map((pkg, i) => (
+                        <div key={`${pkg.slug}-${i}`} className="allTourCard">
                             {/* Image zone */}
                             <Link href={`/packages/${pkg.slug}`} className="allTourCardImgLink">
                                 <div className="allTourCardImg">

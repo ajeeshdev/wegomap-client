@@ -96,7 +96,7 @@ export default function EventsCombinedPage() {
                                     src="/uploads/premium-event-setup.png"
                                     alt="Premium Corporate Event Specialist"
                                     fill
-                                    unoptimized
+                                    
                                 />
                             </div>
                             
@@ -143,10 +143,10 @@ export default function EventsCombinedPage() {
                                     <div className="packageCardSmall group h-full flex flex-col">
                                         <div className="imageWrapper eventWrapper">
                                             <Image
-                                                src={event.images?.[0] || "/assests/site/assets/images/event.jpg"}
+                                                src={event.images?.[0] || "/assets/site/assets/images/event.jpg"}
                                                 alt={event.title}
                                                 fill
-                                                unoptimized
+                                                
                                             />
                                             {/* Category Tag */}
                                             <div className={`category-tag ${event.type === 'Corporate' ? 'corporate' : 'special'}`}>

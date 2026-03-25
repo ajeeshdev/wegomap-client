@@ -16,6 +16,12 @@ export default function HotelLandingPagesAdmin() {
   const fetchData = async () => {
     try {
       const res = await fetch(`${API_URL}/pages`);
+      
+      // Safety check for JSON content-type
+      if (!res.headers.get('content-type')?.includes('application/json')) {
+        throw new Error(`API returned non-JSON response from ${res.url} (Status: ${res.status})`);
+      }
+
       const json = await res.json();
       if (json.success) {
         // Filter only hotel landing pages

@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    unoptimized: true,
+    unoptimized: false,
     remotePatterns: [
       {
         protocol: 'https',
@@ -27,6 +27,11 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'api.demo.wegomap.com',
+        pathname: '/uploads/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api-demo.wegomap.com',
         pathname: '/uploads/**',
       },
       {

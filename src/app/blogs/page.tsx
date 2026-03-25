@@ -110,7 +110,6 @@ export default function BlogsPage() {
                                                 alt={blog.title}
                                                 fill
                                                 style={{ objectFit: 'cover' }}
-                                                unoptimized
                                                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                             />
                                         ) : (

@@ -89,7 +89,7 @@ export default function Footer() {
                                 <div className="quotes mb-5">
                                     <div className="quoteIconWrapper">
                                         <img
-                                            src="/assests/site/assets/images/quote.png"
+                                            src="/assets/site/assets/images/quote.png"
                                             className="d-block mx-auto quote-img"
                                             height="20"
                                             width="20"

@@ -15,8 +15,8 @@ const banks = [
         branch: 'Aluva Branch',
         acctType: 'Current Account',
         color: '#004B92',
-        logo: '/assests/site/assets/images/hdfc-logo-small.png',
-        banner: '/assests/site/assets/images/hdfc-bank.jpg',
+        logo: '/assets/site/assets/images/hdfc-logo-small.png',
+        banner: '/assets/site/assets/images/hdfc-bank.jpg',
     },
     {
         name: 'Kotak Mahindra Bank',
@@ -27,8 +27,8 @@ const banks = [
         branch: 'Aluva Branch',
         acctType: 'Current Account',
         color: '#ED1C24',
-        logo: '/assests/site/assets/images/kotak-mahindra-small.png',
-        banner: '/assests/site/assets/images/kotak-mahindra.png',
+        logo: '/assets/site/assets/images/kotak-mahindra-small.png',
+        banner: '/assets/site/assets/images/kotak-mahindra.png',
     },
     {
         name: 'YES Bank',
@@ -39,8 +39,8 @@ const banks = [
         branch: 'Padivattom Branch',
         acctType: 'Current Account',
         color: '#1C32D6',
-        logo: '/assests/site/assets/images/yes-bank-small.png',
-        banner: '/assests/site/assets/images/yes-bank.png',
+        logo: '/assets/site/assets/images/yes-bank-small.png',
+        banner: '/assets/site/assets/images/yes-bank.png',
     },
 ];
 
@@ -98,34 +98,34 @@ export default function PaymentPage() {
                             {/* Front */}
                             <div className="payUpiCardFront">
                                 <Image
-                                    src="/assests/site/assets/images/gpay.png"
+                                    src="/assets/site/assets/images/gpay.png"
                                     alt="Google Pay / UPI"
                                     width={200}
                                     height={120}
                                     style={{ objectFit: 'contain' }}
-                                    unoptimized
+                                    
                                 />
                                 <span className="hoverHint">Hover to scan QR</span>
                             </div>
                             {/* Back */}
                             <div className="payUpiCardBack">
                                 <Image
-                                    src="/assests/site/assets/images/gpay-logo-small.png"
+                                    src="/assets/site/assets/images/gpay-logo-small.png"
                                     alt="GPay"
                                     width={60}
                                     height={30}
                                     style={{ objectFit: 'contain' }}
-                                    unoptimized
+                                    
                                 />
                                 <div className="qrName">Wegomap Tours &amp; Events</div>
                                 <div className="qrPhone">+91 9778734488</div>
                                 <Image
-                                    src="/assests/site/assets/images/qr.png"
+                                    src="/assets/site/assets/images/qr.png"
                                     alt="UPI QR Code"
                                     width={150}
                                     height={150}
                                     style={{ objectFit: 'contain' }}
-                                    unoptimized
+                                    
                                 />
                                 <div className="qrUpiId">9778734488@obizaxis</div>
                             </div>
@@ -142,24 +142,24 @@ export default function PaymentPage() {
                             {/* Front */}
                             <div className="payUpiCardFront">
                                 <Image
-                                    src="/assests/site/assets/images/pay-online.png"
+                                    src="/assets/site/assets/images/pay-online.png"
                                     alt="Pay Online"
                                     width={220}
                                     height={120}
                                     style={{ objectFit: 'contain' }}
-                                    unoptimized
+                                    
                                 />
                                 <span className="hoverHint">Hover to pay online</span>
                             </div>
                             {/* Back */}
                             <div className="payUpiCardBack">
                                 <Image
-                                    src="/assests/site/assets/images/razorpay-logo.svg"
+                                    src="/assets/site/assets/images/razorpay-logo.svg"
                                     alt="Razorpay"
                                     width={140}
                                     height={40}
                                     style={{ objectFit: 'contain' }}
-                                    unoptimized
+                                    
                                 />
                                 <p className="razorDesc">Pay securely using Credit Card, Debit Card, Net Banking, or UPI via Razorpay.</p>
                                 <form>
@@ -196,7 +196,7 @@ export default function PaymentPage() {
                                     width={80}
                                     height={32}
                                     style={{ objectFit: 'contain', filter: 'brightness(0) invert(1)' }}
-                                    unoptimized
+                                    
                                 />
                                 <div className="payBankName">{bank.name}</div>
                             </div>

@@ -55,9 +55,9 @@ export default function Hero() {
                         subtitle: 'Discover breathtaking destinations with Wegomap',
                         buttonText: 'Explore Packages',
                         buttonHref: '/tours',
-                        imgDesktop: '/assests/site/assets/images/placeholder.jpg',
-                        imgMobile: '/assests/site/assets/images/placeholder.jpg',
-                        imgPortrait: '/assests/site/assets/images/placeholder.jpg'
+                        imgDesktop: '/assets/site/assets/images/placeholder.jpg',
+                        imgMobile: '/assets/site/assets/images/placeholder.jpg',
+                        imgPortrait: '/assets/site/assets/images/placeholder.jpg'
                     }]);
                 }
             })
@@ -68,9 +68,9 @@ export default function Hero() {
                     subtitle: 'Discover breathtaking destinations with Wegomap',
                     buttonText: 'Explore Packages',
                     buttonHref: '/tours',
-                    imgDesktop: '/assests/site/assets/images/placeholder.jpg',
-                    imgMobile: '/assests/site/assets/images/placeholder.jpg',
-                    imgPortrait: '/assests/site/assets/images/placeholder.jpg'
+                    imgDesktop: '/assets/site/assets/images/placeholder.jpg',
+                    imgMobile: '/assets/site/assets/images/placeholder.jpg',
+                    imgPortrait: '/assets/site/assets/images/placeholder.jpg'
                 }]);
             })
             .finally(() => setIsLoadingSlides(false));
@@ -186,7 +186,7 @@ export default function Hero() {
                                                 <source media="(max-width: 480px)" srcSet={slide.imgPortrait || slide.imgDesktop} />
                                                 <source media="(max-width: 768px)" srcSet={slide.imgMobile || slide.imgDesktop} />
                                                 <Image
-                                                    src={slide.imgDesktop || '/assests/site/assets/images/placeholder.jpg'}
+                                                    src={slide.imgDesktop || '/assets/site/assets/images/placeholder.jpg'}
                                                     alt={slide.title || 'Slide'}
                                                     fill
                                                     className="object-cover"

@@ -108,7 +108,6 @@ export default function BlogDetailPage() {
                         alt={blog.title}
                         fill
                         className="hero-image"
-                        unoptimized
                     />
                 )}
                 {/* gradient overlay */}
@@ -224,7 +223,7 @@ export default function BlogDetailPage() {
                                                 <Link key={relBlog.id} href={`/blogs/${relBlog.slug}`} className="related-item">
                                                     <div className="image-wrap">
                                                         {relBlog.image && (
-                                                            <Image src={relBlog.image} alt={relBlog.title} fill unoptimized />
+                                                            <Image src={relBlog.image} alt={relBlog.title} fill />
                                                         )}
                                                     </div>
                                                     <div className="content-wrap">

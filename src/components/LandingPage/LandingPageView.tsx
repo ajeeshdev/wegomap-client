@@ -629,7 +629,7 @@ export default function LandingPageView({
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
               <div key={num} className="lp-partnerLogoWrap">
                 <Image 
-                  src={getImageUrl(`https://www.wegomap.com/assests/site/lp/images/logo-${num}.webp`)}
+                  src={getImageUrl(`https://www.wegomap.com/assets/site/lp/images/logo-${num}.webp`)}
                   alt={`Partner Logo ${num}`}
                   width={140}
                   height={70}
