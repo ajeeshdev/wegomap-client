@@ -10,7 +10,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export default function OfferBanner() {
+export default function OfferBanner() { 
     const [banners, setBanners] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const sliderRef = useRef<any>(null);
