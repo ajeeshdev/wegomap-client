@@ -52,7 +52,7 @@ const nextConfig = {
   sassOptions: {
     silenceDeprecations: ['import', 'legacy-js-api', 'if-function', 'global-builtin', 'color-functions']
   },
-  output: 'standalone',
+
   // Skip lint and type-check during production builds to save server memory
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
