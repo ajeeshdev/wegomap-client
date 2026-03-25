@@ -14,7 +14,18 @@
       "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
     }
   ],
-  "headers": [],
+  "headers": [
+    {
+      "source": "/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ],
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
+    }
+  ],
   "rewrites": {
     "beforeFiles": [],
     "afterFiles": [],
@@ -671,6 +682,12 @@
       "namedRegex": "^/golden\\-triangle\\-tour\\-package(?:/)?$"
     },
     {
+      "page": "/hotels",
+      "regex": "^/hotels(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/hotels(?:/)?$"
+    },
+    {
       "page": "/international-tour-packages",
       "regex": "^/international\\-tour\\-packages(?:/)?$",
       "routeKeys": {},
@@ -807,6 +824,12 @@
       "regex": "^/rajasthan\\-tour\\-package(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/rajasthan\\-tour\\-package(?:/)?$"
+    },
+    {
+      "page": "/robots.txt",
+      "regex": "^/robots\\.txt(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/robots\\.txt(?:/)?$"
     },
     {
       "page": "/services",
