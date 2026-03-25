@@ -52,8 +52,12 @@ const nextConfig = {
   sassOptions: {
     silenceDeprecations: ['import', 'legacy-js-api', 'if-function', 'global-builtin', 'color-functions']
   },
-  // Skip lint and type-check during production builds to save server memory
-  eslint: { ignoreDuringBuilds: true },
+  // Required by Hostinger's server bridge
+  output: 'standalone',
+  // Fix workspace root detection so standalone is created at standalone/frontend/server.js
+  turbopack: {
+    root: '..',
+  },
   typescript: { ignoreBuildErrors: true },
   async headers() {
     return [
