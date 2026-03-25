@@ -68,6 +68,7 @@ export default function Home() {
   const [corporateEvents, setCorporateEvents] = useState<any[]>([]);
   const [specialEvents, setSpecialEvents] = useState<any[]>([]);
   const [wishlist, setWishlist] = useState<string[]>([]);
+  const [hasHotels, setHasHotels] = useState(false);
   const router = useRouter();
 
   const fetchWishlist = async () => {
@@ -133,7 +134,8 @@ export default function Home() {
 
   const IconMap: Record<string, any> = {
     Home: HomeIcon, Info, Users, Phone, Mail, MapPin, Heart, Package, Calendar, 
-    Ship, Globe, Zap, MessageSquare, HelpCircle, Star, Compass, FileText, Search, Contact, ClipboardList: FileText
+    Ship, Globe, Zap, MessageSquare, HelpCircle, Star, Compass, FileText, Search, Contact, 
+    Building2, Hotel: Building2, ClipboardList: FileText
   };
 
   useEffect(() => {
@@ -183,6 +185,10 @@ export default function Home() {
             const corporate = pagesData.data.find((p: any) => p.slug === 'events');
             if (home) setHomePage(home);
             if (corporate) setCorporatePage(corporate);
+
+            // Check if any hotels exist
+            const hotelsExist = pagesData.data.some((p: any) => p.type === 'hotel' && (p.status === 'Published' || !p.status));
+            setHasHotels(hotelsExist);
 
             if (home && typeof document !== 'undefined') {
                 document.title = home.seo_title || document.title;
@@ -279,19 +285,30 @@ export default function Home() {
             </div>
 
             <nav className="quickNav">
-              {(stickyLinks.length > 0 ? stickyLinks : services).map((service, index) => {
-                const Icon = IconMap[service.icon] || Info;
-                return (
-                  <Link
-                    key={index}
-                    href={service.href}
-                    className={`navItem ${service.active ? 'active' : ''}`}
-                  >
-                    <Icon size={18} />
-                    <span>{service.name}</span>
-                  </Link>
-                );
-              })}
+              {(() => {
+                const baseLinks = stickyLinks.length > 0 ? stickyLinks : services;
+                const toursIndex = baseLinks.findIndex(l => l.name === "Tours");
+                
+                let finalLinks = [...baseLinks];
+                // Only insert Hotels if it's not already there and if we have hotels
+                if (hasHotels && toursIndex !== -1 && !finalLinks.some(l => l.name === "Hotels")) {
+                  finalLinks.splice(toursIndex + 1, 0, { name: "Hotels", icon: "Building2", href: "/hotels" });
+                }
+                
+                return finalLinks.map((service, index) => {
+                  const Icon = IconMap[service.icon] || Info;
+                  return (
+                    <Link
+                      key={index}
+                      href={service.href}
+                      className={`navItem ${service.active ? 'active' : ''}`}
+                    >
+                      <Icon size={18} />
+                      <span>{service.name}</span>
+                    </Link>
+                  );
+                });
+              })()}
             </nav>
           </div>
         </div>
