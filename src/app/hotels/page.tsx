@@ -49,6 +49,7 @@ export default function HotelsListingPage() {
                 fallbackTitle={"Premium Stay\nExperiences."}
                 fallbackSubtitle="Explore our curated collection of luxury hotels and resorts for your next getaway."
                 fallbackPreTitle="Stay with Wegomap"
+                fallbackImage="aroma_hero_kerala_1774025974860.png"
                 breadcrumbs={[{ label: 'Hotels' }]}
             />
 
@@ -95,7 +96,7 @@ export default function HotelsListingPage() {
                                         src={hotel.banner_image ? getImageUrl(hotel.banner_image) : '/bg-placeholder.jpg'} 
                                         alt={hotel.title}
                                         fill
-                                        unoptimized
+                                        
                                     />
                                     <div className="hotel-card-overlay" />
                                     
