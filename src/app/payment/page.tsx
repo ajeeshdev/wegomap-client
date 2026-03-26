@@ -1,4 +1,5 @@
 "use client";
+import { getImageUrl } from "@/config";
 
 import Image from 'next/image';
 import { useState } from 'react';

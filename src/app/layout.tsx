@@ -28,6 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
       const descOpt = json.data.find((o: any) => o.key === 'site_description');
       
       return {
+        metadataBase: new URL('https://demo.wegomap.com'),
         title: titleOpt?.value || "Best Kerala Tour Packages | Wegomap",
         description: descOpt?.value || "Experience the magic of God’s Own Country with Wegomap, your reliable Kerala travel partner.",
         robots: "noindex, nofollow",

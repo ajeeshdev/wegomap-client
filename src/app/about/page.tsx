@@ -1,6 +1,6 @@
 "use client";
 
-import { API_URL } from '@/config';
+import { API_URL, getImageUrl } from '@/config';
 import { MoveRight, Heart, Target, Rocket, Users, Phone } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';

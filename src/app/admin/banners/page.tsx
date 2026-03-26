@@ -1,4 +1,5 @@
 "use client";
+import { getImageUrl } from "@/config";
 
 import { API_URL } from '@/config';
 import { useEffect, useState } from 'react';
