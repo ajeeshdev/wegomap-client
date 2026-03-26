@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
+import { API_URL, getImageUrl } from "@/config";
 
 const SCROLL_SECTIONS = [
   { id: "hero", label: "Home" },
@@ -23,6 +24,23 @@ function scrollToSection(id: string) {
 
 export default function LandingPageHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [logo, setLogo] = useState("/assets/images/logo.png");
+
+  useEffect(() => {
+    const fetchLogo = async () => {
+      try {
+        const res = await fetch(`${API_URL}/options`);
+        const json = await res.json();
+        if (json.success) {
+          const logoOpt = json.data.find((o: any) => o.key === "site_logo");
+          if (logoOpt && logoOpt.value) setLogo(getImageUrl(logoOpt.value));
+        }
+      } catch (err) {
+        console.error("Failed to fetch logo", err);
+      }
+    };
+    fetchLogo();
+  }, []);
 
   return (
     <header className="lp-header">
@@ -34,7 +52,7 @@ export default function LandingPageHeader() {
           aria-label="Scroll to top"
         >
           <Image
-            src="/assets/images/logo.png"
+            src={logo}
             alt="Wegomap"
             width={160}
             height={40}

@@ -43,9 +43,9 @@ export default function Hero() {
                         subtitle: s.subtitle || "Explore the world with Wegomap",
                         buttonText: "Discover Now",
                         buttonHref: s.link || '/packages',
-                        imgDesktop: getImageUrl(s.image) || '',
-                        imgMobile: getImageUrl(s.image) || '',
-                        imgPortrait: getImageUrl(s.image) || ''
+                        imgDesktop: getImageUrl(s.image),
+                        imgMobile: getImageUrl(s.image),
+                        imgPortrait: getImageUrl(s.image)
                     }));
                     setSlides(dynamicSlides);
                 } else {
@@ -55,9 +55,9 @@ export default function Hero() {
                         subtitle: 'Discover breathtaking destinations with Wegomap',
                         buttonText: 'Explore Packages',
                         buttonHref: '/tours',
-                        imgDesktop: '/assets/site/assets/images/placeholder.jpg',
-                        imgMobile: '/assets/site/assets/images/placeholder.jpg',
-                        imgPortrait: '/assets/site/assets/images/placeholder.jpg'
+                        imgDesktop: '/bg-placeholder.jpg',
+                        imgMobile: '/bg-placeholder.jpg',
+                        imgPortrait: '/bg-placeholder.jpg'
                     }]);
                 }
             })
@@ -68,9 +68,9 @@ export default function Hero() {
                     subtitle: 'Discover breathtaking destinations with Wegomap',
                     buttonText: 'Explore Packages',
                     buttonHref: '/tours',
-                    imgDesktop: '/assets/site/assets/images/placeholder.jpg',
-                    imgMobile: '/assets/site/assets/images/placeholder.jpg',
-                    imgPortrait: '/assets/site/assets/images/placeholder.jpg'
+                    imgDesktop: '/bg-placeholder.jpg',
+                    imgMobile: '/bg-placeholder.jpg',
+                    imgPortrait: '/bg-placeholder.jpg'
                 }]);
             })
             .finally(() => setIsLoadingSlides(false));
@@ -186,7 +186,7 @@ export default function Hero() {
                                                 <source media="(max-width: 480px)" srcSet={slide.imgPortrait || slide.imgDesktop} />
                                                 <source media="(max-width: 768px)" srcSet={slide.imgMobile || slide.imgDesktop} />
                                                 <Image
-                                                    src={slide.imgDesktop || '/assets/site/assets/images/placeholder.jpg'}
+                                                    src={slide.imgDesktop || '/bg-placeholder.jpg'}
                                                     alt={slide.title || 'Slide'}
                                                     fill
                                                     className="object-cover"

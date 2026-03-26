@@ -15,7 +15,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 
 import "../../../scss/components/_hotel-landing-page.scss";
-import { API_URL } from "@/config";
+import { API_URL, getImageUrl } from "@/config";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
 
@@ -149,7 +149,7 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
           const json = await res.json();
           if (json.success) {
              const logoOpt = json.data.find((o: any) => o.key === 'site_logo');
-             if (logoOpt && logoOpt.value) setLogo(logoOpt.value);
+             if (logoOpt && logoOpt.value) setLogo(getImageUrl(logoOpt.value));
              else setLogo('/assets/images/logo.png');
           }
        } catch (err) { 
@@ -252,7 +252,7 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
     window.open(waUrl, '_blank');
   };
 
-  const heroImages = data.banner_images?.length ? data.banner_images : (data.banner_image ? [data.banner_image] : ["/assets/images/placeholder.jpg"]);
+  const heroImages = data.banner_images?.length ? data.banner_images.map(img => getImageUrl(img)) : (data.banner_image ? [getImageUrl(data.banner_image)] : ["/bg-placeholder.jpg"]);
   const fallbackTestimonials = [
     { content: "The most peaceful stay I've ever had. The mountain views from the balcony are simply surreal, and the campfire evenings were the highlight of our trip.", author: "Sarah Johnson", date: "March 2026" },
     { content: "Professional service and authentic Kerala cuisine. Aroma Hills is a gem in Munnar. Highly recommend for families and nature lovers.", author: "David Chen", date: "February 2026" },
@@ -382,7 +382,7 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
          <div className="container-ctn">
             <div className="about-grid">
                <div className="about-img-wrap">
-                  <img src={data.about_image || "/assets/images/placeholder.jpg"} className="main-img" alt="Lobby" />
+                  <img src={getImageUrl(data.about_image)} className="main-img" alt="Lobby" />
                   {data.about_badge_text && (
                     <div className="privacy-badge">
                         <span className="number">100%</span>
@@ -449,7 +449,7 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
                {data.hotel_rooms?.map((room, i) => (
                   <div key={i} className="room-card-modern bg-white">
                      <div className="img-wrap relative aspect-[4/3]">
-                        <Image src={room.images?.[0] || "/assets/images/placeholder.jpg"} alt={room.title} fill className="object-cover transition-transform duration-700 hover:scale-110" />
+                        <Image src={getImageUrl(room.images?.[0])} alt={room.title} fill className="object-cover transition-transform duration-700 hover:scale-110" />
                         <div className="badge">Limited Stock</div>
                      </div>
                      <div className="p-8">
@@ -488,7 +488,7 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
                   </div>
                </div>
                <div className="why-image">
-                  <img src={data.why_choose_image || "/assets/images/placeholder.jpg"} alt="Why Choose" className="side-img" />
+                  <img src={getImageUrl(data.why_choose_image)} alt="Why Choose" className="side-img" />
                </div>
             </div>
          </div>
@@ -505,7 +505,7 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
                <div className="gallery-grid grid grid-cols-2 lg:grid-cols-4 gap-4">
                   {data.gallery_images.map((img, i) => (
                      <div key={i} className="gallery-item group" onClick={() => setOpenGallery(img)}>
-                        <img src={img} alt={`Gallery ${i}`} className="transition-all duration-700 group-hover:scale-110" />
+                        <img src={getImageUrl(img)} alt={`Gallery ${i}`} className="transition-all duration-700 group-hover:scale-110" />
                         <div className="overlay"><div className="plus-btn"><Camera size={24} /></div></div>
                      </div>
                   ))}

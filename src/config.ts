@@ -22,10 +22,18 @@ export const getImageUrl = (src: string | null | undefined): string => {
     let resolved = String(src).trim();
 
     // 1. Handle production domain migration (absolute URLs)
-    // We want to replace any wegomap.com domain with our current UPLOADS_URL
-    const domainPattern = /^https?:\/\/(www\.)?wegomap\.com/i;
-    if (domainPattern.test(resolved)) {
-        resolved = resolved.replace(domainPattern, UPLOADS_URL);
+    // Replace any localhost or wegomap domain with our current UPLOADS_URL
+    const migrationPatterns = [
+        /^https?:\/\/([a-z0-9-]+\.)*wegomap\.com/i,
+        /^http:\/\/localhost:5001/i,
+        /^http:\/\/127\.0.0\.1:5001/i
+    ];
+
+    for (const pattern of migrationPatterns) {
+        if (pattern.test(resolved)) {
+            resolved = resolved.replace(pattern, UPLOADS_URL);
+            break;
+        }
     }
     
     // 2. Handle relative paths starting with /uploads or uploads/
@@ -33,8 +41,15 @@ export const getImageUrl = (src: string | null | undefined): string => {
         const cleanPath = resolved.startsWith('/') ? resolved : `/${resolved}`;
         resolved = `${UPLOADS_URL}${cleanPath}`;
     }
-    
+
     // 3. Fallback for potential double slashes (e.g., https://domain.com//uploads)
     // but preserving the protocol's double slash
-    return resolved.replace(/([^:]\/)\/+/g, "$1");
+    resolved = resolved.replace(/([^:]\/)\/+/g, "$1");
+
+    // Final safety check: if resolved starts with /assets or similar root folders, assume it's a public asset
+    if (resolved.startsWith('/') && !resolved.startsWith('/uploads/')) {
+        return resolved;
+    }
+    
+    return resolved;
 };

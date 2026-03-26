@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { API_URL } from '@/config';
+import { API_URL, getImageUrl } from '@/config';
 import { useState, useEffect, useRef } from 'react';
 import {
     X, ChevronDown, ChevronRight, User, Heart, Info, Users, Contact,
@@ -196,7 +196,7 @@ export default function Header() {
 
                     const logoOpt = json.data.find((o: any) => o.key === 'site_logo');
                     if (logoOpt && logoOpt.value) {
-                        setLogo(logoOpt.value);
+                        setLogo(getImageUrl(logoOpt.value));
                     }
                 }
             } catch (err) {
