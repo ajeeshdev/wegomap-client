@@ -6,8 +6,10 @@ export const API_URL = (process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBL
 
 
 // Derive uploads base URL from API URL (remove /api suffix)
-// If API_URL is https://api.domain.com/api -> UPLOADS_URL is https://api.domain.com
-export const UPLOADS_URL = API_URL.replace(/\/api\/?$/, '');
+// Special handling: if relative or localhost, ensure we define a solid base for production uploads
+export const UPLOADS_URL = API_URL.startsWith('http') 
+    ? API_URL.replace(/\/api\/?$/, '') 
+    : 'https://api-demo.wegomap.com';
 
 /**
  * Resolves an image path to a full URL using the correct base.
@@ -36,10 +38,16 @@ export const getImageUrl = (src: string | null | undefined): string => {
         }
     }
     
-    // 2. Handle relative paths starting with /uploads or uploads/
+    // 2. Handle paths starting with /uploads or uploads/
+    // This ensures that even if no domain was provided (relative path), it resolves to the UPLOADS_URL.
     if (resolved.startsWith('/uploads/') || resolved.startsWith('uploads/')) {
         const cleanPath = resolved.startsWith('/') ? resolved : `/${resolved}`;
         resolved = `${UPLOADS_URL}${cleanPath}`;
+    }
+    
+    // 3. Absolute URL without protocol? Prepend https
+    if (resolved.includes('wegomap.com') && !resolved.startsWith('http')) {
+        resolved = 'https://' + resolved;
     }
 
     // 3. Fallback for potential double slashes (e.g., https://domain.com//uploads)
