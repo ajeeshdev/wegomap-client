@@ -24,7 +24,7 @@ export const getImageUrl = (src: string | null | undefined): string => {
     let resolved = String(src).trim();
 
     // 1. Handle production domain migration (absolute URLs)
-    // Replace any localhost or wegomap domain with our current UPLOADS_URL
+    // Strip any localhost or wegomap domain to convert to relative first
     const migrationPatterns = [
         /^https?:\/\/([a-z0-9-]+\.)*wegomap\.com/i,
         /^http:\/\/localhost:5001/i,
@@ -33,16 +33,18 @@ export const getImageUrl = (src: string | null | undefined): string => {
 
     for (const pattern of migrationPatterns) {
         if (pattern.test(resolved)) {
-            resolved = resolved.replace(pattern, UPLOADS_URL);
+            resolved = resolved.replace(pattern, '');
             break;
         }
     }
     
-    // 2. Handle paths starting with /uploads or uploads/
+    // 2. Remove leading slash and handle potential '/api/' prefix in saved paths
+    resolved = resolved.replace(/^\/?api\//i, '/').replace(/^\/+/, '');
+
+    // 3. Handle paths starting with uploads/
     // This ensures that even if no domain was provided (relative path), it resolves to the UPLOADS_URL.
-    if (resolved.startsWith('/uploads/') || resolved.startsWith('uploads/')) {
-        const cleanPath = resolved.startsWith('/') ? resolved : `/${resolved}`;
-        resolved = `${UPLOADS_URL}${cleanPath}`;
+    if (resolved.startsWith('uploads/')) {
+        resolved = `${UPLOADS_URL}/${resolved}`;
     }
     
     // 3. Absolute URL without protocol? Prepend https

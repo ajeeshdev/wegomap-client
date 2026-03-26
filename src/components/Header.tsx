@@ -163,7 +163,7 @@ export default function Header() {
     useEffect(() => {
         const fetchNav = async () => {
             try {
-                const res = await fetch(`${API_URL}/options`);
+                const res = await fetch(`${API_URL}/options`, { cache: 'no-store' });
                 if (!res.headers.get('content-type')?.includes('application/json')) {
                     throw new Error(`API returned non-JSON response from ${res.url} (Status: ${res.status})`);
                 }

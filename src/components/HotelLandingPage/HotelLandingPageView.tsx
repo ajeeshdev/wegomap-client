@@ -144,7 +144,7 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
     // Fetch Site Logo
     const fetchLogo = async () => {
        try {
-          const res = await fetch(`${API_URL}/options`);
+          const res = await fetch(`${API_URL}/options`, { cache: 'no-store' });
           if (!res.ok) throw new Error("Network response was not ok");
           const json = await res.json();
           if (json.success) {

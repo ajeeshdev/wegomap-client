@@ -29,7 +29,7 @@ export default function LandingPageHeader() {
   useEffect(() => {
     const fetchLogo = async () => {
       try {
-        const res = await fetch(`${API_URL}/options`);
+        const res = await fetch(`${API_URL}/options`, { cache: 'no-store' });
         const json = await res.json();
         if (json.success) {
           const logoOpt = json.data.find((o: any) => o.key === "site_logo");
