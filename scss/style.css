@@ -1596,6 +1596,7 @@ header {
 @media (max-width: 768px) {
   body.is-home.mobile-search-sticky header {
     opacity: 0;
+    transform: translateY(-50%);
     transition: opacity 0.4s ease-in-out;
   }
 }
@@ -10703,6 +10704,22 @@ button.wishlistBtn {
 .testimonialSection .testimonialSwiper .swiper-slide {
   height: auto;
   display: flex;
+}
+.testimonialSection .test-pagination {
+  margin-top: 2.5rem !important;
+}
+.testimonialSection .test-pagination .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: #cbd5e1;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+.testimonialSection .test-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background: #FF6B35;
+  width: 24px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(255, 107, 53, 0.45);
 }
 .testimonialSection .testimonialCard {
   background: #fff;
