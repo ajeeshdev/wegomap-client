@@ -4,7 +4,7 @@
     "env": {},
     "webpack": null,
     "typescript": {
-      "ignoreBuildErrors": false
+      "ignoreBuildErrors": true
     },
     "typedRoutes": false,
     "distDir": ".next",
@@ -92,7 +92,7 @@
         {
           "protocol": "https",
           "hostname": "api-demo.wegomap.com",
-          "pathname": "/uploads/**"
+          "pathname": "/**"
         },
         {
           "protocol": "http",
@@ -110,7 +110,7 @@
       "qualities": [
         75
       ],
-      "unoptimized": false
+      "unoptimized": true
     },
     "devIndicators": {
       "position": "bottom-left"

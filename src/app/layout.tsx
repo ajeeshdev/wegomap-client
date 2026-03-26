@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit, Dancing_Script } from "next/font/google";
 import "./globals.css";
-import "../../scss/style.scss";
 import AppGoogleAuthProvider from "@/components/GoogleAuthProvider";
 import BootstrapClient from "@/components/BootstrapClient";
 
@@ -62,7 +61,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="stylesheet" href="/style-direct.css" />
+        <link rel="stylesheet" href={`/style.css?v=${new Date().getTime()}`} />
       </head>
       <body className={`${outfit.variable} ${dancingScript.variable} font-sans antialiased text-slate-900 bg-white`}>
         <AppGoogleAuthProvider>
