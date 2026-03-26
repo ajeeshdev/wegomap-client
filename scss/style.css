@@ -1594,15 +1594,13 @@ header {
   border-bottom: 1px solid #f1f5f9;
 }
 @media (max-width: 768px) {
-  body.mobile-search-sticky header {
+  body.is-home.mobile-search-sticky header {
     opacity: 0;
     transition: opacity 0.4s ease-in-out;
   }
 }
 header.scrolled {
   background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
 }
 header.scrolled .headerInner {
@@ -2077,7 +2075,7 @@ header .button-wrapper .modernHamburger {
   }
 }
 .mobileMenuToggle {
-  z-index: 1300;
+  z-index: 1;
 }
 
 .modernHamburger {
@@ -10609,7 +10607,7 @@ button.wishlistBtn {
   position: absolute;
   inset: 0;
   z-index: 5;
-  padding: 1.5rem !important;
+  padding: 1.5rem;
   display: flex !important;
   flex-direction: column !important;
   justify-content: flex-end !important;
@@ -10617,9 +10615,14 @@ button.wishlistBtn {
   background: transparent !important;
   pointer-events: none;
 }
+@media (max-width: 767px) {
+  .corporate-events-section .packageCardSmall .cardContent, .special-events-section .packageCardSmall .cardContent, .corporateModernSection .packageCardSmall .cardContent, .specialEventsSection .packageCardSmall .cardContent, .events-listing .packageCardSmall .cardContent {
+    padding: 10px;
+  }
+}
 .corporate-events-section .packageCardSmall .cardContent .packageTitle, .corporate-events-section .packageCardSmall .cardContent .title, .special-events-section .packageCardSmall .cardContent .packageTitle, .special-events-section .packageCardSmall .cardContent .title, .corporateModernSection .packageCardSmall .cardContent .packageTitle, .corporateModernSection .packageCardSmall .cardContent .title, .specialEventsSection .packageCardSmall .cardContent .packageTitle, .specialEventsSection .packageCardSmall .cardContent .title, .events-listing .packageCardSmall .cardContent .packageTitle, .events-listing .packageCardSmall .cardContent .title {
   margin: 0 !important;
-  font-size: 1rem !important;
+  font-size: 1rem;
   font-weight: 500 !important;
   color: #fff !important;
   line-height: 1.15;
@@ -10632,6 +10635,12 @@ button.wishlistBtn {
   overflow: hidden;
   min-height: 2.4em;
   padding-right: 3.5rem;
+}
+@media (max-width: 767px) {
+  .corporate-events-section .packageCardSmall .cardContent .packageTitle, .corporate-events-section .packageCardSmall .cardContent .title, .special-events-section .packageCardSmall .cardContent .packageTitle, .special-events-section .packageCardSmall .cardContent .title, .corporateModernSection .packageCardSmall .cardContent .packageTitle, .corporateModernSection .packageCardSmall .cardContent .title, .specialEventsSection .packageCardSmall .cardContent .packageTitle, .specialEventsSection .packageCardSmall .cardContent .title, .events-listing .packageCardSmall .cardContent .packageTitle, .events-listing .packageCardSmall .cardContent .title {
+    font-size: 14px;
+    padding-right: 25px;
+  }
 }
 .corporate-events-section .packageCardSmall .cardContent p, .special-events-section .packageCardSmall .cardContent p, .corporateModernSection .packageCardSmall .cardContent p, .specialEventsSection .packageCardSmall .cardContent p, .events-listing .packageCardSmall .cardContent p {
   margin: 0.5rem 0 0 !important;
@@ -10651,8 +10660,8 @@ button.wishlistBtn {
   left: auto !important;
   background: #FF6B35 !important;
   color: #fff !important;
-  width: 36px !important;
-  height: 36px !important;
+  width: 36px;
+  height: 36px;
   border-radius: 50% !important;
   display: flex !important;
   align-items: center !important;
@@ -10661,12 +10670,24 @@ button.wishlistBtn {
   z-index: 10 !important;
   pointer-events: auto;
 }
+@media (max-width: 767px) {
+  .corporate-events-section .packageCardSmall .cardContent .actionIcon, .special-events-section .packageCardSmall .cardContent .actionIcon, .corporateModernSection .packageCardSmall .cardContent .actionIcon, .specialEventsSection .packageCardSmall .cardContent .actionIcon, .events-listing .packageCardSmall .cardContent .actionIcon {
+    width: 25px;
+    height: 25px;
+  }
+}
 .corporate-events-section .packageCardSmall .cardContent .actionIcon svg, .special-events-section .packageCardSmall .cardContent .actionIcon svg, .corporateModernSection .packageCardSmall .cardContent .actionIcon svg, .specialEventsSection .packageCardSmall .cardContent .actionIcon svg, .events-listing .packageCardSmall .cardContent .actionIcon svg {
   width: 20px !important;
   height: 20px !important;
   stroke: #fff !important;
   stroke-width: 3px !important;
   display: block;
+}
+@media (max-width: 767px) {
+  .corporate-events-section .packageCardSmall .cardContent .actionIcon svg, .special-events-section .packageCardSmall .cardContent .actionIcon svg, .corporateModernSection .packageCardSmall .cardContent .actionIcon svg, .specialEventsSection .packageCardSmall .cardContent .actionIcon svg, .events-listing .packageCardSmall .cardContent .actionIcon svg {
+    width: 15px;
+    height: 15px;
+  }
 }
 
 .firstMinuteOfferSection .packageCardSmall .packageTitle {
@@ -13781,8 +13802,9 @@ button.wishlistBtn {
 }
 @media (max-width: 767px) {
   .allToursPage .allToursControls .allToursSearch {
-    width: 160px;
+    width: 70%;
     margin-right: 0.75rem;
+    padding: 0px 20px;
   }
 }
 .allToursPage .allToursControls .allToursSearch:focus-within {
@@ -13880,6 +13902,9 @@ button.wishlistBtn {
 @media (max-width: 767px) {
   .allToursPage .allToursControls .mobileFilterToggle {
     display: flex;
+    width: -moz-fit-content;
+    width: fit-content;
+    padding: 18px 26px;
   }
 }
 .allToursPage .allToursControls .mobileFilterDrawer {

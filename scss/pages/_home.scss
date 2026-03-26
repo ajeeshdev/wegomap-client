@@ -3604,6 +3604,26 @@ button.wishlistBtn {
         }
     }
 
+    // Dots pagination spacing & styling
+    .test-pagination {
+        margin-top: 2.5rem !important;
+
+        .swiper-pagination-bullet {
+            width: 8px;
+            height: 8px;
+            background: #cbd5e1;
+            opacity: 1;
+            transition: all 0.3s ease;
+
+            &.swiper-pagination-bullet-active {
+                background: $cosmicOrange;
+                width: 24px;
+                border-radius: 4px;
+                box-shadow: 0 2px 8px rgba($cosmicOrange, 0.45);
+            }
+        }
+    }
+
     .testimonialCard {
         background: #fff;
         padding: 2.5rem;
