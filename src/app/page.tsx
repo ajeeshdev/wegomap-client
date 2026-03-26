@@ -950,6 +950,7 @@ export default function Home() {
 
 
 
+      {(homeSections.find(s => s.id === 'testimonials')?.enabled ?? true) && testimonials.length > 0 && (
       <section className="commonPadding bg-slate-50 testimonialSection">
         <div className="homeContainer">
           <div className="sectionHeader flex items-center justify-center mb-8">
@@ -1001,6 +1002,7 @@ export default function Home() {
           <div className="test-pagination mt-8 flex justify-center"></div>
         </div>
       </section>
+      )}
 
       {/* Requested Kerala Specialist Thin Section */}
       {(homeSections.find(s => s.id === 'seo')?.enabled ?? true) && (
