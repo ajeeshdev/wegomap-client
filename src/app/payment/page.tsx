@@ -191,7 +191,7 @@ export default function PaymentPage() {
                             {/* Card Header with bank color */}
                             <div className="payBankHeader" style={{ backgroundColor: bank.color }}>
                                 <Image
-                                    src={bank.logo}
+                                    src={getImageUrl(bank.logo)}
                                     alt={bank.name}
                                     width={80}
                                     height={32}

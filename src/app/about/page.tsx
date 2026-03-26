@@ -105,7 +105,7 @@ export default function AboutPage() {
                         <SwiperSlide key={i}>
                             <div className="aboutSlideImg">
                                 <Image
-                                    src={img.src}
+                                    src={getImageUrl(img.src)}
                                     alt={img.alt}
                                     fill
                                     style={{ objectFit: 'cover' }}

@@ -244,7 +244,7 @@ export default function TourCategoryPage({
                                 <div className="tourCatReviewCard">
                                     <div className="tourCatReviewAvatar">
                                         <Image
-                                            src={t.img}
+                                            src={getImageUrl(t.img)}
                                             alt={t.name}
                                             width={56}
                                             height={56}

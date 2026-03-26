@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 // eslint and typescript flags reduce server memory usage during production builds
 const nextConfig = {
   images: {
-    unoptimized: false,
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -33,7 +33,7 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'api-demo.wegomap.com',
-        pathname: '/uploads/**',
+        pathname: '/**',
       },
       {
         protocol: 'http',

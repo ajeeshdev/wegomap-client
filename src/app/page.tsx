@@ -381,7 +381,7 @@ export default function Home() {
               <SwiperSlide key={idx} className="h-auto">
                 <Link href={item.href || "/packages"} className="block h-full">
                   <div className="packageCardKerala group">
-                    <Image src={item.image} alt={item.title} fill className="object-cover"  />
+                    <Image src={getImageUrl(item.image)} alt={item.title} fill className="object-cover"  />
                     <div className="overlay"></div>
                     {item.averageRating !== undefined && item.averageRating > 0 && (
                       <div className="ratingBadge">
@@ -487,7 +487,7 @@ export default function Home() {
               <SwiperSlide key={idx} className="h-auto">
                 <Link href={item.href || "/packages"} className="block h-full">
                   <div className="packageCardKerala group">
-                    <Image src={item.image} alt={item.title} fill className="object-cover"  />
+                    <Image src={getImageUrl(item.image)} alt={item.title} fill className="object-cover"  />
                     <div className="overlay"></div>
                     {item.averageRating !== undefined && item.averageRating > 0 && (
                       <div className="ratingBadge">
@@ -589,7 +589,7 @@ export default function Home() {
               <SwiperSlide key={idx} className="h-auto">
                 <Link href={item.href || "/packages"} className="block h-full">
                   <div className="packageCardKerala group">
-                    <Image src={item.image} alt={item.title} fill className="object-cover"  />
+                    <Image src={getImageUrl(item.image)} alt={item.title} fill className="object-cover"  />
                     <div className="overlay"></div>
                     {item.averageRating !== undefined && item.averageRating > 0 && (
                       <div className="ratingBadge">
@@ -694,7 +694,7 @@ export default function Home() {
                 <Link href={item.href} className="block h-full cursor-pointer">
                     <div className="packageCardLocation group">
                     <div className="imageWrapper">
-                        <Image src={item.image} alt={item.title} fill className="object-cover"  />
+                        <Image src={getImageUrl(item.image)} alt={item.title} fill className="object-cover"  />
                         {item.averageRating !== undefined && item.averageRating > 0 && (
                           <div className="ratingBadge">
                             <Star size={12} fill="currentColor" />

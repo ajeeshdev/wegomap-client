@@ -93,7 +93,7 @@ export default function HouseboatsAdmin() {
                       <div className="flex items-center gap-4">
                         <div className="w-16 h-16 rounded-2xl bg-orange-50/30 flex items-center justify-center text-orange-600 border border-orange-100/50 flex-shrink-0 group-hover:scale-110 group-hover:bg-orange-600 group-hover:text-white transition-all duration-700 shadow-sm overflow-hidden relative">
                           {item.thumb ? (
-                            <img src={item.thumb} alt="" className="w-small h-small object-cover grayscale group-hover:grayscale-0 transition-all duration-700 opacity-80 group-hover:opacity-100" />
+                            <img src={getImageUrl(item.thumb)} alt="" className="w-small h-small object-cover grayscale group-hover:grayscale-0 transition-all duration-700 opacity-80 group-hover:opacity-100" />
                           ) : (
                             <Ship size={24} className="group-hover:-rotate-12 transition-transform duration-500" />
                           )}

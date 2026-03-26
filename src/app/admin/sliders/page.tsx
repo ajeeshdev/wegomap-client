@@ -81,7 +81,7 @@ export default function SlidersAdmin() {
               {/* Preview Window */}
               <div className="admin-tile-preview admin-tile-preview--sm">
                 {item.image ? (
-                  <img src={item.image} alt="Slider" className="admin-tile-image" />
+                  <img src={getImageUrl(item.image)} alt="Slider" className="admin-tile-image" />
                 ) : (
                   <div className="h-full w-full flex items-center justify-center text-slate-300">
                     <ImageIcon size={32} strokeWidth={1} />

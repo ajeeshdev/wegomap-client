@@ -344,7 +344,7 @@ export default function TourDetailView({ id }: { id: string }) {
                                                 <p>{item.activity}</p>
                                                 {item.image && (
                                                     <div className="itineraryImage aspect-[16/10]">
-                                                        <Image src={item.image} alt={item.day} fill className="object-cover" unoptimized />
+                                                        <Image src={getImageUrl(item.image)} alt={item.day} fill className="object-cover" unoptimized />
                                                     </div>
                                                 )}
                                             </div>

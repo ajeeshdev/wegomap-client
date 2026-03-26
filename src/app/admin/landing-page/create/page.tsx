@@ -320,7 +320,7 @@ export default function CreateLandingPage({ params: paramsProp }: { params?: { i
                              const isSelected = formData.package_ids.includes(pkg._id);
                              return (
                                 <div key={pkg._id} onClick={() => {const ni = isSelected ? formData.package_ids.filter(id => id !== pkg._id) : [...formData.package_ids, pkg._id]; setFormData({ ...formData, package_ids: ni });}} className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all ${isSelected ? 'border-orange-600 bg-orange-50/50':'border-slate-100 bg-slate-50/30 hover:border-slate-300'}`}>
-                                   <div className="w-12 h-12 rounded-lg bg-slate-200 overflow-hidden shrink-0"><img src={pkg.thumb} className="w-full h-full object-cover" /></div>
+                                   <div className="w-12 h-12 rounded-lg bg-slate-200 overflow-hidden shrink-0"><img src={getImageUrl(pkg.thumb)} className="w-full h-full object-cover" /></div>
                                    <div className="flex-1 min-w-0">
                                       <div className="text-[11px] font-bold text-slate-900 line-clamp-1">{pkg.title}</div>
                                       <div className="text-[10px] text-slate-400 font-mono mt-0.5">₹{pkg.price}</div>

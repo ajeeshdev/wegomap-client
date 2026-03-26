@@ -270,7 +270,7 @@ export default function Hero() {
                                     >
                                         <div className="suggestionImg">
                                             {s.image ? (
-                                                <Image src={s.image} alt={s.title} fill style={{ objectFit: 'cover' }} unoptimized />
+                                                <Image src={getImageUrl(s.image)} alt={s.title} fill style={{ objectFit: 'cover' }} unoptimized />
                                             ) : (
                                                 <div className="w-small h-small bg-slate-200 flex items-center justify-center"><MapPin size={14} className="text-slate-400" /></div>
                                             )}

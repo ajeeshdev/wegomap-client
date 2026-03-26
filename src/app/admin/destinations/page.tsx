@@ -93,7 +93,7 @@ export default function DestinationsAdmin() {
                       <div className="flex items-center gap-4">
                         <div className="admin-icon-enclosure overflow-hidden">
                           {item.image ? (
-                            <img src={item.image} alt="" className="w-small h-small object-cover" />
+                            <img src={getImageUrl(item.image)} alt="" className="w-small h-small object-cover" />
                           ) : (
                             <MapPin size={22} strokeWidth={2} />
                           )}

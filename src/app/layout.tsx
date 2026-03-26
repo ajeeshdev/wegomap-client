@@ -15,7 +15,7 @@ const dancingScript = Dancing_Script({
   variable: "--font-writing",
 });
 
-import { API_URL } from "@/config";
+import { API_URL, getImageUrl } from "@/config";
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
@@ -32,9 +32,9 @@ export async function generateMetadata(): Promise<Metadata> {
         description: descOpt?.value || "Experience the magic of God’s Own Country with Wegomap, your reliable Kerala travel partner.",
         robots: "noindex, nofollow",
         icons: {
-          icon: favOpt?.value || "/favicon.ico",
-          shortcut: favOpt?.value || "/favicon.ico",
-          apple: favOpt?.value || "/favicon.ico",
+          icon: getImageUrl(favOpt?.value) || "/favicon.ico",
+          shortcut: getImageUrl(favOpt?.value) || "/favicon.ico",
+          apple: getImageUrl(favOpt?.value) || "/favicon.ico",
         }
       };
     }

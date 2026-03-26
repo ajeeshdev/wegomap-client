@@ -1,6 +1,6 @@
 "use client";
 
-import { API_URL } from '@/config';
+import { API_URL, getImageUrl } from '@/config';
 import { useEffect, useState } from 'react';
 import { Clock, MoveRight, Calendar, Tag } from 'lucide-react';
 import Link from 'next/link';
@@ -106,7 +106,7 @@ export default function BlogsPage() {
                                     <div className="imageWrapper">
                                         {(blog.featuredImage || blog.image) ? (
                                             <Image
-                                                src={blog.featuredImage || blog.image || ''}
+                                                src={getImageUrl(blog.featuredImage || blog.image || '')}
                                                 alt={blog.title}
                                                 fill
                                                 style={{ objectFit: 'cover' }}

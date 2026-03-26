@@ -287,7 +287,7 @@ export default function Header() {
                                 >
                                     {userProfile?.picture ? (
                                         <Image
-                                            src={userProfile.picture}
+                                            src={getImageUrl(userProfile.picture)}
                                             alt={userProfile.name || "Profile"}
                                             width={36}
                                             height={36}

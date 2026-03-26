@@ -1,6 +1,6 @@
 "use client";
 
-import { API_URL } from '@/config';
+import { API_URL, getImageUrl } from '@/config';
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { Clock, Hash, User, ArrowLeft, Send, Share2, Tag, Calendar } from 'lucide-react';
@@ -104,7 +104,7 @@ export default function BlogDetailPage() {
             <section className="hero-section">
                 {(blog.featuredImage || blog.image) && (
                     <Image
-                        src={blog.featuredImage || blog.image || ''}
+                        src={getImageUrl(blog.featuredImage || blog.image || '')}
                         alt={blog.title}
                         fill
                         className="hero-image"
@@ -223,7 +223,7 @@ export default function BlogDetailPage() {
                                                 <Link key={relBlog.id} href={`/blogs/${relBlog.slug}`} className="related-item">
                                                     <div className="image-wrap">
                                                         {relBlog.image && (
-                                                            <Image src={relBlog.image} alt={relBlog.title} fill />
+                                                            <Image src={getImageUrl(relBlog.image)} alt={relBlog.title} fill />
                                                         )}
                                                     </div>
                                                     <div className="content-wrap">

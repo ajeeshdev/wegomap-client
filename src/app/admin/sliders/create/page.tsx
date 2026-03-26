@@ -179,7 +179,7 @@ export default function CreateSlider() {
           <div className="admin-form-card p-12 bg-slate-900 border-slate-800 relative overflow-hidden h-80 group shadow-2xl">
             {formData.image && (
               <div className="absolute inset-0 opacity-10 filter blur-sm scale-110 transition-opacity duration-1000 group-hover:opacity-30">
-                <img src={formData.image} className="w-small h-small object-cover" />
+                <img src={getImageUrl(formData.image)} className="w-small h-small object-cover" />
               </div>
             )}
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent h-full"></div>

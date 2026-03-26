@@ -75,7 +75,7 @@ export default function BannersAdmin() {
 
               <div className="admin-tile-preview">
                 {item.image ? (
-                  <img src={item.image} alt="Banner" className="admin-tile-image" />
+                  <img src={getImageUrl(item.image)} alt="Banner" className="admin-tile-image" />
                 ) : (
                   <div className="h-full w-full flex items-center justify-center text-slate-300">
                     <ImageIcon size={48} strokeWidth={1} />

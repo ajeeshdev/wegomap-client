@@ -153,7 +153,7 @@ export default function WishlistPage() {
                                         <div className="cardImageContainer">
                                             {pkg.images && pkg.images.length > 0 ? (
                                                 <Image
-                                                    src={pkg.images[0]}
+                                                    src={getImageUrl(pkg.images[0])}
                                                     alt={pkg.title}
                                                     fill
                                                     className="cardImage"
