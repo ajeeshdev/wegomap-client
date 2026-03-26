@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { API_URL } from '@/config';
+import { API_URL, getImageUrl } from '@/config';
 import { Edit, Trash2, Plus, Search, MapPin, Tag, IndianRupee, Eye, MoreVertical, ShieldCheck, Sparkles, Zap, Clock, Layers } from 'lucide-react';
 
 export default function PackagesAdmin() {
@@ -108,7 +108,7 @@ export default function PackagesAdmin() {
                       <div className="cms-cell-product">
                         <div className="cms-cell-image">
                           {pkg.thumb || (pkg.images && pkg.images[0]) ? (
-                            <img src={pkg.thumb || pkg.images[0]} alt="" />
+                            <img src={getImageUrl(pkg.thumb || pkg.images[0])} alt="" />
                           ) : (
                             <div className="w-small h-small flex items-center justify-center text-slate-300">
                               <Layers size={24} />
