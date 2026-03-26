@@ -121,11 +121,22 @@ export default function Header() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
+    const [isSearchSticky, setIsSearchSticky] = useState(false);
+
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20);
+            
+            // Sync with mobile search sticky state
+            if (window.innerWidth <= 768) {
+                const isSticky = document.body.classList.contains('mobile-search-sticky');
+                setIsSearchSticky(isSticky);
+            } else {
+                setIsSearchSticky(false);
+            }
         };
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -226,7 +237,16 @@ export default function Header() {
     };
 
     return (
-        <header className={scrolled ? 'scrolled' : ''}>
+        <header 
+            className={scrolled ? 'scrolled' : ''}
+            style={isSearchSticky ? { 
+                opacity: 0, 
+                zIndex: -1, 
+                pointerEvents: 'none',
+                transform: 'translateY(-50%)',
+                transition: 'opacity 0.4s ease-in-out'
+            } : {}}
+        >
             <div className="homeContainer">
                 <div className="headerInner">
                     {/* Logo */}
