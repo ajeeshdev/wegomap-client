@@ -3496,17 +3496,20 @@ button.wishlistBtn {
             position: absolute;
             inset: 0;
             z-index: 5;
-            padding: 1.5rem !important;
+            padding: 1.5rem ;
             display: flex !important;
             flex-direction: column !important;
             justify-content: flex-end !important;
             color: #fff !important;
             background: transparent !important;
             pointer-events: none; // Allow clicks on the Link parent
+            @include max(767){
+                padding:10px;
+            }
             
             .packageTitle, .title {
                 margin: 0 !important;
-                font-size: 1rem !important;
+                font-size: 1rem ;
                 font-weight: 500 !important;
                 color: #fff !important;
                 line-height: 1.15;
@@ -3520,6 +3523,10 @@ button.wishlistBtn {
                 overflow: hidden;
                 min-height: 2.4em;
                 padding-right: 3.5rem; // More space for the icon
+                @include max(767){
+                    font-size: 14px;
+                padding-right: 25px;
+            }
             }
 
             
@@ -3542,8 +3549,8 @@ button.wishlistBtn {
                 left: auto !important;
                 background: $cosmicOrange !important;
                 color: #fff !important;
-                width: 36px !important;
-                height: 36px !important;
+                width: 36px ;
+                height: 36px ;
                 border-radius: 50% !important;
                 display: flex !important;
                 align-items: center !important;
@@ -3551,13 +3558,23 @@ button.wishlistBtn {
                 box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
                 z-index: 10 !important;
                 pointer-events: auto;
+                @include max(767){
+                   width: 25px;
+                   height:25px;
 
+                }
                 svg {
                     width: 20px !important;
                     height: 20px !important;
                     stroke: #fff !important;
                     stroke-width: 3px !important;
                     display: block;
+
+                @include max(767){
+                   width: 15px;
+                   height:15px;
+                    
+                }
                 }
             }
         }
