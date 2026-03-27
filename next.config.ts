@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 // eslint and typescript flags reduce server memory usage during production builds
 const nextConfig = {
+  output: "standalone",
   images: {
     unoptimized: true,
     remotePatterns: [
