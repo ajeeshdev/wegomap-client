@@ -1,8 +1,0 @@
-1:"$Sreact.fragment"
-2:I[26601,["/_next/static/chunks/e67131d4501adf54.js","/_next/static/chunks/52cfaffe7615d874.js","/_next/static/chunks/2c2f39dca5b50797.js","/_next/static/chunks/85ee8f63b1e9fe04.js","/_next/static/chunks/c570144b929fd303.js"],"default"]
-3:I[64381,["/_next/static/chunks/6e9ac5b86215ad1c.js","/_next/static/chunks/b42d52e703bf0993.js"],"OutletBoundary"]
-4:"$Sreact.suspense"
-:HL["/_next/static/chunks/f7eb669682772961.css","style"]
-:HL["/_next/static/chunks/30718e32e17299a4.css","style"]
-0:{"buildId":"zifQWKDZYtWqDp3LO1bzo","rsc":["$","$1","c",{"children":[["$","$L2",null,{"title":"Leh Ladakh Tour Package","subtitle":"Leh Ladakh Holidays","bannerImage":"/uploads/categories/d4rzq89o8xu3a9ejgnhkfes4r5lpqvsfgtldzmoi240904033509.jpg","packages":[{"image":"/uploads/packages/k7ksmqay9clwp5rfdoeab7b3ucmsrsijxaxstr6d240904032017.png","duration":"5 Nights 6 Days","title":"Leh Ladakh Tour Package","location":"3N Leh 2N Ladakh","price":"₹ 16999","originalPrice":"₹ 22000","detailUrl":"/packages/leh-ladakh-tour-package"}],"readMoreHeading":"","readMoreContent":""}],[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/f7eb669682772961.css","precedence":"next"}],["$","link","1",{"rel":"stylesheet","href":"/_next/static/chunks/30718e32e17299a4.css","precedence":"next"}],["$","script","script-0",{"src":"/_next/static/chunks/85ee8f63b1e9fe04.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/c570144b929fd303.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
-5:null
