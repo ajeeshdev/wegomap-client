@@ -61,7 +61,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="stylesheet" href={`/style.css?v=${new Date().getTime()}`} />
+        <link rel="stylesheet" href="/scss/style.css" />
       </head>
       <body className={`${outfit.variable} ${dancingScript.variable} font-sans antialiased text-slate-900 bg-white`}>
         <AppGoogleAuthProvider>
