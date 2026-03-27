@@ -226,7 +226,7 @@ export default function Hero() {
                                 <input
                                     ref={inputRef}
                                     type="text"
-                                    placeholder="Search Destination or Package…"
+                                    placeholder="Search Destinations or Events"
                                     value={query}
                                     onChange={e => {
                                         setQuery(e.target.value);

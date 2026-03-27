@@ -8,8 +8,7 @@ const navItems = [
     { name: 'Home', href: '/', icon: Home },
     { name: 'Tours', href: '/packages', icon: Briefcase },
     { name: 'Events', href: '/events', icon: Calendar },
-    { name: 'AI Chatbot', href: 'https://wa.me/918590370566', icon: Bot },
-    { name: 'Profile', href: '/dashboard', icon: User },
+    { name: 'Profile', href: '/profile', icon: User },
 ];
 
 export default function MobileNav() {

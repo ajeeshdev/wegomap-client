@@ -88,6 +88,8 @@ const ALL_PACKAGES = buildAllPackages();
 export default function AllToursPage() {
     const searchParams = useSearchParams();
     const [activeFilter, setActiveFilter] = useState('all');
+    const [priceRange, setPriceRange] = useState('all');
+    const [durationRange, setDurationRange] = useState('all');
     const [searchQuery, setSearchQuery] = useState(searchParams?.get('q') || '');
     const [showFilters, setShowFilters] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -226,6 +228,24 @@ export default function AllToursPage() {
                 p.location?.toLowerCase().includes(activeFilter)
             );
         }
+        if (priceRange !== 'all') {
+            list = list.filter(p => {
+                const price = parseInt(p.price.replace(/[^\d]/g, '')) || 0;
+                if (priceRange === 'low') return price < 15000;
+                if (priceRange === 'mid') return price >= 15000 && price < 40000;
+                if (priceRange === 'high') return price >= 40000;
+                return true;
+            });
+        }
+        if (durationRange !== 'all') {
+            list = list.filter(p => {
+                const days = parseInt(p.duration.split(' ')[0]) || 0;
+                if (durationRange === 'short') return days <= 3;
+                if (durationRange === 'mid') return days > 3 && days <= 6;
+                if (durationRange === 'long') return days > 6;
+                return true;
+            });
+        }
         if (searchQuery.trim()) {
             const q = searchQuery.toLowerCase();
             list = list.filter(p =>
@@ -233,7 +253,7 @@ export default function AllToursPage() {
             );
         }
         return list;
-    }, [allCombinedPackages, activeFilter, searchQuery]);
+    }, [allCombinedPackages, activeFilter, searchQuery, priceRange, durationRange]);
 
     const handleEnquire = (e: React.MouseEvent, pkgTitle: string) => {
         e.preventDefault();
@@ -298,18 +318,94 @@ export default function AllToursPage() {
                     </button>
                 </div>
 
-                {/* Mobile Filter Drawer */}
-                {showFilters && (
-                    <div className="mobileFilterDrawer homeContainer">
-                        {ALL_CATEGORIES.map(cat => (
-                            <button
-                                key={cat.key}
-                                className={`filterPill ${activeFilter === cat.key ? 'active' : ''}`}
-                                onClick={() => { setActiveFilter(cat.key); setShowFilters(false); }}
+                {/* Additional Filters Strip */}
+                <div className="allToursExtraFilters">
+                    <div className="homeContainer allToursExtraFiltersInner">
+                        <div className="filterGroup">
+                            <label>Budget</label>
+                            <select 
+                                value={priceRange}
+                                onChange={(e) => setPriceRange(e.target.value)}
                             >
-                                {cat.label}
-                            </button>
-                        ))}
+                                <option value="all">Any Price</option>
+                                <option value="low">Under ₹15,000</option>
+                                <option value="mid">₹15,000 - ₹40,000</option>
+                                <option value="high">Above ₹40,000</option>
+                            </select>
+                        </div>
+                        <div className="filterGroup">
+                            <label>Duration</label>
+                            <select 
+                                value={durationRange}
+                                onChange={(e) => setDurationRange(e.target.value)}
+                            >
+                                <option value="all">Any Duration</option>
+                                <option value="short">Short (1-3 Days)</option>
+                                <option value="mid">Medium (4-6 Days)</option>
+                                <option value="long">Long (7+ Days)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Mobile Filter Sheet Overlay */}
+                {showFilters && (
+                    <div className="mobileFilterOverlay" onClick={() => setShowFilters(false)}>
+                        <div className="mobileFilterSheet" onClick={(e) => e.stopPropagation()}>
+                            <div className="mobileFilterSheetHandle" />
+                            
+                            <div className="mobileFilterDrawerHeader">
+                                <span>Filter Packages</span>
+                                <div className="drawerActions">
+                                    <button className="resetBtn" onClick={() => { setActiveFilter('all'); setPriceRange('all'); setDurationRange('all'); setSearchQuery(''); }}>Reset</button>
+                                    <button className="doneBtn" onClick={() => setShowFilters(false)}>Done</button>
+                                </div>
+                            </div>
+                            
+                            <div className="mobileFilterDrawerSection">
+                                <label>Travel Category</label>
+                                <div className="mobileFilterPills">
+                                    {ALL_CATEGORIES.map(cat => (
+                                        <button
+                                            key={cat.key}
+                                            className={`filterPill ${activeFilter === cat.key ? 'active' : ''}`}
+                                            onClick={() => { setActiveFilter(cat.key); }}
+                                        >
+                                            {cat.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                            
+                            <div className="mobileFilterDrawerSection">
+                                <div className="flex gap-4">
+                                    <div className="filterGroup flex-1">
+                                        <label>Budget</label>
+                                        <select 
+                                            value={priceRange}
+                                            onChange={(e) => setPriceRange(e.target.value)}
+                                        >
+                                            <option value="all">Any Price</option>
+                                            <option value="low">Under ₹15,000</option>
+                                            <option value="mid">₹15,000 - ₹40,000</option>
+                                            <option value="high">Above ₹40,000</option>
+                                        </select>
+                                    </div>
+                                    <div className="filterGroup flex-1">
+                                        <label>Duration</label>
+                                        <select 
+                                            value={durationRange}
+                                            onChange={(e) => setDurationRange(e.target.value)}
+                                        >
+                                            <option value="all">Any Duration</option>
+                                            <option value="short">1-3 Days</option>
+                                            <option value="mid">4-6 Days</option>
+                                            <option value="long">7+ Days</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 )}
             </div>
@@ -319,6 +415,8 @@ export default function AllToursPage() {
                 <span className="resultsCount">
                     Showing <strong>{filtered.length}</strong> packages
                     {activeFilter !== 'all' && <> in <em>{ALL_CATEGORIES.find(c => c.key === activeFilter)?.label}</em></>}
+                    {priceRange !== 'all' && <> with price <em>{priceRange === 'low' ? 'Under ₹15,000' : priceRange === 'mid' ? '₹15,000 - ₹40,000' : 'Above ₹40,000'}</em></>}
+                    {durationRange !== 'all' && <> with duration <em>{durationRange === 'short' ? '1-3 Days' : durationRange === 'mid' ? '4-6 Days' : '7+ Days'}</em></>}
                     {searchQuery && <> for "<em>{searchQuery}</em>"</>}
                 </span>
             </div>
@@ -345,14 +443,16 @@ export default function AllToursPage() {
                                         unoptimized
                                     />
                                 </div>
-                                {pkg.oldPrice && <span className="allTourCardBadge">SALE</span>}
-
                                 {pkg.averageRating !== undefined && pkg.averageRating > 0 && (
                                     <div className="ratingBadge">
                                         <Star size={11} fill="currentColor" />
                                         <span>{pkg.averageRating.toFixed(1)}</span>
                                     </div>
                                 )}
+
+                                <div className="wishlistBtnFloating" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}>
+                                    <WishlistButton id={pkg.slug} wishlist={wishlist} toggleWishlist={toggleWishlist} />
+                                </div>
 
                                 {/* Location chip — bottom right */}
                                 {pkg.location && (
@@ -374,12 +474,14 @@ export default function AllToursPage() {
                                     {pkg.title}
                                 </Link>
 
-                                <div className="allTourCardMetaRow flex items-center justify-between mt-2 mb-4">
+                                <div className="allTourCardMetaRow flex items-center justify-between ">
                                      <div className="priceInfo">
-                                        <span className="currentPrice text-slate-900 font-black italic text-lg">{pkg.price}</span>
-                                        {pkg.oldPrice && <span className="oldPrice text-slate-400 text-[10px] line-through ml-2 font-bold">{pkg.oldPrice}</span>}
+                                        <div className="priceMain">
+                                            <span className="currentPrice">{pkg.price}</span>
+                                            <span className="perPerson">/ Person</span>
+                                        </div>
+                                        {pkg.oldPrice && <span className="oldPrice">{pkg.oldPrice}</span>}
                                      </div>
-                                     <WishlistButton id={pkg.slug} wishlist={wishlist} toggleWishlist={toggleWishlist} />
                                 </div>
 
                                 <div className="allTourCardRule" />

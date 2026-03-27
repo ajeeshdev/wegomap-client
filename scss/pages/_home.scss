@@ -1388,15 +1388,14 @@
             margin-bottom: 2.5rem;
 
             .scriptTag {
-                font-family: var(--font-writing);
-                font-size: 2.25rem;
-                background: $gradient;
-                -webkit-background-clip: text;
-                background-clip: text;
-                -webkit-text-fill-color: transparent;
+                font-family: "Outfit", sans-serif;
+                font-size: 1rem;
+                font-weight: 800;
+                color: $primaryColor;
+                text-transform: uppercase;
+                letter-spacing: 0.2em;
                 display: block;
                 margin-bottom: 0.5rem;
-                transform: rotate(-2deg);
                 width: fit-content;
             }
 
@@ -1651,17 +1650,12 @@
             }
 
             .quote-h3 {
-                font-family: $writing-font;
-                font-size: 3.5rem; // Slightly larger for impact
-                font-weight: 400;
+                font-family: "Outfit", sans-serif;
+                font-size: 2.5rem;
+                font-weight: 700;
                 line-height: 1.3;
                 margin-bottom: 2rem;
-
-                // Premium Gradient Text
-                background: $gradient;
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
+                color: #fff;
                 display: block; // Ensures the gradient spans the full width for the writing effect
 
                 max-width: 900px;
@@ -1718,14 +1712,17 @@
         }
 
         .special-reveal-text {
-            font-family: $writing-font;
-            font-size: 2.25rem;
-            color: $secondaryColor;
+            font-family: "Outfit", sans-serif;
+            font-size: 0.875rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: $primaryColor;
             margin-bottom: 1.25rem;
             display: block;
             position: relative;
             z-index: 2;
-            opacity: 0.9;
+            opacity: 1;
             @include max(767){
                 
                 font-size: 2rem;
@@ -3446,7 +3443,7 @@ button.wishlistBtn {
 // Re-implementing Square Cards for Specific Sections
 .corporate-events-section, .special-events-section, .corporateModernSection, .specialEventsSection, .events-listing {
     .packageCardSmall {
-        aspect-ratio: 1 / 1 !important;
+        aspect-ratio: 3 / 2 !important;
         width: 100% !important;
         height: auto !important;
         min-height: unset !important;
@@ -3626,13 +3623,13 @@ button.wishlistBtn {
 
     .testimonialCard {
         background: #fff;
-        padding: 2.5rem;
-        border-radius: 2rem;
+        padding: 1.75rem;
+        border-radius: 1.5rem;
         border: 1px solid #f1f5f9;
         width: 100%;
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
+        gap: 1.25rem;
         transition: all 0.4s ease;
         position: relative;
         overflow: hidden;

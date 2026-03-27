@@ -199,7 +199,7 @@ export default function Footer() {
 
 
                                     <div className="footer-copyright-v2 pb-4">
-                                        <p>{options.footer_copyright || "© 2026 Wegomap. All rights reserved."}</p>
+                                        <p>© {new Date().getFullYear()} WEGOMAP crafted with love.</p>
                                     </div>
                                 </div>
                             </div>

@@ -122,11 +122,11 @@ export default function FeaturedPackages() {
                 <div className="mb-32">
                     <div className="flex flex-col md:flex-row justify-center items-center mb-12 text-center relative">
                         <div className="max-w-3xl">
-                            <h1 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter italic uppercase mb-4">
+                            <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter uppercase mb-4">
                                 <span className="text-blue-600">Kerala Tour</span> Operator
                             </h1>
-                            <p className="text-slate-500 font-medium text-lg leading-relaxed max-w-2xl italic mx-auto">
-                                Experience the beauty of God&apos;s Own Country with Kerala&apos;s best tour operator. As a trusted Kerala travel agency, we specialize in crafting unforgettable journeys tailored to your desires.
+                            <p className="text-slate-500 font-medium text-lg leading-relaxed max-w-2xl mx-auto">
+                                Experience the beauty of God&apos;s Own Country with Kerala&apos;s best tour operator. As a trusted Kerala travel agency, we specialize in crafting unforgettable journeys.
                             </p>
                         </div>
                         <div className="flex gap-4 mt-8 md:mt-0 md:absolute md:right-0 md:bottom-2">
@@ -158,7 +158,7 @@ export default function FeaturedPackages() {
                             <SwiperSlide key={pkg._id}>
                                 <div className="group relative bg-[#f1f5f9] rounded-[2.5rem] overflow-hidden border border-transparent hover:border-blue-100 transition-all duration-500 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)]">
                                     {/* Image Area */}
-                                    <div className="aspect-square relative overflow-hidden">
+                                    <div className="aspect-[4/3] relative overflow-hidden">
                                         {pkg.images && pkg.images.length > 0 ? (
                                             <Image
                                                 src={getImageUrl(pkg.images?.[0] || (pkg as any).image || (pkg as any).thumb)}
@@ -183,7 +183,7 @@ export default function FeaturedPackages() {
                                                 )}
                                                 <div className="flex items-center gap-0.5 text-slate-900 font-black tracking-tighter text-lg">
                                                     <span className="text-xs">₹</span>{pkg.price.toLocaleString()}
-                                                    <small className="text-[10px] text-slate-500 font-bold italic ml-0.5">/Person</small>
+                                                    <small className="text-[10px] text-slate-500 font-bold ml-1 uppercase">Per Person</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -207,15 +207,18 @@ export default function FeaturedPackages() {
 
                                     {/* Content Area */}
                                     <div className="p-8">
-                                        <h3 className="text-xl font-black text-slate-900 mb-2 truncate group-hover:text-blue-600 transition-colors uppercase italic tracking-tight">{pkg.title}</h3>
-                                        <p className="text-slate-500 text-xs font-semibold mb-8 line-clamp-1 italic leading-relaxed">
+                                        <h3 className="text-xl font-black text-slate-900 mb-2 truncate group-hover:text-blue-600 transition-colors uppercase tracking-tight">{pkg.title}</h3>
+                                        <p className="text-slate-500 text-xs font-semibold mb-8 line-clamp-1 leading-relaxed">
                                             {pkg.description}
                                         </p>
                                         <div className="flex justify-between items-center group-hover:translate-x-1 transition-transform">
-                                            <div className="flex gap-1 text-yellow-400">
-                                                {[...Array(5)].map((_, i) => (
-                                                    <Star key={i} size={12} fill={i < Math.floor(pkg.rating) ? "currentColor" : "none"} />
-                                                ))}
+                                            <div className="flex items-center gap-2">
+                                                <div className="flex gap-1 text-yellow-500">
+                                                    {[...Array(5)].map((_, i) => (
+                                                        <Star key={i} size={14} fill={i < Math.floor(pkg.rating || 5) ? "currentColor" : "none"} />
+                                                    ))}
+                                                </div>
+                                                <span className="text-xs font-bold text-slate-600">({pkg.rating || 5}.0)</span>
                                             </div>
                                             <Link href={`/packages/${pkg.slug || pkg._id}`} className="w-10 h-10 bg-white group-hover:bg-blue-600 group-hover:text-white rounded-full flex items-center justify-center shadow-lg transition-all border border-slate-100">
                                                 <ChevronRight size={18} />
@@ -232,7 +235,7 @@ export default function FeaturedPackages() {
                 <div>
                     <div className="flex flex-col md:flex-row justify-center items-center mb-16 px-4 text-center relative">
                         <div className="max-w-2xl">
-                            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter underline decoration-8 decoration-blue-100 underline-offset-8 italic uppercase mb-4">
+                            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter underline decoration-8 decoration-blue-100 underline-offset-8 uppercase mb-4">
                                 Domestic & International
                             </h2>
                             <p className="text-slate-500 font-medium">Explore the World all the way you can. Grab the best destination offers and getaway!</p>
@@ -245,7 +248,7 @@ export default function FeaturedPackages() {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {otherPackages.map((pkg: Package) => (
                             <div key={pkg._id} className="group flex flex-col items-center text-center">
-                                <div className="aspect-square w-full bg-slate-100 rounded-[3rem] overflow-hidden mb-8 relative border border-slate-50 hover:border-blue-100 transition-all">
+                                <div className="aspect-[4/3] w-full bg-slate-100 rounded-[3rem] overflow-hidden mb-8 relative border border-slate-50 hover:border-blue-100 transition-all">
                                     {pkg.images && pkg.images.length > 0 ? (
                                         <Image
                                             src={getImageUrl(pkg.images?.[0] || (pkg as any).image || (pkg as any).thumb)}
@@ -275,7 +278,7 @@ export default function FeaturedPackages() {
                                 <div className="flex items-center gap-1.5 text-[10px] font-black text-blue-600 uppercase tracking-widest mb-2">
                                     <MapPin size={10} /> {pkg.location}
                                 </div>
-                                <h4 className="text-lg font-black text-slate-900 group-hover:text-blue-600 transition-colors italic uppercase">{pkg.title}</h4>
+                                <h4 className="text-lg font-black text-slate-900 group-hover:text-blue-600 transition-colors uppercase">{pkg.title}</h4>
                             </div>
                         ))}
                     </div>

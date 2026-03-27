@@ -66,23 +66,14 @@
     justify-content: center;
     border: none;
     cursor: pointer;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
+    background: #f1f5f9;
+    color: #1e293b;
     transition: all 0.3s;
 
     &:hover {
         background: $primaryColor;
         color: #fff;
         transform: rotate(90deg) scale(1.1);
-    }
-
-    @media (min-width: 768px) {
-        background: #f1f5f9;
-        color: #1e293b;
-
-        &:hover {
-            background: #e2e8f0;
-        }
     }
 }
 

@@ -392,9 +392,9 @@ export default function Header() {
                                 <Image
                                     src="/assets/images/go-globe.png"
                                     alt="Menu"
-                                    width={40}
-                                    height={40}
-                                    className="w-small h-small object-contain p-1"
+                                    width={60}
+                                    height={60}
+                                    className="w-10 h-10 md:w-12 md:h-12 object-contain p-1"
                                 />
                             )}
                         </button>
@@ -416,9 +416,9 @@ export default function Header() {
                                 <Image
                                     src="/assets/images/go-globe.png"
                                     alt="Menu"
-                                    width={40}
-                                    height={40}
-                                    className="w-small h-small object-contain p-1"
+                                    width={60}
+                                    height={60}
+                                    className="w-10 h-10 md:w-12 md:h-12 object-contain p-1"
                                 />
                             )}
                         </button>

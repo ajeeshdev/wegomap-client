@@ -332,7 +332,7 @@ export default function Home() {
               <span className="sectionSubtitle">{homeSections.find(s => s.id === 'offers')?.subtitle || "Limited Time Offers"}</span>
               <h2 className="sliderTitle">{homeSections.find(s => s.id === 'offers')?.title || "First Minute Offers"}</h2>
               {homeSections.find(s => s.id === 'offers')?.description && (
-                <p className=" text-slate-500 max-w-2xl text-[13px] leading-relaxed italic">{homeSections.find(s => s.id === 'offers')?.description}</p>
+                <p className=" text-slate-500 max-w-2xl text-[13px] leading-relaxed">{homeSections.find(s => s.id === 'offers')?.description}</p>
               )}
             </div>
             <Link href="/trending" className="viewAllBtn">
@@ -644,7 +644,7 @@ export default function Home() {
                 {homeSections.find(s => s.id === 'kochi')?.title || "Kochi Based Travel Agency"}
               </h2>
               {homeSections.find(s => s.id === 'kochi')?.description && (
-                <p className="text-slate-500 max-w-2xl text-[13px] leading-relaxed italic">{homeSections.find(s => s.id === 'kochi')?.description}</p>
+                <p className="text-slate-500 max-w-2xl text-[13px] leading-relaxed">{homeSections.find(s => s.id === 'kochi')?.description}</p>
               )}
             </div>
             <Link href="/kerala-tour-packages" className="viewAllBtn">
@@ -744,7 +744,7 @@ export default function Home() {
               <span className="sectionSubtitle">{homeSections.find(s => s.id === 'corporate')?.subtitle || "MICE & Events"}</span>
               <h2 className="sliderTitle">{homeSections.find(s => s.id === 'corporate')?.title || "Redefining Corporate Experiences"}</h2>
               <div
-                  className="sectionHeaderDescription mb-0 max-w-2xl text-[13px] leading-relaxed italic text-slate-500"
+                  className="sectionHeaderDescription mb-0 max-w-2xl text-[13px] leading-relaxed text-slate-500"
                   dangerouslySetInnerHTML={{ __html: homeSections.find(s => s.id === 'corporate')?.description || "Wegomap delivers world-class event management services in Kochi and beyond." }}
               />
             </div>
@@ -844,7 +844,7 @@ export default function Home() {
                 {homeSections.find(s => s.id === 'special_events')?.title || "Special Events & Activities"}
               </h2>
               {homeSections.find(s => s.id === 'special_events')?.description && (
-                <p className="text-slate-500 max-w-2xl text-[13px] leading-relaxed italic">{homeSections.find(s => s.id === 'special_events')?.description}</p>
+                <p className="text-slate-500 max-w-2xl text-[13px] leading-relaxed">{homeSections.find(s => s.id === 'special_events')?.description}</p>
               )}
             </div>
             <Link href="/special-events" className="viewAllBtn">
