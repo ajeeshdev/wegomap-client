@@ -2187,20 +2187,20 @@ header .button-wrapper .modernHamburger {
 @keyframes floatPulse {
   0% {
     transform: scale(1);
-    filter: drop-shadow(0 0 0 rgba(22, 115, 184, 0));
+    filter: drop-shadow(0 0 0 rgba(37, 211, 102, 0));
   }
   70% {
     transform: scale(1.05);
-    filter: drop-shadow(0 10px 20px rgba(22, 115, 184, 0.3));
+    filter: drop-shadow(0 10px 20px rgba(37, 211, 102, 0.3));
   }
   100% {
     transform: scale(1);
-    filter: drop-shadow(0 0 0 rgba(22, 115, 184, 0));
+    filter: drop-shadow(0 0 0 rgba(37, 211, 102, 0));
   }
 }
 .floating-whatsapp:hover {
   transform: translateY(-5px) scale(1.05);
-  filter: drop-shadow(0 15px 25px rgba(22, 115, 184, 0.4));
+  filter: drop-shadow(0 15px 25px rgba(37, 211, 102, 0.4));
   animation: none;
 }
 .floating-whatsapp .bot-image {
@@ -2208,6 +2208,7 @@ header .button-wrapper .modernHamburger {
   height: 100%;
   -o-object-fit: contain;
      object-fit: contain;
+  filter: hue-rotate(-63deg);
 }
 @media (max-width: 1023px) {
   .floating-whatsapp {
