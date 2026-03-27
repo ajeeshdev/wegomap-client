@@ -14,9 +14,8 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     const isAuthPage = pathname === '/login' || pathname === '/admin-login';
     const isAdminPage = pathname?.startsWith('/admin');
     const isPackagesPage = pathname?.startsWith('/packages/');
-    const isHotelPage = pathname?.startsWith('/hotels/');
 
-    if (isAuthPage || isAdminPage || isPackagesPage || isHotelPage) {
+    if (isAuthPage || isAdminPage || isPackagesPage) {
         return <>{children}</>;
     }
 

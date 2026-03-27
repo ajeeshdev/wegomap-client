@@ -11,6 +11,7 @@ export default function FloatingWhatsApp() {
             className="floating-whatsapp"
             aria-label="Chat on WhatsApp"
         >
+            <span className="tooltip-text">Chat with us</span>
             <img
                 src="/assets/images/myrabot.webp"
                 alt="Myra bot"

@@ -269,49 +269,7 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
 
   return (
     <div className="hotel-lp-container aroma-hills-theme">
-      {/* Header */}
-      <header className={`aroma-header ${mobileMenuOpen ? 'menu-active' : ''}`}>
-         <div className="container-ctn header-flex">
-            <Link href="/" className="aroma-logo">
-               <img src={logo} alt="Logo" className="h-10 w-auto object-contain" />
-            </Link>
-            
-            <nav className="aroma-nav desktop-only">
-               <a href="#about">About</a>
-               <a href="#rooms">Rooms</a>
-               <a href="#amenities">Amenities</a>
-               <a href="#gallery">Gallery</a>
-               <a href="#contact">Contact</a>
-            </nav>
-
-            <div className="aroma-header-actions">
-               <a href={`tel:${data.cta_phone}`} className="header-enquiry-btn">
-                  <Phone size={18} />
-                  <span className="desktop-only">Enquiry: {data.cta_phone}</span>
-               </a>
-               <button className="mobile-toggle lg:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-                  {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-               </button>
-            </div>
-         </div>
-
-         {/* Mobile Navigation Drawer */}
-         <div className={`mobile-nav-drawer ${mobileMenuOpen ? 'open' : ''}`}>
-            <div className="drawer-padding">
-               <nav className="mobile-links">
-                  <a href="#about" onClick={() => setMobileMenuOpen(false)}>About Our Retreat</a>
-                  <a href="#rooms" onClick={() => setMobileMenuOpen(false)}>Signature Rooms</a>
-                  <a href="#amenities" onClick={() => setMobileMenuOpen(false)}>Premium Amenities</a>
-                  <a href="#gallery" onClick={() => setMobileMenuOpen(false)}>Photo Gallery</a>
-                  <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Get In Touch</a>
-               </nav>
-               <div className="drawer-footer">
-                  <a href={`tel:${data.cta_phone}`} className="mobile-cta-btn">Call Reservations: {data.cta_phone}</a>
-               </div>
-            </div>
-         </div>
-      </header>
-
+      {/* Custom Header Removed - using global Header instead */}
       {/* Hero Slider */}
       <section className="hotel-hero-centered" id="home">
         <div className="hero-slider-container">
@@ -667,16 +625,7 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
          </div>
       </section>
 
-      {/* Modern Footer */}
-      <footer className="hotel-footer">
-         <div className="container-ctn">
-            <div className="flex flex-col items-center gap-6">
-               <img src={logo} alt="Logo" className="h-10 w-auto " />
-               <p className="copyright font-bold text-xs uppercase tracking-widest text-slate-400">© {new Date().getFullYear()} {data.title}. Designed by Wegomap.</p>
-            </div>
-         </div>
-      </footer>
-
+      {/* Custom Footer Removed - using global Footer instead */}
       {/* Lightbox Wrapper */}
       {openGallery && (
         <div className="fixed inset-0 z-[5000] bg-black/98 flex items-center justify-center p-10 backdrop-blur-md animate-in fade-in duration-500" onClick={()=>setOpenGallery(null)}>
@@ -687,11 +636,6 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
         </div>
       )}
 
-      {/* Floating Action Buttons */}
-      <div className="fixed-actions scale-in">
-         {data.cta_phone && <a href={`tel:${data.cta_phone}`} className="action-btn phone shadow-[0_20px_40px_rgba(132,144,113,0.4)]"><Phone size={24} /></a>}
-         {data.whatsapp_number && <a href={`https://wa.me/${data.whatsapp_number.replace(/\D/g, '')}`} target="_blank" className="action-btn whatsapp shadow-[0_20px_40px_rgba(37,211,102,0.4)]"><MessageSquare size={24} /></a>}
-      </div>
-    </div>
+      {/* Custom Floating Action Buttons Removed - using global floating WhatsApp/Chatbot instead */}    </div>
   );
 }
