@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "concurrently \"sass --watch scss/style.scss public/scss/style.css\" \"next dev\"",
-    "build": "sass scss/style.scss public/scss/style.css && next build && cp -r .next/static .next/standalone/.next/static && cp -r public .next/standalone/public && cd .next/standalone && npm pkg set scripts.start=\"node server.js\"",
+    "build": "sass scss/style.scss public/scss/style.css && next build && cp -r .next/static .next/standalone/.next/static && cp -r public .next/standalone/public && cd .next/standalone && cp server.js app.js && cp server.js index.js && npm pkg set scripts.start=\"node app.js\"",
     "start": "next start",
     "lint": "eslint",
     "copy-tinymce": "mkdir -p public/tinymce && cp -r node_modules/tinymce/skins public/tinymce/ && cp -r node_modules/tinymce/icons public/tinymce/ && cp -r node_modules/tinymce/themes public/tinymce/ && cp -r node_modules/tinymce/models public/tinymce/ && cp -r node_modules/tinymce/plugins public/tinymce/ && cp node_modules/tinymce/tinymce.min.js public/tinymce/",
