@@ -13824,14 +13824,20 @@ button.wishlistBtn {
 .allToursPage .allToursControls .allToursControlsInner {
   display: flex;
   align-items: center;
-  gap: 0;
-  padding: 0.875rem 0;
+  gap: 1rem;
+  padding: 0.75rem 5% 0.825rem 5%;
   flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.allToursPage .allToursControls .allToursControlsInner::-webkit-scrollbar {
+  display: none;
 }
 @media (max-width: 767px) {
   .allToursPage .allToursControls .allToursControlsInner {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 10px 10vw 10px 1rem;
+    gap: 0.75rem;
   }
 }
 .allToursPage .allToursControls .allToursSearch {
@@ -13843,16 +13849,16 @@ button.wishlistBtn {
   padding: 0.625rem 1.125rem;
   border: 2px solid transparent;
   flex: 0 0 auto;
-  width: 240px;
+  width: 220px;
   transition: all 0.25s;
-  margin-right: 1rem;
+  margin: 0;
 }
 @media (max-width: 767px) {
   .allToursPage .allToursControls .allToursSearch {
-    width: 70%;
-    height: 45px;
-    margin-right: 0.75rem;
-    padding: 0px 20px;
+    width: 140px;
+    height: 40px;
+    padding: 0px 12px;
+    flex-shrink: 0;
   }
 }
 .allToursPage .allToursControls .allToursSearch:focus-within {
@@ -13910,26 +13916,95 @@ button.wishlistBtn {
     display: none;
   }
 }
-.allToursPage .allToursControls .allToursFilterPills {
+.allToursPage .allToursControls .allToursFilterSliderWrapper {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
-  flex-wrap: nowrap;
   flex: 1;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  mask-image: linear-gradient(to right, black 85%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
-  padding-right: 2rem;
+  min-width: 0;
+  position: relative;
+  padding: 0 0.5rem;
 }
-.allToursPage .allToursControls .allToursFilterPills::-webkit-scrollbar {
-  display: none;
+.allToursPage .allToursControls .allToursFilterSliderWrapper .allToursFilterSwiper {
+  width: 100%;
+  padding: 0.5rem 0;
+}
+.allToursPage .allToursControls .allToursFilterSliderWrapper .allToursFilterSwiper .swiper-slide {
+  width: auto !important;
+}
+.allToursPage .allToursControls .allToursFilterSliderWrapper .category-nav-btn {
+  background: #f1f5f9;
+  border: 1.5px solid #e2e8f0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  z-index: 10;
 }
 @media (max-width: 767px) {
-  .allToursPage .allToursControls .allToursFilterPills {
+  .allToursPage .allToursControls .allToursFilterSliderWrapper .category-nav-btn {
     display: none;
   }
+}
+.allToursPage .allToursControls .allToursFilterSliderWrapper .category-nav-btn:hover {
+  border-color: #ff5a3d;
+  color: #ff5a3d;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.allToursPage .allToursControls .allToursFilterSliderWrapper .category-nav-btn.swiper-button-disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.allToursPage .allToursControls .allToursSelectFilters {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.allToursPage .allToursControls .allToursSelectFilters .tourSelect {
+  background: #f1f5f9;
+  border: 2px solid transparent;
+  border-radius: 9999px;
+  padding: 0.625rem 2rem 0.625rem 1.125rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #0f172a;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8' stroke-width='3'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5' /%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.875rem center;
+  background-size: 0.75rem;
+  transition: all 0.2s;
+  min-width: 120px;
+}
+@media (max-width: 767px) {
+  .allToursPage .allToursControls .allToursSelectFilters .tourSelect {
+    height: 40px;
+    font-size: 0.75rem;
+    min-width: 100px;
+    padding: 0 1.5rem 0 0.75rem;
+    background-position: right 0.5rem center;
+  }
+}
+.allToursPage .allToursControls .allToursSelectFilters .tourSelect:hover {
+  background-color: #e2e8f0;
+}
+.allToursPage .allToursControls .allToursSelectFilters .tourSelect:focus {
+  border-color: #ff5a3d;
+  background: #fff;
 }
 .allToursPage .allToursControls .mobileFilterToggle {
   display: none;
@@ -14052,58 +14127,6 @@ button.wishlistBtn {
   to {
     transform: translateY(0);
   }
-}
-.allToursPage .allToursControls .allToursExtraFilters {
-  background: #fff;
-  border-top: 1px solid #f1f5f9;
-  padding: 1.25rem 0;
-  display: none;
-}
-@media (min-width: 768px) {
-  .allToursPage .allToursControls .allToursExtraFilters {
-    display: block;
-  }
-}
-.allToursPage .allToursControls .allToursExtraFilters .allToursExtraFiltersInner {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-.allToursPage .allToursControls .allToursExtraFilters .filterGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.allToursPage .allToursControls .allToursExtraFilters .filterGroup label {
-  font-size: 0.625rem;
-  font-weight: 800;
-  color: #adb9c9;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-.allToursPage .allToursControls .allToursExtraFilters .filterGroup select {
-  background-color: transparent;
-  border: none;
-  border-bottom: 2.5px solid #f1f5f9;
-  border-radius: 0;
-  padding: 0.5rem 2rem 0.5rem 0;
-  font-size: 1rem;
-  font-weight: 800;
-  color: #0f172a;
-  outline: none;
-  cursor: pointer;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230f172a' stroke-width='4'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5' /%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0 center;
-  background-size: 0.8rem;
-  transition: all 0.2s;
-  width: 100%;
-}
-.allToursPage .allToursControls .allToursExtraFilters .filterGroup select:focus {
-  border-bottom-color: #ff5a3d;
 }
 .allToursPage .filterPill {
   display: flex;
