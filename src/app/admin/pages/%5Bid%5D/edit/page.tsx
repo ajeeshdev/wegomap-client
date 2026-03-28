@@ -77,7 +77,7 @@ export default function EditPage() {
 
  if (loading) return (
  <div className="flex flex-col items-center justify-center h-[60vh] gap-4">
- <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
+ <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
  <p className="font-semibold text-slate-400 uppercase tracking-wider text-xs italic">Loading page content...</p>
  </div>
  );
@@ -97,7 +97,7 @@ export default function EditPage() {
  </button>
  <div>
  <h2 className="text-3xl font-semibold text-slate-800 tracking-tight">Modify Page</h2>
- <p className="text-xs text-orange-600 font-semibold uppercase tracking-wider">Editing: {formData.title}</p>
+ <p className="text-xs text-blue-600 font-semibold uppercase tracking-wider">Editing: {formData.title}</p>
  </div>
  </div>
  <div className="flex items-center gap-3">
@@ -107,7 +107,7 @@ export default function EditPage() {
  <button 
  onClick={() => handleSubmit()} 
  disabled={saving}
- className="bg-orange-600 hover:bg-black text-white px-8 py-3 rounded-2xl font-semibold flex items-center gap-2 transition-all shadow-xl shadow-orange-500/20 active:scale-95 uppercase text-xs tracking-wider italic"
+ className="bg-blue-600 hover:bg-black text-white px-8 py-3 rounded-2xl font-semibold flex items-center gap-2 transition-all shadow-xl shadow-blue-600/20 active:scale-95 uppercase text-xs tracking-wider italic"
  >
  <Save size={18} /> {saving ? 'Syncing...' : 'Update Page'}
  </button>
@@ -125,11 +125,11 @@ export default function EditPage() {
  onClick={() => setActiveTab(tab.id)}
  className={`w-full flex items-center gap-4 px-6 py-4 rounded-2xl font-semibold transition-all text-left group ${
  activeTab === tab.id
- ? 'bg-white shadow-xl shadow-slate-200/50 text-orange-600 border-r-4 border-r-orange-600'
+ ? 'bg-white shadow-xl shadow-slate-200/50 text-blue-600 border-r-4 border-r-blue-600'
  : 'text-slate-400 hover:text-slate-500 hover:bg-white/50'
  }`}
  >
- <Icon size={20} className={activeTab === tab.id ? 'text-orange-600' : 'group-hover:text-slate-500 transition-colors'} />
+ <Icon size={20} className={activeTab === tab.id ? 'text-blue-600' : 'group-hover:text-slate-500 transition-colors'} />
  <span className="uppercase tracking-wider text-xs">{tab.label}</span>
  </button>
  );
@@ -137,7 +137,7 @@ export default function EditPage() {
 
  <div className="pt-8 px-6">
  <div className="bg-slate-900 rounded-3xl p-6 text-white shadow-2xl relative overflow-hidden group">
- <div className="absolute top-0 right-0 w-24 h-24 bg-orange-500/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
+ <div className="absolute top-0 right-0 w-24 h-24 bg-blue-600/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
  <h4 className="text-xs font-semibold uppercase tracking-wider text-orange-400 mb-4 flex items-center gap-2">
  <Clock size={12} /> Registry
  </h4>
@@ -147,7 +147,7 @@ export default function EditPage() {
  <select 
  value={formData.status} 
  onChange={e => setFormData({ ...formData, status: e.target.value })}
- className="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-2 text-xs font-bold outline-none focus:ring-2 focus:ring-orange-500 transition-all appearance-none cursor-pointer"
+ className="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-2 text-xs font-bold outline-none focus:ring-2 focus:ring-blue-600 transition-all appearance-none cursor-pointer"
  >
  <option className="bg-slate-900" value="Published">PUBLISHED</option>
  <option className="bg-slate-900" value="Draft">DRAFT / HIDDEN</option>
@@ -182,13 +182,13 @@ export default function EditPage() {
  type="text" 
  value={formData.title} 
  onChange={e => setFormData({ ...formData, title: e.target.value })} 
- className="w-full px-6 py-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:ring-8 focus:ring-orange-600/5 focus:border-orange-600 transition-all font-bold text-slate-800 outline-none" 
+ className="w-full px-6 py-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:ring-8 focus:ring-blue-600/5 focus:border-blue-600 transition-all font-bold text-slate-800 outline-none" 
  />
  </div>
  <div className="space-y-2">
  <label className="text-xs font-semibold uppercase tracking-wider text-slate-400 ml-1 flex items-center justify-between">
  <span>Canonical Slug</span>
- <a href={`/${formData.slug}`} target="_blank" className="text-orange-500 hover:text-orange-700 flex items-center gap-1 normal-case tracking-normal font-bold">
+ <a href={`/${formData.slug}`} target="_blank" className="text-blue-600 hover:text-orange-700 flex items-center gap-1 normal-case tracking-normal font-bold">
  View Live <ExternalLink size={10} />
  </a>
  </label>
@@ -198,7 +198,7 @@ export default function EditPage() {
  type="text" 
  value={formData.slug} 
  onChange={e => setFormData({ ...formData, slug: e.target.value })} 
- className="w-full pl-10 pr-6 py-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:ring-8 focus:ring-orange-600/5 focus:border-orange-600 transition-all font-mono text-xs text-slate-500 outline-none" 
+ className="w-full pl-10 pr-6 py-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:ring-8 focus:ring-blue-600/5 focus:border-blue-600 transition-all font-mono text-xs text-slate-500 outline-none" 
  />
  </div>
  </div>
@@ -219,7 +219,7 @@ export default function EditPage() {
  rows={3} 
  value={formData.excerpt} 
  onChange={e => setFormData({ ...formData, excerpt: e.target.value })} 
- className="w-full px-6 py-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:ring-8 focus:ring-orange-600/5 focus:border-orange-600 transition-all font-medium text-slate-800 outline-none" 
+ className="w-full px-6 py-4 rounded-2xl border border-slate-100 bg-slate-50/50 focus:bg-white focus:ring-8 focus:ring-blue-600/5 focus:border-blue-600 transition-all font-medium text-slate-800 outline-none" 
  ></textarea>
  </div>
  </div>
@@ -228,32 +228,32 @@ export default function EditPage() {
  {activeTab === 'seo' && (
  <div className="space-y-8 animate-in slide-in-from-bottom-4 duration-500">
  <h3 className="text-xl font-semibold text-slate-800 border-b border-slate-100 pb-5 flex items-center gap-3">
- <div className="w-1.5 h-6 bg-orange-500 rounded-full"></div>
+ <div className="w-1.5 h-6 bg-blue-600 rounded-full"></div>
  Global Search Indexing
  </h3>
  <div className="space-y-6">
  <div className="space-y-2">
- <label className="text-xs font-semibold uppercase tracking-wider text-orange-600 ml-1">Custom Meta Title</label>
+ <label className="text-xs font-semibold uppercase tracking-wider text-blue-600 ml-1">Custom Meta Title</label>
  <input 
  type="text" 
  value={formData.seo_title} 
  onChange={e => setFormData({ ...formData, seo_title: e.target.value })} 
- className="w-full px-6 py-4 rounded-2xl border border-orange-100 bg-orange-50/10 focus:bg-white focus:ring-8 focus:ring-orange-500/5 focus:border-orange-500 transition-all font-bold text-slate-800 outline-none" 
+ className="w-full px-6 py-4 rounded-2xl border border-orange-100 bg-orange-50/10 focus:bg-white focus:ring-8 focus:ring-blue-600/5 focus:border-blue-600 transition-all font-bold text-slate-800 outline-none" 
  />
  </div>
  <div className="space-y-2">
- <label className="text-xs font-semibold uppercase tracking-wider text-orange-600 ml-1">Meta Description Mapping</label>
+ <label className="text-xs font-semibold uppercase tracking-wider text-blue-600 ml-1">Meta Description Mapping</label>
  <textarea 
  rows={5} 
  value={formData.seo_description} 
  onChange={e => setFormData({ ...formData, seo_description: e.target.value })} 
- className="w-full px-6 py-4 rounded-2xl border border-orange-100 bg-orange-50/10 focus:bg-white focus:ring-8 focus:ring-orange-500/5 focus:border-orange-500 transition-all font-medium text-slate-800 outline-none" 
+ className="w-full px-6 py-4 rounded-2xl border border-orange-100 bg-orange-50/10 focus:bg-white focus:ring-8 focus:ring-blue-600/5 focus:border-blue-600 transition-all font-medium text-slate-800 outline-none" 
  ></textarea>
  </div>
  </div>
 
  <div className="bg-slate-900 p-10 rounded-[40px] shadow-2xl mt-12 relative overflow-hidden group border border-white/5">
- <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/20 rounded-bl-full blur-2xl"></div>
+ <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/20 rounded-bl-full blur-2xl"></div>
  <div className="flex items-center gap-3 mb-6">
  <div className="w-8 h-8 bg-white/10 rounded-xl flex items-center justify-center text-xs text-white font-semibold">G</div>
  <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Search Engine Result Preview</p>

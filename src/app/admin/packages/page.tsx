@@ -84,8 +84,8 @@ export default function PackagesAdmin() {
 
       {/* Content Table */}
       {loading ? (
-        <div className="admin-form-card flex flex-col items-center justify-center p-20 gap-4">
-          <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
+        <div className="admin-form-card flex flex-col items-center justify-center p-10 gap-4">
+          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
           <p className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Loading packages...</p>
         </div>
       ) : (
@@ -98,7 +98,8 @@ export default function PackagesAdmin() {
                   <th style={{ width: '20%' }}>Location</th>
                   <th style={{ width: '15%' }}>Price</th>
                   <th style={{ width: '15%' }}>Category</th>
-                  <th style={{ width: '15%', textAlign: 'right' }}>Actions</th>
+                  <th style={{ width: '10%' }}>Status</th>
+                  <th style={{ width: '10%', textAlign: 'right' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -123,12 +124,14 @@ export default function PackagesAdmin() {
                             <span className="cms-meta-badge">
                               <ShieldCheck size={9} style={{ color: '#3b82f6' }} /> #{pkg.pcode || 'UNTYPED'}
                             </span>
-                            <span className="cms-meta-badge">
-                              <Layers size={9} style={{ color: '#0ea5e9' }} /> {pkg.slug || 'no-slug'}
-                            </span>
                             {pkg.onoffer && (
-                              <span className="px-1.5 py-0.5 bg-rose-50 text-rose-500 rounded-lg text-[8px] font-black uppercase tracking-tighter border border-rose-100 flex items-center gap-1">
+                              <span className="px-1.5 py-0.5 bg-rose-50 text-emerald-500 rounded-lg text-[8px] font-black uppercase tracking-tighter border border-rose-100 flex items-center gap-1">
                                 <Zap size={8} className="fill-current" /> Special Offer
+                              </span>
+                            )}
+                            {pkg.displayToHome && (
+                              <span className="px-1.5 py-0.5 bg-blue-50 text-blue-600 rounded-lg text-[8px] font-black uppercase tracking-tighter border border-blue-100 flex items-center gap-1">
+                                <Sparkles size={8} className="fill-current" /> Home
                               </span>
                             )}
                           </div>
@@ -153,6 +156,17 @@ export default function PackagesAdmin() {
                       <span className="cms-cat-badge">
                         <Tag size={10} /> {pkg.category || 'Platform Core'}
                       </span>
+                    </td>
+                    <td className="cms-table-cell">
+                      {pkg.isActive ? (
+                        <div className="admin-status-badge admin-status-badge-success">
+                           <ShieldCheck size={10} /> Active
+                        </div>
+                      ) : (
+                        <div className="admin-status-badge admin-status-badge-secondary">
+                           <Clock size={10} /> Inactive
+                        </div>
+                      )}
                     </td>
                     <td className="cms-table-cell">
                       <div className="cms-action-group">
@@ -186,36 +200,33 @@ export default function PackagesAdmin() {
 
       {/* Summary Matrix */}
       {!loading && filteredPackages.length > 0 && (
-        <div className="admin-form-card bg-slate-900 border-slate-800 p-8 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-bl-full blur-[80px]"></div>
-          <div className="relative z-10 flex items-center justify-between">
+        <div className="admin-card !p-6 flex items-center justify-between">
             <div className="flex items-center gap-6">
-              <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white border border-white/20 backdrop-blur-md">
-                <Sparkles size={28} />
+              <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 border border-blue-100">
+                <Sparkles size={24} />
               </div>
               <div>
-                <h4 className="text-white font-bold text-lg tracking-tight uppercase">Package Inventory</h4>
-                <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-1">All active travel packages and itineraries published on your website.</p>
+                <h4 className="text-slate-900 font-bold text-base uppercase tracking-tight">Inventory Summary</h4>
+                <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-0.5">View your current active package statistics.</p>
               </div>
             </div>
-            <div className="flex items-center gap-8 pr-12">
-              <div className="text-center">
-                <h5 className="text-2xl font-bold text-white leading-none">{(filteredPackages.length).toString().padStart(2, '0')}</h5>
-                <p className="text-[8px] font-bold text-slate-500 uppercase tracking-[0.2em] mt-2">Active Packages</p>
+            <div className="flex items-center gap-6">
+              <div className="text-right">
+                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Active Inventory</p>
+                <h5 className="text-xl font-bold text-slate-900 leading-none mt-1">{(filteredPackages.length).toString().padStart(2, '0')}</h5>
               </div>
-              <div className="w-px h-10 bg-white/10"></div>
-              <div className="flex flex-col gap-1.5">
-                <div className="flex items-center gap-2">
+              <div className="w-px h-8 bg-slate-200"></div>
+              <div className="flex flex-col gap-1">
+                <div className="flex items-center gap-1.5">
                   <ShieldCheck size={10} className="text-emerald-500" />
-                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Inventory Secure</span>
+                  <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Inventory Secure</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Zap size={10} className="text-orange-500" />
-                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Pricing Core Active</span>
+                <div className="flex items-center gap-1.5">
+                  <Zap size={10} className="text-blue-500" />
+                  <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Pricing Active</span>
                 </div>
               </div>
             </div>
-          </div>
         </div>
       )}
     </div>

@@ -70,7 +70,7 @@ export default function EditSlider() {
 
   if (loading) return (
     <div className="admin-form-card flex flex-col items-center justify-center p-24 gap-6">
-      <div className="w-16 h-16 border-4 border-orange-600 border-t-transparent rounded-full animate-spin shadow-2xl shadow-orange-500/20"></div>
+      <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin shadow-2xl shadow-blue-600/20"></div>
       <p className="font-black text-slate-400 uppercase tracking-[0.3em] text-[10px]">Retrieving canvas data...</p>
     </div>
   );
@@ -114,7 +114,7 @@ export default function EditSlider() {
           <div className="admin-form-card">
             <div className="space-y-10">
               <h3 className="admin-form-section-title">
-                <div className="admin-page-title-indicator bg-orange-600"></div>
+                <div className="admin-page-title-indicator bg-blue-600"></div>
                 Slider Information
               </h3>
 
@@ -172,7 +172,7 @@ export default function EditSlider() {
         <div className="admin-form-sidebar">
           <div className="admin-form-card p-6 space-y-8">
             <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2">
-              <div className="w-1 h-3 bg-orange-500 rounded-full"></div>
+              <div className="w-1 h-3 bg-blue-600 rounded-full"></div>
               Settings
             </h4>
             <div className="space-y-6">
@@ -190,7 +190,7 @@ export default function EditSlider() {
               
               <div className="pt-4 border-t border-slate-50">
                 <div className="flex items-center gap-3 bg-slate-50 p-4 rounded-xl border border-slate-100 transition-all hover:bg-white">
-                  <div className="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center text-orange-600 shrink-0">
+                  <div className="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center text-blue-600 shrink-0">
                     <Clock size={16} />
                   </div>
                   <div className="min-w-0">
@@ -206,7 +206,7 @@ export default function EditSlider() {
 
           <div className="admin-form-card bg-slate-900 border-none p-8 relative overflow-hidden h-64 group shadow-xl">
             <div className="relative z-10 flex flex-col items-center justify-center gap-6 h-full text-center">
-              <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-white border border-white/20 backdrop-blur-xl group-hover:bg-orange-600 transition-all duration-700">
+              <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-white border border-white/20 backdrop-blur-xl group-hover:bg-blue-600 transition-all duration-700">
                 <Sparkles size={32} />
               </div>
               <div className="space-y-2">

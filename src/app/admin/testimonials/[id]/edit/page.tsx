@@ -122,7 +122,7 @@ export default function EditTestimonial() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
                 <div className="admin-form-group">
                   <label className="admin-form-label flex items-center gap-2 mb-3">
-                    <User size={12} className="text-orange-500" /> Full Name
+                    <User size={12} className="text-blue-600" /> Full Name
                   </label>
                   <input 
                     type="text" 
@@ -148,7 +148,7 @@ export default function EditTestimonial() {
 
               <div className="admin-form-group pt-12 border-t border-slate-50">
                 <label className="admin-form-label flex items-center gap-3 mb-8">
-                  <MessageSquareQuote size={18} className="text-rose-500" /> Feedback Content
+                  <MessageSquareQuote size={18} className="text-emerald-500" /> Feedback Content
                 </label>
                 <div className="bg-slate-50/50 rounded-[32px] p-1.5 border border-slate-100 shadow-inner overflow-hidden transition-all focus-within:bg-white focus-within:shadow-xl focus-within:border-amber-200">
                   <textarea 
@@ -167,7 +167,7 @@ export default function EditTestimonial() {
         <div className="admin-form-sidebar">
           <div className="admin-form-card p-8 space-y-10">
              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 flex items-center gap-3">
-              <div className="w-1.5 h-4 bg-orange-500 rounded-full"></div>
+              <div className="w-1.5 h-4 bg-blue-600 rounded-full"></div>
               Rating
             </h4>
             
@@ -215,7 +215,7 @@ export default function EditTestimonial() {
 
           <div className="admin-form-card p-10 bg-slate-900 border-slate-800 relative overflow-hidden group shadow-2xl shadow-orange-950/20 mt-6">
             <div className="relative z-10 flex items-center gap-6">
-              <div className="w-16 h-16 rounded-[28px] bg-white/10 flex items-center justify-center text-white border border-white/20 backdrop-blur-3xl group-hover:bg-orange-600 group-hover:border-orange-500 transition-all duration-700 shadow-2xl">
+              <div className="w-16 h-16 rounded-[28px] bg-white/10 flex items-center justify-center text-white border border-white/20 backdrop-blur-3xl group-hover:bg-blue-600 group-hover:border-blue-600 transition-all duration-700 shadow-2xl">
                 <ShieldCheck size={28} />
               </div>
               <div className="flex-1">

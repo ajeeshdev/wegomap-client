@@ -87,9 +87,9 @@ export default function CreateFAQ() {
 
               <div className="admin-form-group">
                 <label className="admin-form-label flex items-center gap-3 mb-6">
-                  <HelpCircle size={18} className="text-orange-500" /> The Question
+                  <HelpCircle size={18} className="text-blue-600" /> The Question
                 </label>
-                <div className="bg-slate-50/50 rounded-[48px] p-3 border-2 border-slate-100 shadow-inner overflow-hidden transition-all focus-within:bg-white focus-within:shadow-2xl focus-within:shadow-orange-500/10 focus-within:border-orange-200">
+                <div className="bg-slate-50/50 rounded-[48px] p-3 border-2 border-slate-100 shadow-inner overflow-hidden transition-all focus-within:bg-white focus-within:shadow-2xl focus-within:shadow-blue-600/10 focus-within:border-orange-200">
                   <textarea 
                     rows={3} 
                     value={formData.question} 
@@ -104,7 +104,7 @@ export default function CreateFAQ() {
                 <label className="admin-form-label flex items-center gap-3 mb-8">
                   <MessageCircle size={18} className="text-emerald-500" /> The Answer
                 </label>
-                <div className="bg-slate-50 rounded-[56px] p-2.5 border-2 border-slate-100 transition-all shadow-inner overflow-hidden focus-within:bg-white focus-within:shadow-2xl focus-within:shadow-orange-500/10 focus-within:border-emerald-200">
+                <div className="bg-slate-50 rounded-[56px] p-2.5 border-2 border-slate-100 transition-all shadow-inner overflow-hidden focus-within:bg-white focus-within:shadow-2xl focus-within:shadow-blue-600/10 focus-within:border-emerald-200">
                   <RichTextEditor 
                     value={formData.answer} 
                     onChange={(answer) => setFormData({ ...formData, answer })} 
@@ -120,12 +120,12 @@ export default function CreateFAQ() {
         <div className="admin-form-sidebar">
           <div className="admin-form-card p-8 space-y-10">
             <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 flex items-center gap-3">
-              <div className="w-1.5 h-4 bg-orange-500 rounded-full"></div>
+              <div className="w-1.5 h-4 bg-blue-600 rounded-full"></div>
               Settings
             </h4>
             <div className="space-y-10">
               <div className="admin-form-group">
-                <label className="admin-form-label text-[10px] flex items-center gap-3 uppercase tracking-[0.2em] text-slate-400 font-black opacity-60 mb-4"> <List size={14} className="text-orange-500" /> Category or Tag</label>
+                <label className="admin-form-label text-[10px] flex items-center gap-3 uppercase tracking-[0.2em] text-slate-400 font-black opacity-60 mb-4"> <List size={14} className="text-blue-600" /> Category or Tag</label>
                 <div className="relative group/module">
                     <input 
                     type="text" 
@@ -134,7 +134,7 @@ export default function CreateFAQ() {
                     className="admin-form-input font-black h-14 px-6 rounded-2xl bg-slate-50 border-slate-100 group-hover/module:bg-white transition-all pr-12" 
                     placeholder="General, Packages, Transits..." 
                     />
-                    <div className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-300 group-hover/module:text-orange-500 transition-colors">
+                    <div className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-300 group-hover/module:text-blue-600 transition-colors">
                         <Layers size={16} />
                     </div>
                 </div>
@@ -145,7 +145,7 @@ export default function CreateFAQ() {
                   type="number" 
                   value={formData.order} 
                   onChange={e => setFormData({ ...formData, order: parseInt(e.target.value) })} 
-                  className="admin-form-input font-mono font-black h-14 px-6 rounded-2xl bg-slate-50 border-slate-100 text-orange-600 focus:bg-white" 
+                  className="admin-form-input font-mono font-black h-14 px-6 rounded-2xl bg-slate-50 border-slate-100 text-blue-600 focus:bg-white" 
                 />
               </div>
               <div className="admin-form-group pt-10 border-t border-slate-100">
@@ -154,7 +154,7 @@ export default function CreateFAQ() {
                   <select 
                     value={formData.status} 
                     onChange={e => setFormData({ ...formData, status: e.target.value })}
-                    className="admin-form-input font-black bg-slate-50 border-slate-100 rounded-2xl h-14 uppercase text-[11px] tracking-widest cursor-pointer group-hover/status:bg-white transition-all shadow-sm focus:ring-12 focus:ring-orange-500/5 appearance-none px-6"
+                    className="admin-form-input font-black bg-slate-50 border-slate-100 rounded-2xl h-14 uppercase text-[11px] tracking-widest cursor-pointer group-hover/status:bg-white transition-all shadow-sm focus:ring-12 focus:ring-blue-600/5 appearance-none px-6"
                   >
                     <option value="Published">Published</option>
                     <option value="Draft">Draft</option>
@@ -168,16 +168,16 @@ export default function CreateFAQ() {
           </div>
 
           <div className="admin-form-card p-12 bg-slate-900 border-slate-800 relative overflow-hidden h-80 group shadow-2xl shadow-orange-950/20 mt-6">
-             <div className="absolute top-0 right-0 w-48 h-48 bg-orange-500/10 rounded-bl-full blur-[60px]"></div>
+             <div className="absolute top-0 right-0 w-48 h-48 bg-blue-600/10 rounded-bl-full blur-[60px]"></div>
              <div className="relative z-10 flex flex-col items-center justify-center gap-10 py-4 h-full text-center">
-               <div className="admin-icon-box bg-white/10 text-white w-24 h-24 rounded-[40px] border border-white/20 backdrop-blur-3xl group-hover:bg-orange-600 group-hover:border-orange-500 transition-all duration-700 shadow-2xl transform group-hover:rotate-12 group-hover:scale-110">
+               <div className="admin-icon-box bg-white/10 text-white w-24 h-24 rounded-[40px] border border-white/20 backdrop-blur-3xl group-hover:bg-blue-600 group-hover:border-blue-600 transition-all duration-700 shadow-2xl transform group-hover:rotate-12 group-hover:scale-110">
                  <Sparkles size={40} className="animate-pulse" />
                </div>
                <div className="admin-space-y-4">
                  <div className="text-[10px] font-black text-white uppercase tracking-[0.4em] leading-none mb-2 opacity-60">Info</div>
                  <p className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] px-6 leading-relaxed italic opacity-60">FAQs help customers find answers quickly without needing to contact support.</p>
                  <div className="flex items-center justify-center gap-3 mt-8">
-                    <Clock size={16} className="text-rose-500" />
+                    <Clock size={16} className="text-emerald-500" />
                     <span className="text-[9px] font-black text-slate-500 uppercase tracking-[0.3em] italic">System Active</span>
                  </div>
                </div>

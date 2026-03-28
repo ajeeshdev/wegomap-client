@@ -133,7 +133,7 @@ export default function EventsSettingsPage() {
                 {/* 1. Corporate Events Panel */}
                 <div className="admin-form-card !p-8">
                     <div className="flex items-center gap-3 mb-8 border-b border-slate-50 pb-6">
-                        <div className="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center text-orange-600">
+                        <div className="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center text-blue-600">
                              <Calendar size={22} />
                         </div>
                         <div>
@@ -146,7 +146,7 @@ export default function EventsSettingsPage() {
                         <div className="space-y-6">
                             <div className="admin-form-group">
                                 <label className="admin-form-label mb-2 flex items-center gap-2">
-                                    <Type size={14} className="text-orange-500" /> <span className="text-black font-black">Section Subtitle</span>
+                                    <Type size={14} className="text-blue-600" /> <span className="text-black font-black">Section Subtitle</span>
                                 </label>
                                 <input 
                                     type="text"
@@ -172,7 +172,7 @@ export default function EventsSettingsPage() {
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="admin-form-group">
                                     <label className="admin-form-label mb-2 flex items-center gap-2">
-                                        <Sparkles size={14} className="text-orange-500" /> <span className="text-black font-black">Stat Label</span>
+                                        <Sparkles size={14} className="text-blue-600" /> <span className="text-black font-black">Stat Label</span>
                                     </label>
                                     <input 
                                         type="text"
@@ -225,7 +225,7 @@ export default function EventsSettingsPage() {
                 {/* 2. Special Events Panel */}
                 <div className="admin-form-card !p-8">
                     <div className="flex items-center gap-3 mb-8 border-b border-slate-50 pb-6">
-                        <div className="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center text-orange-600">
+                        <div className="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center text-blue-600">
                              <PartyPopper size={22} />
                         </div>
                         <div>
@@ -238,7 +238,7 @@ export default function EventsSettingsPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div className="admin-form-group">
                                 <label className="admin-form-label mb-2 flex items-center gap-2">
-                                    <Type size={14} className="text-orange-500" /> <span className="text-black font-black">Subtitle</span>
+                                    <Type size={14} className="text-blue-600" /> <span className="text-black font-black">Subtitle</span>
                                 </label>
                                 <input 
                                     type="text"

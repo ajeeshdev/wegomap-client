@@ -71,8 +71,8 @@ export default function HouseboatsAdmin() {
 
       {/* Content Display */}
       {loading ? (
-        <div className="admin-form-card flex flex-col items-center justify-center p-20 gap-4">
-          <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
+        <div className="admin-form-card flex flex-col items-center justify-center p-10 gap-4">
+          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
           <p className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Loading houseboats...</p>
         </div>
       ) : (
@@ -92,16 +92,16 @@ export default function HouseboatsAdmin() {
                   <tr key={item._id} className="group hover:bg-slate-50/50 transition-colors">
                     <td className="px-8 py-6">
                       <div className="flex items-center gap-4">
-                        <div className="w-16 h-16 rounded-2xl bg-orange-50/30 flex items-center justify-center text-orange-600 border border-orange-100/50 flex-shrink-0 group-hover:scale-110 group-hover:bg-orange-600 group-hover:text-white transition-all duration-700 shadow-sm overflow-hidden relative">
+                        <div className="w-16 h-16 rounded-2xl bg-orange-50/30 flex items-center justify-center text-blue-600 border border-orange-100/50 flex-shrink-0 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-700 shadow-sm overflow-hidden relative">
                           {item.thumb ? (
                             <img src={getImageUrl(item.thumb)} alt="" className="w-small h-small object-cover grayscale group-hover:grayscale-0 transition-all duration-700 opacity-80 group-hover:opacity-100" />
                           ) : (
                             <Ship size={24} className="group-hover:-rotate-12 transition-transform duration-500" />
                           )}
-                          <div className="absolute inset-0 bg-orange-600/0 group-hover:bg-orange-600/5 transition-colors"></div>
+                          <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/5 transition-colors"></div>
                         </div>
                         <div className="min-w-0">
-                          <div className="font-bold text-slate-900 group-hover:text-orange-600 transition-colors uppercase text-[11px] tracking-tight leading-tight line-clamp-1">
+                          <div className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors uppercase text-[11px] tracking-tight leading-tight line-clamp-1">
                             {item.title || item.name}
                           </div>
                           <div className="flex items-center gap-3 mt-2 leading-none">
@@ -114,7 +114,7 @@ export default function HouseboatsAdmin() {
                     </td>
                     <td className="px-6 py-6 border-x border-slate-50/50">
                       <div className="flex items-center gap-2 text-slate-600 bg-slate-100/50 px-3 py-1.5 rounded-xl border border-slate-100 w-fit">
-                        <Anchor size={11} className="text-orange-500" />
+                        <Anchor size={11} className="text-blue-600" />
                         <span className="text-[10px] font-bold uppercase tracking-widest">{item.category || 'Luxury Cruiser'}</span>
                       </div>
                     </td>
@@ -126,11 +126,11 @@ export default function HouseboatsAdmin() {
                       </div>
                     </td>
                     <td className="px-8 py-6 text-right">
-                      <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-4 group-hover:translate-x-0">
-                        <Link href={`/admin/houseboats/${item._id}/edit`} className="p-2.5 bg-white border border-slate-200 rounded-xl text-orange-600 hover:bg-orange-600 hover:text-white transition-all shadow-sm active:scale-95 group/edit" title="Edit">
+                      <div className="flex items-center justify-end gap-2 transition-all duration-300">
+                        <Link href={`/admin/houseboats/${item._id}/edit`} className="p-2.5 bg-white border border-slate-200 rounded-xl text-blue-600 hover:bg-blue-600 hover:text-white transition-all shadow-sm active:scale-95 group/edit" title="Edit">
                           <Edit size={16} className="group-hover/edit:rotate-12 transition-transform" />
                         </Link>
-                        <button onClick={() => handleDelete(item._id)} className="p-2.5 bg-white border border-slate-200 rounded-xl text-rose-500 hover:bg-rose-500 hover:text-white transition-all shadow-sm active:scale-95 shrink-0" title="Delete">
+                        <button onClick={() => handleDelete(item._id)} className="p-2.5 bg-white border border-slate-200 rounded-xl text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all shadow-sm active:scale-95 shrink-0" title="Delete">
                           <Trash2 size={16} />
                         </button>
                       </div>
@@ -158,7 +158,7 @@ export default function HouseboatsAdmin() {
       {/* Summary Matrix */}
       {!loading && filteredData.length > 0 && (
         <div className="admin-form-card bg-slate-900 border-slate-800 p-8 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-bl-full blur-[80px]"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 rounded-bl-full blur-[80px]"></div>
           <div className="relative z-10 flex items-center justify-between">
             <div className="flex items-center gap-6">
               <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white border border-white/20 backdrop-blur-md">
@@ -181,7 +181,7 @@ export default function HouseboatsAdmin() {
                   <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">System Active</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Zap size={10} className="text-orange-500" />
+                  <Zap size={10} className="text-blue-600" />
                   <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Live Pricing</span>
                 </div>
               </div>

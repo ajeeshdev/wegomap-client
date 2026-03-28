@@ -76,7 +76,7 @@ export default function EditSpecialEvent() {
 
   if (loading) return (
     <div className="admin-form-card flex flex-col items-center justify-center p-24 gap-6">
-      <div className="w-16 h-16 border-4 border-rose-600 border-t-transparent rounded-full animate-spin shadow-2xl shadow-rose-500/20"></div>
+      <div className="w-16 h-16 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin shadow-2xl shadow-emerald-500/20"></div>
       <p className="font-black text-slate-400 uppercase tracking-[0.3em] text-[10px]">Loading...</p>
     </div>
   );
@@ -127,7 +127,7 @@ export default function EditSpecialEvent() {
                 <div className="admin-form-grid-2">
                   <div className="admin-form-group">
                     <label className="admin-form-label flex items-center gap-3 mb-4">
-                      <Type size={14} className="text-orange-500" /> Name
+                      <Type size={14} className="text-blue-600" /> Name
                     </label>
                     <input 
                       type="text" 
@@ -198,7 +198,7 @@ export default function EditSpecialEvent() {
         <div className="admin-form-sidebar">
           <div className="admin-form-card p-8 space-y-10">
             <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 flex items-center gap-3">
-              <div className="w-1.5 h-4 bg-orange-500 rounded-full"></div>
+              <div className="w-1.5 h-4 bg-blue-600 rounded-full"></div>
               Media
             </h4>
             <div className="space-y-8">
@@ -216,7 +216,7 @@ export default function EditSpecialEvent() {
                   <select 
                     value={formData.status} 
                     onChange={e => setFormData({ ...formData, status: e.target.value })}
-                    className="admin-form-select font-black bg-slate-50 border-slate-100 rounded-2xl h-14 uppercase text-[10px] tracking-widest cursor-pointer hover:bg-white transition-all shadow-sm focus:ring-8 focus:ring-orange-500/5 text-center"
+                    className="admin-form-select font-black bg-slate-50 border-slate-100 rounded-2xl h-14 uppercase text-[10px] tracking-widest cursor-pointer hover:bg-white transition-all shadow-sm focus:ring-8 focus:ring-blue-600/5 text-center"
                   >
                     <option value="Active">Visible</option>
                     <option value="Hidden">Hidden</option>
@@ -224,7 +224,7 @@ export default function EditSpecialEvent() {
                 </div>
                 
                 <div className="flex items-center gap-4 bg-slate-50/50 p-6 rounded-[32px] border border-slate-100 transition-all hover:bg-white hover:shadow-sm">
-                  <div className="w-10 h-10 rounded-xl bg-orange-100/50 flex items-center justify-center text-orange-600 shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-orange-100/50 flex items-center justify-center text-blue-600 shrink-0">
                     <Clock size={20} />
                   </div>
                   <div className="text-left min-w-0">

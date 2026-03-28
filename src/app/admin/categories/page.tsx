@@ -71,7 +71,7 @@ export default function CategorysAdmin() {
               className="admin-search-input"
             />
           </div>
-          <Link href="/admin/categories/create" className="admin-btn admin-btn-primary h-10 px-6 flex-shrink-0">
+          <Link href="/admin/categories/create" className="admin-btn admin-btn-primary flex-shrink-0">
             <Plus size={18} /> Add Category
           </Link>
         </div>
@@ -80,7 +80,7 @@ export default function CategorysAdmin() {
       {/* Content Display */}
       {loading ? (
         <div className="admin-form-card flex flex-col items-center justify-center p-16 gap-4">
-          <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
           <p className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Loading categories...</p>
         </div>
       ) : (
@@ -115,7 +115,7 @@ export default function CategorysAdmin() {
                     </td>
                     <td className="px-6 py-4 border-x border-slate-50/50">
                       <div className="flex justify-center">
-                        <div className="text-[10px] font-bold text-orange-600 font-mono bg-orange-50/50 px-3 py-1.5 rounded-lg border border-orange-100/50 w-fit tracking-tighter shadow-sm">
+                        <div className="text-[10px] font-bold text-blue-600 font-mono bg-blue-50/50 px-3 py-1.5 rounded-lg border border-blue-100/50 w-fit tracking-tighter shadow-sm">
                           /{String(item.slug || 'global')}
                         </div>
                       </div>
@@ -128,7 +128,7 @@ export default function CategorysAdmin() {
                       </div>
                     </td>
                     <td className="px-6 py-4 text-right">
-                      <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <div className="flex items-center justify-end gap-2">
                         <Link href={`/admin/categories/${item._id}/edit`} className="admin-action-btn-circle" title="Edit">
                           <Edit size={16} />
                         </Link>
@@ -160,7 +160,7 @@ export default function CategorysAdmin() {
       {/* Summary Matrix Footer */}
       {!loading && uniqueData.length > 0 && (
           <div className="admin-summary-footer">
-               <div className="absolute top-0 right-0 w-[600px] h-full bg-orange-500/5 -skew-x-12 translate-x-32 group-hover:translate-x-24 transition-transform duration-1000"></div>
+               <div className="absolute top-0 right-0 w-[600px] h-full bg-blue-600/5 -skew-x-12 translate-x-32 group-hover:translate-x-24 transition-transform duration-1000"></div>
                <div className="admin-summary-footer-inner">
                    <div className="flex items-center gap-6">
                        <div className="admin-summary-icon-box">
@@ -173,7 +173,7 @@ export default function CategorysAdmin() {
                                   <Clock size={12} className="text-emerald-500" /> Synced
                                </div>
                                <div className="admin-badge-indicator">
-                                  <ShieldCheck size={12} className="text-orange-500" /> Valid
+                                  <ShieldCheck size={12} className="text-blue-600" /> Valid
                                </div>
                            </div>
                        </div>
@@ -186,7 +186,7 @@ export default function CategorysAdmin() {
                         <div className="w-px h-16 bg-white/10"></div>
                         <div className="grid grid-cols-1 gap-3">
                              <div className="admin-badge-indicator text-orange-400">
-                                 <div className="admin-badge-dot bg-orange-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
+                                 <div className="admin-badge-dot bg-blue-600 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
                                  Indexed
                              </div>
                              <div className="admin-badge-indicator">

@@ -230,7 +230,7 @@ export default function AboutSettingsPage() {
                             {content.values.map((value, index) => (
                                 <div key={index} className="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-3">
                                     <div className="flex items-center justify-between">
-                                        <span className="text-[9px] font-black text-rose-500 uppercase">Value 0{index + 1}</span>
+                                        <span className="text-[9px] font-black text-emerald-500 uppercase">Value 0{index + 1}</span>
                                         <ShieldCheck size={14} className="text-slate-300" />
                                     </div>
                                     <input 
@@ -241,7 +241,7 @@ export default function AboutSettingsPage() {
                                             newValues[index].title = e.target.value;
                                             setContent({ ...content, values: newValues });
                                         }}
-                                        className="w-full bg-white border border-slate-200 rounded-lg px-4 py-3 text-xs font-bold text-slate-800 outline-none focus:border-rose-500 transition-colors"
+                                        className="w-full bg-white border border-slate-200 rounded-lg px-4 py-3 text-xs font-bold text-slate-800 outline-none focus:border-emerald-500 transition-colors"
                                         placeholder="Title"
                                     />
                                     <textarea 
@@ -252,7 +252,7 @@ export default function AboutSettingsPage() {
                                             newValues[index].description = e.target.value;
                                             setContent({ ...content, values: newValues });
                                         }}
-                                        className="w-full bg-white border border-slate-200 rounded-lg px-4 py-3 text-[10px] font-medium text-slate-500 outline-none focus:border-rose-500 transition-colors resize-none"
+                                        className="w-full bg-white border border-slate-200 rounded-lg px-4 py-3 text-[10px] font-medium text-slate-500 outline-none focus:border-emerald-500 transition-colors resize-none"
                                         placeholder="Description..."
                                     />
                                 </div>

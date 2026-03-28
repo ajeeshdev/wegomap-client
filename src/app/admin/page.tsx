@@ -10,27 +10,30 @@ import {
   ArrowRight,
   Globe,
   Plus,
+  Activity,
+  MapPin,
+  Clock,
+  Users
 } from "lucide-react";
 
 import "./cms-dashboard.css";
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState({ packages: 0, blogs: 0, leads: 0 });
+  const [visitorStats, setVisitorStats] = useState({ totalVisits: 0, todayVisits: 0, recentVisitors: [] });
   const [loading, setLoading] = useState(true);
-  const [siteLogo, setSiteLogo] = useState("");
 
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const [pRes, bRes, lRes, oRes] = await Promise.all([
+        const token = localStorage.getItem("token");
+        const fetchOptions = { headers: { Authorization: `Bearer ${token}` } };
+        
+        const [pRes, bRes, lRes, aRes] = await Promise.all([
           fetch(`${API_URL}/packages`),
           fetch(`${API_URL}/blogs`),
-          fetch(`${API_URL}/leads`, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }),
-          fetch(`${API_URL}/options`)
+          fetch(`${API_URL}/leads`, fetchOptions),
+          fetch(`${API_URL}/analytics/stats`, fetchOptions)
         ]);
 
         const safeJson = async (res: Response) => {
@@ -40,16 +43,15 @@ export default function AdminDashboard() {
           return { success: false, data: [] };
         };
 
-        const [pData, bData, lData, oData] = await Promise.all([
+        const [pData, bData, lData, aData] = await Promise.all([
           safeJson(pRes),
           safeJson(bRes),
           safeJson(lRes),
-          safeJson(oRes),
+          safeJson(aRes)
         ]);
 
-        if (oData.success && oData.data) {
-          const logoOpt = oData.data.find((o: any) => o.key === 'site_logo');
-          if (logoOpt) setSiteLogo(logoOpt.value);
+        if (aData.success && aData.data) {
+          setVisitorStats(aData.data);
         }
 
         setStats({
@@ -67,105 +69,118 @@ export default function AdminDashboard() {
   }, []);
 
   const cards = [
-    {
-      label: "Travel Packages",
-      count: stats.packages,
-      icon: Package,
-      href: "/admin/packages",
-      desc: "Manage your tour packages",
-    },
-    {
-      label: "Blog Posts",
-      count: stats.blogs,
-      icon: FileText,
-      href: "/admin/blogs",
-      desc: "Your published articles",
-    },
-    {
-      label: "Inquiries",
-      count: stats.leads,
-      icon: Zap,
-      href: "/admin/leads",
-      desc: "Customer messages",
-    },
+    { label: "Tour Packages", count: stats.packages, icon: Package, href: "/admin/packages" },
+    { label: "Inquiries", count: stats.leads, icon: Zap, href: "/admin/leads" },
+    { label: "Blog Posts", count: stats.blogs, icon: FileText, href: "/admin/blogs" },
   ];
 
   return (
-    <div id="cms-dashboard" className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-      <header className="dashboard-header-centered flex flex-col items-center mb-16 pt-8">
-     
-
-        {/* Centered Actions */}
-        <div className="header-actions flex items-center justify-center gap-4 mt-8">
-          <Link href="/" target="_blank" className="admin-btn admin-btn-secondary !rounded-full !px-8">
-            <Globe size={16} /> <span>Site Preview</span>
+    <div id="cms-dashboard">
+      <div className="dashboard-header-modern">
+        <h1>Overview</h1>
+        <div className="flex items-center gap-2">
+          <Link href="/" target="_blank" className="admin-btn admin-btn-secondary h-8 text-[11px] !rounded-md">
+            <Globe size={14} /> Preview Site
           </Link>
-          <Link href="/admin/packages/create" className="admin-btn admin-btn-primary !rounded-full !px-8 hover:!rotate-[-2deg]">
-            <Plus size={18} /> <span>New Package</span>
+          <Link href="/admin/packages/create" className="admin-btn admin-btn-primary h-8 text-[11px] !rounded-md !bg-slate-900 !text-white shadow-none border-none">
+            <Plus size={14} /> New Package
           </Link>
         </div>
-      </header>
+      </div>
 
-      <div className="dashboard-grid space-y-12">
-        {/* Core Stats Overview */}
-        <section className="stats-grid grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="space-y-6">
+        <section className="stats-grid-compact">
           {cards.map((card) => {
             const Icon = card.icon;
             return (
-              <Link key={card.label} href={card.href} className="stat-card-premium group">
-                <div className="card-top flex justify-between items-start mb-6">
-                  <div className="icon-box group-hover:bg-orange-500 group-hover:text-white transition-all duration-500">
-                    <Icon size={24} />
-                  </div>
-                  <div className="trend text-[10px] font-black uppercase text-emerald-500 bg-emerald-50 px-2 py-1 rounded-lg">
-                    Live
-                  </div>
-                </div>
-                <div className="card-info">
-                  <span className="label text-[11px] font-black uppercase tracking-widest text-slate-400 mb-1 block">
-                    {card.label}
-                  </span>
-                  <div className="value text-4xl font-black text-slate-950 mb-4">
-                    {loading ? <div className="h-10 w-20 bg-slate-100 animate-pulse rounded-lg" /> : card.count}
-                  </div>
-                  <p className="description text-xs font-semibold text-slate-500">{card.desc}</p>
-                </div>
-                <div className="card-footer mt-6 pt-6 border-t border-slate-50 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-orange-500">Manage Data</span>
-                  <ArrowRight size={14} className="text-orange-500" />
+              <Link key={card.label} href={card.href} className="stat-card-classic">
+                <div className="stat-label">{card.label}</div>
+                <div className="flex items-center justify-between mt-1">
+                  <div className="stat-value">{loading ? "..." : card.count}</div>
+                  <Icon size={20} className="text-slate-300" />
                 </div>
               </Link>
             );
           })}
         </section>
 
-        {/* Action Center */}
-        <section className="quick-actions-panel pt-8">
-          <div className="panel-header flex flex-col items-center gap-3 mb-10">
-            <div className="w-8 h-1.5 bg-orange-500 rounded-full mb-2"></div>
-            <h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight">Quick Actions</h2>
-            <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">Execute frequent management tasks</p>
-          </div>
-          <div className="actions-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Link href="/admin/packages/create" className="action-button group">
-              <div className="action-icon bg-orange-50 text-orange-600 group-hover:bg-orange-600 group-hover:text-white"><Plus size={18} /></div>
-              <span className="font-black text-sm text-slate-700">Add Package</span>
-            </Link>
-            <Link href="/admin/blogs/create" className="action-button group">
-              <div className="action-icon bg-orange-50 text-orange-600 group-hover:bg-orange-600 group-hover:text-white"><FileText size={18} /></div>
-              <span className="font-black text-sm text-slate-700">Write Blog</span>
-            </Link>
-            <Link href="/admin/leads" className="action-button group">
-              <div className="action-icon bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white"><Zap size={18} /></div>
-              <span className="font-black text-sm text-slate-700">Check Leads</span>
-            </Link>
-            <Link href="/admin/destinations" className="action-button group">
-              <div className="action-icon bg-orange-50 text-orange-600 group-hover:bg-orange-600 group-hover:text-white"><Globe size={18} /></div>
-              <span className="font-black text-sm text-slate-700">Destinations</span>
-            </Link>
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <section className="lg:col-span-2 audience-section">
+            <div className="audience-section-header">
+              <h2 className="audience-section-title flex items-center gap-2">
+                <Activity size={14} className="text-blue-600" /> Recent Traffic
+              </h2>
+            </div>
+            <div className="activity-table">
+               {(visitorStats?.recentVisitors || []).length > 0 ? (
+                 visitorStats.recentVisitors.map((v: any, idx: number) => (
+                   <div key={idx} className="activity-row">
+                      <div className="activity-info">
+                         <div className="activity-ip">{v.ip}</div>
+                         <div className="activity-ua font-mono">{v.userAgent}</div>
+                      </div>
+                      <div className="activity-meta">
+                         <div className="activity-path text-blue-600 font-bold">{v.path}</div>
+                         <div className="activity-time">{new Date(v.timestamp).toLocaleTimeString()}</div>
+                      </div>
+                   </div>
+                 ))
+               ) : (
+                 <div className="py-12 text-center text-xs text-slate-400">No activity yet</div>
+               )}
+            </div>
+          </section>
+
+          <section className="lg:col-span-1 space-y-4">
+              <div className="audience-section !flex !items-center !justify-between !p-6">
+                  <div>
+                    <div className="stat-label">Total Visitors</div>
+                    <div className="text-2xl font-bold text-slate-900 leading-none mt-2">
+                      {loading ? "..." : (visitorStats?.totalVisits || 0).toLocaleString()}
+                    </div>
+                  </div>
+                  <Users size={24} className="text-slate-100" />
+              </div>
+              <div className="audience-section !flex !items-center !justify-between !p-6">
+                  <div>
+                    <div className="stat-label">Direct Leads</div>
+                    <div className="text-2xl font-bold text-slate-900 leading-none mt-2">
+                      {loading ? "..." : stats.leads}
+                    </div>
+                  </div>
+                  <Zap size={24} className="text-slate-100" />
+              </div>
+              
+              <div className="p-1 px-3 bg-blue-50 text-blue-600 rounded-lg text-[10px] font-bold uppercase tracking-wider text-center">
+                  System monitoring active
+              </div>
+          </section>
+        </div>
+
+        <section className="dashboard-actions pt-4 pb-12">
+           <div className="audience-section-header">
+              <h2 className="audience-section-title">Quick Actions</h2>
+           </div>
+           <div className="quick-actions-bar">
+             <Link href="/admin/packages/create" className="action-card-classic">
+               <Plus size={14} className="action-icon-classic" /> Add Package
+             </Link>
+             <Link href="/admin/blogs/create" className="action-card-classic">
+               <FileText size={14} className="action-icon-classic" /> Write Blog
+             </Link>
+             <Link href="/admin/leads" className="action-card-classic">
+               <Inbox className="w-4 h-4 text-slate-400" /> Check Inquiries
+             </Link>
+           </div>
         </section>
       </div>
     </div>
   );
 }
+
+// Minimal missing component for brevity
+const Inbox = ({ className }: { className: string }) => (
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0a2 2 0 01-2 2H6a2 2 0 01-2-2m16 0l-8 8-8-8" />
+  </svg>
+);

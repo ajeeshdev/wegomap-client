@@ -93,8 +93,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   if (!authorized && pathname !== '/login') {
       return (
-          <div className="flex items-center justify-center min-h-screen bg-slate-950">
-              <div className="w-8 h-8 border-4 border-rose-600 border-t-transparent rounded-full animate-spin"></div>
+          <div className="flex items-center justify-center min-h-screen bg-white">
+              <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
           </div>
       );
   }
@@ -240,7 +240,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   ];
 
   return (
-    <div className="admin-layout selection:bg-orange-500/20">
+    <div className="admin-layout selection:bg-blue-600/20">
       {/* Sidebar */}
       <div className="admin-sidebar shadow-sm">
         

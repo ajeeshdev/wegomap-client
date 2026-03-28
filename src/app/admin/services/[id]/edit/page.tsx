@@ -70,7 +70,7 @@ export default function EditService() {
     if (loading) {
         return (
             <div className="py-32 flex flex-col items-center gap-4">
-                <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
                 <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Accessing Service Logic...</p>
             </div>
         );
@@ -116,7 +116,7 @@ export default function EditService() {
                         <div className="space-y-8">
                             <div className="admin-form-group">
                                 <label className="admin-form-label flex items-center gap-3 mb-3">
-                                    <Type size={14} className="text-orange-500" /> Service Title
+                                    <Type size={14} className="text-blue-600" /> Service Title
                                 </label>
                                 <input 
                                     type="text" 
@@ -143,7 +143,7 @@ export default function EditService() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div className="admin-form-group">
                                     <label className="admin-form-label flex items-center gap-3 mb-3">
-                                        <Briefcase size={14} className="text-orange-500" /> Icon Name (Lucide)
+                                        <Briefcase size={14} className="text-blue-600" /> Icon Name (Lucide)
                                     </label>
                                     <input 
                                         type="text" 
@@ -156,7 +156,7 @@ export default function EditService() {
 
                                 <div className="admin-form-group">
                                     <label className="admin-form-label flex items-center gap-3 mb-3">
-                                        <Globe size={14} className="text-orange-500" /> Redirect Path
+                                        <Globe size={14} className="text-blue-600" /> Redirect Path
                                     </label>
                                     <input 
                                         type="text" 
@@ -174,7 +174,7 @@ export default function EditService() {
                 <div className="admin-form-sidebar">
                     <div className="admin-form-card p-8 space-y-8">
                         <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2">
-                            <div className="w-1 h-3 bg-orange-500 rounded-full"></div>
+                            <div className="w-1 h-3 bg-blue-600 rounded-full"></div>
                             Node Management
                         </h4>
                         
@@ -204,7 +204,7 @@ export default function EditService() {
                                 <select 
                                     value={formData.status}
                                     onChange={e => setFormData({ ...formData, status: e.target.value })}
-                                    className="bg-transparent font-black text-[10px] uppercase outline-none text-orange-600 appearance-none cursor-pointer"
+                                    className="bg-transparent font-black text-[10px] uppercase outline-none text-blue-600 appearance-none cursor-pointer"
                                 >
                                     <option value="Active">Active</option>
                                     <option value="Inactive">Draft</option>

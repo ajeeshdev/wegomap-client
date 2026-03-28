@@ -127,7 +127,7 @@ export default function ServicesSettingsPage() {
                     <div className="space-y-6">
                         <div className="admin-form-group">
                             <label className="admin-form-label mb-2 flex items-center gap-2">
-                                <Info size={14} className="text-orange-500" /> <span className="text-black font-black">Section Subtitle</span>
+                                <Info size={14} className="text-blue-600" /> <span className="text-black font-black">Section Subtitle</span>
                             </label>
                             <input 
                                 type="text"
@@ -153,13 +153,13 @@ export default function ServicesSettingsPage() {
                             </div>
                             <div className="admin-form-group">
                                 <label className="admin-form-label mb-2 flex items-center gap-2">
-                                    <Sparkles size={14} className="text-orange-500" /> <span className="text-black font-black">Title (Highlight Part)</span>
+                                    <Sparkles size={14} className="text-blue-600" /> <span className="text-black font-black">Title (Highlight Part)</span>
                                 </label>
                                 <input 
                                     type="text"
                                     value={content.intro.highlightText}
                                     onChange={e => setContent({ ...content, intro: { ...content.intro, highlightText: e.target.value } })}
-                                    className="admin-form-input font-black text-orange-600 border-orange-100 bg-orange-50/10"
+                                    className="admin-form-input font-black text-blue-600 border-orange-100 bg-orange-50/10"
                                     placeholder="e.g. our expertise."
                                 />
                             </div>

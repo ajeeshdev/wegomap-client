@@ -108,7 +108,7 @@ export default function LandingPagesAdmin() {
                     <td className="cms-table-cell">
                       <div>
                         <div className="cms-cell-title">{item.title}</div>
-                        <Link href={`/${item.slug}`} target="_blank" className="text-xs text-orange-600 hover:underline">
+                        <Link href={`/${item.slug}`} target="_blank" className="text-xs text-blue-600 hover:underline">
                           /{item.slug}
                         </Link>
                       </div>

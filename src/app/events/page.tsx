@@ -140,38 +140,46 @@ export default function EventsCombinedPage() {
                                     href={event.type === 'Special' ? `/special-events/${event.slug || event._id}` : `/events/${event.slug || event._id}`}
                                     className="block h-full"
                                 >
-                                    <div className="packageCardSmall group h-full flex flex-col">
+                                    <div className="premiumEventCard group h-full">
                                         <div className="imageWrapper eventWrapper">
                                             <Image
                                                 src={event.images?.[0] || "/assets/site/assets/images/event.jpg"}
                                                 alt={event.title}
                                                 fill
-                                                
+                                                className="img-premium"
                                             />
                                             {/* Category Tag */}
                                             <div className={`category-tag ${event.type === 'Corporate' ? 'corporate' : 'special'}`}>
                                                 {event.type}
                                             </div>
+                                            
+                                            <div className="card-overlay">
+                                                <div className="action-pill">
+                                                    Explore details <ArrowRight size={14} />
+                                                </div>
+                                            </div>
                                         </div>
                                         
-                                        <div className="cardContent flex-1 flex flex-col">
-                                            <div className="location-meta flex items-center gap-2 mb-2 text-slate-400 font-semibold uppercase text-[10px] tracking-wider">
-                                                <MapPin size={12} className="text-orange-500" /> {event.location || 'Kochi, Kerala'}
+                                        <div className="cardContent">
+                                            <div className="location-meta">
+                                                <MapPin size={12} /> {event.location || 'Kochi, Kerala'}
                                             </div>
-                                            <h4 className="packageTitle line-clamp-2 text-lg font-black text-slate-900 leading-tight">
+                                            <h4 className="packageTitle">
                                                 {event.title}
                                             </h4>
                                             
-                                            <div className="flex items-center justify-between mt-auto pt-4">
-                                                <div className="flex items-center gap-2 font-black text-[10px] uppercase tracking-widest text-slate-400 group-hover:text-orange-500 transition-colors">
-                                                    Join Event <ArrowRight size={14} />
+                                            <div className="event-footer">
+                                                <div className="join-event">
+                                                    JOIN EVENT
                                                 </div>
-                                                <div className="actionIcon !relative !right-0 !top-0 !transform-none !m-0">
+                                                <div className="actionIcon-premium">
                                                     <ChevronRight size={18} />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
+
                                 </Link>
                             ))}
                         </div>

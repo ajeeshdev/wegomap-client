@@ -67,8 +67,8 @@ export default function HouseboatPricingAdmin() {
   };
 
   if (loading) return (
-    <div className="cms-page-wrapper flex items-center justify-center p-20">
-      <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
+    <div className="cms-page-wrapper flex items-center justify-center p-10">
+      <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
     </div>
   );
 

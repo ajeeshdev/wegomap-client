@@ -65,7 +65,7 @@ export default function EditAmenity() {
 
   if (loading) return (
     <div className="admin-form-card flex flex-col items-center justify-center p-24 gap-6">
-      <div className="w-16 h-16 border-4 border-orange-600 border-t-transparent rounded-full animate-spin shadow-2xl shadow-orange-500/20"></div>
+      <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin shadow-2xl shadow-blue-600/20"></div>
       <p className="font-black text-slate-400 uppercase tracking-[0.3em] text-[10px]">Loading...</p>
     </div>
   );
@@ -115,7 +115,7 @@ export default function EditAmenity() {
               <div className="admin-form-grid-2 admin-form-grid-2--compact">
                 <div className="admin-form-group">
                   <label className="admin-form-label flex items-center gap-3 mb-4">
-                    <Type size={18} className="text-orange-500" /> Amenity Name
+                    <Type size={18} className="text-blue-600" /> Amenity Name
                   </label>
                   <input 
                     type="text" 
@@ -136,7 +136,7 @@ export default function EditAmenity() {
                       type="text" 
                       value={formData.icon} 
                       onChange={e => setFormData({ ...formData, icon: e.target.value })} 
-                      className="admin-form-input pl-10 font-mono text-[13px] text-orange-600 font-black h-16 px-8 rounded-3xl bg-slate-50 border-slate-100 group-hover/mapping:bg-white transition-all uppercase tracking-widest" 
+                      className="admin-form-input pl-10 font-mono text-[13px] text-blue-600 font-black h-16 px-8 rounded-3xl bg-slate-50 border-slate-100 group-hover/mapping:bg-white transition-all uppercase tracking-widest" 
                     />
                     <Sparkles className="absolute right-6 top-1/2 -translate-y-1/2 text-amber-500/40 animate-pulse" size={18} />
                   </div>
@@ -144,7 +144,7 @@ export default function EditAmenity() {
               </div>
               
               <div className="p-10 bg-slate-50 border-2 border-slate-100 rounded-[48px] flex items-start gap-8 shadow-inner group/tip transition-all hover:bg-white hover:border-orange-100 hover:shadow-2xl hover:shadow-slate-200/40">
-                  <div className="w-16 h-16 rounded-3xl bg-white flex items-center justify-center text-orange-500 shadow-lg border border-slate-100 group-hover/tip:bg-orange-600 group-hover/tip:text-white transition-all duration-700 transform group-hover/tip:scale-110">
+                  <div className="w-16 h-16 rounded-3xl bg-white flex items-center justify-center text-blue-600 shadow-lg border border-slate-100 group-hover/tip:bg-blue-600 group-hover/tip:text-white transition-all duration-700 transform group-hover/tip:scale-110">
                     <Layers size={32} className="animate-pulse" />
                   </div>
                   <div className="space-y-3">
@@ -164,7 +164,7 @@ export default function EditAmenity() {
         <div className="admin-form-sidebar">
           <div className="admin-form-card p-8 space-y-10">
             <h4 className="text-[10px] font-black uppercase tracking-[0.35em] text-slate-400 flex items-center gap-3">
-              <div className="w-1.5 h-4 bg-orange-500 rounded-full"></div>
+              <div className="w-1.5 h-4 bg-blue-600 rounded-full"></div>
               Status
             </h4>
             <div className="space-y-10">
@@ -174,7 +174,7 @@ export default function EditAmenity() {
                   <select 
                     value={formData.status} 
                     onChange={e => setFormData({ ...formData, status: e.target.value })}
-                    className="admin-form-input font-black bg-slate-50 border-slate-100 rounded-2xl h-14 uppercase text-[11px] tracking-widest cursor-pointer group-hover/status:bg-white transition-all shadow-sm focus:ring-12 focus:ring-orange-500/5 appearance-none px-6"
+                    className="admin-form-input font-black bg-slate-50 border-slate-100 rounded-2xl h-14 uppercase text-[11px] tracking-widest cursor-pointer group-hover/status:bg-white transition-all shadow-sm focus:ring-12 focus:ring-blue-600/5 appearance-none px-6"
                   >
                    <option value="Active">Active</option>
                     <option value="Disabled">Disabled</option>
@@ -187,7 +187,7 @@ export default function EditAmenity() {
               
                <div className="pt-10 border-t border-slate-100">
                 <div className="flex items-center gap-5 bg-slate-50/50 p-6 rounded-[32px] border-2 border-slate-100 overflow-hidden group/id transition-all hover:bg-white hover:shadow-xl hover:border-orange-100">
-                  <div className="w-12 h-12 rounded-2xl bg-orange-100/50 flex items-center justify-center text-orange-600 shrink-0 group-hover/id:bg-orange-600 group-hover/id:text-white transition-all duration-700 shadow-sm">
+                  <div className="w-12 h-12 rounded-2xl bg-orange-100/50 flex items-center justify-center text-blue-600 shrink-0 group-hover/id:bg-blue-600 group-hover/id:text-white transition-all duration-700 shadow-sm">
                     <Clock size={24} />
                   </div>
                   <div className="min-w-0 text-left">
@@ -200,9 +200,9 @@ export default function EditAmenity() {
           </div>
 
           <div className="admin-form-card p-12 bg-slate-900 border-slate-800 relative overflow-hidden h-80 group shadow-2xl shadow-orange-950/20 mt-6 text-center">
-             <div className="absolute top-0 right-0 w-56 h-56 bg-orange-500/10 rounded-bl-full blur-[70px]"></div>
+             <div className="absolute top-0 right-0 w-56 h-56 bg-blue-600/10 rounded-bl-full blur-[70px]"></div>
              <div className="relative z-10 flex flex-col items-center justify-center gap-10 py-4 h-full">
-               <div className="admin-icon-box bg-white/10 text-white w-24 h-24 rounded-[40px] border border-white/20 backdrop-blur-3xl group-hover:bg-orange-600 group-hover:border-orange-500 transition-all duration-700 shadow-2xl transform group-hover:scale-125 group-hover:-rotate-12">
+               <div className="admin-icon-box bg-white/10 text-white w-24 h-24 rounded-[40px] border border-white/20 backdrop-blur-3xl group-hover:bg-blue-600 group-hover:border-blue-600 transition-all duration-700 shadow-2xl transform group-hover:scale-125 group-hover:-rotate-12">
                  <Zap size={40} className="animate-pulse" />
                </div>
                <div className="admin-space-y-4">

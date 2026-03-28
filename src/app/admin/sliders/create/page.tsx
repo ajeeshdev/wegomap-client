@@ -87,7 +87,7 @@ export default function CreateSlider() {
               <div className="space-y-12">
                 <div className="admin-form-group">
                   <label className="admin-form-label flex items-center gap-3 mb-4">
-                    <Type size={14} className="text-orange-500" /> Primary Headline Identity (Master Title)
+                    <Type size={14} className="text-blue-600" /> Primary Headline Identity (Master Title)
                   </label>
                   <input
                     type="text"
@@ -107,7 +107,7 @@ export default function CreateSlider() {
                       type="text"
                       value={formData.subtitle}
                       onChange={e => setFormData({ ...formData, subtitle: e.target.value })}
-                      className="admin-form-input font-black text-orange-600 uppercase tracking-[0.2em] text-[11px] h-14"
+                      className="admin-form-input font-black text-blue-600 uppercase tracking-[0.2em] text-[11px] h-14"
                       placeholder="THE ULTIMATE ESCAPE PROTOCOL"
                     />
                   </div>
@@ -122,7 +122,7 @@ export default function CreateSlider() {
                         type="text"
                         value={formData.link}
                         onChange={e => setFormData({ ...formData, link: e.target.value })}
-                        className="admin-form-input pl-10 font-mono text-[11px] text-orange-600 font-bold h-14"
+                        className="admin-form-input pl-10 font-mono text-[11px] text-blue-600 font-bold h-14"
                         placeholder="munnar-escape-blueprint"
                       />
                     </div>
@@ -147,7 +147,7 @@ export default function CreateSlider() {
         <div className="admin-form-sidebar">
           <div className="admin-form-card p-8 space-y-10">
             <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 flex items-center gap-2">
-              <div className="w-1 h-3 bg-orange-500 rounded-full"></div>
+              <div className="w-1 h-3 bg-blue-600 rounded-full"></div>
               Publication Hub
             </h4>
             <div className="space-y-8 text-center">
@@ -156,7 +156,7 @@ export default function CreateSlider() {
                 <select
                   value={formData.status}
                   onChange={e => setFormData({ ...formData, status: e.target.value })}
-                  className="admin-form-select font-black bg-slate-50 border-slate-100 rounded-2xl h-14 uppercase text-[10px] tracking-widest cursor-pointer hover:bg-white transition-all shadow-sm focus:ring-8 focus:ring-orange-500/5 text-center"
+                  className="admin-form-select font-black bg-slate-50 border-slate-100 rounded-2xl h-14 uppercase text-[10px] tracking-widest cursor-pointer hover:bg-white transition-all shadow-sm focus:ring-8 focus:ring-blue-600/5 text-center"
                 >
                   <option value="Active">Operational / Live</option>
                   <option value="Hidden">Draft / Archive Node</option>
@@ -165,7 +165,7 @@ export default function CreateSlider() {
 
               <div className="pt-8 border-t border-slate-50">
                 <div className="flex items-start gap-4 bg-slate-50/50 p-6 rounded-[32px] border border-slate-100 italic transition-all hover:bg-white hover:shadow-sm">
-                  <div className="w-10 h-10 rounded-xl bg-orange-100/50 flex items-center justify-center text-orange-600 shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-orange-100/50 flex items-center justify-center text-blue-600 shrink-0">
                     <Clock size={20} />
                   </div>
                   <div className="text-left">
@@ -185,7 +185,7 @@ export default function CreateSlider() {
             )}
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent h-full"></div>
             <div className="relative z-10 flex flex-col items-center justify-center gap-8 h-full text-center py-4">
-              <div className="admin-icon-box bg-white/10 text-white w-24 h-24 rounded-[40px] border border-white/20 backdrop-blur-3xl group-hover:bg-orange-600 transition-all duration-700 shadow-2xl group-hover:scale-110">
+              <div className="admin-icon-box bg-white/10 text-white w-24 h-24 rounded-[40px] border border-white/20 backdrop-blur-3xl group-hover:bg-blue-600 transition-all duration-700 shadow-2xl group-hover:scale-110">
                 <Sparkles size={48} className="group-hover:rotate-12 transition-transform duration-700" />
               </div>
               <div className="admin-space-y-4">

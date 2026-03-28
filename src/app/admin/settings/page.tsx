@@ -70,8 +70,8 @@ export default function SettingsAdmin() {
 
       {/* Content Display */}
       {loading ? (
-        <div className="admin-form-card flex flex-col items-center justify-center p-20 gap-4">
-          <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
+        <div className="admin-form-card flex flex-col items-center justify-center p-10 gap-4">
+          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
           <p className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Loading settings...</p>
         </div>
       ) : (
@@ -91,15 +91,15 @@ export default function SettingsAdmin() {
                   <tr key={item._id} className="group hover:bg-slate-50/50 transition-colors">
                     <td className="px-8 py-5">
                       <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 border border-slate-100 group-hover:bg-orange-600 group-hover:text-white transition-all shadow-sm">
+                        <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 border border-slate-100 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
                            <Settings size={18} className="group-hover:rotate-90 transition-transform duration-500" strokeWidth={2} />
                         </div>
                         <div className="min-w-0">
-                          <div className="font-bold text-slate-900 group-hover:text-orange-600 transition-colors text-sm">
+                          <div className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors text-sm">
                             {item.title || item.name || item.key}
                           </div>
                           <div className="text-[10px] font-medium text-slate-400 mt-1 flex items-center gap-2">
-                             <span className="text-orange-500/60">Registry: #{String(item._id).toUpperCase().slice(-8)}</span>
+                             <span className="text-blue-600/60">Registry: #{String(item._id).toUpperCase().slice(-8)}</span>
                           </div>
                         </div>
                       </div>
@@ -120,10 +120,10 @@ export default function SettingsAdmin() {
                     </td>
                     <td className="px-8 py-5 text-right">
                       <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all">
-                        <Link href={`/admin/settings/${item._id}/edit`} className="p-2 bg-white border border-slate-200 rounded-lg text-orange-600 hover:bg-orange-600 hover:text-white transition-all shadow-sm active:scale-95" title="Edit">
+                        <Link href={`/admin/settings/${item._id}/edit`} className="p-2 bg-white border border-slate-200 rounded-lg text-blue-600 hover:bg-blue-600 hover:text-white transition-all shadow-sm active:scale-95" title="Edit">
                           <Edit size={16} />
                         </Link>
-                        <button onClick={() => handleDelete(item._id)} className="p-2 bg-white border border-slate-200 rounded-lg text-rose-500 hover:bg-rose-500 hover:text-white transition-all shadow-sm active:scale-95" title="Delete">
+                        <button onClick={() => handleDelete(item._id)} className="p-2 bg-white border border-slate-200 rounded-lg text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all shadow-sm active:scale-95" title="Delete">
                           <Trash2 size={16} />
                         </button>
                       </div>
@@ -160,7 +160,7 @@ export default function SettingsAdmin() {
                            <h4 className="text-white font-bold text-xl tracking-tight mb-2">Configuration Overview</h4>
                            <div className="flex items-center gap-6">
                                <div className="flex items-center gap-2 text-slate-500 text-[10px] font-bold uppercase tracking-widest border-r border-white/10 pr-6 leading-none">
-                                  <Clock size={12} className="text-orange-500" /> System Live
+                                  <Clock size={12} className="text-blue-600" /> System Live
                                </div>
                                <div className="flex items-center gap-2 text-slate-500 text-[10px] font-bold uppercase tracking-widest leading-none">
                                   <ShieldCheck size={12} className="text-emerald-500" /> Data Validated

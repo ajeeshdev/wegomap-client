@@ -83,7 +83,7 @@ export default function CreateAmenity() {
               <div className="admin-form-grid-2 admin-form-grid-2--compact">
                 <div className="admin-form-group">
                   <label className="admin-form-label flex items-center gap-3 mb-4">
-                    <Type size={18} className="text-orange-500" /> Amenity Name
+                    <Type size={18} className="text-blue-600" /> Amenity Name
                   </label>
                   <input 
                     type="text" 
@@ -104,7 +104,7 @@ export default function CreateAmenity() {
                       type="text" 
                       value={formData.icon} 
                       onChange={e => setFormData({ ...formData, icon: e.target.value })} 
-                      className="admin-form-input pl-10 font-mono text-[13px] text-orange-600 font-black h-16 px-8 rounded-3xl bg-slate-50 border-slate-100 group-hover/mapping:bg-white transition-all uppercase tracking-widest" 
+                      className="admin-form-input pl-10 font-mono text-[13px] text-blue-600 font-black h-16 px-8 rounded-3xl bg-slate-50 border-slate-100 group-hover/mapping:bg-white transition-all uppercase tracking-widest" 
                       placeholder="e.g. wifi, coffee, car..." 
                     />
                     <Sparkles className="absolute right-6 top-1/2 -translate-y-1/2 text-amber-500/40 animate-pulse" size={18} />
@@ -113,7 +113,7 @@ export default function CreateAmenity() {
               </div>
               
               <div className="p-10 bg-slate-50 border-2 border-slate-100 rounded-[48px] flex items-start gap-8 shadow-inner group/tip transition-all hover:bg-white hover:border-orange-100 hover:shadow-2xl hover:shadow-slate-200/40">
-                  <div className="w-16 h-16 rounded-3xl bg-white flex items-center justify-center text-orange-500 shadow-lg border border-slate-100 group-hover/tip:bg-orange-600 group-hover/tip:text-white transition-all duration-700 transform group-hover/tip:scale-110">
+                  <div className="w-16 h-16 rounded-3xl bg-white flex items-center justify-center text-blue-600 shadow-lg border border-slate-100 group-hover/tip:bg-blue-600 group-hover/tip:text-white transition-all duration-700 transform group-hover/tip:scale-110">
                     <Layers size={32} className="animate-pulse" />
                   </div>
                   <div className="space-y-3">
@@ -133,7 +133,7 @@ export default function CreateAmenity() {
         <div className="admin-form-sidebar">
           <div className="admin-form-card p-8 space-y-10">
             <h4 className="text-[10px] font-black uppercase tracking-[0.35em] text-slate-400 flex items-center gap-3">
-              <div className="w-1.5 h-4 bg-orange-500 rounded-full"></div>
+              <div className="w-1.5 h-4 bg-blue-600 rounded-full"></div>
               Status
             </h4>
             <div className="space-y-10">
@@ -143,7 +143,7 @@ export default function CreateAmenity() {
                   <select 
                     value={formData.status} 
                     onChange={e => setFormData({ ...formData, status: e.target.value })}
-                    className="admin-form-input font-black bg-slate-50 border-slate-100 rounded-2xl h-14 uppercase text-[11px] tracking-widest cursor-pointer group-hover/status:bg-white transition-all shadow-sm focus:ring-12 focus:ring-orange-500/5 appearance-none px-6"
+                    className="admin-form-input font-black bg-slate-50 border-slate-100 rounded-2xl h-14 uppercase text-[11px] tracking-widest cursor-pointer group-hover/status:bg-white transition-all shadow-sm focus:ring-12 focus:ring-blue-600/5 appearance-none px-6"
                   >
                     <option value="Active">Active</option>
                     <option value="Disabled">Disabled</option>
@@ -156,7 +156,7 @@ export default function CreateAmenity() {
               
               <div className="pt-10 border-t border-slate-100">
                 <div className="flex items-center gap-5 bg-slate-50/50 p-6 rounded-[32px] border-2 border-slate-100 overflow-hidden group/sync hover:bg-white transition-all shadow-sm hover:border-orange-100 hover:shadow-xl">
-                  <div className="w-12 h-12 rounded-2xl bg-orange-100/50 flex items-center justify-center text-orange-600 shrink-0 group-hover/sync:bg-orange-600 group-hover/sync:text-white transition-all duration-700 shadow-sm">
+                  <div className="w-12 h-12 rounded-2xl bg-orange-100/50 flex items-center justify-center text-blue-600 shrink-0 group-hover/sync:bg-blue-600 group-hover/sync:text-white transition-all duration-700 shadow-sm">
                     <Clock size={24} className="animate-pulse" />
                   </div>
                   <div>

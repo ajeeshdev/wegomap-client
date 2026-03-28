@@ -78,7 +78,7 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
       {label ? (
         <div className="flex items-center justify-between">
           <label className="admin-form-label !mb-0 flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-orange-600"></div>
+            <div className="w-1.5 h-1.5 rounded-full bg-blue-600"></div>
             {label}
           </label>
           {value && !hideRemove && (
@@ -93,15 +93,15 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
       ) : null}
 
       {value ? (
-        <div className={`relative group overflow-hidden rounded-2xl border-2 border-slate-100 bg-slate-50 transition-all hover:border-orange-200 hover:shadow-xl hover:shadow-orange-500/5 ${size === 'icon' ? 'w-24 h-24 mx-auto' :
+        <div className={`relative group overflow-hidden rounded-2xl border-2 border-slate-100 bg-slate-50 transition-all hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/5 ${size === 'icon' ? 'w-24 h-24 mx-auto' :
           size === 'small' ? 'aspect-[4/3]' :
             size === 'landscape' ? 'aspect-[3/1]' :
-              'aspect-video'
+              'max-w-[300px] aspect-video'
           }`}>
           <img src={value} alt="Preview" className={`w-full h-full ${size === 'icon' ? 'object-contain p-2' : (objectFit === 'contain' ? 'object-contain' : 'object-cover')}`} />
 
           <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-            <div className="bg-white/95 backdrop-blur-sm rounded-xl p-3 flex items-center justify-between shadow-lg border border-orange-50">
+            <div className="bg-white/95 backdrop-blur-sm rounded-xl p-3 flex items-center justify-between shadow-lg border border-blue-50">
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
                   <CheckCircle2 size={12} strokeWidth={3} />
@@ -117,7 +117,7 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
                   disabled={uploading}
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                 />
-                <button className="bg-orange-600 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-orange-700 transition-all flex items-center gap-2">
+                <button className="bg-blue-600 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-blue-700 transition-all flex items-center gap-2">
                   {uploading ? <Loader2 size={10} className="animate-spin" /> : <Upload size={10} strokeWidth={3} />}
                   Change
                 </button>
@@ -126,7 +126,7 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
           </div>
 
           {!hideRemove && (
-            <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="absolute top-3 right-3">
               <button
                 onClick={removeImage}
                 className="w-8 h-8 bg-rose-500 text-white rounded-lg flex items-center justify-center shadow-lg hover:bg-rose-600 transition-all active:scale-90"
@@ -148,19 +148,19 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
           />
           <div className={`
             border-2 border-dashed rounded-2xl p-10 flex flex-col items-center justify-center gap-4 transition-all duration-300
-            ${uploading ? 'bg-orange-50/50 border-orange-200' : 'bg-slate-50/50 border-slate-200 group-hover:bg-white group-hover:border-orange-400 group-hover:shadow-2xl group-hover:shadow-orange-500/10'}
+            ${uploading ? 'bg-blue-50/50 border-blue-200' : 'bg-slate-50/50 border-slate-200 group-hover:bg-white group-hover:border-blue-400 group-hover:shadow-2xl group-hover:shadow-blue-500/10'}
           `}>
             <div className={`
               w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500
-              ${uploading ? 'bg-orange-600 text-white animate-bounce' : 'bg-white text-orange-400 shadow-sm group-hover:scale-110 group-hover:bg-orange-600 group-hover:text-white'}
+              ${uploading ? 'bg-blue-600 text-white animate-bounce' : 'bg-white text-blue-400 shadow-sm group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white'}
             `}>
               {uploading ? <Loader2 size={24} className="animate-spin" /> : <Upload size={22} strokeWidth={2.5} />}
             </div>
             <div className="text-center">
-              <p className="text-[11px] font-black uppercase tracking-[0.15em] text-slate-900 group-hover:text-orange-600 transition-colors">
+              <p className="text-[11px] font-black uppercase tracking-[0.15em] text-slate-900 group-hover:text-blue-600 transition-colors">
                 {uploading ? 'Processing Architecture...' : 'Click to upload media'}
               </p>
-              <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-2 bg-slate-100 px-3 py-1 rounded-full group-hover:bg-orange-50 group-hover:text-orange-400 transition-colors">
+              <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-2 bg-slate-100 px-3 py-1 rounded-full group-hover:bg-blue-50 group-hover:text-blue-400 transition-colors">
                 High-res JPG, PNG or WebP
               </p>
             </div>

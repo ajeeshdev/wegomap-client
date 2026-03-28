@@ -87,7 +87,7 @@ export default function CreateTestimonial() {
               <div className="admin-form-grid-2">
                 <div className="admin-form-group">
                   <label className="admin-form-label flex items-center gap-3 mb-4">
-                    <User size={14} className="text-orange-500" /> Customer Name
+                    <User size={14} className="text-blue-600" /> Customer Name
                   </label>
                   <input 
                     type="text" 
@@ -113,7 +113,7 @@ export default function CreateTestimonial() {
 
               <div className="admin-form-group pt-12 border-t border-slate-50">
                 <label className="admin-form-label flex items-center gap-3 mb-8">
-                  <MessageSquareQuote size={18} className="text-rose-500" /> Feedback Content
+                  <MessageSquareQuote size={18} className="text-emerald-500" /> Feedback Content
                 </label>
                 <div className="bg-slate-50/50 rounded-[48px] p-2.5 border-2 border-slate-100 shadow-inner overflow-hidden transition-all focus-within:bg-white focus-within:shadow-2xl focus-within:shadow-slate-200/40 focus-within:border-amber-200">
                   <textarea 
@@ -132,7 +132,7 @@ export default function CreateTestimonial() {
         <div className="admin-form-sidebar">
           <div className="admin-form-card p-8 space-y-10">
              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 flex items-center gap-3">
-              <div className="w-1.5 h-4 bg-orange-500 rounded-full"></div>
+              <div className="w-1.5 h-4 bg-blue-600 rounded-full"></div>
               Rating
             </h4>
             
@@ -173,9 +173,9 @@ export default function CreateTestimonial() {
           </div>
 
           <div className="admin-form-card p-12 bg-slate-900 border-slate-800 relative overflow-hidden h-80 group shadow-2xl shadow-rose-950/10 mt-6">
-            <div className="absolute top-0 right-0 w-48 h-48 bg-rose-500/10 rounded-bl-full blur-[60px]"></div>
+            <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/10 rounded-bl-full blur-[60px]"></div>
             <div className="relative z-10 flex flex-col items-center justify-center gap-8 h-full text-center py-4">
-              <div className="admin-icon-box bg-white/10 text-white w-24 h-24 rounded-[40px] border border-white/20 backdrop-blur-3xl group-hover:bg-rose-600 group-hover:border-rose-500 transition-all duration-700 shadow-2xl transform group-hover:scale-110">
+              <div className="admin-icon-box bg-white/10 text-white w-24 h-24 rounded-[40px] border border-white/20 backdrop-blur-3xl group-hover:bg-emerald-600 group-hover:border-emerald-500 transition-all duration-700 shadow-2xl transform group-hover:scale-110">
                 <Sparkles size={40} className="animate-pulse" />
               </div>
               <div className="admin-space-y-4">

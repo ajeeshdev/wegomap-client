@@ -92,7 +92,7 @@ export default function CreateBanner() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="admin-form-group">
                   <label className="admin-form-label flex items-center gap-3 mb-3">
-                    <Layout size={14} className="text-orange-500" /> Page Identification Name
+                    <Layout size={14} className="text-blue-600" /> Page Identification Name
                   </label>
                   <input 
                     type="text" 
@@ -122,7 +122,7 @@ export default function CreateBanner() {
 
               <div className="admin-form-group">
                 <label className="admin-form-label flex items-center gap-3 mb-3">
-                  <Type size={14} className="text-orange-500" /> Primary Banner Headline
+                  <Type size={14} className="text-blue-600" /> Primary Banner Headline
                 </label>
                 <input 
                   type="text" 
@@ -160,14 +160,14 @@ export default function CreateBanner() {
         <div className="admin-form-sidebar">
           <div className="admin-form-card p-8 space-y-8">
             <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2">
-              <div className="w-1 h-3 bg-orange-500 rounded-full"></div>
+              <div className="w-1 h-3 bg-blue-600 rounded-full"></div>
               Banner Options
             </h4>
             
             <div className="space-y-6">
               <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-rose-500">
+                  <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-emerald-500">
                     <ArrowLeft size={18} />
                   </div>
                   <div>

@@ -111,7 +111,7 @@ export default function CreatePage() {
                        </div>
                        <div className="admin-form-group">
                           <label>Public URL Path</label>
-                          <div className="relative"><span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono">/</span><input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} className="pl-6 font-mono text-orange-600" /></div>
+                          <div className="relative"><span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono">/</span><input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} className="pl-6 font-mono text-blue-600" /></div>
                        </div>
                     </div>
                  </div>

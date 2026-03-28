@@ -74,15 +74,15 @@ export default function BlogsAdmin() {
               className="cms-search-input"
             />
           </div>
-          <Link href="/admin/blogs/create" className="admin-btn admin-btn-primary px-6 h-10">
+          <Link href="/admin/blogs/create" className="admin-btn admin-btn-primary">
             <Plus size={18} /> New Blog
           </Link>
         </div>
       </div>
 
       {loading ? (
-        <div className="admin-form-card flex flex-col items-center justify-center p-20 gap-4">
-          <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
+        <div className="admin-form-card flex flex-col items-center justify-center p-10 gap-4">
+          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
           <p className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Loading blogs...</p>
         </div>
       ) : (

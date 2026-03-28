@@ -72,7 +72,7 @@ export default function DestinationsAdmin() {
       {/* Content Display */}
       {loading ? (
         <div className="cms-empty-state">
-          <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
           <p className="cms-empty-text">Loading destinations...</p>
         </div>
       ) : (
@@ -155,7 +155,7 @@ export default function DestinationsAdmin() {
       {/* Stats Footer */}
       {!loading && filteredData.length > 0 && (
         <div className="admin-form-card bg-slate-900 border-slate-800 p-8 relative overflow-hidden group mt-10">
-          <div className="absolute top-0 right-0 w-[600px] h-full bg-orange-500/5 -skew-x-12 translate-x-32 group-hover:translate-x-24 transition-transform duration-1000"></div>
+          <div className="absolute top-0 right-0 w-[600px] h-full bg-blue-600/5 -skew-x-12 translate-x-32 group-hover:translate-x-24 transition-transform duration-1000"></div>
           <div className="relative z-10 flex items-center justify-between">
             <div className="flex items-center gap-8">
               <div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white border border-white/20 backdrop-blur-md">
@@ -168,7 +168,7 @@ export default function DestinationsAdmin() {
                     <ShieldCheck size={12} className="text-emerald-500" /> Atlas Synced
                   </div>
                   <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400">
-                    <Zap size={12} className="text-orange-500" /> Routing Live
+                    <Zap size={12} className="text-blue-600" /> Routing Live
                   </div>
                 </div>
               </div>

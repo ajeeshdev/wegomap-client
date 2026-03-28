@@ -332,8 +332,9 @@ export default function Header() {
                                             style={{ objectFit: 'cover' }}
                                         />
                                     ) : (
-                                        <User size={28} strokeWidth={1.5} />
+                                        <User size={30} strokeWidth={1.5} />
                                     )}
+
                                 </button>
 
                                 {isProfileOpen && (
@@ -410,10 +411,11 @@ export default function Header() {
                                 <Image
                                     src="/assets/images/go-globe.png"
                                     alt="Menu"
-                                    width={60}
-                                    height={60}
-                                    className="w-10 h-10 md:w-12 md:h-12 object-contain p-1"
+                                    width={70}
+                                    height={70}
+                                    className="w-11 h-11 md:w-14 md:h-14 object-contain p-1"
                                 />
+
                             )}
                         </button>
                     </div>
@@ -434,10 +436,11 @@ export default function Header() {
                                 <Image
                                     src="/assets/images/go-globe.png"
                                     alt="Menu"
-                                    width={60}
-                                    height={60}
-                                    className="w-10 h-10 md:w-12 md:h-12 object-contain p-1"
+                                    width={70}
+                                    height={70}
+                                    className="w-11 h-11 md:w-14 md:h-14 object-contain p-1"
                                 />
+
                             )}
                         </button>
                     </div>

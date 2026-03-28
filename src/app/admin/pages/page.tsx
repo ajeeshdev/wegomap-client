@@ -50,7 +50,7 @@ export default function PagesAdmin() {
         </div>
         <div className="flex items-center gap-4">
           <div className="relative group w-64">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-orange-500 transition-colors" size={16} />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={16} />
             <input 
               type="text" 
               placeholder="Search main pages..." 
@@ -63,8 +63,8 @@ export default function PagesAdmin() {
       </div>
 
       {loading ? (
-        <div className="admin-form-card flex flex-col items-center justify-center p-32 gap-6 bg-white/50 border-dashed">
-          <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
+        <div className="admin-form-card flex flex-col items-center justify-center p-12 gap-6 bg-white/50 border-dashed">
+          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
           <p className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Loading Primary Nodes...</p>
         </div>
       ) : (
@@ -88,10 +88,10 @@ export default function PagesAdmin() {
                     <td className="px-6 py-8">
                       <div className="flex flex-col gap-1.5">
                         <div className="font-black text-slate-900 uppercase tracking-tight text-sm flex items-center gap-2">
-                          <FileText size={14} className="text-orange-500" />
+                          <FileText size={14} className="text-blue-600" />
                           {item.title || item.name || item.slug}
                         </div>
-                        <div className="text-[10px] font-mono text-orange-600 font-bold bg-orange-50 px-3 py-1 rounded-lg w-fit">
+                        <div className="text-[10px] font-mono text-blue-600 font-bold bg-orange-50 px-3 py-1 rounded-lg w-fit">
                           /{item.slug === 'home' ? '' : item.slug}
                         </div>
                       </div>

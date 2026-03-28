@@ -71,7 +71,7 @@ export default function EventsAdmin() {
       {/* Content Display */}
       {loading ? (
         <div className="admin-form-card flex flex-col items-center justify-center p-24 gap-6">
-          <div className="w-16 h-16 border-4 border-rose-600 border-t-transparent rounded-full animate-spin shadow-2xl shadow-rose-500/20"></div>
+          <div className="w-16 h-16 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin shadow-2xl shadow-emerald-500/20"></div>
           <p className="font-black text-slate-400 uppercase tracking-[0.3em] text-[10px]">Loading contents...</p>
         </div>
       ) : (
@@ -91,16 +91,16 @@ export default function EventsAdmin() {
                   <tr key={item._id} className="group hover:bg-slate-50/50 transition-colors">
                     <td className="px-8 py-6">
                       <div className="flex items-center gap-5">
-                        <div className="w-16 h-16 rounded-[24px] bg-slate-50 flex items-center justify-center text-slate-400 border border-slate-200/50 flex-shrink-0 group-hover:scale-110 group-hover:bg-rose-600 group-hover:text-white transition-all duration-700 shadow-sm relative overflow-hidden">
+                        <div className="w-16 h-16 rounded-[24px] bg-slate-50 flex items-center justify-center text-slate-400 border border-slate-200/50 flex-shrink-0 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-700 shadow-sm relative overflow-hidden">
                           {item.images && item.images[0] ? (
                             <img src={getImageUrl(item.images[0])} alt="" className="w-small h-small object-cover grayscale group-hover:grayscale-0 transition-all duration-700 opacity-80 group-hover:opacity-100" />
                           ) : (
                             <Ticket size={28} className="group-hover:-rotate-12 transition-transform duration-700 relative z-10" />
                           )}
-                          <div className="absolute inset-0 bg-rose-600/0 group-hover:bg-rose-600/5 transition-colors"></div>
+                          <div className="absolute inset-0 bg-emerald-600/0 group-hover:bg-emerald-600/5 transition-colors"></div>
                         </div>
                         <div className="min-w-0">
-                          <div className="font-black text-slate-900 group-hover:text-rose-600 transition-colors uppercase text-[11px] tracking-tight leading-none truncate max-w-lg">
+                          <div className="font-black text-slate-900 group-hover:text-emerald-600 transition-colors uppercase text-[11px] tracking-tight leading-none truncate max-w-lg">
                             {item.title || item.name}
                           </div>
                           <div className="text-[9px] font-bold text-slate-400 mt-2 flex items-center gap-2 uppercase tracking-widest leading-none">
@@ -112,7 +112,7 @@ export default function EventsAdmin() {
                     <td className="px-6 py-6 border-x border-slate-50/50">
                       <div className="flex flex-col items-center gap-1.5">
                         <div className="flex items-center gap-2 font-mono font-black text-slate-900 text-[10px] bg-slate-100 px-4 py-2 rounded-xl border border-slate-200 group-hover:bg-white group-hover:shadow-sm transition-all tracking-tighter">
-                          <Calendar size={12} className="text-orange-500" />
+                          <Calendar size={12} className="text-blue-600" />
                           {item.date ? new Date(item.date).toLocaleDateString() : 'To be decided'}
                         </div>
                         <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest opacity-60 leading-none mt-1">Event Date</p>
@@ -126,11 +126,11 @@ export default function EventsAdmin() {
                       </div>
                     </td>
                     <td className="px-8 py-6 text-right">
-                      <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-4 group-hover:translate-x-0">
-                        <Link href={`/admin/events/${item._id}/edit`} className="p-2.5 bg-white border border-slate-200 rounded-xl text-orange-600 hover:bg-orange-600 hover:text-white transition-all shadow-sm active:scale-95 group/edit" title="Edit">
+                      <div className="flex items-center justify-end gap-2 transition-all duration-300">
+                        <Link href={`/admin/events/${item._id}/edit`} className="p-2.5 bg-white border border-slate-200 rounded-xl text-blue-600 hover:bg-blue-600 hover:text-white transition-all shadow-sm active:scale-95 group/edit" title="Edit">
                           <Edit size={16} className="group-hover/edit:rotate-12 transition-transform" />
                         </Link>
-                        <button onClick={() => handleDelete(item._id)} className="p-2.5 bg-white border border-slate-200 rounded-xl text-rose-500 hover:bg-rose-500 hover:text-white transition-all shadow-sm active:scale-95" title="Delete">
+                        <button onClick={() => handleDelete(item._id)} className="p-2.5 bg-white border border-slate-200 rounded-xl text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all shadow-sm active:scale-95" title="Delete">
                           <Trash2 size={16} />
                         </button>
                       </div>
@@ -158,11 +158,11 @@ export default function EventsAdmin() {
       {/* Tectonic Event Manifest Footer */}
       {!loading && filteredData.length > 0 && (
         <div className="admin-form-card bg-slate-900 border-slate-800 p-10 relative overflow-hidden group shadow-2xl">
-          <div className="absolute top-0 right-0 w-[600px] h-full bg-rose-500/5 -skew-x-12 translate-x-48 group-hover:translate-x-32 transition-transform duration-1000"></div>
-          <div className="absolute top-0 left-0 w-48 h-48 bg-orange-500/10 rounded-br-full blur-[80px]"></div>
+          <div className="absolute top-0 right-0 w-[600px] h-full bg-emerald-500/5 -skew-x-12 translate-x-48 group-hover:translate-x-32 transition-transform duration-1000"></div>
+          <div className="absolute top-0 left-0 w-48 h-48 bg-blue-600/10 rounded-br-full blur-[80px]"></div>
           <div className="relative z-10 flex items-center justify-between">
             <div className="flex items-center gap-10">
-              <div className="w-20 h-20 rounded-[32px] bg-white/5 flex items-center justify-center text-white border border-white/10 backdrop-blur-3xl group-hover:bg-rose-600 group-hover:border-rose-500 transition-all duration-700 shadow-2xl transform group-hover:scale-110">
+              <div className="w-20 h-20 rounded-[32px] bg-white/5 flex items-center justify-center text-white border border-white/10 backdrop-blur-3xl group-hover:bg-emerald-600 group-hover:border-emerald-500 transition-all duration-700 shadow-2xl transform group-hover:scale-110">
                 <Sparkles size={40} />
               </div>
               <div>
@@ -172,7 +172,7 @@ export default function EventsAdmin() {
                     <ShieldCheck size={14} className="text-emerald-500" /> Verified
                   </div>
                   <div className="flex items-center gap-2.5 text-slate-500 text-[10px] font-black uppercase tracking-[0.2em] leading-none">
-                    <Zap size={14} className="text-orange-500" /> Live Content
+                    <Zap size={14} className="text-blue-600" /> Live Content
                   </div>
                 </div>
               </div>
@@ -184,8 +184,8 @@ export default function EventsAdmin() {
               </div>
               <div className="w-px h-24 bg-white/5"></div>
               <div className="flex flex-col gap-4">
-                <div className="flex items-center gap-3 text-rose-500">
-                  <div className="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-[0_0_12px_rgba(244,63,94,0.8)] animate-pulse"></div>
+                <div className="flex items-center gap-3 text-emerald-500">
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(244,63,94,0.8)] animate-pulse"></div>
                   <span className="text-[11px] font-black uppercase tracking-widest leading-none">Schedule Active</span>
                 </div>
                 <div className="flex items-center gap-3 text-slate-400">

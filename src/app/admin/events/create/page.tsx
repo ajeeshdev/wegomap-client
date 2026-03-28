@@ -93,7 +93,7 @@ export default function CreateEvent() {
                     </div>
                     <div className="admin-form-group">
                        <label>URL Slug</label>
-                       <input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} placeholder="boat-racing-event" className="font-mono text-orange-600" />
+                       <input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} placeholder="boat-racing-event" className="font-mono text-blue-600" />
                     </div>
                  </div>
               </div>

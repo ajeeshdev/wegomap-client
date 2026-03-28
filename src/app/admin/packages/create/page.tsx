@@ -19,7 +19,8 @@ export default function CreatePackage() {
     price: '', oldamt: '', per: '/ Person', duration: '', highlights: [],
     inclusions: [], exclusions: [], terms: '', category: '',
     images: [], thumb: '', onoffer: false, isBestSeller: false,
-    itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: ''
+    itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '',
+    displayToHome: false, isActive: true
   });
 
   useEffect(() => {
@@ -116,12 +117,25 @@ export default function CreatePackage() {
                     <label className="flex items-center justify-between cursor-pointer group">
                        <span className="text-[10px] font-bold text-slate-500">Special Offer</span>
                        <input type="checkbox" checked={formData.onoffer} onChange={e => setFormData({ ...formData, onoffer: e.target.checked })} className="sr-only peer" />
-                       <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-rose-500 transition-all relative"><div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-4.5"></div></div>
+                       <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-emerald-500 transition-all relative"><div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-4.5"></div></div>
                     </label>
                     <label className="flex items-center justify-between cursor-pointer group">
                        <span className="text-[10px] font-bold text-slate-500">Bestseller</span>
                        <input type="checkbox" checked={formData.isBestSeller} onChange={e => setFormData({ ...formData, isBestSeller: e.target.checked })} className="sr-only peer" />
-                       <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-orange-600 transition-all relative"><div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-4.5"></div></div>
+                       <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-blue-600 transition-all relative"><div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-4.5"></div></div>
+                    </label>
+                    <label className="flex items-center justify-between cursor-pointer group">
+                       <span className="text-[10px] font-bold text-slate-500">Display home</span>
+                       <input type="checkbox" checked={formData.displayToHome} onChange={e => setFormData({ ...formData, displayToHome: e.target.checked })} className="sr-only peer" />
+                       <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-blue-600 transition-all relative"><div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-4.5"></div></div>
+                    </label>
+                    <label className="flex items-center justify-between cursor-pointer group pt-4 border-t border-slate-50 mt-2">
+                       <div className="flex flex-col">
+                          <span className="text-[10px] font-bold text-emerald-600">Active Status</span>
+                          <span className="text-[7px] text-emerald-400 uppercase tracking-tighter">{formData.isActive ? 'Public' : 'Hidden'}</span>
+                       </div>
+                       <input type="checkbox" checked={formData.isActive} onChange={e => setFormData({ ...formData, isActive: e.target.checked })} className="sr-only peer" />
+                       <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-emerald-500 transition-all relative"><div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-4.5"></div></div>
                     </label>
                  </div>
               </div>
@@ -144,7 +158,7 @@ export default function CreatePackage() {
                        </div>
                        <div className="grid grid-cols-2 gap-6">
                           <div className="admin-form-group"><label>Subtitle</label><input type="text" value={formData.subtitle} onChange={e => setFormData({ ...formData, subtitle: e.target.value })} /></div>
-                          <div className="admin-form-group"><label>Promo Label</label><input type="text" value={formData.slabel} onChange={e => setFormData({ ...formData, slabel: e.target.value })} className="text-rose-500 font-bold" /></div>
+                          <div className="admin-form-group"><label>Promo Label</label><input type="text" value={formData.slabel} onChange={e => setFormData({ ...formData, slabel: e.target.value })} className="text-emerald-500 font-bold" /></div>
                        </div>
                        <div className="grid grid-cols-3 gap-6">
                           <div className="admin-form-group"><label>Location</label><input type="text" value={formData.location} onChange={e => setFormData({ ...formData, location: e.target.value })} /></div>
@@ -172,7 +186,7 @@ export default function CreatePackage() {
                  <div className="editor-card">
                     <div className="card-header"><h4 className="serif">Pricing Strategy</h4></div>
                     <div className="grid grid-cols-3 gap-6">
-                       <div className="admin-form-group"><label>Offer Price (₹)</label><input type="number" value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} className="font-black text-orange-600 text-lg" /></div>
+                       <div className="admin-form-group"><label>Offer Price (₹)</label><input type="number" value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} className="font-black text-blue-600 text-lg" /></div>
                        <div className="admin-form-group"><label>Regular Price (₹)</label><input type="number" value={formData.oldamt} onChange={e => setFormData({ ...formData, oldamt: e.target.value })} className="font-bold text-slate-400 line-through" /></div>
                        <div className="admin-form-group"><label>Price Frequency</label><input type="text" value={formData.per} onChange={e => setFormData({ ...formData, per: e.target.value })} /></div>
                     </div>
@@ -184,7 +198,7 @@ export default function CreatePackage() {
                        <textarea rows={8} value={formData.inclusions?.join('\n')} onChange={e => setFormData({ ...formData, inclusions: e.target.value.split('\n') })} className="bg-emerald-50/10" placeholder="One per line..." />
                     </div>
                     <div className="editor-card">
-                       <div className="card-header"><h4 className="serif text-rose-600">Exclusions</h4></div>
+                       <div className="card-header"><h4 className="serif text-emerald-600">Exclusions</h4></div>
                        <textarea rows={8} value={formData.exclusions?.join('\n')} onChange={e => setFormData({ ...formData, exclusions: e.target.value.split('\n') })} className="bg-rose-50/10" placeholder="One per line..." />
                     </div>
                  </div>
@@ -196,13 +210,13 @@ export default function CreatePackage() {
                  <div className="editor-card">
                     <div className="card-header flex justify-between items-center">
                        <h4 className="serif">Activity Plan</h4>
-                       <button type="button" onClick={() => setFormData({ ...formData, itinerary: [...(formData.itinerary || []), { day: (formData.itinerary?.length || 0) + 1, title: '', description: '' }] })} className="px-4 py-2 bg-orange-600 text-white rounded-full text-[10px] font-bold">+ Add Day</button>
+                       <button type="button" onClick={() => setFormData({ ...formData, itinerary: [...(formData.itinerary || []), { day: (formData.itinerary?.length || 0) + 1, title: '', description: '' }] })} className="px-4 py-2 bg-blue-600 text-white rounded-full text-[10px] font-bold">+ Add Day</button>
                     </div>
                     <div className="space-y-4 py-4">
                        {formData.itinerary?.map((item: any, idx: number) => (
                           <div key={idx} className="p-6 bg-slate-50/50 rounded-2xl border border-slate-100 relative group">
                              <div className="flex gap-6">
-                                <div className="w-12 h-12 bg-white rounded-xl border flex flex-col items-center justify-center font-bold text-orange-600 shrink-0">
+                                <div className="w-12 h-12 bg-white rounded-xl border flex flex-col items-center justify-center font-bold text-blue-600 shrink-0">
                                    <span className="text-[7px] uppercase opacity-50">Day</span>
                                    <span>{item.day || idx + 1}</span>
                                 </div>
@@ -210,7 +224,7 @@ export default function CreatePackage() {
                                    <input type="text" value={item.title} onChange={e => {const ni=[...formData.itinerary]; ni[idx].title=e.target.value; setFormData({...formData, itinerary:ni});}} placeholder="Title" className="w-full bg-transparent border-b font-bold text-lg" />
                                    <textarea value={item.description} onChange={e => {const ni=[...formData.itinerary]; ni[idx].description=e.target.value; setFormData({...formData, itinerary:ni});}} placeholder="Description" className="w-full bg-transparent border-none p-0 min-h-[60px]" />
                                 </div>
-                                <button type="button" onClick={() => setFormData({ ...formData, itinerary: formData.itinerary.filter((_: any, i: number) => i !== idx) })} className="opacity-0 group-hover:opacity-100 transition-opacity text-slate-300 hover:text-rose-500"><Trash2 size={16} /></button>
+                                <button type="button" onClick={() => setFormData({ ...formData, itinerary: formData.itinerary.filter((_: any, i: number) => i !== idx) })} className="opacity-0 group-hover:opacity-100 transition-opacity text-slate-300 hover:text-emerald-500"><Trash2 size={16} /></button>
                              </div>
                           </div>
                        ))}
@@ -237,7 +251,7 @@ export default function CreatePackage() {
                     <div className="card-header"><h4 className="serif">Indexing Settings</h4></div>
                     <div className="space-y-4">
                        <div className="admin-form-group"><label>Meta Title</label><input type="text" value={formData.seo_title} onChange={e => setFormData({ ...formData, seo_title: e.target.value })} /></div>
-                       <div className="admin-form-group"><label>URL Slug</label><input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} className="font-mono text-orange-600" /></div>
+                       <div className="admin-form-group"><label>URL Slug</label><input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} className="font-mono text-blue-600" /></div>
                        <div className="admin-form-group"><label>Meta Description</label><textarea rows={4} value={formData.seo_meta} onChange={e => setFormData({ ...formData, seo_meta: e.target.value })} /></div>
                     </div>
                  </div>

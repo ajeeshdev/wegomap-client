@@ -86,24 +86,185 @@
     .events-listing { @extend .commonPadding; background-color: #f8fafc; }
     .eventsGrid { 
         display: grid; 
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
-        gap: 3rem; 
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+        gap: 2rem; 
         
         // Match home page grid spacing
-        @include min(1200) {
+        @include min(1024) {
             grid-template-columns: repeat(4, 1fr);
         }
     }
 
+
+    // 10. Premium Event Card
+    .premiumEventCard {
+        background: #fff;
+        border-radius: 2rem;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); 
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border: 1px solid #f1f5f9;
+        display: flex;
+        flex-direction: column;
+
+        .imageWrapper {
+            position: relative;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+
+            .card-overlay {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+                display: flex;
+                align-items: flex-end;
+                padding: 1.5rem;
+                opacity: 0;
+                transform: translateY(10px);
+                transition: all 0.4s ease;
+                z-index: 5;
+
+                .action-pill {
+                    background: #fff;
+                    color: $primaryColor;
+                    padding: 8px 20px;
+                    border-radius: 100px;
+                    font-size: 10px;
+                    font-weight: 900;
+                    text-transform: uppercase;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+                }
+            }
+
+            img {
+                object-fit: cover;
+                transition: transform 0.8s ease;
+            }
+        }
+
+        .cardContent {
+            padding: 1.5rem;
+            background: #fff;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+
+            .location-meta {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                margin-bottom: 0.75rem;
+                color: #94a3b8;
+                font-weight: 700;
+                text-transform: uppercase;
+                font-size: 10px;
+                letter-spacing: 0.2rem;
+                
+                svg { color: $cosmicOrange; }
+            }
+
+            .packageTitle {
+                font-size: 1.125rem;
+                font-weight: 800;
+                color: #0f172a;
+                line-height: 1.25;
+                margin-bottom: 1rem;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                transition: color 0.3s ease;
+                font-family: var(--font-outfit);
+            }
+
+            .event-footer {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-top: auto;
+                border-top: 1px solid #f1f5f9;
+                padding-top: 1rem;
+
+                .join-event {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    font-weight: 900;
+                    font-size: 10px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.15rem;
+                    color: #94a3b8;
+                    transition: color 0.3s ease;
+                }
+            }
+        }
+
+        .actionIcon-premium {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: #f1f5f9;
+            color: #94a3b8;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        &:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.1);
+            border-color: rgba($primaryColor, 0.2);
+
+            .imageWrapper {
+                .card-overlay {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                img {
+                    transform: scale(1.1);
+                }
+            }
+
+            .cardContent {
+                background: #f8fafc;
+
+                .packageTitle {
+                    color: $cosmicOrange;
+                }
+
+                .event-footer .join-event {
+                    color: $cosmicOrange;
+                }
+            }
+
+            .actionIcon-premium {
+                background: $cosmicOrange;
+                color: #fff;
+                transform: rotate(45deg);
+        }
+    }
+}
+
     // Category Tags for Event types
+
+
     .category-tag {
         position: absolute;
         top: 20px;
         left: 20px;
         padding: 6px 16px;
         border-radius: 99px;
-        font-size: 10px;
-        font-weight: 900;
+        font-size: 9px;
+        font-weight: 950;
         text-transform: uppercase;
         letter-spacing: 0.1em;
         color: #fff;
@@ -111,9 +272,10 @@
         backdrop-filter: blur(8px);
         z-index: 10;
 
-        &.corporate { background-color: rgba(30, 64, 175, 0.9); }
-        &.special { background-color: rgba(194, 65, 12, 0.9); }
+        &.corporate { background-color: rgba($primaryColor, 0.9); }
+        &.special { background-color: rgba($cosmicOrange, 0.9); }
     }
+
 
     // 3. Detail Page Specifics
     &.detail-v3 {

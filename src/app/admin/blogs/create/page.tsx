@@ -46,6 +46,29 @@ export default function CreateBlog() {
     fetchCategories();
   }, []);
 
+  const slugify = (text: string) => {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/[\s_-]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  };
+
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newTitle = e.target.value;
+    const newSlug = slugify(newTitle);
+    
+    // Only auto-update slug if it was previously empty or matching the previous title slug
+    const shouldUpdateSlug = !formData.slug || formData.slug === slugify(formData.title);
+    
+    setFormData({
+      ...formData,
+      title: newTitle,
+      slug: shouldUpdateSlug ? newSlug : formData.slug
+    });
+  };
+
   const handleSubmit = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
 
@@ -81,7 +104,7 @@ export default function CreateBlog() {
 
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-700 pb-20">
+    <div className="space-y-6 animate-in fade-in duration-700 pb-20">
       {/* Header Section */}
       <div className="admin-page-header ">
         <div className="flex items-center gap-4">
@@ -112,30 +135,23 @@ export default function CreateBlog() {
 
       <div className="admin-form-grid">
         {/* Main Content Area (Central) */}
-        <div className="space-y-8">
+        <div className="space-y-6">
 
           {/* Article Content Section */}
-          <div className="admin-form-card space-y-10">
+          <div className="admin-form-card space-y-6">
             <h3 className="admin-form-section-title">
-              <div className="admin-page-title-indicator bg-orange-600"></div>
+              <div className="admin-page-title-indicator bg-blue-600"></div>
               Post Content
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
               <div className="admin-form-group md:col-span-2">
-                <label className="admin-form-label flex items-center gap-2"> <FileText size={12} className="text-orange-500" /> Title</label>
+                <label className="admin-form-label flex items-center gap-2"> <FileText size={12} className="text-blue-600" /> Title</label>
                 <input
                   type="text"
                   value={formData.title}
-                  onChange={e => {
-                    const val = e.target.value;
-                    setFormData({
-                      ...formData,
-                      title: val,
-                      slug: val.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')
-                    });
-                  }}
-                  className="admin-form-input font-bold h-12"
+                  onChange={handleTitleChange}
+                  className="admin-form-input font-bold h-10 px-4"
                   placeholder="e.g. Best time to visit Kerala"
                 />
               </div>
@@ -145,13 +161,13 @@ export default function CreateBlog() {
                   type="text"
                   value={formData.slug}
                   onChange={e => setFormData({ ...formData, slug: e.target.value })}
-                  className="admin-form-input font-medium h-12 text-orange-600 bg-slate-50/50"
+                  className="admin-form-input font-medium h-12 text-blue-600 bg-slate-50/50"
                   placeholder="best-time-to-visit-kerala"
                 />
               </div>
 
               <div className="admin-form-group md:col-span-2 pt-4 border-t border-slate-50">
-                <label className="admin-form-label flex items-center gap-2 mb-4"> <Layers size={14} className="text-orange-500" /> Content</label>
+                <label className="admin-form-label flex items-center gap-2 mb-4"> <Layers size={14} className="text-blue-600" /> Content</label>
                 <div className="bg-slate-50/30 rounded-2xl p-1 border border-slate-100 shadow-inner">
                   <RichTextEditor
                     value={formData.content}
@@ -176,56 +192,55 @@ export default function CreateBlog() {
             </div>
           </div>
 
-          {/* SEO Preview Simulator */}
-          <div className="admin-form-card space-y-8">
-            <h3 className="admin-form-section-title border-none mb-0">
-              <div className="admin-page-title-indicator bg-emerald-500"></div>
-              Google Search Preview
-            </h3>
-
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm max-w-2xl">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-4 h-4 rounded-full bg-slate-100 flex items-center justify-center text-[10px] text-slate-400 font-bold">W</div>
-                <div className="text-[11px] text-slate-500">wegomap.com › blogs</div>
-              </div>
-              <h4 className="text-[#1a0dab] text-xl font-medium mb-1 hover:underline cursor-pointer">
-                {formData.seo_title || formData.title || 'Post Title Preview'}
-              </h4>
-              <p className="text-[#4d5156] text-sm leading-snug line-clamp-2">
-                {formData.seo_meta || formData.excerpt || 'Enter an SEO description to see how it appears in search results...'}
-              </p>
-            </div>
-          </div>
         </div>
 
         {/* Sidebar Navigation & Meta (Right Side) */}
         <div className="admin-form-sidebar">
+          {/* SEO Preview Simulator */}
+          <div className="admin-form-card space-y-4 !p-4">
+            <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2">
+              <div className="w-1 h-3 bg-emerald-500 rounded-full"></div>
+              Search Preview
+            </h3>
 
-          <div className="admin-form-card p-8 space-y-10">
+            <div className="bg-white border border-slate-100 rounded-lg p-3 shadow-sm">
+              <div className="flex items-center gap-2 mb-1">
+                <div className="text-[9px] text-slate-400">wegomap.com › blogs</div>
+              </div>
+              <h4 className="text-[#1a0dab] text-sm font-medium mb-1 line-clamp-1">
+                {formData.seo_title || formData.title || 'Post Title Preview'}
+              </h4>
+              <p className="text-[#4d5156] text-[11px] leading-snug line-clamp-2">
+                {formData.seo_meta || formData.excerpt || 'Enter an SEO description...'}
+              </p>
+            </div>
+          </div>
+
+          <div className="admin-form-card p-4 space-y-6">
             {/* Featured Image */}
             <div className="group/media">
-              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-8">
-                <div className="w-1 h-3 bg-orange-500 rounded-full"></div>
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-4">
+                <div className="w-1 h-3 bg-blue-600 rounded-full"></div>
                 Featured Image
               </h4>
-              <div className="bg-slate-50/50 rounded-2xl p-2 border border-slate-100">
+              <div className="bg-slate-50/50 rounded-lg p-1 border border-slate-100">
                 <ImageUpload
                   value={formData.featuredImage}
                   onChange={(url) => setFormData({ ...formData, featuredImage: url })}
-                  label="Upload Image"
+                  label=""
                 />
               </div>
             </div>
 
             {/* Post details */}
-            <div className="pt-10 border-t border-slate-50">
-              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-8">
-                <div className="w-1 h-3 bg-orange-500 rounded-full"></div>
+            <div className="pt-6 border-t border-slate-50">
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-4">
+                <div className="w-1 h-3 bg-blue-600 rounded-full"></div>
                 Metadata
               </h4>
-              <div className="space-y-6">
+              <div className="space-y-4">
                 <div className="admin-form-group">
-                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <Tag size={10} className="text-orange-500" /> Category</label>
+                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <Tag size={10} className="text-blue-600" /> Category</label>
                   <select
                     value={formData.category}
                     onChange={e => setFormData({ ...formData, category: e.target.value })}
@@ -241,7 +256,7 @@ export default function CreateBlog() {
                 </div>
 
                 <div className="admin-form-group">
-                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <Clock size={10} className="text-orange-500" /> Publish Date</label>
+                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <Clock size={10} className="text-blue-600" /> Publish Date</label>
                   <input
                     type="date"
                     value={formData.publishDate}
@@ -282,7 +297,7 @@ export default function CreateBlog() {
                 </div>
 
                 <div className="admin-form-group">
-                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <Layers size={10} className="text-orange-500" /> Meta Description</label>
+                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <Layers size={10} className="text-blue-600" /> Meta Description</label>
                   <textarea
                     rows={3}
                     value={formData.seo_meta}
@@ -296,7 +311,7 @@ export default function CreateBlog() {
 
             <div className="pt-10 border-t border-slate-50">
               <div className="flex items-center gap-3 bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
-                <div className="w-8 h-8 rounded-xl bg-orange-100/50 flex items-center justify-center text-orange-600 shrink-0">
+                <div className="w-8 h-8 rounded-xl bg-orange-100/50 flex items-center justify-center text-blue-600 shrink-0">
                   <Clock size={16} />
                 </div>
                 <div>

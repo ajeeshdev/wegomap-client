@@ -89,7 +89,7 @@ export default function CreateOfferBanner() {
               <div className="space-y-12">
                 <div className="admin-form-group">
                   <label className="admin-form-label flex items-center gap-3 mb-4">
-                    <Type size={14} className="text-orange-500" /> Administrative Title
+                    <Type size={14} className="text-blue-600" /> Administrative Title
                   </label>
                   <input
                     type="text"
@@ -110,7 +110,7 @@ export default function CreateOfferBanner() {
                         type="text"
                         value={formData.link}
                         onChange={e => setFormData({ ...formData, link: e.target.value })}
-                        className="admin-form-input pl-14 font-mono text-[11px] text-orange-600 font-bold h-14"
+                        className="admin-form-input pl-14 font-mono text-[11px] text-blue-600 font-bold h-14"
                         placeholder="https://wegomap.com/kerala-special"
                       />
                     </div>
@@ -134,7 +134,7 @@ export default function CreateOfferBanner() {
         <div className="admin-form-sidebar">
           <div className="admin-form-card p-8 space-y-10">
             <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 flex items-center gap-2">
-              <div className="w-1 h-3 bg-orange-500 rounded-full"></div>
+              <div className="w-1 h-3 bg-blue-600 rounded-full"></div>
               Configuration
             </h4>
             <div className="space-y-8 text-center">

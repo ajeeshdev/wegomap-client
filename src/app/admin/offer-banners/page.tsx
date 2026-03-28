@@ -71,7 +71,7 @@ export default function OfferBannersAdmin() {
       {/* Content Grid */}
       {loading ? (
         <div className="admin-form-card flex flex-col items-center justify-center p-12 gap-3">
-          <div className="w-8 h-8 border-3 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-8 h-8 border-3 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
           <p className="font-bold text-slate-400 uppercase tracking-widest text-[9px]">Loading...</p>
         </div>
       ) : (
@@ -101,7 +101,7 @@ export default function OfferBannersAdmin() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="text-[9px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
-                      <Megaphone size={11} className="text-orange-500" /> Status
+                      <Megaphone size={11} className="text-blue-600" /> Status
                     </div>
                     <div className={`flex items-center gap-1 px-1.5 py-0.5 rounded text-[8px] font-bold border ${item.active ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-slate-50 text-slate-600 border-slate-100'}`}>
                       {item.active ? 'Active' : 'Draft'}
@@ -123,10 +123,10 @@ export default function OfferBannersAdmin() {
                 </div>
 
                 <div className="flex items-center gap-2 pt-4">
-                  <Link href={`/admin/offer-banners/${item._id}/edit`} className="flex-1 flex items-center justify-center gap-2 h-9 bg-white border border-slate-200 rounded-lg text-orange-600 font-bold uppercase tracking-widest text-[9px] hover:bg-orange-600 hover:text-white transition-all shadow-sm active:scale-95">
+                  <Link href={`/admin/offer-banners/${item._id}/edit`} className="flex-1 flex items-center justify-center gap-2 h-9 bg-white border border-slate-200 rounded-lg text-blue-600 font-bold uppercase tracking-widest text-[9px] hover:bg-blue-600 hover:text-white transition-all shadow-sm active:scale-95">
                     <Edit size={12} /> Edit Banner
                   </Link>
-                  <button onClick={() => handleDelete(item._id)} className="w-9 h-9 flex items-center justify-center bg-white border border-slate-200 rounded-lg text-rose-500 hover:bg-rose-500 hover:text-white transition-all shadow-sm active:scale-95 shrink-0">
+                  <button onClick={() => handleDelete(item._id)} className="w-9 h-9 flex items-center justify-center bg-white border border-slate-200 rounded-lg text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all shadow-sm active:scale-95 shrink-0">
                     <Trash2 size={14} />
                   </button>
                 </div>

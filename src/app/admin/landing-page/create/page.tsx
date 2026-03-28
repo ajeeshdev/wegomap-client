@@ -188,7 +188,7 @@ export default function CreateLandingPage({ params: paramsProp }: { params?: { i
               </select>
               
               {isEdit && (
-                <Link href={`/${formData.slug}`} target="_blank" className="mt-4 flex items-center gap-2 text-[10px] font-bold text-orange-600 hover:underline uppercase tracking-widest">
+                <Link href={`/${formData.slug}`} target="_blank" className="mt-4 flex items-center gap-2 text-[10px] font-bold text-blue-600 hover:underline uppercase tracking-widest">
                   <Eye size={12} /> View Live Page
                 </Link>
               )}
@@ -202,7 +202,7 @@ export default function CreateLandingPage({ params: paramsProp }: { params?: { i
                     <div className="card-header"><h4 className="serif">Page Identification</h4></div>
                     <div className="grid grid-cols-2 gap-6">
                        <div className="admin-form-group"><label>Internal Identifier</label><input type="text" value={formData.title} onChange={e => {const v=e.target.value; setFormData({...formData, title:v, slug:v.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')});}} placeholder="Summer 2024 Promo..." /></div>
-                       <div className="admin-form-group"><label>Public URL Path</label><div className="relative"><span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono">/</span><input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} className="pl-8 font-mono text-orange-600" /></div></div>
+                       <div className="admin-form-group"><label>Public URL Path</label><div className="relative"><span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono">/</span><input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} className="pl-8 font-mono text-blue-600" /></div></div>
                     </div>
                  </div>
 
@@ -310,7 +310,7 @@ export default function CreateLandingPage({ params: paramsProp }: { params?: { i
                              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
                              <input type="text" placeholder="Filter inventory..." value={pkgSearch} onChange={e => setPkgSearch(e.target.value)} className="pl-9 h-10 w-48 text-[11px]" />
                           </div>
-                          <div className="bg-orange-600 text-white px-3 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest">{formData.package_ids.length} Linked</div>
+                          <div className="bg-blue-600 text-white px-3 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest">{formData.package_ids.length} Linked</div>
                        </div>
                     </div>
                     
@@ -320,13 +320,13 @@ export default function CreateLandingPage({ params: paramsProp }: { params?: { i
                           .map((pkg: any) => {
                              const isSelected = formData.package_ids.includes(pkg._id);
                              return (
-                                <div key={pkg._id} onClick={() => {const ni = isSelected ? formData.package_ids.filter(id => id !== pkg._id) : [...formData.package_ids, pkg._id]; setFormData({ ...formData, package_ids: ni });}} className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all ${isSelected ? 'border-orange-600 bg-orange-50/50':'border-slate-100 bg-slate-50/30 hover:border-slate-300'}`}>
+                                <div key={pkg._id} onClick={() => {const ni = isSelected ? formData.package_ids.filter(id => id !== pkg._id) : [...formData.package_ids, pkg._id]; setFormData({ ...formData, package_ids: ni });}} className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all ${isSelected ? 'border-blue-600 bg-orange-50/50':'border-slate-100 bg-slate-50/30 hover:border-slate-300'}`}>
                                    <div className="w-12 h-12 rounded-lg bg-slate-200 overflow-hidden shrink-0"><img src={getImageUrl(pkg.thumb)} className="w-full h-full object-cover" /></div>
                                    <div className="flex-1 min-w-0">
                                       <div className="text-[11px] font-bold text-slate-900 line-clamp-1">{pkg.title}</div>
                                       <div className="text-[10px] text-slate-400 font-mono mt-0.5">₹{pkg.price}</div>
                                    </div>
-                                   {isSelected && <ShieldCheck size={14} className="text-orange-600" />}
+                                   {isSelected && <ShieldCheck size={14} className="text-blue-600" />}
                                 </div>
                              );
                           })}

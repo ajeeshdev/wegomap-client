@@ -185,7 +185,7 @@ export default function CreateHotelLandingPage({ params: paramsProp }: { params?
 
   const gold = "#849071";
 
-  if (loading) return <div className="p-20 text-center font-bold">Loading Aroma Hills Data...</div>;
+  if (loading) return <div className="p-10 text-center font-bold">Loading Aroma Hills Data...</div>;
 
   return (
     <div className="property-edit-container animate-in fade-in duration-700">

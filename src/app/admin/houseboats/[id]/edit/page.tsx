@@ -78,8 +78,8 @@ export default function EditHouseboat() {
   };
 
   if (loading) return (
-    <div className="admin-form-card flex flex-col items-center justify-center p-20 gap-4">
-      <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
+    <div className="admin-form-card flex flex-col items-center justify-center p-10 gap-4">
+      <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
       <p className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Navigating to harbor quadrant...</p>
     </div>
   );
@@ -129,7 +129,7 @@ export default function EditHouseboat() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
                 <div className="admin-form-group">
                   <label className="admin-form-label flex items-center gap-2">
-                    <Ship size={12} className="text-orange-500" /> Houseboat Name
+                    <Ship size={12} className="text-blue-600" /> Houseboat Name
                   </label>
                   <input 
                     type="text" 
@@ -148,7 +148,7 @@ export default function EditHouseboat() {
                       type="text" 
                       value={formData.slug} 
                       onChange={e => setFormData({ ...formData, slug: e.target.value })} 
-                      className="admin-form-input pl-8 font-mono text-xs text-orange-600 focus:bg-white" 
+                      className="admin-form-input pl-8 font-mono text-xs text-blue-600 focus:bg-white" 
                     />
                   </div>
                 </div>
@@ -156,7 +156,7 @@ export default function EditHouseboat() {
 
               <div className="admin-form-group pt-4 border-t border-slate-50">
                 <label className="admin-form-label flex items-center gap-2 mb-6">
-                  <Layers size={14} className="text-orange-500" /> Description
+                  <Layers size={14} className="text-blue-600" /> Description
                 </label>
                 <div className="bg-slate-50/50 rounded-[40px] p-2 border border-slate-100 shadow-inner overflow-hidden">
                   <RichTextEditor 
@@ -174,12 +174,12 @@ export default function EditHouseboat() {
         <div className="admin-form-sidebar">
           <div className="admin-form-card p-6 space-y-8">
             <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2">
-              <div className="w-1 h-3 bg-orange-500 rounded-full"></div>
+              <div className="w-1 h-3 bg-blue-600 rounded-full"></div>
               Pricing & Type
             </h4>
             <div className="space-y-6">
               <div className="admin-form-group">
-                <label className="admin-form-label text-[10px] flex items-center gap-2"> <Tag size={10} className="text-orange-500" /> Category</label>
+                <label className="admin-form-label text-[10px] flex items-center gap-2"> <Tag size={10} className="text-blue-600" /> Category</label>
                 <div className="relative">
                     <select 
                         value={formData.category} 
@@ -219,7 +219,7 @@ export default function EditHouseboat() {
 
               <div className="pt-4 border-t border-slate-50">
                 <div className="flex items-center gap-3 bg-slate-50/50 p-4 rounded-2xl border border-slate-100 transition-all hover:bg-white hover:shadow-sm group/status">
-                  <div className="w-10 h-10 rounded-xl bg-orange-100/50 flex items-center justify-center text-orange-600 shrink-0 group-hover/status:bg-orange-600 group-hover/status:text-white transition-all duration-500">
+                  <div className="w-10 h-10 rounded-xl bg-orange-100/50 flex items-center justify-center text-blue-600 shrink-0 group-hover/status:bg-blue-600 group-hover/status:text-white transition-all duration-500">
                     <Clock size={20} className="group-hover/status:animate-spin-slow" />
                   </div>
                   <div className="min-w-0">

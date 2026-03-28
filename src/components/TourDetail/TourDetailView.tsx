@@ -23,10 +23,8 @@ export default function TourDetailView({ id }: { id: string }) {
     const [scrolled, setScrolled] = useState(false);
     const [wishlist, setWishlist] = useState<string[]>([]);
     const [user, setUser] = useState<any>(null);
-    const [reviews, setReviews] = useState<any[]>([]);
-    const [reviewForm, setReviewForm] = useState({ rating: 5, comment: '' });
-    const [isReviewSubmitting, setIsReviewSubmitting] = useState(false);
-    const [showReviewForm, setShowReviewForm] = useState(false);
+
+
     const { openEnquiry } = useEnquiry();
     const router = useRouter();
 
@@ -55,21 +53,7 @@ export default function TourDetailView({ id }: { id: string }) {
         fetchUserData();
     }, []);
 
-    useEffect(() => {
-        const fetchReviews = async () => {
-            if (!pkg?.id) return;
-            try {
-                const res = await fetch(`${API_URL}/reviews/package/${pkg.id}`);
-                const data = await res.json();
-                if (data.success) {
-                    setReviews(data.data);
-                }
-            } catch (err) {
-                console.error('Error fetching reviews:', err);
-            }
-        };
-        if (pkg) fetchReviews();
-    }, [pkg]);
+
 
     const toggleWishlist = async (pkgId: string, e: React.MouseEvent) => {
         e.preventDefault();
@@ -151,8 +135,7 @@ export default function TourDetailView({ id }: { id: string }) {
                         })),
                         inclusions: p.inclusions || [],
                         exclusions: p.exclusions || [],
-                        averageRating: p.averageRating,
-                        reviewCount: p.reviewCount
+
                     });
                     setLoading(false);
                     return;
@@ -169,58 +152,7 @@ export default function TourDetailView({ id }: { id: string }) {
         if (id) getPackage();
     }, [id]);
 
-    const handleReviewSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        const token = localStorage.getItem('token');
-        if (!token) {
-            toast.error('Please login to submit a review');
-            return;
-        }
 
-        setIsReviewSubmitting(true);
-        try {
-            // If the package ID is not a MongoDB ObjectId (e.g., static dummy data like "20"), simulate success
-            if (pkg?.id && !/^[0-9a-fA-F]{24}$/.test(pkg.id)) {
-                await new Promise(r => setTimeout(r, 600)); // Simulate network latency
-                const mockReview = {
-                    _id: Math.random().toString(),
-                    rating: reviewForm.rating,
-                    comment: reviewForm.comment,
-                    user: user || { name: 'Demo User', image: '' },
-                    createdAt: new Date().toISOString()
-                };
-                setReviews([mockReview, ...reviews]);
-                setReviewForm({ rating: 5, comment: '' });
-                toast.success('Review submitted successfully!');
-                return;
-            }
-
-            const res = await fetch(`${API_URL}/reviews`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    package: pkg?.id,
-                    rating: reviewForm.rating,
-                    comment: reviewForm.comment
-                })
-            });
-            const data = await res.json();
-            if (data.success) {
-                toast.success('Review submitted successfully!');
-                setReviews([data.data, ...reviews]);
-                setReviewForm({ rating: 5, comment: '' });
-            } else {
-                toast.error(data.error || 'Failed to submit review');
-            }
-        } catch (err) {
-            toast.error('Failed to submit review');
-        } finally {
-            setIsReviewSubmitting(false);
-        }
-    };
 
     if (loading) return (
         <div className="flex items-center justify-center min-h-screen bg-white">
@@ -385,126 +317,7 @@ export default function TourDetailView({ id }: { id: string }) {
                                 </div>
                             </div>
 
-                            {/* Google-Style Reviews Section */}
-                            <div className="googleReviewsSection">
-                                <div className="gr-main-header">
-                                    <div className="gr-title-side">
-                                        <h3 className="gr-title">Guest Reviews</h3>
-                                        <div className="gr-summary-line">
-                                            <div className="gr-rating-number">{pkg.averageRating?.toFixed(1) || '5.0'}</div>
-                                            <div className="gr-rating-details">
-                                                <div className="gr-stars">
-                                                    {[...Array(5)].map((_, i) => <Star key={i} size={15} fill="currentColor" strokeWidth={0} />)}
-                                                </div>
-                                                <div className="gr-review-count">Based on {reviews.length || 1} verified reviews</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button onClick={() => setShowReviewForm(!showReviewForm)} className="gr-write-btn">
-                                        {showReviewForm ? 'Close form' : 'Write a review'}
-                                    </button>
-                                </div>
 
-
-
-                                {/* Reviews List (Google Style) */}
-                                <div className="gr-list">
-                                    {reviews.length > 0 ? reviews.map((r, i) => (
-                                        <div key={i} className="gr-item">
-                                            <div className="gr-user-header">
-                                                <div className="gr-avatar">
-                                                    {r.user?.image ? (
-                                                        <Image src={getImageUrl(r.user.image)} alt={r.user.name} width={40} height={40} className="object-cover" unoptimized />
-                                                    ) : (
-                                                        r.user?.name?.charAt(0) || 'U'
-                                                    )}
-                                                </div>
-                                                <div className="gr-user-info">
-                                                    <div className="gr-user-name">
-                                                        {r.user?.name || 'Traveler'}
-                                                    </div>
-                                                    <div className="gr-user-badges">
-                                                        <span>Local Guide</span>
-                                                        <span className="gr-dot"></span>
-                                                        <span>Verified</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="gr-review-meta">
-                                                <div className="gr-stars-small">
-                                                    {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" strokeWidth={0} />)}
-                                                </div>
-                                                <span className="gr-time">
-                                                    {r.createdAt ? new Date(r.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : 'Recently'}
-                                                </span>
-                                            </div>
-                                            <p className="gr-comment">
-                                                {r.comment}
-                                            </p>
-                                        </div>
-                                    )) : (
-                                        <div className="gr-empty">No reviews yet.</div>
-                                    )}
-                                </div>
-
-                                {/* Make a Review (Google Style Button & Form) - Toggled */}
-                                {showReviewForm && (
-                                    <div className="gr-write-review">
-                                        {!user ? (
-                                            <div className="gr-login-prompt">
-                                                <Link href="/login" className="gr-login-link">
-                                                    <span className="gr-plus">+</span> Sign in to write a review
-                                                </Link>
-                                            </div>
-                                        ) : (
-                                            <div className="gr-write-box">
-                                                <div className="gr-user-header mb-6">
-                                                    <div className="gr-avatar">
-                                                        {user.name?.charAt(0) || 'U'}
-                                                    </div>
-                                                    <div className="gr-user-info">
-                                                        <div className="gr-user-name">{user.name}</div>
-                                                        <div className="gr-subtitle">Share details of your own experience</div>
-                                                    </div>
-                                                </div>
-                                                <div className="gr-rating-input">
-                                                    {[1,2,3,4,5].map(nu => (
-                                                        <button 
-                                                            key={nu} 
-                                                            type="button"
-                                                            onClick={() => setReviewForm({...reviewForm, rating: nu})}
-                                                            className={`gr-star-btn ${reviewForm.rating >= nu ? 'active' : ''}`}
-                                                        >
-                                                            <Star size={30} fill={reviewForm.rating >= nu ? "currentColor" : "none"} strokeWidth={reviewForm.rating >= nu ? 0 : 2} />
-                                                        </button>
-                                                    ))}
-                                                </div>
-                                                <form onSubmit={handleReviewSubmit} className="gr-form">
-                                                    <textarea 
-                                                        placeholder="Share details of your own experience at this place..."
-                                                        required
-                                                        value={reviewForm.comment}
-                                                        onChange={e => setReviewForm({...reviewForm, comment: e.target.value})}
-                                                        className="gr-textarea"
-                                                    />
-                                                    <div className="gr-form-footer">
-                                                        <button 
-                                                            type="button" 
-                                                            onClick={() => setShowReviewForm(false)}
-                                                            className="gr-cancel-btn"
-                                                        >
-                                                            Cancel
-                                                        </button>
-                                                        <button type="submit" disabled={isReviewSubmitting} className="gr-submit-btn">
-                                                            {isReviewSubmitting ? 'Posting...' : 'Post'}
-                                                        </button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        )}
-                                    </div>
-                                )}
-                            </div>
                         </div>
 
                         <div className="bookingCol">
@@ -514,10 +327,7 @@ export default function TourDetailView({ id }: { id: string }) {
                                         <span className="bk-price-val">{pkg.price}</span>
                                         <span className="bk-price-label">Starting Price</span>
                                     </div>
-                                    <div className="bk-rating">
-                                        <Star size={16} fill="currentColor" />
-                                        <span>{pkg.averageRating?.toFixed(1) || '5.0'}</span>
-                                    </div>
+
                                 </div>
                                 
                                 <div className="bk-stats">

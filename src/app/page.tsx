@@ -955,7 +955,7 @@ export default function Home() {
       {(homeSections.find(s => s.id === 'testimonials')?.enabled ?? true) && testimonials.length > 0 && (
       <section className="commonPadding bg-slate-50 testimonialSection">
         <div className="homeContainer">
-          <div className="sectionHeader flex items-center justify-center mb-8">
+          <div className="sectionHeader flex items-center justify-center mb-6">
             <div className="titleArea">
               <span className="sectionSubtitle">Guest Experiences</span>
               <h2 className="sliderTitle">What Travelers Are Saying</h2>
@@ -983,13 +983,14 @@ export default function Home() {
                   <div className="authorArea">
                     <div className="authorImg">
                       <Image 
-                        src={t.avatar || "/assets/site/assets/images/google-review.svg"} 
-                        alt={t.name} 
-                        width={40} 
-                        height={40} 
-                        className="rounded-full"
+                         src={t.avatar || "/assets/site/assets/images/google-review.svg"} 
+                         alt={t.name} 
+                         width={32} 
+                         height={32} 
+                         className="rounded-full"
                       />
                     </div>
+
                     <div className="authorInfo">
                       <h4 className="authorName">{t.name || "Happy Traveler"}</h4>
                       <div className="authorStars flex gap-0.5">

@@ -52,7 +52,7 @@ export default function AmenitiesAdmin() {
         </div>
         <div className="flex items-center gap-4 w-full md:w-auto">
           <div className="relative flex-1 md:w-64 group">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-hover:text-orange-500 transition-colors" size={18} />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-hover:text-blue-600 transition-colors" size={18} />
             <input 
               type="text"               placeholder="SEARCH..." 
               value={searchTerm}
@@ -69,7 +69,7 @@ export default function AmenitiesAdmin() {
       {/* Content Display */}
       {loading ? (
         <div className="admin-form-card flex flex-col items-center justify-center p-24 gap-6">
-          <div className="w-16 h-16 border-4 border-orange-600 border-t-transparent rounded-full animate-spin shadow-2xl shadow-orange-500/20"></div>
+          <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin shadow-2xl shadow-blue-600/20"></div>
           <p className="font-black text-slate-400 uppercase tracking-[0.3em] text-[10px]">Loading amenities...</p>
         </div>
       ) : (
@@ -89,12 +89,12 @@ export default function AmenitiesAdmin() {
                   <tr key={item._id} className="group hover:bg-slate-50/50 transition-colors">
                     <td className="px-8 py-7">
                       <div className="flex items-center gap-5">
-                        <div className="w-16 h-16 rounded-[24px] bg-slate-50 flex items-center justify-center text-slate-400 border border-slate-200/50 flex-shrink-0 group-hover:scale-125 group-hover:bg-orange-600 group-hover:text-white transition-all duration-700 shadow-sm relative overflow-hidden">
+                        <div className="w-16 h-16 rounded-[24px] bg-slate-50 flex items-center justify-center text-slate-400 border border-slate-200/50 flex-shrink-0 group-hover:scale-125 group-hover:bg-blue-600 group-hover:text-white transition-all duration-700 shadow-sm relative overflow-hidden">
                            <Coffee size={30} strokeWidth={1.5} className="group-hover:-rotate-12 transition-transform duration-700 relative z-10" />
-                           <div className="absolute inset-0 bg-orange-600/0 group-hover:bg-orange-600/5 transition-colors"></div>
+                           <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/5 transition-colors"></div>
                         </div>
                         <div className="min-w-0">
-                          <div className="font-black text-slate-900 group-hover:text-orange-600 transition-colors uppercase text-[12px] tracking-tight leading-none truncate max-w-lg">
+                          <div className="font-black text-slate-900 group-hover:text-blue-600 transition-colors uppercase text-[12px] tracking-tight leading-none truncate max-w-lg">
                             {item.title || item.name}
                           </div>
                           <div className="text-[9px] font-black text-slate-400 mt-3 flex items-center gap-3 uppercase tracking-[0.2em] leading-none">
@@ -111,7 +111,7 @@ export default function AmenitiesAdmin() {
                     </td>
                     <td className="px-6 py-7 border-x border-slate-50/50">
                       <div className="flex justify-center">
-                        <div className="text-[11px] font-black text-orange-500 font-mono bg-orange-50/30 px-5 py-2.5 rounded-2xl border border-orange-100/50 w-fit tracking-tighter group-hover:bg-orange-600 group-hover:text-white group-hover:border-orange-500 transition-all duration-700 shadow-sm uppercase italic">
+                        <div className="text-[11px] font-black text-blue-600 font-mono bg-orange-50/30 px-5 py-2.5 rounded-2xl border border-orange-100/50 w-fit tracking-tighter group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all duration-700 shadow-sm uppercase italic">
                           {String(item.key || 'standard-asset').toUpperCase()}
                         </div>
                       </div>
@@ -124,11 +124,11 @@ export default function AmenitiesAdmin() {
                       </div>
                     </td>
                     <td className="px-8 py-7 text-right">
-                      <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-4 group-hover:translate-x-0">
-                        <Link href={`/admin/amenities/${item._id}/edit`} className="p-3 bg-white border border-slate-200 rounded-2xl text-orange-600 hover:bg-orange-600 hover:text-white transition-all shadow-sm active:scale-95 group/edit" title="Edit">
+                      <div className="flex items-center justify-end gap-2 transition-all duration-300">
+                        <Link href={`/admin/amenities/${item._id}/edit`} className="p-3 bg-white border border-slate-200 rounded-2xl text-blue-600 hover:bg-blue-600 hover:text-white transition-all shadow-sm active:scale-95 group/edit" title="Edit">
                           <Edit size={18} className="group-hover/edit:rotate-12 transition-transform duration-500" />
                         </Link>
-                        <button onClick={() => handleDelete(item._id)} className="p-3 bg-white border border-slate-200 rounded-2xl text-rose-500 hover:bg-rose-500 hover:text-white transition-all shadow-sm active:scale-95 shrink-0" title="Delete">
+                        <button onClick={() => handleDelete(item._id)} className="p-3 bg-white border border-slate-200 rounded-2xl text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all shadow-sm active:scale-95 shrink-0" title="Delete">
                           <Trash2 size={18} />
                         </button>
                       </div>
@@ -139,7 +139,7 @@ export default function AmenitiesAdmin() {
                   <tr>
                     <td colSpan={4} className="px-8 py-32 text-center">
                       <div className="flex flex-col items-center gap-8">
-                        <div className="p-20 bg-slate-50 rounded-[64px] border border-slate-100 text-slate-200 shadow-inner">
+                        <div className="p-10 bg-slate-50 rounded-[64px] border border-slate-100 text-slate-200 shadow-inner">
                           <Wind size={96} strokeWidth={1} className="animate-pulse opacity-10" />
                         </div>
                         <p className="font-black text-slate-400 uppercase tracking-[0.4em] text-[12px] italic">No amenities found</p>
@@ -156,18 +156,18 @@ export default function AmenitiesAdmin() {
       {/* Summary Matrix Footer */}
       {!loading && filteredData.length > 0 && (
           <div className="admin-form-card bg-slate-900 border-slate-800 p-12 relative overflow-hidden group shadow-2xl">
-               <div className="absolute top-0 right-0 w-[800px] h-full bg-orange-500/5 -skew-x-12 translate-x-32 group-hover:translate-x-24 transition-transform duration-1000"></div>
-               <div className="absolute top-0 left-0 w-64 h-64 bg-orange-500/10 rounded-br-full blur-[100px]"></div>
+               <div className="absolute top-0 right-0 w-[800px] h-full bg-blue-600/5 -skew-x-12 translate-x-32 group-hover:translate-x-24 transition-transform duration-1000"></div>
+               <div className="absolute top-0 left-0 w-64 h-64 bg-blue-600/10 rounded-br-full blur-[100px]"></div>
                <div className="relative z-10 flex items-center justify-between">
                    <div className="flex items-center gap-10">
-                       <div className="w-24 h-24 rounded-[40px] bg-white/5 flex items-center justify-center text-white border border-white/10 backdrop-blur-3xl group-hover:bg-orange-600 group-hover:border-orange-500 transition-all duration-700 shadow-2xl transform group-hover:scale-110">
+                       <div className="w-24 h-24 rounded-[40px] bg-white/5 flex items-center justify-center text-white border border-white/10 backdrop-blur-3xl group-hover:bg-blue-600 group-hover:border-blue-600 transition-all duration-700 shadow-2xl transform group-hover:scale-110">
                            <Zap size={48} className="animate-pulse" />
                        </div>
                        <div>
                             <h4 className="text-white font-black text-3xl tracking-tighter uppercase mb-4">Summary</h4>
                            <div className="flex items-center gap-8">
                                <div className="flex items-center gap-3 text-slate-500 text-[10px] font-black uppercase tracking-[0.35em] border-r border-white/10 pr-8 leading-none">
-                                  <Clock size={16} className="text-orange-500" /> SYNCED
+                                  <Clock size={16} className="text-blue-600" /> SYNCED
                                </div>
                                <div className="flex items-center gap-3 text-slate-500 text-[10px] font-black uppercase tracking-[0.35em] leading-none">
                                   <Sparkles size={16} className="text-amber-500" /> VERIFIED
@@ -175,15 +175,15 @@ export default function AmenitiesAdmin() {
                            </div>
                        </div>
                    </div>
-                   <div className="flex items-center gap-20 pr-12">
+                   <div className="flex items-center gap-10 pr-12">
                         <div className="text-right">
                             <h5 className="text-7xl font-black text-white leading-none tracking-tighter">{(filteredData.length).toString().padStart(2, '0')}</h5>
                             <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.5em] mt-5 mr-1 italic">Total Amenities</p>
                         </div>
                         <div className="w-px h-32 bg-white/10"></div>
                         <div className="grid grid-cols-1 gap-6">
-                             <div className="flex items-center gap-5 text-orange-500">
-                                 <div className="w-3 h-3 rounded-full bg-orange-500 shadow-[0_0_15px_rgba(99,102,241,0.8)] animate-pulse"></div>
+                             <div className="flex items-center gap-5 text-blue-600">
+                                 <div className="w-3 h-3 rounded-full bg-blue-600 shadow-[0_0_15px_rgba(99,102,241,0.8)] animate-pulse"></div>
                                  <span className="text-[11px] font-black uppercase tracking-widest leading-none">System Active</span>
                              </div>
                              <div className="flex items-center gap-5 text-slate-400">

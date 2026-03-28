@@ -119,7 +119,7 @@ export default function SiteOptionsPage() {
 
 
         <div className="admin-form-card flex flex-col items-center justify-center p-24 gap-6">
-            <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
             <p className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Loading Settings...</p>
         </div>
 
@@ -129,23 +129,23 @@ export default function SiteOptionsPage() {
             <div className="admin-page-header">
                 <div>
                     <h2 className="admin-page-title">
-                        <div className="admin-page-title-indicator"></div>
+                        <div className="admin-page-title-indicator bg-blue-600"></div>
                         General Settings
                     </h2>
                     <p className="admin-page-subtitle mt-1">Manage site-wide configuration, contact info, and social links</p>
                 </div>
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-4">
                     <Link 
                         href="/"
                         target="_blank"
-                        className="admin-btn h-11 px-6 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 hover:shadow-lg hover:shadow-slate-200/50 transition-all flex items-center justify-center gap-2"
+                        className="admin-btn h-10 px-4 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 transition-all flex items-center justify-center gap-2"
                     >
                          <ExternalLink size={14} /> View Live Site
                     </Link>
                     <button 
                         onClick={handleSave}
                         disabled={saving}
-                        className="admin-btn admin-btn-primary h-11 px-10 shadow-lg shadow-orange-200/50"
+                        className="admin-btn admin-btn-primary h-10 px-8"
                     >
                         <ShieldCheck size={18} /> {saving ? 'Saving...' : 'Save All Settings'}
                     </button>
@@ -153,26 +153,25 @@ export default function SiteOptionsPage() {
             </div>
 
             <div className="">
-                {/* Main Content Area */}
-                <div className="space-y-10">
+                <div className="space-y-6">
                     
                     {/* General Section */}
                     <div className="admin-form-card">
-                        <div className="space-y-6">
+                        <div className="space-y-4">
                             <div className="admin-form-group">
-                                <label className="admin-form-label">Site name</label>
+                                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Site name</label>
                                 <input 
                                     type="text" 
                                     value={general.site_title}
                                     onChange={e => setGeneral({...general, site_title: e.target.value})}
-                                    className="admin-form-input" 
+                                    className="admin-form-input !h-9" 
                                 />
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="admin-form-group">
-                                    <label className="admin-form-label">Site logo</label>
-                                    <div className="border border-slate-200 rounded-lg p-3 bg-slate-50/50">
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Site logo</label>
+                                    <div className="border border-slate-100 rounded-lg p-2 bg-slate-50/30">
                                         <ImageUpload 
                                             value={general.site_logo}
                                             onChange={url => setGeneral({...general, site_logo: url})}
@@ -182,11 +181,10 @@ export default function SiteOptionsPage() {
                                             hideUrlInput
                                         />
                                     </div>
-                                    <p className="text-xs text-slate-500 mt-1">Transparent PNG. Used for login and header.</p>
                                 </div>
                                 <div className="admin-form-group">
-                                    <label className="admin-form-label">Favicon</label>
-                                    <div className="border border-slate-200 rounded-lg p-3 bg-slate-50/50">
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Favicon</label>
+                                    <div className="border border-slate-100 rounded-lg p-2 bg-slate-50/30">
                                         <ImageUpload 
                                             value={general.site_favicon}
                                             onChange={url => setGeneral({...general, site_favicon: url})}
@@ -195,54 +193,53 @@ export default function SiteOptionsPage() {
                                             hideUrlInput
                                         />
                                     </div>
-                                    <p className="text-xs text-slate-500 mt-1">Square icon (32×32 or 64×64). Browser tab.</p>
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="admin-form-group">
-                                    <label className="admin-form-label">Google rating</label>
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Google rating</label>
                                     <input 
                                         type="text" 
                                         value={general.google_rating}
                                         onChange={e => setGeneral({...general, google_rating: e.target.value})}
-                                        className="admin-form-input"
+                                        className="admin-form-input !h-9"
                                     />
                                 </div>
                                 <div className="admin-form-group">
-                                    <label className="admin-form-label">Total reviews</label>
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Total reviews</label>
                                     <input 
                                         type="text" 
                                         value={general.google_reviews}
                                         onChange={e => setGeneral({...general, google_reviews: e.target.value})}
-                                        className="admin-form-input"
+                                        className="admin-form-input !h-9"
                                     />
                                 </div>
                             </div>
 
                             <div className="admin-form-group">
-                                <label className="admin-form-label">Google Analytics / tracking scripts</label>
+                                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Tracking scripts</label>
                                 <textarea 
                                     value={general.analytics_script}
                                     onChange={e => setGeneral({...general, analytics_script: e.target.value})}
-                                    rows={5}
-                                    className="admin-form-input font-mono text-sm bg-slate-900 text-slate-300 border-slate-700"
+                                    rows={3}
+                                    className="admin-form-input font-mono text-[11px] bg-slate-900 text-slate-300 border-slate-700"
                                 />
                             </div>
 
-                            <div className="pt-6 mt-6 border-t border-slate-200 flex items-center justify-between">
+                            <div className="py-2 flex items-center justify-between border-t border-slate-50">
                                 <div>
-                                    <label className="admin-form-label block">Maintenance mode</label>
-                                    <p className="text-xs text-slate-500 mt-0.5">Show &quot;Under Construction&quot; on the site</p>
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block">Maintenance mode</label>
+                                    <p className="text-[10px] text-slate-400">Under Construction mode</p>
                                 </div>
-                                <label className="relative inline-block w-11 h-6 cursor-pointer">
+                                <label className="relative inline-block w-10 h-5 cursor-pointer">
                                     <input 
                                         type="checkbox" 
-                                        checked={general.maintenance_mode === true || String(general.maintenance_mode) === 'true' || String(general.maintenance_mode) === '1'}
+                                        checked={general.maintenance_mode === true || String(general.maintenance_mode) === 'true'}
                                         onChange={e => setGeneral({...general, maintenance_mode: e.target.checked})}
                                         className="sr-only peer"
                                     />
-                                    <span className="block w-full h-full bg-slate-200 rounded-full peer-checked:bg-rose-500 transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:w-5 after:h-5 after:bg-white after:rounded-full after:shadow after:transition-transform peer-checked:after:translate-x-5"></span>
+                                    <span className="block w-full h-full bg-slate-200 rounded-full peer-checked:bg-emerald-500 transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:w-4 after:h-4 after:bg-white after:rounded-full after:shadow after:transition-transform peer-checked:after:translate-x-5"></span>
                                 </label>
                             </div>
                         </div>
@@ -250,46 +247,46 @@ export default function SiteOptionsPage() {
 
                     {/* Contact Section */}
                     <div className="admin-form-card">
-                        <div className="space-y-6">
-                            <h3 className="admin-form-section-title text-base font-semibold text-slate-800">Contact</h3>
+                        <div className="space-y-4">
+                            <h3 className="admin-form-section-title text-sm border-b border-slate-50 pb-2 mb-4">Contact Details</h3>
 
                             <div className="admin-form-group">
-                                <label className="admin-form-label">Address</label>
+                                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Physical Address</label>
                                 <textarea 
                                     value={contact.address}
                                     onChange={e => setContact({...contact, address: e.target.value})}
-                                    rows={2}
-                                    className="admin-form-input"
+                                    rows={1}
+                                    className="admin-form-input !h-auto min-h-[40px] py-2"
                                 />
                             </div>
                             
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <div className="admin-form-group">
-                                    <label className="admin-form-label">Phone (primary)</label>
-                                    <input type="text" value={contact.phone1} onChange={e => setContact({...contact, phone1: e.target.value})} className="admin-form-input" />
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Phone Primary</label>
+                                    <input type="text" value={contact.phone1} onChange={e => setContact({...contact, phone1: e.target.value})} className="admin-form-input !h-9" />
                                 </div>
                                 <div className="admin-form-group">
-                                    <label className="admin-form-label">Phone (support)</label>
-                                    <input type="text" value={contact.phone2} onChange={e => setContact({...contact, phone2: e.target.value})} className="admin-form-input" />
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Phone Support</label>
+                                    <input type="text" value={contact.phone2} onChange={e => setContact({...contact, phone2: e.target.value})} className="admin-form-input !h-9" />
                                 </div>
                                 <div className="admin-form-group">
-                                    <label className="admin-form-label">WhatsApp</label>
-                                    <input type="text" value={contact.whatsapp} onChange={e => setContact({...contact, whatsapp: e.target.value})} className="admin-form-input" />
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">WhatsApp</label>
+                                    <input type="text" value={contact.whatsapp} onChange={e => setContact({...contact, whatsapp: e.target.value})} className="admin-form-input !h-9" />
                                 </div>
                             </div>
                             
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-slate-100">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
                                 <div className="admin-form-group">
-                                    <label className="admin-form-label">Email (info)</label>
-                                    <input type="email" value={contact.email1} onChange={e => setContact({...contact, email1: e.target.value})} className="admin-form-input" />
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Email Info</label>
+                                    <input type="email" value={contact.email1} onChange={e => setContact({...contact, email1: e.target.value})} className="admin-form-input !h-9" />
                                 </div>
                                 <div className="admin-form-group">
-                                    <label className="admin-form-label">Email (booking)</label>
-                                    <input type="email" value={contact.email2} onChange={e => setContact({...contact, email2: e.target.value})} className="admin-form-input" />
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Email Booking</label>
+                                    <input type="email" value={contact.email2} onChange={e => setContact({...contact, email2: e.target.value})} className="admin-form-input !h-9" />
                                 </div>
                                 <div className="admin-form-group">
-                                    <label className="admin-form-label">Email (admin)</label>
-                                    <input type="email" value={contact.email3} onChange={e => setContact({...contact, email3: e.target.value})} className="admin-form-input" />
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Email Admin</label>
+                                    <input type="email" value={contact.email3} onChange={e => setContact({...contact, email3: e.target.value})} className="admin-form-input !h-9" />
                                 </div>
                             </div>
                         </div>

@@ -69,7 +69,7 @@ export default function CabsAdmin() {
     finally { setSaving(false); }
   };
 
-  if (loading) return <div className="p-20 text-center font-bold text-slate-400">Syncing Cab Fleet Pricing...</div>;
+  if (loading) return <div className="p-10 text-center font-bold text-slate-400">Syncing Cab Fleet Pricing...</div>;
 
   const vehicleTypes = [
     { key: 'sedan', label: 'Sedan' },
@@ -115,7 +115,7 @@ export default function CabsAdmin() {
                       type="text" 
                       value={pricing[vehicle.key]?.[duration.key] || ''}
                       onChange={e => handleChange(vehicle.key, duration.key, e.target.value)}
-                      className="flex-1 h-14 px-6 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-orange-500 outline-none font-bold text-lg"
+                      className="flex-1 h-14 px-6 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-600 outline-none font-bold text-lg"
                       placeholder="e.g. 8000"
                     />
                   </div>

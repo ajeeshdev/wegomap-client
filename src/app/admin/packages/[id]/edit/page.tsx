@@ -18,7 +18,8 @@ export default function EditPackage() {
     price: '', oldamt: '', per: '', duration: '', highlights: [],
     inclusions: [], exclusions: [], terms: '', category: '',
     images: [], thumb: '', onoffer: false, isBestSeller: false,
-    itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: ''
+    itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '',
+    displayToHome: false, isActive: true
   });
 
   useEffect(() => {
@@ -55,7 +56,9 @@ export default function EditPackage() {
             inclusions: data.data.inclusions || [],
             exclusions: data.data.exclusions || [],
             images: data.data.images || [],
-            itinerary: data.data.itinerary || []
+            itinerary: data.data.itinerary || [],
+            displayToHome: data.data.displayToHome || false,
+            isActive: data.data.isActive !== undefined ? data.data.isActive : true
           });
         }
       } catch (err) {
@@ -100,8 +103,8 @@ export default function EditPackage() {
   };
 
   if (loading) return (
-    <div className="admin-form-card flex flex-col items-center justify-center p-20 gap-4">
-      <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
+    <div className="admin-form-card flex flex-col items-center justify-center p-10 gap-4">
+      <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
       <p className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Retrieving package node...</p>
     </div>
   );
@@ -145,13 +148,13 @@ export default function EditPackage() {
           {/* Basic Details Section */}
           <div className="admin-form-card space-y-12">
             <h3 className="admin-form-section-title">
-              <div className="admin-page-title-indicator bg-orange-600"></div>
+              <div className="admin-page-title-indicator bg-blue-600"></div>
               Basic Details
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
               <div className="admin-form-group md:col-span-2">
-                <label className="admin-form-label flex items-center gap-2"> <Layers size={12} className="text-orange-500" /> Package Title</label>
+                <label className="admin-form-label flex items-center gap-2"> <Layers size={12} className="text-blue-600" /> Package Title</label>
                 <input type="text" value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} className="admin-form-input text-lg font-bold h-12" placeholder="e.g. Kerala Backwaters Magic" />
               </div>
               <div className="admin-form-group">
@@ -159,11 +162,11 @@ export default function EditPackage() {
                 <input type="text" value={formData.subtitle} onChange={e => setFormData({ ...formData, subtitle: e.target.value })} className="admin-form-input" placeholder="e.g. Venice of the East" />
               </div>
               <div className="admin-form-group">
-                <label className="admin-form-label flex items-center gap-2"> <Zap size={12} className="text-rose-500" /> Offer Label</label>
-                <input type="text" value={formData.slabel} onChange={e => setFormData({ ...formData, slabel: e.target.value })} className="admin-form-input font-black text-rose-500 uppercase tracking-widest placeholder:text-rose-200" placeholder="e.g. 20% OFF" />
+                <label className="admin-form-label flex items-center gap-2"> <Zap size={12} className="text-emerald-500" /> Offer Label</label>
+                <input type="text" value={formData.slabel} onChange={e => setFormData({ ...formData, slabel: e.target.value })} className="admin-form-input font-black text-emerald-500 uppercase tracking-widest placeholder:text-rose-200" placeholder="e.g. 20% OFF" />
               </div>
               <div className="admin-form-group">
-                <label className="admin-form-label flex items-center gap-2"> <MapPin size={12} className="text-rose-500" /> Location</label>
+                <label className="admin-form-label flex items-center gap-2"> <MapPin size={12} className="text-emerald-500" /> Location</label>
                 <input type="text" value={formData.location} onChange={e => setFormData({ ...formData, location: e.target.value })} className="admin-form-input font-bold" placeholder="e.g. Alleppey, Kerala" />
               </div>
               <div className="admin-form-group">
@@ -181,7 +184,7 @@ export default function EditPackage() {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
               <div className="admin-form-group">
-                <label className="admin-form-label text-orange-600">Price (₹)</label>
+                <label className="admin-form-label text-blue-600">Price (₹)</label>
                 <div className="relative">
                   <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">₹</div>
                   <input type="number" value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} className="admin-form-input pl-10 font-black text-slate-900 text-lg" />
@@ -215,7 +218,7 @@ export default function EditPackage() {
                 </div>
               </div>
               <div className="admin-form-group">
-                <label className="admin-form-label text-rose-600 flex items-center gap-2"> <Trash2 size={12} /> Package Exclusions</label>
+                <label className="admin-form-label text-emerald-600 flex items-center gap-2"> <Trash2 size={12} /> Package Exclusions</label>
                 <div className="bg-rose-50/10 rounded-2xl p-2 border border-rose-100/50 shadow-inner">
                   <textarea rows={6} value={formData.exclusions?.join('\n')} onChange={e => setFormData({ ...formData, exclusions: e.target.value.split('\n') })} className="admin-form-textarea !bg-transparent border-none font-medium text-slate-700 h-40" placeholder="e.g. Personal expenses..."></textarea>
                 </div>
@@ -223,7 +226,7 @@ export default function EditPackage() {
             </div>
 
             <div className="admin-form-group pt-4 border-t border-slate-50">
-              <label className="admin-form-label flex items-center gap-2 mb-2"> <ShieldCheck size={12} className="text-orange-500" /> Terms & Conditions</label>
+              <label className="admin-form-label flex items-center gap-2 mb-2"> <ShieldCheck size={12} className="text-blue-600" /> Terms & Conditions</label>
               <div className="bg-slate-50/50 rounded-2xl p-2 border border-slate-100 shadow-inner">
                 <textarea rows={4} value={formData.terms} onChange={e => setFormData({ ...formData, terms: e.target.value })} className="admin-form-textarea !bg-transparent border-none font-medium text-slate-600 h-32 leading-relaxed" placeholder="Standard tour terms..."></textarea>
               </div>
@@ -233,7 +236,7 @@ export default function EditPackage() {
           {/* Gallery Assets Section */}
           <div className="admin-form-card space-y-12">
             <h3 className="admin-form-section-title">
-              <div className="admin-page-title-indicator bg-orange-500"></div>
+              <div className="admin-page-title-indicator bg-blue-600"></div>
               Gallery Assets
             </h3>
             <div className="pt-4">
@@ -249,7 +252,7 @@ export default function EditPackage() {
           <div className="admin-form-card space-y-12">
             <div className="flex justify-between items-center border-b border-slate-50 pb-6 mb-2">
               <h3 className="admin-form-section-title border-none pb-0 mb-0">
-                <div className="admin-page-title-indicator bg-orange-600"></div>
+                <div className="admin-page-title-indicator bg-blue-600"></div>
                 Itinerary / Tour Plan
               </h3>
               <button
@@ -263,7 +266,7 @@ export default function EditPackage() {
             <div className="space-y-8 pt-4">
               {formData.itinerary?.map((item: any, idx: number) => (
                 <div key={idx} className="bg-slate-50/30 p-8 rounded-3xl border border-slate-100 relative group transition-all duration-300 hover:bg-white hover:shadow-sm">
-                  <div className="absolute -left-4 top-8 w-12 h-12 bg-white border border-slate-200 shadow-sm rounded-xl flex flex-col items-center justify-center font-bold text-orange-600 transition-all group-hover:bg-orange-600 group-hover:text-white group-hover:border-orange-600">
+                  <div className="absolute -left-4 top-8 w-12 h-12 bg-white border border-slate-200 shadow-sm rounded-xl flex flex-col items-center justify-center font-bold text-blue-600 transition-all group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600">
                     <span className="text-[7px] uppercase opacity-50 mb-0.5">Day</span>
                     <span className="text-xl leading-none">{item.day || idx + 1}</span>
                   </div>
@@ -274,7 +277,7 @@ export default function EditPackage() {
                         const newItin = [...formData.itinerary];
                         newItin[idx].title = e.target.value;
                         setFormData({ ...formData, itinerary: newItin });
-                      }} className="w-full bg-transparent border-b border-slate-100 py-3 focus:border-orange-600 outline-none font-bold text-xl text-slate-900 transition-all" placeholder="e.g. Arrival at Cochin" />
+                      }} className="w-full bg-transparent border-b border-slate-100 py-3 focus:border-blue-600 outline-none font-bold text-xl text-slate-900 transition-all" placeholder="e.g. Arrival at Cochin" />
                     </div>
                     <div className="admin-form-group">
                       <label className="admin-form-label text-[10px] uppercase tracking-widest text-slate-400">Description</label>
@@ -288,7 +291,7 @@ export default function EditPackage() {
                   <button
                     type="button"
                     onClick={() => setFormData({ ...formData, itinerary: formData.itinerary.filter((_: any, i: number) => i !== idx) })}
-                    className="absolute top-6 right-6 w-8 h-8 rounded-full flex items-center justify-center text-slate-200 hover:bg-rose-50 hover:text-rose-500 transition-all opacity-0 group-hover:opacity-100 border border-transparent hover:border-rose-100"
+                    className="absolute top-6 right-6 w-9 h-9 rounded-xl flex items-center justify-center text-slate-300 hover:bg-rose-50 hover:text-rose-600 transition-all border border-slate-100 hover:border-rose-200 shadow-sm"
                   >
                     <Trash2 size={16} />
                   </button>
@@ -314,7 +317,7 @@ export default function EditPackage() {
             {/* Main Thumbnail */}
             <div className="group/media">
               <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-8">
-                <div className="w-1 h-3 bg-orange-500 rounded-full shadow-[0_0_8px_rgba(168,85,247,0.4)]"></div>
+                <div className="w-1 h-3 bg-blue-600 rounded-full shadow-[0_0_8px_rgba(168,85,247,0.4)]"></div>
                 Primary Thumbnail
               </h4>
               <div className="bg-slate-50/50 rounded-2xl p-2 border border-slate-100 transition-all hover:bg-white hover:shadow-sm">
@@ -329,12 +332,12 @@ export default function EditPackage() {
             {/* Package Details */}
             <div className="pt-10 border-t border-slate-50">
               <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-8">
-                <div className="w-1 h-3 bg-orange-500 rounded-full"></div>
+                <div className="w-1 h-3 bg-blue-600 rounded-full"></div>
                 Package Identity
               </h4>
               <div className="space-y-6">
                 <div className="admin-form-group">
-                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold"> <Tag size={10} className="text-orange-500" /> Category</label>
+                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold"> <Tag size={10} className="text-blue-600" /> Category</label>
                   <select
                     value={formData.category}
                     onChange={e => setFormData({ ...formData, category: e.target.value })}
@@ -355,7 +358,7 @@ export default function EditPackage() {
                     type="text"
                     value={formData.pcode}
                     onChange={e => setFormData({ ...formData, pcode: e.target.value.toUpperCase() })}
-                    className="admin-form-input font-mono font-bold text-orange-600 h-10 text-[11px] uppercase"
+                    className="admin-form-input font-mono font-bold text-blue-600 h-10 text-[11px] uppercase"
                     placeholder="WM-KRL-001"
                   />
                 </div>
@@ -365,7 +368,7 @@ export default function EditPackage() {
             {/* Status box */}
             <div className="pt-10 border-t border-slate-50">
               <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-6">
-                <div className="w-1 h-3 bg-rose-500 rounded-full"></div>
+                <div className="w-1 h-3 bg-emerald-500 rounded-full"></div>
                 Publication
               </h4>
               <div className="space-y-3">
@@ -374,7 +377,7 @@ export default function EditPackage() {
                     <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 transition-colors leading-none">Special Offer</span>
                   </div>
                   <input type="checkbox" checked={formData.onoffer} onChange={e => setFormData({ ...formData, onoffer: e.target.checked })} className="sr-only peer" />
-                  <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-rose-500 transition-all relative">
+                  <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-emerald-500 transition-all relative">
                     <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-4.5 shadow-sm"></div>
                   </div>
                 </label>
@@ -384,15 +387,36 @@ export default function EditPackage() {
                     <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 transition-colors leading-none">Bestseller</span>
                   </div>
                   <input type="checkbox" checked={formData.isBestSeller} onChange={e => setFormData({ ...formData, isBestSeller: e.target.checked })} className="sr-only peer" />
-                  <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-orange-600 transition-all relative">
+                  <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-blue-600 transition-all relative">
                     <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-4.5 shadow-sm"></div>
+                  </div>
+                </label>
+
+                <label className="flex items-center justify-between cursor-pointer group/stat p-3 hover:bg-slate-50 rounded-xl transition-all border border-transparent hover:border-slate-100">
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 transition-colors leading-none">Display to Home</span>
+                  </div>
+                  <input type="checkbox" checked={formData.displayToHome} onChange={e => setFormData({ ...formData, displayToHome: e.target.checked })} className="sr-only peer" />
+                  <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-blue-600 transition-all relative">
+                    <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-4.5 shadow-sm"></div>
+                  </div>
+                </label>
+
+                <label className="flex items-center justify-between cursor-pointer group/stat p-3 hover:bg-emerald-50/50 rounded-xl transition-all border border-transparent hover:border-emerald-100/50 mt-4 bg-emerald-50/20">
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-600 transition-colors leading-none">Website Status</span>
+                    <span className="text-[8px] font-medium text-emerald-400 mt-1 uppercase tracking-tighter">{formData.isActive ? 'Active Everywhere' : 'Hidden from Site'}</span>
+                  </div>
+                  <input type="checkbox" checked={formData.isActive} onChange={e => setFormData({ ...formData, isActive: e.target.checked })} className="sr-only peer" />
+                  <div className="w-10 h-6 bg-slate-200 rounded-full peer-checked:bg-emerald-500 transition-all relative">
+                    <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-5 shadow-sm"></div>
                   </div>
                 </label>
               </div>
 
               <div className="mt-8">
                 <div className="flex items-center gap-3 bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
-                  <div className="w-8 h-8 rounded-xl bg-orange-100/50 flex items-center justify-center text-orange-600 shrink-0">
+                  <div className="w-8 h-8 rounded-xl bg-orange-100/50 flex items-center justify-center text-blue-600 shrink-0">
                     <Clock size={16} />
                   </div>
                   <div>
@@ -416,12 +440,12 @@ export default function EditPackage() {
                 </div>
 
                 <div className="admin-form-group">
-                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold"> <Globe size={10} className="text-orange-500" /> URL Slug</label>
+                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold"> <Globe size={10} className="text-blue-600" /> URL Slug</label>
                   <input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} className="admin-form-input font-bold text-slate-900 h-10 text-[11px]" placeholder="e.g. kerala-backwaters-magic" />
                 </div>
 
                 <div className="admin-form-group">
-                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold"> <Layers size={10} className="text-orange-500" /> SEO Description</label>
+                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold"> <Layers size={10} className="text-blue-600" /> SEO Description</label>
                   <textarea rows={3} value={formData.seo_meta} onChange={e => setFormData({ ...formData, seo_meta: e.target.value })} className="admin-form-textarea text-[11px] font-bold text-slate-700 leading-relaxed min-h-[80px] py-2" placeholder="Brief summary for indexing..."></textarea>
                 </div>
               </div>

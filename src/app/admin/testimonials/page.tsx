@@ -136,11 +136,11 @@ export default function TestimonialsAdmin() {
                       </div>
                     </td>
                     <td className="px-8 py-7 text-right">
-                      <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-4 group-hover:translate-x-0">
-                        <Link href={`/admin/testimonials/${item._id}/edit`} className="p-3 bg-white border border-slate-200 rounded-2xl text-orange-600 hover:bg-orange-600 hover:text-white transition-all shadow-sm active:scale-95 group/edit" title="Edit">
+                      <div className="flex items-center justify-end gap-2 transition-all duration-300">
+                        <Link href={`/admin/testimonials/${item._id}/edit`} className="p-3 bg-white border border-slate-200 rounded-2xl text-blue-600 hover:bg-blue-600 hover:text-white transition-all shadow-sm active:scale-95 group/edit" title="Edit">
                           <Edit size={18} className="group-hover/edit:rotate-12 transition-transform duration-500" />
                         </Link>
-                        <button onClick={() => handleDelete(item._id)} className="p-3 bg-white border border-slate-200 rounded-2xl text-rose-500 hover:bg-rose-500 hover:text-white transition-all shadow-sm active:scale-95 shrink-0" title="Delete">
+                        <button onClick={() => handleDelete(item._id)} className="p-3 bg-white border border-slate-200 rounded-2xl text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all shadow-sm active:scale-95 shrink-0" title="Delete">
                           <Trash2 size={18} />
                         </button>
                       </div>
@@ -151,7 +151,7 @@ export default function TestimonialsAdmin() {
                   <tr>
                     <td colSpan={4} className="px-8 py-32 text-center">
                       <div className="flex flex-col items-center gap-8">
-                        <div className="p-20 bg-slate-50 rounded-[64px] border border-slate-100 text-slate-200 shadow-inner">
+                        <div className="p-10 bg-slate-50 rounded-[64px] border border-slate-100 text-slate-200 shadow-inner">
                           <MessageSquareQuote size={96} strokeWidth={1} className="animate-pulse opacity-10" />
                         </div>
                         <p className="font-black text-slate-400 uppercase tracking-[0.4em] text-[12px] italic">No testimonials found</p>
@@ -182,12 +182,12 @@ export default function TestimonialsAdmin() {
                     <ShieldCheck size={16} className="text-emerald-500" /> VERIFIED
                   </div>
                   <div className="flex items-center gap-3 text-slate-500 text-[10px] font-black uppercase tracking-[0.3em] leading-none">
-                    <Zap size={16} className="text-orange-500 animate-pulse" /> LIVE CONTENT
+                    <Zap size={16} className="text-blue-600 animate-pulse" /> LIVE CONTENT
                   </div>
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-20 pr-12">
+            <div className="flex items-center gap-10 pr-12">
               <div className="text-right">
                 <h5 className="text-7xl font-black text-white leading-none tracking-tighter">{(filteredData.length).toString().padStart(2, '0')}</h5>
                 <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.5em] mt-5 mr-1 italic">Total Testimonials</p>
