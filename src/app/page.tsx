@@ -323,9 +323,11 @@ export default function Home() {
       {/* Kerala Tour Operator Section */}
 
 
+      <main className="homePageSections">
+      
       {/* First Minute Offers - Original Card Style */}
       {(homeSections.find(s => s.id === 'offers')?.enabled ?? true) && firstMinuteOffers.length > 0 && (
-      <section className="sectionPadding bg-white firstMinuteOfferSection">
+      <section className="commonPadding firstMinuteOfferSection">
         <div className="homeContainer">
           <div className="sectionHeader flex items-center justify-center mb-8">
             <div className="titleArea">
@@ -431,7 +433,7 @@ export default function Home() {
 
       {/* Domestic Packages Slider */}
       {(homeSections.find(s => s.id === 'domestic')?.enabled ?? true) && domesticPackages.length > 0 && (
-      <section className="sectionPadding bg-gradient-bottom">
+      <section className="commonPadding domesticSection">
         <div className="homeContainer">
           <div className="sectionHeader flex items-center justify-center mb-8">
             <div className="titleArea">
@@ -533,7 +535,7 @@ export default function Home() {
 
       {/* International Packages Slider */}
       {(homeSections.find(s => s.id === 'international')?.enabled ?? true) && internationalPackages.length > 0 && (
-      <section className="sectionPadding bg-slate-50">
+      <section className="commonPadding internationalSection">
         <div className="homeContainer">
           <div className="sectionHeader flex items-center justify-center mb-8">
             <div className="titleArea">
@@ -635,7 +637,7 @@ export default function Home() {
 
       {/* Kochi Based Travel Agency Section */}
       {homeSections.find(s => s.id === 'kochi')?.enabled && kochiExperiences.length > 0 && (
-      <section className="sectionPadding bg-gradient-bottom">
+      <section className="commonPadding kochiSection">
         <div className="homeContainer">
           <div className="sectionHeader flex items-center justify-center mb-8">
             <div className="titleArea">
@@ -737,7 +739,7 @@ export default function Home() {
 
       {/* Refined Corporate Events Section */}
       {(homeSections.find(s => s.id === 'corporate')?.enabled ?? true) && (
-      <section className="corporate-events-section sectionPadding bg-white">
+      <section className="corporate-events-section commonPadding">
         <div className="homeContainer">
           <div className="sectionHeader flex items-center justify-center mb-8">
             <div className="titleArea">
@@ -835,7 +837,7 @@ export default function Home() {
 
       {/* Special Events Section */}
       {homeSections.find(s => s.id === 'special_events')?.enabled && specialEvents.length > 0 && (
-      <section className="special-events-section sectionPadding bg-slate-50/50 ">
+      <section className="special-events-section commonPadding">
         <div className="homeContainer">
           <div className="sectionHeader flex items-center justify-center mb-8">
             <div className="titleArea">
@@ -969,7 +971,7 @@ export default function Home() {
             pagination={{ clickable: true, el: '.test-pagination' }}
             breakpoints={{
               768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 }
+              1024: { slidesPerView: 2 }
             }}
             className="testimonialSwiper"
           >
@@ -1006,7 +1008,7 @@ export default function Home() {
 
       {/* Requested Kerala Specialist Thin Section */}
       {(homeSections.find(s => s.id === 'seo')?.enabled ?? true) && (
-      <section className="services-list readmore-section commonPadding bg-white">
+      <section className="services-list readmore-section commonPadding">
         <div className="homeContainer">
           <div className="row">
             <div className="col-xl-12 mx-auto">
@@ -1033,6 +1035,7 @@ export default function Home() {
       </section>
       )}
 
+      </main>
     </div>
   );
 }

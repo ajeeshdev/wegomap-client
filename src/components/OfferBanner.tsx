@@ -58,7 +58,7 @@ export default function OfferBanner() {
     };
 
     return (
-        <section className="offerBannerSection py-6 md:py-10 overflow-hidden bg-white">
+        <section className="offerBannerSection py-6 md:py-10 overflow-hidden">
             <div className="relative group slickFullWidth">
                 <Slider ref={sliderRef} {...settings}>
                     {banners.map((banner, idx) => (
