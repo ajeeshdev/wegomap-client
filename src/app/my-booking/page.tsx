@@ -49,7 +49,7 @@ export default function MyBookingsPage() {
                     <p className="text-slate-500 max-w-xs font-medium mb-8">
                         You haven&apos;t booked any tours yet. When you book an experience, it will show up here.
                     </p>
-                    <Link href="/tours" className="py-4 px-10 bg-primary hover:bg-blue-700 text-white font-black rounded-2xl transition-all shadow-xl shadow-blue-100 inline-flex items-center gap-2 group">
+                    <Link href="/packages" className="py-4 px-10 bg-primary hover:bg-blue-700 text-white font-black rounded-2xl transition-all shadow-xl shadow-blue-100 inline-flex items-center gap-2 group">
                         Start Exploring <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>

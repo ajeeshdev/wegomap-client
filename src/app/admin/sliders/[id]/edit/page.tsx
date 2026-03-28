@@ -150,7 +150,7 @@ export default function EditSlider() {
                         value={formData.link} 
                         onChange={e => setFormData({ ...formData, link: e.target.value })} 
                         className="admin-form-input font-mono text-xs h-11" 
-                        placeholder="/packages/..."
+                        placeholder="/..."
                       />
                     </div>
                   </div>

@@ -533,7 +533,7 @@ export const packagesData: Record<string, TourPackageDetail> = {
     "4n5d-kerala-honeymoon-package": {
         "id": "12",
         "slug": "4n5d-kerala-honeymoon-package",
-        "title": "4N5D kerala Standard Family Package",
+        "title": "4N5D Kerala Standard Honeymoon Package",
         "location": "2NMunnar Hill stations / 1N Thekkady Wildlife  / 1N Houseboat",
         "duration": "",
         "price": "\u20b9 19799",
@@ -589,7 +589,7 @@ export const packagesData: Record<string, TourPackageDetail> = {
     "5n6d-kerala-honeymoon-pacakge": {
         "id": "13",
         "slug": "5n6d-kerala-honeymoon-pacakge",
-        "title": "5N6D Kerala Beach Plan",
+        "title": "5N6D Kerala Beach Honeymoon Plan",
         "location": "1N Cherai / 2N Munnar Hill stations / 1N Thekkady Wildlife",
         "duration": "",
         "price": "\u20b9 14999",
@@ -651,7 +651,7 @@ export const packagesData: Record<string, TourPackageDetail> = {
     "6n7d-kerala-honeymoon-package": {
         "id": "14",
         "slug": "6n7d-kerala-honeymoon-package",
-        "title": "6N7D Kerala Standard Holiday",
+        "title": "6N7D Kerala Standard Honeymoon Holiday",
         "location": "2N Munnar Hillstations/ 1N Thekkady Wildlife / 2NKovalam Beach/ 1N Houseboat",
         "duration": "",
         "price": "\u20b9 22999",

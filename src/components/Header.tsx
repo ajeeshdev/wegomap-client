@@ -5,7 +5,7 @@ import { API_URL, getImageUrl } from '@/config';
 import { useState, useEffect, useRef } from 'react';
 import {
     X, ChevronDown, ChevronRight, User, Heart, Info, Users, Contact,
-    Home, Search, Phone, Mail, MapPin, Package, Calendar,
+    Home, Search, Phone, Mail, MapPin, Package, Calendar, Building2,
     Ship, Globe, Zap, MessageSquare, HelpCircle, Compass, Star, FileText
 } from 'lucide-react';
 import Image from 'next/image';
@@ -13,7 +13,7 @@ import EnquireModal from './EnquireModal';
 
 
 const IconMap: Record<string, any> = {
-    Home, Info, Users, Phone, Mail, MapPin, Heart, Package, Calendar,
+    Home, Info, Users, Phone, Mail, MapPin, Heart, Package, Calendar, Building2,
     Ship, Globe, Zap, MessageSquare, HelpCircle, Star, Compass, FileText, Search, Contact, ClipboardList: FileText
 };
 
@@ -90,6 +90,7 @@ const navLinks = [
         dropdown: tourItems
     },
     { name: 'Events', href: '/events' },
+    { name: 'Hotels', href: '/hotels' },
     { name: 'Cruises', href: '/cruise-packages' },
     { name: 'Payment', href: '/payment' },
     { name: 'Blogs', href: '/blogs' },
@@ -450,14 +451,29 @@ export default function Header() {
                     <div className="sideMenuNav">
                         {finalSidebarLinks.map((link: any) => (
                             <div key={link.name} className="mobileMenuItem">
-                                <div className="mobileItemHeader" onClick={() => link.dropdown ? toggleMobileMenu(link.name) : setIsOpen(false)}>
+                                <div className="mobileItemHeader" onClick={(e) => {
+                                    if (!link.dropdown) setIsOpen(false);
+                                }}>
                                     {link.dropdown ? (
-                                        <span className="mobileLink">
-                                            {link.name}
-                                            <ChevronDown size={18} className={`transform transition-transform ${activeMobileMenu === link.name ? 'rotate-180' : ''}`} />
-                                        </span>
+                                        <div className="flex items-center w-full">
+                                            {link.href && link.href !== '#' ? (
+                                                <Link href={link.href} className="mobileLink flex-1" onClick={() => setIsOpen(false)}>
+                                                    {link.name}
+                                                </Link>
+                                            ) : (
+                                                <span className="mobileLink flex-1" onClick={() => toggleMobileMenu(link.name)}>
+                                                    {link.name}
+                                                </span>
+                                            )}
+                                            <button 
+                                                className="p-2 -mr-2"
+                                                onClick={(e) => { e.stopPropagation(); toggleMobileMenu(link.name); }}
+                                            >
+                                                <ChevronDown size={18} className={`transform transition-transform ${activeMobileMenu === link.name ? 'rotate-180' : ''}`} />
+                                            </button>
+                                        </div>
                                     ) : (
-                                        <Link href={link.href} className="flex items-center">
+                                        <Link href={link.href} className="flex items-center w-full">
                                             {link.icon && <DynamicIcon name={link.icon} size={20} className="mr-3 text-slate-400 group-hover:text-indigo-500 transition-colors" />}
                                             {link.name}
                                         </Link>
@@ -468,16 +484,30 @@ export default function Header() {
                                     <div className="mobileSubMenu">
                                         {link.dropdown.map((sub: any) => (
                                             <div key={sub.name} className="mobileSubItem">
-                                                <div className="mobileSubHeader" onClick={(e) => sub.dropdown ? toggleSubMenu(e, sub.name) : setIsOpen(false)}>
+                                                <div className="mobileSubHeader">
                                                     {sub.dropdown ? (
-                                                        <span className="mobileSubLink">
-                                                            {sub.name}
-                                                            <ChevronDown size={16} className={`transform transition-transform ${activeSubMenu === sub.name ? 'rotate-180' : ''}`} />
-                                                        </span>
+                                                        <div className="flex items-center w-full">
+                                                            {sub.href && sub.href !== '#' ? (
+                                                                <Link href={sub.href} className="mobileSubLink flex-1" onClick={() => setIsOpen(false)}>
+                                                                    {sub.name}
+                                                                </Link>
+                                                            ) : (
+                                                                <span className="mobileSubLink flex-1" onClick={(e) => toggleSubMenu(e, sub.name)}>
+                                                                    {sub.name}
+                                                                </span>
+                                                            )}
+                                                            <button 
+                                                                className="p-2 -mr-2"
+                                                                onClick={(e) => toggleSubMenu(e, sub.name)}
+                                                            >
+                                                                <ChevronDown size={16} className={`transform transition-transform ${activeSubMenu === sub.name ? 'rotate-180' : ''}`} />
+                                                            </button>
+                                                        </div>
                                                     ) : (
-                                                        <Link href={sub.href}>{sub.name}</Link>
+                                                        <Link href={sub.href} onClick={() => setIsOpen(false)}>{sub.name}</Link>
                                                     )}
                                                 </div>
+
 
                                                 {sub.dropdown && activeSubMenu === sub.name && (
                                                     <div className="mobileLeafMenu">

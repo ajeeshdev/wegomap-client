@@ -1,18 +1,21 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { MapPin, User, Mail, Phone, X, Heart } from 'lucide-react';
+import { MapPin, User, Mail, Phone, X, Heart, Search, Clock, Filter, Star, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { API_URL, getImageUrl } from '@/config';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
+import { Autoplay, Pagination, Navigation, FreeMode } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import 'swiper/css/free-mode';
 import EnquireModal from './EnquireModal';
+import WishlistButton from '@/components/WishlistButton';
+
 
 
 export interface TourPackage {
@@ -64,6 +67,41 @@ export default function TourCategoryPage({
     // const [isSubmitting, setIsSubmitting] = useState(false);
 
     const router = useRouter();
+    const [searchQuery, setSearchQuery] = useState('');
+    const [sortOrder, setSortOrder] = useState('all');
+    const [durationRange, setDurationRange] = useState('all');
+    const [showFilters, setShowFilters] = useState(false);
+
+
+    const filtered = useMemo(() => {
+        let list = packages;
+        
+        if (durationRange !== 'all') {
+            list = list.filter(p => {
+                const durationMatch = p.duration.match(/(\d+)\s*(?:Day|Days)/i);
+                const titleMatch = p.title.match(/(\d+)D/i);
+                const days = parseInt(durationMatch?.[1] || titleMatch?.[1] || "0") || 0;
+                return days === parseInt(durationRange);
+            });
+        }
+        
+        if (sortOrder === 'low-high' || sortOrder === 'high-low') {
+            list = [...list].sort((a, b) => {
+                const priceA = parseInt(a.price.replace(/[^\d]/g, '')) || 0;
+                const priceB = parseInt(b.price.replace(/[^\d]/g, '')) || 0;
+                return sortOrder === 'low-high' ? priceA - priceB : priceB - priceA;
+            });
+        }
+        
+        if (searchQuery.trim()) {
+            const q = searchQuery.toLowerCase();
+            list = list.filter(p =>
+                p.title.toLowerCase().includes(q) || p.location?.toLowerCase().includes(q)
+            );
+        }
+        return list;
+    }, [packages, searchQuery, sortOrder, durationRange]);
+
 
     useEffect(() => {
         const fetchWishlist = async () => {
@@ -132,68 +170,179 @@ export default function TourCategoryPage({
                 fallbackPreTitle={preTitle}
                 fallbackImage={getImageUrl(bannerImage)}
                 breadcrumbs={[{ label: title }]}
+                variant="large"
+                centered={true}
             />
 
             {/* ── Package Listings ── */}
-            <section className="tourCatPackages">
+            <section className="tourCatPackages allToursPage" style={{ background: '#f8fafc' }}>
                 <div className="homeContainer">
                     <div className="tourCatBookedBadge">
                         <span className="tourCatBookedNum">{bookCount}</span> tours booked in the last 24 hours.
                     </div>
-                    <p className="tourCatIntro">
-                        Wegomap is a Kochi-based tour operator in Kerala, offering top-quality travel services at best prices.
-                        We partner with trusted hotels and travel services to ensure a safe and enjoyable holiday,
-                        backed by 24/7 customer support. Contact us for custom tour packages tailored to fit your needs and budget.
-                    </p>
-
-                    <div className="tourCatGrid">
-                        {packages.map((pkg, i) => (
-                            <div key={i} className="tourCatCard">
-                                <Link href={pkg.detailUrl ? (pkg.detailUrl.startsWith('/') ? pkg.detailUrl : `/${pkg.detailUrl}`) : `/packages/${pkg.slug || pkg._id || ''}`} className="tourCatCardImgWrap">
-                                    <Image
-                                        src={getImageUrl(pkg.image)}
-                                        alt={pkg.title}
-                                        fill
-                                        style={{ objectFit: 'cover' }}
-                                        unoptimized
-                                    />
-                                    {pkg.strip && (
-                                        <span className="tourCatCardStrip">
-                                            🏷️ {pkg.strip}
-                                        </span>
-                                    )}
-                                    <button 
-                                        onClick={(e) => toggleWishlist(pkg._id || '', e)}
-                                        className={`tourCatWishlistBtn ${wishlist.includes(pkg._id || '') ? 'active' : ''}`}
-                                    >
-                                        <Heart size={18} fill={wishlist.includes(pkg._id || '') ? "currentColor" : "none"} />
+                    
+                    {/* Filter + Search Strip */}
+                    <div className="allToursControls" style={{ position: 'static', marginBottom: '2rem', borderRadius: '1.5rem', border: '1px solid #e2e8f0' }}>
+                        <div className="allToursControlsInner">
+                            {/* Search */}
+                            <div className="allToursSearch">
+                                <Search size={16} className="allToursSearchIcon" />
+                                <input
+                                    type="text"
+                                    placeholder="Search in this category…"
+                                    value={searchQuery}
+                                    onChange={e => setSearchQuery(e.target.value)}
+                                    className="allToursSearchInput"
+                                />
+                                {searchQuery && (
+                                    <button onClick={() => setSearchQuery('')} className="allToursSearchClear">
+                                        <X size={14} />
                                     </button>
+                                )}
+                            </div>
+
+                            <div className="allToursControlsDivider" />
+
+                            {/* Sorting */}
+                            <div className="allToursSelectFilters">
+                                <select 
+                                    value={sortOrder}
+                                    onChange={(e) => setSortOrder(e.target.value)}
+                                    className="tourSelect"
+                                >
+                                    <option value="all">Budget</option>
+                                    <option value="low-high">Price: Low to High</option>
+                                    <option value="high-low">Price: High to Low</option>
+                                </select>
+                                
+                                <select 
+                                    value={durationRange}
+                                    onChange={(e) => setDurationRange(e.target.value)}
+                                    className="tourSelect"
+                                >
+                                    <option value="all">Duration</option>
+                                    {[1,2,3,4,5,6,7,8,9,10].map(d => (
+                                        <option key={d} value={d}>{d} Day{d > 1 ? 's' : ''}</option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            {/* Mobile Filter Toggle */}
+                            <button className="mobileFilterToggle" onClick={() => setShowFilters(!showFilters)}>
+                                <Filter size={16} /> Filter
+                            </button>
+                        </div>
+
+                        {/* Mobile Filter Sheet Overlay */}
+                        {showFilters && (
+                            <div className="mobileFilterOverlay" onClick={() => setShowFilters(false)}>
+                                <div className="mobileFilterSheet" onClick={(e) => e.stopPropagation()}>
+                                    <div className="mobileFilterSheetHandle" />
+                                    
+                                    <div className="mobileFilterDrawerHeader">
+                                        <span>Filter {title}</span>
+                                        <div className="drawerActions">
+                                            <button className="resetBtn" onClick={() => { setSortOrder('all'); setDurationRange('all'); setSearchQuery(''); }}>Reset</button>
+                                            <button className="doneBtn" onClick={() => setShowFilters(false)}>Done</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="mobileFilterDrawerSection">
+                                        <div className="flex gap-4">
+                                            <div className="filterGroup flex-1">
+                                                <label>Sort By</label>
+                                                <select 
+                                                    value={sortOrder}
+                                                    onChange={(e) => setSortOrder(e.target.value)}
+                                                >
+                                                    <option value="all">Default</option>
+                                                    <option value="low-high">Price: Low to High</option>
+                                                    <option value="high-low">Price: High to Low</option>
+                                                </select>
+                                            </div>
+                                            <div className="filterGroup flex-1">
+                                                <label>Duration</label>
+                                                <select 
+                                                    value={durationRange}
+                                                    onChange={(e) => setDurationRange(e.target.value)}
+                                                >
+                                                    <option value="all">Any Duration</option>
+                                                    {[1,2,3,4,5,6,7,8,9,10].map(d => (
+                                                        <option key={d} value={d}>{d} Day{d > 1 ? 's' : ''}</option>
+                                                    ))}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+
+                    <div className="allToursGrid">
+                        {filtered.map((pkg, i) => (
+                            <div key={`${pkg.slug}-${i}`} className="allTourCard group">
+                                {/* Image zone */}
+                                <Link href={pkg.detailUrl ? (pkg.detailUrl.startsWith('/') ? pkg.detailUrl : `/${pkg.detailUrl}`) : `/${pkg.slug || pkg._id || ''}`} className="allTourCardImgLink">
+                                    <div className="allTourCardImg">
+                                        <Image
+                                            src={getImageUrl(pkg.image)}
+                                            alt={pkg.title}
+                                            fill
+                                            style={{ objectFit: 'cover' }}
+                                            className="transform group-hover:scale-110 transition-transform duration-700"
+                                            unoptimized
+                                        />
+                                    </div>
+                                    
+                                    {/* Overlay Top Right - Wishlist */}
+                                    <div className="wishlistBtnFloating" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}>
+                                        <WishlistButton id={pkg._id || pkg.slug || ''} wishlist={wishlist} toggleWishlist={toggleWishlist} />
+                                    </div>
+
+                                    {/* Overlay Bottom Left - Duration Pill */}
+                                  
+
+                                    {/* Overlay Bottom Right - Location chip */}
+
                                 </Link>
-                                <div className="tourCatCardBody">
-                                    <p className="tourCatCardDuration">{pkg.duration}</p>
-                                    <Link href={pkg.detailUrl ? (pkg.detailUrl.startsWith('/') ? pkg.detailUrl : `/${pkg.detailUrl}`) : `/packages/${pkg.slug || pkg._id || ''}`}>
-                                        <h2 className="tourCatCardTitle">{pkg.title}</h2>
+
+                                {/* Card body */}
+                                <div className="allTourCardBody">
+                                    <Link href={pkg.detailUrl ? (pkg.detailUrl.startsWith('/') ? pkg.detailUrl : `/${pkg.detailUrl}`) : `/${pkg.slug || pkg._id || ''}`} className="allTourCardTitle">
+                                        {pkg.title}
                                     </Link>
-                                    <div className="tourCatCardLocation">
-                                        <span className="tourCatDot">•</span> {pkg.location}
+
+                                    <div className="allTourCardPricingRow">
+                                         <div className="priceGroup">
+                                            <div className="priceMain">
+                                                <span className="currency">₹</span>
+                                                <span className="amount">{pkg.price.replace('₹', '').replace('INR', '').trim()}</span>
+                                                <span className="unit">/ person</span>
+                                            </div>
+                                            {pkg.originalPrice && pkg.originalPrice !== pkg.price && (
+                                                <div className="priceOld">
+                                                    <span className="oldAmount">{pkg.originalPrice}</span>
+                                                </div>
+                                            )}
+                                         </div>
                                     </div>
-                                    <div className="tourCatCardPricing">
-                                        <span className="tourCatPrice">{pkg.price}</span>
-                                        <span className="tourCatOrigPrice">{pkg.originalPrice}</span>
-                                        <span className="tourCatPerPerson">per Person</span>
-                                    </div>
-                                    <div className="tourCatCardBtns">
-                                        <button
-                                            type="button"
-                                            onClick={() => handleQuickPlan(pkg.title)}
-                                            className="tourCatEnquireBtn"
-                                            style={{ backgroundColor: '#FF6B35' }}
-                                        >
-                                            Get a Quick Plan
-                                        </button>
-                                        <Link href={pkg.detailUrl ? (pkg.detailUrl.startsWith('/') ? pkg.detailUrl : `/${pkg.detailUrl}`) : `/packages/${pkg.slug || pkg._id || ''}`} className="tourCatDetailsBtn">
-                                            Details
-                                        </Link>
+
+                                    <div className="allTourCardActions">
+                                        <div className="actionDivider" />
+                                        <div className="actionButtons">
+                                            <Link href={pkg.detailUrl ? (pkg.detailUrl.startsWith('/') ? pkg.detailUrl : `/${pkg.detailUrl}`) : `/${pkg.slug || pkg._id || ''}`} className="detailsBtn">
+                                                Details
+                                            </Link>
+                                            <button
+                                                className="enquireBtn"
+                                                onClick={() => handleQuickPlan(pkg.title)}
+                                            >
+                                                Enquire Now
+                                                <ArrowRight size={14} className="ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -201,6 +350,7 @@ export default function TourCategoryPage({
                     </div>
                 </div>
             </section>
+
 
             {/* ── Read More Content (optional) ── */}
             {readMoreContent && (

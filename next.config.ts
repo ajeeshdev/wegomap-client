@@ -67,6 +67,22 @@ const nextConfig = {
       },
     ]
   },
+
+  async redirects() {
+    return [
+      {
+        source: '/tours',
+        destination: '/packages',
+        permanent: true,
+      },
+      {
+        source: '/:slug/tours/:id',
+        destination: '/:slug/packages/:id',
+        permanent: true,
+      },
+
+    ];
+  },
 };
 
 export default nextConfig as NextConfig;

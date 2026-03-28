@@ -76,16 +76,16 @@ export const categoryData: Record<string, any> = {
         "seoKeys": "",
         "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/payment/\" />"
     },
-    "tours": {
+    "packages": {
         "id": 9,
-        "slug": "tours",
-        "title": "Tours",
-        "subtitle": "tours",
+        "slug": "packages",
+        "title": "Packages",
+        "subtitle": "packages",
         "text": "file",
-        "seoTitle": "Kerala Honeymoon Packages | Romantic Getaways by Wegomap",
-        "seoMeta": "Book your dream honeymoon with Wegomap\u00e2\u0080\u0099s Kerala Honeymoon Packages. Enjoy romantic escapes, cozy stays, and unforgettable experiences for couples.",
-        "seoKeys": "Kerala Honeymoon Packages , best  Kerala Honeymoon Packages , trusted  Honeymoon Package agency in kochi",
-        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/tours\" />"
+        "seoTitle": "All Tour Packages | Wegomap — Kerala & International Tours",
+        "seoMeta": "Browse all tour packages offered by Wegomap — Kerala, international, honeymoon, family, and adventure tours. Filter by category and find your perfect trip.",
+        "seoKeys": "tour packages, kerala tours, international packages, honeymoon packages, wegomap",
+        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/packages\" />"
     },
     "kerala-tour-packages": {
         "id": 10,
@@ -450,17 +450,7 @@ export const categoryData: Record<string, any> = {
         "contentImage": null,
         "contentDesc": "<p>Are you planning a relaxing and memorable vacation in Kerala? Wegomap offers a wide range of Kerala tour packages from Bangalore, perfect for travellers looking to explore the serene beauty of &ldquo;God&rsquo;s Own Country.&rdquo; Whether you&rsquo;re dreaming of a peaceful houseboat ride through Alleppey&rsquo;s backwaters, a refreshing retreat in Munnar&rsquo;s tea gardens, or an exciting wildlife adventure in Thekkady, we have something for everyone.</p>\r\n<p>Our carefully designed Kerala packages from Bangalore cater to all types of travellers, from honeymooners looking for a romantic escape to families seeking a fun-filled holiday. Whether it&rsquo;s a cozy <a href=\"kerala-honeymoon-packages/\">honeymoon package to Kerala</a> with candlelight dinners and scenic resorts or an exciting Kerala package for family with sightseeing and adventure, we offer customized options to suit your needs. Enjoy the lush greenery, beautiful beaches, rich cultural heritage, and mouth-watering Kerala cuisine with our well-planned itineraries that cover all the must-visit destinations.</p>\r\n<p>With our expertly crafted Kerala trip from Bangalore, you can experience the best of Kerala without any hassle. Our packages include comfortable accommodation, guided tours, and delicious local cuisine, ensuring a memorable journey. Whether you want to explore the misty hills of Wayanad, relax by the beaches of Kovalam, or indulge in Ayurvedic spa treatments, we have it all covered.</p>\r\n<h3>Why Choose Our Kerala Tour Packages?</h3>\r\n<ul>\r\n<li>Affordable packages with no hidden charges</li>\r\n<li>Customizable itineraries to suit your preferences</li>\r\n<li>Comfortable transportation and hotel stays</li>\r\n<li>24/7 customer support to assist you at every step</li>\r\n</ul>\r\n<p>Whether you're planning a quick weekend escape or a long vacation, our Kerala holiday packages from Bangalore offer budget-friendly and luxury options to match your travel style. We take care of everything so you can focus on making beautiful memories with your loved ones.</p>\r\n<p>Book your trip with Wegomap today and embark on an unforgettable journey to explore Kerala&rsquo;s natural beauty, culture, and traditions. Contact us now to plan your dream holiday!</p>\r\n<p>&nbsp;</p>"
     },
-    "packages": {
-        "id": 55,
-        "slug": "packages",
-        "title": "Packages",
-        "subtitle": "packages",
-        "text": "file",
-        "seoTitle": "Top Kerala Tour Operator | Trusted Kerala Travel Agency",
-        "seoMeta": "Experience the beauty of God's Own Country with Kerala\u00e2\u0080\u0099s best tour operator. Customized Kerala tours and packages crafted to create unforgettable journeys just for you.",
-        "seoKeys": "Kerala tour operator",
-        "canonical": "<link rel=\"canonical\" href=\"https://api-demo.wegomap.com/\" />"
-    },
+
     "kerala-tour-package": {
         "id": 56,
         "slug": "kerala-tour-package",

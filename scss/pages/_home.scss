@@ -104,31 +104,16 @@
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin-bottom: -1rem;
         position: relative;
         z-index: 10;
-        transform: rotate(-3deg);
-        padding-right: 1.5rem;
+        margin-bottom: -20px;
         @include min(992){
             font-size: 2.25rem;
 
         }
     }
 
-    h1.sliderTitle,
-    h2.sliderTitle {
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: #0f172a;
-        margin-bottom: 1rem;
-        position: relative;
-        z-index: 5;
-        letter-spacing: -0.02em;
-
-        @media (min-width: 768px) {
-            font-size: 3rem;
-        }
-    }
+   
 
     >p,
     .sectionHeaderDescription {
@@ -1775,7 +1760,6 @@
 
         .premium-title {
             font-size: 4rem;
-            font-weight: 900;
             margin-bottom: 1.5rem;
             letter-spacing: -0.04em;
             position: relative;
@@ -2029,14 +2013,18 @@
 
 .sliderTitle {
     font-size: 2.75rem;
-    font-weight: 800;
+    font-weight: 600;
     color: #0f172a;
     font-family: $primary-font;
     letter-spacing: -0.02em;
-
+    
     @media (max-width: 768px) {
         font-size: 2rem;
         margin-bottom: 0!important;
+    }
+    span{
+        font-weight: 600;
+
     }
 
     .highlight {

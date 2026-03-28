@@ -143,7 +143,7 @@ export default function WishlistPage() {
                                 <p className="emptyText">
                                     Looks like you haven&apos;t saved any adventures yet. Explore our collections and find something magical!
                                 </p>
-                                <Link href="/tours" className="exploreButton">
+                                <Link href="/packages" className="exploreButton">
                                     Explore Tours <ArrowRight size={20} />
                                 </Link>
                             </div>

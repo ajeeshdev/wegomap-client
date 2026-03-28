@@ -188,7 +188,7 @@ export default function CreateLandingPage({ params: paramsProp }: { params?: { i
               </select>
               
               {isEdit && (
-                <Link href={`/packages/${formData.slug}`} target="_blank" className="mt-4 flex items-center gap-2 text-[10px] font-bold text-orange-600 hover:underline uppercase tracking-widest">
+                <Link href={`/${formData.slug}`} target="_blank" className="mt-4 flex items-center gap-2 text-[10px] font-bold text-orange-600 hover:underline uppercase tracking-widest">
                   <Eye size={12} /> View Live Page
                 </Link>
               )}
@@ -202,7 +202,7 @@ export default function CreateLandingPage({ params: paramsProp }: { params?: { i
                     <div className="card-header"><h4 className="serif">Page Identification</h4></div>
                     <div className="grid grid-cols-2 gap-6">
                        <div className="admin-form-group"><label>Internal Identifier</label><input type="text" value={formData.title} onChange={e => {const v=e.target.value; setFormData({...formData, title:v, slug:v.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')});}} placeholder="Summer 2024 Promo..." /></div>
-                       <div className="admin-form-group"><label>Public URL Path</label><div className="relative"><span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono">/packages/</span><input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} className="pl-20 font-mono text-orange-600" /></div></div>
+                       <div className="admin-form-group"><label>Public URL Path</label><div className="relative"><span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono">/</span><input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} className="pl-8 font-mono text-orange-600" /></div></div>
                     </div>
                  </div>
 

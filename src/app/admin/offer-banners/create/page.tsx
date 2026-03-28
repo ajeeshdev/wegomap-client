@@ -111,7 +111,7 @@ export default function CreateOfferBanner() {
                         value={formData.link}
                         onChange={e => setFormData({ ...formData, link: e.target.value })}
                         className="admin-form-input pl-14 font-mono text-[11px] text-orange-600 font-bold h-14"
-                        placeholder="https://wegomap.com/packages/kerala-special"
+                        placeholder="https://wegomap.com/kerala-special"
                       />
                     </div>
                 </div>

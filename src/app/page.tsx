@@ -125,7 +125,7 @@ export default function Home() {
 
   const services = [
     { name: "Services", icon: "Info", href: "/services" },
-    { name: "Tours", icon: "MapPin", active: true, href: "/tours" },
+    { name: "Tours", icon: "MapPin", active: true, href: "/packages" },
     { name: "Events", icon: "Calendar", href: "/events" },
     { name: "Cruises", icon: "Ship", href: "/cruise-packages" },
     { name: "Blogs", icon: "FileText", href: "/blogs" },
@@ -264,7 +264,7 @@ export default function Home() {
   const kochiExperiences = destinations.map(d => ({
       title: d.name || d.title || 'Experience',
       image: getImageUrl(d.image || d.thumb || '/bg-placeholder.jpg'),
-      href: `/tours?q=${encodeURIComponent(d.name || d.title || '')}`,
+      href: `/packages?q=${encodeURIComponent(d.name || d.title || '')}`,
       averageRating: d.averageRating || 0
   }));
 

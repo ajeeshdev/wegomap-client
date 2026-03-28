@@ -54,7 +54,7 @@ export default function Hero() {
                         title: 'Your world, your way',
                         subtitle: 'Discover breathtaking destinations with Wegomap',
                         buttonText: 'Explore Packages',
-                        buttonHref: '/tours',
+                        buttonHref: '/packages',
                         imgDesktop: '/bg-placeholder.jpg',
                         imgMobile: '/bg-placeholder.jpg',
                         imgPortrait: '/bg-placeholder.jpg'
@@ -67,7 +67,7 @@ export default function Hero() {
                     title: 'Your world, your way',
                     subtitle: 'Discover breathtaking destinations with Wegomap',
                     buttonText: 'Explore Packages',
-                    buttonHref: '/tours',
+                    buttonHref: '/packages',
                     imgDesktop: '/bg-placeholder.jpg',
                     imgMobile: '/bg-placeholder.jpg',
                     imgPortrait: '/bg-placeholder.jpg'
@@ -75,27 +75,52 @@ export default function Hero() {
             })
             .finally(() => setIsLoadingSlides(false));
 
-        // Fetch packages for the search index
-        fetch(`${API_URL}/packages`)
-            .then(res => {
-                if (!res.headers.get('content-type')?.includes('application/json')) {
-                    throw new Error(`API returned non-JSON response from ${res.url} (Status: ${res.status})`);
-                }
-                return res.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    const dynamicSearchIndex = data.data.map((pkg: any) => ({
-                        type: 'package' as const,
-                        title: pkg.title,
-                        href: `/packages/${pkg.slug || pkg._id}`,
-                        image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || ''),
-                        meta: pkg.duration || pkg.location,
-                    }));
-                    setSearchIndex(dynamicSearchIndex);
-                }
-            })
-            .catch(err => console.error("Failed to load search index", err));
+        // Fetch search data: packages, corporate events, and special events
+        Promise.all([
+            fetch(`${API_URL}/packages`),
+            fetch(`${API_URL}/events`),
+            fetch(`${API_URL}/special-events`)
+        ])
+        .then(async ([pkgsRes, eventsRes, specRes]) => {
+            const pkgsData = await pkgsRes.json();
+            const eventsData = await eventsRes.json();
+            const specData = await specRes.json();
+
+            let masterIndex: any[] = [];
+
+            if (pkgsData.success) {
+                masterIndex = [...masterIndex, ...pkgsData.data.map((pkg: any) => ({
+                    type: 'package',
+                    title: pkg.title,
+                    href: `/packages/${pkg.slug || pkg._id}`,
+                    image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || ''),
+                    meta: pkg.duration || pkg.location,
+                }))];
+            }
+
+            if (eventsData.success) {
+                masterIndex = [...masterIndex, ...eventsData.data.map((evt: any) => ({
+                    type: 'event',
+                    title: evt.title,
+                    href: `/events/${evt.slug || evt._id}`,
+                    image: getImageUrl(evt.image || ''),
+                    meta: 'Corporate Event',
+                }))];
+            }
+
+            if (specData.success) {
+                masterIndex = [...masterIndex, ...specData.data.map((evt: any) => ({
+                    type: 'special',
+                    title: evt.title,
+                    href: `/special-events/${evt.slug || evt._id}`,
+                    image: getImageUrl(evt.image || ''),
+                    meta: 'Special Occasion',
+                }))];
+            }
+
+            setSearchIndex(masterIndex);
+        })
+        .catch(err => console.error("Failed to load search data", err));
     }, []);
 
     useEffect(() => {
@@ -158,7 +183,7 @@ export default function Hero() {
                 router.push(suggestions[activeSuggestion].href);
                 setShowSuggestions(false);
             } else {
-                router.push(`/tours?q=${encodeURIComponent(query)}`);
+                router.push(`/packages?q=${encodeURIComponent(query)}`);
                 setShowSuggestions(false);
             }
         } else if (e.key === 'Escape') {
@@ -249,7 +274,7 @@ export default function Hero() {
                                 className="submitBtn"
                                 onClick={() => {
                                     if (query.trim()) {
-                                        router.push(`/tours?q=${encodeURIComponent(query)}`);
+                                        router.push(`/packages?q=${encodeURIComponent(query)}`);
                                         setShowSuggestions(false);
                                     }
                                 }}
@@ -283,12 +308,12 @@ export default function Hero() {
                                             </span>}
                                         </div>
                                         <span className={`suggestionBadge ${s.type}`}>
-                                            {s.type === 'category' ? 'Category' : 'Package'}
+                                            {s.type === 'category' ? 'Category' : s.type === 'event' ? 'Event' : s.type === 'special' ? 'Special' : 'Package'}
                                         </span>
                                     </Link>
                                 ))}
                                 <Link
-                                    href={`/tours?q=${encodeURIComponent(query)}`}
+                                    href={`/packages?q=${encodeURIComponent(query)}`}
                                     className="suggestionViewAll"
                                     onClick={() => setShowSuggestions(false)}
                                 >

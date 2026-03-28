@@ -6,6 +6,8 @@ import EnquireModal from '@/components/EnquireModal';
 interface EnquiryContextType {
     openEnquiry: (packageName?: string) => void;
     closeEnquiry: () => void;
+    hideLayout: boolean;
+    setHideLayout: (hide: boolean) => void;
 }
 
 const EnquiryContext = createContext<EnquiryContextType | undefined>(undefined);
@@ -13,6 +15,7 @@ const EnquiryContext = createContext<EnquiryContextType | undefined>(undefined);
 export function EnquiryProvider({ children }: { children: ReactNode }) {
     const [isOpen, setIsOpen] = useState(false);
     const [pkgName, setPkgName] = useState('General Inquiry');
+    const [hideLayout, setHideLayout] = useState(false);
 
     const openEnquiry = (packageName?: string) => {
         setPkgName(packageName || 'General Inquiry');
@@ -24,7 +27,7 @@ export function EnquiryProvider({ children }: { children: ReactNode }) {
     };
 
     return (
-        <EnquiryContext.Provider value={{ openEnquiry, closeEnquiry }}>
+        <EnquiryContext.Provider value={{ openEnquiry, closeEnquiry, hideLayout, setHideLayout }}>
             {children}
             <EnquireModal 
                 isOpen={isOpen} 

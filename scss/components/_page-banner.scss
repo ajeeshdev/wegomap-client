@@ -24,6 +24,21 @@
         @include min(768) { height: 400px; }
     }
 
+    &.variant-large {
+        height: 65vh;
+        min-height: 450px;
+        
+        @include min(768) {
+            height: 75vh;
+            min-height: 600px;
+        }
+
+        .pageBannerContent {
+            margin-top: 2rem;
+        }
+    }
+
+
     .pageBannerImg {
         position: absolute;
         inset: 0;
@@ -126,6 +141,71 @@
             border-left: 3px solid #f97316;
             padding-left: 1.5rem;
             white-space: pre-line;
+        }
+    }
+
+    &.isCentered {
+        .pageBannerInner {
+            text-align: center;
+        }
+        .pageBannerContent {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+            .pageBannerTitle {
+                text-transform: none; // Match reference mixed case
+                white-space: normal;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            .pageBannerDescription {
+                border-left: none;
+                padding-left: 0;
+                margin: 1.5rem auto 0;
+            }
+        }
+
+        .googleReviewsBadge {
+            margin-top: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #fff;
+            padding: 8px 20px;
+            border-radius: 99px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            color: #1e293b;
+            font-size: 0.85rem;
+            font-weight: 600;
+
+            .googleIcon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 22px;
+                height: 22px;
+                background: #4285F4;
+                color: #fff;
+                border-radius: 4px;
+                font-size: 0.75rem;
+                font-weight: 900;
+            }
+
+            .stars {
+                display: flex;
+                gap: 2px;
+            }
+
+            .count {
+                color: #64748b;
+                border-left: 1px solid #e2e8f0;
+                padding-left: 12px;
+            }
+        }
+
+        .pageBannerTop {
+            justify-content: center;
         }
     }
 }

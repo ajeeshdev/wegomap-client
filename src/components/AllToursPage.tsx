@@ -5,7 +5,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Search, MapPin, Clock, Filter, X, User, Mail, Phone, Heart, Star, MessageSquare, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, MapPin, Clock, Filter, X, User, Mail, Phone, Heart, Star, MessageSquare, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import DynamicPageBanner from '@/components/DynamicPageBanner';
 import EnquireModal from '@/components/EnquireModal';
@@ -279,6 +279,8 @@ export default function AllToursPage() {
                 fallbackSubtitle={`Browse ${allCombinedPackages.length}+ handpicked packages — from Kerala backwaters to international escapes.`}
                 fallbackPreTitle="Curated Journeys"
                 breadcrumbs={[{ label: 'All Packages' }]}
+                variant="large"
+                centered={true}
             />
 
             {/* Filter + Search Strip */}
@@ -450,7 +452,7 @@ export default function AllToursPage() {
                     </div>
                 ) : (
                     filtered.map((pkg, i) => (
-                        <div key={`${pkg.slug}-${i}`} className="allTourCard">
+                        <div key={`${pkg.slug}-${i}`} className="allTourCard group">
                             {/* Image zone */}
                             <Link href={`/packages/${pkg.slug}`} className="allTourCardImgLink">
                                 <div className="allTourCardImg">
@@ -459,24 +461,36 @@ export default function AllToursPage() {
                                         alt={pkg.title}
                                         fill
                                         style={{ objectFit: 'cover' }}
+                                        className="transform group-hover:scale-110 transition-transform duration-700"
                                         unoptimized
                                     />
                                 </div>
+                                
+                                {/* Overlay Top Left - Rating */}
                                 {pkg.averageRating !== undefined && pkg.averageRating > 0 && (
-                                    <div className="ratingBadge">
-                                        <Star size={11} fill="currentColor" />
+                                    <div className="ratingBadge glassmorphism">
+                                        <Star size={10} fill="currentColor" />
                                         <span>{pkg.averageRating.toFixed(1)}</span>
                                     </div>
                                 )}
 
+                                {/* Overlay Top Right - Wishlist */}
                                 <div className="wishlistBtnFloating" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}>
                                     <WishlistButton id={pkg.slug} wishlist={wishlist} toggleWishlist={toggleWishlist} />
                                 </div>
 
-                                {/* Location chip — bottom right */}
+                                {/* Overlay Bottom Left - Duration Pill */}
+                                {pkg.duration && (
+                                    <div className="durationBadge glassmorphism">
+                                        <Clock size={10} />
+                                        <span>{pkg.duration}</span>
+                                    </div>
+                                )}
+
+                                {/* Overlay Bottom Right - Location chip */}
                                 {pkg.location && (
-                                    <div className="allTourCardLocation">
-                                        <MapPin size={9} />
+                                    <div className="locationBadge glassmorphism">
+                                        <MapPin size={10} />
                                         <span className="locationText">{pkg.location}</span>
                                     </div>
                                 )}
@@ -484,36 +498,40 @@ export default function AllToursPage() {
 
                             {/* Card body */}
                             <div className="allTourCardBody">
-                                {pkg.duration && (
-                                    <div className="allTourCardDuration">
-                                        <Clock size={11} /> {pkg.duration}
-                                    </div>
-                                )}
-                                 <Link href={`/packages/${pkg.slug}`} className="allTourCardTitle">
+                                <Link href={`/packages/${pkg.slug}`} className="allTourCardTitle">
                                     {pkg.title}
                                 </Link>
 
-                                <div className="allTourCardMetaRow flex items-center justify-between ">
-                                     <div className="priceInfo">
+                                <div className="allTourCardPricingRow">
+                                     <div className="priceGroup">
                                         <div className="priceMain">
-                                            <span className="currentPrice">{pkg.price}</span>
-                                            <span className="perPerson">/ Person</span>
+                                            <span className="currency">₹</span>
+                                            <span className="amount">{pkg.price.replace('₹', '')}</span>
+                                            <span className="unit">/ person</span>
                                         </div>
-                                        {pkg.oldPrice && <span className="oldPrice">{pkg.oldPrice}</span>}
+                                        {pkg.oldPrice && (
+                                            <div className="priceOld">
+                                                <span className="oldAmount">{pkg.oldPrice}</span>
+                                                <span className="saveBadge">Save {(parseInt(pkg.oldPrice.replace(/[^\d]/g, '')) - parseInt(pkg.price.replace(/[^\d]/g, ''))).toLocaleString()}</span>
+                                            </div>
+                                        )}
                                      </div>
                                 </div>
 
-                                <div className="allTourCardRule" />
-                                <div className="allTourCardCta">
-                                    <Link href={`/packages/${pkg.slug}`} className="allTourCardDetails">
-                                        View Details
-                                    </Link>
-                                    <button
-                                        className="allTourCardEnquire"
-                                        onClick={(e) => handleEnquire(e, pkg.title)}
-                                    >
-                                        Enquire Now
-                                    </button>
+                                <div className="allTourCardActions">
+                                    <div className="actionDivider" />
+                                    <div className="actionButtons">
+                                        <Link href={`/packages/${pkg.slug}`} className="detailsBtn">
+                                            Details
+                                        </Link>
+                                        <button
+                                            className="enquireBtn"
+                                            onClick={(e) => handleEnquire(e, pkg.title)}
+                                        >
+                                            Enquire Now
+                                            <ArrowRight size={14} className="ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

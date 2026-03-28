@@ -1,13 +1,14 @@
 "use client";
 
 import Link from 'next/link';
-import { Home, Briefcase, Calendar, Bot, User } from 'lucide-react';
+import { Home, Briefcase, Calendar, Building2, User } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 const navItems = [
     { name: 'Home', href: '/', icon: Home },
     { name: 'Tours', href: '/packages', icon: Briefcase },
     { name: 'Events', href: '/events', icon: Calendar },
+    { name: 'Hotels', href: '/hotels', icon: Building2 },
     { name: 'Profile', href: '/profile', icon: User },
 ];
 

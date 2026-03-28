@@ -188,7 +188,7 @@ export default function UserDashboard() {
                                         Explore our curated collections to start your journey and find your perfect getaway.
                                     </p>
                                     <div className="ctaGrid">
-                                        <Link href="/tours" className="ctaButton ctaPrimary">
+                                        <Link href="/packages" className="ctaButton ctaPrimary">
                                             Browse Packages <ArrowRight size={20} />
                                         </Link>
                                         <Link href="/trending" className="ctaButton ctaSecondary">

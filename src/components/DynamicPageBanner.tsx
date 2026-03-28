@@ -22,7 +22,9 @@ interface DynamicPageBannerProps {
     fallbackImage?: string;
     variant?: 'standard' | 'large';
     breadcrumbs: { label: string; href?: string }[];
+    centered?: boolean;
 }
+
 
 export default function DynamicPageBanner({ 
     title,
@@ -32,7 +34,8 @@ export default function DynamicPageBanner({
     fallbackPreTitle,
     fallbackImage,
     variant = 'standard',
-    breadcrumbs 
+    breadcrumbs,
+    centered = false
 }: DynamicPageBannerProps) {
     const pathname = usePathname();
     const [banner, setBanner] = useState<BannerData | null>(null);
@@ -92,6 +95,8 @@ export default function DynamicPageBanner({
             breadcrumbs={breadcrumbs}
             showBack={banner?.showBack ?? true}
             variant={variant}
+            centered={centered}
         />
     );
 }
+
