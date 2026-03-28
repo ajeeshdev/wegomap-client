@@ -14,7 +14,8 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     const { hideLayout } = useEnquiry();
     
     // Pages that should NOT show the main header/footer
-    const isAuthPage = pathname === '/login' || pathname === '/admin-login';
+    const isAuthPage = pathname === '/login';
+
     const isAdminPage = pathname?.startsWith('/admin');
 
     if (isAuthPage || isAdminPage || hideLayout) {

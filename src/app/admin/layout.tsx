@@ -27,7 +27,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     const userProfile = localStorage.getItem('userProfile');
     
     if (!token) {
-        router.push('/admin-login');
+        router.push('/login');
         return;
     }
 
@@ -35,14 +35,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         if (userProfile) {
             const user = JSON.parse(userProfile);
             if (user.role !== 'admin' && user.role !== 'manager') {
-                router.push('/admin-login');
+                router.push('/login');
                 return;
             }
         }
         setAuthorized(true);
     } catch (e) {
-        router.push('/admin-login');
+        router.push('/login');
     }
+
     fetchSettings();
   }, [router]);
 
@@ -90,7 +91,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     }));
   };
 
-  if (!authorized && pathname !== '/admin-login') {
+  if (!authorized && pathname !== '/login') {
       return (
           <div className="flex items-center justify-center min-h-screen bg-slate-950">
               <div className="w-8 h-8 border-4 border-rose-600 border-t-transparent rounded-full animate-spin"></div>

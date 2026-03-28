@@ -372,6 +372,7 @@
             flex-wrap: wrap;
             align-items: center;
             gap: 1rem;
+            
 
             button {
                 padding: 0.75rem 2rem;
@@ -632,4 +633,10 @@
     to {
         transform: rotate(360deg);
     }
+}
+
+.filterGroup select {
+    border: 1px solid #0972b8;
+    border-radius: 15px;
+    padding: 5px 10px;
 }
