@@ -88,7 +88,7 @@ const ALL_PACKAGES = buildAllPackages();
 export default function AllToursPage() {
     const searchParams = useSearchParams();
     const [activeFilter, setActiveFilter] = useState('all');
-    const [priceRange, setPriceRange] = useState('all');
+    const [sortOrder, setSortOrder] = useState('all');
     const [durationRange, setDurationRange] = useState('all');
     const [searchQuery, setSearchQuery] = useState(searchParams?.get('q') || '');
     const [showFilters, setShowFilters] = useState(false);
@@ -228,22 +228,21 @@ export default function AllToursPage() {
                 p.location?.toLowerCase().includes(activeFilter)
             );
         }
-        if (priceRange !== 'all') {
-            list = list.filter(p => {
-                const price = parseInt(p.price.replace(/[^\d]/g, '')) || 0;
-                if (priceRange === 'low') return price < 15000;
-                if (priceRange === 'mid') return price >= 15000 && price < 40000;
-                if (priceRange === 'high') return price >= 40000;
-                return true;
-            });
-        }
         if (durationRange !== 'all') {
             list = list.filter(p => {
-                const days = parseInt(p.duration.split(' ')[0]) || 0;
-                if (durationRange === 'short') return days <= 3;
-                if (durationRange === 'mid') return days > 3 && days <= 6;
-                if (durationRange === 'long') return days > 6;
-                return true;
+                const durationMatch = p.duration.match(/(\d+)\s*(?:Day|Days)/i);
+                const titleMatch = p.title.match(/(\d+)D/i);
+                const days = parseInt(durationMatch?.[1] || titleMatch?.[1] || "0") || 0;
+                return days === parseInt(durationRange);
+            });
+        }
+        
+        // Sorting logic
+        if (sortOrder === 'low-high' || sortOrder === 'high-low') {
+            list = [...list].sort((a, b) => {
+                const priceA = parseInt(a.price.replace(/[^\d]/g, '')) || 0;
+                const priceB = parseInt(b.price.replace(/[^\d]/g, '')) || 0;
+                return sortOrder === 'low-high' ? priceA - priceB : priceB - priceA;
             });
         }
         if (searchQuery.trim()) {
@@ -253,7 +252,7 @@ export default function AllToursPage() {
             );
         }
         return list;
-    }, [allCombinedPackages, activeFilter, searchQuery, priceRange, durationRange]);
+    }, [allCombinedPackages, activeFilter, searchQuery, sortOrder, durationRange]);
 
     const handleEnquire = (e: React.MouseEvent, pkgTitle: string) => {
         e.preventDefault();
@@ -278,7 +277,7 @@ export default function AllToursPage() {
 
             {/* Filter + Search Strip */}
             <div className="allToursControls">
-                <div className="homeContainer allToursControlsInner">
+                <div className="allToursControlsInner">
                     {/* Search */}
                     <div className="allToursSearch">
                         <Search size={16} className="allToursSearchIcon" />
@@ -312,40 +311,34 @@ export default function AllToursPage() {
                         ))}
                     </div>
 
+                    {/* Additional Filters Drodowns in same row */}
+                    <div className="allToursSelectFilters">
+                        <select 
+                            value={sortOrder}
+                            onChange={(e) => setSortOrder(e.target.value)}
+                            className="tourSelect"
+                        >
+                            <option value="all">Budget</option>
+                            <option value="low-high">Price: Low to High</option>
+                            <option value="high-low">Price: High to Low</option>
+                        </select>
+                        
+                        <select 
+                            value={durationRange}
+                            onChange={(e) => setDurationRange(e.target.value)}
+                            className="tourSelect"
+                        >
+                            <option value="all">Duration</option>
+                            {[1,2,3,4,5,6,7,8,9,10].map(d => (
+                                <option key={d} value={d}>{d} Day{d > 1 ? 's' : ''}</option>
+                            ))}
+                        </select>
+                    </div>
+
                     {/* Mobile Filter Toggle */}
                     <button className="mobileFilterToggle" onClick={() => setShowFilters(!showFilters)}>
                         <Filter size={16} /> Filter
                     </button>
-                </div>
-
-                {/* Additional Filters Strip */}
-                <div className="allToursExtraFilters">
-                    <div className="homeContainer allToursExtraFiltersInner">
-                        <div className="filterGroup">
-                            <label>Budget</label>
-                            <select 
-                                value={priceRange}
-                                onChange={(e) => setPriceRange(e.target.value)}
-                            >
-                                <option value="all">Any Price</option>
-                                <option value="low">Under ₹15,000</option>
-                                <option value="mid">₹15,000 - ₹40,000</option>
-                                <option value="high">Above ₹40,000</option>
-                            </select>
-                        </div>
-                        <div className="filterGroup">
-                            <label>Duration</label>
-                            <select 
-                                value={durationRange}
-                                onChange={(e) => setDurationRange(e.target.value)}
-                            >
-                                <option value="all">Any Duration</option>
-                                <option value="short">Short (1-3 Days)</option>
-                                <option value="mid">Medium (4-6 Days)</option>
-                                <option value="long">Long (7+ Days)</option>
-                            </select>
-                        </div>
-                    </div>
                 </div>
 
                 {/* Mobile Filter Sheet Overlay */}
@@ -357,7 +350,7 @@ export default function AllToursPage() {
                             <div className="mobileFilterDrawerHeader">
                                 <span>Filter Packages</span>
                                 <div className="drawerActions">
-                                    <button className="resetBtn" onClick={() => { setActiveFilter('all'); setPriceRange('all'); setDurationRange('all'); setSearchQuery(''); }}>Reset</button>
+                                    <button className="resetBtn" onClick={() => { setActiveFilter('all'); setSortOrder('all'); setDurationRange('all'); setSearchQuery(''); }}>Reset</button>
                                     <button className="doneBtn" onClick={() => setShowFilters(false)}>Done</button>
                                 </div>
                             </div>
@@ -380,15 +373,14 @@ export default function AllToursPage() {
                             <div className="mobileFilterDrawerSection">
                                 <div className="flex gap-4">
                                     <div className="filterGroup flex-1">
-                                        <label>Budget</label>
+                                        <label>Sort By</label>
                                         <select 
-                                            value={priceRange}
-                                            onChange={(e) => setPriceRange(e.target.value)}
+                                            value={sortOrder}
+                                            onChange={(e) => setSortOrder(e.target.value)}
                                         >
-                                            <option value="all">Any Price</option>
-                                            <option value="low">Under ₹15,000</option>
-                                            <option value="mid">₹15,000 - ₹40,000</option>
-                                            <option value="high">Above ₹40,000</option>
+                                            <option value="all">Default</option>
+                                            <option value="low-high">Price: Low to High</option>
+                                            <option value="high-low">Price: High to Low</option>
                                         </select>
                                     </div>
                                     <div className="filterGroup flex-1">
@@ -398,9 +390,9 @@ export default function AllToursPage() {
                                             onChange={(e) => setDurationRange(e.target.value)}
                                         >
                                             <option value="all">Any Duration</option>
-                                            <option value="short">1-3 Days</option>
-                                            <option value="mid">4-6 Days</option>
-                                            <option value="long">7+ Days</option>
+                                            {[1,2,3,4,5,6,7,8,9,10].map(d => (
+                                                <option key={d} value={d}>{d} Day{d > 1 ? 's' : ''}</option>
+                                            ))}
                                         </select>
                                     </div>
                                 </div>
@@ -415,8 +407,8 @@ export default function AllToursPage() {
                 <span className="resultsCount">
                     Showing <strong>{filtered.length}</strong> packages
                     {activeFilter !== 'all' && <> in <em>{ALL_CATEGORIES.find(c => c.key === activeFilter)?.label}</em></>}
-                    {priceRange !== 'all' && <> with price <em>{priceRange === 'low' ? 'Under ₹15,000' : priceRange === 'mid' ? '₹15,000 - ₹40,000' : 'Above ₹40,000'}</em></>}
-                    {durationRange !== 'all' && <> with duration <em>{durationRange === 'short' ? '1-3 Days' : durationRange === 'mid' ? '4-6 Days' : '7+ Days'}</em></>}
+                    {sortOrder !== 'all' && <> sorted <em>{sortOrder === 'low-high' ? 'Low to High' : 'High to Low'}</em></>}
+                    {durationRange !== 'all' && <> for <em>{durationRange} Day{parseInt(durationRange) > 1 ? 's' : ''}</em></>}
                     {searchQuery && <> for "<em>{searchQuery}</em>"</>}
                 </span>
             </div>

@@ -7864,7 +7864,6 @@ footer .footerBottom .socialLinks a:hover {
   margin-bottom: 2rem;
   color: #fff;
   text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
-  transform: rotate(-2deg);
 }
 .heroSection .heroBanner .slideContent .contentOverlay .heroPackageBtn {
   padding: 0.75rem 2rem;
@@ -14555,7 +14554,6 @@ button.wishlistBtn {
   font-size: 1.5rem;
   color: #ff5a3d;
   margin-bottom: -0.5rem;
-  transform: rotate(-2deg);
 }
 .hotels-listing-wrapper .hotels-header-row .hotels-title-area .hotels-page-title {
   font-size: 2.5rem;
