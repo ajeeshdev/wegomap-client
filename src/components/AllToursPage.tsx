@@ -5,11 +5,17 @@ import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Search, MapPin, Clock, Filter, X, User, Mail, Phone, Heart, Star, MessageSquare } from 'lucide-react';
+import { Search, MapPin, Clock, Filter, X, User, Mail, Phone, Heart, Star, MessageSquare, ChevronLeft, ChevronRight } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import DynamicPageBanner from '@/components/DynamicPageBanner';
 import EnquireModal from '@/components/EnquireModal';
 import WishlistButton from '@/components/WishlistButton';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, FreeMode } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
 
 import { packagesData } from '@/data/packages';
 import { categoryMappings } from '@/data/categoryMappings';
@@ -298,17 +304,38 @@ export default function AllToursPage() {
                     {/* Divider */}
                     <div className="allToursControlsDivider" />
 
-                    {/* Filter Pills */}
-                    <div className="allToursFilterPills">
-                        {ALL_CATEGORIES.map(cat => (
-                            <button
-                                key={cat.key}
-                                className={`filterPill ${activeFilter === cat.key ? 'active' : ''}`}
-                                onClick={() => setActiveFilter(cat.key)}
-                            >
-                                {cat.label}
-                            </button>
-                        ))}
+                    {/* Filter Pills Slider */}
+                    <div className="allToursFilterSliderWrapper">
+                        <button className="category-nav-btn cat-prev">
+                            <ChevronLeft size={16} />
+                        </button>
+                        
+                        <Swiper
+                            modules={[Navigation, FreeMode]}
+                            slidesPerView="auto"
+                            freeMode={true}
+                            spaceBetween={8}
+                            navigation={{
+                                prevEl: '.cat-prev',
+                                nextEl: '.cat-next',
+                            }}
+                            className="allToursFilterSwiper"
+                        >
+                            {ALL_CATEGORIES.map(cat => (
+                                <SwiperSlide key={cat.key} style={{ width: 'auto' }}>
+                                    <button
+                                        className={`filterPill ${activeFilter === cat.key ? 'active' : ''}`}
+                                        onClick={() => setActiveFilter(cat.key)}
+                                    >
+                                        {cat.label}
+                                    </button>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+
+                        <button className="category-nav-btn cat-next">
+                            <ChevronRight size={16} />
+                        </button>
                     </div>
 
                     {/* Additional Filters Drodowns in same row */}

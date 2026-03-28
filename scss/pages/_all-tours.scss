@@ -195,12 +195,56 @@
             }
         }
 
-        .allToursFilterPills {
+        .allToursFilterSliderWrapper {
             display: flex;
-            gap: 0.625rem;
-            flex-wrap: nowrap;
-            flex-shrink: 0;
-            padding-right: 0.5rem;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+            min-width: 0;
+            position: relative;
+            padding: 0 0.5rem;
+
+            .allToursFilterSwiper {
+                width: 100%;
+                padding: 0.5rem 0;
+
+                .swiper-slide {
+                    width: auto !important;
+                }
+            }
+
+            .category-nav-btn {
+                background: #f1f5f9;
+                border: 1.5px solid #e2e8f0;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #64748b;
+                cursor: pointer;
+                transition: all 0.2s;
+                flex-shrink: 0;
+                z-index: 10;
+
+                @include max(767) {
+                    display: none; // Rely on touch swipe on mobile
+                }
+
+                &:hover {
+                    border-color: $cosmicOrange;
+                    color: $cosmicOrange;
+                    background-color: #fff;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+                }
+
+                &.swiper-button-disabled {
+                    opacity: 0.3;
+                    cursor: not-allowed;
+                    pointer-events: none;
+                }
+            }
         }
 
         .allToursSelectFilters {
