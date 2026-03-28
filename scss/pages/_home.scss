@@ -107,6 +107,9 @@
         position: relative;
         z-index: 10;
         margin-bottom: -20px;
+        @include max(767){
+            margin-bottom: 10px;
+        }
         @include min(992){
             font-size: 2.25rem;
 

@@ -4,6 +4,8 @@ import { API_URL } from '@/config';
 import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { Save, ArrowLeft, LayoutGrid, Type, Globe, Info, Clock, Sparkles, Zap, ShieldCheck, Layers } from 'lucide-react';
+import { toast } from 'react-hot-toast';
+
 
 export default function EditCategory() {
   const router = useRouter();
@@ -53,14 +55,16 @@ export default function EditCategory() {
       });
       const data = await res.json();
       if (data.success) {
+        toast.success('Category updated successfully');
         router.push('/admin/categories');
       } else {
-        alert(data.error || 'Update failed');
+        toast.error(data.error || 'Update failed');
       }
     } catch (err) {
       console.error(err);
-      alert('Request failed');
+      toast.error('Request failed');
     } finally {
+
       setSaving(false);
     }
   };

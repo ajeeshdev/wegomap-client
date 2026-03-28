@@ -4,6 +4,8 @@ import { API_URL } from '@/config';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Save, ArrowLeft, Ship, Type, Image as ImageIcon, Anchor, Waves, Tag, Sparkles, Briefcase, Zap, Globe, ShieldCheck, Clock, Layers, IndianRupee, Shield as Safe } from 'lucide-react';
+import { toast } from 'react-hot-toast';
+
 import ImageUpload from '@/components/admin/ImageUpload';
 import RichTextEditor from '@/components/admin/Editor';
 
@@ -34,14 +36,16 @@ export default function CreateHouseboat() {
       });
       const data = await res.json();
       if (data.success) {
+        toast.success('Houseboat added successfully');
         router.push('/admin/houseboats');
       } else {
-        alert(data.error || 'Creation failed');
+        toast.error(data.error || 'Creation failed');
       }
     } catch (err) {
       console.error(err);
-      alert('Request failed');
+      toast.error('Request failed');
     } finally {
+
       setLoading(false);
     }
   };

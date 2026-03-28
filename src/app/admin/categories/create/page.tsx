@@ -4,6 +4,8 @@ import { API_URL } from '@/config';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Save, ArrowLeft, LayoutGrid, Type, Globe, Info, Sparkles, Zap, ShieldCheck, Clock, Layers } from 'lucide-react';
+import { toast } from 'react-hot-toast';
+
 
 export default function CreateCategory() {
   const router = useRouter();
@@ -29,14 +31,16 @@ export default function CreateCategory() {
       });
       const data = await res.json();
       if (data.success) {
+        toast.success('Category created successfully');
         router.push('/admin/categories');
       } else {
-        alert(data.error || 'Creation failed');
+        toast.error(data.error || 'Creation failed');
       }
     } catch (err) {
       console.error(err);
-      alert('Request failed');
+      toast.error('Request failed');
     } finally {
+
       setLoading(false);
     }
   };

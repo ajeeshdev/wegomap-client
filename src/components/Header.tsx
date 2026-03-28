@@ -169,8 +169,9 @@ export default function Header() {
         };
     }, []);
 
-    const [finalHeaderLinks, setFinalHeaderLinks] = useState(navLinks);
-    const [finalSidebarLinks, setFinalSidebarLinks] = useState(navLinks);
+    const [finalHeaderLinks, setFinalHeaderLinks] = useState<any[]>([]);
+    const [finalSidebarLinks, setFinalSidebarLinks] = useState<any[]>([]);
+
 
     useEffect(() => {
         const fetchNav = async () => {
@@ -184,6 +185,7 @@ export default function Header() {
                 if (json.success) {
                     const hlOpt = json.data.find((o: any) => o.key === 'header_links');
                     if (hlOpt && hlOpt.value) {
+
                         const dynamicH = JSON.parse(hlOpt.value);
                         if (Array.isArray(dynamicH) && dynamicH.length > 0) {
                             const mergedH = dynamicH.map((dl: any) => {
@@ -191,7 +193,11 @@ export default function Header() {
                                 return { ...dl, dropdown: staticMatch ? staticMatch.dropdown : undefined };
                             });
                             setFinalHeaderLinks(mergedH);
+                        } else {
+                            setFinalHeaderLinks(navLinks);
                         }
+                    } else {
+                        setFinalHeaderLinks(navLinks);
                     }
 
                     const slOpt = json.data.find((o: any) => o.key === 'sidebar_links');
@@ -203,17 +209,28 @@ export default function Header() {
                                 return { ...dl, dropdown: staticMatch ? staticMatch.dropdown : undefined };
                             });
                             setFinalSidebarLinks(mergedS);
+                        } else {
+                            setFinalSidebarLinks(navLinks);
                         }
+                    } else {
+                        setFinalSidebarLinks(navLinks);
                     }
 
                     const logoOpt = json.data.find((o: any) => o.key === 'site_logo');
                     if (logoOpt && logoOpt.value) {
                         setLogo(getImageUrl(logoOpt.value));
                     }
+                } else {
+                    // Fail gracefully to static links
+                    setFinalHeaderLinks(navLinks);
+                    setFinalSidebarLinks(navLinks);
                 }
             } catch (err) {
                 console.error('Failed to fetch nav', err);
+                setFinalHeaderLinks(navLinks);
+                setFinalSidebarLinks(navLinks);
             }
+
         };
         fetchNav();
     }, []);
@@ -537,13 +554,23 @@ export default function Header() {
                             Enquire Now
                         </button>
 
-                        <Link
-                            href="/login"
-                            className="loginBtn"
-                            onClick={() => setIsOpen(false)}
-                        >
-                            Log In
-                        </Link>
+                        {isLoggedIn ? (
+                            <button
+                                onClick={handleLogout}
+                                className="loginBtn"
+                                style={{ background: '#fef2f2', color: '#ef4444', border: '1px solid #fee2e2' }}
+                            >
+                                Log Out
+                            </button>
+                        ) : (
+                            <Link
+                                href="/login"
+                                className="loginBtn"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                Log In
+                            </Link>
+                        )}
                     </div>
                 </div>
             </div>

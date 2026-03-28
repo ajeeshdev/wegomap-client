@@ -280,6 +280,17 @@ export default function TourCategoryPage({
                     </div>
 
 
+                    {/* Floating Filter Button for Mobile */}
+                    {!showFilters && (
+                        <button className="floatingFilterTrigger" onClick={() => setShowFilters(true)}>
+                            <Filter size={18} />
+                            <span>Filters</span>
+                        </button>
+                    )}
+
+
+
+
                     <div className="allToursGrid">
                         {filtered.map((pkg, i) => (
                             <div key={`${pkg.slug}-${i}`} className="allTourCard group">

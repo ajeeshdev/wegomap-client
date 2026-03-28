@@ -1,19 +1,33 @@
 "use client";
-
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Home, Briefcase, Calendar, Building2, User } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
-const navItems = [
-    { name: 'Home', href: '/', icon: Home },
-    { name: 'Tours', href: '/packages', icon: Briefcase },
-    { name: 'Events', href: '/events', icon: Calendar },
-    { name: 'Hotels', href: '/hotels', icon: Building2 },
-    { name: 'Profile', href: '/profile', icon: User },
-];
-
 export default function MobileNav() {
     const pathname = usePathname();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const checkAuth = () => {
+            const token = localStorage.getItem('token');
+            setIsLoggedIn(!!token);
+        };
+        checkAuth();
+        window.addEventListener('storage', checkAuth);
+        window.addEventListener('authChange', checkAuth);
+        return () => {
+            window.removeEventListener('storage', checkAuth);
+            window.removeEventListener('authChange', checkAuth);
+        };
+    }, []);
+
+    const navItems = [
+        { name: 'Home', href: '/', icon: Home },
+        { name: 'Tours', href: '/packages', icon: Briefcase },
+        { name: 'Events', href: '/events', icon: Calendar },
+        { name: 'Profile', href: isLoggedIn ? '/dashboard' : '/login', icon: User },
+    ];
 
     return (
         <nav className="mobileBottomNav">

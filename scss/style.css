@@ -1914,43 +1914,73 @@ header .button-wrapper .modernHamburger {
   flex-direction: column;
 }
 .sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileItemHeader {
-  padding: 0.5rem 0;
   border-bottom: 1px solid #f1f5f9;
 }
-.sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileItemHeader a,
-.sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileItemHeader .mobileLink {
+.sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileItemHeader .mobileLink,
+.sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileItemHeader a {
   font-size: 1.125rem;
   font-weight: 700;
   color: #1e293b;
   text-decoration: none;
+  padding: 0.625rem 0;
+  transition: all 0.2s;
+}
+.sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileItemHeader .mobileLink:hover,
+.sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileItemHeader a:hover {
+  color: #FF6B35;
+}
+.sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileItemHeader button {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileItemHeader button:hover {
+  color: #FF6B35;
+  background: rgba(255, 107, 53, 0.05);
+  border-radius: 8px;
 }
 .sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileSubMenu {
-  padding: 0.5rem 0 0.5rem 1rem;
+  padding: 0.25rem 0 0.5rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
   border-left: 2px solid #f1f5f9;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
 }
 .sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileSubMenu .mobileSubItem {
   display: flex;
   flex-direction: column;
 }
-.sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileSubMenu .mobileSubItem .mobileSubHeader {
-  padding: 0.5rem 0;
-}
-.sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileSubMenu .mobileSubItem .mobileSubHeader a,
-.sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileSubMenu .mobileSubItem .mobileSubHeader .mobileSubLink {
-  font-size: 1rem;
+.sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileSubMenu .mobileSubItem .mobileSubHeader .mobileSubLink,
+.sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileSubMenu .mobileSubItem .mobileSubHeader a {
+  font-size: 0.95rem;
   font-weight: 600;
   color: #475569;
   text-decoration: none;
+  padding: 0.5rem 0;
+  transition: all 0.2s;
+}
+.sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileSubMenu .mobileSubItem .mobileSubHeader .mobileSubLink:hover,
+.sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileSubMenu .mobileSubItem .mobileSubHeader a:hover {
+  color: #FF6B35;
+}
+.sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileSubMenu .mobileSubItem .mobileSubHeader button {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileSubMenu .mobileSubItem .mobileSubHeader button:hover {
+  color: #FF6B35;
 }
 .sideMenu .sideMenuContent .sideMenuNav .mobileMenuItem .mobileSubMenu .mobileSubItem .mobileLeafMenu {
   padding: 0.25rem 0 0.5rem 1rem;
@@ -3339,6 +3369,19 @@ footer .footerBottom .socialLinks a:hover {
     height: 400px;
   }
 }
+.pageBanner.variant-large {
+  height: 65vh;
+  min-height: 450px;
+}
+@media (min-width: 768px) {
+  .pageBanner.variant-large {
+    height: 75vh;
+    min-height: 600px;
+  }
+}
+.pageBanner.variant-large .pageBannerContent {
+  margin-top: 2rem;
+}
 .pageBanner .pageBannerImg {
   position: absolute;
   inset: 0;
@@ -3442,6 +3485,62 @@ footer .footerBottom .socialLinks a:hover {
   border-left: 3px solid #f97316;
   padding-left: 1.5rem;
   white-space: pre-line;
+}
+.pageBanner.isCentered .pageBannerInner {
+  text-align: center;
+}
+.pageBanner.isCentered .pageBannerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pageBanner.isCentered .pageBannerContent .pageBannerTitle {
+  text-transform: none;
+  white-space: normal;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.pageBanner.isCentered .pageBannerContent .pageBannerDescription {
+  border-left: none;
+  padding-left: 0;
+  margin: 1.5rem auto 0;
+}
+.pageBanner.isCentered .googleReviewsBadge {
+  margin-top: 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  padding: 8px 20px;
+  border-radius: 99px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  color: #1e293b;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.pageBanner.isCentered .googleReviewsBadge .googleIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: #4285F4;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+.pageBanner.isCentered .googleReviewsBadge .stars {
+  display: flex;
+  gap: 2px;
+}
+.pageBanner.isCentered .googleReviewsBadge .count {
+  color: #64748b;
+  border-left: 1px solid #e2e8f0;
+  padding-left: 12px;
+}
+.pageBanner.isCentered .pageBannerTop {
+  justify-content: center;
 }
 
 :root {
@@ -7671,6 +7770,11 @@ footer .footerBottom .socialLinks a:hover {
   position: relative;
   z-index: 10;
   margin-bottom: -20px;
+}
+@media (max-width: 767px) {
+  .sectionHeader .sectionSubtitle {
+    margin-bottom: 10px;
+  }
 }
 @media (min-width: 992px) {
   .sectionHeader .sectionSubtitle {

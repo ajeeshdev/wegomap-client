@@ -431,6 +431,16 @@ export default function AllToursPage() {
                 )}
             </div>
 
+            {/* Floating Filter Button for Mobile */}
+            {!showFilters && (
+                <button className="floatingFilterTrigger" onClick={() => setShowFilters(true)}>
+                    <Filter size={18} />
+                    <span>Filters</span>
+                </button>
+            )}
+
+
+
             {/* Results Count */}
             <div className="homeContainer allToursResultsMeta">
                 <span className="resultsCount">

@@ -86,9 +86,15 @@ export default function DynamicPageBanner({
         fetchBanner();
     }, [pathname]);
 
+    const finalTitle = title || banner?.title || fallbackTitle;
+    
+    // If we're loading and have no title yet, we can return null or a skeleton
+    // to prevent showing "Explore Your Journey" or other generic fallbacks.
+    if (!finalTitle && loading) return <div className={`pageBanner noImage variant-${variant}`} />;
+
     return (
         <PageBanner
-            title={title || banner?.title || fallbackTitle || "Explore Your Journey"}
+            title={finalTitle || "Explore"} 
             subtitle={subtitle || banner?.subtitle || fallbackSubtitle}
             preTitle={banner?.preTitle || fallbackPreTitle || (breadcrumbs.length > 0 ? breadcrumbs[breadcrumbs.length - 1].label : 'Explore')}
             backgroundImage={banner?.image || fallbackImage}
@@ -99,4 +105,5 @@ export default function DynamicPageBanner({
         />
     );
 }
+
 

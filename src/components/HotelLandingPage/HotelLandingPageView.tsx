@@ -239,9 +239,10 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
   const handleHeroSubmit = () => {
     const { checkIn, checkOut, adults, children } = heroSearch;
     if (!checkIn || !checkOut) {
-      alert("Please select your check-in and check-out dates.");
+      toast.error("Please select your check-in and check-out dates.");
       return;
     }
+
     if (!data.whatsapp_number) return;
     const message = `Hi, I'm interested in booking a stay at ${data.title}.\n\n` +
                     `📅 Check-in: ${checkIn}\n` +
