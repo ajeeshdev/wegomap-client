@@ -84,9 +84,9 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
           {value && !hideRemove && (
             <button
               onClick={removeImage}
-              className="text-[10px] font-black text-rose-500 uppercase tracking-widest hover:text-rose-600 transition-colors flex items-center gap-1.5"
+              className="text-[10px] font-black text-rose-500 uppercase tracking-widest hover:text-rose-600 transition-colors flex items-center gap-1.5 leading-none pt-[0.5px]"
             >
-              <X size={10} strokeWidth={3} /> Remove
+              <X size={10} strokeWidth={3} className="relative -top-[0.5px]" /> Remove
             </button>
           )}
         </div>
@@ -106,7 +106,7 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
                 <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
                   <CheckCircle2 size={12} strokeWidth={3} />
                 </div>
-                <span className="text-[10px] font-black text-slate-700 uppercase tracking-tight">Active Image</span>
+                <span className="text-[10px] font-black text-slate-700 uppercase tracking-tight leading-none pt-[1px]">Active Image</span>
               </div>
 
               <div className="relative">
@@ -117,9 +117,9 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
                   disabled={uploading}
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                 />
-                <button className="bg-blue-600 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-blue-700 transition-all flex items-center gap-2">
-                  {uploading ? <Loader2 size={10} className="animate-spin" /> : <Upload size={10} strokeWidth={3} />}
-                  Change
+                <button className="bg-blue-600 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-blue-700 transition-all flex items-center justify-center gap-2 leading-none">
+                  {uploading ? <Loader2 size={10} className="animate-spin" /> : <Upload size={10} strokeWidth={3} className="relative -top-[0.5px]" />}
+                  <span>Change</span>
                 </button>
               </div>
             </div>

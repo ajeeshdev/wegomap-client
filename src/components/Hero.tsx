@@ -207,7 +207,7 @@ export default function Hero() {
                                 <SwiperSlide key={idx}>
                                     <div className="slideContent">
                                         <div className="imageWrapper">
-                                            <picture>
+                                            <picture style={{ position: 'relative', display: 'block', width: '100%', height: '100%' }}>
                                                 <source media="(max-width: 480px)" srcSet={slide.imgPortrait || slide.imgDesktop} />
                                                 <source media="(max-width: 768px)" srcSet={slide.imgMobile || slide.imgDesktop} />
                                                 <Image
