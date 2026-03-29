@@ -257,6 +257,8 @@ export default function Home() {
       !isKerala(p.title, p.category || '', p.location || '')
   ).slice(0, 10);
 
+  const keralaPackages = parsedPackages.filter(p => isKerala(p.title, p.category || '', p.location || '')).slice(0, 10);
+
   const intlDomesticPackages = [...internationalPackages, ...domesticPackages];
 
   // Map destinations
@@ -427,6 +429,108 @@ export default function Home() {
       )}
 
       {/* Offer Banners (Image Only Slider) - Added after First Minute Offers */}
+      {/* Kerala Tour Packages - Added after First Minute Offers */}
+      {keralaPackages.length > 0 && (
+      <section className="commonPadding keralaTourSection">
+        <div className="homeContainer">
+          <div className="sectionHeader flex items-center justify-center mb-8">
+            <div className="titleArea">
+              <span className="sectionSubtitle">God's Own Country</span>
+              <h2 className="sliderTitle">Kerala Tour Packages</h2>
+              <p className="text-slate-500 max-w-2xl text-[13px] leading-relaxed">
+                Experience the serene backwaters, misty hills, and pristine beaches of Kerala with our specially curated local packages.
+              </p>
+            </div>
+            <Link href="/packages?q=kerala" className="viewAllBtn">
+              View All <ArrowRight size={18} />
+            </Link>
+          </div>
+          <Swiper
+            modules={[Autoplay, Navigation, Pagination]}
+            spaceBetween={16}
+            slidesPerView={2}
+            navigation={{
+              prevEl: '.kerala-prev',
+              nextEl: '.kerala-next',
+            }}
+            loop={keralaPackages.length > 5}
+            autoplay={{ delay: 3500, disableOnInteraction: false, pauseOnMouseEnter: true }}
+            pagination={{
+              el: '.kerala-pagination',
+              type: 'progressbar',
+            }}
+            onSwiper={(swiper) => {
+              setTimeout(() => {
+                if (swiper && !swiper.destroyed && swiper.params) {
+                  if (swiper.params.navigation && typeof swiper.params.navigation !== 'boolean') {
+                    swiper.params.navigation.prevEl = '.kerala-prev';
+                    swiper.params.navigation.nextEl = '.kerala-next';
+                  }
+                  if (swiper.params.pagination && typeof swiper.params.pagination !== 'boolean') {
+                    swiper.params.pagination.el = '.kerala-pagination';
+                  }
+                  swiper.navigation?.init();
+                  swiper.navigation?.update();
+                  swiper.pagination?.init();
+                  swiper.pagination?.update();
+                }
+              });
+            }}
+            breakpoints={{
+              640: { slidesPerView: 2, spaceBetween: 24 },
+              1024: { slidesPerView: 3, spaceBetween: 30 },
+              1280: { slidesPerView: 4, spaceBetween: 30 }
+            }}
+            className="packageSlider"
+          >
+            {keralaPackages.map((item: any, idx) => (
+              <SwiperSlide key={idx} className="h-auto">
+                <Link href={item.href || "/packages"} className="block h-full">
+                  <div className="packageCardKerala group">
+                    <Image src={getImageUrl(item.image)} alt={item.title} fill className="object-cover"  />
+                    <div className="overlay"></div>
+                    {item.averageRating !== undefined && item.averageRating > 0 && (
+                      <div className="ratingBadge">
+                          <Star size={12} fill="currentColor" />
+                          <span>{item.averageRating.toFixed(1)}</span>
+                      </div>
+                    )}
+                    <div className="cardContent">
+                      <div className="topSection">
+                        <h4 className="packageTitle line-clamp-1">{item.title.replace(/ Package$/i, '')}</h4>
+                        <p className="packageSubtitle">Package</p>
+                      </div>
+                      <div className="bottomSection">
+                        {item.oldPrice && <span className="oldPrice">{item.oldPrice}</span>}
+                        <span className="currentPrice">{item.price}<small> / Person</small></span>
+                      </div>
+                      <WishlistButton id={item._id} wishlist={wishlist} toggleWishlist={toggleWishlist} />
+                    </div>
+                  </div>
+                </Link>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+ 
+          <div className="sliderNavigation">
+            <div className="progressWrapper">
+              <div className="kerala-pagination customPagination"></div>
+            </div>
+            <div className="navButtons">
+              <div className="navBtn kerala-prev"><ArrowLeft size={20} /></div>
+              <div className="navBtn kerala-next"><ArrowRight size={20} /></div>
+            </div>
+          </div>
+ 
+          <div className="viewAllMobileContainer">
+            <Link href="/packages?q=kerala" className="viewAllBtnMobile">
+              View All <ArrowRight size={18} />
+            </Link>
+          </div>
+        </div>
+      </section>
+      )}
+ 
       <OfferBanner />
  
       {/* Combined International and Domestic Packages Slider */}
