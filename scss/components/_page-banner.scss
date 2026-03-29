@@ -78,6 +78,11 @@
         position: relative;
         z-index: 10;
         width: 100%;
+        padding: 4rem 0 2rem;
+        
+        @include min(768) {
+            padding: 0;
+        }
     }
 
     .pageBannerTop {
@@ -90,8 +95,9 @@
     .pageBreadcrumb {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        padding: 8px 20px;
+        flex-wrap: wrap; // Prevent overflow on small screens
+        gap: 0.35rem;
+        padding: 6px 16px;
         background: rgba(255, 255, 255, 0.08);
         backdrop-filter: blur(10px);
         border-radius: 40px;
@@ -106,7 +112,7 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
 
             &.active { color: #f97316; }
             &:hover:not(.active) { color: #fff; }
@@ -116,31 +122,40 @@
     .pageBannerContent {
         .pageBannerPreTitle {
             font-family: var(--font-writing);
-            font-size: 2rem;
+            font-size: 1.1rem;
             color: #f97316;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
+            @include min(768) {
+                font-size: 1.5rem;
+            }
         }
         .pageBannerTitle {
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             font-weight: 900;
             color: #fff;
             text-transform: uppercase;
-            line-height: 1;
+            line-height: 1.2;
             letter-spacing: -0.02em;
             white-space: pre-line;
+            max-width: 90%;
 
             @include min(768) {
-                font-size: 4.5rem;
+                font-size: 3.2rem;
+                max-width: 80%;
             }
         }
         .pageBannerDescription {
             font-size: 1rem;
             color: #94a3b8;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             max-width: 600px;
-            border-left: 3px solid #f97316;
+            border-left: 2px solid #f97316;
             padding-left: 1.5rem;
             white-space: pre-line;
+            @include max(767) {
+                font-size: 0.85rem;
+                padding-left: 1rem;
+            }
         }
     }
 

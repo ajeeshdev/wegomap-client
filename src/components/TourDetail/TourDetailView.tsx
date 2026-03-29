@@ -178,6 +178,7 @@ export default function TourDetailView({ id }: { id: string }) {
                 fallbackTitle={pkg.title}
                 fallbackImage={pkg.image}
                 fallbackSubtitle={pkg.location}
+                fallbackPreTitle="Package Details"
                 breadcrumbs={[
                     { label: 'Packages', href: '/packages' },
                     { label: pkg.title }
