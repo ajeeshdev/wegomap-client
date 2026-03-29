@@ -98,8 +98,7 @@ export default function PackagesAdmin() {
                   <th style={{ width: '20%' }}>Location</th>
                   <th style={{ width: '15%' }}>Price</th>
                   <th style={{ width: '15%' }}>Category</th>
-                  <th style={{ width: '10%' }}>Status</th>
-                  <th style={{ width: '10%', textAlign: 'right' }}>Actions</th>
+                  <th style={{ width: '15%', textAlign: 'right' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -124,14 +123,12 @@ export default function PackagesAdmin() {
                             <span className="cms-meta-badge">
                               <ShieldCheck size={9} style={{ color: '#3b82f6' }} /> #{pkg.pcode || 'UNTYPED'}
                             </span>
+                            <span className="cms-meta-badge">
+                              <Layers size={9} style={{ color: '#0ea5e9' }} /> {pkg.slug || 'no-slug'}
+                            </span>
                             {pkg.onoffer && (
                               <span className="px-1.5 py-0.5 bg-rose-50 text-emerald-500 rounded-lg text-[8px] font-black uppercase tracking-tighter border border-rose-100 flex items-center gap-1">
                                 <Zap size={8} className="fill-current" /> Special Offer
-                              </span>
-                            )}
-                            {pkg.displayToHome && (
-                              <span className="px-1.5 py-0.5 bg-blue-50 text-blue-600 rounded-lg text-[8px] font-black uppercase tracking-tighter border border-blue-100 flex items-center gap-1">
-                                <Sparkles size={8} className="fill-current" /> Home
                               </span>
                             )}
                           </div>
@@ -156,17 +153,6 @@ export default function PackagesAdmin() {
                       <span className="cms-cat-badge">
                         <Tag size={10} /> {pkg.category || 'Platform Core'}
                       </span>
-                    </td>
-                    <td className="cms-table-cell">
-                      {pkg.isActive ? (
-                        <div className="admin-status-badge admin-status-badge-success">
-                           <ShieldCheck size={10} /> Active
-                        </div>
-                      ) : (
-                        <div className="admin-status-badge admin-status-badge-secondary">
-                           <Clock size={10} /> Inactive
-                        </div>
-                      )}
                     </td>
                     <td className="cms-table-cell">
                       <div className="cms-action-group">
@@ -201,32 +187,32 @@ export default function PackagesAdmin() {
       {/* Summary Matrix */}
       {!loading && filteredPackages.length > 0 && (
         <div className="admin-card !p-6 flex items-center justify-between">
-            <div className="flex items-center gap-6">
-              <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 border border-blue-100">
-                <Sparkles size={24} />
+          <div className="flex items-center gap-6">
+            <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 border border-blue-100">
+              <Sparkles size={24} />
+            </div>
+            <div>
+              <h4 className="text-slate-900 font-bold text-base uppercase tracking-tight">Inventory Summary</h4>
+              <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-0.5">View your current active package statistics.</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-6">
+            <div className="text-right">
+              <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Active Inventory</p>
+              <h5 className="text-xl font-bold text-slate-900 leading-none mt-1">{(filteredPackages.length).toString().padStart(2, '0')}</h5>
+            </div>
+            <div className="w-px h-8 bg-slate-200"></div>
+            <div className="flex flex-col gap-1">
+              <div className="flex items-center gap-1.5">
+                <ShieldCheck size={10} className="text-emerald-500" />
+                <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Inventory Secure</span>
               </div>
-              <div>
-                <h4 className="text-slate-900 font-bold text-base uppercase tracking-tight">Inventory Summary</h4>
-                <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-0.5">View your current active package statistics.</p>
+              <div className="flex items-center gap-1.5">
+                <Zap size={10} className="text-blue-500" />
+                <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Pricing Active</span>
               </div>
             </div>
-            <div className="flex items-center gap-6">
-              <div className="text-right">
-                <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Active Inventory</p>
-                <h5 className="text-xl font-bold text-slate-900 leading-none mt-1">{(filteredPackages.length).toString().padStart(2, '0')}</h5>
-              </div>
-              <div className="w-px h-8 bg-slate-200"></div>
-              <div className="flex flex-col gap-1">
-                <div className="flex items-center gap-1.5">
-                  <ShieldCheck size={10} className="text-emerald-500" />
-                  <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Inventory Secure</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Zap size={10} className="text-blue-500" />
-                  <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Pricing Active</span>
-                </div>
-              </div>
-            </div>
+          </div>
         </div>
       )}
     </div>

@@ -252,13 +252,12 @@ export default function Home() {
   };
 
   const internationalPackages = parsedPackages.filter(p => isInternational(p.title, p.category || '', p.location || '')).slice(0, 10);
-  const keralaPackages = parsedPackages.filter(p => isKerala(p.title, p.category || '', p.location || '')).slice(0, 10);
-  
-  // Anything else is domestic (or just those that aren't international or kerala)
   const domesticPackages = parsedPackages.filter(p => 
       !isInternational(p.title, p.category || '', p.location || '') && 
       !isKerala(p.title, p.category || '', p.location || '')
   ).slice(0, 10);
+
+  const intlDomesticPackages = [...internationalPackages, ...domesticPackages];
 
   // Map destinations
   const kochiExperiences = destinations.map(d => ({
@@ -429,21 +428,20 @@ export default function Home() {
 
       {/* Offer Banners (Image Only Slider) - Added after First Minute Offers */}
       <OfferBanner />
-
-
-      {/* Domestic Packages Slider */}
-      {(homeSections.find(s => s.id === 'domestic')?.enabled ?? true) && domesticPackages.length > 0 && (
-      <section className="commonPadding domesticSection">
+ 
+      {/* Combined International and Domestic Packages Slider */}
+      {((homeSections.find(s => s.id === 'domestic')?.enabled ?? true) || (homeSections.find(s => s.id === 'international')?.enabled ?? true)) && intlDomesticPackages.length > 0 && (
+      <section className="commonPadding intlDomesticSection">
         <div className="homeContainer">
           <div className="sectionHeader flex items-center justify-center mb-8">
             <div className="titleArea">
-              <span className="sectionSubtitle">{homeSections.find(s => s.id === 'domestic')?.subtitle || "Incredible India"}</span>
-              <h2 className="sliderTitle">{homeSections.find(s => s.id === 'domestic')?.title || "Domestic Packages"}</h2>
-              {homeSections.find(s => s.id === 'domestic')?.description && (
-                <p className="text-slate-500 max-w-2xl text-[13px] leading-relaxed">{homeSections.find(s => s.id === 'domestic')?.description}</p>
-              )}
+              <span className="sectionSubtitle">Explore The World & India</span>
+              <h2 className="sliderTitle">International and Domestic Packages</h2>
+              <p className="text-slate-500 max-w-2xl text-[13px] leading-relaxed">
+                Discover our handpicked collection of breathtaking international destinations and incredible Indian getaways.
+              </p>
             </div>
-            <Link href="/domestic-tour-packages" className="viewAllBtn">
+            <Link href="/packages" className="viewAllBtn">
               View All <ArrowRight size={18} />
             </Link>
           </div>
@@ -452,126 +450,24 @@ export default function Home() {
             spaceBetween={16}
             slidesPerView={2}
             navigation={{
-              prevEl: '.domestic-prev',
-              nextEl: '.domestic-next',
+              prevEl: '.intl-dom-prev',
+              nextEl: '.intl-dom-next',
             }}
-            loop={domesticPackages.length > 5}
-            autoplay={{ delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true }}
-            pagination={{
-              el: '.domestic-pagination',
-              type: 'progressbar',
-            }}
-            onSwiper={(swiper) => {
-              setTimeout(() => {
-                if (swiper && !swiper.destroyed && swiper.params) {
-                  if (swiper.params.navigation && typeof swiper.params.navigation !== 'boolean') {
-                    swiper.params.navigation.prevEl = '.domestic-prev';
-                    swiper.params.navigation.nextEl = '.domestic-next';
-                  }
-                  if (swiper.params.pagination && typeof swiper.params.pagination !== 'boolean') {
-                    swiper.params.pagination.el = '.domestic-pagination';
-                  }
-                  swiper.navigation?.init();
-                  swiper.navigation?.update();
-                  swiper.pagination?.init();
-                  swiper.pagination?.update();
-                }
-              });
-            }}
-            breakpoints={{
-              640: { slidesPerView: 2, spaceBetween: 24 },
-              1024: { slidesPerView: 3, spaceBetween: 30 },
-              1280: { slidesPerView: 4, spaceBetween: 30 }
-            }}
-            className="packageSlider"
-          >
-            {domesticPackages.map((item: any, idx) => (
-              <SwiperSlide key={idx} className="h-auto">
-                <Link href={item.href || "/packages"} className="block h-full">
-                  <div className="packageCardKerala group">
-                    <Image src={getImageUrl(item.image)} alt={item.title} fill className="object-cover"  />
-                    <div className="overlay"></div>
-                    {item.averageRating !== undefined && item.averageRating > 0 && (
-                      <div className="ratingBadge">
-                          <Star size={12} fill="currentColor" />
-                          <span>{item.averageRating.toFixed(1)}</span>
-                      </div>
-                    )}
-                    <div className="cardContent">
-                      <div className="topSection">
-                        <h4 className="packageTitle line-clamp-1">{item.title.replace(/ Package$/i, '')}</h4>
-                        <p className="packageSubtitle">Package</p>
-                      </div>
-                      <div className="bottomSection">
-                        {item.oldPrice && <span className="oldPrice">{item.oldPrice}</span>}
-                        <span className="currentPrice">{item.price}<small> / Person</small></span>
-                      </div>
-                      <WishlistButton id={item._id} wishlist={wishlist} toggleWishlist={toggleWishlist} />
-                    </div>
-                  </div>
-                </Link>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-
-          <div className="sliderNavigation">
-            <div className="progressWrapper">
-              <div className="domestic-pagination customPagination"></div>
-            </div>
-            <div className="navButtons">
-              <div className="navBtn domestic-prev"><ArrowLeft size={20} /></div>
-              <div className="navBtn domestic-next"><ArrowRight size={20} /></div>
-            </div>
-          </div>
-
-          <div className="viewAllMobileContainer">
-            <Link href="/domestic-tour-packages" className="viewAllBtnMobile">
-              View All <ArrowRight size={18} />
-            </Link>
-          </div>
-        </div>
-      </section>
-      )}
-
-      {/* International Packages Slider */}
-      {(homeSections.find(s => s.id === 'international')?.enabled ?? true) && internationalPackages.length > 0 && (
-      <section className="commonPadding internationalSection">
-        <div className="homeContainer">
-          <div className="sectionHeader flex items-center justify-center mb-8">
-            <div className="titleArea">
-              <span className="sectionSubtitle">{homeSections.find(s => s.id === 'international')?.subtitle || "Explore The World"}</span>
-              <h2 className="sliderTitle">{homeSections.find(s => s.id === 'international')?.title || "International Packages"}</h2>
-              {homeSections.find(s => s.id === 'international')?.description && (
-                <p className=" text-slate-500 max-w-2xl text-[13px] leading-relaxed">{homeSections.find(s => s.id === 'international')?.description}</p>
-              )}
-            </div>
-            <Link href="/international-tour-packages" className="viewAllBtn">
-              View All <ArrowRight size={18} />
-            </Link>
-          </div>
-          <Swiper
-            modules={[Autoplay, Navigation, Pagination]}
-            spaceBetween={16}
-            slidesPerView={2}
-            navigation={{
-              prevEl: '.intl-prev',
-              nextEl: '.intl-next',
-            }}
-            loop={internationalPackages.length > 5}
+            loop={intlDomesticPackages.length > 5}
             autoplay={{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }}
             pagination={{
-              el: '.intl-pagination',
+              el: '.intl-dom-pagination',
               type: 'progressbar',
             }}
             onSwiper={(swiper) => {
               setTimeout(() => {
                 if (swiper && !swiper.destroyed && swiper.params) {
                   if (swiper.params.navigation && typeof swiper.params.navigation !== 'boolean') {
-                    swiper.params.navigation.prevEl = '.intl-prev';
-                    swiper.params.navigation.nextEl = '.intl-next';
+                    swiper.params.navigation.prevEl = '.intl-dom-prev';
+                    swiper.params.navigation.nextEl = '.intl-dom-next';
                   }
                   if (swiper.params.pagination && typeof swiper.params.pagination !== 'boolean') {
-                    swiper.params.pagination.el = '.intl-pagination';
+                    swiper.params.pagination.el = '.intl-dom-pagination';
                   }
                   swiper.navigation?.init();
                   swiper.navigation?.update();
@@ -587,7 +483,7 @@ export default function Home() {
             }}
             className="packageSlider"
           >
-            {internationalPackages.map((item: any, idx) => (
+            {intlDomesticPackages.map((item: any, idx) => (
               <SwiperSlide key={idx} className="h-auto">
                 <Link href={item.href || "/packages"} className="block h-full">
                   <div className="packageCardKerala group">
@@ -615,19 +511,19 @@ export default function Home() {
               </SwiperSlide>
             ))}
           </Swiper>
-
+ 
           <div className="sliderNavigation">
             <div className="progressWrapper">
-              <div className="intl-pagination customPagination"></div>
+              <div className="intl-dom-pagination customPagination"></div>
             </div>
             <div className="navButtons">
-              <div className="navBtn intl-prev"><ArrowLeft size={20} /></div>
-              <div className="navBtn intl-next"><ArrowRight size={20} /></div>
+              <div className="navBtn intl-dom-prev"><ArrowLeft size={20} /></div>
+              <div className="navBtn intl-dom-next"><ArrowRight size={20} /></div>
             </div>
           </div>
-
+ 
           <div className="viewAllMobileContainer">
-            <Link href="/international-tour-packages" className="viewAllBtnMobile">
+            <Link href="/packages" className="viewAllBtnMobile">
               View All <ArrowRight size={18} />
             </Link>
           </div>

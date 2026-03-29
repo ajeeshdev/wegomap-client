@@ -18,8 +18,7 @@ export default function EditPackage() {
     price: '', oldamt: '', per: '', duration: '', highlights: [],
     inclusions: [], exclusions: [], terms: '', category: '',
     images: [], thumb: '', onoffer: false, isBestSeller: false,
-    itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '',
-    displayToHome: false, isActive: true
+    itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: ''
   });
 
   useEffect(() => {
@@ -56,9 +55,7 @@ export default function EditPackage() {
             inclusions: data.data.inclusions || [],
             exclusions: data.data.exclusions || [],
             images: data.data.images || [],
-            itinerary: data.data.itinerary || [],
-            displayToHome: data.data.displayToHome || false,
-            isActive: data.data.isActive !== undefined ? data.data.isActive : true
+            itinerary: data.data.itinerary || []
           });
         }
       } catch (err) {
@@ -389,27 +386,6 @@ export default function EditPackage() {
                   <input type="checkbox" checked={formData.isBestSeller} onChange={e => setFormData({ ...formData, isBestSeller: e.target.checked })} className="sr-only peer" />
                   <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-blue-600 transition-all relative">
                     <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-4.5 shadow-sm"></div>
-                  </div>
-                </label>
-
-                <label className="flex items-center justify-between cursor-pointer group/stat p-3 hover:bg-slate-50 rounded-xl transition-all border border-transparent hover:border-slate-100">
-                  <div className="flex flex-col">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 transition-colors leading-none">Display to Home</span>
-                  </div>
-                  <input type="checkbox" checked={formData.displayToHome} onChange={e => setFormData({ ...formData, displayToHome: e.target.checked })} className="sr-only peer" />
-                  <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-blue-600 transition-all relative">
-                    <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-4.5 shadow-sm"></div>
-                  </div>
-                </label>
-
-                <label className="flex items-center justify-between cursor-pointer group/stat p-3 hover:bg-emerald-50/50 rounded-xl transition-all border border-transparent hover:border-emerald-100/50 mt-4 bg-emerald-50/20">
-                  <div className="flex flex-col">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-600 transition-colors leading-none">Website Status</span>
-                    <span className="text-[8px] font-medium text-emerald-400 mt-1 uppercase tracking-tighter">{formData.isActive ? 'Active Everywhere' : 'Hidden from Site'}</span>
-                  </div>
-                  <input type="checkbox" checked={formData.isActive} onChange={e => setFormData({ ...formData, isActive: e.target.checked })} className="sr-only peer" />
-                  <div className="w-10 h-6 bg-slate-200 rounded-full peer-checked:bg-emerald-500 transition-all relative">
-                    <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-5 shadow-sm"></div>
                   </div>
                 </label>
               </div>

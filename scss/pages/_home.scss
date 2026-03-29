@@ -19,7 +19,7 @@
 @mixin card-hover {
     transform: translateY(-8px);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    
+
     .imageWrapper img {
         transform: scale(1.1);
     }
@@ -48,8 +48,9 @@
     max-width: 85%;
     margin: 0 auto 2rem;
     position: relative;
-    @include max(767){
-       max-width: 95%;
+
+    @include max(767) {
+        max-width: 95%;
     }
 
     &.flex {
@@ -107,16 +108,18 @@
         position: relative;
         z-index: 10;
         margin-bottom: -20px;
-        @include max(767){
+
+        @include max(767) {
             margin-bottom: 10px;
         }
-        @include min(992){
+
+        @include min(992) {
             font-size: 2.25rem;
 
         }
     }
 
-   
+
 
     >p,
     .sectionHeaderDescription {
@@ -342,8 +345,12 @@
                 .imageWrapper img {
                     transform: scale(1);
                 }
+
                 .contentOverlay {
-                    h1, .heroSubheading, .heroPackageBtn {
+
+                    h1,
+                    .heroSubheading,
+                    .heroPackageBtn {
                         transform: translateY(0);
                         opacity: 1;
                     }
@@ -570,9 +577,10 @@
 }
 
 .homePageSections {
-    section{
+    section {
         overflow-x: hidden;
     }
+
     section:nth-child(even) {
         background-color: #f8fafc; // bg-light (slate-50)
     }
@@ -585,11 +593,12 @@
 .commonPadding {
     padding: 80px 0;
     position: relative;
-    
+
     @media (max-width: 768px) {
         padding: 40px 0;
     }
 }
+
 .bg-white {
     background-color: #ffffff !important;
 }
@@ -677,7 +686,7 @@
                 transform: translateY(-2px);
                 box-shadow: 0 4px 12px rgba($primaryColor, 0.25);
                 color: #fff;
-    
+
                 svg {
                     color: #fff;
                 }
@@ -768,7 +777,8 @@
 }
 
 // 5. CORPORATE EVENTS SECTION
-.corporateModernSection, .corporate-events-section {
+.corporateModernSection,
+.corporate-events-section {
     background: #f8fafc;
 
     .sectionHeader {
@@ -780,10 +790,11 @@
             margin-top: 1.5rem;
         }
     }
-    .swiper-slide{
 
-        
-    padding-bottom: 2rem;
+    .swiper-slide {
+
+
+        padding-bottom: 2rem;
     }
 
     .eventSlider {
@@ -1755,8 +1766,9 @@
             position: relative;
             z-index: 2;
             opacity: 1;
-            @include max(767){
-                
+
+            @include max(767) {
+
                 font-size: 2rem;
             }
         }
@@ -1855,7 +1867,8 @@
                     justify-content: center;
                     flex-wrap: wrap;
                     gap: 3rem;
-                    @include max(767){
+
+                    @include max(767) {
                         gap: 1.1rem;
                     }
 
@@ -1866,7 +1879,8 @@
                         font-size: 1.05rem;
                         transition: all 0.3s;
                         letter-spacing: 0.5px;
-                        @include max(767){
+
+                        @include max(767) {
                             font-size: 0.9rem;
                         }
 
@@ -1894,14 +1908,18 @@
                     justify-content: center;
                     border-radius: 50%;
                     transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-                    @include max(767){
+
+                    @include max(767) {
                         width: 40px;
                         height: 40px;
-                        img,svg{
+
+                        img,
+                        svg {
                             width: 15px;
                             height: 15px;
                         }
                     }
+
                     &:hover {
                         background: #fff;
                         color: #000;
@@ -1951,9 +1969,11 @@
     visibility: hidden;
     transform: translateY(20px) scale(0.8);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-    @include max(767){
+
+    @include max(767) {
         display: none;
     }
+
     padding: 0;
 
     &.visible {
@@ -1979,7 +1999,7 @@
         align-items: center;
         justify-content: center;
         transform: rotate(-45deg); // ArrowUpRight points top-right, rotating -45deg makes it point up
-        
+
         svg {
             stroke-width: 2.5px;
         }
@@ -2020,12 +2040,13 @@
     color: #0f172a;
     font-family: $primary-font;
     letter-spacing: -0.02em;
-    
+
     @media (max-width: 768px) {
         font-size: 2rem;
-        margin-bottom: 0!important;
+        margin-bottom: 0 !important;
     }
-    span{
+
+    span {
         font-weight: 600;
 
     }
@@ -2051,7 +2072,8 @@
         display: flex;
         flex-direction: column;
         padding-bottom: 2rem; // Extra room for card shadows
-        @include max(575){
+
+        @include max(575) {
             padding-bottom: 0;
         }
     }
@@ -2128,13 +2150,14 @@
     flex: 1;
 
     &:hover {
-       
+
 
         .actionIcon {
             background: $cosmicOrange !important;
             color: #fff !important;
+
             svg path {
-                stroke: $cosmicOrange   !important;
+                stroke: $cosmicOrange !important;
             }
         }
     }
@@ -2207,9 +2230,9 @@
                 background: #fff !important;
             }
 
-            &:hover { 
+            &:hover {
                 background: #ff0000 !important;
-                color: #fff !important; 
+                color: #fff !important;
                 transform: scale(1.1);
             }
         }
@@ -2228,7 +2251,7 @@
             display: flex;
             align-items: center;
             gap: 4px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 
             span {
                 color: #fff;
@@ -2258,7 +2281,7 @@
             margin-bottom: 0.5rem;
             line-height: 1.3;
             // Prevent overlap with action arrow
-            padding-right: 3rem; 
+            padding-right: 3rem;
             // Default limit: 1 line
             display: -webkit-box;
             -webkit-line-clamp: 1;
@@ -2266,7 +2289,7 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
             // Constant height to keep grid aligned
-            min-height: 1.3em; 
+            min-height: 1.3em;
         }
 
 
@@ -2298,7 +2321,7 @@
             &:hover {
                 background-color: $cosmicOrange !important;
                 color: #fff !important;
-                
+
                 svg path {
                     stroke: #fff !important;
                 }
@@ -2307,7 +2330,7 @@
 
         @media (max-width: 768px) {
             padding: 0.75rem 0.5rem;
-            
+
             .packageTitle {
                 font-size: 0.8rem;
                 font-weight: 700;
@@ -2335,7 +2358,7 @@
 
     @media (max-width: 768px) {
         border-radius: 1rem;
-        
+
         .imageWrapper {
             height: 140px; // Movie poster like taller dimension
             min-height: 190px;
@@ -2349,6 +2372,7 @@
                 .currentPrice {
                     font-size: 0.95rem;
                 }
+
                 .oldPrice {
                     font-size: 0.65rem;
                 }
@@ -2359,7 +2383,11 @@
                 left: 0.5rem;
                 width: 30px;
                 height: 30px;
-                svg { width: 14px; height: 14px; }
+
+                svg {
+                    width: 14px;
+                    height: 14px;
+                }
             }
         }
     }
@@ -2437,7 +2465,8 @@
         justify-content: space-between;
         padding: 1rem;
         color: #fff;
-        @include max(575){
+
+        @include max(575) {
             padding: 0.5rem;
         }
 
@@ -2504,10 +2533,12 @@
                     white-space: normal;
                     line-height: 1.2;
                 }
+
                 .packageSubtitle {
                     font-size: 0.75rem;
                     margin-bottom: 0.4rem;
                 }
+
                 .packageDuration {
                     font-size: 0.8rem;
                 }
@@ -2518,14 +2549,14 @@
                 border-radius: 10px;
 
                 .currentPrice {
-                    font-size: 1.1rem!important;
+                    font-size: 1.1rem !important;
                 }
             }
         }
     }
 
     @media (max-width: 768px) {
-        height: 320px; 
+        height: 320px;
         border-radius: 4px;
     }
 }
@@ -2851,9 +2882,10 @@
 .packageCardKerala {
     height: 150px;
     border-radius: 12px;
-    @include min(768){
+
+    @include min(768) {
         height: 200px;
-        
+
     }
 
     .cardContent {
@@ -2862,7 +2894,8 @@
         .topSection {
             .packageTitle {
                 font-size: 1.2rem;
-                @include max(575){
+
+                @include max(575) {
                     font-size: 1rem;
                 }
             }
@@ -3413,7 +3446,8 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             color: #1e293b;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            @include max(575){
+
+            @include max(575) {
                 width: 35px;
                 height: 35px;
             }
@@ -3455,12 +3489,15 @@
         }
     }
 }
+
 .img-box {
     margin-left: -23px;
 }
+
 span.breadcrumbGroup {
     display: flex;
 }
+
 button.wishlistBtn {
     display: flex;
     justify-content: flex-end;
@@ -3472,9 +3509,13 @@ button.wishlistBtn {
     position: absolute;
     right: 6px;
 }
- 
+
 // Premium Horizontal Cards for Events and Corporate Sections
-.corporate-events-section, .special-events-section, .corporateModernSection, .specialEventsSection, .events-listing {
+.corporate-events-section,
+.special-events-section,
+.corporateModernSection,
+.specialEventsSection,
+.events-listing {
     .homeContainer {
         overflow-x: hidden;
     }
@@ -3494,7 +3535,7 @@ button.wishlistBtn {
             transform: translateY(-5px);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12) !important;
 
-          
+
         }
 
         .imageWrapper {
@@ -3550,7 +3591,8 @@ button.wishlistBtn {
                 padding: 10px 12px !important;
             }
 
-            .packageTitle, .title {
+            .packageTitle,
+            .title {
                 margin: 0 !important;
                 font-size: 0.875rem !important;
                 font-weight: 800 !important;
@@ -3618,7 +3660,7 @@ button.wishlistBtn {
 .testimonialSection {
     padding-top: 60px !important;
     padding-bottom: 60px !important;
-    
+
     @media (max-width: 767px) {
         padding-top: 40px !important;
         padding-bottom: 40px !important;
@@ -3631,19 +3673,11 @@ button.wishlistBtn {
         .swiper-wrapper {
             display: flex;
             align-items: stretch;
-
-            @media (max-width: 767px) {
-                align-items: flex-start !important;
-            }
         }
 
         .swiper-slide {
             height: auto;
             display: flex;
-
-            @media (max-width: 767px) {
-                display: block !important;
-            }
         }
     }
 
@@ -3683,7 +3717,7 @@ button.wishlistBtn {
         &:hover {
             transform: translateY(-8px);
             border-color: rgba($primaryColor, 0.2);
-            box-shadow: 0 20px 40px -20px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.1);
         }
 
         .quoteIcon {
@@ -3703,7 +3737,7 @@ button.wishlistBtn {
             align-items: center;
             gap: 1rem;
             margin-top: auto;
-            
+
             .authorName {
                 font-size: 0.9rem;
                 font-weight: 800;
@@ -3715,17 +3749,20 @@ button.wishlistBtn {
 }
 
 .special-events-section {
-    .swiper-slide{
+    .swiper-slide {
         padding-bottom: 2rem;
     }
 }
 
-.internationalSection,.domesticSection,.firstMinuteOfferSection{
+.internationalSection,
+.domesticSection,
+.firstMinuteOfferSection {
 
-    .homeContainer{
+    .homeContainer {
         overflow-x: hidden;
     }
 }
-.offerBannerSection{
-    background: unset!important;
+
+.offerBannerSection {
+    background: unset !important;
 }

@@ -7990,7 +7990,9 @@ footer .footerBottom .socialLinks a:hover {
 .heroSection .heroBanner .swiper-slide-active .slideContent .imageWrapper img {
   transform: scale(1);
 }
-.heroSection .heroBanner .swiper-slide-active .slideContent .contentOverlay h1, .heroSection .heroBanner .swiper-slide-active .slideContent .contentOverlay .heroSubheading, .heroSection .heroBanner .swiper-slide-active .slideContent .contentOverlay .heroPackageBtn {
+.heroSection .heroBanner .swiper-slide-active .slideContent .contentOverlay h1,
+.heroSection .heroBanner .swiper-slide-active .slideContent .contentOverlay .heroSubheading,
+.heroSection .heroBanner .swiper-slide-active .slideContent .contentOverlay .heroPackageBtn {
   transform: translateY(0);
   opacity: 1;
 }
@@ -8354,34 +8356,42 @@ footer .footerBottom .socialLinks a:hover {
   border-radius: 9999px;
 }
 
-.corporateModernSection, .corporate-events-section {
+.corporateModernSection,
+.corporate-events-section {
   background: #f8fafc;
 }
-.corporateModernSection .sectionHeader, .corporate-events-section .sectionHeader {
+.corporateModernSection .sectionHeader,
+.corporate-events-section .sectionHeader {
   margin-bottom: 2.5rem;
 }
-.corporateModernSection .sectionHeader .leadDescription, .corporate-events-section .sectionHeader .leadDescription {
+.corporateModernSection .sectionHeader .leadDescription,
+.corporate-events-section .sectionHeader .leadDescription {
   font-size: 1.25rem;
   color: #64748b;
   margin-top: 1.5rem;
 }
-.corporateModernSection .swiper-slide, .corporate-events-section .swiper-slide {
+.corporateModernSection .swiper-slide,
+.corporate-events-section .swiper-slide {
   padding-bottom: 2rem;
 }
-.corporateModernSection .eventSlider, .corporate-events-section .eventSlider {
+.corporateModernSection .eventSlider,
+.corporate-events-section .eventSlider {
   padding-bottom: 2rem;
 }
-.corporateModernSection .corporateFeatureGrid, .corporate-events-section .corporateFeatureGrid {
+.corporateModernSection .corporateFeatureGrid,
+.corporate-events-section .corporateFeatureGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2.5rem;
 }
 @media (max-width: 991px) {
-  .corporateModernSection .corporateFeatureGrid, .corporate-events-section .corporateFeatureGrid {
+  .corporateModernSection .corporateFeatureGrid,
+  .corporate-events-section .corporateFeatureGrid {
     grid-template-columns: 1fr;
   }
 }
-.corporateModernSection .featureCard, .corporate-events-section .featureCard {
+.corporateModernSection .featureCard,
+.corporate-events-section .featureCard {
   background: #fff;
   border-radius: 2rem;
   overflow: hidden;
@@ -8389,25 +8399,31 @@ footer .footerBottom .socialLinks a:hover {
   transition: transform 0.3s ease;
   height: 100%;
 }
-.corporateModernSection .featureCard:hover, .corporate-events-section .featureCard:hover {
+.corporateModernSection .featureCard:hover,
+.corporate-events-section .featureCard:hover {
   transform: translateY(-8px);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
-.corporateModernSection .featureCard:hover .imageWrapper img, .corporate-events-section .featureCard:hover .imageWrapper img {
+.corporateModernSection .featureCard:hover .imageWrapper img,
+.corporate-events-section .featureCard:hover .imageWrapper img {
   transform: scale(1.1);
 }
-.corporateModernSection .featureCard.featured, .corporate-events-section .featureCard.featured {
+.corporateModernSection .featureCard.featured,
+.corporate-events-section .featureCard.featured {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.11);
   border: 1px solid rgba(22, 115, 184, 0.1);
 }
-.corporateModernSection .featureCard .imageBox, .corporate-events-section .featureCard .imageBox {
+.corporateModernSection .featureCard .imageBox,
+.corporate-events-section .featureCard .imageBox {
   position: relative;
   height: 240px;
 }
-.corporateModernSection .featureCard .cardInfo, .corporate-events-section .featureCard .cardInfo {
+.corporateModernSection .featureCard .cardInfo,
+.corporate-events-section .featureCard .cardInfo {
   padding: 2.5rem;
 }
-.corporateModernSection .featureCard .cardInfo .icon, .corporate-events-section .featureCard .cardInfo .icon {
+.corporateModernSection .featureCard .cardInfo .icon,
+.corporate-events-section .featureCard .cardInfo .icon {
   width: 48px;
   height: 48px;
   background: rgba(22, 115, 184, 0.1);
@@ -8418,29 +8434,34 @@ footer .footerBottom .socialLinks a:hover {
   justify-content: center;
   margin-bottom: 1.5rem;
 }
-.corporateModernSection .featureCard .cardInfo h4, .corporate-events-section .featureCard .cardInfo h4 {
+.corporateModernSection .featureCard .cardInfo h4,
+.corporate-events-section .featureCard .cardInfo h4 {
   font-size: 1.5rem;
   font-weight: 800;
   margin-bottom: 1rem;
   color: #1e293b;
 }
 @media (max-width: 575px) {
-  .corporateModernSection .featureCard .cardInfo h4, .corporate-events-section .featureCard .cardInfo h4 {
+  .corporateModernSection .featureCard .cardInfo h4,
+  .corporate-events-section .featureCard .cardInfo h4 {
     font-size: 1.25rem;
   }
 }
-.corporateModernSection .featureCard .cardInfo p, .corporate-events-section .featureCard .cardInfo p {
+.corporateModernSection .featureCard .cardInfo p,
+.corporate-events-section .featureCard .cardInfo p {
   font-size: 1rem;
   color: #64748b;
   line-height: 1.6;
 }
 @media (max-width: 575px) {
-  .corporateModernSection .featureCard .cardInfo p, .corporate-events-section .featureCard .cardInfo p {
+  .corporateModernSection .featureCard .cardInfo p,
+  .corporate-events-section .featureCard .cardInfo p {
     font-size: 0.9rem;
   }
 }
 @media (max-width: 575px) {
-  .corporateModernSection .featureCard .cardInfo, .corporate-events-section .featureCard .cardInfo {
+  .corporateModernSection .featureCard .cardInfo,
+  .corporate-events-section .featureCard .cardInfo {
     padding: 1.5rem;
   }
 }
@@ -9328,7 +9349,8 @@ footer .footerBottom .socialLinks a:hover {
     width: 40px;
     height: 40px;
   }
-  .mainFooter .footerWrapper .footer-bottom-v2 .footer-social-hub .social-pill img, .mainFooter .footerWrapper .footer-bottom-v2 .footer-social-hub .social-pill svg {
+  .mainFooter .footerWrapper .footer-bottom-v2 .footer-social-hub .social-pill img,
+  .mainFooter .footerWrapper .footer-bottom-v2 .footer-social-hub .social-pill svg {
     width: 15px;
     height: 15px;
   }
@@ -10682,10 +10704,18 @@ button.wishlistBtn {
   right: 6px;
 }
 
-.corporate-events-section .homeContainer, .special-events-section .homeContainer, .corporateModernSection .homeContainer, .specialEventsSection .homeContainer, .events-listing .homeContainer {
+.corporate-events-section .homeContainer,
+.special-events-section .homeContainer,
+.corporateModernSection .homeContainer,
+.specialEventsSection .homeContainer,
+.events-listing .homeContainer {
   overflow-x: hidden;
 }
-.corporate-events-section .packageCardSmall, .special-events-section .packageCardSmall, .corporateModernSection .packageCardSmall, .specialEventsSection .packageCardSmall, .events-listing .packageCardSmall {
+.corporate-events-section .packageCardSmall,
+.special-events-section .packageCardSmall,
+.corporateModernSection .packageCardSmall,
+.specialEventsSection .packageCardSmall,
+.events-listing .packageCardSmall {
   background: #fff !important;
   border-radius: 16px !important;
   overflow: hidden;
@@ -10696,27 +10726,47 @@ button.wishlistBtn {
   border: 1px solid #f1f5f9 !important;
   height: 100% !important;
 }
-.corporate-events-section .packageCardSmall:hover, .special-events-section .packageCardSmall:hover, .corporateModernSection .packageCardSmall:hover, .specialEventsSection .packageCardSmall:hover, .events-listing .packageCardSmall:hover {
+.corporate-events-section .packageCardSmall:hover,
+.special-events-section .packageCardSmall:hover,
+.corporateModernSection .packageCardSmall:hover,
+.specialEventsSection .packageCardSmall:hover,
+.events-listing .packageCardSmall:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12) !important;
 }
-.corporate-events-section .packageCardSmall .imageWrapper, .special-events-section .packageCardSmall .imageWrapper, .corporateModernSection .packageCardSmall .imageWrapper, .specialEventsSection .packageCardSmall .imageWrapper, .events-listing .packageCardSmall .imageWrapper {
+.corporate-events-section .packageCardSmall .imageWrapper,
+.special-events-section .packageCardSmall .imageWrapper,
+.corporateModernSection .packageCardSmall .imageWrapper,
+.specialEventsSection .packageCardSmall .imageWrapper,
+.events-listing .packageCardSmall .imageWrapper {
   position: relative !important;
   width: 100% !important;
   aspect-ratio: 3/2 !important;
   height: auto !important;
   margin: 0 !important;
 }
-.corporate-events-section .packageCardSmall .imageWrapper::after, .special-events-section .packageCardSmall .imageWrapper::after, .corporateModernSection .packageCardSmall .imageWrapper::after, .specialEventsSection .packageCardSmall .imageWrapper::after, .events-listing .packageCardSmall .imageWrapper::after {
+.corporate-events-section .packageCardSmall .imageWrapper::after,
+.special-events-section .packageCardSmall .imageWrapper::after,
+.corporateModernSection .packageCardSmall .imageWrapper::after,
+.specialEventsSection .packageCardSmall .imageWrapper::after,
+.events-listing .packageCardSmall .imageWrapper::after {
   display: none !important;
 }
-.corporate-events-section .packageCardSmall .imageWrapper img, .special-events-section .packageCardSmall .imageWrapper img, .corporateModernSection .packageCardSmall .imageWrapper img, .specialEventsSection .packageCardSmall .imageWrapper img, .events-listing .packageCardSmall .imageWrapper img {
+.corporate-events-section .packageCardSmall .imageWrapper img,
+.special-events-section .packageCardSmall .imageWrapper img,
+.corporateModernSection .packageCardSmall .imageWrapper img,
+.specialEventsSection .packageCardSmall .imageWrapper img,
+.events-listing .packageCardSmall .imageWrapper img {
   height: 100% !important;
   width: 100% !important;
   -o-object-fit: cover !important;
      object-fit: cover !important;
 }
-.corporate-events-section .packageCardSmall .imageWrapper .priceTag, .special-events-section .packageCardSmall .imageWrapper .priceTag, .corporateModernSection .packageCardSmall .imageWrapper .priceTag, .specialEventsSection .packageCardSmall .imageWrapper .priceTag, .events-listing .packageCardSmall .imageWrapper .priceTag {
+.corporate-events-section .packageCardSmall .imageWrapper .priceTag,
+.special-events-section .packageCardSmall .imageWrapper .priceTag,
+.corporateModernSection .packageCardSmall .imageWrapper .priceTag,
+.specialEventsSection .packageCardSmall .imageWrapper .priceTag,
+.events-listing .packageCardSmall .imageWrapper .priceTag {
   position: absolute !important;
   top: 0.75rem !important;
   left: 0.75rem !important;
@@ -10744,10 +10794,18 @@ button.wishlistBtn {
   font-weight: 800 !important;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-.corporate-events-section .packageCardSmall .imageWrapper .priceTag .currentPrice, .special-events-section .packageCardSmall .imageWrapper .priceTag .currentPrice, .corporateModernSection .packageCardSmall .imageWrapper .priceTag .currentPrice, .specialEventsSection .packageCardSmall .imageWrapper .priceTag .currentPrice, .events-listing .packageCardSmall .imageWrapper .priceTag .currentPrice {
+.corporate-events-section .packageCardSmall .imageWrapper .priceTag .currentPrice,
+.special-events-section .packageCardSmall .imageWrapper .priceTag .currentPrice,
+.corporateModernSection .packageCardSmall .imageWrapper .priceTag .currentPrice,
+.specialEventsSection .packageCardSmall .imageWrapper .priceTag .currentPrice,
+.events-listing .packageCardSmall .imageWrapper .priceTag .currentPrice {
   color: #0f172a !important;
 }
-.corporate-events-section .packageCardSmall .cardContent, .special-events-section .packageCardSmall .cardContent, .corporateModernSection .packageCardSmall .cardContent, .specialEventsSection .packageCardSmall .cardContent, .events-listing .packageCardSmall .cardContent {
+.corporate-events-section .packageCardSmall .cardContent,
+.special-events-section .packageCardSmall .cardContent,
+.corporateModernSection .packageCardSmall .cardContent,
+.specialEventsSection .packageCardSmall .cardContent,
+.events-listing .packageCardSmall .cardContent {
   position: relative !important;
   background: #fff !important;
   padding: 1.15rem 1rem !important;
@@ -10759,11 +10817,24 @@ button.wishlistBtn {
   flex: 1;
 }
 @media (max-width: 767px) {
-  .corporate-events-section .packageCardSmall .cardContent, .special-events-section .packageCardSmall .cardContent, .corporateModernSection .packageCardSmall .cardContent, .specialEventsSection .packageCardSmall .cardContent, .events-listing .packageCardSmall .cardContent {
+  .corporate-events-section .packageCardSmall .cardContent,
+  .special-events-section .packageCardSmall .cardContent,
+  .corporateModernSection .packageCardSmall .cardContent,
+  .specialEventsSection .packageCardSmall .cardContent,
+  .events-listing .packageCardSmall .cardContent {
     padding: 10px 12px !important;
   }
 }
-.corporate-events-section .packageCardSmall .cardContent .packageTitle, .corporate-events-section .packageCardSmall .cardContent .title, .special-events-section .packageCardSmall .cardContent .packageTitle, .special-events-section .packageCardSmall .cardContent .title, .corporateModernSection .packageCardSmall .cardContent .packageTitle, .corporateModernSection .packageCardSmall .cardContent .title, .specialEventsSection .packageCardSmall .cardContent .packageTitle, .specialEventsSection .packageCardSmall .cardContent .title, .events-listing .packageCardSmall .cardContent .packageTitle, .events-listing .packageCardSmall .cardContent .title {
+.corporate-events-section .packageCardSmall .cardContent .packageTitle,
+.corporate-events-section .packageCardSmall .cardContent .title,
+.special-events-section .packageCardSmall .cardContent .packageTitle,
+.special-events-section .packageCardSmall .cardContent .title,
+.corporateModernSection .packageCardSmall .cardContent .packageTitle,
+.corporateModernSection .packageCardSmall .cardContent .title,
+.specialEventsSection .packageCardSmall .cardContent .packageTitle,
+.specialEventsSection .packageCardSmall .cardContent .title,
+.events-listing .packageCardSmall .cardContent .packageTitle,
+.events-listing .packageCardSmall .cardContent .title {
   margin: 0 !important;
   font-size: 0.875rem !important;
   font-weight: 800 !important;
@@ -10778,14 +10849,31 @@ button.wishlistBtn {
   flex: 1;
 }
 @media (max-width: 767px) {
-  .corporate-events-section .packageCardSmall .cardContent .packageTitle, .corporate-events-section .packageCardSmall .cardContent .title, .special-events-section .packageCardSmall .cardContent .packageTitle, .special-events-section .packageCardSmall .cardContent .title, .corporateModernSection .packageCardSmall .cardContent .packageTitle, .corporateModernSection .packageCardSmall .cardContent .title, .specialEventsSection .packageCardSmall .cardContent .packageTitle, .specialEventsSection .packageCardSmall .cardContent .title, .events-listing .packageCardSmall .cardContent .packageTitle, .events-listing .packageCardSmall .cardContent .title {
+  .corporate-events-section .packageCardSmall .cardContent .packageTitle,
+  .corporate-events-section .packageCardSmall .cardContent .title,
+  .special-events-section .packageCardSmall .cardContent .packageTitle,
+  .special-events-section .packageCardSmall .cardContent .title,
+  .corporateModernSection .packageCardSmall .cardContent .packageTitle,
+  .corporateModernSection .packageCardSmall .cardContent .title,
+  .specialEventsSection .packageCardSmall .cardContent .packageTitle,
+  .specialEventsSection .packageCardSmall .cardContent .title,
+  .events-listing .packageCardSmall .cardContent .packageTitle,
+  .events-listing .packageCardSmall .cardContent .title {
     font-size: 0.75rem !important;
   }
 }
-.corporate-events-section .packageCardSmall .cardContent p, .special-events-section .packageCardSmall .cardContent p, .corporateModernSection .packageCardSmall .cardContent p, .specialEventsSection .packageCardSmall .cardContent p, .events-listing .packageCardSmall .cardContent p {
+.corporate-events-section .packageCardSmall .cardContent p,
+.special-events-section .packageCardSmall .cardContent p,
+.corporateModernSection .packageCardSmall .cardContent p,
+.specialEventsSection .packageCardSmall .cardContent p,
+.events-listing .packageCardSmall .cardContent p {
   display: none !important;
 }
-.corporate-events-section .packageCardSmall .cardContent .actionIcon, .special-events-section .packageCardSmall .cardContent .actionIcon, .corporateModernSection .packageCardSmall .cardContent .actionIcon, .specialEventsSection .packageCardSmall .cardContent .actionIcon, .events-listing .packageCardSmall .cardContent .actionIcon {
+.corporate-events-section .packageCardSmall .cardContent .actionIcon,
+.special-events-section .packageCardSmall .cardContent .actionIcon,
+.corporateModernSection .packageCardSmall .cardContent .actionIcon,
+.specialEventsSection .packageCardSmall .cardContent .actionIcon,
+.events-listing .packageCardSmall .cardContent .actionIcon {
   width: 34px !important;
   height: 34px !important;
   background: #f1f5f9 !important;
@@ -10798,19 +10886,31 @@ button.wishlistBtn {
   flex-shrink: 0;
 }
 @media (max-width: 767px) {
-  .corporate-events-section .packageCardSmall .cardContent .actionIcon, .special-events-section .packageCardSmall .cardContent .actionIcon, .corporateModernSection .packageCardSmall .cardContent .actionIcon, .specialEventsSection .packageCardSmall .cardContent .actionIcon, .events-listing .packageCardSmall .cardContent .actionIcon {
+  .corporate-events-section .packageCardSmall .cardContent .actionIcon,
+  .special-events-section .packageCardSmall .cardContent .actionIcon,
+  .corporateModernSection .packageCardSmall .cardContent .actionIcon,
+  .specialEventsSection .packageCardSmall .cardContent .actionIcon,
+  .events-listing .packageCardSmall .cardContent .actionIcon {
     width: 28px !important;
     height: 28px !important;
   }
 }
-.corporate-events-section .packageCardSmall .cardContent .actionIcon svg, .special-events-section .packageCardSmall .cardContent .actionIcon svg, .corporateModernSection .packageCardSmall .cardContent .actionIcon svg, .specialEventsSection .packageCardSmall .cardContent .actionIcon svg, .events-listing .packageCardSmall .cardContent .actionIcon svg {
+.corporate-events-section .packageCardSmall .cardContent .actionIcon svg,
+.special-events-section .packageCardSmall .cardContent .actionIcon svg,
+.corporateModernSection .packageCardSmall .cardContent .actionIcon svg,
+.specialEventsSection .packageCardSmall .cardContent .actionIcon svg,
+.events-listing .packageCardSmall .cardContent .actionIcon svg {
   width: 18px !important;
   height: 18px !important;
   stroke: #94a3b8 !important;
   stroke-width: 2.5px !important;
 }
 @media (max-width: 767px) {
-  .corporate-events-section .packageCardSmall .cardContent .actionIcon svg, .special-events-section .packageCardSmall .cardContent .actionIcon svg, .corporateModernSection .packageCardSmall .cardContent .actionIcon svg, .specialEventsSection .packageCardSmall .cardContent .actionIcon svg, .events-listing .packageCardSmall .cardContent .actionIcon svg {
+  .corporate-events-section .packageCardSmall .cardContent .actionIcon svg,
+  .special-events-section .packageCardSmall .cardContent .actionIcon svg,
+  .corporateModernSection .packageCardSmall .cardContent .actionIcon svg,
+  .specialEventsSection .packageCardSmall .cardContent .actionIcon svg,
+  .events-listing .packageCardSmall .cardContent .actionIcon svg {
     width: 14px !important;
     height: 14px !important;
   }
@@ -10904,7 +11004,9 @@ button.wishlistBtn {
   padding-bottom: 2rem;
 }
 
-.internationalSection .homeContainer, .domesticSection .homeContainer, .firstMinuteOfferSection .homeContainer {
+.internationalSection .homeContainer,
+.domesticSection .homeContainer,
+.firstMinuteOfferSection .homeContainer {
   overflow-x: hidden;
 }
 
