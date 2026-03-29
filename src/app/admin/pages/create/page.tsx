@@ -50,7 +50,6 @@ export default function CreatePage() {
 
   const tabs = [
     { id: 'content', label: 'Content', icon: Layout },
-    { id: 'seo', label: 'SEO', icon: Search },
     { id: 'config', label: 'Settings', icon: Settings },
   ];
 
@@ -130,28 +129,7 @@ export default function CreatePage() {
               </div>
            )}
 
-           {activeTab === 'seo' && (
-              <div className="space-y-6">
-                 <div className="editor-card">
-                    <div className="card-header"><h4 className="serif">SEO Optimization</h4></div>
-                    <div className="space-y-4">
-                       <div className="admin-form-group"><label>Meta Title</label><input type="text" value={formData.seo_title} onChange={e => setFormData({ ...formData, seo_title: e.target.value })} /></div>
-                       <div className="admin-form-group"><label>Meta Description</label><textarea rows={4} value={formData.seo_description} onChange={e => setFormData({ ...formData, seo_description: e.target.value })} /></div>
-                    </div>
-                 </div>
-                 
-                 <div className="editor-card bg-slate-900 border-slate-800">
-                    <div className="card-header border-slate-800"><h4 className="serif text-white">Google Search Preview</h4></div>
-                    <div className="p-8">
-                       <div className="max-w-xl">
-                          <h4 className="text-orange-400 text-xl font-bold mb-1">{formData.seo_title || formData.title || 'Page Title'}</h4>
-                          <p className="text-emerald-500 text-xs font-mono mb-2">https://wegomap.digital/{formData.slug || 'url-slug'}</p>
-                          <p className="text-slate-400 text-sm italic">{formData.seo_description || 'No description provided.'}</p>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-           )}
+
 
            {activeTab === 'config' && (
               <div className="editor-card">

@@ -115,7 +115,7 @@ export default function EditPage() {
               </div>
 
               <div className="admin-form-group">
-                <label className="text-xs font-semibold uppercase tracking-wider text-slate-400 ml-1">Page Title</label>
+                <label className="text-xs font-semibold uppercase tracking-wider text-blue-600 ml-1">Page Content</label>
                 <RichTextEditor 
                   value={formData.content}
                   onChange={content => setFormData({...formData, content})}
@@ -151,68 +151,15 @@ export default function EditPage() {
 
         {/* Sidebar Settings */}
         <div className="admin-form-sidebar space-y-8">
-          <div className="admin-form-card">
-            <h3 className="admin-form-section-title">
-              <div className="admin-page-title-indicator bg-emerald-500"></div>
-              SEO Settings
-            </h3>
-            
-            <div className="space-y-6">
-              <div className="admin-form-group">
-                <label className="admin-form-label">SEO Title</label>
-                <input 
-                  type="text" 
-                  value={formData.seo_title}
-                  onChange={e => setFormData({...formData, seo_title: e.target.value})}
-                  className="admin-form-input text-xs"
-                  placeholder="Clear, descriptive title..."
-                />
-              </div>
-
-              <div className="admin-form-group">
-                <label className="text-xs font-semibold uppercase tracking-wider text-blue-600 ml-1">Description</label>
-                <textarea 
-                  rows={4}
-                  value={formData.seo_description}
-                  onChange={e => setFormData({...formData, seo_description: e.target.value})}
-                  className="admin-form-input text-xs min-h-[100px] py-3"
-                  placeholder={formData.seo_description || 'If left empty, search engines will use text from your content.'}
-                />
-              </div>
-
-              <div className="admin-form-group">
-                <label className="admin-form-label">Keywords</label>
-                <textarea 
-                  rows={3}
-                  value={formData.seo_keys}
-                  onChange={e => setFormData({...formData, seo_keys: e.target.value})}
-                  className="admin-form-input text-xs min-h-[80px] py-3"
-                  placeholder="Comma separated keywords..."
-                />
-              </div>
-
-              <div className="admin-form-group">
-                <label className="admin-form-label"><span>Page Link (URL)</span></label>
-                <input 
-                  type="text" 
-                  value={formData.seo_canonical}
-                  onChange={e => setFormData({...formData, seo_canonical: e.target.value})}
-                  className="admin-form-input text-xs font-mono"
-                  placeholder="https://..."
-                />
-              </div>
-            </div>
-          </div>
-
           <div className="admin-form-card bg-slate-50 border-none p-6">
             <div className="flex items-start gap-3">
               <div className="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center text-blue-600 shrink-0">
                 <Sparkles size={16} />
               </div>
               <div className="space-y-1">
-                <p className="font-semibold text-slate-400 uppercase tracking-wider text-xs italic">Loading...</p>
+                <p className="font-semibold text-slate-400 uppercase tracking-wider text-xs italic">Live Update</p>
                 <p className="text-[11px] text-slate-500 leading-relaxed italic opacity-80">
-                  Changes made here will be reflected on the public website immediately after saving.
+                  Changes made here will be reflected on the public website immediately after saving. To manage SEO metadata, please use the dedicated SEO module.
                 </p>
               </div>
             </div>
