@@ -149,15 +149,15 @@ export default function EventDetailPage() {
                         
                         <div className="lg:col-span-8">
                             <div className="ed-overview-card">
-                                <h2 className="text-2xl font-bold mb-6 text-slate-900 border-l-4 border-primary pl-6">
+                                <h2 className="ed-overview-header">
                                     Event Overview
                                 </h2>
-                                <div className="ed-description tour-description-content">
-                                    <div dangerouslySetInnerHTML={{ __html: firstPara }} className="lead-text" />
+                                <div className="ed-description-v3">
+                                    <div dangerouslySetInnerHTML={{ __html: firstPara }} className="ed-lead-text" />
                                     <div dangerouslySetInnerHTML={{ __html: remainingParas }} />
                                 </div>
 
-                                <div className="ed-info-pills grid grid-cols-1 md:grid-cols-3 gap-4 mt-12 bg-slate-50 p-8 rounded-3xl border border-slate-100">
+                                <div className="ed-info-pills">
                                     <div className="flex items-center gap-4">
                                         <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-blue-600 shadow-sm"><ShieldCheck size={24} /></div>
                                         <div>
@@ -213,29 +213,29 @@ export default function EventDetailPage() {
                                     </div>
                                 ) : (
                                     <>
-                                        <div className="ed-card-header !mb-8">
-                                            <h4 className="text-2xl font-bold text-slate-900 uppercase italic leading-tight">Apply for <span className="text-primary italic">Admission.</span></h4>
-                                            <p className="text-slate-500 mt-2">Secure your spot at this curated experience.</p>
+                                        <div className="ed-card-header">
+                                            <h4>Apply for <span>Admission.</span></h4>
+                                            <p>Secure your spot at this curated experience.</p>
                                         </div>
                                         <form onSubmit={handleFormSubmit} className="ed-form space-y-5">
                                             <div className="ed-field">
-                                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 block">Full Name</label>
-                                                <div className="relative">
-                                                    <User size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
-                                                    <input required type="text" placeholder="Your name" className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-4 pl-12 pr-4 text-slate-900 outline-none focus:border-primary transition-all" />
+                                                <label>Full Name</label>
+                                                <div className="ed-input-group">
+                                                    <User size={18} />
+                                                    <input required type="text" placeholder="Your name" />
                                                 </div>
                                             </div>
                                             <div className="ed-field">
-                                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 block">Email Address</label>
-                                                <div className="relative">
-                                                    <ShieldCheck size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
-                                                    <input required type="email" placeholder="Your email" className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-4 pl-12 pr-4 text-slate-900 outline-none focus:border-primary transition-all" />
+                                                <label>Email Address</label>
+                                                <div className="ed-input-group">
+                                                    <ShieldCheck size={18} />
+                                                    <input required type="email" placeholder="Your email" />
                                                 </div>
                                             </div>
-                                            <button disabled={formStatus === 'loading'} type="submit" className="w-full bg-[#ff5349] text-white py-5 rounded-2xl font-bold uppercase text-xs tracking-widest shadow-xl shadow-rose-100 hover:bg-slate-900 transition-all" >
+                                            <button disabled={formStatus === 'loading'} type="submit" className="ed-submit-btn">
                                                 {formStatus === 'loading' ? 'Processing...' : 'Reserve my Spot'}
                                             </button>
-                                            <span className="block text-center text-[10px] font-bold text-slate-400 uppercase mt-4">Verified by Wegomap Events</span>
+                                            <span className="ed-verified-text">Verified by Wegomap Events</span>
                                         </form>
                                     </>
                                 )}

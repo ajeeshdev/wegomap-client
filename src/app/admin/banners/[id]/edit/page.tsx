@@ -15,8 +15,7 @@ export default function EditBanner() {
     pagePath: '',
     title: '',
     subtitle: '',
-    image: '',
-    showBack: true
+    image: ''
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -188,25 +187,6 @@ export default function EditBanner() {
             </h4>
             
             <div className="space-y-6">
-              <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-emerald-500">
-                    <ArrowLeft size={18} />
-                  </div>
-                  <div>
-                    <label className="text-[11px] font-bold text-slate-700 block">Back Option</label>
-                    <span className="text-[9px] text-slate-400 uppercase tracking-wider font-bold">Visibility</span>
-                  </div>
-                </div>
-                <label className="admin-toggle scale-90">
-                  <input 
-                    type="checkbox" 
-                    checked={formData.showBack}
-                    onChange={() => setFormData({ ...formData, showBack: !formData.showBack })}
-                  />
-                  <span className="toggle-slider"></span>
-                </label>
-              </div>
 
                {/* Decorative Sections Removed */}
             </div>

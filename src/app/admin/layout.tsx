@@ -230,10 +230,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     },
     { 
       label: 'Advanced', 
-      href: '/admin/settings', 
+      href: '/admin/users', 
       icon: Sliders,
       subItems: [
-        { label: 'System Settings', href: '/admin/settings' },
+        { label: 'Admin Role Manager', href: '/admin/users' },
       ]
     },
   ];

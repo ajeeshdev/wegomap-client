@@ -10,7 +10,6 @@ interface BannerData {
     subtitle?: string;
     preTitle?: string;
     image?: string;
-    showBack?: boolean;
 }
 
 interface DynamicPageBannerProps {
@@ -99,7 +98,6 @@ export default function DynamicPageBanner({
             preTitle={banner?.preTitle || fallbackPreTitle || (breadcrumbs.length > 0 ? breadcrumbs[breadcrumbs.length - 1].label : 'Explore')}
             backgroundImage={banner?.image || fallbackImage}
             breadcrumbs={breadcrumbs}
-            showBack={banner?.showBack ?? true}
             variant={variant}
             centered={centered}
         />

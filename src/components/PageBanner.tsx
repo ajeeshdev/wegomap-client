@@ -3,7 +3,7 @@
 import React, { Fragment } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Home, ChevronRight, ArrowLeft, Star } from 'lucide-react';
+import { Home, ChevronRight, Star } from 'lucide-react';
 import { getImageUrl } from '@/config';
 
 export interface BreadcrumbItem {
@@ -17,7 +17,6 @@ interface PageBannerProps {
     preTitle?: string;
     breadcrumbs: BreadcrumbItem[];
     backgroundImage?: string;
-    showBack?: boolean;
     variant?: 'standard' | 'large';
     centered?: boolean;
 }
@@ -28,11 +27,9 @@ export default function PageBanner({
     preTitle, 
     breadcrumbs, 
     backgroundImage, 
-    showBack = true,
     variant = 'standard',
     centered = false
 }: PageBannerProps) {
-    const router = typeof window !== 'undefined' ? require('next/navigation').useRouter() : null;
 
     return (
         <div className={`pageBanner ${backgroundImage ? 'hasImage' : 'noImage'} variant-${variant} ${centered ? 'isCentered' : ''}`}>
@@ -77,15 +74,6 @@ export default function PageBanner({
                             ))}
                         </nav>
 
-                        {showBack && (
-                            <button 
-                                onClick={() => router?.back()}
-                                className="bannerBackBtn"
-                            >
-                                <ArrowLeft size={14} />
-                                <span>Go Back</span>
-                            </button>
-                        )}
                     </div>
 
                     <div className="pageBannerContent">

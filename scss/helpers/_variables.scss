@@ -4,14 +4,14 @@
 }
 
 // Colors
-$primaryColor: #1673B8 !default;
-$secondaryColor: #FF6B35 !default;
+$primaryColor: #FF6B35 !default;
+$secondaryColor: #8CC647 !default;
 $colorForDarkBg: #AEADAD !default;
 $colorForGreyBg: #3E444A !default;
 $colorForFooter: #787878 !default;
-$gradient-theme: linear-gradient(90deg, #1673B8 50%, #8CC647 75%);
-$gradient: linear-gradient(90deg, #1673B8 0%, #FB7F33 75%, #fff 100%);
-$gradient: linear-gradient(90deg, #1673B8 0%, #FB7F33 75%, #fff 100%);
+$gradient-theme: linear-gradient(90deg, #FF6B35 50%, #8CC647 75%);
+$gradient: linear-gradient(90deg, #FF6B35 0%, #FB7F33 75%, #fff 100%);
+$gradient: linear-gradient(90deg, #FF6B35 0%, #FB7F33 75%, #fff 100%);
 $bg-gradient: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
 
 $greyBg: #EFEFEF !default;

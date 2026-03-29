@@ -162,7 +162,10 @@ export default function CreateHotelLandingPage({ params: paramsProp }: { params?
       const url = isEdit ? `${API_URL}/pages/${pageId}` : `${API_URL}/pages`;
       const res = await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
         body: JSON.stringify(formData)
       });
       const data = await res.json();

@@ -104,14 +104,6 @@ export default function BannersAdmin() {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between">
-                    <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                      <ArrowLeft size={12} className="text-emerald-500" /> Back Opt
-                    </div>
-                    <div className={`px-2 py-0.5 rounded text-[9px] font-bold border ${item.showBack ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-rose-50 text-emerald-600 border-rose-100'}`}>
-                      {item.showBack ? 'Enabled' : 'Disabled'}
-                    </div>
-                  </div>
                 </div>
 
                 <div className="flex items-center gap-2 pt-6">
