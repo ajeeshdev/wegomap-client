@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Bhutan Tour Packages from Kerala | Peaceful Bhutan Trips – Wegomap',
-    description: "Discover the Land of Thunder Dragon with Wegomap's Bhutan tour packages. Explore monasteries, dzongs, and pristine nature with verified hotels, expert planning, best prices, and 24/7 support.",
+    title: 'Bhutan Tour Packages from Kerala | Peaceful Bhutan Trips – WEGOMAP',
+    description: "Discover the Land of Thunder Dragon with WEGOMAP's Bhutan tour packages. Explore monasteries, dzongs, and pristine nature with verified hotels, expert planning, best prices, and 24/7 support.",
     keywords: 'Bhutan tour packages, Bhutan packages from Kerala',
     openGraph: {
         title: 'Bhutan Package',

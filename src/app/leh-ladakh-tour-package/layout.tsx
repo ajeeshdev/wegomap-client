@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Leh Ladakh Tour Package from Kerala | Best Price Adventure Trips – Wegomap',
-    description: "Experience the land of high passes with Wegomap's Leh Ladakh tour packages. Explore monasteries, mountain lakes, and breathtaking valleys with verified hotels, best prices, and 24/7 customer support.",
+    title: 'Leh Ladakh Tour Package from Kerala | Best Price Adventure Trips – WEGOMAP',
+    description: "Experience the land of high passes with WEGOMAP's Leh Ladakh tour packages. Explore monasteries, mountain lakes, and breathtaking valleys with verified hotels, best prices, and 24/7 customer support.",
     keywords: 'Leh Ladakh tour package, Leh Ladakh packages from Kerala',
     openGraph: {
         title: 'Leh Ladakh Tour Package',

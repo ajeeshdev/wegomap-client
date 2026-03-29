@@ -91,10 +91,10 @@ export default function EventDetailPage() {
     }
 
     const descriptionLines = (event.description || "").split('</p>');
-    const firstPara = descriptionLines[0] || "Experience this exclusive event managed by Wegomap.";
+    const firstPara = descriptionLines[0] || "Experience this exclusive event managed by WEGOMAP.";
     const remainingParas = descriptionLines.slice(1).join('</p>') || `
         <p>Join us for an unforgettable experience at our selected venue. This event is meticulously planned to ensure every guest enjoys a seamless and premium experience, featuring world-class amenities and professional coordination.</p>
-        <p>Our team at Wegomap specializes in creating moments that matter. From technical production to guest hospitality, we handle every detail so you can focus on the experience itself.</p>
+        <p>Our team at WEGOMAP specializes in creating moments that matter. From technical production to guest hospitality, we handle every detail so you can focus on the experience itself.</p>
     `;
 
     return (
@@ -235,7 +235,7 @@ export default function EventDetailPage() {
                                             <button disabled={formStatus === 'loading'} type="submit" className="ed-submit-btn">
                                                 {formStatus === 'loading' ? 'Processing...' : 'Reserve my Spot'}
                                             </button>
-                                            <span className="ed-verified-text">Verified by Wegomap Events</span>
+                                            <span className="ed-verified-text">Verified by WEGOMAP Events</span>
                                         </form>
                                     </>
                                 )}

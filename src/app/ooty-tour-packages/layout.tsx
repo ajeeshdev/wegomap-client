@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Ooty Tour Packages from Kerala | Best Ooty Holiday – Wegomap',
-    description: "Book Ooty tour packages from Kerala with Wegomap, a trusted Kochi-based tour operator. Enjoy the Nilgiris, tea gardens, and cool weather with verified hotels, best prices, and 24/7 support.",
+    title: 'Ooty Tour Packages from Kerala | Best Ooty Holiday – WEGOMAP',
+    description: "Book Ooty tour packages from Kerala with WEGOMAP, a trusted Kochi-based tour operator. Enjoy the Nilgiris, tea gardens, and cool weather with verified hotels, best prices, and 24/7 support.",
     keywords: 'Ooty tour packages, Ooty tour packages from Kerala',
     openGraph: {
         title: 'Ooty Tour Packages',

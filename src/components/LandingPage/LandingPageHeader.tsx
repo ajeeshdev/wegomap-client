@@ -53,7 +53,7 @@ export default function LandingPageHeader() {
         >
           <Image
             src={logo}
-            alt="Wegomap"
+            alt="WEGOMAP"
             width={160}
             height={40}
             className="lp-header-logo"

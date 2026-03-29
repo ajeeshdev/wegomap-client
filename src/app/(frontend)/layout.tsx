@@ -16,8 +16,8 @@ const dancingScript = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: "Best Kerala Tour Packages | Wegomap",
-  description: "Experience the magic of God’s Own Country with Wegomap, your reliable Kerala travel partner.",
+  title: "Best Kerala Tour Packages | WEGOMAP",
+  description: "Experience the magic of God’s Own Country with WEGOMAP, your reliable Kerala travel partner.",
   robots: "noindex, nofollow",
 };
 

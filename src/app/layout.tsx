@@ -28,8 +28,8 @@ export async function generateMetadata(): Promise<Metadata> {
       
       return {
         metadataBase: new URL('https://demo.wegomap.com'),
-        title: titleOpt?.value || "Best Kerala Tour Packages | Wegomap",
-        description: descOpt?.value || "Experience the magic of God’s Own Country with Wegomap, your reliable Kerala travel partner.",
+        title: titleOpt?.value || "Best Kerala Tour Packages | WEGOMAP",
+        description: descOpt?.value || "Experience the magic of God’s Own Country with WEGOMAP, your reliable Kerala travel partner.",
         robots: "noindex, nofollow",
         icons: {
           icon: getImageUrl(favOpt?.value) || "/favicon.ico",
@@ -43,8 +43,8 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 
   return {
-    title: "Best Kerala Tour Packages | Wegomap",
-    description: "Experience the magic of God’s Own Country with Wegomap, your reliable Kerala travel partner.",
+    title: "Best Kerala Tour Packages | WEGOMAP",
+    description: "Experience the magic of God’s Own Country with WEGOMAP, your reliable Kerala travel partner.",
     robots: "noindex, nofollow",
   };
 }

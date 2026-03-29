@@ -118,7 +118,7 @@ export default function PaymentPage() {
                                     style={{ objectFit: 'contain' }}
                                     
                                 />
-                                <div className="qrName">Wegomap Tours &amp; Events</div>
+                                <div className="qrName">WEGOMAP Tours &amp; Events</div>
                                 <div className="qrPhone">+91 9778734488</div>
                                 <Image
                                     src="/assets/site/assets/images/qr.png"

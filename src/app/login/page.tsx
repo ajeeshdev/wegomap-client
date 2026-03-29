@@ -276,7 +276,7 @@ export default function UserLogin() {
                             marginBottom: '2.5rem',
                         }}>
                             <Globe size={13} strokeWidth={2.5} />
-                            Wegomap Travel
+                            WEGOMAP Travel
                         </div>
 
                         <h1 style={{
@@ -353,7 +353,7 @@ export default function UserLogin() {
                                     ))}
                                 </div>
                                 <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.8)', lineHeight: 1.6, fontStyle: 'italic' }}>
-                                    "Wegomap made planning our honeymoon an absolute breeze. Highly recommend!"
+                                    "WEGOMAP made planning our honeymoon an absolute breeze. Highly recommend!"
                                 </p>
                                 <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', marginTop: 6, fontWeight: 600 }}>
                                     — Priya M., Kerala
@@ -405,7 +405,7 @@ export default function UserLogin() {
                                 borderRadius: '999px',
                             }}>
                                 <Globe size={12} />
-                                Wegomap
+                                WEGOMAP
                             </span>
                         </div>
 
@@ -419,7 +419,7 @@ export default function UserLogin() {
                                 lineHeight: 1.15,
                                 marginBottom: '0.4rem',
                             }}>
-                                {step === 1 ? 'Sign in to Wegomap'
+                                {step === 1 ? 'Sign in to WEGOMAP'
                                     : step === 2 ? 'Check Your Email'
                                     : step === 3 ? 'Reset Your Password'
                                     : 'Enter Reset Code'}

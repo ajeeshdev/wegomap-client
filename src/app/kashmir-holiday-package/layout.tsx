@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Kashmir Holiday Package | Best Deals on Kashmir Tours – Wegomap',
-    description: "Book Kashmir holiday packages with Wegomap, a trusted Kochi-based tour operator. Explore Srinagar's valleys, Dal Lake, Gulmarg, and Pahalgam with verified hotels, best prices, and 24/7 customer support.",
+    title: 'Kashmir Holiday Package | Best Deals on Kashmir Tours – WEGOMAP',
+    description: "Book Kashmir holiday packages with WEGOMAP, a trusted Kochi-based tour operator. Explore Srinagar's valleys, Dal Lake, Gulmarg, and Pahalgam with verified hotels, best prices, and 24/7 customer support.",
     keywords: 'Kashmir holiday package, Kashmir tour packages from Kerala',
     openGraph: {
         title: 'Kashmir Holiday Package',

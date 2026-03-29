@@ -1,5 +1,5 @@
 <?php
-// Wegomap Deployment Helper
+// WEGOMAP Deployment Helper
 // This script extracts the deploy.zip and cleans up.
 
 $zipFile = 'deploy.zip';

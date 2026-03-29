@@ -747,7 +747,7 @@ export default function Home() {
               <h2 className="sliderTitle">{homeSections.find(s => s.id === 'corporate')?.title || "Redefining Corporate Experiences"}</h2>
               <div
                   className="sectionHeaderDescription mb-0 max-w-2xl text-[13px] leading-relaxed text-slate-500"
-                  dangerouslySetInnerHTML={{ __html: homeSections.find(s => s.id === 'corporate')?.description || "Wegomap delivers world-class event management services in Kochi and beyond." }}
+                  dangerouslySetInnerHTML={{ __html: homeSections.find(s => s.id === 'corporate')?.description || "WEGOMAP delivers world-class event management services in Kochi and beyond." }}
               />
             </div>
             <Link href="/events" className="viewAllBtn">
@@ -979,7 +979,7 @@ export default function Home() {
               <SwiperSlide key={i}>
                 <div className="testimonialCard">
                   <div className="quoteIcon"><MessageSquare size={24} /></div>
-                  <p className="testimonialText">"{t.quote || "Exceptional service and unforgettable memories. Highly recommend Wegomap!"}"</p>
+                  <p className="testimonialText">"{t.quote || "Exceptional service and unforgettable memories. Highly recommend WEGOMAP!"}"</p>
                   <div className="authorArea">
                     <div className="authorImg">
                       <Image 
@@ -1021,11 +1021,11 @@ export default function Home() {
                 <div className={`readmore-content ${showMore ? 'is-expanded' : ''}`}>
                   <div 
                     className="mb-4"
-                    dangerouslySetInnerHTML={{ __html: homeSections.find(s => s.id === 'seo')?.description || (homePage?.content && homePage.content !== 'file' ? homePage.content : "Experience the magic of God's Own Country with Wegomap.") }}
+                    dangerouslySetInnerHTML={{ __html: homeSections.find(s => s.id === 'seo')?.description || (homePage?.content && homePage.content !== 'file' ? homePage.content : "Experience the magic of God's Own Country with WEGOMAP.") }}
                   />
                   <div className="extraText">
                     <p>
-                        At Wegomap, we pride ourselves on being the best travel agency for personalized tours that cater to your interests. Our packages include everything from romantic honeymoons and adventurous treks to relaxing family vacations and rejuvenating wellness retreats. As a Kochi-based tour operator, we have in-depth local knowledge to provide you with the most authentic experiences. We offer a range of services to make your trip seamless, including transportation, accommodation, and guided tours. Our team of experts is here to ensure every detail is taken care of, so you can focus on making memories. Whether you're exploring Kerala for the first time or revisiting its wonders, we strive to make your journey seamless and unforgettable. With Wegomap, you're not just booking a trip; you're investing in a lifetime of memories. Contact us today and let the best Kerala travel agency plan your perfect getaway. Explore Kerala with Wegomap and see why we're recognized as a leading Kerala tour operator!
+                        At WEGOMAP, we pride ourselves on being the best travel agency for personalized tours that cater to your interests. Our packages include everything from romantic honeymoons and adventurous treks to relaxing family vacations and rejuvenating wellness retreats. As a Kochi-based tour operator, we have in-depth local knowledge to provide you with the most authentic experiences. We offer a range of services to make your trip seamless, including transportation, accommodation, and guided tours. Our team of experts is here to ensure every detail is taken care of, so you can focus on making memories. Whether you're exploring Kerala for the first time or revisiting its wonders, we strive to make your journey seamless and unforgettable. With WEGOMAP, you're not just booking a trip; you're investing in a lifetime of memories. Contact us today and let the best Kerala travel agency plan your perfect getaway. Explore Kerala with WEGOMAP and see why we're recognized as a leading Kerala tour operator!
                     </p>
                   </div>
                 </div>

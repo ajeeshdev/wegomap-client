@@ -662,7 +662,7 @@ export default function LandingPageView({
                     <>
                       <p>
                         Kerala is known as God&apos;s own country because it offers stunning backwaters, misty hill
-                        stations, exciting culture, and warm-hearted locals. Wegomap builds Kerala tour
+                        stations, exciting culture, and warm-hearted locals. WEGOMAP builds Kerala tour
                         packages to connect you with the beauty of God&apos;s own country—whether you&apos;re looking
                         for a relaxing holiday, a romantic getaway, or an adventurous vacation filled with fun
                         activities.
@@ -783,7 +783,7 @@ export default function LandingPageView({
                 onClick={() => handleOpenQuickPlan(data.title)}
                 className="lp-inquiryBtnPrimary"
               >
-               Book  Trip
+               Enquire Now
               </button>
               <a href={`tel:${data.cta_phone?.replace(/\s/g, "") || "+918590370566"}`} className="lp-inquiryBtnSecondary">
                 Call Expert
@@ -933,7 +933,7 @@ export default function LandingPageView({
               </div>
 
               <p className="lp-modalSubmitNote">
-                You will get a response within 2 hours.
+                You will get a response within 24 hours.
               </p>
             </form>
           </div>

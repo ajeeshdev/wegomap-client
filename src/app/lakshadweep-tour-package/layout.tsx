@@ -2,8 +2,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Lakshadweep Tour Package | Pristine Island Holidays from Kerala | Wegomap',
-    description: 'Explore crystal-clear waters and untouched islands with Wegomap\'s Lakshadweep tour packages. As a trusted Kochi-based Kerala tour operator, we offer personalized island holidays with best prices, reliable services, and expert planning for a seamless travel experience.',
+    title: 'Lakshadweep Tour Package | Pristine Island Holidays from Kerala | WEGOMAP',
+    description: 'Explore crystal-clear waters and untouched islands with WEGOMAP\'s Lakshadweep tour packages. As a trusted Kochi-based Kerala tour operator, we offer personalized island holidays with best prices, reliable services, and expert planning for a seamless travel experience.',
     keywords: 'Lakshadweep tour package',
     openGraph: {
         title: 'Lakshadweep Tour Package',

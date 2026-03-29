@@ -19,7 +19,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
   const [logo, setLogo] = useState('');
-  const [siteTitle, setSiteTitle] = useState('Wegomap');
+  const [siteTitle, setSiteTitle] = useState('WEGOMAP');
   const [favicon, setFavicon] = useState('');
 
   useEffect(() => {

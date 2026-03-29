@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Goa Tour Packages from Kerala | Goa Holiday Packages – Wegomap',
-    description: "Book Goa tour packages from Kerala with Wegomap. Enjoy beaches, nightlife, and heritage with comfortable stays, best prices, and 24/7 customer support from a trusted Kochi-based tour operator.",
+    title: 'Goa Tour Packages from Kerala | Goa Holiday Packages – WEGOMAP',
+    description: "Book Goa tour packages from Kerala with WEGOMAP. Enjoy beaches, nightlife, and heritage with comfortable stays, best prices, and 24/7 customer support from a trusted Kochi-based tour operator.",
     keywords: 'Goa tour packages from Kerala, Goa tour packages from Kochi',
     openGraph: {
         title: 'Goa Tour Packages',

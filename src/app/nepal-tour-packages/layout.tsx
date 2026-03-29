@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Nepal Tour Packages from Kerala | Best Nepal Trip – Wegomap',
-    description: "Explore the Himalayas with Wegomap's Nepal tour packages. Visit Kathmandu and Pokhara with verified hotels, expert planning, great prices, and 24/7 support from a Kochi-based tour operator.",
+    title: 'Nepal Tour Packages from Kerala | Best Nepal Trip – WEGOMAP',
+    description: "Explore the Himalayas with WEGOMAP's Nepal tour packages. Visit Kathmandu and Pokhara with verified hotels, expert planning, great prices, and 24/7 support from a Kochi-based tour operator.",
     keywords: 'Nepal tour packages, Nepal tour packages from Kerala',
     openGraph: {
         title: 'Nepal Tour Packages',

@@ -13,9 +13,9 @@ import DynamicPageBanner from '@/components/DynamicPageBanner';
 import { useEffect, useState } from 'react';
 
 const carouselImages = [
-    { src: '/assets/site/assets/images/about-1.jpg', alt: 'About Wegomap 1' },
-    { src: '/assets/site/assets/images/about-3.jpg', alt: 'About Wegomap 2' },
-    { src: '/assets/site/assets/images/about-2.jpg', alt: 'About Wegomap 3' },
+    { src: '/assets/site/assets/images/about-1.jpg', alt: 'About WEGOMAP 1' },
+    { src: '/assets/site/assets/images/about-3.jpg', alt: 'About WEGOMAP 2' },
+    { src: '/assets/site/assets/images/about-2.jpg', alt: 'About WEGOMAP 3' },
 ];
 
 interface AboutData {
@@ -28,10 +28,10 @@ interface AboutData {
 const DEFAULT_DATA: AboutData = {
     banner: {
         title: "We plan your\nDream Destinations.!",
-        subtitle: "Learn about Wegomap — your trusted travel partner since 2012."
+        subtitle: "Learn about WEGOMAP — your trusted travel partner since 2012."
     },
     story: {
-        heading: "Wegomap is a one-stop travel solution to destinations around the world.",
+        heading: "WEGOMAP is a one-stop travel solution to destinations around the world.",
         leftText: "We have a dedicated team of travel professionals who can cater to all your travel needs. Our team will be just one ring away from all your travel-related enquiries. We customise both Indian and International Tour packages within your budget. Our company maintains good relationship with Resorts, Hotels and Transportation team. The company is located near Cochin Airport and all the tour package operations are managed by our Kerala Team.",
         rightText: "We can offer you the best Kerala Honeymoon Packages and Kerala Family packages which include Munnar Hill station, Thekkady Wildlife, Aleppey Backwater and houseboat. We are highly dedicated to delivering you the best service in the industry. Suggestions and complaints will be treated with due respect & rectifications will be made.\n\nYou can contact us at any time — our 24/7 support team will be available to answer your queries."
     },
@@ -176,7 +176,7 @@ export default function AboutPage() {
             {/* ── Values Deck ── */}
             <div className="homeContainer px-4 sm:px-0">
                 <section className="valuesSection">
-                    <span className="sectionTag">The Wegomap Way</span>
+                    <span className="sectionTag">The WEGOMAP Way</span>
                     <h2>Our Core <span>Philosophy.</span></h2>
                     
                     <div className="valuesGrid">

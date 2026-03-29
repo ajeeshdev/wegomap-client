@@ -25,7 +25,7 @@ const DEFAULT_CONTENT: EventsConfiguration = {
     corporate: {
         subtitle: "Event Specialists",
         title: "PREMIUM EVENT MANAGEMENT IN KERALA.",
-        description1: "At Wegomap, we redefine what it means to host an extraordinary gathering. Whether you're orchestrating a flagship corporate summit in Kochi or a milestone cultural celebration, our event management team blends creative vision with flawless technical execution.",
+        description1: "At WEGOMAP, we redefine what it means to host an extraordinary gathering. Whether you're orchestrating a flagship corporate summit in Kochi or a milestone cultural celebration, our event management team blends creative vision with flawless technical execution.",
         description2: "From high-impact venue selection and advanced staging to seamless guest logistics and digital engagement, we manage every layer of the experience. We don't just plan events; we create lasting impressions.",
         statLabel: "Venues Partnered",
         statCount: "100+"

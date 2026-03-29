@@ -35,7 +35,7 @@ const staticBlogs: Blog[] = (siteData.blogs as any[]).map((b) => ({
     date: b.date,
     content: b.content || '',
     category: 'Travel Guide',
-    author: 'Wegomap',
+    author: 'WEGOMAP',
 }));
 
 function formatDate(dateStr?: string): string {
@@ -135,7 +135,7 @@ export default function BlogDetailPage() {
                         <div className="meta-item">
                             <span className="label">Author</span>
                             <span className="value">
-                                <User size={14} color="#FF6B35" /> {blog.author || 'Wegomap'}
+                                <User size={14} color="#FF6B35" /> {blog.author || 'WEGOMAP'}
                             </span>
                         </div>
 
@@ -182,7 +182,7 @@ export default function BlogDetailPage() {
 
                             {/* Tags */}
                             <div className="tags-container">
-                                {['Kerala Tourism', 'Wegomap Guide', 'Travel Tips'].map(tag => (
+                                {['Kerala Tourism', 'WEGOMAP Guide', 'Travel Tips'].map(tag => (
                                     <span key={tag} className="tag-badge">{tag}</span>
                                 ))}
                             </div>

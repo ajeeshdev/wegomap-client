@@ -40,7 +40,7 @@ export default function Hero() {
                 if (data.success && data.data && data.data.length > 0) {
                     const dynamicSlides = data.data.map((s: any) => ({
                         title: s.title || '',
-                        subtitle: s.subtitle || "Explore the world with Wegomap",
+                        subtitle: s.subtitle || "Explore the world with WEGOMAP",
                         buttonText: "Discover Now",
                         buttonHref: s.link || '/packages',
                         imgDesktop: getImageUrl(s.image),
@@ -52,7 +52,7 @@ export default function Hero() {
                     // Fallback static slide when database is empty
                     setSlides([{
                         title: 'Your world, your way',
-                        subtitle: 'Discover breathtaking destinations with Wegomap',
+                        subtitle: 'Discover breathtaking destinations with WEGOMAP',
                         buttonText: 'Explore Packages',
                         buttonHref: '/packages',
                         imgDesktop: '/bg-placeholder.jpg',
@@ -65,7 +65,7 @@ export default function Hero() {
                 console.error("Failed to load sliders", err);
                 setSlides([{
                     title: 'Your world, your way',
-                    subtitle: 'Discover breathtaking destinations with Wegomap',
+                    subtitle: 'Discover breathtaking destinations with WEGOMAP',
                     buttonText: 'Explore Packages',
                     buttonHref: '/packages',
                     imgDesktop: '/bg-placeholder.jpg',
@@ -239,7 +239,7 @@ export default function Hero() {
                         </div>
                     ) : (
                         <div className="h-[60vh] bg-slate-900 flex items-center justify-center rounded-[32px] overflow-hidden">
-                            <h1 className="text-white text-2xl font-bold">Welcome to Wegomap</h1>
+                            <h1 className="text-white text-2xl font-bold">Welcome to WEGOMAP</h1>
                         </div>
                     )}
 

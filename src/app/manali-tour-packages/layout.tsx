@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Manali Tour Packages from Kerala | Kullu Manali Packages – Wegomap',
-    description: "Book Manali tour packages from Kerala with Wegomap, a trusted Kochi-based tour operator. Explore snow-capped peaks, valleys and adventure with verified hotels, best prices, and 24/7 customer support.",
+    title: 'Manali Tour Packages from Kerala | Kullu Manali Packages – WEGOMAP',
+    description: "Book Manali tour packages from Kerala with WEGOMAP, a trusted Kochi-based tour operator. Explore snow-capped peaks, valleys and adventure with verified hotels, best prices, and 24/7 customer support.",
     keywords: 'Manali tour packages, Kullu Manali packages from Kerala',
     openGraph: {
         title: 'Manali Tour Packages',

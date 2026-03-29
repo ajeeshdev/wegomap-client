@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Maldives Tour Packages from Kochi Kerala | Best Maldives Holiday – Wegomap',
-    description: "Explore paradise with Wegomap's Maldives tour packages from Kochi. Enjoy overwater bungalows, crystal-clear lagoons, and pristine beaches with verified resorts, best prices, and 24/7 customer support.",
+    title: 'Maldives Tour Packages from Kochi Kerala | Best Maldives Holiday – WEGOMAP',
+    description: "Explore paradise with WEGOMAP's Maldives tour packages from Kochi. Enjoy overwater bungalows, crystal-clear lagoons, and pristine beaches with verified resorts, best prices, and 24/7 customer support.",
     keywords: 'Maldives tour packages from Kochi, Maldives tour packages from Kerala',
     openGraph: {
         title: 'Maldives Tour Packages',

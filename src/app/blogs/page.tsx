@@ -41,7 +41,7 @@ const staticBlogs: Blog[] = sortByDateDesc(
         image: b.image,
         date: b.date,
         category: 'Travel Guide',
-        author: 'Wegomap',
+        author: 'WEGOMAP',
     }))
 );
 
@@ -126,7 +126,7 @@ export default function BlogsPage() {
                                         <div className="metaRow">
                                             <span className="metaItem">
                                                 <Tag size={13} />
-                                                {blog.author || 'Wegomap'}
+                                                {blog.author || 'WEGOMAP'}
                                             </span>
                                             <span className="metaItem">
                                                 <Calendar size={13} />

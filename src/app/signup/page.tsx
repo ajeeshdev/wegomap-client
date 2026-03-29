@@ -76,7 +76,7 @@ export default function Signup() {
                 }
 
                 window.dispatchEvent(new Event('authChange'));
-                toast.success('Email verified! Welcome to Wegomap.');
+                toast.success('Email verified! Welcome to WEGOMAP.');
                 router.push('/dashboard');
             } else {
                 setError(data.error || 'Verification failed. Please check the code.');
@@ -92,7 +92,7 @@ export default function Signup() {
         <div className="user-signup-wrapper">
             <div className="user-signup-visual">
                 <div className="user-signup-visual-content">
-                    <h1>Join the <br/>Adventure with <span style={{ color: '#000' }}>Wegomap</span>.</h1>
+                    <h1>Join the <br/>Adventure with <span style={{ color: '#000' }}>WEGOMAP</span>.</h1>
                     <p>Create your account and start exploring the world's most beautiful destinations.</p>
                     <div className="signup-feature-list">
                         <div className="signup-feature-item">
@@ -113,7 +113,7 @@ export default function Signup() {
                 <div className="user-signup-form-container">
                     <div className="user-signup-header">
                         <h2>{step === 1 ? 'Create Account' : 'Verify Email'}</h2>
-                        <p>{step === 1 ? 'Join Wegomap today and start your journey' : `We've sent a code to ${email}`}</p>
+                        <p>{step === 1 ? 'Join WEGOMAP today and start your journey' : `We've sent a code to ${email}`}</p>
                     </div>
 
                     {error && <div style={{ background: '#fef2f2', border: '1px solid #fee2e2', color: '#b91c1c', padding: '1rem', borderRadius: '1rem', marginBottom: '2rem', fontSize: '14px', fontWeight: '600', textAlign: 'center' }}>{error}</div>}

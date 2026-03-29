@@ -19,10 +19,10 @@ const DEFAULT_SECTIONS: HomeSection[] = [
     { id: 'domestic', title: 'Domestic Packages', subtitle: 'Incredible India', description: 'Explore the diverse landscapes and cultures across India.', enabled: true },
     { id: 'international', title: 'International Packages', subtitle: 'Explore The World', description: 'Curated international destinations for your dream vacation.', enabled: true },
     { id: 'kochi', title: 'Kochi Based Travel Agency', subtitle: 'Local Expertise', description: "As a premier travel agency in Kerala, we craft personalized tours that immerse you in the cultural and natural wonders of the region.", enabled: false },
-    { id: 'corporate', title: 'Redefining Corporate Experiences', subtitle: 'MICE & Events', description: 'Wegomap delivers world-class event management. We curate bespoke experiences that define your business legacy.', enabled: true },
+    { id: 'corporate', title: 'Redefining Corporate Experiences', subtitle: 'MICE & Events', description: 'WEGOMAP delivers world-class event management. We curate bespoke experiences that define your business legacy.', enabled: true },
     { id: 'special_events', title: 'Special Events & Activities', subtitle: 'Experience More', description: 'Discover unique events, festivals, and activities curated special for you.', enabled: true },
     { id: 'testimonials', title: 'What our clients say', subtitle: 'Review', description: '', enabled: true },
-    { id: 'seo', title: 'Best Tour Operator in Kerala', subtitle: 'Kerala Specialist', description: "Experience the magic of God's Own Country with Wegomap, your reliable Kerala travel partner.", enabled: true }
+    { id: 'seo', title: 'Best Tour Operator in Kerala', subtitle: 'Kerala Specialist', description: "Experience the magic of God's Own Country with WEGOMAP, your reliable Kerala travel partner.", enabled: true }
 ];
 
 export default function HomeSettingsPage() {

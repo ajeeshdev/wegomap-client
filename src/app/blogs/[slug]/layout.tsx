@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     if (blog) {
         return {
-            title: `${blog.title} | Wegomap Travel Blog`,
-            description: blog.excerpt?.slice(0, 160) || 'Explore travel stories and tips from Wegomap.',
+            title: `${blog.title} | WEGOMAP Travel Blog`,
+            description: blog.excerpt?.slice(0, 160) || 'Explore travel stories and tips from WEGOMAP.',
             openGraph: {
                 title: blog.title,
                 description: blog.excerpt?.slice(0, 160),
@@ -28,8 +28,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     // Fallback metadata
     return {
-        title: 'Travel Blog | Wegomap Tours & Events',
-        description: 'Read travel stories and destination guides from Wegomap.',
+        title: 'Travel Blog | WEGOMAP Tours & Events',
+        description: 'Read travel stories and destination guides from WEGOMAP.',
         alternates: {
             canonical: `https://www.wegomap.com/blogs/${slug}/`,
         },

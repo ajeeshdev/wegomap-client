@@ -46,7 +46,7 @@ export default function EventsCombinedPage() {
     const corporate = pageContent?.corporate || {
         subtitle: "Event Specialists",
         title: "PREMIUM EVENT MANAGEMENT IN KERALA.",
-        description1: "At Wegomap, we redefine what it means to host an extraordinary gathering. Whether you're orchestrating a flagship corporate summit in Kochi or a milestone cultural celebration, our event management team blends creative vision with flawless technical execution.",
+        description1: "At WEGOMAP, we redefine what it means to host an extraordinary gathering. Whether you're orchestrating a flagship corporate summit in Kochi or a milestone cultural celebration, our event management team blends creative vision with flawless technical execution.",
         description2: "From high-impact venue selection and advanced staging to seamless guest logistics and digital engagement, we manage every layer of the experience. We don't just plan events; we create lasting impressions.",
         statLabel: "Venues Partnered",
         statCount: "100+"
@@ -55,7 +55,7 @@ export default function EventsCombinedPage() {
     const special = pageContent?.special || {
         subtitle: "Curative Calendar",
         title: "DISCOVER OUR CURATED CALENDAR.",
-        description: "From niche networking summits to grand public festivities, explore the events defined by Wegomap's signature excellence."
+        description: "From niche networking summits to grand public festivities, explore the events defined by WEGOMAP's signature excellence."
     };
 
     return (
@@ -64,7 +64,7 @@ export default function EventsCombinedPage() {
             {/* 1. Hero Banner */}
             <DynamicPageBanner
                 fallbackTitle="Experience the\nUnforgettable"
-                fallbackSubtitle="Wegomap orchestrates world-class corporate summits, cultural festivals, and bespoke celebrations across Kerala."
+                fallbackSubtitle="WEGOMAP orchestrates world-class corporate summits, cultural festivals, and bespoke celebrations across Kerala."
                 fallbackPreTitle="Premium Event Management"
                 fallbackImage="/uploads/categories/ubqf5mc4ve1g6yqwmnsyiyek9fkld9akyp6g2lar220406065334.jpg"
                 breadcrumbs={[{ label: 'Events' }]}

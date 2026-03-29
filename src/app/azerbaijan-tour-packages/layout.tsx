@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Azerbaijan Tour Packages from India | Best Azerbaijan Trips – Wegomap',
-    description: "Discover the beauty of Azerbaijan with Wegomap's affordable and customizable tour packages. Explore Baku, mountain landscapes, cultural heritage, Caspian Sea views, and unforgettable experiences. Trusted hotels, expert planning, and 24/7 support — book your dream Azerbaijan holiday today!",
+    title: 'Azerbaijan Tour Packages from India | Best Azerbaijan Trips – WEGOMAP',
+    description: "Discover the beauty of Azerbaijan with WEGOMAP's affordable and customizable tour packages. Explore Baku, mountain landscapes, cultural heritage, Caspian Sea views, and unforgettable experiences. Trusted hotels, expert planning, and 24/7 support — book your dream Azerbaijan holiday today!",
     keywords: 'Azerbaijan tour packages',
     openGraph: {
         title: 'Azerbaijan Tour Packages',

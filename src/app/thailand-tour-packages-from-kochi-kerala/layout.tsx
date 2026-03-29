@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Thailand Tour Packages from Kerala | Thailand Trip from Kochi – Wegomap',
-    description: "Explore Thailand with Wegomap's affordable tour packages from Kerala. Discover Bangkok, Pattaya, Phuket & Krabi with verified hotels, expert planning, and 24/7 support from a Kochi-based tour operator.",
+    title: 'Thailand Tour Packages from Kerala | Thailand Trip from Kochi – WEGOMAP',
+    description: "Explore Thailand with WEGOMAP's affordable tour packages from Kerala. Discover Bangkok, Pattaya, Phuket & Krabi with verified hotels, expert planning, and 24/7 support from a Kochi-based tour operator.",
     keywords: 'Thailand tour packages from Kerala, Thailand tour packages from Kochi',
     openGraph: {
         title: 'Thailand Tour Packages',

@@ -20,7 +20,7 @@ const DEFAULT_CONTENT: ServicesPageContent = {
         subtitle: "Comprehensive Solutions",
         title: "Your journey,",
         highlightText: "our expertise.",
-        description: "Wegomap offers comprehensive solutions for all your travel needs. From booking your initial transport to finding the perfect accommodation, our dedicated team manages everything so you can focus on building beautiful memories."
+        description: "WEGOMAP offers comprehensive solutions for all your travel needs. From booking your initial transport to finding the perfect accommodation, our dedicated team manages everything so you can focus on building beautiful memories."
     }
 };
 

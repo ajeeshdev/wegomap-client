@@ -2,8 +2,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Singapore Tour Package | Best Deals on Singapore Trips | Wegomap',
-    description: 'Wegomap is a Kochi-based tour operator in Kerala offering top-quality travel services at the best prices. Enjoy safe holidays with trusted hotel partners, 24/7 customer support, and custom tour packages tailored to your needs and budget.',
+    title: 'Singapore Tour Package | Best Deals on Singapore Trips | WEGOMAP',
+    description: 'WEGOMAP is a Kochi-based tour operator in Kerala offering top-quality travel services at the best prices. Enjoy safe holidays with trusted hotel partners, 24/7 customer support, and custom tour packages tailored to your needs and budget.',
     keywords: 'Singapore tour package, Kochi travel agency',
     openGraph: {
         title: 'Singapore Tour Package',

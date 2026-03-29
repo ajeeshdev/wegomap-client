@@ -110,7 +110,7 @@ export default function EditPage() {
                   value={formData.title}
                   onChange={e => setFormData({...formData, title: e.target.value})}
                   className="admin-form-input"
-                  placeholder="e.g. Welcome to Wegomap"
+                  placeholder="e.g. Welcome to WEGOMAP"
                 />
               </div>
 

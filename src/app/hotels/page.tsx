@@ -48,7 +48,7 @@ export default function HotelsListingPage() {
             <DynamicPageBanner 
                 fallbackTitle={"Premium Stay\nExperiences."}
                 fallbackSubtitle="Explore our curated collection of luxury hotels and resorts for your next getaway."
-                fallbackPreTitle="Stay with Wegomap"
+                fallbackPreTitle="Stay with WEGOMAP"
                 fallbackImage="aroma_hero_kerala_1774025974860.png"
                 breadcrumbs={[{ label: 'Hotels' }]}
             />
@@ -56,7 +56,7 @@ export default function HotelsListingPage() {
             <div className="homeContainer hotels-listing-container">
                 <div className="hotels-header-row">
                     <div className="hotels-title-area">
-                        <span className="hotels-page-pretitle">Stay with Wegomap</span>
+                        <span className="hotels-page-pretitle">Stay with WEGOMAP</span>
                         <h2 className="hotels-page-title">Exclusive Properties</h2>
                         <p className="hotels-page-subtitle">Discover the best-rated stays across top destinations in Kerala and beyond</p>
                     </div>

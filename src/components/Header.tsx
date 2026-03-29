@@ -271,7 +271,7 @@ export default function Header() {
                     <Link href="/" className="brand">
                         <img
                             src={logo}
-                            alt="Wegomap"
+                            alt="WEGOMAP"
                             width={180}
                             height={45}
                             className="h-8 md:h-11 w-auto object-contain"
@@ -458,7 +458,7 @@ export default function Header() {
                     <div className="sideMenuHeader">
                         <img
                             src={logo}
-                            alt="Wegomap"
+                            alt="WEGOMAP"
                             width={140}
                             height={35}
                             className="h-7 w-auto object-contain"

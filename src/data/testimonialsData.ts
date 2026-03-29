@@ -2,12 +2,12 @@ export const testimonialsData = [
     {
         "name": "Suri Tiruvayipati",
         "img": "https://api-demo.wegomap.com/uploads/testimonials/AYOZ4IhehTkYEFUq8Bx46q3ATXhnyjikDOiKzbyb260226033444.jpg",
-        "text": "Hi, This is Surya, from Visakhapatnam, AP,.... in Pongal Holidays we went kerala Trip Through Wegomap Tours and Traves... Our Travel Agent Fathima Madam Given best plan with budget Friendly Package for 4 days and 3 night Package.... She Fallow us every day and given perfect planning for Visit of Sight seens and Alloted best hotels... Especially The House boat Facilities is Good.... Thanks to Wegomap and Fathima Garu.."
+        "text": "Hi, This is Surya, from Visakhapatnam, AP,.... in Pongal Holidays we went kerala Trip Through WEGOMAP Tours and Traves... Our Travel Agent Fathima Madam Given best plan with budget Friendly Package for 4 days and 3 night Package.... She Fallow us every day and given perfect planning for Visit of Sight seens and Alloted best hotels... Especially The House boat Facilities is Good.... Thanks to WEGOMAP and Fathima Garu.."
     },
     {
         "name": "Vishesh Maity",
         "img": "https://api-demo.wegomap.com/uploads/testimonials/5gx8E8RQimgCGiohTY51b6YPb7vd4CWNYgn13X7A260226033830.jpg",
-        "text": "We booked a 6N/7D package with Wegomap Tour, and it was an absolutely amazing experience! Everything \u00e2\u0080\u0094 from the stay, food, and transportation to the overall planning \u00e2\u0080\u0094 was perfectly organized. It truly turned out to be a memorable trip for our family. And our travel advisor (alen) was very friendly."
+        "text": "We booked a 6N/7D package with WEGOMAP Tour, and it was an absolutely amazing experience! Everything \u00e2\u0080\u0094 from the stay, food, and transportation to the overall planning \u00e2\u0080\u0094 was perfectly organized. It truly turned out to be a memorable trip for our family. And our travel advisor (alen) was very friendly."
     },
     {
         "name": "Prakash Kamath",
@@ -22,7 +22,7 @@ export const testimonialsData = [
     {
         "name": "Pooja Singh",
         "img": "https://api-demo.wegomap.com/uploads/testimonials/ZRyfMmqrgi6Hd4QW1Pv2Op6vPqTeAC5qhuJQOUuw260226035449.png",
-        "text": "Had a fabulous experience, the itinerary was well planned. The hotels were located at best places. Fathima was amazing the way she explained the package. We have not faced any issues in any way in our entire trip. Thanks Wegomap for planning this amazing experience and i have already suggested a few of my friends to plan their trips with you. Much appreciated\u00f0\u009f\u0091\u008d\u00f0\u009f\u0091\u008c"
+        "text": "Had a fabulous experience, the itinerary was well planned. The hotels were located at best places. Fathima was amazing the way she explained the package. We have not faced any issues in any way in our entire trip. Thanks WEGOMAP for planning this amazing experience and i have already suggested a few of my friends to plan their trips with you. Much appreciated\u00f0\u009f\u0091\u008d\u00f0\u009f\u0091\u008c"
     },
     {
         "name": "V T Vishwanath",
@@ -42,7 +42,7 @@ export const testimonialsData = [
     {
         "name": "Sumit Kumar Sinha",
         "img": "https://api-demo.wegomap.com/uploads/testimonials/e9LVL1MpqxfB7dYYZjbfgT9c6PctXAF277MdMGPt260228022430.png",
-        "text": "Wegomaps provided an outstanding Kerala experience, surpassing expectations. From well-curated itineraries showcasing diverse landscapes to impeccable accommodations, every detail was meticulously planned. Cultural experiences in Munnar and Kumarkom houseboat was great. Knowledgeable and friendly driver Mr Prajeesh added delight to the journey, and seamless logistics ensured a worry-free trip. He exactly knew just when and where to stop and where not to. For an extraordinary and hassle-free Kerala adventure, I highly recommend Wegomap."
+        "text": "WEGOMAPs provided an outstanding Kerala experience, surpassing expectations. From well-curated itineraries showcasing diverse landscapes to impeccable accommodations, every detail was meticulously planned. Cultural experiences in Munnar and Kumarkom houseboat was great. Knowledgeable and friendly driver Mr Prajeesh added delight to the journey, and seamless logistics ensured a worry-free trip. He exactly knew just when and where to stop and where not to. For an extraordinary and hassle-free Kerala adventure, I highly recommend WEGOMAP."
     },
     {
         "name": "Imran Shariff",

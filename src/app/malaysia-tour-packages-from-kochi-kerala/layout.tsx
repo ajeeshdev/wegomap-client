@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Malaysia Tour Packages from Kochi Kerala | Affordable Malaysia Holiday – Wegomap',
-    description: "Affordable Malaysia Tour Packages from Kerala - Wegomap offer vibrant cities, stunning islands, and rich culture. Enjoy comfortable stays, great deals, and memorable travel moments.",
+    title: 'Malaysia Tour Packages from Kochi Kerala | Affordable Malaysia Holiday – WEGOMAP',
+    description: "Affordable Malaysia Tour Packages from Kerala - WEGOMAP offer vibrant cities, stunning islands, and rich culture. Enjoy comfortable stays, great deals, and memorable travel moments.",
     keywords: 'malaysia tour packages, malaysia tour packages from kochi, malaysia tour packages from kerala',
     openGraph: {
         title: 'Malaysia Tour Packages',

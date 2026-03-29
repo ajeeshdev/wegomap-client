@@ -80,7 +80,7 @@ export default function FaqPage() {
         <div className="faqPage">
             <DynamicPageBanner
                 fallbackTitle="Frequently Asked\nQuestions"
-                fallbackSubtitle="Everything you need to know before you travel with Wegomap."
+                fallbackSubtitle="Everything you need to know before you travel with WEGOMAP."
                 fallbackPreTitle="Common Queries"
                 breadcrumbs={[{ label: 'FAQ' }]}
             />

@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: 'Best Kerala Tour Packages Under 10000 | Kerala Holiday Packages',
-    description: 'Explore handpicked Kerala tour packages with Wegomap. Experience expert planning, great value, and unforgettable journeys across God\'s Own Country.',
+    description: 'Explore handpicked Kerala tour packages with WEGOMAP. Experience expert planning, great value, and unforgettable journeys across God\'s Own Country.',
     keywords: 'best kerala tour packages, kerala tour packages under 10000, kerala holiday packages',
     openGraph: {
         title: 'Kerala Tour Packages',

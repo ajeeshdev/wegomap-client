@@ -93,7 +93,7 @@ export default function SpecialEventDetailPage() {
     const descriptionLines = (event.description || "").split('</p>');
     const firstPara = descriptionLines[0] || "Discover the magic of this curated special event across Kerala.";
     const remainingParas = descriptionLines.slice(1).join('</p>') || `
-        <p>This special activity at our premium destination offers a unique blend of culture, luxury, and unforgettable activities. Meticulously planned by the experts at Wegomap, we ensure every detail is handled with precision.</p>
+        <p>This special activity at our premium destination offers a unique blend of culture, luxury, and unforgettable activities. Meticulously planned by the experts at WEGOMAP, we ensure every detail is handled with precision.</p>
         <p>Experience local traditions combined with modern comforts, managed by our dedicated on-site coordination team. Whether you're here for leisure or celebration, we guarantee a premium experience that stays with you forever.</p>
     `;
 
@@ -234,7 +234,7 @@ export default function SpecialEventDetailPage() {
                                                 {formStatus === 'loading' ? 'Processing...' : 'Express Interest Now'}
                                                 <Send size={16} />
                                             </button>
-                                            <span className="ed-privacy">Managed by Wegomap Premium Concierge</span>
+                                            <span className="ed-privacy">Managed by WEGOMAP Premium Concierge</span>
                                         </form>
                                     </>
                                 )}

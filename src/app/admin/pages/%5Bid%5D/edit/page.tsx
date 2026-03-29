@@ -259,7 +259,7 @@ export default function EditPage() {
  <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Search Engine Result Preview</p>
  </div>
  <h4 className="text-orange-400 font-bold text-xl leading-tight mb-2">
- {formData.seo_title || formData.title || 'Untitled Page | Wegomap'}
+ {formData.seo_title || formData.title || 'Untitled Page | WEGOMAP'}
  </h4>
  <p className="text-emerald-500 text-xs mb-4 font-medium opacity-80 uppercase tracking-wider">
  https://wegomap.com/{formData.slug || id}

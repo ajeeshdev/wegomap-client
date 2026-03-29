@@ -206,13 +206,13 @@ export default function TourDetailView({ id }: { id: string }) {
                         </div>
                     </div>
                     <div className="tStat border-l border-slate-100 pl-8 flex items-center">
-                         <button 
+                        <button
                             onClick={(e) => toggleWishlist(pkg.id, e)}
                             className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-black uppercase text-[10px] tracking-widest transition-all ${wishlist.includes(pkg.id) ? 'bg-rose-500 text-white shadow-lg shadow-rose-200' : 'bg-slate-50 text-slate-400 hover:text-rose-500 hover:bg-rose-50'}`}
-                         >
+                        >
                             <Heart size={16} fill={wishlist.includes(pkg.id) ? "currentColor" : "none"} />
                             {wishlist.includes(pkg.id) ? 'Saved' : 'Save to Wishlist'}
-                         </button>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -330,7 +330,7 @@ export default function TourDetailView({ id }: { id: string }) {
                                     </div>
 
                                 </div>
-                                
+
                                 <div className="bk-stats">
                                     <div className="bk-stat-item">
                                         <Clock className="bk-icon" size={20} />
@@ -349,11 +349,8 @@ export default function TourDetailView({ id }: { id: string }) {
                                 </div>
 
                                 <div className="ctaGroup">
-                                    <button onClick={() => openEnquiry(pkg.title)} className="bk-btn bk-btn-primary">
-                                        Check Availability
-                                    </button>
-                                    <button onClick={() => openEnquiry(pkg.title)} className="bk-btn bk-btn-secondary">
-                                      Book Trip
+                                    <button onClick={() => openEnquiry(pkg.title)} className="bk-btn bk-btn-primary w-full">
+                                        Get a quick plan
                                     </button>
                                 </div>
 

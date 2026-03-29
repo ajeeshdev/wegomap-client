@@ -33,7 +33,7 @@ export default function SpecialEventsListingPage() {
         <main className="eventsPage bg-white min-h-screen">
             <DynamicPageBanner
                 fallbackTitle="Signature\nExperiences"
-                fallbackSubtitle="Wegomap's curated festive calendar, featuring cultural celebrations and exclusive local activities across Kerala."
+                fallbackSubtitle="WEGOMAP's curated festive calendar, featuring cultural celebrations and exclusive local activities across Kerala."
                 fallbackPreTitle="Memorable Moments"
                 fallbackImage="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=2000"
                 breadcrumbs={[{ label: 'Special Events' }]}

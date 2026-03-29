@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Coorg Mysore Ooty Tour Package | South India Hill Station Trip – Wegomap',
-    description: "Explore the best of South India with Wegomap's Coorg, Mysore & Ooty combined tour packages. Enjoy coffee estates, royal palaces, and Nilgiri hills with verified hotels and 24/7 support.",
+    title: 'Coorg Mysore Ooty Tour Package | South India Hill Station Trip – WEGOMAP',
+    description: "Explore the best of South India with WEGOMAP's Coorg, Mysore & Ooty combined tour packages. Enjoy coffee estates, royal palaces, and Nilgiri hills with verified hotels and 24/7 support.",
     keywords: 'Coorg Mysore Ooty tour package, South India hill station packages',
     openGraph: {
         title: 'Coorg / Mysore / Ooty',
