@@ -138,7 +138,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         { label: 'Home Page Layout', href: '/admin/home-settings' },
         { label: 'Banner Sliders', href: '/admin/sliders' },
         { label: 'Offer Banners', href: '/admin/offer-banners' },
-        { label: 'SEO Settings', href: '/admin/pages/69b2119212e7a77684ef09fd/edit' },
       ]
     },
     { 

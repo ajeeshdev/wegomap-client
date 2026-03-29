@@ -96,6 +96,29 @@ export default function EditSEO() {
             <div className="lg:col-span-2 space-y-8">
                 <div className="admin-card-panel">
                     <h3 className="text-sm uppercase tracking-wider font-bold text-slate-400 flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-amber-500"></div>
+                        Path Specification
+                    </h3>
+                    <div className="admin-form-group mt-6">
+                        <label className="text-xs font-bold text-slate-700 uppercase tracking-wide">Public URL Slug</label>
+                        <div className="flex items-center mt-2">
+                            <div className="h-12 px-4 bg-slate-100 border border-r-0 border-slate-200 rounded-l-xl flex items-center text-slate-400 text-xs font-bold">
+                                /pages/
+                            </div>
+                            <input 
+                                type="text" 
+                                value={formData.slug}
+                                onChange={e => setFormData({...formData, slug: e.target.value})}
+                                className="flex-1 h-12 px-4 border border-slate-200 rounded-r-xl outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 transition-all font-mono text-sm"
+                                placeholder="page-slug"
+                            />
+                        </div>
+                        <p className="text-[10px] text-slate-400 mt-2 px-1 italic">Note: Changing the slug will update the page's URL. Ensure proper redirects are in place if the page is already indexed.</p>
+                    </div>
+                </div>
+
+                <div className="admin-card-panel">
+                    <h3 className="text-sm uppercase tracking-wider font-bold text-slate-400 flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-blue-600"></div>
                         Core Metadata
                     </h3>

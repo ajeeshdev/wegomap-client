@@ -124,29 +124,7 @@ export default function EditPage() {
             </div>
           </div>
 
-          <div className="admin-form-card">
-            <div className="space-y-8">
-              <h3 className="admin-form-section-title">
-                <div className="admin-page-title-indicator bg-amber-500"></div>
-                URL Configuration
-              </h3>
-              <div className="admin-form-group">
-                <label className="admin-form-label">Page URL Slug</label>
-                <div className="flex items-center">
-                  <div className="h-11 px-4 bg-slate-100 border border-r-0 border-slate-200 rounded-l-xl flex items-center text-slate-400 text-xs font-bold">
-                    /pages/
-                  </div>
-                  <input 
-                    type="text" 
-                    value={formData.slug}
-                    onChange={e => setFormData({...formData, slug: e.target.value})}
-                    className="flex-1 admin-form-input !rounded-l-none font-mono text-xs"
-                    placeholder="e.g. kochi-travel-guide"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+
         </div>
 
         {/* Sidebar Settings */}
