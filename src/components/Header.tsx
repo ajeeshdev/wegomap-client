@@ -90,7 +90,7 @@ const navLinks = [
         dropdown: tourItems
     },
     { name: 'Events', href: '/events' },
-    { name: 'Hotels', href: '/hotels' },
+    { name: 'Hotels', icon: 'Building2', href: '/hotels' },
     { name: 'Cruises', href: '/cruise-packages' },
     { name: 'Payment', href: '/payment' },
     { name: 'Blogs', href: '/blogs' },

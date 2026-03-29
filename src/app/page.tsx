@@ -126,6 +126,7 @@ export default function Home() {
   const services = [
     { name: "Services", icon: "Info", href: "/services" },
     { name: "Tours", icon: "MapPin", active: true, href: "/packages" },
+    { name: "Hotels", icon: "Building2", href: "/hotels" },
     { name: "Events", icon: "Calendar", href: "/events" },
     { name: "Cruises", icon: "Ship", href: "/cruise-packages" },
     { name: "Blogs", icon: "FileText", href: "/blogs" },
@@ -298,10 +299,16 @@ export default function Home() {
                 
                 let finalLinks = [...baseLinks];
                 // Only insert Hotels if it's not already there and if we have hotels
-                if (hasHotels && toursIndex !== -1 && !finalLinks.some(l => l.name === "Hotels")) {
-                  finalLinks.splice(toursIndex + 1, 0, { name: "Hotels", icon: "Building2", href: "/hotels" });
+                const hasHotelsInLinks = finalLinks.some(l => l.name.toLowerCase() === 'hotels');
+                if (!hasHotelsInLinks && hasHotels) {
+                  const toursIndex = finalLinks.findIndex(l => l.name === "Tours");
+                  if (toursIndex !== -1) {
+                    finalLinks.splice(toursIndex + 1, 0, { name: "Hotels", icon: "Building2", href: "/hotels" });
+                  } else {
+                    finalLinks.push({ name: "Hotels", icon: "Building2", href: "/hotels" });
+                  }
                 }
-                
+             
                 return finalLinks.map((service, index) => {
                   const Icon = IconMap[service.icon] || Info;
                   return (
@@ -410,9 +417,9 @@ export default function Home() {
           </Swiper>
 
           <div className="sliderNavigation">
-            <div className="progressWrapper">
+            {/* <div className="progressWrapper">
               <div className="first-pagination customPagination"></div>
-            </div>
+            </div> */}
             <div className="navButtons">
               <div className="navBtn first-prev"><ArrowLeft size={20} /></div>
               <div className="navBtn first-next"><ArrowRight size={20} /></div>
@@ -513,9 +520,9 @@ export default function Home() {
           </Swiper>
  
           <div className="sliderNavigation">
-            <div className="progressWrapper">
+            {/* <div className="progressWrapper">
               <div className="kerala-pagination customPagination"></div>
-            </div>
+            </div> */}
             <div className="navButtons">
               <div className="navBtn kerala-prev"><ArrowLeft size={20} /></div>
               <div className="navBtn kerala-next"><ArrowRight size={20} /></div>
@@ -617,9 +624,9 @@ export default function Home() {
           </Swiper>
  
           <div className="sliderNavigation">
-            <div className="progressWrapper">
+            {/* <div className="progressWrapper">
               <div className="intl-dom-pagination customPagination"></div>
-            </div>
+            </div> */}
             <div className="navButtons">
               <div className="navBtn intl-dom-prev"><ArrowLeft size={20} /></div>
               <div className="navBtn intl-dom-next"><ArrowRight size={20} /></div>
@@ -717,9 +724,9 @@ export default function Home() {
           </Swiper>
 
           <div className="sliderNavigation">
-            <div className="progressWrapper">
+            {/* <div className="progressWrapper">
               <div className="kochi-pagination customPagination"></div>
-            </div>
+            </div> */}
             <div className="navButtons">
               <div className="navBtn kochi-prev"><ArrowLeft size={20} /></div>
               <div className="navBtn kochi-next"><ArrowRight size={20} /></div>
@@ -823,9 +830,9 @@ export default function Home() {
           </Swiper>
 
           <div className="sliderNavigation">
-            <div className="progressWrapper">
+            {/* <div className="progressWrapper">
               <div className="event-pagination customPagination"></div>
-            </div>
+            </div> */}
             <div className="navButtons">
               <div className="navBtn event-prev"><ArrowLeft size={20} /></div>
               <div className="navBtn event-next"><ArrowRight size={20} /></div>
@@ -932,9 +939,9 @@ export default function Home() {
           </Swiper>
 
           <div className="sliderNavigation">
-            <div className="progressWrapper">
+            {/* <div className="progressWrapper">
               <div className="special-pagination customPagination"></div>
-            </div>
+            </div> */}
             <div className="navButtons">
               <div className="navBtn special-prev"><ArrowLeft size={20} /></div>
               <div className="navBtn special-next"><ArrowRight size={20} /></div>
