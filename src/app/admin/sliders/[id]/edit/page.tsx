@@ -13,6 +13,7 @@ export default function EditSlider() {
     title: '',
     subtitle: '',
     image: '',
+    imageAlt: '',
     link: '',
     status: 'Active'
   });
@@ -29,6 +30,7 @@ export default function EditSlider() {
             title: data.data.title || '',
             subtitle: data.data.subtitle || '',
             image: data.data.image || '',
+            imageAlt: data.data.imageAlt || 'wegomap',
             link: data.data.link || '',
             status: data.data.status || 'Active'
           });
@@ -160,6 +162,8 @@ export default function EditSlider() {
                   <ImageUpload 
                     value={formData.image}
                     onChange={(url) => setFormData({ ...formData, image: url })}
+                    altValue={formData.imageAlt}
+                    onAltChange={(alt) => setFormData({ ...formData, imageAlt: alt })}
                     label="Slider Background Image"
                   />
                 </div>

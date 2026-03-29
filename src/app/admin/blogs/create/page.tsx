@@ -17,6 +17,7 @@ export default function CreateBlog() {
     slug: '',
     excerpt: '',
     featuredImage: '',
+    featuredImageAlt: 'wegomap',
     content: '',
     category: '',
     author: 'Admin',
@@ -227,6 +228,8 @@ export default function CreateBlog() {
                 <ImageUpload
                   value={formData.featuredImage}
                   onChange={(url) => setFormData({ ...formData, featuredImage: url })}
+                  altValue={formData.featuredImageAlt}
+                  onAltChange={(alt) => setFormData({ ...formData, featuredImageAlt: alt })}
                   label=""
                 />
               </div>

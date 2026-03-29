@@ -17,6 +17,7 @@ export default function EditBlog() {
     slug: '',
     excerpt: '',
     featuredImage: '',
+    featuredImageAlt: '',
     content: '',
     category: '',
     author: '',
@@ -58,6 +59,7 @@ export default function EditBlog() {
             slug: data.data.slug || '',
             excerpt: data.data.excerpt || '',
             featuredImage: data.data.featuredImage || data.data.image || '',
+            featuredImageAlt: data.data.featuredImageAlt || 'wegomap',
             content: data.data.content || '',
             category: data.data.category || '',
             author: data.data.author || '',
@@ -260,6 +262,8 @@ export default function EditBlog() {
                 <ImageUpload
                   value={formData.featuredImage}
                   onChange={(url) => setFormData({ ...formData, featuredImage: url })}
+                  altValue={formData.featuredImageAlt}
+                  onAltChange={(alt) => setFormData({ ...formData, featuredImageAlt: alt })}
                   label=""
                 />
               </div>

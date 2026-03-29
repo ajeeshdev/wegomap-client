@@ -13,6 +13,7 @@ export default function CreateSlider() {
     title: '',
     subtitle: '',
     image: '',
+    imageAlt: 'wegomap',
     link: '',
     status: 'Active'
   });
@@ -134,6 +135,8 @@ export default function CreateSlider() {
                     <ImageUpload
                       value={formData.image}
                       onChange={(url) => setFormData({ ...formData, image: url })}
+                      altValue={formData.imageAlt}
+                      onAltChange={(alt) => setFormData({ ...formData, imageAlt: alt })}
                       label="Master Asset Visual"
                     />
                   </div>

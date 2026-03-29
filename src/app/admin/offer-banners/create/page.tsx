@@ -11,6 +11,7 @@ export default function CreateOfferBanner() {
   const [formData, setFormData] = useState({
     title: '',
     image: '',
+    imageAlt: 'wegomap',
     link: '',
     active: true
   });
@@ -121,6 +122,8 @@ export default function CreateOfferBanner() {
                     <ImageUpload
                       value={formData.image}
                       onChange={(url) => setFormData({ ...formData, image: url })}
+                      altValue={formData.imageAlt}
+                      onAltChange={(alt) => setFormData({ ...formData, imageAlt: alt })}
                       label="Upload Banner Image (Recommended aspect ratio 25:7)"
                     />
                   </div>

@@ -12,9 +12,11 @@ interface ImageUploadProps {
   objectFit?: 'cover' | 'contain';
   hideUrlInput?: boolean;
   hideRemove?: boolean;
+  altValue?: string;
+  onAltChange?: (alt: string) => void;
 }
 
-export default function ImageUpload({ value, onChange, label = "Featured Image", size = 'standard', objectFit = 'cover', hideUrlInput = true, hideRemove = false }: ImageUploadProps) {
+export default function ImageUpload({ value, onChange, label = "Featured Image", size = 'standard', objectFit = 'cover', hideUrlInput = true, hideRemove = false, altValue = "wegomap", onAltChange }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -189,6 +191,24 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
               className="admin-form-input !pl-8 text-[10px] h-9 rounded-lg font-mono bg-slate-50 border-slate-100 focus:bg-white"
             />
           </div>
+        </div>
+      )}
+
+      {onAltChange && value && (
+        <div className="pt-2">
+           <div className="flex flex-col gap-1.5">
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5 px-1">
+                 <div className="w-1 h-2 bg-emerald-500 rounded-full"></div>
+                 Image Alt Text (SEO)
+              </label>
+              <input 
+                type="text"
+                value={altValue}
+                onChange={e => onAltChange(e.target.value)}
+                placeholder="e.g. Kerala Backwaters Image"
+                className="admin-form-input !h-9 text-[11px] font-bold bg-white/50 border-slate-100 focus:bg-white"
+              />
+           </div>
         </div>
       )}
     </div>

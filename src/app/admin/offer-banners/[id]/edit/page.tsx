@@ -12,6 +12,7 @@ export default function EditOfferBanner() {
   const [formData, setFormData] = useState({
     title: '',
     image: '',
+    imageAlt: '',
     link: '',
     active: true
   });
@@ -26,6 +27,7 @@ export default function EditOfferBanner() {
           setFormData({
             title: data.data.title || '',
             image: data.data.image || '',
+            imageAlt: data.data.imageAlt || 'wegomap',
             link: data.data.link || '',
             active: data.data.active !== false
           });
@@ -142,6 +144,8 @@ export default function EditOfferBanner() {
                     <ImageUpload
                       value={formData.image}
                       onChange={(url) => setFormData({ ...formData, image: url })}
+                      altValue={formData.imageAlt}
+                      onAltChange={(alt) => setFormData({ ...formData, imageAlt: alt })}
                       label="Upload Banner Image"
                     />
                   </div>

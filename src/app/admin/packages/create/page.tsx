@@ -18,7 +18,7 @@ export default function CreatePackage() {
       title: '', pcode: '', subtitle: '', slabel: '', location: '', description: '',
       price: '', oldamt: '', per: '/ Person', duration: '', highlights: [],
       inclusions: [], exclusions: [], terms: '', category: '',
-      images: [], thumb: '', onoffer: false, isBestSeller: false,
+      images: [], thumb: '', thumb_alt: 'wegomap', onoffer: false, isBestSeller: false,
       itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: ''
    });
 
@@ -127,7 +127,13 @@ export default function CreatePackage() {
                   </div>
 
                   <div className="mt-6">
-                     <ImageUpload value={formData.thumb} onChange={(url) => setFormData({ ...formData, thumb: url })} label="Primary Thumbnail" />
+                     <ImageUpload 
+                        value={formData.thumb} 
+                        onChange={(url) => setFormData({ ...formData, thumb: url })} 
+                        altValue={formData.thumb_alt}
+                        onAltChange={(alt) => setFormData({ ...formData, thumb_alt: alt })}
+                        label="Primary Thumbnail" 
+                      />
                   </div>
                </div>
             </div>

@@ -17,7 +17,7 @@ export default function EditPackage() {
     title: '', pcode: '', subtitle: '', slabel: '', location: '', description: '',
     price: '', oldamt: '', per: '', duration: '', highlights: [],
     inclusions: [], exclusions: [], terms: '', category: '',
-    images: [], thumb: '', onoffer: false, isBestSeller: false,
+    images: [], thumb: '', thumb_alt: '', onoffer: false, isBestSeller: false,
     itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: ''
   });
 
@@ -55,6 +55,7 @@ export default function EditPackage() {
             inclusions: data.data.inclusions || [],
             exclusions: data.data.exclusions || [],
             images: data.data.images || [],
+            thumb_alt: data.data.thumb_alt || 'wegomap',
             itinerary: data.data.itinerary || []
           });
         }
@@ -321,6 +322,8 @@ export default function EditPackage() {
                 <ImageUpload
                   value={formData.thumb}
                   onChange={(url) => setFormData({ ...formData, thumb: url })}
+                  altValue={formData.thumb_alt}
+                  onAltChange={(alt) => setFormData({ ...formData, thumb_alt: alt })}
                   label="Thumbnail"
                 />
               </div>
