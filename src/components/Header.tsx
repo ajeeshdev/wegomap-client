@@ -292,14 +292,14 @@ export default function Header() {
                                         <ul className="dropdownMenu firstLevel">
                                             {link.dropdown.map((sub: any) => (
                                                 <li key={sub.name} className={sub.dropdown ? 'hasSubDropdown' : ''}>
-                                                    <Link href={sub.href}>
+                                                    <Link href={sub.href} prefetch={false}>
                                                         {sub.name} {sub.dropdown && <ChevronRight size={14} className="ml-auto" />}
                                                     </Link>
                                                     {sub.dropdown && (
                                                         <ul className="dropdownMenu secondLevel">
                                                             {sub.dropdown.map((leaf: any) => (
                                                                 <li key={leaf.name}>
-                                                                    <Link href={leaf.href}>{leaf.name}</Link>
+                                                                    <Link href={leaf.href} prefetch={false}>{leaf.name}</Link>
                                                                 </li>
                                                             ))}
                                                         </ul>

@@ -104,10 +104,10 @@ export default function UserDashboard() {
                                         {item.label}
                                     </button>
                                 ))}
-                                <Link href="/wishlist" className="navItem">
+                                <Link href="/wishlist" className="navItem" prefetch={false}>
                                     <Heart size={18} strokeWidth={2} className="navIcon" /> Wishlist
                                 </Link>
-                                <Link href="/contact" className="navItem">
+                                <Link href="/contact" className="navItem" prefetch={false}>
                                     <Contact size={18} strokeWidth={2} className="navIcon" /> Contact us
                                 </Link>
                                 <div className="sidebarDivider" />
