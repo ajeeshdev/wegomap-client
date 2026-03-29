@@ -148,12 +148,12 @@ export default function EventDetailPage() {
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
                         
                         <div className="lg:col-span-8">
-                            <div className="ed-overview-card !bg-white !shadow-none !border-none !p-0">
+                            <div className="ed-overview-card">
                                 <h2 className="text-2xl font-bold mb-6 text-slate-900 border-l-4 border-primary pl-6">
                                     Event Overview
                                 </h2>
-                                <div className="ed-description !text-slate-600 !text-base leading-relaxed">
-                                    <div dangerouslySetInnerHTML={{ __html: firstPara }} className="lead !text-slate-900 !text-xl !mb-6 leading-relaxed" />
+                                <div className="ed-description tour-description-content">
+                                    <div dangerouslySetInnerHTML={{ __html: firstPara }} className="lead-text" />
                                     <div dangerouslySetInnerHTML={{ __html: remainingParas }} />
                                 </div>
 
@@ -203,7 +203,7 @@ export default function EventDetailPage() {
                         </div>
 
                         <div className="lg:col-span-4 ed-sidebar">
-                            <div className="ed-booking-card !bg-white !text-slate-900 !border !border-slate-100 !shadow-2xl !rounded-3xl !p-10">
+                            <div className="ed-booking-card">
                                 {formStatus === 'success' ? (
                                     <div className="ed-success">
                                         <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6"><CheckCircle2 size={32} /></div>

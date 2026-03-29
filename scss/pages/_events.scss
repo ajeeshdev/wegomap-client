@@ -282,7 +282,14 @@
         padding-bottom: 5rem;
         
         .ed-stats-bar {
-            margin-top: -3.5rem; position: relative; z-index: 50; background: #fff; border-radius: 2rem; padding: 2rem 3rem; border: 1px solid #f1f5f9; box-shadow: 0 30px 60px -10px rgba(0,0,0,0.08);
+            margin-top: -3.5rem; 
+            position: relative; 
+            z-index: 50; 
+            background: #fff; 
+            border-radius: 2rem; 
+            padding: 2rem 3rem; 
+            border: 1px solid rgba(0,0,0,0.05); 
+            box-shadow: 0 30px 60px -10px rgba(0,0,0,0.12);
 
             .ed-stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; @include min(1024) { grid-template-columns: repeat(4, 1fr); } }
             .ed-stat-item { display: flex; flex-direction: column; gap: 5px; }
@@ -290,14 +297,38 @@
             .ed-stat-value { font-size: 0.875rem; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 8px; svg { color: #f97316; } }
             
             .ed-stat-bordered { @include min(1024) { border-left: 1px solid #f1f5f9; padding-left: 2.5rem; } }
+            
+            @include max(767) {
+                padding: 1.5rem;
+                margin-top: -2rem;
+                .ed-stat-grid { gap: 1rem; }
+            }
         }
 
         .ed-main-content { padding-top: 4rem; }
 
         .ed-overview-card {
-            background-color: #fdfdfd; border: 1px solid #f1f5f9; border-radius: 2.5rem; padding: 4rem; position: relative; overflow: hidden;
+            background-color: #fff; 
+            border: 1px solid #f1f5f9; 
+            border-radius: 2.5rem; 
+            padding: 0; 
+            position: relative;
+            
             .ed-card-title { font-size: 1.875rem; font-weight: 900; margin-bottom: 2rem; text-transform: uppercase; font-style: italic; display: flex; align-items: center; gap: 1rem; color: #020617; svg { color: #f97316; } }
-            .ed-description { font-size: 1.125rem; line-height: 1.8; color: #475569; .lead { color: #0f172a; font-weight: 800; margin-bottom: 1.5rem; display: block; } }
+            .ed-description { 
+                font-size: 1.125rem; 
+                line-height: 1.8; 
+                color: #475569; 
+                
+                .lead-text { 
+                    color: #0f172a; 
+                    font-weight: 800; 
+                    font-size: 1.25rem;
+                    margin-bottom: 2rem; 
+                    display: block; 
+                    line-height: 1.6;
+                } 
+            }
             
             .ed-info-pills { margin-top: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
             .ed-pill { background: #fff; padding: 1.5rem; border-radius: 1.5rem; border: 1px solid #f1f5f9; display: flex; align-items: center; gap: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
@@ -320,15 +351,75 @@
         .ed-sidebar {
             @include min(1024) { position: sticky; top: 120px; }
             .ed-booking-card {
-                background: #020617; border-radius: 3rem; padding: 3rem; color: #fff; position: relative; overflow: hidden; box-shadow: 0 40px 80px -20px rgba(0,0,0,0.4);
-                .ed-card-header { position: relative; z-index: 5; margin-bottom: 2.5rem; h4 { font-size: 2rem; font-weight: 900; text-transform: uppercase; line-height: 1; margin-bottom: 0.75rem; span { color: #f97316; font-style: italic; } } p { font-size: 0.875rem; color: #94a3b8; line-height: 1.5; } }
+                background: #fff; 
+                border-radius: 2rem; 
+                padding: 3rem; 
+                color: #0f172a; 
+                position: relative; 
+                overflow: hidden; 
+                border: 1px solid #f1f5f9;
+                box-shadow: 0 40px 80px -20px rgba(0,0,0,0.08);
+
+                .ed-card-header { 
+                    position: relative; 
+                    z-index: 5; 
+                    margin-bottom: 2.5rem; 
+                    h4 { 
+                        font-size: 2rem; 
+                        font-weight: 900; 
+                        text-transform: uppercase; 
+                        line-height: 1.1; 
+                        margin-bottom: 0.75rem; 
+                        color: #020617;
+                        span { color: #f97316; font-style: italic; } 
+                    } 
+                    p { font-size: 0.875rem; color: #64748b; line-height: 1.5; } 
+                }
                 .ed-form { position: relative; z-index: 5; }
-                .ed-field { margin-bottom: 1.5rem; label { display: block; font-size: 10px; font-weight: 900; text-transform: uppercase; color: #64748b; margin-bottom: 0.5rem; padding-left: 5px; } }
-                .ed-input-group { position: relative; svg { position: absolute; left: 1.25rem; top: 50%; transform: translateY(-50%); color: #475569; } input { width: 100%; background: #0c1221; border: 1px solid #1e293b; border-radius: 1.25rem; padding: 1.125rem 1.25rem 1.125rem 3.5rem; color: #fff; font-size: 0.875rem; outline: none; transition: 0.3s; &:focus { border-color: #f97316; background: #111827; } } }
-                .ed-submit-btn { width: 100%; background: #f97316; padding: 1.25rem; border: none; border-radius: 1.5rem; color: #fff; font-weight: 900; text-transform: uppercase; letter-spacing: 0.15em; font-size: 11px; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 2rem; transition: 0.3s; cursor: pointer; &:hover { background: #ea580c; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(249, 115, 22, 0.3); } }
-                .ed-privacy { display: block; text-align: center; font-size: 9px; font-weight: 800; color: #475569; text-transform: uppercase; margin-top: 1.5rem; }
+                .ed-field { 
+                    margin-bottom: 1.5rem; 
+                    label { display: block; font-size: 10px; font-weight: 900; text-transform: uppercase; color: #94a3b8; margin-bottom: 0.5rem; padding-left: 5px; } 
+                }
+                .ed-input-group { 
+                    position: relative; 
+                    svg { position: absolute; left: 1.25rem; top: 50%; transform: translateY(-50%); color: #94a3b8; } 
+                    input { 
+                        width: 100%; 
+                        background: #f8fafc; 
+                        border: 1px solid #e2e8f0; 
+                        border-radius: 1.25rem; 
+                        padding: 1.125rem 1.25rem 1.125rem 3.5rem; 
+                        color: #0f172a; 
+                        font-size: 0.875rem; 
+                        outline: none; 
+                        transition: 0.3s; 
+                        &:focus { border-color: #f97316; background: #fff; } 
+                    } 
+                }
+                .ed-submit-btn { 
+                    width: 100%; 
+                    background: #ff5349; 
+                    padding: 1.25rem; 
+                    border: none; 
+                    border-radius: 1.5rem; 
+                    color: #fff; 
+                    font-weight: 900; 
+                    text-transform: uppercase; 
+                    letter-spacing: 0.15em; 
+                    font-size: 11px; 
+                    display: flex; 
+                    align-items: center; 
+                    justify-content: center; 
+                    gap: 10px; 
+                    margin-top: 2rem; 
+                    transition: 0.3s; 
+                    cursor: pointer; 
+                    box-shadow: 0 10px 20px rgba(255, 83, 73, 0.2);
+                    &:hover { background: #020617; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); } 
+                }
+                .ed-privacy { display: block; text-align: center; font-size: 9px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-top: 1.5rem; }
                 
-                .ed-success { text-align: center; padding: 2rem 0; .icon { width: 80px; height: 80px; background: #059669; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; } h5 { font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 0.5rem; } p { color: #94a3b8; font-size: 0.875rem; } }
+                .ed-success { text-align: center; padding: 2rem 0; .icon { width: 80px; height: 80px; background: #059669; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; } h5 { font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 0.5rem; } p { color: #64748b; font-size: 0.875rem; } }
             }
         }
     }
