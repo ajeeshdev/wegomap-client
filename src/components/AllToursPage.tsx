@@ -12,6 +12,7 @@ import EnquireModal from '@/components/EnquireModal';
 import WishlistButton from '@/components/WishlistButton';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, FreeMode } from 'swiper/modules';
+import PackageCard from './PackageCard';
 
 import 'swiper/css';
 import 'swiper/css/free-mode';
@@ -39,22 +40,26 @@ const CATEGORY_SLUG_MAP: Record<string, string[]> = {
     adventure: ['leh-ladakh-tour-package', 'bhutan-packages', 'meghalaya-tour-package', 'darjeeling', 'kashmir-holiday-package'],
 };
 
-interface PackageCard {
+interface PackageCardData {
     slug: string;
     title: string;
     location: string;
     duration: string;
     price: string;
-    oldPrice?: string;
+    oldPrice?: string | null;
     image: string;
+    images?: string[];
+    subtitle?: string;
+    highlights?: string[];
+    itinerary?: any[];
     categories: string[];
     averageRating?: number;
     reviewCount?: number;
 }
 
-function buildAllPackages(): PackageCard[] {
+function buildAllPackages(): PackageCardData[] {
     const seen = new Set<string>();
-    const result: PackageCard[] = [];
+    const result: PackageCardData[] = [];
     const slugCategoryMap: Record<string, Set<string>> = {};
 
     Object.entries(CATEGORY_SLUG_MAP).forEach(([cat, catGroups]) => {
@@ -100,7 +105,7 @@ export default function AllToursPage() {
     const [showFilters, setShowFilters] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedPackage, setSelectedPackage] = useState('');
-    const [cmsPackages, setCmsPackages] = useState<PackageCard[]>([]);
+    const [cmsPackages, setCmsPackages] = useState<PackageCardData[]>([]);
     const [loading, setLoading] = useState(true);
     const [wishlist, setWishlist] = useState<string[]>([]);
     const [formData, setFormData] = useState({
@@ -181,18 +186,39 @@ export default function AllToursPage() {
 
                 const data = await res.json();
                 if (data.success) {
-                    const mapped = data.data.map((pkg: any) => ({
-                        slug: pkg.slug || pkg._id, // Prioritize human-readable slug if available
-                        title: pkg.title,
-                        location: pkg.location,
-                        duration: pkg.duration,
-                        price: pkg.price ? `₹${pkg.price.toLocaleString()}` : 'N/A',
-                        oldPrice: pkg.oldamt ? `₹${Number(pkg.oldamt).toLocaleString()}` : null,
-                        image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || pkg.image || '/bg-placeholder.jpg'),
-                        categories: [pkg.category?.toLowerCase() || 'all'],
-                        averageRating: pkg.averageRating,
-                        reviewCount: pkg.reviewCount
-                    }));
+                    const mapped = data.data.map((pkg: any) => {
+                        const cmsCat = pkg.category?.toLowerCase() || '';
+                        const categories = ['all'];
+                        
+                        if (cmsCat.includes('international')) categories.push('international');
+                        else if (cmsCat.includes('domestic')) categories.push('domestic');
+                        else if (cmsCat.includes('kerala')) categories.push('kerala');
+                        
+                        if (cmsCat.includes('honeymoon')) categories.push('honeymoon');
+                        if (cmsCat.includes('family')) categories.push('family');
+                        if (cmsCat.includes('adventure')) categories.push('adventure');
+                        
+                        if (categories.length === 1 && cmsCat) {
+                            categories.push(cmsCat);
+                        }
+
+                        return {
+                            slug: pkg.slug || pkg._id,
+                            title: pkg.title,
+                            location: pkg.location,
+                            duration: pkg.duration,
+                            price: pkg.price ? `₹${pkg.price.toLocaleString()}` : 'N/A',
+                            oldPrice: pkg.oldamt ? `₹${Number(pkg.oldamt).toLocaleString()}` : null,
+                            image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || pkg.image || '/bg-placeholder.jpg'),
+                            images: pkg.images || [],
+                            subtitle: pkg.subtitle || pkg.description || '',
+                            highlights: pkg.highlights || [],
+                            itinerary: pkg.itinerary || [],
+                            categories: categories,
+                            averageRating: pkg.averageRating,
+                            reviewCount: pkg.reviewCount
+                        };
+                    });
                     setCmsPackages(mapped);
                 }
             } catch (err) {
@@ -462,89 +488,13 @@ export default function AllToursPage() {
                     </div>
                 ) : (
                     filtered.map((pkg, i) => (
-                        <div key={`${pkg.slug}-${i}`} className="allTourCard group">
-                            {/* Image zone */}
-                            <Link href={`/packages/${pkg.slug}`} className="allTourCardImgLink">
-                                <div className="allTourCardImg">
-                                    <Image
-                                        src={getImageUrl(pkg.image)}
-                                        alt={pkg.title}
-                                        fill
-                                        style={{ objectFit: 'cover' }}
-                                        className="transform group-hover:scale-110 transition-transform duration-700"
-                                        unoptimized
-                                    />
-                                </div>
-                                
-                                {/* Overlay Top Left - Rating */}
-                                {pkg.averageRating !== undefined && pkg.averageRating > 0 && (
-                                    <div className="ratingBadge glassmorphism">
-                                        <Star size={10} fill="currentColor" />
-                                        <span>{pkg.averageRating.toFixed(1)}</span>
-                                    </div>
-                                )}
-
-                                {/* Overlay Top Right - Wishlist */}
-                                <div className="wishlistBtnFloating" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}>
-                                    <WishlistButton id={pkg.slug} wishlist={wishlist} toggleWishlist={toggleWishlist} />
-                                </div>
-
-                                {/* Overlay Bottom Left - Duration Pill */}
-                                {pkg.duration && (
-                                    <div className="durationBadge glassmorphism">
-                                        <Clock size={10} />
-                                        <span>{pkg.duration}</span>
-                                    </div>
-                                )}
-
-                                {/* Overlay Bottom Right - Location chip */}
-                                {pkg.location && (
-                                    <div className="locationBadge glassmorphism">
-                                        <MapPin size={10} />
-                                        <span className="locationText">{pkg.location}</span>
-                                    </div>
-                                )}
-                            </Link>
-
-                            {/* Card body */}
-                            <div className="allTourCardBody">
-                                <Link href={`/packages/${pkg.slug}`} className="allTourCardTitle">
-                                    {pkg.title}
-                                </Link>
-
-                                <div className="allTourCardPricingRow">
-                                     <div className="priceGroup">
-                                        <div className="priceMain">
-                                            <span className="currency">₹</span>
-                                            <span className="amount">{pkg.price.replace('₹', '')}</span>
-                                            <span className="unit">/ person</span>
-                                        </div>
-                                        {pkg.oldPrice && (
-                                            <div className="priceOld">
-                                                <span className="oldAmount">{pkg.oldPrice}</span>
-                                                <span className="saveBadge">Save {(parseInt(pkg.oldPrice.replace(/[^\d]/g, '')) - parseInt(pkg.price.replace(/[^\d]/g, ''))).toLocaleString()}</span>
-                                            </div>
-                                        )}
-                                     </div>
-                                </div>
-
-                                <div className="allTourCardActions">
-                                    <div className="actionDivider" />
-                                    <div className="actionButtons">
-                                        <Link href={`/packages/${pkg.slug}`} className="detailsBtn">
-                                            Details
-                                        </Link>
-                                        <button
-                                            className="enquireBtn"
-                                            onClick={(e) => handleEnquire(e, pkg.title)}
-                                        >
-                                            Enquire Now
-                                            <ArrowRight size={14} className="ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <PackageCard 
+                            key={`${pkg.slug}-${i}`}
+                            pkg={pkg}
+                            wishlist={wishlist}
+                            toggleWishlist={toggleWishlist}
+                            onEnquire={handleEnquire}
+                        />
                     ))
                 )}
             </section>

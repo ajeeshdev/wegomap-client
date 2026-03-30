@@ -15,6 +15,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/free-mode';
 import EnquireModal from './EnquireModal';
 import WishlistButton from '@/components/WishlistButton';
+import PackageCard from './PackageCard';
 
 
 
@@ -294,72 +295,30 @@ export default function TourCategoryPage({
 
 
                     <div className="allToursGrid">
-                        {filtered.map((pkg, i) => (
-                            <div key={`${pkg.slug}-${i}`} className="allTourCard group">
-                                {/* Image zone */}
-                                <Link href={pkg.detailUrl ? (pkg.detailUrl.startsWith('/') ? pkg.detailUrl : `/${pkg.detailUrl}`) : `/${pkg.slug || pkg._id || ''}`} className="allTourCardImgLink">
-                                    <div className="allTourCardImg">
-                                        <Image
-                                            src={getImageUrl(pkg.image)}
-                                            alt={pkg.title}
-                                            fill
-                                            style={{ objectFit: 'cover' }}
-                                            className="transform group-hover:scale-110 transition-transform duration-700"
-                                            unoptimized
-                                        />
-                                    </div>
-                                    
-                                    {/* Overlay Top Right - Wishlist */}
-                                    <div className="wishlistBtnFloating" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}>
-                                        <WishlistButton id={pkg._id || pkg.slug || ''} wishlist={wishlist} toggleWishlist={toggleWishlist} />
-                                    </div>
-
-                                    {/* Overlay Bottom Left - Duration Pill */}
-                                  
-
-                                    {/* Overlay Bottom Right - Location chip */}
-
-                                </Link>
-
-                                {/* Card body */}
-                                <div className="allTourCardBody">
-                                    <Link href={pkg.detailUrl ? (pkg.detailUrl.startsWith('/') ? pkg.detailUrl : `/${pkg.detailUrl}`) : `/${pkg.slug || pkg._id || ''}`} className="allTourCardTitle">
-                                        {pkg.title}
-                                    </Link>
-
-                                    <div className="allTourCardPricingRow">
-                                         <div className="priceGroup">
-                                            <div className="priceMain">
-                                                <span className="currency">₹</span>
-                                                <span className="amount">{pkg.price.replace('₹', '').replace('INR', '').trim()}</span>
-                                                <span className="unit">/ person</span>
-                                            </div>
-                                            {pkg.originalPrice && pkg.originalPrice !== pkg.price && (
-                                                <div className="priceOld">
-                                                    <span className="oldAmount">{pkg.originalPrice}</span>
-                                                </div>
-                                            )}
-                                         </div>
-                                    </div>
-
-                                    <div className="allTourCardActions">
-                                        <div className="actionDivider" />
-                                        <div className="actionButtons">
-                                            <Link href={pkg.detailUrl ? (pkg.detailUrl.startsWith('/') ? pkg.detailUrl : `/${pkg.detailUrl}`) : `/${pkg.slug || pkg._id || ''}`} className="detailsBtn">
-                                                Details
-                                            </Link>
-                                            <button
-                                                className="enquireBtn"
-                                                onClick={() => handleQuickPlan(pkg.title)}
-                                            >
-                                                Enquire Now
-                                                <ArrowRight size={14} className="ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                        {filtered.map((pkg, i) => {
+                            const normalizedPkg = {
+                                slug: pkg.slug || pkg._id || (pkg.detailUrl?.split('/').pop()) || '',
+                                title: pkg.title,
+                                location: pkg.location,
+                                duration: pkg.duration,
+                                price: pkg.price,
+                                oldPrice: pkg.originalPrice,
+                                image: pkg.image,
+                                images: (pkg as any).images || [],
+                                subtitle: (pkg as any).subtitle || '',
+                                highlights: (pkg as any).highlights || [],
+                                itinerary: (pkg as any).itinerary || [],
+                            };
+                            return (
+                                <PackageCard 
+                                    key={`${pkg.slug}-${i}`}
+                                    pkg={normalizedPkg}
+                                    wishlist={wishlist}
+                                    toggleWishlist={toggleWishlist}
+                                    onEnquire={(e: React.MouseEvent, title: string) => handleQuickPlan(title)}
+                                />
+                            );
+                        })}
                     </div>
                 </div>
             </section>

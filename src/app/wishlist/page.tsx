@@ -12,6 +12,7 @@ import {
 import Image from 'next/image';
 import { toast } from 'react-hot-toast';
 import { API_URL } from '@/config';
+import PackageCard from '@/components/PackageCard';
 
 import './wishlist.css';
 
@@ -149,54 +150,30 @@ export default function WishlistPage() {
                             </div>
                         ) : (
                             <div className="wishlistGrid">
-                                {wishlist.map((pkg) => (
-                                    <Link key={pkg._id} href={`/packages/${pkg.slug || pkg._id}`} className="wishlistCard">
-                                        <div className="cardImageContainer">
-                                            {pkg.images && pkg.images.length > 0 ? (
-                                                <Image
-                                                    src={getImageUrl(pkg.images[0])}
-                                                    alt={pkg.title}
-                                                    fill
-                                                    className="cardImage"
-                                                    
-                                                />
-                                            ) : (
-                                                <div className="absolute inset-0 bg-slate-100 flex items-center justify-center font-black text-slate-300 text-xs">
-                                                    {pkg.location}
-                                                </div>
-                                            )}
-                                            
-                                            <button 
-                                                onClick={(e) => removeFromWishlist(pkg._id, e)}
-                                                className="removeButton"
-                                            >
-                                                <Trash2 size={14} />
-                                            </button>
-
-                                            <div className="cardPriceTag">
-                                                <div className="priceLabel">
-                                                    ₹{pkg.price.toLocaleString()}
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="cardBody">
-                                            <div className="cardLocation">
-                                                <MapPin size={10} /> {pkg.location}
-                                            </div>
-                                            <h3 className="cardTitle">{pkg.title}</h3>
-                                            
-                                            <div className="cardFooter">
-                                                <div className="cardStars">
-                                                    {[...Array(5)].map((_, i) => (
-                                                        <Star key={i} size={10} fill={i < 5 ? "currentColor" : "none"} />
-                                                    ))}
-                                                </div>
-                                                <span className="cardDuration">{pkg.duration}</span>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                ))}
+                                {wishlist.map((item) => {
+                                    const pkg = {
+                                        slug: item.slug || item._id,
+                                        title: item.title,
+                                        location: item.location,
+                                        duration: item.duration,
+                                        price: `₹${item.price.toLocaleString()}`,
+                                        oldPrice: item.oldamt ? `₹${Number(item.oldamt).toLocaleString()}` : null,
+                                        image: item.thumb || (item.images && item.images[0]) || '/bg-placeholder.jpg',
+                                        images: item.images || [],
+                                        subtitle: item.subtitle || item.description || '',
+                                        highlights: item.highlights || [],
+                                        itinerary: item.itinerary || [],
+                                    };
+                                    return (
+                                        <PackageCard 
+                                            key={item._id}
+                                            pkg={pkg}
+                                            wishlist={wishlist.map(w => w._id)}
+                                            toggleWishlist={(id: string, e: React.MouseEvent) => removeFromWishlist(id, e)}
+                                            onEnquire={(e: React.MouseEvent, title: string) => {}}
+                                        />
+                                    );
+                                })}
                             </div>
                         )}
                     </div>
