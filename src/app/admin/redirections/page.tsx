@@ -23,8 +23,8 @@ export default function RedirectionsPage() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
 
-  const emptyForm = { from: '', to: '', type: '301' as const, active: true };
-  const [newForm, setNewForm] = useState(emptyForm);
+  const emptyForm: Omit<Redirect, 'id' | 'createdAt'> = { from: '', to: '', type: '301', active: true };
+  const [newForm, setNewForm] = useState<Omit<Redirect, 'id' | 'createdAt'>>(emptyForm);
   const [editForm, setEditForm] = useState<Partial<Redirect>>({});
 
   const fetchRedirects = async () => {
