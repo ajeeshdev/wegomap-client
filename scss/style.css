@@ -2189,7 +2189,6 @@ header .button-wrapper .modernHamburger {
   }
 }
 .modernHamburger:hover {
-  background-color: #e2e8f0;
   transform: scale(1.05);
 }
 .modernHamburger .line {
