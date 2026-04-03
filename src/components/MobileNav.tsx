@@ -1,7 +1,6 @@
-"use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Home, Briefcase, Calendar, Building2, User } from 'lucide-react';
+import { Home, Briefcase, Calendar, User, MessageCircle } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 export default function MobileNav() {
@@ -30,23 +29,27 @@ export default function MobileNav() {
     ];
 
     return (
-        <nav className="mobileBottomNav">
-            <div className="navContainer">
-                {navItems.map((item) => {
-                    const Icon = item.icon;
-                    const isActive = pathname === item.href;
-                    return (
-                        <Link
-                            key={item.name}
-                            href={item.href}
-                            className={`navItem ${isActive ? 'active' : ''}`}
-                        >
-                            <Icon size={18} />
-                            <span>{item.name}</span>
-                        </Link>
-                    );
-                })}
-            </div>
-        </nav>
+        <div className="mobileBottomNavWrapper">
+            <nav className="mobileBottomNav">
+                <div className="navContainer">
+                    {navItems.map((item) => {
+                        const Icon = item.icon;
+                        const isActive = pathname === item.href;
+                        return (
+                            <Link
+                                key={item.name}
+                                href={item.href}
+                                className={`navItem ${isActive ? 'active' : ''}`}
+                            >
+                                <div className="iconWrapper">
+                                    <Icon size={22} />
+                                </div>
+                                <span className="navLabel">{item.name}</span>
+                            </Link>
+                        );
+                    })}
+                </div>
+            </nav>
+        </div>
     );
 }

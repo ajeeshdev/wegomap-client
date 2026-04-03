@@ -495,99 +495,133 @@ header {
 // =============================================
 // MOBILE BOTTOM NAV — only visible on mobile
 // =============================================
-.mobileBottomNav {
+.mobileBottomNavWrapper {
     display: none;
 
     @media (max-width: 1023px) {
-        display: block;
+        display: flex;
         position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        bottom: 12px;
+        left: 10px;
+        right: 15px;
         z-index: 9999;
-        background: rgba(255, 255, 255, 0.85);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.08);
-        border-top: 1px solid rgba(241, 245, 249, 0.8);
+        align-items: center;
+        gap: 12px;
         padding-bottom: env(safe-area-inset-bottom, 0px);
+        margin-bottom: 4px;
 
-        .navContainer {
+        .mobileBottomNav {
+            flex: 1;
+            background: rgb(255 255 255 / 48%);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 50px; // Complete pill shape
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.2);
+            height: 64px;
             display: flex;
-            justify-content: space-around;
             align-items: center;
-            padding: 0.75rem 0.25rem;
-            max-width: 500px;
-            margin: 0 auto;
+
+            .navContainer {
+                display: flex;
+                width: 100%;
+                height: 100%;
+                justify-content: space-evenly;
+                align-items: center;
+                padding: 0 4px;
+            }
+
+            .navItem {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                color: #2c2c2c;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                padding: 4px 14px;
+                border-radius: 30px; 
+                min-height: 56px;
+                min-width: 82px;
+
+                .iconWrapper {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: transform 0.3s ease;
+                    
+                    svg {
+                        width: 22px;
+                        height: 22px;
+                    }
+                }
+
+                .navLabel {
+                    font-size: 11px;
+                    font-weight: 700;
+                    letter-spacing: -0.1px;
+                }
+
+                &:hover {
+                    background: transparent;
+                    color: inherit;
+                }
+
+                &:active {
+                    transform: scale(0.96);
+                    opacity: 0.8;
+                }
+
+                &.active {
+                    background: #ffffff;
+                    color: $cosmicOrange;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                    
+                    .iconWrapper {
+                        transform: scale(1.05);
+                    }
+                }
+            }
         }
 
-        .navItem {
+        .mobileChatBotTrigger {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 2px solid $cosmicOrange;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 6px;
-            text-decoration: none;
-            color: #94a3b8;
-            font-size: 0.7rem;
-            font-weight: 700;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba($cosmicOrange, 0.25);
+            flex-shrink: 0;
             padding: 0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 20%;
-            position: relative;
-
-            svg {
-                width: 24px;
-                height: 24px;
-                stroke-width: 1.5;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-
-            span {
-                transition: all 0.3s ease;
-            }
-
-            &::after {
-                content: '';
-                position: absolute;
-                top: -12px;
-                left: 50%;
-                transform: translateX(-50%) scaleX(0);
-                width: 20px;
-                height: 3px;
-                background: $cosmicOrange;
-                border-radius: 0 0 4px 4px;
-                transition: transform 0.3s ease;
-            }
-
-            &.active {
-                color: $cosmicOrange;
-
-                svg {
-                    stroke-width: 2.2;
-                    transform: translateY(-2px);
-                    filter: drop-shadow(0 4px 8px rgba($cosmicOrange, 0.3));
-                }
-
-                span {
-                    transform: scale(1.05);
-                }
-
-                &::after {
-                    transform: translateX(-50%) scaleX(1);
-                }
-            }
+            cursor: pointer;
+            transition: transform 0.2s active;
 
             &:active {
-                transform: scale(0.9);
+                transform: scale(0.92);
+            }
+
+            .botIconWrapper {
+                display: flex;
+                animation: iconPulse 3s infinite ease-in-out;
+                color: $cosmicOrange;
+            }
+
+            @keyframes iconPulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.08); }
+                100% { transform: scale(1); }
             }
         }
     }
 }
 
-// Body padding so content isn't behind bottom nav
+// Ensure body doesn't get hidden under fixed nav
 @media (max-width: 1023px) {
     body {
-        padding-bottom: 80px;
+        padding-bottom: 110px !important;
     }
 }
 
@@ -786,7 +820,7 @@ header {
 
     // On mobile screens, elevate it above the bottom navigation bar
     @media (max-width: 1023px) {
-        bottom: calc(65px + env(safe-area-inset-bottom, 0px) + 16px);
+        bottom: calc(110px + env(safe-area-inset-bottom, 0px) + 16px);
         right: 16px;
         width: 60px;
         height: 60px;

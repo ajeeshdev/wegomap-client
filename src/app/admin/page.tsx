@@ -68,6 +68,29 @@ export default function AdminDashboard() {
     fetchDashboardData();
   }, []);
 
+  const formatUA = (ua: string) => {
+    if (!ua) return "Direct Visit";
+    const lowUA = ua.toLowerCase();
+    if (lowUA.includes("node")) return "Server Process";
+    if (lowUA.includes("chrome")) return "Chrome Browser";
+    if (lowUA.includes("safari")) return "Safari Browser";
+    if (lowUA.includes("firefox")) return "Firefox Browser";
+    if (lowUA.includes("edge")) return "Edge Browser";
+    
+    // Fallback but clean it up
+    return ua.split(" ")[0].replace(/Mozilla\/\d\.\d/i, "Web Browser");
+  };
+
+  const getDeviceFromUA = (ua: string) => {
+    const lowUA = ua.toLowerCase();
+    if (lowUA.includes("macintosh") || lowUA.includes("mac os")) return "macOS";
+    if (lowUA.includes("iphone") || lowUA.includes("ipad")) return "iOS";
+    if (lowUA.includes("android")) return "Android";
+    if (lowUA.includes("windows")) return "Windows";
+    if (lowUA.includes("node")) return "System";
+    return "Desktop";
+  };
+
   const cards = [
     { label: "Tour Packages", count: stats.packages, icon: Package, href: "/admin/packages" },
     { label: "Inquiries", count: stats.leads, icon: Zap, href: "/admin/leads" },
@@ -112,20 +135,28 @@ export default function AdminDashboard() {
               </h2>
             </div>
             <div className="activity-table">
-               {(visitorStats?.recentVisitors || []).length > 0 ? (
-                 visitorStats.recentVisitors.map((v: any, idx: number) => (
+               {(visitorStats?.recentVisitors || [])
+                 .filter((v: any) => v.userAgent && !v.userAgent.toLowerCase().includes('node'))
+                 .map((v: any, idx: number) => (
                    <div key={idx} className="activity-row">
                       <div className="activity-info">
-                         <div className="activity-ip">{v.ip}</div>
-                         <div className="activity-ua font-mono">{v.userAgent}</div>
+                         <div className="activity-ip flex items-center gap-2">
+                             {v.ip === '::1' || v.ip === '127.0.0.1' ? 'Localhost' : v.ip}
+                             <span className="px-1.5 py-0.5 bg-slate-50 text-slate-400 rounded text-[9px] font-bold uppercase tracking-tighter">
+                                 {getDeviceFromUA(v.userAgent)}
+                             </span>
+                         </div>
+                         <div className="activity-ua font-mono text-[10px] text-slate-400">{formatUA(v.userAgent)}</div>
                       </div>
                       <div className="activity-meta">
-                         <div className="activity-path text-blue-600 font-bold">{v.path}</div>
+                         <div className="activity-path text-blue-600 font-bold truncate max-w-[120px]" title={v.path}>
+                             {v.path.length > 20 ? '...' + v.path.slice(-17) : v.path}
+                         </div>
                          <div className="activity-time">{new Date(v.timestamp).toLocaleTimeString()}</div>
                       </div>
                    </div>
-                 ))
-               ) : (
+                 ))}
+               {visitorStats?.recentVisitors?.length === 0 && (
                  <div className="py-12 text-center text-xs text-slate-400">No activity yet</div>
                )}
             </div>

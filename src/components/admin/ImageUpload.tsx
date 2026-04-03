@@ -78,37 +78,27 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
   return (
     <div className="space-y-3">
       {label ? (
-        <div className="flex items-center justify-between">
-          <label className="admin-form-label !mb-0 flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-blue-600"></div>
-            {label}
-          </label>
-          {value && !hideRemove && (
-            <button
-              onClick={removeImage}
-              className="text-[10px] font-black text-rose-500 uppercase tracking-widest hover:text-rose-600 transition-colors flex items-center gap-1.5 leading-none pt-[0.5px]"
-            >
-              <X size={10} strokeWidth={3} className="relative -top-[0.5px]" /> Remove
-            </button>
-          )}
-        </div>
+        <label className="admin-form-label !mb-0 flex items-center gap-2">
+          <div className="w-1.5 h-1.5 rounded-full bg-blue-600"></div>
+          {label}
+        </label>
       ) : null}
 
       {value ? (
         <div className={`relative group overflow-hidden rounded-2xl border-2 border-slate-100 bg-slate-50 transition-all hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/5 ${size === 'icon' ? 'w-24 h-24 mx-auto' :
           size === 'small' ? 'aspect-[4/3]' :
             size === 'landscape' ? 'aspect-[3/1]' :
-              'max-w-[300px] aspect-video'
+              'max-w-full aspect-video'
           }`}>
           <img src={value} alt="Preview" className={`w-full h-full ${size === 'icon' ? 'object-contain p-2' : (objectFit === 'contain' ? 'object-contain' : 'object-cover')}`} />
 
-          <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-            <div className="bg-white/95 backdrop-blur-sm rounded-xl p-3 flex items-center justify-between shadow-lg border border-blue-50">
+          <div className="absolute inset-x-0 bottom-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+            <div className="bg-white/95 backdrop-blur-sm rounded-xl p-2.5 flex items-center justify-between shadow-lg border border-blue-50">
               <div className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
-                  <CheckCircle2 size={12} strokeWidth={3} />
+                <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
+                  <CheckCircle2 size={10} strokeWidth={3} />
                 </div>
-                <span className="text-[10px] font-black text-slate-700 uppercase tracking-tight leading-none pt-[1px]">Active Image</span>
+                <span className="text-[9px] font-black text-slate-700 uppercase tracking-tight leading-none">Active</span>
               </div>
 
               <div className="relative">
@@ -117,10 +107,11 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
                   accept="image/*"
                   onChange={handleFileChange}
                   disabled={uploading}
+                  title=""
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                 />
-                <button className="bg-blue-600 text-white px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-blue-700 transition-all flex items-center justify-center gap-2 leading-none">
-                  {uploading ? <Loader2 size={10} className="animate-spin" /> : <Upload size={10} strokeWidth={3} className="relative -top-[0.5px]" />}
+                <button className="bg-blue-600 text-white px-2.5 py-1.5 rounded-lg text-[9px] changeBtn font-black uppercase tracking-widest hover:bg-blue-700 transition-all flex items-center justify-center gap-1.5 leading-none">
+                  {uploading ? <Loader2 size={10} className="animate-spin" /> : <Upload size={10} strokeWidth={3} />}
                   <span>Change</span>
                 </button>
               </div>
@@ -128,13 +119,13 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
           </div>
 
           {!hideRemove && (
-            <div className="absolute top-3 right-3">
+            <div className="absolute top-2 right-2">
               <button
                 onClick={removeImage}
-                className="w-8 h-8 bg-rose-500 text-white rounded-lg flex items-center justify-center shadow-lg hover:bg-rose-600 transition-all active:scale-90"
+                className="w-7 h-7 bg-rose-500 text-white rounded-lg flex items-center justify-center shadow-lg hover:bg-rose-600 transition-all active:scale-90"
                 title="Remove image"
               >
-                <X size={14} strokeWidth={3} />
+                <X size={12} strokeWidth={3} />
               </button>
             </div>
           )}
@@ -206,7 +197,7 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
                 value={altValue}
                 onChange={e => onAltChange(e.target.value)}
                 placeholder="e.g. Kerala Backwaters Image"
-                className="admin-form-input !h-9 text-[11px] font-bold bg-white/50 border-slate-100 focus:bg-white"
+                className="admin-form-input !h-10 text-xs font-bold bg-white/50 border-slate-100 focus:bg-white"
               />
            </div>
         </div>

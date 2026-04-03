@@ -6,6 +6,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { Save, ArrowLeft, Image as ImageIcon, Info, Map, List, Search, Trash2, Globe, Sparkles, Clock, ShieldCheck, Layers, Tag, IndianRupee, Zap, MapPin, Shield as Safe } from 'lucide-react';
 import ImageUpload from '@/components/admin/ImageUpload';
 import MultiImageUpload from '@/components/admin/MultiImageUpload';
+import RichTextEditor from '@/components/admin/Editor';
 import { toast } from 'react-hot-toast';
 
 export default function EditPackage() {
@@ -15,10 +16,11 @@ export default function EditPackage() {
   const [categories, setCategories] = useState<any[]>([]);
   const [formData, setFormData] = useState<any>({
     title: '', pcode: '', subtitle: '', slabel: '', location: '', description: '',
-    price: '', oldamt: '', per: '', duration: '', highlights: [],
+    price: '', oldamt: '', duration: '', highlights: [],
     inclusions: [], exclusions: [], terms: '', category: '',
     images: [], thumb: '', thumb_alt: '', onoffer: false, isBestSeller: false,
-    itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: ''
+    itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '',
+    averageRating: 4.9, reviewCount: 150, noCostEmi: ''
   });
 
   useEffect(() => {
@@ -56,7 +58,10 @@ export default function EditPackage() {
             exclusions: data.data.exclusions || [],
             images: data.data.images || [],
             thumb_alt: data.data.thumb_alt || 'wegomap',
-            itinerary: data.data.itinerary || []
+            itinerary: data.data.itinerary || [],
+            noCostEmi: data.data.noCostEmi || '',
+            averageRating: data.data.averageRating || 4.9,
+            reviewCount: data.data.reviewCount || 150
           });
         }
       } catch (err) {
@@ -150,8 +155,8 @@ export default function EditPackage() {
               Basic Details
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
-              <div className="admin-form-group md:col-span-2">
+            <div className="admin-form-grid-4 pt-4">
+              <div className="admin-form-group md:col-span-4">
                 <label className="admin-form-label flex items-center gap-2"> <Layers size={12} className="text-blue-600" /> Package Title</label>
                 <input type="text" value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} className="admin-form-input text-lg font-bold h-12" placeholder="e.g. Kerala Backwaters Magic" />
               </div>
@@ -180,31 +185,42 @@ export default function EditPackage() {
               <div className="admin-page-title-indicator bg-emerald-500"></div>
               Pricing & Description
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-4">
+            <div className="admin-form-grid-5 pt-4">
               <div className="admin-form-group">
-                <label className="admin-form-label text-blue-600">Price (₹)</label>
-                <div className="relative">
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">₹</div>
-                  <input type="number" value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} className="admin-form-input pl-10 font-black text-slate-900 text-lg" />
-                </div>
-              </div>
-              <div className="admin-form-group">
-                <label className="admin-form-label text-slate-400">Regular Price</label>
+                <label className="admin-form-label text-slate-400">Regular Price (₹)</label>
                 <div className="relative">
                   <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 font-bold">₹</div>
-                  <input type="number" value={formData.oldamt} onChange={e => setFormData({ ...formData, oldamt: e.target.value })} className="admin-form-input pl-10 font-black text-slate-400 line-through opacity-70" />
+                  <input type="number" value={formData.oldamt} onChange={e => setFormData({ ...formData, oldamt: e.target.value })} className="admin-form-input pl-12 h-12 font-bold text-slate-400 line-through" />
                 </div>
               </div>
               <div className="admin-form-group">
-                <label className="admin-form-label">Price Per</label>
-                <input type="text" value={formData.per} onChange={e => setFormData({ ...formData, per: e.target.value })} className="admin-form-input font-bold" placeholder="e.g. / Per Person" />
+                <label className="admin-form-label text-blue-600">Offer Price (₹)</label>
+                <div className="relative">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">₹</div>
+                  <input type="number" value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} className="admin-form-input pl-12 h-12 font-black text-slate-900 text-lg" />
+                </div>
+              </div>
+              <div className="admin-form-group">
+                <label className="admin-form-label text-orange-600">EMI (₹)</label>
+                <div className="relative">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-orange-300 font-bold">₹</div>
+                  <input type="number" value={formData.noCostEmi} onChange={e => setFormData({ ...formData, noCostEmi: e.target.value })} className="admin-form-input pl-12 h-12 font-bold text-slate-900" placeholder="e.g. 1999" />
+                </div>
+              </div>
+              <div className="admin-form-group">
+                <label className="admin-form-label text-yellow-600">Rating (0-5)</label>
+                <input type="number" step="0.1" value={formData.averageRating} onChange={e => setFormData({ ...formData, averageRating: e.target.value })} className="admin-form-input font-bold" />
+              </div>
+              <div className="admin-form-group">
+                <label className="admin-form-label text-slate-500">Reviews</label>
+                <input type="number" value={formData.reviewCount} onChange={e => setFormData({ ...formData, reviewCount: e.target.value })} className="admin-form-input font-bold" />
               </div>
             </div>
 
             <div className="admin-form-group pt-4 border-t border-slate-50">
               <label className="admin-form-label mb-4 block">Description</label>
-              <div className="bg-slate-50/50 rounded-2xl p-2 border border-slate-100 shadow-inner">
-                <textarea rows={6} value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })} className="admin-form-textarea leading-relaxed text-slate-700 font-medium focus:bg-white h-48" placeholder="Enter detailed package overview..."></textarea>
+              <div className="bg-slate-50/50 rounded-2xl p-1 border border-slate-100 shadow-inner">
+                <RichTextEditor value={formData.description} onChange={(content) => setFormData({ ...formData, description: content })} height={300} />
               </div>
             </div>
 
@@ -225,8 +241,8 @@ export default function EditPackage() {
 
             <div className="admin-form-group pt-4 border-t border-slate-50">
               <label className="admin-form-label flex items-center gap-2 mb-2"> <ShieldCheck size={12} className="text-blue-600" /> Terms & Conditions</label>
-              <div className="bg-slate-50/50 rounded-2xl p-2 border border-slate-100 shadow-inner">
-                <textarea rows={4} value={formData.terms} onChange={e => setFormData({ ...formData, terms: e.target.value })} className="admin-form-textarea !bg-transparent border-none font-medium text-slate-600 h-32 leading-relaxed" placeholder="Standard tour terms..."></textarea>
+              <div className="bg-slate-50/50 rounded-2xl p-1 border border-slate-100 shadow-inner">
+                <RichTextEditor value={formData.terms} onChange={(content) => setFormData({ ...formData, terms: content })} height={250} />
               </div>
             </div>
           </div>
@@ -278,12 +294,14 @@ export default function EditPackage() {
                       }} className="w-full bg-transparent border-b border-slate-100 py-3 focus:border-blue-600 outline-none font-bold text-xl text-slate-900 transition-all" placeholder="e.g. Arrival at Cochin" />
                     </div>
                     <div className="admin-form-group">
-                      <label className="admin-form-label text-[10px] uppercase tracking-widest text-slate-400">Description</label>
-                      <textarea value={item.description} onChange={e => {
-                        const newItin = [...formData.itinerary];
-                        newItin[idx].description = e.target.value;
-                        setFormData({ ...formData, itinerary: newItin });
-                      }} className="w-full bg-transparent border-none p-0 min-h-[80px] shadow-none focus:ring-0 leading-relaxed text-slate-600 font-medium text-sm" placeholder="Describe the journey..."></textarea>
+                      <label className="admin-form-label text-[10px] uppercase tracking-widest text-slate-400">Activity Description</label>
+                      <div className="mt-2 bg-white rounded-xl border border-slate-100 p-1">
+                        <RichTextEditor value={item.description} onChange={(content) => {
+                          const newItin = [...formData.itinerary];
+                          newItin[idx].description = content;
+                          setFormData({ ...formData, itinerary: newItin });
+                        }} height={200} />
+                      </div>
                     </div>
                   </div>
                   <button
@@ -311,11 +329,11 @@ export default function EditPackage() {
         {/* Sidebar Navigation & Meta (Right Side) */}
         <div className="admin-form-sidebar">
 
-          <div className="admin-form-card p-8 space-y-10">
+          <div className="admin-form-card p-6 space-y-8">
             {/* Main Thumbnail */}
             <div className="group/media">
-              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-8">
-                <div className="w-1 h-3 bg-blue-600 rounded-full shadow-[0_0_8px_rgba(168,85,247,0.4)]"></div>
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-6">
+                <div className="w-1 h-3 bg-blue-600 rounded-full shadow-blue-glow"></div>
                 Primary Thumbnail
               </h4>
               <div className="bg-slate-50/50 rounded-2xl p-2 border border-slate-100 transition-all hover:bg-white hover:shadow-sm">
@@ -324,24 +342,24 @@ export default function EditPackage() {
                   onChange={(url) => setFormData({ ...formData, thumb: url })}
                   altValue={formData.thumb_alt}
                   onAltChange={(alt) => setFormData({ ...formData, thumb_alt: alt })}
-                  label="Thumbnail"
+                  label=""
                 />
               </div>
             </div>
 
             {/* Package Details */}
-            <div className="pt-10 border-t border-slate-50">
-              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-8">
+            <div className="pt-8 border-t border-slate-50">
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 flex items-center gap-2 mb-6">
                 <div className="w-1 h-3 bg-blue-600 rounded-full"></div>
                 Package Identity
               </h4>
-              <div className="space-y-6">
+              <div className="space-y-5">
                 <div className="admin-form-group">
                   <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold"> <Tag size={10} className="text-blue-600" /> Category</label>
                   <select
                     value={formData.category}
                     onChange={e => setFormData({ ...formData, category: e.target.value })}
-                    className="admin-form-input font-bold text-slate-900 h-10 text-[11px] bg-white"
+                    className="admin-form-select font-bold text-slate-900 h-10 text-xs bg-white pl-4"
                   >
                     <option value="">Select Category</option>
                     {categories.map((cat: any) => (
@@ -358,7 +376,7 @@ export default function EditPackage() {
                     type="text"
                     value={formData.pcode}
                     onChange={e => setFormData({ ...formData, pcode: e.target.value.toUpperCase() })}
-                    className="admin-form-input font-mono font-bold text-blue-600 h-10 text-[11px] uppercase"
+                    className="admin-form-input font-mono font-bold text-blue-600 h-10 text-xs uppercase"
                     placeholder="WM-KRL-001"
                   />
                 </div>

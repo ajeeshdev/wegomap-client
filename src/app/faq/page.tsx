@@ -87,10 +87,12 @@ export default function FaqPage() {
 
             <div className="faqBody homeContainer">
                 {/* Intro */}
-                <div className="faqIntro">
-                    <span className="faqSubLabel">Got Questions?</span>
-                    <h2>We Have <span>Answers.</span></h2>
-                    <p>Browse through the most common questions our travellers ask. Can't find what you're looking for? Reach out to our team — we're always happy to help.</p>
+                <div className="sectionHeader flex items-center justify-center mb-12">
+                    <div className="titleArea">
+                        <span className="sectionSubtitle">Got Questions?</span>
+                        <h2 className="sliderTitle">We Have <span className="highlight">Answers</span></h2>
+                        <p className="text-slate-500 max-w-2xl text-[13px] leading-relaxed mx-auto">Browse through the most common questions our travellers ask. Can't find what you're looking for? Reach out to our team — we're always happy to help.</p>
+                    </div>
                 </div>
 
                 {/* Accordion Categories */}

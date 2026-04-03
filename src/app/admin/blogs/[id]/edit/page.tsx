@@ -179,7 +179,7 @@ export default function EditBlog() {
               Post Content
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
+            <div className="admin-form-grid-2 pt-2">
               <div className="admin-form-group md:col-span-2">
                 <label className="admin-form-label flex items-center gap-2"> <FileText size={12} className="text-blue-600" /> Title</label>
                 <input
@@ -275,7 +275,7 @@ export default function EditBlog() {
                 <div className="w-1 h-3 bg-blue-600 rounded-full"></div>
                 Metadata
               </h4>
-              <div className="space-y-6">
+              <div className="admin-form-grid-3">
                 <div className="admin-form-group">
                   <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <Tag size={10} className="text-blue-600" /> Category</label>
                   <select
@@ -293,7 +293,7 @@ export default function EditBlog() {
                 </div>
 
                 <div className="admin-form-group">
-                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-1"> <Clock size={10} className="text-blue-600" /> Publish Date</label>
+                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-1"> <Clock size={10} className="text-blue-600" /> Date</label>
                   <input
                     type="date"
                     value={formData.publishDate}
@@ -308,7 +308,7 @@ export default function EditBlog() {
                     type="text"
                     value={formData.author}
                     onChange={e => setFormData({ ...formData, author: e.target.value })}
-                    className="admin-form-input h-10 text-[11px] font-bold"
+                    className="admin-form-input h-9 text-[11px] font-bold"
                     placeholder="Admin"
                   />
                 </div>

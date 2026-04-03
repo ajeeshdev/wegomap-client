@@ -453,10 +453,44 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
     }
 }
 
-// Global Descriptions
 .tour-description-content {
     h3 { font-size: 1.5rem; font-weight: 950; margin: 2rem 0 1rem; color: $cosmicBlue; }
-    ul { list-style: disc; margin-left: 1.5rem; margin-bottom: 2rem; color: #64748b; }
+    ul { 
+        list-style: none; 
+        margin-left: 0; 
+        margin-bottom: 2.5rem; 
+        padding: 0;
+        
+        li {
+            position: relative;
+            padding-left: 2.25rem;
+            margin-bottom: 1.25rem;
+            color: #475569;
+            line-height: 1.7;
+            font-weight: 500;
+            
+            &::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0.25rem;
+                width: 1.5rem;
+                height: 1.5rem;
+                background-color: rgba($cosmicOrange, 0.1);
+                border-radius: 50%;
+                background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%23ff5a3d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: 10px;
+                transition: all 0.3s ease;
+            }
+
+            &:hover::before {
+                background-color: rgba($cosmicOrange, 0.2);
+                transform: scale(1.1);
+            }
+        }
+    }
     strong { font-weight: 900; color: $cosmicBlue; }
 }
 

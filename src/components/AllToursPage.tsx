@@ -216,7 +216,12 @@ export default function AllToursPage() {
                             itinerary: pkg.itinerary || [],
                             categories: categories,
                             averageRating: pkg.averageRating,
-                            reviewCount: pkg.reviewCount
+                            reviewCount: pkg.reviewCount,
+                            noCostEmi: pkg.noCostEmi,
+                            totalPrice: pkg.totalPrice,
+                            per: pkg.per || '/ Person',
+                            onoffer: pkg.onoffer,
+                            _id: pkg._id
                         };
                     });
                     setCmsPackages(mapped);
@@ -456,16 +461,6 @@ export default function AllToursPage() {
                     </div>
                 )}
             </div>
-
-            {/* Floating Filter Button for Mobile */}
-            {!showFilters && (
-                <button className="floatingFilterTrigger" onClick={() => setShowFilters(true)}>
-                    <Filter size={18} />
-                    <span>Filters</span>
-                </button>
-            )}
-
-
 
             {/* Results Count */}
             <div className="homeContainer allToursResultsMeta">

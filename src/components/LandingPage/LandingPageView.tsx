@@ -7,9 +7,7 @@ import Image from "next/image";
 import {
   ArrowRight,
   ChevronDown,
-  ChevronRight,
   Clock,
-  Heart,
   Sparkles,
   ShieldCheck,
   Users,
@@ -21,6 +19,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { API_URL, getImageUrl } from "@/config";
 import { toast } from "react-hot-toast";
+import PackageCard from "@/components/PackageCard";
 
 interface LandingPageContent {
   _id: string;
@@ -133,27 +132,6 @@ function RichContent({
   );
 }
 
-function WishlistButton({
-  id,
-  wishlist,
-  toggleWishlist,
-}: {
-  id: string;
-  wishlist: string[];
-  toggleWishlist: (id: string, e: React.MouseEvent) => void;
-}) {
-  const isSelected = wishlist.includes(id);
-  return (
-    <button
-      type="button"
-      className={`wishlistBtn ${isSelected ? "selected" : ""}`}
-      aria-label="Add to wishlist"
-      onClick={(e) => toggleWishlist(id, e)}
-    >
-      <Heart size={18} fill={isSelected ? "currentColor" : "none"} />
-    </button>
-  );
-}
 
 export default function LandingPageView({
   data,
@@ -464,52 +442,36 @@ export default function LandingPageView({
                 {data.packages_empty_text || "No packages linked to this campaign."}
               </div>
             ) : (
-              packages.map((pkg) => {
-                const current = formatINR(pkg.price);
-                const old = formatINR(pkg.oldamt);
+              packages.map((pkg, i) => {
+                const normalizedPkg = {
+                  slug: pkg.slug || pkg._id || '',
+                  title: pkg.title,
+                  location: pkg.location,
+                  duration: pkg.duration,
+                  price: pkg.price ? `₹${Number(String(pkg.price).replace(/[^\d]/g, '')).toLocaleString()}` : 'N/A',
+                  oldPrice: pkg.oldamt ? `₹${Number(String(pkg.oldamt).replace(/[^\d]/g, '')).toLocaleString()}` : null,
+                  image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || "/bg-placeholder.jpg"),
+                  images: pkg.images || [],
+                  subtitle: pkg.location || '',
+                  highlights: [],
+                  itinerary: [],
+                  averageRating: (pkg as any).averageRating || 4.9,
+                  reviewCount: (pkg as any).reviewCount || 150,
+                  noCostEmi: (pkg as any).noCostEmi,
+                  totalPrice: (pkg as any).totalPrice,
+                  per: pkg.per || '/ Person',
+                  onoffer: !!pkg.oldamt,
+                  _id: pkg._id
+                };
 
                 return (
-                  <Link
-                    key={pkg._id || pkg.slug}
-                    href={`/packages/${pkg.slug}`}
-                    className="block h-full"
-                  >
-                    <div className="packageCardSmall group">
-                      <div className="imageWrapper">
-                        <Image
-                          src={getImageUrl(
-                            pkg.thumb ||
-                            (pkg.images && pkg.images[0]) ||
-                            "/bg-placeholder.jpg"
-                          )}
-                          alt={pkg.title}
-                          fill
-                          className="object-cover"
-                          unoptimized
-                        />
-
-                        <div className="priceTag">
-                          {old && <span className="oldPrice">₹{old}</span>}
-                          <span className="currentPrice">
-                            ₹{current || "—"}
-                            <small>/ PERSON</small>
-                          </span>
-                        </div>
-                        <WishlistButton
-                          id={pkg._id || pkg.slug}
-                          wishlist={wishlist}
-                          toggleWishlist={toggleWishlist}
-                        />
-                      </div>
-
-                      <div className="cardContent">
-                        <h4 className="packageTitle">{pkg.title}</h4>
-                        <div className="actionIcon">
-                          <ChevronRight size={20} />
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
+                  <PackageCard 
+                    key={`${normalizedPkg.slug}-${i}`}
+                    pkg={normalizedPkg}
+                    wishlist={wishlist}
+                    toggleWishlist={toggleWishlist}
+                    onEnquire={(e, title) => handleOpenQuickPlan(title)}
+                  />
                 );
               })
             )}

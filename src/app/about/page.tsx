@@ -176,8 +176,12 @@ export default function AboutPage() {
             {/* ── Values Deck ── */}
             <div className="homeContainer px-4 sm:px-0">
                 <section className="valuesSection">
-                    <span className="sectionTag">The WEGOMAP Way</span>
-                    <h2>Our Core <span>Philosophy.</span></h2>
+                    <div className="sectionHeader flex items-center justify-center mb-12">
+                        <div className="titleArea">
+                            <span className="sectionSubtitle">The WEGOMAP Way</span>
+                            <h2 className="sliderTitle">Our Core <span className="highlight">Philosophy</span></h2>
+                        </div>
+                    </div>
                     
                     <div className="valuesGrid">
                         {data.values.map((val, i) => (

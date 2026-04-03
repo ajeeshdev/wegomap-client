@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Save, ArrowLeft, Image as ImageIcon, Info, Map as MapIcon, List, Search, Trash2, Globe, Sparkles, Clock, ShieldCheck, Layers, Tag, IndianRupee, Zap, MapPin, Shield as Safe } from 'lucide-react';
 import ImageUpload from '@/components/admin/ImageUpload';
 import MultiImageUpload from '@/components/admin/MultiImageUpload';
+import RichTextEditor from '@/components/admin/Editor';
 import { toast } from 'react-hot-toast';
 import '../../cms-premium.scss';
 
@@ -16,10 +17,9 @@ export default function CreatePackage() {
    const [categories, setCategories] = useState<any[]>([]);
    const [formData, setFormData] = useState<any>({
       title: '', pcode: '', subtitle: '', slabel: '', location: '', description: '',
-      price: '', oldamt: '', per: '/ Person', duration: '', highlights: [],
-      inclusions: [], exclusions: [], terms: '', category: '',
-      images: [], thumb: '', thumb_alt: 'wegomap', onoffer: false, isBestSeller: false,
-      itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: ''
+      inclusions: [], exclusions: [], terms: '',
+      itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '',
+      averageRating: 4.9, reviewCount: 150, noCostEmi: ''
    });
 
    useEffect(() => {
@@ -148,11 +148,11 @@ export default function CreatePackage() {
                               <label>Package Title</label>
                               <input type="text" value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} placeholder="e.g. Kerala Backwaters Magic" className="text-xl font-bold" />
                            </div>
-                           <div className="grid grid-cols-2 gap-6">
+                           <div className="admin-form-grid-2">
                               <div className="admin-form-group"><label>Subtitle</label><input type="text" value={formData.subtitle} onChange={e => setFormData({ ...formData, subtitle: e.target.value })} /></div>
                               <div className="admin-form-group"><label>Promo Label</label><input type="text" value={formData.slabel} onChange={e => setFormData({ ...formData, slabel: e.target.value })} className="text-emerald-500 font-bold" /></div>
                            </div>
-                           <div className="grid grid-cols-3 gap-6">
+                           <div className="admin-form-grid-3">
                               <div className="admin-form-group"><label>Location</label><input type="text" value={formData.location} onChange={e => setFormData({ ...formData, location: e.target.value })} /></div>
                               <div className="admin-form-group"><label>Duration</label><input type="text" value={formData.duration} onChange={e => setFormData({ ...formData, duration: e.target.value })} /></div>
                               <div className="admin-form-group">
@@ -168,7 +168,9 @@ export default function CreatePackage() {
 
                      <div className="editor-card">
                         <div className="card-header"><h4 className="serif">Detailed Overview</h4></div>
-                        <textarea rows={6} value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })} placeholder="Enter package overview..." />
+                        <div className="p-1">
+                           <RichTextEditor value={formData.description} onChange={(content) => setFormData({ ...formData, description: content })} height={300} />
+                        </div>
                      </div>
                   </div>
                )}
@@ -177,10 +179,12 @@ export default function CreatePackage() {
                   <div className="space-y-6">
                      <div className="editor-card">
                         <div className="card-header"><h4 className="serif">Pricing Strategy</h4></div>
-                        <div className="grid grid-cols-3 gap-6">
-                           <div className="admin-form-group"><label>Offer Price (₹)</label><input type="number" value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} className="font-black text-blue-600 text-lg" /></div>
-                           <div className="admin-form-group"><label>Regular Price (₹)</label><input type="number" value={formData.oldamt} onChange={e => setFormData({ ...formData, oldamt: e.target.value })} className="font-bold text-slate-400 line-through" /></div>
-                           <div className="admin-form-group"><label>Price Frequency</label><input type="text" value={formData.per} onChange={e => setFormData({ ...formData, per: e.target.value })} /></div>
+                        <div className="admin-form-grid-5">
+                           <div className="admin-form-group"><label className="text-slate-400 font-bold">Regular Price (₹)</label><input type="number" value={formData.oldamt} onChange={e => setFormData({ ...formData, oldamt: e.target.value })} className="font-bold text-slate-400 line-through" /></div>
+                           <div className="admin-form-group"><label className="text-blue-600 font-bold">Offer Price (₹)</label><input type="number" value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} className="font-black text-blue-600 text-lg" /></div>
+                           <div className="admin-form-group"><label className="text-orange-600 font-bold">EMI (₹)</label><input type="number" value={formData.noCostEmi} onChange={e => setFormData({ ...formData, noCostEmi: e.target.value })} className="font-bold text-orange-600" placeholder="e.g. 1999" /></div>
+                           <div className="admin-form-group"><label className="text-yellow-600 font-bold">Rating (0-5)</label><input type="number" step="0.1" value={formData.averageRating} onChange={e => setFormData({ ...formData, averageRating: e.target.value })} className="font-bold text-yellow-600" /></div>
+                           <div className="admin-form-group"><label className="text-slate-500 font-bold">Reviews</label><input type="number" value={formData.reviewCount} onChange={e => setFormData({ ...formData, reviewCount: e.target.value })} className="font-bold text-slate-500" /></div>
                         </div>
                      </div>
 
@@ -192,6 +196,13 @@ export default function CreatePackage() {
                         <div className="editor-card">
                            <div className="card-header"><h4 className="serif text-emerald-600">Exclusions</h4></div>
                            <textarea rows={8} value={formData.exclusions?.join('\n')} onChange={e => setFormData({ ...formData, exclusions: e.target.value.split('\n') })} className="bg-rose-50/10" placeholder="One per line..." />
+                        </div>
+                     </div>
+
+                     <div className="editor-card">
+                        <div className="card-header"><h4 className="serif">Terms & Conditions</h4></div>
+                        <div className="p-1">
+                           <RichTextEditor value={formData.terms} onChange={(content) => setFormData({ ...formData, terms: content })} height={250} />
                         </div>
                      </div>
                   </div>
@@ -213,8 +224,10 @@ export default function CreatePackage() {
                                        <span>{item.day || idx + 1}</span>
                                     </div>
                                     <div className="flex-1 space-y-4">
-                                       <input type="text" value={item.title} onChange={e => { const ni = [...formData.itinerary]; ni[idx].title = e.target.value; setFormData({ ...formData, itinerary: ni }); }} placeholder="Title" className="w-full bg-transparent border-b font-bold text-lg" />
-                                       <textarea value={item.description} onChange={e => { const ni = [...formData.itinerary]; ni[idx].description = e.target.value; setFormData({ ...formData, itinerary: ni }); }} placeholder="Description" className="w-full bg-transparent border-none p-0 min-h-[60px]" />
+                                       <input type="text" value={item.title} onChange={e => { const ni = [...formData.itinerary]; ni[idx].title = e.target.value; setFormData({ ...formData, itinerary: ni }); }} placeholder="Activity Title" className="w-full bg-transparent border-b font-bold text-lg" />
+                                       <div className="mt-2 p-1 bg-white rounded-xl border border-slate-100">
+                                          <RichTextEditor value={item.description} onChange={(content) => { const ni = [...formData.itinerary]; ni[idx].description = content; setFormData({ ...formData, itinerary: ni }); }} height={200} />
+                                       </div>
                                     </div>
                                     <button type="button" onClick={() => setFormData({ ...formData, itinerary: formData.itinerary.filter((_: any, i: number) => i !== idx) })} className="opacity-0 group-hover:opacity-100 transition-opacity text-slate-300 hover:text-emerald-500"><Trash2 size={16} /></button>
                                  </div>

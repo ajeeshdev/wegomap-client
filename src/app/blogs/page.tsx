@@ -88,10 +88,12 @@ export default function BlogsPage() {
                 breadcrumbs={[{ label: 'Blogs' }]}
             />
             <div className="homeContainer">
-                <div className="headerSection animate-in fade-in slide-in-from-bottom duration-700">
-                    <span className="subTitle">Our Stories</span>
-                    <h2>Travel <span>Blogs.</span></h2>
-                    <p className="description">Insider tips, destination guides, and travel stories to inspire your next journey.</p>
+                <div className="sectionHeader flex items-center justify-center mb-12">
+                    <div className="titleArea">
+                        <span className="sectionSubtitle">Our Stories</span>
+                        <h2 className="sliderTitle">Travel <span className="highlight">Blogs</span></h2>
+                        <p className="text-slate-500 max-w-2xl text-[13px] leading-relaxed mx-auto">Insider tips, destination guides, and travel stories to inspire your next journey.</p>
+                    </div>
                 </div>
 
                 {loading ? (

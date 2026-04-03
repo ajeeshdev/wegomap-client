@@ -12,6 +12,9 @@ import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import MyraBot from '@/components/MyraBot';
 import { useEnquiry } from '@/context/EnquiryContext';
 
+import { redirect } from 'next/navigation';
+import { categoryMappings } from '@/data/categoryMappings';
+
 export default function PackageDetailPage() {
     const { slug } = useParams();
     const packageSlug = Array.isArray(slug) ? slug[0] : slug;
@@ -74,7 +77,17 @@ export default function PackageDetailPage() {
         );
     }
 
-    // Default to the standard tour detail view
-    return <TourDetailView id={packageSlug} />;
+    // Root slug now ONLY handles landing pages (campaigns). 
+    // If it matches a category mapping, redirect to /packages/[slug]
+    if (categoryMappings[packageSlug]) {
+        redirect(`/packages/${packageSlug}`);
+    }
+
+    // Otherwise standard tours should also be at /packages/[slug]
+    // redirect(`/packages/${packageSlug}`); 
+    // Wait, let's just 404 if not found at all, but for now we'll allow redirecting package detail too if they were at root
+    // But most tours are only at /packages/ anyway.
+    
+    return null;
 }
 

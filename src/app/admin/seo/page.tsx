@@ -14,9 +14,25 @@ export default function SEOAdmin() {
 
   const fetchData = async () => {
     try {
-      const res = await fetch(`${API_URL}/pages`);
-      const json = await res.json();
-      if (json.success) setData(json.data);
+      const [pagesRes, blogsRes] = await Promise.all([
+        fetch(`${API_URL}/pages`),
+        fetch(`${API_URL}/blogs`)
+      ]);
+      
+      const pagesJson = await pagesRes.json();
+      const blogsJson = await blogsRes.json();
+
+      if (pagesJson.success) {
+        let pages = pagesJson.data;
+
+        // If we got blogs, filter them out of the SEO list as they are handled in the blog editor
+        if (blogsJson.success && blogsJson.data) {
+          const blogSlugs = new Set(blogsJson.data.map((b: any) => b.slug));
+          pages = pages.filter((p: any) => !blogSlugs.has(p.slug));
+        }
+        
+        setData(pages);
+      }
     } catch (err) { console.error(err); } 
     finally { setLoading(false); }
   };
@@ -27,7 +43,7 @@ export default function SEOAdmin() {
     
     // Simple filter to exclude clearly package/event related landing pages if any
     // though most in Page collection are probably static pages
-    const excludes = ['package', 'event'];
+    const excludes = ['package', 'event', 'blog'];
     const matchesExclude = excludes.some(exc => title.includes(exc) || slug.includes(exc));
     
     return !matchesExclude && title.includes(searchTerm.toLowerCase());

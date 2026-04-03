@@ -11,7 +11,8 @@ export default function SiteOptionsPage() {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     
-    // Group states to match the tabs
+
+
     const [general, setGeneral] = useState({
         site_title: '',
         analytics_script: '',
@@ -48,7 +49,12 @@ export default function SiteOptionsPage() {
         footer_copyright: ''
     });
 
-    // Navigation states removed as they are now in the Menus module
+    const [payment, setPayment] = useState({
+        razorpay_button_id: '',
+        upi_id: '',
+        upi_phone: '',
+        bank_accounts: [] as any[]
+    });
 
     useEffect(() => {
         fetchOptions();
@@ -70,6 +76,13 @@ export default function SiteOptionsPage() {
                     if (opt.key in con) (con as Record<string, string>)[opt.key] = opt.value;
                     if (opt.key in soc) (soc as Record<string, string>)[opt.key] = opt.value;
                     if (opt.key in foo) (foo as Record<string, string>)[opt.key] = opt.value;
+
+                    if (opt.key === 'payment_details') {
+                        try {
+                            const parsed = JSON.parse(opt.value);
+                            setPayment(parsed);
+                        } catch(e) {}
+                    }
                 });
                 
                 setGeneral(gen);
@@ -93,7 +106,8 @@ export default function SiteOptionsPage() {
                 ...Object.entries(general).map(([k, v]) => ({ key: k, value: String(v) })),
                 ...Object.entries(contact).map(([k, v]) => ({ key: k, value: String(v) })),
                 ...Object.entries(social).map(([k, v]) => ({ key: k, value: String(v) })),
-                ...Object.entries(footer).map(([k, v]) => ({ key: k, value: String(v) }))
+                ...Object.entries(footer).map(([k, v]) => ({ key: k, value: String(v) })),
+                { key: 'payment_details', value: JSON.stringify(payment) }
             ];
 
             const res = await fetch(`${API_URL}/options/bulk`, {
@@ -152,23 +166,43 @@ export default function SiteOptionsPage() {
                 </div>
             </div>
 
-            <div className="">
-                <div className="space-y-6">
-                    
+            <div className="space-y-6">
+
+
                     {/* General Section */}
                     <div className="admin-form-card">
                         <div className="space-y-4">
-                            <div className="admin-form-group">
-                                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Site name</label>
-                                <input 
-                                    type="text" 
-                                    value={general.site_title}
-                                    onChange={e => setGeneral({...general, site_title: e.target.value})}
-                                    className="admin-form-input !h-9" 
-                                />
+                            <div className="admin-form-grid-3">
+                                <div className="admin-form-group">
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Site name</label>
+                                    <input 
+                                        type="text" 
+                                        value={general.site_title}
+                                        onChange={e => setGeneral({...general, site_title: e.target.value})}
+                                        className="admin-form-input !h-9" 
+                                    />
+                                </div>
+                                <div className="admin-form-group">
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Google rating</label>
+                                    <input 
+                                        type="text" 
+                                        value={general.google_rating}
+                                        onChange={e => setGeneral({...general, google_rating: e.target.value})}
+                                        className="admin-form-input !h-9"
+                                    />
+                                </div>
+                                <div className="admin-form-group">
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Total reviews</label>
+                                    <input 
+                                        type="text" 
+                                        value={general.google_reviews}
+                                        onChange={e => setGeneral({...general, google_reviews: e.target.value})}
+                                        className="admin-form-input !h-9"
+                                    />
+                                </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="admin-form-grid-2">
                                 <div className="admin-form-group">
                                     <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Site logo</label>
                                     <div className="border border-slate-100 rounded-lg p-2 bg-slate-50/30">
@@ -196,26 +230,7 @@ export default function SiteOptionsPage() {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="admin-form-group">
-                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Google rating</label>
-                                    <input 
-                                        type="text" 
-                                        value={general.google_rating}
-                                        onChange={e => setGeneral({...general, google_rating: e.target.value})}
-                                        className="admin-form-input !h-9"
-                                    />
-                                </div>
-                                <div className="admin-form-group">
-                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Total reviews</label>
-                                    <input 
-                                        type="text" 
-                                        value={general.google_reviews}
-                                        onChange={e => setGeneral({...general, google_reviews: e.target.value})}
-                                        className="admin-form-input !h-9"
-                                    />
-                                </div>
-                            </div>
+
 
                             <div className="admin-form-group">
                                 <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Tracking scripts</label>
@@ -260,7 +275,7 @@ export default function SiteOptionsPage() {
                                 />
                             </div>
                             
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div className="admin-form-grid-3">
                                 <div className="admin-form-group">
                                     <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Phone Primary</label>
                                     <input type="text" value={contact.phone1} onChange={e => setContact({...contact, phone1: e.target.value})} className="admin-form-input !h-9" />
@@ -275,7 +290,7 @@ export default function SiteOptionsPage() {
                                 </div>
                             </div>
                             
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                            <div className="admin-form-grid-3 pt-2">
                                 <div className="admin-form-group">
                                     <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Email Info</label>
                                     <input type="email" value={contact.email1} onChange={e => setContact({...contact, email1: e.target.value})} className="admin-form-input !h-9" />
@@ -298,22 +313,22 @@ export default function SiteOptionsPage() {
                         <div className="space-y-6">
                             <h3 className="admin-form-section-title text-base font-semibold text-slate-800">Social links</h3>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="admin-form-grid-4">
                                 <div className="admin-form-group">
                                     <label className="admin-form-label">Facebook</label>
-                                    <input type="url" value={social.facebook} onChange={e => setSocial({...social, facebook: e.target.value})} className="admin-form-input" />
+                                    <input type="url" value={social.facebook} onChange={e => setSocial({...social, facebook: e.target.value})} className="admin-form-input !h-9" />
                                 </div>
                                 <div className="admin-form-group">
                                     <label className="admin-form-label">Instagram</label>
-                                    <input type="url" value={social.instagram} onChange={e => setSocial({...social, instagram: e.target.value})} className="admin-form-input" />
+                                    <input type="url" value={social.instagram} onChange={e => setSocial({...social, instagram: e.target.value})} className="admin-form-input !h-9" />
                                 </div>
                                 <div className="admin-form-group">
                                     <label className="admin-form-label">Pinterest</label>
-                                    <input type="url" value={social.pinterest} onChange={e => setSocial({...social, pinterest: e.target.value})} className="admin-form-input" />
+                                    <input type="url" value={social.pinterest} onChange={e => setSocial({...social, pinterest: e.target.value})} className="admin-form-input !h-9" />
                                 </div>
                                 <div className="admin-form-group">
                                     <label className="admin-form-label">LinkedIn</label>
-                                    <input type="url" value={social.linkedin} onChange={e => setSocial({...social, linkedin: e.target.value})} className="admin-form-input" />
+                                    <input type="url" value={social.linkedin} onChange={e => setSocial({...social, linkedin: e.target.value})} className="admin-form-input !h-9" />
                                 </div>
                             </div>
                         </div>
@@ -329,25 +344,22 @@ export default function SiteOptionsPage() {
                                 <textarea value={footer.footer_quote} onChange={e => setFooter({...footer, footer_quote: e.target.value})} rows={2} className="admin-form-input" />
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="admin-form-grid-4 gap-4">
                                 <div className="admin-form-group">
                                     <label className="admin-form-label">Quote author</label>
-                                    <input type="text" value={footer.footer_author} onChange={e => setFooter({...footer, footer_author: e.target.value})} className="admin-form-input" />
+                                    <input type="text" value={footer.footer_author} onChange={e => setFooter({...footer, footer_author: e.target.value})} className="admin-form-input !h-9" />
                                 </div>
                                 <div className="admin-form-group">
-                                    <label className="admin-form-label">Footer subtitle</label>
-                                    <input type="text" value={footer.footer_reveal_text} onChange={e => setFooter({...footer, footer_reveal_text: e.target.value})} className="admin-form-input" />
+                                    <label className="admin-form-label">Footer sub</label>
+                                    <input type="text" value={footer.footer_reveal_text} onChange={e => setFooter({...footer, footer_reveal_text: e.target.value})} className="admin-form-input !h-9" />
                                 </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="admin-form-group">
                                     <label className="admin-form-label">CTA title</label>
-                                    <input type="text" value={footer.footer_cta_title} onChange={e => setFooter({...footer, footer_cta_title: e.target.value})} className="admin-form-input" />
+                                    <input type="text" value={footer.footer_cta_title} onChange={e => setFooter({...footer, footer_cta_title: e.target.value})} className="admin-form-input !h-9" />
                                 </div>
                                 <div className="admin-form-group">
-                                    <label className="admin-form-label">CTA subtitle</label>
-                                    <input type="text" value={footer.footer_cta_subtitle} onChange={e => setFooter({...footer, footer_cta_subtitle: e.target.value})} className="admin-form-input" />
+                                    <label className="admin-form-label">CTA sub</label>
+                                    <input type="text" value={footer.footer_cta_subtitle} onChange={e => setFooter({...footer, footer_cta_subtitle: e.target.value})} className="admin-form-input !h-9" />
                                 </div>
                             </div>
 
@@ -358,7 +370,183 @@ export default function SiteOptionsPage() {
                         </div>
                     </div>
 
-                </div>
+                    {/* Payment Section */}
+                    <div className="admin-form-card">
+                        <div className="space-y-6">
+                            <h3 className="admin-form-section-title text-base font-semibold text-slate-800 border-b border-slate-50 pb-2">Payment Details</h3>
+
+                            <div className="admin-form-grid-3">
+                                <div className="admin-form-group">
+                                    <label className="admin-form-label">Razorpay Button ID</label>
+                                    <input 
+                                        type="text" 
+                                        value={payment.razorpay_button_id} 
+                                        onChange={e => setPayment({...payment, razorpay_button_id: e.target.value})} 
+                                        className="admin-form-input !h-9 font-mono text-[11px]" 
+                                        placeholder="pl_XXXXXXX"
+                                    />
+                                </div>
+                                <div className="admin-form-group">
+                                    <label className="admin-form-label">UPI ID</label>
+                                    <input 
+                                        type="text" 
+                                        value={payment.upi_id} 
+                                        onChange={e => setPayment({...payment, upi_id: e.target.value})} 
+                                        className="admin-form-input !h-9" 
+                                        placeholder="9778734488@obizaxis"
+                                    />
+                                </div>
+                                <div className="admin-form-group">
+                                    <label className="admin-form-label">UPI Phone</label>
+                                    <input 
+                                        type="text" 
+                                        value={payment.upi_phone} 
+                                        onChange={e => setPayment({...payment, upi_phone: e.target.value})} 
+                                        className="admin-form-input !h-9" 
+                                        placeholder="+91 9778734488"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="pt-4">
+                                <div className="flex items-center justify-between mb-4">
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest">Bank Accounts</label>
+                                    <button 
+                                        onClick={() => setPayment({
+                                            ...payment, 
+                                            bank_accounts: [...payment.bank_accounts, { 
+                                                name: '', accountName: 'WEGOMAP', accountNo: '', ifsc: '', branch: '', acctType: 'Current Account', color: '#004B92' 
+                                            }]
+                                        })}
+                                        className="text-[10px] bg-slate-900 text-white px-3 py-1 rounded hover:bg-slate-800 transition-colors"
+                                    >
+                                        + Add Bank
+                                    </button>
+                                </div>
+
+                                <div className="space-y-4">
+                                    {payment.bank_accounts.map((bank, bIdx) => (
+                                        <div key={bIdx} className="p-4 bg-slate-50/50 rounded-xl border border-slate-100 relative group">
+                                            <button 
+                                                onClick={() => {
+                                                    const updated = [...payment.bank_accounts];
+                                                    updated.splice(bIdx, 1);
+                                                    setPayment({...payment, bank_accounts: updated});
+                                                }}
+                                                className="absolute top-2 right-2 p-1 text-slate-300 hover:text-red-500 transition-colors"
+                                            >
+                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                            </button>
+
+                                            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                                <div className="admin-form-group">
+                                                    <label className="text-[10px] font-bold text-slate-400 uppercase">Bank Name</label>
+                                                    <input 
+                                                        type="text" 
+                                                        value={bank.name} 
+                                                        onChange={e => {
+                                                            const updated = [...payment.bank_accounts];
+                                                            updated[bIdx].name = e.target.value;
+                                                            setPayment({...payment, bank_accounts: updated});
+                                                        }}
+                                                        className="admin-form-input !h-8 text-[12px]" 
+                                                    />
+                                                </div>
+                                                <div className="admin-form-group">
+                                                    <label className="text-[10px] font-bold text-slate-400 uppercase">Account Name</label>
+                                                    <input 
+                                                        type="text" 
+                                                        value={bank.accountName} 
+                                                        onChange={e => {
+                                                            const updated = [...payment.bank_accounts];
+                                                            updated[bIdx].accountName = e.target.value;
+                                                            setPayment({...payment, bank_accounts: updated});
+                                                        }}
+                                                        className="admin-form-input !h-8 text-[12px]" 
+                                                    />
+                                                </div>
+                                                <div className="admin-form-group">
+                                                    <label className="text-[10px] font-bold text-slate-400 uppercase">Account No</label>
+                                                    <input 
+                                                        type="text" 
+                                                        value={bank.accountNo} 
+                                                        onChange={e => {
+                                                            const updated = [...payment.bank_accounts];
+                                                            updated[bIdx].accountNo = e.target.value;
+                                                            setPayment({...payment, bank_accounts: updated});
+                                                        }}
+                                                        className="admin-form-input !h-8 text-[12px] font-mono" 
+                                                    />
+                                                </div>
+                                                <div className="admin-form-group">
+                                                    <label className="text-[10px] font-bold text-slate-400 uppercase">IFSC Code</label>
+                                                    <input 
+                                                        type="text" 
+                                                        value={bank.ifsc} 
+                                                        onChange={e => {
+                                                            const updated = [...payment.bank_accounts];
+                                                            updated[bIdx].ifsc = e.target.value;
+                                                            setPayment({...payment, bank_accounts: updated});
+                                                        }}
+                                                        className="admin-form-input !h-8 text-[12px] font-mono" 
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3">
+                                                <div className="admin-form-group">
+                                                    <label className="text-[10px] font-bold text-slate-400 uppercase">Branch</label>
+                                                    <input 
+                                                        type="text" 
+                                                        value={bank.branch} 
+                                                        onChange={e => {
+                                                            const updated = [...payment.bank_accounts];
+                                                            updated[bIdx].branch = e.target.value;
+                                                            setPayment({...payment, bank_accounts: updated});
+                                                        }}
+                                                        className="admin-form-input !h-8 text-[12px]" 
+                                                    />
+                                                </div>
+                                                <div className="admin-form-group">
+                                                    <label className="text-[10px] font-bold text-slate-400 uppercase">Type</label>
+                                                    <select 
+                                                        value={bank.acctType} 
+                                                        onChange={e => {
+                                                            const updated = [...payment.bank_accounts];
+                                                            updated[bIdx].acctType = e.target.value;
+                                                            setPayment({...payment, bank_accounts: updated});
+                                                        }}
+                                                        className="admin-form-input !h-8 text-[12px]"
+                                                    >
+                                                        <option value="Current Account">Current Account</option>
+                                                        <option value="Savings Account">Savings Account</option>
+                                                    </select>
+                                                </div>
+                                                <div className="admin-form-group">
+                                                    <label className="text-[10px] font-bold text-slate-400 uppercase">Brand Color</label>
+                                                    <input 
+                                                        type="color" 
+                                                        value={bank.color} 
+                                                        onChange={e => {
+                                                            const updated = [...payment.bank_accounts];
+                                                            updated[bIdx].color = e.target.value;
+                                                            setPayment({...payment, bank_accounts: updated});
+                                                        }}
+                                                        className="h-8 w-full rounded border border-slate-100 p-0 overflow-hidden cursor-pointer" 
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                    {payment.bank_accounts.length === 0 && (
+                                        <div className="text-center py-8 border-2 border-dashed border-slate-50 rounded-2xl text-slate-300 text-[11px] font-bold uppercase tracking-widest">
+                                            No bank accounts added
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
             </div>
         </div>
     );

@@ -190,7 +190,7 @@ export default function EditCab() {
                 </select>
               </div>
 
-              <div className="grid grid-cols-2 gap-6">
+              <div className="admin-form-grid-2">
                 <div className="admin-form-group">
                   <label className="admin-form-label text-[10px] font-black uppercase tracking-[0.2em] flex items-center gap-2 mb-3 opacity-60"><Users size={12}/> PAX Unit</label>
                   <input 

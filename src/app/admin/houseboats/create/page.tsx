@@ -151,35 +151,37 @@ export default function CreateHouseboat() {
               Pricing & Type
             </h4>
             <div className="space-y-6">
-              <div className="admin-form-group">
-                <label className="admin-form-label text-[10px] flex items-center gap-2"> <Tag size={10} className="text-blue-600" /> Category</label>
-                <div className="relative">
-                    <select 
-                        value={formData.category} 
-                        onChange={e => setFormData({ ...formData, category: e.target.value })}
-                        className="admin-form-input font-bold text-slate-900 cursor-pointer bg-white h-11 appearance-none pr-10"
-                    >
-                        <option value="Deluxe">Deluxe</option>
-                        <option value="Premium">Premium</option>
-                        <option value="Luxury">Luxury</option>
-                    </select>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-                        <Waves size={14} />
-                    </div>
+              <div className="admin-form-grid-2">
+                <div className="admin-form-group">
+                  <label className="admin-form-label text-[10px] flex items-center gap-2"> <Tag size={10} className="text-blue-600" /> Category</label>
+                  <div className="relative">
+                      <select 
+                          value={formData.category} 
+                          onChange={e => setFormData({ ...formData, category: e.target.value })}
+                          className="admin-form-input font-bold text-slate-900 cursor-pointer bg-white h-11 appearance-none pr-10"
+                      >
+                          <option value="Deluxe">Deluxe</option>
+                          <option value="Premium">Premium</option>
+                          <option value="Luxury">Luxury</option>
+                      </select>
+                      <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                          <Waves size={14} />
+                      </div>
+                  </div>
                 </div>
-              </div>
 
-              <div className="admin-form-group">
-                <label className="admin-form-label text-[10px] flex items-center gap-2"> <IndianRupee size={10} className="text-emerald-500" /> Price per Night (₹)</label>
-                <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-xs">₹</span>
-                  <input 
-                    type="text" 
-                    value={formData.price} 
-                    onChange={e => setFormData({ ...formData, price: e.target.value })} 
-                    className="admin-form-input pl-10 font-black text-slate-900 h-11" 
-                    placeholder="0.00" 
-                  />
+                <div className="admin-form-group">
+                  <label className="admin-form-label text-[10px] flex items-center gap-2"> <IndianRupee size={10} className="text-emerald-500" /> Price (₹)</label>
+                  <div className="relative">
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-xs">₹</span>
+                    <input 
+                      type="text" 
+                      value={formData.price} 
+                      onChange={e => setFormData({ ...formData, price: e.target.value })} 
+                      className="admin-form-input pl-10 font-black text-slate-900 h-11" 
+                      placeholder="0.00" 
+                    />
+                  </div>
                 </div>
               </div>
 

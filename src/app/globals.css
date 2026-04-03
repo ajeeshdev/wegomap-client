@@ -1,4 +1,8 @@
 @import "tailwindcss";
+@source "../**/*.{ts,tsx}";
+@source "../../scss/**/*.{scss,css}";
+
+
 
 @layer base {
   .tour-description-content {
@@ -10,18 +14,46 @@
   }
 
   .tour-description-content ul {
-    @apply list-disc ml-6 mb-4;
+    @apply list-none ml-0 mb-8;
   }
 
   .tour-description-content li {
-    @apply mb-2;
+    @apply mb-5 relative pl-9 text-slate-700 font-medium leading-relaxed;
+  }
+
+  .tour-description-content li::before {
+    content: "";
+    @apply absolute left-0 top-[0.15em] w-6 h-6 rounded-full bg-orange-500/10;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%23f97316" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 14px;
+    transition: all 0.3s ease;
+  }
+
+  .tour-description-content li:hover::before {
+    @apply bg-orange-500/20 scale-110 shadow-[0_4px_12px_rgba(249,115,22,0.1)];
+  }
+
+  .tour-description-content ul ul {
+    @apply mt-4 mb-2 ml-4;
+  }
+
+  .tour-description-content ul ul li {
+    @apply text-slate-500 text-[0.95em] mb-3;
+  }
+
+  .tour-description-content ul ul li::before {
+    @apply w-5 h-5 top-[0.25em] bg-slate-100;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="%2394a3b8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 12 12 4 12"></polyline></svg>');
+    background-size: 10px;
   }
 
   .tour-description-content h1,
   .tour-description-content h2,
   .tour-description-content h3,
   .tour-description-content h4 {
-    @apply font-black text-slate-900 uppercase italic tracking-tighter mt-8 mb-4;
+    @apply font-black text-slate-900 uppercase italic tracking-tighter mt-12 mb-6;
   }
 }
 

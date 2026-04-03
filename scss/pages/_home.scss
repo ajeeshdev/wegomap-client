@@ -674,22 +674,39 @@
             font-weight: 700;
             font-size: 0.9rem;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: #f8fafc;
+            background: transparent;
 
             svg {
                 color: #64748b;
                 transition: color 0.3s;
             }
 
-            &:hover {
-                background: $cosmicOrange;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba($primaryColor, 0.25);
-                color: #fff;
+            .threeDIconWrapper {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: transform 0.3s ease;
 
-                svg {
-                    color: #fff;
+                img {
+                    mix-blend-mode: multiply; // Removes white background from generated images
                 }
+            }
+
+            &:hover {
+                background: rgba($cosmicOrange, 0.05); // Subtle hover background instead of solid
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+                color: $cosmicOrange; // Keep brand color on hover
+
+                svg, .threeDIconWrapper {
+                    color: $cosmicOrange;
+                    transform: scale(1.1);
+                }
+            }
+
+            &.active {
+                color: $cosmicOrange;
+                font-weight: 800;
             }
 
         }
