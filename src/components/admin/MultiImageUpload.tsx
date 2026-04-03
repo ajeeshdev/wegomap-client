@@ -8,9 +8,10 @@ interface MultiImageUploadProps {
   value: string[];
   onChange: (urls: string[]) => void;
   label?: string;
+  dimensions?: string;
 }
 
-export default function MultiImageUpload({ value, onChange, label = "Gallery Assets" }: MultiImageUploadProps) {
+export default function MultiImageUpload({ value, onChange, label = "Gallery Assets", dimensions }: MultiImageUploadProps) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -70,9 +71,17 @@ export default function MultiImageUpload({ value, onChange, label = "Gallery Ass
 
   return (
     <div className="space-y-6">
-      <label className="admin-form-label text-[10px] flex items-center gap-3 mb-2 font-black uppercase tracking-[0.2em] text-slate-400">
-        <ImageIcon size={14} className="text-blue-600" /> {label}
-      </label>
+      <div className="flex items-center justify-between gap-4">
+        <label className="admin-form-label text-[10px] flex items-center gap-3 mb-2 font-black uppercase tracking-[0.2em] text-slate-400">
+          <ImageIcon size={14} className="text-blue-600" /> {label}
+        </label>
+        {dimensions && (
+          <div className="px-2 py-0.5 rounded-md bg-blue-50 border border-blue-100/50 flex items-center gap-1.5 group/dim hover:bg-blue-100 transition-colors mb-2">
+            <span className="text-[10px] font-bold text-blue-600 uppercase tracking-tight">Rec:</span>
+            <span className="text-[10px] font-black text-blue-700 font-mono tracking-tighter">{dimensions}</span>
+          </div>
+        )}
+      </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
         {value.map((url, index) => (

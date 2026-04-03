@@ -174,6 +174,7 @@ export default function CreateSpecialEvent() {
                     value={formData.image}
                     onChange={(url) => setFormData({ ...formData, image: url })}
                     label="Cover Image"
+                    dimensions="1200 x 800"
                   />
                 </div>
 

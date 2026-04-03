@@ -2078,5 +2078,211 @@ tr:hover .admin-icon-enclosure {
 button.admin-btn-small {
     display: flex;
     align-items: center;
-    gap: 9px;
+}
+
+@media (max-width: 1024px) {
+  /* Hide sidebar completely on mobile by default */
+  .admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transform: translateX(-100%);
+    box-shadow: 25px 0 50px -12px rgba(0, 0, 0, 0.25);
+    z-index: 9999;
+    border-right: none;
+    max-width: 85vw;
+  }
+
+  /* Show when active */
+  .admin-sidebar--open {
+    transform: translateX(0);
+  }
+
+  /* Backdrop overlay */
+  .admin-sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 9998;
+    animation: fadeInOverlay 0.3s ease-out forwards;
+  }
+
+  @keyframes fadeInOverlay {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .admin-hamburger-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #0f172a;
+    cursor: pointer;
+  }
+
+  .admin-sidebar-close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    background: #f1f5f9;
+    color: #64748b;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+  /* Make forms stack */
+  .admin-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Header Optimization */
+  .admin-header {
+    padding: 0 1rem;
+  }
+  .admin-header-title {
+    display: none; /* Takes up too much space */
+  }
+  .admin-user-info {
+    display: none; /* Hide user labels on mobile */
+  }
+  
+  /* Layout Paddings */
+  .admin-content-area {
+    padding: 1rem 0.5rem;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  .cms-page-wrapper {
+    max-width: calc(100vw - 1rem); /* 0.5rem padding on each side */
+    overflow-x: hidden;
+  }
+  .admin-form-card,
+  .admin-card,
+  .p-8,
+  .p-12 {
+    padding: 1rem !important; /* Force simpler padding */
+  }
+
+  /* Page Headers Wrapping */
+  .admin-page-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1rem;
+  }
+  .admin-page-header > div:last-child {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  /* Sticky Action Bar */
+  .admin-sticky-action-bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    bottom: 0;
+    border-radius: 1rem 1rem 0 0;
+    padding: 1rem !important;
+  }
+  .admin-sticky-action-bar > div:last-child {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  .admin-sticky-action-bar .admin-btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Horizontal scrolling for Tables */
+  .admin-table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .admin-table {
+    min-width: 600px;
+  }
+  
+  .cms-table-wrapper,
+  .cms-listing-card {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+  .cms-table {
+    min-width: 700px;
+  }
+
+  /* Rich Text Editor Overrides */
+  .quill, .ql-toolbar, .ql-container {
+    width: 100% !important;
+  }
+  .ql-toolbar {
+    white-space: normal; /* Fix floating toolbars out of frame */
+  }
+
+  /* Prevent inputs and wide text from breaking padding container */
+  .admin-form-card, 
+  .admin-card {
+    max-width: calc(100vw - 1rem); /* Force boundaries */
+  }
+  
+  /* Prevent inputs from overflowing */
+  input, textarea, select {
+    max-width: 100%;
+  }
+
+  /* List items in menus editor */
+  .admin-form-card div {
+    max-width: 100%;
+  }
+
+  /* Force all arbitrary grid columns to 1 column on mobile forms */
+  .grid-cols-2, 
+  .grid-cols-3, 
+  .grid-cols-4,
+  .admin-form-grid-2,
+  .admin-form-grid-3,
+  .admin-form-grid-4 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Ensure items-between headers wrap instead of squeezing */
+  .justify-between {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  /* Stop buttons from overflowing screen */
+  .admin-form-card .flex {
+    flex-wrap: wrap;
+  }
+  .admin-form-card > .flex.items-center.gap-3.p-3 {
+    flex-wrap: nowrap; /* except menu list items which should keep their flex row layout */
+  }
+  .admin-form-card > .flex.items-center.gap-3.p-3 .grid {
+    width: 100%;
+    flex: 1;
+  }
+}
+
+@media (min-width: 1025px) {
+
+  .admin-hamburger-btn, 
+  .admin-sidebar-close-btn {
+    display: none;
+  }
 }

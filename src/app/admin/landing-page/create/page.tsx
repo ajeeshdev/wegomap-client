@@ -222,7 +222,7 @@ export default function CreateLandingPage({ params: paramsProp }: { params?: { i
                           <div className="admin-form-group"><label>Intro Text</label><textarea rows={3} value={formData.banner_description} onChange={e => setFormData({ ...formData, banner_description: e.target.value })} /></div>
                        </div>
                        <div className="space-y-4">
-                          <ImageUpload value={formData.banner_image} onChange={url => setFormData({ ...formData, banner_image: url })} label="Hero Media" />
+                          <ImageUpload value={formData.banner_image} onChange={url => setFormData({ ...formData, banner_image: url })} label="Hero Media" dimensions="1920 x 800" />
                           <div className="grid grid-cols-2 gap-4">
                              <div className="admin-form-group"><label>Primary Button</label><input type="text" value={formData.hero_cta_button} onChange={e=>setFormData({...formData, hero_cta_button:e.target.value})} /></div>
                              <div className="admin-form-group"><label>Starting Label</label><input type="text" value={formData.hero_starting_label} onChange={e=>setFormData({...formData, hero_starting_label:e.target.value})} /></div>
@@ -234,7 +234,7 @@ export default function CreateLandingPage({ params: paramsProp }: { params?: { i
                  <div className="editor-card">
                     <div className="card-header"><h4 className="serif">2. Narrative Section</h4></div>
                     <div className="grid grid-cols-2 gap-8 items-start">
-                       <ImageUpload value={formData.about_image} onChange={url => setFormData({ ...formData, about_image: url })} label="Background Parallax Image" size="small" />
+                       <ImageUpload value={formData.about_image} onChange={url => setFormData({ ...formData, about_image: url })} label="Background Parallax Image" size="small" dimensions="1920 x 600" />
                        <div className="space-y-4">
                           <div className="admin-form-group"><label>Section Title</label><input type="text" value={formData.about_title} onChange={e => setFormData({ ...formData, about_title: e.target.value })} className="font-bold" /></div>
                           <div className="admin-form-group"><label>Description</label><textarea rows={6} value={formData.about_description} onChange={e => setFormData({ ...formData, about_description: e.target.value })} /></div>
@@ -263,7 +263,7 @@ export default function CreateLandingPage({ params: paramsProp }: { params?: { i
                           <div className="admin-form-group"><label>Bottom Closing Title</label><input type="text" value={formData.end_title} onChange={e => setFormData({ ...formData, end_title: e.target.value })} className="bg-white" /></div>
                           <div className="admin-form-group"><label>Statement</label><textarea rows={4} value={formData.end_description} onChange={e => setFormData({ ...formData, end_description: e.target.value })} className="bg-white" /></div>
                        </div>
-                       <ImageUpload value={formData.end_image} onChange={url => setFormData({ ...formData, end_image: url })} label="Decorative Media" size="small" />
+                       <ImageUpload value={formData.end_image} onChange={url => setFormData({ ...formData, end_image: url })} label="Decorative Media" size="small" dimensions="1200 x 800" />
                     </div>
                  </div>
 

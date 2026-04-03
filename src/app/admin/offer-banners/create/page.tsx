@@ -125,6 +125,7 @@ export default function CreateOfferBanner() {
                       altValue={formData.imageAlt}
                       onAltChange={(alt) => setFormData({ ...formData, imageAlt: alt })}
                       label="Upload Banner Image (Recommended aspect ratio 25:7)"
+                      dimensions="1200 x 400"
                     />
                   </div>
                 </div>

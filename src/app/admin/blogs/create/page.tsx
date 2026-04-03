@@ -231,6 +231,7 @@ export default function CreateBlog() {
                   altValue={formData.featuredImageAlt}
                   onAltChange={(alt) => setFormData({ ...formData, featuredImageAlt: alt })}
                   label=""
+                  dimensions="1200 x 800"
                 />
               </div>
             </div>

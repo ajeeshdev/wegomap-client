@@ -190,6 +190,7 @@ export default function CreateHouseboat() {
                     value={formData.image}
                     onChange={(url) => setFormData({ ...formData, image: url })}
                     label="Houseboat Image"
+                    dimensions="1200 x 800"
                   />
                 </div>
 

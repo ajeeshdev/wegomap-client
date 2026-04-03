@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { 
     Heart, MapPin, Star, ArrowLeft, 
-    Trash2, ShoppingBag, ArrowRight,
+    Trash2, ShoppingBag, ArrowRight, ChevronRight,
     Sparkles, User, Contact
 } from 'lucide-react';
 import Image from 'next/image';
@@ -149,29 +149,64 @@ export default function WishlistPage() {
                                 </Link>
                             </div>
                         ) : (
-                            <div className="wishlistGrid">
-                                {wishlist.map((item) => {
-                                    const pkg = {
-                                        slug: item.slug || item._id,
-                                        title: item.title,
-                                        location: item.location,
-                                        duration: item.duration,
-                                        price: `₹${item.price.toLocaleString()}`,
-                                        oldPrice: item.oldamt ? `₹${Number(item.oldamt).toLocaleString()}` : null,
-                                        image: item.thumb || (item.images && item.images[0]) || '/bg-placeholder.jpg',
-                                        images: item.images || [],
-                                        subtitle: item.subtitle || item.description || '',
-                                        highlights: item.highlights || [],
-                                        itinerary: item.itinerary || [],
-                                    };
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
+                                {wishlist.map((pkg) => {
                                     return (
-                                        <PackageCard 
-                                            key={item._id}
-                                            pkg={pkg}
-                                            wishlist={wishlist.map(w => w._id)}
-                                            toggleWishlist={(id: string, e: React.MouseEvent) => removeFromWishlist(id, e)}
-                                            onEnquire={(e: React.MouseEvent, title: string) => {}}
-                                        />
+                                        <div key={pkg._id} className="group relative bg-[#f1f5f9] rounded-[2rem] overflow-hidden border border-transparent hover:border-blue-100 transition-all duration-500 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)]">
+                                            {/* Image Area */}
+                                            <div className="aspect-[4/3] relative overflow-hidden">
+                                                <Image
+                                                    src={getImageUrl(pkg.images?.[0] || pkg.image || pkg.thumb || '/bg-placeholder.jpg')}
+                                                    alt={pkg.title}
+                                                    fill
+                                                    className="object-cover group-hover:scale-110 transition-transform duration-700"
+                                                    unoptimized
+                                                />
+                                                {/* Price Badge */}
+                                                <div className="absolute top-4 left-4 z-10">
+                                                    <div className="bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-xl border border-white/20">
+                                                        {pkg.oldamt && (
+                                                            <span className="text-[9px] text-slate-400 line-through block font-bold mb-0.5 tracking-tighter decoration-red-400/50">
+                                                                ₹{Number(pkg.oldamt).toLocaleString()}
+                                                            </span>
+                                                        )}
+                                                        <div className="flex items-center gap-0.5 text-slate-900 font-black tracking-tighter text-sm">
+                                                            <span className="text-[10px]">₹</span>{Number(pkg.price).toLocaleString()}
+                                                            <small className="text-[8px] text-slate-500 font-bold ml-1 uppercase">Per Person</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {/* Remove Wishlist Button */}
+                                                <button 
+                                                    onClick={(e) => removeFromWishlist(pkg._id, e)}
+                                                    className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center shadow-lg transition-all z-20 bg-rose-500 text-white hover:bg-rose-600"
+                                                >
+                                                    <Heart size={14} fill="currentColor" />
+                                                </button>
+                                            </div>
+
+                                            {/* Content Area */}
+                                            <div className="p-6">
+                                                <h3 className="text-lg font-black text-slate-900 mb-1.5 truncate group-hover:text-blue-600 transition-colors uppercase tracking-tight">{pkg.title}</h3>
+                                                <p className="text-slate-500 text-[11px] font-semibold mb-6 flex items-center gap-1">
+                                                    <MapPin size={10} /> {pkg.location || 'Global destination'}
+                                                </p>
+                                                <div className="flex justify-between items-center group-hover:translate-x-1 transition-transform">
+                                                    <div className="flex items-center gap-1.5">
+                                                        <div className="flex gap-0.5 text-yellow-500">
+                                                            {[...Array(5)].map((_, i) => (
+                                                                <Star key={i} size={12} fill={i < Math.floor(pkg.rating || 5) ? "currentColor" : "none"} />
+                                                            ))}
+                                                        </div>
+                                                        <span className="text-[10px] font-bold text-slate-600">({pkg.rating || 5})</span>
+                                                    </div>
+                                                    <Link href={`/packages/${pkg.slug || pkg._id}`} className="w-8 h-8 bg-white group-hover:bg-blue-600 group-hover:text-white rounded-full flex items-center justify-center shadow-lg transition-all border border-slate-100">
+                                                        <ChevronRight size={14} />
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                        </div>
                                     );
                                 })}
                             </div>

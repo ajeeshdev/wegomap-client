@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { ChevronDown, Package, FileText, Users, Home, Settings, LogOut,
   MapPin, Car, Anchor, MessageSquare, HelpCircle,
   Image as ImageIcon, List, File, CheckCircle, Sliders,
-  PartyPopper, Calendar, Inbox, Briefcase, Globe, Layout
+  PartyPopper, Calendar, Inbox, Briefcase, Globe, Layout, ArrowRightLeft,
+  Menu, X as XIcon
  } from 'lucide-react';
  import { usePathname, useRouter } from 'next/navigation';
  import { useEffect, useState } from 'react';
@@ -21,6 +22,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [logo, setLogo] = useState('');
   const [siteTitle, setSiteTitle] = useState('WEGOMAP');
   const [favicon, setFavicon] = useState('');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -46,6 +48,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
     fetchSettings();
   }, [router]);
+
+  // Auto-close sidebar on route change (mobile)
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [pathname]);
 
   const fetchSettings = async () => {
     try {
@@ -108,6 +115,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       subItems: [
         { label: 'Site Profile', href: '/admin/site-options' },
         { label: 'Navigation Menus', href: '/admin/menus' },
+        { label: 'URL Redirections', href: '/admin/redirections' },
       ]
     },
     { 
@@ -240,8 +248,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   return (
     <div className="admin-layout selection:bg-blue-600/20">
+      {/* Mobile overlay backdrop */}
+      {sidebarOpen && (
+        <div
+          className="admin-sidebar-overlay"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <div className="admin-sidebar shadow-sm">
+      <div className={`admin-sidebar ${sidebarOpen ? 'admin-sidebar--open' : ''}`}>
         
         {/* Branding */}
         <div className="admin-sidebar-header">
@@ -253,6 +269,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <h2 className="admin-logo-text">{siteTitle}</h2>
             </>
           )}
+          {/* Close button on mobile */}
+          <button
+            className="admin-sidebar-close-btn"
+            onClick={() => setSidebarOpen(false)}
+            aria-label="Close sidebar"
+          >
+            <XIcon size={18} />
+          </button>
         </div>
 
         {/* Navigation */}
@@ -324,6 +348,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {/* Top Navbar */}
         <header className="admin-header">
           <div className="flex items-center gap-4">
+            {/* Hamburger - mobile only */}
+            <button
+              className="admin-hamburger-btn"
+              onClick={() => setSidebarOpen(true)}
+              aria-label="Open sidebar"
+            >
+              <Menu size={20} />
+            </button>
             <h1 className="admin-header-title">
               System Administration
             </h1>

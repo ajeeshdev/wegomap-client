@@ -20,33 +20,44 @@ export default function PagesAdmin() {
     } catch (err) { console.error(err); } 
     finally { setLoading(false); }
   };
-  const mainSlugs = [
-    'home', 
-    'about', 
-    'services', 
-    'contact', 
-    'blogs', 
-    'faqs', 
-    'payment', 
-    'cruise-packages', 
-    'corporate-event-management-company-kochi', 
-    'domestic-international-packages'
+  const policySlugs = [
+    'privacy-policy', 
+    'refund-policy', 
+    'terms-and-conditions'
   ];
 
   const filteredData = data.filter((item: any) => 
-    mainSlugs.includes(item.slug) &&
-    (item.title || item.name || '').toLowerCase().includes(searchTerm.toLowerCase())
+    policySlugs.includes(item.slug) &&
+    (item.title || item.slug || '').toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleDelete = async (id: string) => {
+    if (confirm('Are you sure you want to delete this page?')) {
+        try {
+            const token = localStorage.getItem('token');
+            const res = await fetch(`${API_URL}/pages/${id}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const result = await res.json();
+            if (result.success) {
+                setData(data.filter((d: any) => d._id !== id));
+            }
+        } catch (e) {
+            console.error('Delete failed', e);
+        }
+    }
+  };
+
   return (
-    <div className="space-y-10 animate-in fade-in duration-700 pb-20">
+    <div className="space-y-10 animate-in fade-in duration-700 pb-20 px-6 lg:px-8 pt-6">
       <div className="admin-page-header">
         <div>
           <h2 className="admin-page-title">
             <div className="admin-page-title-indicator"></div>
-            Main Page SEO
+            Policy Pages
           </h2>
-          <p className="admin-page-subtitle mt-1 text-slate-400">Manage Meta Titles, Descriptions and Keywords for core site landing pages</p>
+          <p className="admin-page-subtitle mt-1 text-slate-400">Manage your website's formal legal documents, privacy terms, and refund policies.</p>
         </div>
         <div className="flex items-center gap-4">
           <div className="relative group w-64">
@@ -68,21 +79,21 @@ export default function PagesAdmin() {
           <p className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Loading Primary Nodes...</p>
         </div>
       ) : (
-        <div className="bg-white rounded-[40px] border border-slate-100 shadow-xl shadow-slate-200/50 overflow-hidden">
+        <div className="bg-white ">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-slate-50/50 border-b border-slate-100">
-                  <th className="px-10 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] w-20">ID</th>
+                  <th className="pl-10 pr-6 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] w-28">ID</th>
                   <th className="px-6 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Platform Route</th>
                   <th className="px-6 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Meta Strategy</th>
-                  <th className="px-10 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] text-right">Actions</th>
+                  <th className="pr-10 pl-6 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] text-right">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-50">
                 {filteredData.map((item: any, index: number) => (
                   <tr key={item._id} className="group hover:bg-slate-50/80 transition-all">
-                    <td className="px-10 py-8">
+                    <td className="pl-10 pr-6 py-8">
                       <span className="text-xs font-black text-slate-300">{(index + 1).toString().padStart(2, '0')}</span>
                     </td>
                     <td className="px-6 py-8">
@@ -110,12 +121,21 @@ export default function PagesAdmin() {
                       )}
                     </td>
                     <td className="px-10 py-8 text-right">
-                      <Link 
-                        href={`/admin/pages/${item._id}/edit`} 
-                        className="inline-flex items-center gap-2 h-10 px-5 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg shadow-slate-200 active:scale-95"
-                      >
-                        <Zap size={14} className="text-amber-400 fill-amber-400" /> Optimize SEO
-                      </Link>
+                      <div className="flex justify-end gap-3">
+                        <Link 
+                          href={`/admin/pages/${item._id}/edit`} 
+                          className="inline-flex items-center gap-2 h-10 px-5 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg shadow-slate-200 active:scale-95"
+                        >
+                          <Edit size={14} className="text-amber-400" /> Edit Page
+                        </Link>
+                        <button
+                          onClick={() => handleDelete(item._id)}
+                          className="inline-flex items-center justify-center w-10 h-10 bg-white border border-slate-200 text-rose-500 rounded-xl hover:bg-rose-50 hover:border-rose-100 transition-all focus:outline-none"
+                          title="Delete Page"
+                        >
+                          <Trash2 size={16} strokeWidth={2.5} />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

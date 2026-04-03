@@ -75,7 +75,7 @@ export default function CreateDestination() {
               </select>
 
               <div className="mt-8">
-                 <ImageUpload value={formData.image} onChange={(url) => setFormData({ ...formData, image: url })} label="Featured Cover" />
+                 <ImageUpload value={formData.image} onChange={(url) => setFormData({ ...formData, image: url })} label="Featured Cover" dimensions="1200 x 800" />
               </div>
            </div>
         </div>

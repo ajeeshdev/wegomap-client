@@ -254,11 +254,12 @@ export default function EditPackage() {
               Gallery Assets
             </h3>
             <div className="pt-4">
-              <MultiImageUpload
-                value={formData.images}
-                onChange={(urls) => setFormData({ ...formData, images: urls })}
-                label="Gallery Assets"
-              />
+                <MultiImageUpload
+                  value={formData.images}
+                  onChange={(urls) => setFormData({ ...formData, images: urls })}
+                  label="Gallery Assets"
+                  dimensions="1200 x 800"
+                />
             </div>
           </div>
 
@@ -343,6 +344,7 @@ export default function EditPackage() {
                   altValue={formData.thumb_alt}
                   onAltChange={(alt) => setFormData({ ...formData, thumb_alt: alt })}
                   label=""
+                  dimensions="1200 x 800"
                 />
               </div>
             </div>

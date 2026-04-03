@@ -138,6 +138,7 @@ export default function CreateSlider() {
                       altValue={formData.imageAlt}
                       onAltChange={(alt) => setFormData({ ...formData, imageAlt: alt })}
                       label="Master Asset Visual"
+                      dimensions="1920 x 800"
                     />
                   </div>
                 </div>

@@ -3,15 +3,17 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { API_URL } from '@/config';
-import { ExternalLink, ShieldCheck } from 'lucide-react';
+import { ExternalLink, ShieldCheck, FileCode2, RefreshCw, CheckCircle2, AlertCircle, Copy, ExternalLink as OpenIcon, Globe2 } from 'lucide-react';
 import ImageUpload from '@/components/admin/ImageUpload';
 import { toast } from 'react-hot-toast';
 
 export default function SiteOptionsPage() {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
-    
-
+    const [sitemapGenerating, setSitemapGenerating] = useState(false);
+    const [sitemapResult, setSitemapResult] = useState<{ urlCount: number; xml: string; path: string } | null>(null);
+    const [sitemapError, setSitemapError] = useState<string | null>(null);
+    const [showXmlPreview, setShowXmlPreview] = useState(false);
 
     const [general, setGeneral] = useState({
         site_title: '',
@@ -202,7 +204,7 @@ export default function SiteOptionsPage() {
                                 </div>
                             </div>
 
-                            <div className="admin-form-grid-2">
+                            <div className="admin-form-grid-2 col-lg-7">
                                 <div className="admin-form-group">
                                     <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Site logo</label>
                                     <div className="border border-slate-100 rounded-lg p-2 bg-slate-50/30">
@@ -213,6 +215,7 @@ export default function SiteOptionsPage() {
                                             size="landscape"
                                             objectFit="contain"
                                             hideUrlInput
+                                            dimensions="500 x 200"
                                         />
                                     </div>
                                 </div>
@@ -225,6 +228,7 @@ export default function SiteOptionsPage() {
                                             label=""
                                             size="icon"
                                             hideUrlInput
+                                            dimensions="32 x 32"
                                         />
                                     </div>
                                 </div>
@@ -424,9 +428,9 @@ export default function SiteOptionsPage() {
                                     </button>
                                 </div>
 
-                                <div className="space-y-4">
+                                <div className="space-y-4 row">
                                     {payment.bank_accounts.map((bank, bIdx) => (
-                                        <div key={bIdx} className="p-4 bg-slate-50/50 rounded-xl border border-slate-100 relative group">
+                                        <div key={bIdx} className="p-4 bg-slate-50/50 rounded-xl border border-slate-100 relative group col-lg-4">
                                             <button 
                                                 onClick={() => {
                                                     const updated = [...payment.bank_accounts];
@@ -543,6 +547,126 @@ export default function SiteOptionsPage() {
                                         </div>
                                     )}
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Sitemap Generator Section */}
+                    <div className="admin-form-card">
+                        <div className="space-y-6">
+                            <div className="flex items-start justify-between gap-4">
+                                <div>
+                                    <h3 className="admin-form-section-title text-base font-semibold text-slate-800 flex items-center gap-2 border-none pb-0 mb-0">
+                                        <FileCode2 size={16} className="text-emerald-500" /> XML Sitemap Generator
+                                    </h3>
+                                    <p className="text-[11px] text-slate-400 mt-1">Auto-generates sitemap.xml from all pages, packages, blogs &amp; hotels and saves it to the site root.</p>
+                                </div>
+                                <button
+                                    onClick={async () => {
+                                        setSitemapGenerating(true);
+                                        setSitemapResult(null);
+                                        setSitemapError(null);
+                                        setShowXmlPreview(false);
+                                        try {
+                                            const siteUrl = window.location.origin;
+                                            const res = await fetch('/api/generate-sitemap', {
+                                                method: 'POST',
+                                                headers: { 'Content-Type': 'application/json' },
+                                                body: JSON.stringify({ siteUrl })
+                                            });
+                                            const data = await res.json();
+                                            if (data.success) {
+                                                setSitemapResult(data);
+                                                toast.success(`Sitemap generated! ${data.urlCount} URLs indexed.`);
+                                            } else {
+                                                setSitemapError(data.error || 'Generation failed');
+                                                toast.error(data.error || 'Generation failed');
+                                            }
+                                        } catch (err: any) {
+                                            const msg = err.message || 'Request failed';
+                                            setSitemapError(msg);
+                                            toast.error(msg);
+                                        } finally {
+                                            setSitemapGenerating(false);
+                                        }
+                                    }}
+                                    disabled={sitemapGenerating}
+                                    className="admin-btn admin-btn-primary h-10 px-5 shrink-0 flex items-center gap-2"
+                                >
+                                    <RefreshCw size={14} className={sitemapGenerating ? 'animate-spin' : ''} />
+                                    {sitemapGenerating ? 'Generating...' : 'Generate Sitemap'}
+                                </button>
+                            </div>
+
+                            {sitemapResult && (
+                                <div className="space-y-3">
+                                    <div className="flex items-center gap-3 bg-emerald-50 border border-emerald-100 p-4 rounded-xl">
+                                        <CheckCircle2 size={18} className="text-emerald-500 shrink-0" />
+                                        <div className="flex-1 min-w-0">
+                                            <p className="text-[12px] font-bold text-emerald-700">Sitemap saved to <span className="font-mono">/sitemap.xml</span></p>
+                                            <p className="text-[11px] text-emerald-600">{sitemapResult.urlCount} URLs indexed successfully</p>
+                                        </div>
+                                        <div className="flex items-center gap-2 shrink-0">
+                                            <button
+                                                onClick={() => {
+                                                    navigator.clipboard.writeText(sitemapResult.xml);
+                                                    toast.success('XML copied!');
+                                                }}
+                                                className="admin-btn h-8 px-3 bg-white border border-emerald-200 text-emerald-700 hover:bg-emerald-50 text-[10px] flex items-center gap-1.5"
+                                            >
+                                                <Copy size={11} /> Copy XML
+                                            </button>
+                                            <a
+                                                href="/sitemap.xml"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="admin-btn h-8 px-3 bg-white border border-emerald-200 text-emerald-700 hover:bg-emerald-50 text-[10px] flex items-center gap-1.5"
+                                            >
+                                                <OpenIcon size={11} /> View Live
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        onClick={() => setShowXmlPreview(!showXmlPreview)}
+                                        className="text-[11px] font-bold text-blue-600 hover:underline flex items-center gap-1"
+                                    >
+                                        <FileCode2 size={12} />
+                                        {showXmlPreview ? 'Hide' : 'Preview'} XML
+                                    </button>
+
+                                    {showXmlPreview && (
+                                        <pre className="bg-slate-900 text-emerald-400 text-[10px] font-mono p-4 rounded-xl overflow-x-auto max-h-64 leading-relaxed border border-slate-700">
+                                            {sitemapResult.xml.substring(0, 4000)}{sitemapResult.xml.length > 4000 ? '\n...(truncated)' : ''}
+                                        </pre>
+                                    )}
+                                </div>
+                            )}
+
+                            {sitemapError && (
+                                <div className="flex items-center gap-3 bg-rose-50 border border-rose-100 p-4 rounded-xl">
+                                    <AlertCircle size={18} className="text-rose-500 shrink-0" />
+                                    <p className="text-[12px] font-bold text-rose-700">{sitemapError}</p>
+                                </div>
+                            )}
+
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                {[
+                                    { label: 'Static Pages', icon: Globe2, note: 'Home, Packages, Blogs...', color: 'blue' },
+                                    { label: 'Tour Packages', icon: RefreshCw, note: 'All package slugs', color: 'emerald' },
+                                    { label: 'Blog Posts', icon: FileCode2, note: 'All blog slugs', color: 'amber' },
+                                    { label: 'Hotels', icon: Globe2, note: 'All hotel/houseboat slugs', color: 'violet' },
+                                ].map((item, i) => (
+                                    <div key={i} className="p-3 bg-slate-50 rounded-xl border border-slate-100 flex items-start gap-2">
+                                        <div className="w-7 h-7 rounded-lg bg-white border border-slate-200 flex items-center justify-center shrink-0">
+                                            <item.icon size={13} className="text-slate-400" />
+                                        </div>
+                                        <div>
+                                            <p className="text-[11px] font-bold text-slate-700">{item.label}</p>
+                                            <p className="text-[9px] text-slate-400 mt-0.5">{item.note}</p>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>

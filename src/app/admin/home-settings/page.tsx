@@ -38,7 +38,7 @@ export default function HomeSettingsPage() {
         try {
             const res = await fetch(`${API_URL}/options`);
             const json = await res.json();
-            
+
             if (json.success && json.data) {
                 const homeSectionsOpt = json.data.find((opt: { key: string }) => opt.key === 'home_sections');
                 if (homeSectionsOpt) {
@@ -76,7 +76,7 @@ export default function HomeSettingsPage() {
                     ]
                 })
             });
-            
+
             const json = await res.json();
             if (json.success) {
                 toast.success('Home sections updated successfully!');
@@ -139,7 +139,7 @@ export default function HomeSettingsPage() {
                     <p className="admin-page-subtitle">Configure global visibility and narrative content for homepage modules</p>
                 </div>
                 <div className="header-actions">
-                    <button 
+                    <button
                         onClick={handleSave}
                         disabled={saving}
                         className="admin-btn admin-btn-primary"
@@ -171,8 +171,8 @@ export default function HomeSettingsPage() {
                                             <span className="status-text">{section.enabled ? 'Live' : 'Hidden'}</span>
                                         </div>
                                         <label className="admin-toggle">
-                                            <input 
-                                                type="checkbox" 
+                                            <input
+                                                type="checkbox"
                                                 checked={section.enabled}
                                                 onChange={() => toggleSection(section.id)}
                                             />
@@ -189,8 +189,8 @@ export default function HomeSettingsPage() {
                                 <div className="form-group-row">
                                     <div className="admin-form-group">
                                         <label className="premium-label">Marketing Title</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             value={section.title}
                                             onChange={e => updateSection(section.id, 'title', e.target.value)}
                                             className="premium-input"
@@ -199,8 +199,8 @@ export default function HomeSettingsPage() {
                                     </div>
                                     <div className="admin-form-group">
                                         <label className="premium-label">Section Subtitle / Label</label>
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             value={section.subtitle}
                                             onChange={e => updateSection(section.id, 'subtitle', e.target.value)}
                                             className="premium-input"
@@ -212,7 +212,7 @@ export default function HomeSettingsPage() {
 
                                 <div className="admin-form-group">
                                     <label className="premium-label">Narrative Description</label>
-                                    <textarea 
+                                    <textarea
                                         rows={4}
                                         value={section.description}
                                         onChange={e => updateSection(section.id, 'description', e.target.value)}
@@ -225,13 +225,12 @@ export default function HomeSettingsPage() {
                     </div>
                 ))}
             </div>
-            
+
             <div className="floating-action-footer">
                 <button onClick={handleSave} disabled={saving} className="deploy-btn">
                     <div className="btn-icon"><Save size={20} /></div>
                     <div className="btn-text-wrap">
-                        <p className="btn-small-label">Live Update</p>
-                        <p className="btn-main-label">{saving ? 'SYNCING...' : 'DEPLOY CONFIGURATION'}</p>
+                        <p className="btn-main-label">{saving ? 'SYNCING...' : 'Save Changes'}</p>
                     </div>
                 </button>
             </div>

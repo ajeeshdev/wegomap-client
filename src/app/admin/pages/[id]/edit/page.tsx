@@ -135,7 +135,6 @@ export default function EditPage() {
                 <Sparkles size={16} />
               </div>
               <div className="space-y-1">
-                <p className="font-semibold text-slate-400 uppercase tracking-wider text-xs italic">Live Update</p>
                 <p className="text-[11px] text-slate-500 leading-relaxed italic opacity-80">
                   Changes made here will be reflected on the public website immediately after saving. To manage SEO metadata, please use the dedicated SEO module.
                 </p>

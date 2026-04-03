@@ -173,6 +173,7 @@ export default function EditBanner() {
                   value={formData.image}
                   onChange={(url) => setFormData({ ...formData, image: url })}
                   label="Background Banner Image"
+                  dimensions="1920 x 600"
                 />
               </div>
             </div>

@@ -3,23 +3,11 @@
 import { API_URL } from '@/config';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ShieldCheck, Plus, Trash2, Link as LinkIcon, Sparkles, Layers, List,
-    Home, Info, Users, Phone, Mail, MapPin, Heart, Package, Calendar, 
-    Ship, Globe, Zap, MessageSquare, HelpCircle, Star, Compass, FileText, Search, Contact,
+import { ShieldCheck, Plus, Trash2, List,
+    Sparkles, 
     ChevronUp, ChevronDown
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
-
-const IconMap: Record<string, any> = {
-    Home, Info, Users, Phone, Mail, MapPin, Heart, Package, Calendar, 
-    Ship, Globe, Zap, MessageSquare, HelpCircle, Star, Compass, FileText, Search, Contact
-};
-
-const DynamicIcon = ({ name, size = 18, className = "" }: { name: string, size?: number, className?: string }) => {
-    const IconComponent = IconMap[name];
-    if (!IconComponent) return null;
-    return <IconComponent size={size} className={className} />;
-};
 
 export default function MenusPage() {
     const [loading, setLoading] = useState(true);
@@ -143,7 +131,7 @@ export default function MenusPage() {
                                 </h3>
                             </div>
                             <button 
-                                onClick={() => setSidebarLinks([...sidebarLinks, { name: '', href: '', icon: 'ChevronRight' }])}
+                                onClick={() => setSidebarLinks([...sidebarLinks, { name: '', href: '' }])}
                                 className="admin-btn-small bg-slate-900 text-white hover:bg-blue-600 px-4 py-2 rounded-md transition-colors d-flex align-items-center"
                             >
                                 <Plus size={14} /> Add Item
@@ -170,8 +158,8 @@ export default function MenusPage() {
                                         </button>
                                     </div>
 
-                                    <div className="flex-1 grid grid-cols-12 gap-4">
-                                        <div className="col-span-4">
+                                    <div className="flex-1 grid grid-cols-2 gap-4">
+                                        <div>
                                             <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Label</label>
                                             <input 
                                                 type="text"
@@ -185,7 +173,7 @@ export default function MenusPage() {
                                                 className="admin-form-input !h-9 !text-sm !bg-white border-slate-200"
                                             />
                                         </div>
-                                        <div className="col-span-4">
+                                        <div>
                                             <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Target URL</label>
                                             <input 
                                                 type="text"
@@ -198,43 +186,6 @@ export default function MenusPage() {
                                                 placeholder="/about"
                                                 className="admin-form-input !h-9 !text-sm !bg-white border-slate-200"
                                             />
-                                        </div>
-                                        <div className="col-span-4">
-                                            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Icon</label>
-                                            <div className="flex items-center gap-2">
-                                                <div className="w-9 h-9 flex items-center justify-center bg-slate-100 rounded border border-slate-200 shrink-0">
-                                                    <DynamicIcon name={item.icon} size={15} />
-                                                </div>
-                                                <select 
-                                                    value={item.icon || ''}
-                                                    onChange={e => {
-                                                        const newNav = [...sidebarLinks];
-                                                        newNav[idx].icon = e.target.value;
-                                                        setSidebarLinks(newNav);
-                                                    }}
-                                                    className="admin-form-input !h-9 !text-[11px] !bg-white border-slate-200 flex-1 px-1"
-                                                >
-                                                    <option value="">None</option>
-                                                    <option value="Home">Home</option>
-                                                    <option value="Info">Info</option>
-                                                    <option value="Users">Users</option>
-                                                    <option value="Phone">Phone</option>
-                                                    <option value="Mail">Mail</option>
-                                                    <option value="MapPin">Location</option>
-                                                    <option value="Heart">Heart</option>
-                                                    <option value="Package">Package</option>
-                                                    <option value="Calendar">Calendar</option>
-                                                    <option value="Ship">Cruises</option>
-                                                    <option value="Globe">Globe</option>
-                                                    <option value="Zap">Zap</option>
-                                                    <option value="MessageSquare">Blogs</option>
-                                                    <option value="HelpCircle">FAQ</option>
-                                                    <option value="Contact">Contact</option>
-                                                    <option value="Star">Star</option>
-                                                    <option value="Compass">Trending</option>
-                                                    <option value="FileText">Document/Blog</option>
-                                                </select>
-                                            </div>
                                         </div>
                                     </div>
                                     <button 
@@ -286,7 +237,7 @@ export default function MenusPage() {
                                     </div>
                                 </div>
                                 <button 
-                                    onClick={() => setStickyLinks([...stickyLinks, { name: '', href: '', icon: 'Compass' }])}
+                                    onClick={() => setStickyLinks([...stickyLinks, { name: '', href: '' }])}
                                     className="admin-btn-small bg-slate-900 text-white hover:bg-emerald-600 h-9 px-4 rounded-md"
                                 >
                                     <Plus size={14} /> Add Link
@@ -314,8 +265,8 @@ export default function MenusPage() {
                                         </button>
                                     </div>
 
-                                    <div className="flex-1 grid grid-cols-12 gap-4">
-                                        <div className="col-span-4">
+                                    <div className="flex-1 grid grid-cols-2 gap-4">
+                                        <div>
                                             <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Label</label>
                                             <input 
                                                 type="text"
@@ -329,7 +280,7 @@ export default function MenusPage() {
                                                 className="admin-form-input !h-9 !text-sm !bg-white border-slate-200"
                                             />
                                         </div>
-                                        <div className="col-span-4">
+                                        <div>
                                             <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Target URL</label>
                                             <input 
                                                 type="text"
@@ -342,42 +293,6 @@ export default function MenusPage() {
                                                 placeholder="/offers"
                                                 className="admin-form-input !h-9 !text-sm !bg-white border-slate-200"
                                             />
-                                        </div>
-                                        <div className="col-span-4">
-                                            <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Icon</label>
-                                            <div className="flex items-center gap-2">
-                                                <div className="w-9 h-9 flex items-center justify-center bg-white border border-slate-200 rounded shrink-0">
-                                                    <DynamicIcon name={item.icon} size={15} />
-                                                </div>
-                                                <select 
-                                                    value={item.icon || ''}
-                                                    onChange={e => {
-                                                        const newNav = [...stickyLinks];
-                                                        newNav[idx].icon = e.target.value;
-                                                        setStickyLinks(newNav);
-                                                    }}
-                                                    className="admin-form-input !h-9 !text-[11px] !bg-white border-slate-200 flex-1 px-1"
-                                                >
-                                                    <option value="">None</option>
-                                                    <option value="Home">Home</option>
-                                                    <option value="Info">Info</option>
-                                                    <option value="Users">Users</option>
-                                                    <option value="Phone">Phone</option>
-                                                    <option value="Mail">Mail</option>
-                                                    <option value="MapPin">Location</option>
-                                                    <option value="Heart">Heart</option>
-                                                    <option value="Package">Package</option>
-                                                    <option value="Calendar">Calendar</option>
-                                                    <option value="Ship">Cruises</option>
-                                                    <option value="Globe">Globe</option>
-                                                    <option value="Zap">Zap</option>
-                                                    <option value="MessageSquare">Blogs</option>
-                                                    <option value="HelpCircle">FAQ</option>
-                                                    <option value="Star">Star</option>
-                                                    <option value="Compass">Compass</option>
-                                                    <option value="FileText">Document/Blog</option>
-                                                </select>
-                                            </div>
                                         </div>
                                     </div>
                                     <button 

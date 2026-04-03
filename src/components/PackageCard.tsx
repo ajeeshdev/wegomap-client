@@ -256,7 +256,7 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
                         <div className="pricePrimary">
                             <span className="currencySymbol">₹</span>
                             <span className="mainValue">{rawPrice.toLocaleString()}</span>
-                            <span className="priceLabel">{pkg.per || "/ Per Person"}</span>
+                            <span className="priceLabel">{pkg.per === 'Person' ? 'Per Person' : (pkg.per || "Per Person")}</span>
                         </div>
                         <div className="priceSecondary">
                             <span className="totalLabel">Total :</span>

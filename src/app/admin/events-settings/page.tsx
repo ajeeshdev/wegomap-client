@@ -113,7 +113,7 @@ export default function EventsSettingsPage() {
                 <div>
                     <h2 className="admin-page-title admin-page-title--section">
                         <div className="admin-page-title-indicator"></div>
-                        Events Page <span className="text-black ml-1">Configuration</span>
+                        Events Page Configuration
                     </h2>
                     <p className="admin-page-subtitle text-slate-500 font-bold">Manage landing text and headers for Events & Special Events</p>
                 </div>

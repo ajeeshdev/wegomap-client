@@ -14,9 +14,10 @@ interface ImageUploadProps {
   hideRemove?: boolean;
   altValue?: string;
   onAltChange?: (alt: string) => void;
+  dimensions?: string;
 }
 
-export default function ImageUpload({ value, onChange, label = "Featured Image", size = 'standard', objectFit = 'cover', hideUrlInput = true, hideRemove = false, altValue = "wegomap", onAltChange }: ImageUploadProps) {
+export default function ImageUpload({ value, onChange, label = "Featured Image", size = 'standard', objectFit = 'cover', hideUrlInput = true, hideRemove = false, altValue = "wegomap", onAltChange, dimensions }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -77,16 +78,22 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
 
   return (
     <div className="space-y-3">
-      {label ? (
-        <label className="admin-form-label !mb-0 flex items-center gap-2">
-          <div className="w-1.5 h-1.5 rounded-full bg-blue-600"></div>
-          {label}
-        </label>
-      ) : null}
+        <div className="flex items-center justify-between gap-4">
+          <label className="admin-form-label !mb-0 flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-blue-600"></div>
+            {label}
+          </label>
+          {dimensions && (
+            <div className="px-2 py-0.5 rounded-md bg-blue-50 border border-blue-100/50 flex items-center gap-1.5 group/dim hover:bg-blue-100 transition-colors">
+              <span className="text-[10px] font-bold text-blue-600 uppercase tracking-tight">Rec:</span>
+              <span className="text-[10px] font-black text-blue-700 font-mono tracking-tighter">{dimensions}</span>
+            </div>
+          )}
+        </div>
 
       {value ? (
         <div className={`relative group overflow-hidden rounded-2xl border-2 border-slate-100 bg-slate-50 transition-all hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/5 ${size === 'icon' ? 'w-24 h-24 mx-auto' :
-          size === 'small' ? 'aspect-[4/3]' :
+          size === 'small' ? 'aspect-[4/4]' :
             size === 'landscape' ? 'aspect-[3/1]' :
               'max-w-full aspect-video'
           }`}>

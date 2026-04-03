@@ -147,6 +147,7 @@ export default function EditOfferBanner() {
                       altValue={formData.imageAlt}
                       onAltChange={(alt) => setFormData({ ...formData, imageAlt: alt })}
                       label="Upload Banner Image"
+                      dimensions="1200 x 400"
                     />
                   </div>
                 </div>

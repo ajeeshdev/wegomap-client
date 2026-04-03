@@ -325,8 +325,22 @@ export default function Home() {
                     "Phone": "/images/nav-icons/contact.png"
                   };
 
+                  // Name-based fallback for CMS links that don't store an icon key
+                  const NameToIcon: Record<string, string> = {
+                    "services": "/images/nav-icons/services.png",
+                    "tours": "/images/nav-icons/experiences.png",
+                    "packages": "/images/nav-icons/experiences.png",
+                    "hotels": "/images/nav-icons/homes.png",
+                    "events": "/images/nav-icons/services.png",
+                    "cruises": "/images/nav-icons/cruises.png",
+                    "cruise": "/images/nav-icons/cruises.png",
+                    "blogs": "/images/nav-icons/blogs.png",
+                    "blog": "/images/nav-icons/blogs.png",
+                    "contact": "/images/nav-icons/contact.png",
+                  };
+
                   const Icon = IconMap[service.icon] || Info;
-                  const threeDIcon = ThreeDIcons[service.icon];
+                  const threeDIcon = ThreeDIcons[service.icon] || NameToIcon[(service.name || '').toLowerCase()];
 
                   return (
                     <Link

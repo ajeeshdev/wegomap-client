@@ -71,9 +71,9 @@ export default function ServicesPage() {
                         <div className="titleArea">
                             <span className="sectionSubtitle">{pageContent.subtitle}</span>
                             <h2 className="sliderTitle">
-                                {pageContent.title} <span className="text-orange-500 italic">{pageContent.highlightText}</span>
+                                {pageContent.title} {pageContent.highlightText}
                             </h2>
-                            <div className="sectionHeaderDescription mt-4 max-w-3xl text-slate-500 font-medium leading-relaxed">
+                            <div className="sectionHeaderDescription mt-0 max-w-3xl text-slate-500 font-medium leading-relaxed">
                                 {pageContent.description}
                             </div>
                         </div>

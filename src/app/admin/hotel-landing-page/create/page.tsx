@@ -233,7 +233,7 @@ export default function CreateHotelLandingPage({ params: paramsProp }: { params?
                  <div className="editor-card">
                     <div className="card-header"><h4 className="serif">Hero Visuals</h4></div>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                       <ImageUpload value={formData.banner_image} onChange={url=>setFormData({...formData, banner_image: url})} label="Main Banner" />
+                       <ImageUpload value={formData.banner_image} onChange={url=>setFormData({...formData, banner_image: url})} label="Main Banner" dimensions="1920 x 800" />
                        <div className="space-y-4">
                           <div className="admin-form-group"><label>Display Header</label><input type="text" value={formData.banner_title} onChange={e=>setFormData({...formData, banner_title: e.target.value})} /></div>
                           <div className="admin-form-group"><label>Sub-header Kicker</label><input type="text" value={formData.subtitle} onChange={e=>setFormData({...formData, subtitle: e.target.value})} /></div>
@@ -250,7 +250,7 @@ export default function CreateHotelLandingPage({ params: paramsProp }: { params?
                           <div className="admin-form-group"><label>Key Traits (One per line)</label><textarea value={formData.about_features.join('\n')} onChange={e=>setFormData({...formData, about_features: e.target.value.split('\n')})} rows={5} className="font-mono text-xs" /></div>
                        </div>
                        <div className="space-y-4">
-                          <ImageUpload value={formData.about_image} onChange={url=>setFormData({...formData, about_image: url})} label="Story Illustration" />
+                          <ImageUpload value={formData.about_image} onChange={url=>setFormData({...formData, about_image: url})} label="Story Illustration" dimensions="1200 x 800" />
                           <div className="admin-form-group"><label>Float Badge Caption</label><input type="text" value={formData.about_badge_text} onChange={e=>setFormData({...formData, about_badge_text: e.target.value})} /></div>
                        </div>
                     </div>
@@ -274,7 +274,7 @@ export default function CreateHotelLandingPage({ params: paramsProp }: { params?
                              <div className="grid grid-cols-1 gap-3">
                                 {room.images?.map((img:string, iIdx:number) => (
                                    <div key={iIdx} className="relative">
-                                      <ImageUpload value={img} onChange={url=>{const r=[...formData.hotel_rooms]; r[idx].images[iIdx]=url; setFormData({...formData, hotel_rooms: r});}} label={`#${iIdx+1}`} hideRemove={true} />
+                                      <ImageUpload value={img} onChange={url=>{const r=[...formData.hotel_rooms]; r[idx].images[iIdx]=url; setFormData({...formData, hotel_rooms: r});}} label={`#${iIdx+1}`} hideRemove={true} dimensions="1200 x 800" />
                                       <button onClick={()=>{const r=[...formData.hotel_rooms]; r[idx].images.splice(iIdx,1); setFormData({...formData, hotel_rooms: r});}} className="absolute -top-1 -right-1 p-1 bg-red-500 text-white rounded-full shadow-lg z-20"><X size={10}/></button>
                                    </div>
                                 ))}
@@ -289,7 +289,7 @@ export default function CreateHotelLandingPage({ params: paramsProp }: { params?
                     <div className="gallery-grid">
                        {formData.gallery_images.map((img, idx) => (
                           <div key={idx} className="relative group">
-                             <ImageUpload value={img} onChange={url=>{const g=[...formData.gallery_images]; g[idx]=url; setFormData({...formData, gallery_images: g});}} label="IMG" hideRemove={true} />
+                             <ImageUpload value={img} onChange={url=>{const g=[...formData.gallery_images]; g[idx]=url; setFormData({...formData, gallery_images: g});}} label="IMG" hideRemove={true} dimensions="1200 x 800" />
                              <button onClick={()=>{const g=[...formData.gallery_images]; g.splice(idx,1); setFormData({...formData, gallery_images: g});}} className="absolute -top-1 -right-1 p-1.5 bg-red-500 text-white rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all z-20"><X size={10}/></button>
                           </div>
                        ))}
@@ -322,7 +322,7 @@ export default function CreateHotelLandingPage({ params: paramsProp }: { params?
                  <div className="editor-card">
                     <div className="card-header flex items-center justify-between"><h4 className="serif">Exclusive Benefits (Why Us)</h4><button onClick={()=>setFormData({...formData, why_choose_points: [...formData.why_choose_points, { icon:'Check', title:'', description:'' }]})} className="text-sm font-bold underline decoration-slate-300">+ Add Note</button></div>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                       <ImageUpload value={formData.why_choose_image} onChange={url=>setFormData({...formData, why_choose_image: url})} label="Experience Visual" />
+                       <ImageUpload value={formData.why_choose_image} onChange={url=>setFormData({...formData, why_choose_image: url})} label="Experience Visual" dimensions="1200 x 800" />
                        <div className="space-y-3">
                           {formData.why_choose_points.map((pt, idx) => (
                              <div key={idx} className="repeater-item !p-4">

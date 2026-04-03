@@ -1,26 +1,39 @@
 "use client";
 
+import { useEffect, useState } from 'react';
 import DynamicPageBanner from '@/components/DynamicPageBanner';
+import { API_URL } from '@/config';
 
 export default function TermsAndConditionsPage() {
+    const [pageData, setPageData] = useState<any>(null);
+
+    useEffect(() => {
+        fetch(`${API_URL}/pages/terms-and-conditions`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.success && data.data) {
+                    setPageData(data.data);
+                }
+            })
+            .catch(console.error);
+    }, []);
+
     return (
         <div className="termsPolicyPage">
             <DynamicPageBanner
-                fallbackTitle="Terms and\nConditions"
+                fallbackTitle={pageData?.title || "Terms and\nConditions"}
                 fallbackSubtitle="Agreement between you and WEGOMAP."
                 fallbackPreTitle="Policies"
-                breadcrumbs={[{ label: 'Terms and Conditions' }]}
+                breadcrumbs={[{ label: pageData?.title || 'Terms and Conditions' }]}
             />
 
             <div className="policyBody homeContainer commonPadding">
-                <div className="max-w-4xl mx-auto">
-                    <div className="sectionHeader flex items-center justify-center mb-12">
-                        <div className="titleArea">
-                            <span className="sectionSubtitle">Policy</span>
-                            <h2 className="sliderTitle">Terms & <span className="highlight">Conditions</span></h2>
-                        </div>
-                    </div>
-                    <div className="tour-description-content">
+                <h2 className="sliderTitle">{pageData?.title || "Terms & Conditions"}</h2>
+                 
+                <div className="tour-description-content">
+                    {pageData?.content ? (
+                        <div dangerouslySetInnerHTML={{ __html: pageData.content }} />
+                    ) : (
                         <ul>
                             <li>In the event of unavailability of the specified room category, we reserve the right to offer alternative accommodations of similar or different standards, subject to availability. The room rate may vary accordingly.</li>
                             <li>Hotel selection is based on your preferred budget. Room rates are subject to change seasonally.</li>
@@ -36,7 +49,7 @@ export default function TermsAndConditionsPage() {
                             <li>In the event of unforeseen circumstances such as bandhs, strikes, natural calamities, or pandemics, we will make alternative arrangements. Any additional expenses incurred due to these circumstances are not included in the package.</li>
                             <li>Please note that hotels may charge extra for early check-in or late check-out.</li>
                         </ul>
-                    </div>
+                    )}
                 </div>
             </div>
         </div>

@@ -166,6 +166,7 @@ export default function CreateTestimonial() {
                     value={formData.image}
                     onChange={(url) => setFormData({ ...formData, image: url })}
                     label="Customer Image"
+                    dimensions="400 x 400"
                   />
                 </div>
               </div>

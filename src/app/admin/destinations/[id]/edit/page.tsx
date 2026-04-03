@@ -185,6 +185,7 @@ export default function EditDestination() {
                   value={formData.image}
                   onChange={(url) => setFormData({ ...formData, image: url })}
                   label="Main Image"
+                  dimensions="1200 x 800"
                 />
               </div>
             </div>

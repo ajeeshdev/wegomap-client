@@ -265,6 +265,7 @@ export default function EditBlog() {
                   altValue={formData.featuredImageAlt}
                   onAltChange={(alt) => setFormData({ ...formData, featuredImageAlt: alt })}
                   label=""
+                  dimensions="1200 x 800"
                 />
               </div>
             </div>
@@ -275,7 +276,7 @@ export default function EditBlog() {
                 <div className="w-1 h-3 bg-blue-600 rounded-full"></div>
                 Metadata
               </h4>
-              <div className="admin-form-grid-3">
+              <div className="d-flex flex-wrap">
                 <div className="admin-form-group">
                   <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <Tag size={10} className="text-blue-600" /> Category</label>
                   <select

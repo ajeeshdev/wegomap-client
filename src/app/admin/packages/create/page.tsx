@@ -126,15 +126,14 @@ export default function CreatePackage() {
                      </div>
                   </div>
 
-                  <div className="mt-6">
                      <ImageUpload 
                         value={formData.thumb} 
                         onChange={(url) => setFormData({ ...formData, thumb: url })} 
                         altValue={formData.thumb_alt}
                         onAltChange={(alt) => setFormData({ ...formData, thumb_alt: alt })}
                         label="Primary Thumbnail" 
+                        dimensions="1200 x 800"
                       />
-                  </div>
                </div>
             </div>
 
@@ -245,7 +244,7 @@ export default function CreatePackage() {
                   <div className="editor-card">
                      <div className="card-header"><h4 className="serif">Package Gallery</h4></div>
                      <div className="p-4">
-                        <MultiImageUpload value={formData.images} onChange={(urls) => setFormData({ ...formData, images: urls })} label="Upload Gallery Images" />
+                        <MultiImageUpload value={formData.images} onChange={(urls) => setFormData({ ...formData, images: urls })} label="Upload Gallery Images" dimensions="1200 x 800" />
                      </div>
                   </div>
                )}

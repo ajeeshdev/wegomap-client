@@ -6,7 +6,7 @@ import Link from 'next/link';
 import {
     User, Heart, MapPin,
     ArrowRight, LogOut, Sparkles,
-    Compass, Star, Contact, FileText, Download, Eye, Calendar, Package
+    Compass, Star, Contact, FileText, Download, Eye, Calendar, Package, Settings, Lock, Smartphone
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { API_URL, UPLOADS_URL } from '@/config';
@@ -20,7 +20,7 @@ interface BookingPdf {
     uploadedAt: string;
 }
 
-type DashTab = 'overview' | 'bookings';
+type DashTab = 'overview' | 'bookings' | 'settings';
 
 export default function UserDashboard() {
     const [user, setUser] = useState<any>(null);
@@ -28,6 +28,7 @@ export default function UserDashboard() {
     const [activeTab, setActiveTab] = useState<DashTab>('overview');
     const [pdfs, setPdfs] = useState<BookingPdf[]>([]);
     const [pdfsLoading, setPdfsLoading] = useState(false);
+    const [updatingProfile, setUpdatingProfile] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -61,6 +62,47 @@ export default function UserDashboard() {
         toast.success('Logged out successfully');
     };
 
+    const handleUpdateProfile = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setUpdatingProfile(true);
+        const form = e.currentTarget;
+        const formData = new FormData(form);
+        const payload: Record<string, string> = {
+            name: formData.get('name') as string,
+            phone: formData.get('phone') as string,
+            password: formData.get('password') as string
+        };
+        if (!payload.password) delete payload.password; // Don't send empty password
+        
+        try {
+            const token = localStorage.getItem('token');
+            const res = await fetch(`${API_URL}/auth/profile`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (data.success) {
+                toast.success('Profile updated successfully!');
+                setUser(data.data);
+                localStorage.setItem('userProfile', JSON.stringify(data.data)); // Sync local storage
+                form.reset(); // clear password field
+                if (payload.password) {
+                     toast.success('Password changed successfully - You will stay logged in.');
+                }
+            } else {
+                toast.error(data.error || 'Failed to update profile');
+            }
+        } catch (err) {
+            toast.error('Network error. Please try again.');
+        } finally {
+            setUpdatingProfile(false);
+        }
+    };
+
     if (loading) {
         return (
             <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -73,6 +115,7 @@ export default function UserDashboard() {
     const navItems = [
         { key: 'overview', label: 'Dashboard', icon: User },
         { key: 'bookings', label: 'Booking Details', icon: Package },
+        { key: 'settings', label: 'Account Settings', icon: Settings },
     ] as const;
 
     const BASE_URL = UPLOADS_URL;
@@ -154,10 +197,10 @@ export default function UserDashboard() {
                                                 <p className="profileEmail">{user?.email}</p>
                                             </div>
                                         </div>
-                                        <Link href="/contact" className="profileLink">
+                                        <button onClick={() => setActiveTab('settings')} className="profileLink" style={{ background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', width: '100%', fontFamily: 'inherit' }}>
                                             <span>Account Settings</span>
                                             <ArrowRight size={16} />
-                                        </Link>
+                                        </button>
                                     </div>
 
                                     <div className="statCard saved">
@@ -356,6 +399,66 @@ export default function UserDashboard() {
                                         ))}
                                     </div>
                                 )}
+                            </div>
+                        )}
+
+                        {/* ── Settings tab ── */}
+                        {activeTab === 'settings' && (
+                            <div>
+                                <div style={{
+                                    background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+                                    borderRadius: '2rem', padding: '2.5rem', marginBottom: '2rem', position: 'relative', overflow: 'hidden'
+                                }}>
+                                    <div style={{ position: 'relative' }}>
+                                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255,255,255,0.07)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.1)', padding: '0.35rem 1rem', borderRadius: '999px', fontSize: '0.6875rem', fontWeight: 800, color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '1.25rem' }}>
+                                            <Settings size={12} style={{ color: '#ff6b35' }} />
+                                            Preferences
+                                        </div>
+                                        <h2 style={{ fontSize: '1.875rem', fontWeight: 900, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.15, textTransform: 'uppercase', fontStyle: 'italic', marginBottom: '0.5rem' }}>
+                                            Account <span style={{ color: '#ff6b35' }}>Settings</span>
+                                        </h2>
+                                        <p style={{ color: '#94a3b8', fontSize: '0.9rem', fontWeight: 500, maxWidth: '28rem' }}>
+                                            Update your personal profile, contact information, and security credentials.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <form onSubmit={handleUpdateProfile} style={{ background: '#fff', borderRadius: '2rem', padding: '2.5rem', border: '1px solid #e2e8f0' }}>
+                                    <h3 style={{ fontSize: '1.125rem', fontWeight: 800, color: '#0f172a', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                        <User size={18} style={{ color: '#3b82f6' }} /> Personal Details
+                                    </h3>
+                                    
+                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem', marginBottom: '2.5rem' }}>
+                                        <div>
+                                            <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: '#64748b', marginBottom: '0.5rem' }}>Full Name</label>
+                                            <input type="text" name="name" defaultValue={user?.name} required style={{ width: '100%', padding: '0.875rem 1rem', borderRadius: '0.75rem', border: '1.5px solid #e2e8f0', background: '#f8fafc', fontWeight: 600, outline: 'none', color: '#0f172a' }} />
+                                        </div>
+                                        <div>
+                                            <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: '#64748b', marginBottom: '0.5rem' }}>Phone / Contact</label>
+                                            <input type="text" name="phone" defaultValue={user?.phone || ''} style={{ width: '100%', padding: '0.875rem 1rem', borderRadius: '0.75rem', border: '1.5px solid #e2e8f0', background: '#f8fafc', fontWeight: 600, outline: 'none', color: '#0f172a' }} />
+                                        </div>
+                                        <div style={{ gridColumn: '1 / -1' }}>
+                                            <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: '#64748b', marginBottom: '0.5rem' }}>Email Address <span style={{ color: '#94a3b8', fontWeight: 600, textTransform: 'none' }}>(Contact support to change)</span></label>
+                                            <input type="email" readOnly value={user?.email} style={{ width: '100%', padding: '0.875rem 1rem', borderRadius: '0.75rem', border: '1.5px solid #cbd5e1', background: '#f1f5f9', fontWeight: 600, color: '#64748b', outline: 'none', cursor: 'not-allowed' }} />
+                                        </div>
+                                    </div>
+
+                                    <div style={{ height: '1px', background: '#f1f5f9', margin: '2rem 0' }} />
+
+                                    <h3 style={{ fontSize: '1.125rem', fontWeight: 800, color: '#0f172a', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                        <Lock size={18} style={{ color: '#f43f5e' }} /> Security
+                                    </h3>
+
+                                    <div style={{ marginBottom: '2.5rem', maxWidth: '320px' }}>
+                                        <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', color: '#64748b', marginBottom: '0.5rem' }}>Change Password</label>
+                                        <input type="password" name="password" placeholder="Enter a new password..." style={{ width: '100%', padding: '0.875rem 1rem', borderRadius: '0.75rem', border: '1.5px solid #e2e8f0', background: '#f8fafc', fontWeight: 600, outline: 'none', color: '#0f172a' }} />
+                                        <p style={{ fontSize: '0.6875rem', color: '#94a3b8', marginTop: '0.5rem', fontWeight: 500 }}>Leave this field empty if you do not wish to change your current password.</p>
+                                    </div>
+
+                                    <button type="submit" disabled={updatingProfile} style={{ padding: '1rem 2rem', background: '#ff6b35', color: '#fff', fontSize: '0.875rem', fontWeight: 800, borderRadius: '0.75rem', border: 'none', cursor: 'pointer', transition: 'all 0.2s', opacity: updatingProfile ? 0.7 : 1, width: '100%', maxWidth: 'max-content' }}>
+                                        {updatingProfile ? 'Saving Settings...' : 'Save Profile Settings'}
+                                    </button>
+                                </form>
                             </div>
                         )}
                     </div>

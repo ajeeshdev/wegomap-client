@@ -77,7 +77,7 @@ export default function CreateEvent() {
               </select>
 
               <div className="mt-8">
-                 <ImageUpload value={formData.image} onChange={(url) => setFormData({ ...formData, image: url })} label="Cover Media" />
+                 <ImageUpload value={formData.image} onChange={(url) => setFormData({ ...formData, image: url })} label="Cover Media" dimensions="1200 x 800" />
               </div>
            </div>
         </div>

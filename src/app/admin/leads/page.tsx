@@ -395,6 +395,7 @@ export default function LeadsAdmin() {
           borderRadius: '14px',
           padding: '1.5rem 2rem',
           display: 'flex',
+          flexWrap: 'wrap',
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: '1.5rem',

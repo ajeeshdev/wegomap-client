@@ -216,6 +216,7 @@ export default function EditCab() {
                     value={formData.image}
                     onChange={(url) => setFormData({ ...formData, image: url })}
                     label="Vehicle Image"
+                    dimensions="1200 x 800"
                   />
                 </div>
 

@@ -218,7 +218,7 @@ export default function RoleManager() {
           </div>
           <button 
             onClick={() => setShowAddModal(true)}
-            className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-xl font-bold text-xs transition-all shadow-lg shadow-orange-200"
+            className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-5 py-3 rounded-xl font-bold text-xs transition-all shadow-lg shadow-orange-200"
           >
             <UserPlus size={16} /> Add Admin
           </button>

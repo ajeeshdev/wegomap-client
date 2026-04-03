@@ -165,6 +165,7 @@ export default function EditSlider() {
                     altValue={formData.imageAlt}
                     onAltChange={(alt) => setFormData({ ...formData, imageAlt: alt })}
                     label="Slider Background Image"
+                    dimensions="1920 x 800"
                   />
                 </div>
               </div>
