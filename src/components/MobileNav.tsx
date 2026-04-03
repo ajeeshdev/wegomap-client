@@ -28,15 +28,24 @@ export default function MobileNav() {
         { name: 'Profile', href: isLoggedIn ? '/dashboard' : '/login', icon: User },
     ];
 
+    const activeIndex = navItems.findIndex(item => 
+        item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)
+    );
+
     return (
         <div className="mobileBottomNavWrapper">
             <nav className="mobileBottomNav">
                 <div className="navContainer">
-                    {navItems.map((item) => {
+                    <div 
+                        className="liquidGlassIndicator" 
+                        style={{ 
+                            left: `${(activeIndex * 25) + 12.5}%`,
+                            opacity: activeIndex === -1 ? 0 : 1
+                        }} 
+                    />
+                    {navItems.map((item, idx) => {
                         const Icon = item.icon;
-                        const isActive = item.href === '/' 
-                            ? pathname === '/' 
-                            : pathname.startsWith(item.href);
+                        const isActive = idx === activeIndex;
                         return (
                             <Link
                                 key={item.name}
