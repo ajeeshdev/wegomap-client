@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 export default function MobileNav() {
     const pathname = usePathname();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [pressingIndex, setPressingIndex] = useState<number | null>(null);
 
     useEffect(() => {
         const checkAuth = () => {
@@ -28,20 +29,33 @@ export default function MobileNav() {
         { name: 'Profile', href: isLoggedIn ? '/dashboard' : '/login', icon: User },
     ];
 
+    const activeIndex = navItems.findIndex(item => 
+        item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)
+    );
+
     return (
         <div className="mobileBottomNavWrapper">
             <nav className="mobileBottomNav">
                 <div className="navContainer">
-                    {navItems.map((item) => {
+                    <div 
+                        className={`liquidGlassIndicator ${pressingIndex !== null ? 'pressing' : ''}`}
+                        style={{ 
+                            left: `${(activeIndex * 25) + 12.5}%`,
+                            opacity: activeIndex === -1 ? 0 : 1
+                        }} 
+                    />
+                    {navItems.map((item, idx) => {
                         const Icon = item.icon;
-                        const isActive = item.href === '/' 
-                            ? pathname === '/' 
-                            : pathname.startsWith(item.href);
+                        const isActive = idx === activeIndex;
                         return (
                             <Link
                                 key={item.name}
                                 href={item.href}
                                 className={`navItem ${isActive ? 'active' : ''}`}
+                                onTouchStart={() => setPressingIndex(idx)}
+                                onTouchEnd={() => setPressingIndex(null)}
+                                onMouseDown={() => setPressingIndex(idx)}
+                                onMouseUp={() => setPressingIndex(null)}
                             >
                                 <div className="iconWrapper">
                                     <Icon size={22} />
