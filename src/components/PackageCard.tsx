@@ -243,7 +243,7 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
                     <div className="pricingHeaderRow">
                         <div className="emiBadge">
                             <CreditCard size={12} />
-                            No Cost EMI at <strong>₹{emi}/mo</strong>
+                            No Cost EMI at <strong>₹{emi}/month</strong>
                         </div>
                         {pkg.oldPrice && (
                             <span className="priceRegular line-through">
