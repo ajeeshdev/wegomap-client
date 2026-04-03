@@ -48,16 +48,18 @@ header {
         text-decoration: none;
         flex-shrink: 0;
         width: 180px;
-          @include max(575){
+
+        @include max(575) {
             width: 125px;
         }
 
         img {
-             width: 100%;
-             height: 54px;
-               @include max(575){
-            height: 32px;
-        }
+            width: 100%;
+            height: 54px;
+
+            @include max(575) {
+                height: 32px;
+            }
         }
     }
 
@@ -413,6 +415,7 @@ header {
                         flex-direction: column;
 
                         .mobileSubHeader {
+
                             .mobileSubLink,
                             a {
                                 font-size: 0.95rem;
@@ -512,10 +515,10 @@ header {
 
         .mobileBottomNav {
             flex: 1;
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(35px) saturate(200%);
             -webkit-backdrop-filter: blur(35px) saturate(200%);
-            border: 0.5px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 35px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
             height: 64px;
@@ -536,17 +539,24 @@ header {
                 position: absolute;
                 top: 50%;
                 transform: translate(-50%, -50%);
-                width: 60px;
+                width: 62px;
                 height: 48px;
-                background: rgba(255, 255, 255, 0.75); // Stronger frosted glass
+                background: rgba(255, 255, 255, 0.75);
                 backdrop-filter: blur(12px) brightness(1.1);
                 -webkit-backdrop-filter: blur(12px) brightness(1.1);
-                border: 1px solid rgba(255, 255, 255, 0.5);
+                border: 1.5px solid rgba(255, 255, 255, 0.6);
                 border-radius: 20px;
                 z-index: 1;
-                transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); // "Liquid" spring effect
+                transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                 box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
                 pointer-events: none;
+
+                &.pressing {
+                    background: rgba(59, 130, 246, 0.2); // Light blue tint
+                    border-color: rgba(59, 130, 246, 0.4);
+                    box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+                    transform: translate(-50%, -50%) scale(1.1);
+                }
             }
 
             .navItem {
@@ -571,7 +581,7 @@ header {
                     svg {
                         width: 22px;
                         height: 22px;
-                        stroke-width: 2px;
+                        stroke-width: 2.5px;
                     }
                 }
 
@@ -583,11 +593,12 @@ header {
                 }
 
                 &:active {
-                    transform: scale(0.92);
+                    transform: scale(0.9);
+                    color: #2563eb !important; // Blue press color
                 }
 
                 &.active {
-                    color: $cosmicOrange;
+                    color: #2563eb; // Active BLUE instead of orange for iOS theme
                     
                     .iconWrapper {
                         transform: translateY(-2px);
@@ -622,9 +633,17 @@ header {
             }
 
             @keyframes iconPulse {
-                0% { transform: scale(1); }
-                50% { transform: scale(1.08); }
-                100% { transform: scale(1); }
+                0% {
+                    transform: scale(1);
+                }
+
+                50% {
+                    transform: scale(1.08);
+                }
+
+                100% {
+                    transform: scale(1);
+                }
             }
         }
     }
@@ -661,10 +680,11 @@ header {
     gap: 5px;
     transition: all 0.3s ease;
     box-shadow: none;
-    img{
+
+    img {
         border-radius: 50%;
 
-        @include max(575){
+        @include max(575) {
             height: 32px;
         }
     }

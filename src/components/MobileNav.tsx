@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 export default function MobileNav() {
     const pathname = usePathname();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [pressingIndex, setPressingIndex] = useState<number | null>(null);
 
     useEffect(() => {
         const checkAuth = () => {
@@ -37,7 +38,7 @@ export default function MobileNav() {
             <nav className="mobileBottomNav">
                 <div className="navContainer">
                     <div 
-                        className="liquidGlassIndicator" 
+                        className={`liquidGlassIndicator ${pressingIndex !== null ? 'pressing' : ''}`}
                         style={{ 
                             left: `${(activeIndex * 25) + 12.5}%`,
                             opacity: activeIndex === -1 ? 0 : 1
@@ -51,6 +52,10 @@ export default function MobileNav() {
                                 key={item.name}
                                 href={item.href}
                                 className={`navItem ${isActive ? 'active' : ''}`}
+                                onTouchStart={() => setPressingIndex(idx)}
+                                onTouchEnd={() => setPressingIndex(null)}
+                                onMouseDown={() => setPressingIndex(idx)}
+                                onMouseUp={() => setPressingIndex(null)}
                             >
                                 <div className="iconWrapper">
                                     <Icon size={22} />
