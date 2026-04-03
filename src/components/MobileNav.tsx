@@ -34,7 +34,9 @@ export default function MobileNav() {
                 <div className="navContainer">
                     {navItems.map((item) => {
                         const Icon = item.icon;
-                        const isActive = pathname === item.href;
+                        const isActive = item.href === '/' 
+                            ? pathname === '/' 
+                            : pathname.startsWith(item.href);
                         return (
                             <Link
                                 key={item.name}
