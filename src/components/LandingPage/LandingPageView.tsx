@@ -156,9 +156,7 @@ export default function LandingPageView({
 
   const [faqItems, setFaqItems] = useState<FaqItem[]>([]);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
-  const [testimonialItems, setTestimonialItems] = useState<
-    { name: string; img: string; text: string; rating?: number }[]
-  >([]);
+
 
   const destinationLabel = useMemo(() => {
     const src = `${data.title || ""} ${data.slug || ""}`.toLowerCase();
@@ -220,30 +218,7 @@ export default function LandingPageView({
     };
   }, []);
 
-  useEffect(() => {
-    let mounted = true;
-    async function loadTestimonials() {
-      try {
-        const res = await fetch(`${API_URL}/testimonials`);
-        const json = await res.json();
-        if (!mounted) return;
-        if (json?.success && Array.isArray(json.data)) {
-          const published = json.data.filter((t: { status?: string }) => (t.status || "published") === "published");
-          const mapped = published.map((t: { name?: string; image?: string; review?: string; rating?: number }) => ({
-            name: t.name || "",
-            img: t.image || "",
-            text: t.review || "",
-            rating: typeof t.rating === "number" ? t.rating : undefined,
-          }));
-          setTestimonialItems(mapped);
-        }
-      } catch (e) {
-        console.error("Failed to load testimonials", e);
-      }
-    }
-    loadTestimonials();
-    return () => { mounted = false; };
-  }, []);
+
 
   const fetchWishlist = async () => {
     try {
@@ -327,28 +302,7 @@ export default function LandingPageView({
     }
   };
 
-  const testimonialSliderSettings = {
-    dots: true,
-    arrows: false,
-    infinite: testimonialItems.length > 1,
-    speed: 600,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3500,
-    pauseOnHover: true,
-    adaptiveHeight: false,
-    responsive: [
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          adaptiveHeight: true,
-        },
-      },
-    ],
-  };
+
 
   return (
     <div className="landingPageLayout">
@@ -491,61 +445,7 @@ export default function LandingPageView({
         </div>
       </section>
 
-      {testimonialItems.length > 0 && (
-        <section id="testimonials" className="lp-testimonialsSection">
-          <div className="homeContainer lp-testimonialsInner">
-            <div className="sectionHeader">
-              <span className="sectionSubtitle">
-                {data.testimonials_kicker || "Reviews"}
-              </span>
-              <h2 className="sliderTitle">
-                {data.testimonials_title || "Our Happy clients"}
-              </h2>
-            </div>
 
-            <Slider {...testimonialSliderSettings} className="lp-testimonialsSlider">
-              {testimonialItems.map((t, i) => {
-                const starCount = Math.max(
-                  1,
-                  Math.min(
-                    5,
-                    typeof t.rating === "number" ? Math.round(t.rating) : 5
-                  )
-                );
-                const stars = "★★★★★".slice(0, starCount);
-                return (
-                  <div key={i} className="lp-testimonialSlideWrap">
-                    <div className="lp-testimonialCard">
-                      <div className="lp-testimonialHead">
-                        <div className="lp-testimonialAvatar">
-                          <Image
-                            src={getImageUrl(t.img || "/bg-placeholder.jpg")}
-                            alt={t.name || "Traveler"}
-                            fill
-                            className="lp-img-cover"
-                            unoptimized
-                          />
-                        </div>
-
-                        <div>
-                          <div className="lp-testimonialName">
-                            {t.name || ""}
-                          </div>
-                          <div className="lp-testimonialRating">{stars}</div>
-                        </div>
-                      </div>
-
-                      <div className="lp-testimonialText">
-                        <RichContent text={t.text} className="" />
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </Slider>
-          </div>
-        </section>
-      )}
 
       {/* About / Kerala Tourism – Parallax Effect */}
       <section id="about" className="lp-aboutSection">

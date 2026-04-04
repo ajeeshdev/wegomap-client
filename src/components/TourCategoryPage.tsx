@@ -66,7 +66,6 @@ export default function TourCategoryPage({
         email: ''
     });
     // const [isSubmitting, setIsSubmitting] = useState(false);
-    const [testimonials, setTestimonials] = useState<any[]>([]);
     const [loadingTestimonials, setLoadingTestimonials] = useState(true);
 
     const router = useRouter();
@@ -127,25 +126,7 @@ export default function TourCategoryPage({
         };
         fetchWishlist();
 
-        const fetchTestimonials = async () => {
-            try {
-                const res = await fetch(`${API_URL}/testimonials`);
-                const data = await res.json();
-                if (data.success) {
-                    setTestimonials(data.data.map((t: any) => ({
-                        name: t.name || t.title,
-                        role: t.location || t.designation || 'Verified Traveler',
-                        avatar: t.image ? getImageUrl(t.image) : null,
-                        quote: t.message || t.review || t.text || t.description || 'Great experience!'
-                    })));
-                }
-            } catch (err) {
-                console.error("Failed to load testimonials:", err);
-            } finally {
-                setLoadingTestimonials(false);
-            }
-        };
-        fetchTestimonials();
+
     }, []);
 
     const toggleWishlist = async (id: string, e: React.MouseEvent) => {
@@ -364,61 +345,7 @@ export default function TourCategoryPage({
                 </section>
             )}
 
-            {/* ── Testimonials (Home Page Style) ── */}
-            {testimonials.length > 0 && (
-            <section className="commonPadding bg-slate-50 testimonialSection">
-                <div className="homeContainer">
-                <div className="sectionHeader flex items-center justify-center mb-6">
-                    <div className="titleArea">
-                    <span className="sectionSubtitle">Guest Experiences</span>
-                    <h2 className="sliderTitle">What Travelers Are Saying</h2>
-                    </div>
-                </div>
-                
-                <Swiper
-                    modules={[Autoplay, Pagination]}
-                    spaceBetween={30}
-                    slidesPerView={1}
-                    loop={testimonials.length > 2}
-                    autoplay={{ delay: 6000, disableOnInteraction: false }}
-                    pagination={{ clickable: true, el: '.test-pagination' }}
-                    breakpoints={{
-                    768: { slidesPerView: 2 },
-                    1024: { slidesPerView: 2 }
-                    }}
-                    className="testimonialSwiper"
-                >
-                    {testimonials.map((t, i) => (
-                    <SwiperSlide key={i}>
-                        <div className="testimonialCard">
-                        <div className="quoteIcon"><MessageSquare size={24} /></div>
-                        <p className="testimonialText">"{t.quote}"</p>
-                        <div className="authorArea">
-                            <div className="authorImg">
-                            <Image 
-                                src={t.avatar || "/assets/site/assets/images/google-review.svg"} 
-                                alt={t.name} 
-                                width={32} 
-                                height={32} 
-                                className="rounded-full"
-                            />
-                            </div>
 
-                            <div className="authorInfo">
-                            <h4 className="authorName">{t.name || "Happy Traveler"}</h4>
-                            <div className="authorStars flex gap-0.5">
-                                {[...Array(5)].map((_, i) => <Star key={i} size={10} fill="#fbbf24" color="#fbbf24" strokeWidth={3} />)}
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                    </SwiperSlide>
-                    ))}
-                </Swiper>
-                <div className="test-pagination mt-8 flex justify-center"></div>
-                </div>
-            </section>
-            )}
 
             {/* ── Footer CTA ── */}
             <section className="tourCatCTA">

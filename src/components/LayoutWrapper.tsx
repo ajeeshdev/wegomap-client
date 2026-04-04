@@ -9,6 +9,8 @@ import MyraBot from "@/components/MyraBot";
 
 import { useEnquiry } from '@/context/EnquiryContext';
 
+import CommonTestimonials from "@/components/CommonTestimonials";
+
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     const { hideLayout } = useEnquiry();
@@ -23,6 +25,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
             <main>{children}</main>
             {showLayout && (
                 <>
+                    <CommonTestimonials />
                     <Footer />
                     <MobileNav />
                     <FloatingWhatsApp />
