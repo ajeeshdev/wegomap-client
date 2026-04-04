@@ -294,27 +294,31 @@ export default function TourDetailView({ id }: { id: string }) {
                                             <div className="dayLabel">Chapter 0{i + 1}</div>
                                             <h4>{item.day}</h4>
                                             <div className="activityGrid">
-                                                <div 
-                                                    className="activityText tour-description-content"
-                                                    dangerouslySetInnerHTML={{ __html: item.activity }}
-                                                />
-                                                {item.amenities && item.amenities.length > 0 && (
-                                                    <div className="dayAmenities mt-4 flex flex-wrap gap-3">
-                                                        {item.amenities.map((am: any, aIdx: number) => {
-                                                            const IconComp = ICON_MAP[am.icon] || Star;
-                                                            return (
-                                                                <div key={aIdx} className="flex items-center gap-3 bg-rose-50/40 rounded-xl p-1 pr-4 border border-rose-100/50 animate-in fade-in slide-in-from-bottom-2 duration-700">
-                                                                    <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-rose-500 shadow-sm">
-                                                                        <IconComp size={16} strokeWidth={2.5} />
+                                                <div className="flex flex-col">
+                                                    <div 
+                                                        className="activityText tour-description-content mb-4"
+                                                        dangerouslySetInnerHTML={{ __html: item.activity }}
+                                                    />
+                                                    
+                                                    {item.amenities && item.amenities.length > 0 && (
+                                                        <div className="dayAmenities mt-6 flex flex-wrap gap-3">
+                                                            {item.amenities.map((am: any, aIdx: number) => {
+                                                                const IconComp = ICON_MAP[am.icon] || Star;
+                                                                return (
+                                                                    <div key={aIdx} className="flex items-center gap-3 bg-rose-50/40 rounded-xl p-1 pr-4 border border-rose-100/50 animate-in fade-in slide-in-from-bottom-2 duration-700">
+                                                                        <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-rose-500 shadow-sm">
+                                                                            <IconComp size={16} strokeWidth={2.5} />
+                                                                        </div>
+                                                                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-800">{am.label}</span>
                                                                     </div>
-                                                                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-800">{am.label}</span>
-                                                                </div>
-                                                            )
-                                                        })}
-                                                    </div>
-                                                )}
+                                                                )
+                                                            })}
+                                                        </div>
+                                                    )}
+                                                </div>
+
                                                 {item.image && (
-                                                    <div className="itineraryImage aspect-[16/10] bg-slate-100 rounded-3xl overflow-hidden mt-6 border border-slate-50">
+                                                    <div className="itineraryImage aspect-[16/10] bg-slate-100 rounded-3xl overflow-hidden mt-0 md:mt-0 border border-slate-50">
                                                         <Image src={getImageUrl(item.image)} alt={item.day} fill className="object-cover transition-transform hover:scale-105 duration-700" unoptimized />
                                                     </div>
                                                 )}
