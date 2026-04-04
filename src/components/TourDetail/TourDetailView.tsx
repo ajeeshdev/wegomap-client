@@ -297,7 +297,7 @@ export default function TourDetailView({ id }: { id: string }) {
                                                 <div className="flex flex-col">
                                                     <div 
                                                         className="activityText tour-description-content mb-4"
-                                                        dangerouslySetInnerHTML={{ __html: item.activity }}
+                                                        dangerouslySetInnerHTML={{ __html: item.description || item.activity || '' }}
                                                     />
                                                     
                                                     {item.amenities && item.amenities.length > 0 && (

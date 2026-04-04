@@ -1,5 +1,6 @@
 export interface ItineraryDay {
     day: string;
+    description?: string;
     activity: string;
     image?: string | null;
     amenities?: { icon: string; label: string; color: string }[];
