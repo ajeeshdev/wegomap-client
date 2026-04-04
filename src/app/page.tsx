@@ -167,7 +167,12 @@ export default function Home() {
         const corpEventsData = await safeJson(corpEventsRes);
         const specEventsData = await safeJson(specEventsRes);
 
-        if (pkgsData.success) setPackages(pkgsData.data);
+        if (pkgsData.success) {
+            const list = (pkgsData.data || [])
+                .filter((p: any) => p.status === 'Published' || !p.status)
+                .sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
+            setPackages(list);
+        }
         if (destsData.success) setDestinations(destsData.data);
         if (corpEventsData.success) setCorporateEvents(corpEventsData.data);
         if (specEventsData.success) setSpecialEvents(specEventsData.data);

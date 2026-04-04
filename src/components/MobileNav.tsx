@@ -25,40 +25,51 @@ export default function MobileNav() {
     const navItems = [
         { name: 'Home', href: '/', icon: Home },
         { name: 'Tours', href: '/packages', icon: Briefcase },
+        { name: 'Myra AI', href: '#', icon: MessageCircle, isCentral: true },
         { name: 'Events', href: '/events', icon: Calendar },
-        { name: 'Profile', href: isLoggedIn ? '/dashboard' : '/login', icon: User },
+        { name: 'Account', href: isLoggedIn ? '/dashboard' : '/login', icon: User },
     ];
 
     const activeIndex = navItems.findIndex(item => 
-        item.href === '/' ? pathname === '/' : pathname.startsWith(item.href)
+        item.href === '#' ? false : (item.href === '/' ? pathname === '/' : pathname.startsWith(item.href))
     );
 
     return (
-        <div className="mobileBottomNavWrapper">
+        <div className="mobileBottomNavWrapper mmt-final-style">
             <nav className="mobileBottomNav">
                 <div className="navContainer">
-                    <div 
-                        className={`liquidGlassIndicator ${pressingIndex !== null ? 'pressing' : ''}`}
-                        style={{ 
-                            left: `${(activeIndex * 25) + 12.5}%`,
-                            opacity: activeIndex === -1 ? 0 : 1
-                        }} 
-                    />
                     {navItems.map((item, idx) => {
                         const Icon = item.icon;
                         const isActive = idx === activeIndex;
+                        
+                        if (item.isCentral) {
+                            return (
+                                <div key={item.name} className="centralNavItemWrapper">
+                                    <a 
+                                        href="https://wa.me/918590370566"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="centralNavItem animated"
+                                    >
+                                        <img 
+                                            src="https://promos.makemytrip.com/images/circular_cropped_cleaned_animation.webp" 
+                                            alt="Chat Assistant"
+                                            className="centralAnimatedIcon"
+                                        />
+                                    </a>
+                                    <span className="navLabel centralLabel">Chat with us</span>
+                                </div>
+                            );
+                        }
+
                         return (
                             <Link
                                 key={item.name}
                                 href={item.href}
                                 className={`navItem ${isActive ? 'active' : ''}`}
-                                onTouchStart={() => setPressingIndex(idx)}
-                                onTouchEnd={() => setPressingIndex(null)}
-                                onMouseDown={() => setPressingIndex(idx)}
-                                onMouseUp={() => setPressingIndex(null)}
                             >
                                 <div className="iconWrapper">
-                                    <Icon size={22} />
+                                    <Icon size={24} />
                                 </div>
                                 <span className="navLabel">{item.name}</span>
                             </Link>

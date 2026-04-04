@@ -55,6 +55,8 @@ interface PackageCardData {
     categories: string[];
     averageRating?: number;
     reviewCount?: number;
+    status?: string;
+    order?: number;
 }
 
 function buildAllPackages(): PackageCardData[] {
@@ -211,7 +213,7 @@ export default function AllToursPage() {
                             oldPrice: pkg.oldamt ? `₹${Number(pkg.oldamt).toLocaleString()}` : null,
                             image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || pkg.image || '/bg-placeholder.jpg'),
                             images: pkg.images || [],
-                            subtitle: pkg.subtitle || pkg.description || '',
+                            subtitle: pkg.subtitle || '',
                             highlights: pkg.highlights || [],
                             itinerary: pkg.itinerary || [],
                             categories: categories,
@@ -221,9 +223,13 @@ export default function AllToursPage() {
                             totalPrice: pkg.totalPrice,
                             per: pkg.per || '/ Person',
                             onoffer: pkg.onoffer,
+                            status: pkg.status || 'Published',
+                            order: pkg.order || 0,
                             _id: pkg._id
                         };
-                    });
+                    })
+                    .filter((p: any) => p.status === 'Published')
+                    .sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
                     setCmsPackages(mapped);
                 }
             } catch (err) {
@@ -248,7 +254,7 @@ export default function AllToursPage() {
                 cmsSlugs.add(p.slug);
             }
         });
-        return combined;
+        return combined.sort((a, b) => (a.order || 0) - (b.order || 0));
     }, [cmsPackages]);
 
     useEffect(() => {

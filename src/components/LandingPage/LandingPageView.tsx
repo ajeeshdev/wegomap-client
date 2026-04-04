@@ -138,10 +138,12 @@ export default function LandingPageView({
 }: {
   data: LandingPageContent;
 }) {
-  const packages: PackageCard[] =
-    Array.isArray(data?.package_ids) && data.package_ids.length > 0
-      ? (data.package_ids as PackageCard[])
-      : [];
+  const packages: PackageCard[] = useMemo(() => {
+    if (!Array.isArray(data?.package_ids) || data.package_ids.length === 0) return [];
+    return (data.package_ids as any[])
+      .filter((p: any) => p.status === 'Published' || !p.status)
+      .sort((a: any, b: any) => (a.order || 0) - (b.order || 0)) as PackageCard[];
+  }, [data.package_ids]);
   const [quickPlanOpen, setQuickPlanOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState("");
   const [wishlist, setWishlist] = useState<string[]>([]);
@@ -895,7 +897,7 @@ export default function LandingPageView({
               </div>
 
               <p className="lp-modalSubmitNote">
-                You will get a response within 24 hours.
+                RESPONSE WITHIN 24 HOURS
               </p>
             </form>
           </div>

@@ -19,7 +19,8 @@ export default function CreatePackage() {
       title: '', pcode: '', subtitle: '', slabel: '', location: '', description: '',
       inclusions: [], exclusions: [], terms: '',
       itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '',
-      averageRating: 4.9, reviewCount: 150, noCostEmi: ''
+      averageRating: 4.9, reviewCount: 150, noCostEmi: '',
+      status: 'Published', order: 0
    });
 
    useEffect(() => {
@@ -112,17 +113,18 @@ export default function CreatePackage() {
 
                   <div>
                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-4">Visibility & Status</label>
-                     <div className="space-y-3">
+                     <div className="space-y-4">
                         <label className="flex items-center justify-between cursor-pointer group">
-                           <span className="text-[10px] font-bold text-slate-500">Special Offer</span>
-                           <input type="checkbox" checked={formData.onoffer} onChange={e => setFormData({ ...formData, onoffer: e.target.checked })} className="sr-only peer" />
-                           <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-emerald-500 transition-all relative"><div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-4.5"></div></div>
+                           <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Active Status</span>
+                           <input type="checkbox" checked={formData.status === 'Published'} onChange={e => setFormData({ ...formData, status: e.target.checked ? 'Published' : 'Draft' })} className="sr-only peer" />
+                           <div className="w-10 h-6 bg-slate-200 rounded-full peer-checked:bg-blue-600 transition-all relative">
+                              <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-all peer-checked:translate-x-4 shadow-sm"></div>
+                           </div>
                         </label>
-                        <label className="flex items-center justify-between cursor-pointer group">
-                           <span className="text-[10px] font-bold text-slate-500">Bestseller</span>
-                           <input type="checkbox" checked={formData.isBestSeller} onChange={e => setFormData({ ...formData, isBestSeller: e.target.checked })} className="sr-only peer" />
-                           <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-blue-600 transition-all relative"><div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-4.5"></div></div>
-                        </label>
+                        <div className="pt-2">
+                           <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Display Order</label>
+                           <input type="number" value={formData.order} onChange={e => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })} className="admin-form-input !h-9 font-bold text-center" placeholder="0" />
+                        </div>
                      </div>
                   </div>
 

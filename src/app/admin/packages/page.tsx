@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { API_URL, getImageUrl } from '@/config';
 import { Edit, Trash2, Plus, Search, MapPin, Tag, IndianRupee, Eye, MoreVertical, ShieldCheck, Sparkles, Zap, Clock, Layers } from 'lucide-react';
+import { toast } from 'react-hot-toast';
 
 export default function PackagesAdmin() {
-  const [packages, setPackages] = useState([]);
+  const [packages, setPackages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -47,12 +48,56 @@ export default function PackagesAdmin() {
     }
   }
 
-  const filteredPackages = packages.filter((pkg: any) =>
-    (pkg.title || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (pkg.location || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (pkg.category || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (pkg.pcode || '').toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredPackages = packages
+    .filter((pkg: any) =>
+      (pkg.title || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (pkg.location || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (pkg.category || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (pkg.pcode || '').toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
+
+  const handleStatusToggle = async (pkg: any) => {
+    const newStatus = pkg.status === 'Published' ? 'Draft' : 'Published';
+    try {
+      const res = await fetch(`${API_URL}/packages/${pkg._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ ...pkg, status: newStatus })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setPackages(packages.map((p: any) => p._id === pkg._id ? { ...p, status: newStatus } : p));
+        toast.success(`Package ${newStatus === 'Published' ? 'Enabled' : 'Disabled'}`);
+      }
+    } catch (err) {
+      console.error('Failed to toggle status', err);
+      toast.error('Update failed');
+    }
+  };
+
+  const handleOrderChange = async (pkg: any, newOrder: string) => {
+    const orderNum = parseInt(newOrder) || 0;
+    try {
+      const res = await fetch(`${API_URL}/packages/${pkg._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({ ...pkg, order: orderNum })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setPackages(packages.map((p: any) => p._id === pkg._id ? { ...p, order: orderNum } : p));
+      }
+    } catch (err) {
+       console.error('Failed to update order', err);
+    }
+  };
 
   return (
     <div className="cms-page-wrapper">
@@ -94,11 +139,13 @@ export default function PackagesAdmin() {
             <table className="admin-table">
               <thead className="cms-table-header">
                 <tr>
-                  <th style={{ width: '35%' }}>Package Details</th>
-                  <th style={{ width: '20%' }}>Location</th>
-                  <th style={{ width: '15%' }}>Price</th>
+                  <th style={{ width: '30%' }}>Package Details</th>
+                  <th style={{ width: '15%' }}>Location</th>
+                  <th style={{ width: '10%' }}>Price</th>
                   <th style={{ width: '15%' }}>Category</th>
-                  <th style={{ width: '15%', textAlign: 'right' }}>Actions</th>
+                  <th style={{ width: '10%' }}>Order</th>
+                  <th style={{ width: '10%' }}>Status</th>
+                  <th style={{ width: '10%', textAlign: 'right' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -153,6 +200,28 @@ export default function PackagesAdmin() {
                       <span className="cms-cat-badge">
                         <Tag size={10} /> {pkg.category || 'Platform Core'}
                       </span>
+                    </td>
+                    <td className="cms-table-cell">
+                      <div className="flex items-center gap-2">
+                        <input 
+                          type="number" 
+                          value={pkg.order || 0} 
+                          onChange={(e) => handleOrderChange(pkg, e.target.value)}
+                          className="w-12 h-8 text-[10px] font-bold text-center border rounded bg-slate-50 focus:bg-white transition-all"
+                        />
+                      </div>
+                    </td>
+                    <td className="cms-table-cell">
+                        <button 
+                          onClick={() => handleStatusToggle(pkg)}
+                          className={`px-2 py-1 rounded text-[8px] font-black uppercase tracking-widest border transition-all ${
+                            pkg.status === 'Published' 
+                            ? 'bg-emerald-50 text-emerald-600 border-emerald-200' 
+                            : 'bg-rose-50 text-rose-500 border-rose-200 opacity-60'
+                          }`}
+                        >
+                          {pkg.status === 'Published' ? 'Active' : 'Disabled'}
+                        </button>
                     </td>
                     <td className="cms-table-cell">
                       <div className="cms-action-group">

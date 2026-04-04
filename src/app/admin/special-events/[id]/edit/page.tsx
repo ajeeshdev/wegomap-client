@@ -3,7 +3,7 @@
 import { API_URL } from '@/config';
 import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { Save, ArrowLeft, Ticket, Type, Image as ImageIcon, Sparkles, Link as LinkIcon, Clock, Zap, Globe, Briefcase, Info, ShieldCheck, Layers } from 'lucide-react';
+import { Save, ArrowLeft, Ticket, Type, Image as ImageIcon, Sparkles, Link as LinkIcon, Clock, Zap, Globe, Briefcase, Info, ShieldCheck, Layers, Calendar, MapPin } from 'lucide-react';
 import ImageUpload from '@/components/admin/ImageUpload';
 import RichTextEditor from '@/components/admin/Editor';
 
@@ -17,7 +17,9 @@ export default function EditSpecialEvent() {
     description: '',
     image: '',
     slug: '',
-    status: 'Active'
+    status: 'Active',
+    date: '',
+    location: ''
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -35,7 +37,9 @@ export default function EditSpecialEvent() {
             description: data.data.description || '',
             image: data.data.images?.[0] || '',
             slug: data.data.slug || '',
-            status: data.data.status || 'Active'
+            status: data.data.status || 'Active',
+            date: data.data.date ? new Date(data.data.date).toISOString().split('T')[0] : '',
+            location: data.data.location || ''
           });
         }
       } catch (err) {
@@ -172,6 +176,32 @@ export default function EditSpecialEvent() {
                       value={formData.heroSubtext} 
                       onChange={e => setFormData({ ...formData, heroSubtext: e.target.value })} 
                       className="admin-form-input font-bold h-16 px-8 rounded-3xl" 
+                    />
+                  </div>
+                </div>
+
+                <div className="admin-form-grid-2 admin-form-grid-2--bordered">
+                  <div className="admin-form-group">
+                    <label className="admin-form-label flex items-center gap-3 mb-4 font-black text-[11px] uppercase tracking-[0.2em] opacity-60">
+                      <Calendar size={14} className="text-blue-500" /> Event Date
+                    </label>
+                    <input 
+                      type="date" 
+                      value={formData.date} 
+                      onChange={e => setFormData({ ...formData, date: e.target.value })} 
+                      className="admin-form-input font-bold h-16 px-8 rounded-3xl" 
+                    />
+                  </div>
+                  <div className="admin-form-group">
+                    <label className="admin-form-label flex items-center gap-3 mb-4 font-black text-[11px] uppercase tracking-[0.2em] opacity-60">
+                      <MapPin size={14} className="text-red-500" /> Venue Location
+                    </label>
+                    <input 
+                      type="text" 
+                      value={formData.location} 
+                      onChange={e => setFormData({ ...formData, location: e.target.value })} 
+                      className="admin-form-input font-bold h-16 px-8 rounded-3xl" 
+                      placeholder="e.g. KOCHI, KERALA..." 
                     />
                   </div>
                 </div>
