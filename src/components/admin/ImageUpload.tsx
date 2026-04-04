@@ -152,7 +152,7 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
           `}>
             <div className={`
               w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500
-              ${uploading ? 'bg-blue-600 text-white animate-bounce' : 'bg-white text-blue-400 shadow-sm group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white'}
+              ${uploading ? 'bg-blue-600 text-white animate-bounce' : 'bg-white text-blue-400 shadow-sm group-hover:scale-110 group-hover:bg-blue-600'}
             `}>
               {uploading ? <Loader2 size={24} className="animate-spin" /> : <Upload size={22} strokeWidth={2.5} />}
             </div>
