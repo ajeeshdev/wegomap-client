@@ -7,6 +7,7 @@ import { Save, ArrowLeft, Image as ImageIcon, Info, Map, List, Search, Trash2, G
 import ImageUpload from '@/components/admin/ImageUpload';
 import MultiImageUpload from '@/components/admin/MultiImageUpload';
 import RichTextEditor from '@/components/admin/Editor';
+import AmenityPicker from '@/components/admin/AmenityPicker';
 import { toast } from 'react-hot-toast';
 
 export default function EditPackage() {
@@ -198,25 +199,12 @@ export default function EditPackage() {
             </div>
 
             <div className="pt-6 border-t border-slate-50">
-               <label className="admin-form-label mb-4 block text-[10px] uppercase tracking-widest text-slate-400">Key Features / Amenities (Slot 1, 2, 3)</label>
-               <div className="admin-form-grid-3">
-                  {formData.amenities?.map((am: any, idx: number) => (
-                    <div key={idx} className="admin-form-group">
-                       <label className="admin-form-label text-[9px]">Feature {idx + 1} Label</label>
-                       <input 
-                          type="text" 
-                          value={am.label} 
-                          onChange={e => {
-                             const newAm = [...formData.amenities];
-                             newAm[idx].label = e.target.value;
-                             setFormData({ ...formData, amenities: newAm });
-                          }} 
-                          className="admin-form-input !h-10 font-bold"
-                          placeholder={idx === 0 ? "Luxury Stays" : idx === 1 ? "Fine Dining" : "Private Hub"}
-                       />
-                    </div>
-                  ))}
-               </div>
+               <label className="admin-form-label mb-4 block text-[10px] uppercase tracking-widest text-slate-400">Key Features / Amenities (Icon options)</label>
+               <AmenityPicker 
+                  value={formData.amenities || []}
+                  onChange={am => setFormData({ ...formData, amenities: am })}
+                  max={6}
+               />
             </div>
           </div>
 
@@ -377,6 +365,22 @@ export default function EditPackage() {
                              }}
                              label=""
                              dimensions="800 x 500"
+                          />
+                       </div>
+                    </div>
+                    <div className="admin-form-group">
+                       <label className="admin-form-label text-[10px] uppercase tracking-widest text-slate-400">Day Specific Highlights / Icons</label>
+                       <div className="mt-4">
+                          <AmenityPicker
+                             value={item.amenities || []}
+                             onChange={(am) => {
+                                setFormData((prev: any) => {
+                                   const ni = [...prev.itinerary];
+                                   ni[idx] = { ...ni[idx], amenities: am };
+                                   return { ...prev, itinerary: ni };
+                                });
+                             }}
+                             max={4}
                           />
                        </div>
                     </div>

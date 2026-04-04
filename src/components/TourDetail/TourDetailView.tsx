@@ -13,8 +13,16 @@ import {
     Clock, MapPin, Check, X, ShieldCheck,
     ChevronDown, Send, ArrowLeft, Sparkles,
     Building2, Car, Utensils, Star, Phone,
-    Calendar, Users, Info, User, Heart, MessageSquare, Quote, ThumbsUp, Share2
+    Calendar, Users, Info, User, Heart, MessageSquare, Quote, ThumbsUp, Share2,
+    Plane, Waves, Mountain, Palmtree, Camera, Tent, Wifi, Coffee, Music, Ticket, Sunset, ShoppingBag
 } from 'lucide-react';
+
+const ICON_MAP: Record<string, any> = {
+    Building2, Utensils, Car, Plane, MapPin, Clock, 
+    ShieldCheck, Sparkles, Waves, Mountain, Palmtree, 
+    Camera, Tent, Wifi, Coffee, Music, Ticket, Star,
+    Heart, Sunset, ShoppingBag
+};
 import { useEnquiry } from '@/context/EnquiryContext';
 
 export default function TourDetailView({ id }: { id: string }) {
@@ -298,6 +306,19 @@ export default function TourDetailView({ id }: { id: string }) {
                                                     className="activityText tour-description-content"
                                                     dangerouslySetInnerHTML={{ __html: item.activity }}
                                                 />
+                                                {item.amenities && item.amenities.length > 0 && (
+                                                    <div className="dayAmenities mt-4 flex flex-wrap gap-2">
+                                                        {item.amenities.map((am: any, aIdx: number) => {
+                                                            const IconComp = ICON_MAP[am.icon] || Star;
+                                                            return (
+                                                                <div key={aIdx} className={`dayAmenityBadge flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-${am.color || 'blue'}-50 border border-${am.color || 'blue'}-100 animate-in fade-in slide-in-from-bottom-1 duration-500`}>
+                                                                    <IconComp size={12} className={`text-${am.color || 'blue'}-600`} />
+                                                                    <span className={`text-[10px] font-black uppercase tracking-wider text-${am.color || 'blue'}-700`}>{am.label}</span>
+                                                                </div>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                )}
                                                 {item.image && (
                                                     <div className="itineraryImage aspect-[16/10] bg-slate-100 rounded-3xl overflow-hidden mt-6 border border-slate-50">
                                                         <Image src={getImageUrl(item.image)} alt={item.day} fill className="object-cover transition-transform hover:scale-105 duration-700" unoptimized />

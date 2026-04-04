@@ -7,6 +7,7 @@ import { Save, ArrowLeft, Image as ImageIcon, Info, Map as MapIcon, List, Search
 import ImageUpload from '@/components/admin/ImageUpload';
 import MultiImageUpload from '@/components/admin/MultiImageUpload';
 import RichTextEditor from '@/components/admin/Editor';
+import AmenityPicker from '@/components/admin/AmenityPicker';
 import { toast } from 'react-hot-toast';
 import '../../cms-premium.scss';
 
@@ -165,30 +166,17 @@ export default function CreatePackage() {
                                  </select>
                               </div>
                            </div>
-                           
-                           <div className="pt-6 border-t border-slate-100">
-                              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-4">Key Features / Amenities</label>
-                              <div className="grid grid-cols-3 gap-4">
-                                 {formData.amenities?.map((am: any, idx: number) => (
-                                    <div key={idx} className="admin-form-group">
-                                       <label className="text-[9px] font-bold text-slate-400 mb-1 block">Slot {idx + 1}</label>
-                                       <input 
-                                          type="text" 
-                                          value={am.label} 
-                                          onChange={e => {
-                                             const newAm = [...formData.amenities];
-                                             newAm[idx].label = e.target.value;
-                                             setFormData({ ...formData, amenities: newAm });
-                                          }} 
-                                          className="!h-10 text-sm font-bold"
-                                          placeholder="Label"
-                                       />
-                                    </div>
-                                 ))}
-                              </div>
-                           </div>
-                        </div>
-                     </div>
+                            
+                            <div className="pt-6 border-t border-slate-100">
+                               <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-4">Key Features / Amenities (Icon options)</label>
+                               <AmenityPicker 
+                                  value={formData.amenities || []}
+                                  onChange={am => setFormData({ ...formData, amenities: am })}
+                                  max={6}
+                               />
+                            </div>
+                         </div>
+                      </div>
 
                      <div className="editor-card">
                         <div className="card-header"><h4 className="serif">Detailed Overview</h4></div>
@@ -294,6 +282,22 @@ export default function CreatePackage() {
                                              }}
                                              label=""
                                              dimensions="800 x 500"
+                                          />
+                                       </div>
+
+                                       {/* Day Specific Amenities */}
+                                       <div className="mt-6">
+                                          <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-2">Day Highlights / Icons</label>
+                                          <AmenityPicker
+                                             value={item.amenities || []}
+                                             onChange={(am) => {
+                                                setFormData((prev: any) => {
+                                                   const ni = [...prev.itinerary];
+                                                   ni[idx] = { ...ni[idx], amenities: am };
+                                                   return { ...prev, itinerary: ni };
+                                                });
+                                             }}
+                                             max={4}
                                           />
                                        </div>
                                     </div>

@@ -2,6 +2,7 @@ export interface ItineraryDay {
     day: string;
     activity: string;
     image?: string | null;
+    amenities?: { icon: string; label: string; color: string }[];
 }
 
 export interface TourPackageDetail {
