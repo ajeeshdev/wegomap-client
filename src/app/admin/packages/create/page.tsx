@@ -236,63 +236,62 @@ export default function CreatePackage() {
                            {formData.itinerary?.map((item: any, idx: number) => (
                               <div key={idx} className="p-6 bg-slate-50/50 rounded-2xl border border-slate-100 relative group">
                                  <div className="flex gap-6">
-                                    <div className="w-12 h-12 bg-white rounded-xl border flex flex-col items-center justify-center font-bold text-blue-600 shrink-0">
-                                       <span className="text-[7px] uppercase opacity-50">Day</span>
+                                    <div className="w-10 h-10 bg-white rounded-lg border flex flex-col items-center justify-center font-bold text-blue-600 shrink-0">
+                                       <span className="text-[6px] uppercase opacity-50">Day</span>
                                        <span>{item.day || idx + 1}</span>
                                     </div>
-                                    <div className="flex-1 space-y-4">
+                                    <div className="flex-1 space-y-3">
                                        <input type="text" value={item.title} onChange={e => { 
                                           setFormData((prev: any) => {
                                              const ni = [...prev.itinerary];
                                              ni[idx] = { ...ni[idx], title: e.target.value };
                                              return { ...prev, itinerary: ni };
                                           });
-                                       }} placeholder="Activity Title" className="w-full bg-transparent border-b font-bold text-lg" />
+                                       }} placeholder="Activity Title" className="w-full bg-transparent border-b font-bold text-lg py-1" />
                                        
-                                       <div className="mt-2 p-1 bg-white rounded-xl border border-slate-100">
+                                       <div className="mt-1 p-0.5 bg-white rounded-xl border border-slate-100">
                                           <RichTextEditor value={item.description} onChange={(content) => { 
                                              setFormData((prev: any) => {
                                                 const ni = [...prev.itinerary];
                                                 ni[idx] = { ...ni[idx], description: content };
                                                 return { ...prev, itinerary: ni };
                                              });
-                                          }} height={400} />
+                                          }} height={300} />
                                        </div>
                                        
-                                       {/* Day Image Upload */}
-                                       <div className="mt-4 max-w-xs">
-                                          <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-2">Day Visual / Photo</label>
-                                          <ImageUpload
-                                             value={item.image}
-                                             onChange={(url) => {
-                                                setFormData((prev: any) => {
-                                                   const ni = [...prev.itinerary];
-                                                   ni[idx] = { ...ni[idx], image: url };
-                                                   return { ...prev, itinerary: ni };
-                                                });
-                                             }}
-                                             label=""
-                                             dimensions="800 x 500"
-                                          />
-                                       </div>
-
-                                       {/* Day Specific Amenities */}
-                                       <div className="mt-6">
-                                          <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-2">Day Highlights / Icons</label>
-                                          <AmenityPicker
-                                             value={item.amenities || []}
-                                             onChange={(am) => {
-                                                setFormData((prev: any) => {
-                                                   const ni = [...prev.itinerary];
-                                                   ni[idx] = { ...ni[idx], amenities: am };
-                                                   return { ...prev, itinerary: ni };
-                                                });
-                                             }}
-                                             max={4}
-                                          />
+                                       <div className="mt-2 flex flex-wrap items-start gap-4">
+                                          <div className="max-w-[200px] shrink-0">
+                                             <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-2">Day Photo</label>
+                                             <ImageUpload
+                                                value={item.image}
+                                                onChange={(url) => {
+                                                   setFormData((prev: any) => {
+                                                      const ni = [...prev.itinerary];
+                                                      ni[idx] = { ...ni[idx], image: url };
+                                                      return { ...prev, itinerary: ni };
+                                                   });
+                                                }}
+                                                label=""
+                                                dimensions="800 x 500"
+                                             />
+                                          </div>
+                                          <div className="flex-1 min-w-[200px]">
+                                             <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-2">Day Highlights</label>
+                                             <AmenityPicker
+                                                value={item.amenities || []}
+                                                onChange={(am) => {
+                                                   setFormData((prev: any) => {
+                                                      const ni = [...prev.itinerary];
+                                                      ni[idx] = { ...ni[idx], amenities: am };
+                                                      return { ...prev, itinerary: ni };
+                                                   });
+                                                }}
+                                                max={4}
+                                             />
+                                          </div>
                                        </div>
                                     </div>
-                                    <button type="button" onClick={() => setFormData({ ...formData, itinerary: formData.itinerary.filter((_: any, i: number) => i !== idx) })} className="opacity-0 group-hover:opacity-100 transition-opacity text-slate-300 hover:text-emerald-500"><Trash2 size={16} /></button>
+                                    <button type="button" onClick={() => setFormData({ ...formData, itinerary: formData.itinerary.filter((_: any, i: number) => i !== idx) })} className="opacity-0 group-hover:opacity-100 transition-opacity text-slate-300 hover:text-emerald-500 absolute top-4 right-4"><Trash2 size={14} /></button>
                                  </div>
                               </div>
                            ))}

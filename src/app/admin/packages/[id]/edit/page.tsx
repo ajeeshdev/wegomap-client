@@ -312,76 +312,76 @@ export default function EditPackage() {
                 + Add Day
               </button>
             </div>
-            <div className="space-y-8 pt-4">
+            <div className="space-y-4 pt-2">
               {formData.itinerary?.map((item: any, idx: number) => (
-                <div key={idx} className="bg-slate-50/30 p-8 rounded-3xl border border-slate-100 relative group transition-all duration-300 hover:bg-white hover:shadow-sm">
-                  <div className="absolute -left-4 top-8 w-12 h-12 bg-white border border-slate-200 shadow-sm rounded-xl flex flex-col items-center justify-center font-bold text-blue-600 transition-all group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600">
-                    <span className="text-[7px] uppercase opacity-50 mb-0.5">Day</span>
-                    <span className="text-xl leading-none">{item.day || idx + 1}</span>
+                <div key={idx} className="bg-slate-50/20 p-5 rounded-2xl border border-slate-100 relative group transition-all duration-300 hover:bg-white hover:shadow-sm">
+                  <div className="absolute -left-3 top-5 w-10 h-10 bg-white border border-slate-200 shadow-sm rounded-lg flex flex-col items-center justify-center font-bold text-blue-600 transition-all group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600">
+                    <span className="text-[6px] uppercase opacity-50">Day</span>
+                    <span className="text-lg leading-none">{item.day || idx + 1}</span>
                   </div>
-                  <div className="pl-12 space-y-6">
+                  <div className="pl-10 space-y-3">
                     <div className="admin-form-group">
-                      <label className="admin-form-label text-[10px] uppercase tracking-widest text-slate-400">Activity Title</label>
                       <input type="text" value={item.title} onChange={e => {
                         setFormData((prev: any) => {
                           const newItin = [...prev.itinerary];
                           newItin[idx] = { ...newItin[idx], title: e.target.value };
                           return { ...prev, itinerary: newItin };
                         });
-                      }} className="w-full bg-transparent border-b border-slate-100 py-3 focus:border-blue-600 outline-none font-bold text-xl text-slate-900 transition-all" placeholder="e.g. Arrival at Cochin" />
+                      }} className="w-full bg-transparent border-b border-slate-100 py-1 focus:border-blue-600 outline-none font-bold text-lg text-slate-900 transition-all" placeholder="e.g. Arrival at Cochin" />
                     </div>
-                    <div className="admin-form-group">
-                      <label className="admin-form-label text-[10px] uppercase tracking-widest text-slate-400">Activity Description</label>
-                      <div className="mt-2 bg-white rounded-xl border border-slate-100 p-1">
+
+                    <div className="admin-form-group !mb-1">
+                      <label className="admin-form-label text-[9px] uppercase tracking-widest text-slate-400">Activity Description</label>
+                      <div className="mt-0.5 bg-white rounded-xl border border-slate-100 p-0.5">
                         <RichTextEditor value={item.description} onChange={(content) => {
                           setFormData((prev: any) => {
                             const newItin = [...prev.itinerary];
                             newItin[idx] = { ...newItin[idx], description: content };
                             return { ...prev, itinerary: newItin };
                           });
-                        }} height={400} />
+                        }} height={300} />
                       </div>
                     </div>
+
                     <div className="admin-form-group">
-                       <label className="admin-form-label text-[10px] uppercase tracking-widest text-slate-400">Day Thumbnail / Image</label>
-                       <div className="mt-2 max-w-xs">
-                          <ImageUpload
-                             value={item.image}
-                             onChange={(url) => {
-                                setFormData((prev: any) => {
-                                  const newItin = [...prev.itinerary];
-                                  newItin[idx] = { ...newItin[idx], image: url };
-                                  return { ...prev, itinerary: newItin };
-                                });
-                             }}
-                             label=""
-                             dimensions="800 x 500"
-                          />
-                       </div>
-                    </div>
-                    <div className="admin-form-group">
-                       <label className="admin-form-label text-[10px] uppercase tracking-widest text-slate-400">Day Specific Highlights / Icons</label>
-                       <div className="mt-4">
-                          <AmenityPicker
-                             value={item.amenities || []}
-                             onChange={(am) => {
-                                setFormData((prev: any) => {
-                                   const ni = [...prev.itinerary];
-                                   ni[idx] = { ...ni[idx], amenities: am };
-                                   return { ...prev, itinerary: ni };
-                                });
-                             }}
-                             max={4}
-                          />
+                       <label className="admin-form-label text-[9px] uppercase tracking-widest text-slate-400">Image / Highlights</label>
+                       <div className="mt-1.5 flex flex-wrap items-start gap-4">
+                          <div className="max-w-[200px] shrink-0">
+                             <ImageUpload
+                                value={item.image}
+                                onChange={(url) => {
+                                   setFormData((prev: any) => {
+                                     const newItin = [...prev.itinerary];
+                                     newItin[idx] = { ...newItin[idx], image: url };
+                                     return { ...prev, itinerary: newItin };
+                                   });
+                                }}
+                                label=""
+                                dimensions="800 x 500"
+                             />
+                          </div>
+                          <div className="flex-1 min-w-[200px]">
+                             <AmenityPicker
+                                value={item.amenities || []}
+                                onChange={(am) => {
+                                   setFormData((prev: any) => {
+                                      const ni = [...prev.itinerary];
+                                      ni[idx] = { ...ni[idx], amenities: am };
+                                      return { ...prev, itinerary: ni };
+                                   });
+                                }}
+                                max={4}
+                             />
+                          </div>
                        </div>
                     </div>
                   </div>
                   <button
                     type="button"
                     onClick={() => setFormData({ ...formData, itinerary: formData.itinerary.filter((_: any, i: number) => i !== idx) })}
-                    className="absolute top-6 right-6 w-9 h-9 rounded-xl flex items-center justify-center text-slate-300 hover:bg-rose-50 hover:text-rose-600 transition-all border border-slate-100 hover:border-rose-200 shadow-sm"
+                    className="absolute top-5 right-5 w-8 h-8 rounded-lg flex items-center justify-center text-slate-300 hover:bg-rose-50 hover:text-rose-600 transition-all border border-slate-100"
                   >
-                    <Trash2 size={16} />
+                    <Trash2 size={14} />
                   </button>
                 </div>
               ))}

@@ -306,7 +306,7 @@
 .admin-content-area {
   flex: 1;
   overflow-y: auto;
-  padding: 1rem 1.25rem;
+  padding: 0.75rem 1rem;
   scroll-behavior: smooth;
 }
 
@@ -417,7 +417,7 @@
 .admin-card,
 .admin-form-card {
   background: #fff;
-  padding: 1rem;
+  padding: 0.75rem;
   border-radius: 0.5rem;
   border: 1px solid #e2e8f0;
 }
@@ -552,8 +552,8 @@
 .admin-form-section {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  padding-top: 1rem;
+  gap: 1rem;
+  padding-top: 0.75rem;
   border-top: 1px solid #f8fafc;
 }
 
