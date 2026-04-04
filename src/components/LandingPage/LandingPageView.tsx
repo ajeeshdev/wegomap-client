@@ -416,7 +416,8 @@ export default function LandingPageView({
                   noCostEmi: (pkg as any).noCostEmi,
                   totalPrice: (pkg as any).totalPrice,
                   per: pkg.per || '/ Person',
-                  onoffer: !!pkg.oldamt,
+                  onoffer: (pkg as any).onoffer,
+                  slabel: (pkg as any).slabel,
                   _id: pkg._id
                 };
 

@@ -33,6 +33,7 @@ interface PackageCardProps {
         per?: string;
         totalPrice?: number;
         onoffer?: boolean;
+        slabel?: string;
         href?: string;
         _id?: string;
     };
@@ -147,9 +148,9 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         priority={pkg.onoffer}
                                     />
-                                    {(pkg.onoffer || pkg.oldPrice) && (
+                                    {pkg.onoffer && (
                                         <div className="absolute top-4 left-4  offerLabel">
-                                            SPECIAL OFFER
+                                            {pkg.slabel || 'SPECIAL OFFER'}
                                         </div>
                                     )}
                                 </Link>
@@ -169,9 +170,9 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             priority={pkg.onoffer}
                         />
-                        {(pkg.onoffer || pkg.oldPrice) && (
+                        {pkg.onoffer && (
                                         <div className="absolute top-4 left-4  offerLabel">
-                                SPECIAL OFFER
+                                {pkg.slabel || 'SPECIAL OFFER'}
                             </div>
                         )}
                     </Link>

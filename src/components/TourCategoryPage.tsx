@@ -308,6 +308,7 @@ export default function TourCategoryPage({
                                 totalPrice: (pkg as any).totalPrice,
                                 per: (pkg as any).per || '/ Person',
                                 onoffer: (pkg as any).onoffer,
+                                slabel: (pkg as any).slabel,
                                 _id: pkg._id
                             };
                             return (

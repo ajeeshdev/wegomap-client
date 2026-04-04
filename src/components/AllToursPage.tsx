@@ -57,6 +57,8 @@ interface PackageCardData {
     reviewCount?: number;
     status?: string;
     order?: number;
+    onoffer?: boolean;
+    slabel?: string;
 }
 
 function buildAllPackages(): PackageCardData[] {
@@ -90,6 +92,8 @@ function buildAllPackages(): PackageCardData[] {
             categories: [...cats],
             averageRating: pkg.averageRating,
             reviewCount: pkg.reviewCount,
+            onoffer: pkg.onoffer,
+            slabel: pkg.slabel,
         });
     });
 
@@ -223,6 +227,7 @@ export default function AllToursPage() {
                             totalPrice: pkg.totalPrice,
                             per: pkg.per || '/ Person',
                             onoffer: pkg.onoffer,
+                            slabel: pkg.slabel,
                             status: pkg.status || 'Published',
                             order: pkg.order || 0,
                             _id: pkg._id
