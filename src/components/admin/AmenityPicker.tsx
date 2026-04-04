@@ -1,14 +1,14 @@
 "use client";
 
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { 
   Building2, Utensils, Car, Plane, MapPin, Clock, 
   ShieldCheck, Sparkles, Waves, Mountain, Palmtree, 
   Camera, Tent, Wifi, Coffee, Music, Ticket, Star,
-  Heart, Sunset, ShoppingBag, Plus, X
+  Heart, Sunset, ShoppingBag, Plus, X, LucideIcon
 } from 'lucide-react';
 
-const ICON_MAP: Record<string, any> = {
+const ICON_MAP: Record<string, LucideIcon> = {
   Building2, Utensils, Car, Plane, MapPin, Clock, 
   ShieldCheck, Sparkles, Waves, Mountain, Palmtree, 
   Camera, Tent, Wifi, Coffee, Music, Ticket, Star,
@@ -45,7 +45,7 @@ export default function AmenityPicker({ value = [], onChange, max = 4 }: Amenity
 
   return (
     <div className="flex flex-wrap items-center gap-2">
-      {value.map((am, idx) => {
+      {Array.isArray(value) && value.map((am, idx) => {
         const IconComponent = ICON_MAP[am.icon] || Star;
         
         return (
@@ -56,7 +56,7 @@ export default function AmenityPicker({ value = [], onChange, max = 4 }: Amenity
                 </div>
                 <select 
                    value={am.icon}
-                   onChange={e => updateAmenity(idx, { icon: e.target.value })}
+                   onChange={(e: ChangeEvent<HTMLSelectElement>) => updateAmenity(idx, { icon: e.target.value })}
                    className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
                    title="Change Icon"
                 >
@@ -69,14 +69,15 @@ export default function AmenityPicker({ value = [], onChange, max = 4 }: Amenity
              <input 
                 type="text" 
                 value={am.label}
-                onChange={e => updateAmenity(idx, { label: e.target.value })}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => updateAmenity(idx, { label: e.target.value })}
                 placeholder="Label"
-                className="w-16 md:w-24 bg-transparent border-none text-[10px] font-black text-slate-800 outline-none placeholder:text-slate-300 uppercase tracking-tight"
+                className="w-20 md:w-28 bg-transparent border-none text-[10px] font-black text-slate-800 outline-none placeholder:text-slate-300 uppercase tracking-tight"
              />
 
              <button 
+                type="button"
                 onClick={() => removeAmenity(idx)}
-                className="w-4 h-4 text-slate-300 hover:text-rose-500 transition-colors"
+                className="w-4 h-4 text-slate-300 hover:text-rose-500 transition-colors flex items-center justify-center"
                 title="Remove"
              >
                 <X size={10} />
