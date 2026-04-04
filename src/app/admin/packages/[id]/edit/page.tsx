@@ -60,12 +60,17 @@ export default function EditPackage() {
             exclusions: data.data.exclusions || [],
             images: data.data.images || [],
             thumb_alt: data.data.thumb_alt || 'wegomap',
-            itinerary: (data.data.itinerary || []).map((item: any, idx: number) => ({
-              day: typeof item.day === 'number' ? item.day : (parseInt(String(item.day)) || idx + 1),
-              title: item.title || (typeof item.day === 'string' && item.day.includes(':') ? item.day.split(':').slice(1).join(':').trim() : (typeof item.day === 'string' ? item.day : '')),
-              description: item.description || item.activity || '',
-              image: item.image || null
-            })),
+            itinerary: (data.data.itinerary || []).map((item: any, idx: number) => {
+              const dayNum = typeof item.day === 'number' ? item.day : (parseInt(String(item.day)) || idx + 1);
+              const autoTitle = typeof item.day === 'string' && item.day.includes(':') ? item.day.split(':').slice(1).join(':').trim() : (typeof item.day === 'string' ? item.day : '');
+              return {
+                ...item,
+                day: dayNum,
+                title: item.title || autoTitle,
+                description: item.description || item.activity || '',
+                image: item.image || item.img || ''
+              };
+            }),
             noCostEmi: data.data.noCostEmi || '',
             averageRating: data.data.averageRating || 4.9,
             reviewCount: data.data.reviewCount || 150,
