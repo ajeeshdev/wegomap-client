@@ -323,7 +323,7 @@ export default function EditPackage() {
                           const newItin = [...formData.itinerary];
                           newItin[idx].description = content;
                           setFormData({ ...formData, itinerary: newItin });
-                        }} height={200} />
+                        }} height={400} />
                       </div>
                     </div>
                   </div>
