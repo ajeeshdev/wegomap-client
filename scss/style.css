@@ -12540,6 +12540,48 @@ button.wishlistBtn {
   line-height: 1.8;
   font-weight: 500;
 }
+.packageDetailPage .mainContent .detailsCol .itineraryTimeline .timelineItem .activityGrid .dayAmenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.packageDetailPage .mainContent .detailsCol .itineraryTimeline .timelineItem .activityGrid .dayAmenities .dayAmenityBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background-color: #fffaf9;
+  border: 1px solid #ffedea;
+  border-radius: 50px;
+  padding: 0.4rem 1.1rem 0.4rem 0.6rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.packageDetailPage .mainContent .detailsCol .itineraryTimeline .timelineItem .activityGrid .dayAmenities .dayAmenityBadge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 90, 61, 0.08); /* cosmic orange tint */
+}
+.packageDetailPage .mainContent .detailsCol .itineraryTimeline .timelineItem .activityGrid .dayAmenities .dayAmenityBadge .amIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  color: #ff5a3d;
+}
+.packageDetailPage .mainContent .detailsCol .itineraryTimeline .timelineItem .activityGrid .dayAmenities .dayAmenityBadge .amIcon svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 2px;
+}
+.packageDetailPage .mainContent .detailsCol .itineraryTimeline .timelineItem .activityGrid .dayAmenities .dayAmenityBadge .amLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #1e293b;
+  margin-top: 2px;
+}
 .packageDetailPage .mainContent .detailsCol .itineraryTimeline .timelineItem .activityGrid .itineraryImage {
   position: relative;
   border-radius: 1.5rem;

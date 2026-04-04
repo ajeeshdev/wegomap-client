@@ -159,49 +159,10 @@ export default function SpecialEventDetailPage() {
                                     <div dangerouslySetInnerHTML={{ __html: remainingParas }} />
                                 </div>
 
-                                <div className="ed-info-pills">
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-blue-600 shadow-sm"><ShieldCheck size={24} /></div>
-                                        <div>
-                                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Assurance</div>
-                                            <div className="text-sm font-bold text-slate-900">Verified</div>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-4 border-l border-slate-200 pl-4">
-                                        <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-orange-600 shadow-sm"><Zap size={24} /></div>
-                                        <div>
-                                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Production</div>
-                                            <div className="text-sm font-bold text-slate-900">Pro Staging</div>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-4 border-l border-slate-200 pl-4">
-                                        <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-emerald-600 shadow-sm"><Users size={24} /></div>
-                                        <div>
-                                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Guest Policy</div>
-                                            <div className="text-sm font-bold text-slate-900">VIP Access</div>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
 
-                            <div className="ed-highlights">
-                                <h3 className="ed-h-title">Included Event Essentials.</h3>
-                                <div className="ed-h-grid">
-                                    {[
-                                        "Professional Event Management",
-                                        "High-Definition Media Coverage",
-                                        "Premium Catering & Hospitality",
-                                        "Advanced Audio-Visual Production",
-                                        "Venue Logistics & VIP Support",
-                                        "Digital Attendance Solutions"
-                                    ].map((inc, i) => (
-                                        <div key={i} className="ed-h-item">
-                                            <div className="ed-h-check"><CheckCircle2 size={14} /></div>
-                                            <span className="ed-h-text">{inc}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+
                         </div>
 
                         <div className="lg:col-span-4 ed-sidebar">

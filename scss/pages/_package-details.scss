@@ -311,12 +311,12 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                                     justify-content: center;
                                     width: 28px;
                                     height: 28px;
-                                    border-radius: 50%;
+                                    border-radius: 10px;
                                     color: $cosmicOrange;
                                     
                                     svg {
-                                        width: 14px;
-                                        height: 14px;
+                                        width: 24px;
+                                        height: 24px;
                                         stroke-width: 2px;
                                     }
                                 }
