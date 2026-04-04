@@ -94,21 +94,7 @@ export default function TourDetailView({ id }: { id: string }) {
         async function getPackage() {
             setLoading(true);
             try {
-                const slug = id;
-                if (slug && packagesData[slug]) {
-                    const localPkg = packagesData[slug];
-                    setPkg({
-                        ...localPkg,
-                        image: getImageUrl(localPkg.image),
-                        itinerary: localPkg.itinerary.map(item => ({
-                            ...item,
-                            image: item.image ? getImageUrl(item.image) : item.image
-                        }))
-                    });
-                    setLoading(false);
-                    return;
-                }
-
+                // Try API first to allow Admin updates to take priority
                 const res = await fetch(`${API_URL}/packages/${id}`);
                 let data: any = {};
                 if (res.headers.get('content-type')?.includes('application/json')) {
@@ -131,6 +117,8 @@ export default function TourDetailView({ id }: { id: string }) {
                         highlights: p.highlights || [],
                         itinerary: (p.itinerary || []).map((item: any) => ({
                             ...item,
+                            day: typeof item.day === 'string' ? item.day : (item.title ? `Day ${item.day}: ${item.title}` : `Day ${item.day}`),
+                            activity: item.description || item.activity || '',
                             image: item.image ? getImageUrl(item.image) : item.image
                         })),
                         inclusions: p.inclusions || [],
@@ -141,16 +129,47 @@ export default function TourDetailView({ id }: { id: string }) {
                     return;
                 }
 
+                // Fallback to local hardcoded data if API fails or No data
+                const slug = id;
+                if (slug && packagesData[slug]) {
+                    const localPkg = packagesData[slug];
+                    setPkg({
+                        ...localPkg,
+                        image: getImageUrl(localPkg.image),
+                        itinerary: localPkg.itinerary.map(item => ({
+                            ...item,
+                            image: item.image ? getImageUrl(item.image) : item.image
+                        }))
+                    });
+                    setLoading(false);
+                    return;
+                }
+
                 setPkg(null);
             } catch (err) {
                 console.error('Fetch error:', err);
-                setPkg(null);
+                // Last ditch effort: Try local data if network failed
+                const slug = id;
+                if (slug && packagesData[slug]) {
+                    const localPkg = packagesData[slug];
+                    setPkg({
+                        ...localPkg,
+                        image: getImageUrl(localPkg.image),
+                        itinerary: localPkg.itinerary.map(item => ({
+                            ...item,
+                            image: item.image ? getImageUrl(item.image) : item.image
+                        }))
+                    });
+                } else {
+                    setPkg(null);
+                }
             } finally {
                 setLoading(false);
             }
         }
         if (id) getPackage();
     }, [id]);
+
 
 
 

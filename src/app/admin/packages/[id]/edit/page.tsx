@@ -59,7 +59,12 @@ export default function EditPackage() {
             exclusions: data.data.exclusions || [],
             images: data.data.images || [],
             thumb_alt: data.data.thumb_alt || 'wegomap',
-            itinerary: data.data.itinerary || [],
+            itinerary: (data.data.itinerary || []).map((item: any, idx: number) => ({
+              day: typeof item.day === 'number' ? item.day : (parseInt(String(item.day)) || idx + 1),
+              title: item.title || (typeof item.day === 'string' && item.day.includes(':') ? item.day.split(':').slice(1).join(':').trim() : (typeof item.day === 'string' ? item.day : '')),
+              description: item.description || item.activity || '',
+              image: item.image || null
+            })),
             noCostEmi: data.data.noCostEmi || '',
             averageRating: data.data.averageRating || 4.9,
             reviewCount: data.data.reviewCount || 150,
@@ -275,7 +280,7 @@ export default function EditPackage() {
               </h3>
               <button
                 type="button"
-                onClick={() => setFormData({ ...formData, itinerary: [...(formData.itinerary || []), { day: (formData.itinerary?.length || 0) + 1, title: '', description: '' }] })}
+                onClick={() => setFormData({ ...formData, itinerary: [...(formData.itinerary || []), { day: (formData.itinerary?.length || 0) + 1, title: '', description: '', image: null }] })}
                 className="admin-btn admin-btn-primary h-10 px-6 text-[10px]"
               >
                 + Add Day
