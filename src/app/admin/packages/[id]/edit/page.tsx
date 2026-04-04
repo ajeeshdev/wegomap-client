@@ -20,7 +20,8 @@ export default function EditPackage() {
     inclusions: [], exclusions: [], terms: '', category: '',
     images: [], thumb: '', thumb_alt: '', onoffer: false, isBestSeller: false,
     itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '',
-    averageRating: 4.9, reviewCount: 150, noCostEmi: ''
+    averageRating: 4.9, reviewCount: 150, noCostEmi: '',
+    status: 'Published', order: 0
   });
 
   useEffect(() => {
@@ -61,7 +62,9 @@ export default function EditPackage() {
             itinerary: data.data.itinerary || [],
             noCostEmi: data.data.noCostEmi || '',
             averageRating: data.data.averageRating || 4.9,
-            reviewCount: data.data.reviewCount || 150
+            reviewCount: data.data.reviewCount || 150,
+            status: data.data.status || 'Published',
+            order: data.data.order || 0
           });
         }
       } catch (err) {
@@ -391,7 +394,24 @@ export default function EditPackage() {
                 <div className="w-1 h-3 bg-emerald-500 rounded-full"></div>
                 Publication
               </h4>
-              <div className="space-y-3">
+              <div className="space-y-4">
+                <label className="flex items-center justify-between cursor-pointer group/stat p-3 hover:bg-slate-50 rounded-xl transition-all border border-transparent hover:border-slate-100">
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 transition-colors leading-none">Active Status</span>
+                  </div>
+                  <input type="checkbox" checked={formData.status === 'Published'} onChange={e => setFormData({ ...formData, status: e.target.checked ? 'Published' : 'Draft' })} className="sr-only peer" />
+                  <div className="w-9 h-5 bg-slate-200 rounded-full peer-checked:bg-blue-600 transition-all relative">
+                    <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-4.5 shadow-sm"></div>
+                  </div>
+                </label>
+
+                <div className="px-3">
+                  <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-2">Display Order</label>
+                  <input type="number" value={formData.order} onChange={e => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })} className="admin-form-input !h-9 font-bold text-center" placeholder="0" />
+                </div>
+
+                <div className="h-4"></div>
+
                 <label className="flex items-center justify-between cursor-pointer group/stat p-3 hover:bg-slate-50 rounded-xl transition-all border border-transparent hover:border-slate-100">
                   <div className="flex flex-col">
                     <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 transition-colors leading-none">Special Offer</span>

@@ -43,8 +43,9 @@ interface PackageCardProps {
 
 export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }: PackageCardProps) {
     // Parse subtitle for itinerary list (e.g. "2N Munnar / 1N Thekkady")
-    const itineraryItems = pkg.subtitle 
-        ? pkg.subtitle.split(/[/|•]/).map(s => s.trim()).filter(Boolean)
+    const sub = pkg.subtitle || pkg.location;
+    const itineraryItems = sub 
+        ? sub.split(/[/|•]/).map(s => s.trim()).filter(Boolean)
         : [];
 
     // Fallback: extract duration from title if pkg.duration is missing or N/A
@@ -186,7 +187,7 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
                 <div className="headerSection">
                     <div className="titleRow">
                         <Link href={`/packages/${pkg.slug}`} className="titleLink">
-                            <h3 className="cardTitle">{pkg.title}</h3>
+                            <h3 className="cardTitle leading-snug">{pkg.title}</h3>
                         </Link>
                     </div>
                     {/* Rating Row - Added as per request */}

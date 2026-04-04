@@ -77,7 +77,9 @@ export default function TourCategoryPage({
 
 
     const filtered = useMemo(() => {
-        let list = packages;
+        let list = packages
+            .filter((p: any) => p.status === 'Published' || !p.status)
+            .sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
         
         if (durationRange !== 'all') {
             list = list.filter(p => {
