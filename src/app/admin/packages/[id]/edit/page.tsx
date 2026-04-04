@@ -197,15 +197,6 @@ export default function EditPackage() {
                 <input type="text" value={formData.duration} onChange={e => setFormData({ ...formData, duration: e.target.value })} className="admin-form-input font-bold" placeholder="e.g. 3 Days / 2 Nights" />
               </div>
             </div>
-
-            <div className="pt-6 border-t border-slate-50">
-               <label className="admin-form-label mb-4 block text-[10px] uppercase tracking-widest text-slate-400">Key Features / Amenities (Icon options)</label>
-               <AmenityPicker 
-                  value={formData.amenities || []}
-                  onChange={am => setFormData({ ...formData, amenities: am })}
-                  max={6}
-               />
-            </div>
           </div>
 
           {/* Pricing & Content Section */}

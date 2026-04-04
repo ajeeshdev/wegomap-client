@@ -166,15 +166,6 @@ export default function CreatePackage() {
                                  </select>
                               </div>
                            </div>
-                            
-                            <div className="pt-6 border-t border-slate-100">
-                               <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-4">Key Features / Amenities (Icon options)</label>
-                               <AmenityPicker 
-                                  value={formData.amenities || []}
-                                  onChange={am => setFormData({ ...formData, amenities: am })}
-                                  max={6}
-                               />
-                            </div>
                          </div>
                       </div>
 
