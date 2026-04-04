@@ -474,15 +474,15 @@ export default function Home() {
       <OfferBanner />
 
       {/* Kerala Tour Packages - Added after First Minute Offers */}
-      {keralaPackages.length > 0 && (
+      {(homeSections.find(s => s.id === 'kerala')?.enabled ?? true) && keralaPackages.length > 0 && (
       <section className="commonPadding keralaTourSection">
         <div className="homeContainer">
           <div className="sectionHeader flex items-center justify-center mb-8">
             <div className="titleArea">
-              <span className="sectionSubtitle">God's Own Country</span>
-              <h2 className="sliderTitle">Kerala Tour Packages</h2>
+              <span className="sectionSubtitle">{homeSections.find(s => s.id === 'kerala')?.subtitle || "God's Own Country"}</span>
+              <h2 className="sliderTitle">{homeSections.find(s => s.id === 'kerala')?.title || "Kerala Tour Packages"}</h2>
               <p className="text-slate-500 max-w-2xl text-[13px] leading-relaxed">
-                Experience the serene backwaters, misty hills, and pristine beaches of Kerala with our specially curated local packages.
+                {homeSections.find(s => s.id === 'kerala')?.description || "Experience the serene backwaters, misty hills, and pristine beaches of Kerala with our specially curated local packages."}
               </p>
             </div>
             <Link href="/packages?q=kerala" className="viewAllBtn">
@@ -571,15 +571,15 @@ export default function Home() {
  
  
       {/* Combined International and Domestic Packages Slider */}
-      {((homeSections.find(s => s.id === 'domestic')?.enabled ?? true) || (homeSections.find(s => s.id === 'international')?.enabled ?? true)) && intlDomesticPackages.length > 0 && (
+      {(homeSections.find(s => s.id === 'tours')?.enabled ?? true) && intlDomesticPackages.length > 0 && (
       <section className="commonPadding intlDomesticSection">
         <div className="homeContainer">
           <div className="sectionHeader flex items-center justify-center mb-8">
             <div className="titleArea">
-              <span className="sectionSubtitle">Explore The World & India</span>
-              <h2 className="sliderTitle">International and Domestic Packages</h2>
+              <span className="sectionSubtitle">{homeSections.find(s => s.id === 'tours')?.subtitle || "Explore The World & India"}</span>
+              <h2 className="sliderTitle">{homeSections.find(s => s.id === 'tours')?.title || "International and Domestic Packages"}</h2>
               <p className="text-slate-500 max-w-2xl text-[13px] leading-relaxed">
-                Discover our handpicked collection of breathtaking international destinations and incredible Indian getaways.
+                {homeSections.find(s => s.id === 'tours')?.description || "Discover our handpicked collection of breathtaking international destinations and incredible Indian getaways."}
               </p>
             </div>
             <Link href="/packages" className="viewAllBtn">
@@ -986,8 +986,8 @@ export default function Home() {
         <div className="homeContainer">
           <div className="sectionHeader flex items-center justify-center mb-6">
             <div className="titleArea">
-              <span className="sectionSubtitle">Guest Experiences</span>
-              <h2 className="sliderTitle">What Travelers Are Saying</h2>
+              <span className="sectionSubtitle">{homeSections.find(s => s.id === 'testimonials')?.subtitle || "Guest Experiences"}</span>
+              <h2 className="sliderTitle">{homeSections.find(s => s.id === 'testimonials')?.title || "What Travelers Are Saying"}</h2>
             </div>
           </div>
           

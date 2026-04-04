@@ -16,8 +16,7 @@ interface HomeSection {
 const DEFAULT_SECTIONS: HomeSection[] = [
     { id: 'kerala', title: 'Kerala Tour Operator', subtitle: 'Explore Our Best', description: "Experience the beauty of God's Own Country with Kerala's best tour operator. As a trusted Kerala travel agency, we specialize in crafting unforgettable journeys.", enabled: true },
     { id: 'offers', title: 'First Minute Offers', subtitle: 'Limited Time Offers', description: 'Exclusive early bird discounts on upcoming travel seasons.', enabled: true },
-    { id: 'domestic', title: 'Domestic Packages', subtitle: 'Incredible India', description: 'Explore the diverse landscapes and cultures across India.', enabled: true },
-    { id: 'international', title: 'International Packages', subtitle: 'Explore The World', description: 'Curated international destinations for your dream vacation.', enabled: true },
+    { id: 'tours', title: 'International and Domestic Packages', subtitle: 'Explore The World & India', description: 'Discover our handpicked collection of breathtaking international destinations and incredible Indian getaways.', enabled: true },
     { id: 'kochi', title: 'Kochi Based Travel Agency', subtitle: 'Local Expertise', description: "As a premier travel agency in Kerala, we craft personalized tours that immerse you in the cultural and natural wonders of the region.", enabled: false },
     { id: 'corporate', title: 'Redefining Corporate Experiences', subtitle: 'MICE & Events', description: 'WEGOMAP delivers world-class event management. We curate bespoke experiences that define your business legacy.', enabled: true },
     { id: 'special_events', title: 'Special Events & Activities', subtitle: 'Experience More', description: 'Discover unique events, festivals, and activities curated special for you.', enabled: true },
@@ -100,8 +99,7 @@ export default function HomeSettingsPage() {
     const sectionIcons: Record<string, any> = {
         kerala: <MapPin size={22} />,
         offers: <Zap size={22} />,
-        domestic: <Compass size={22} />,
-        international: <Globe size={22} />,
+        tours: <Globe size={22} />,
         kochi: <Anchor size={22} />,
         corporate: <Users size={22} />,
         special_events: <Sparkles size={22} />,
@@ -112,8 +110,7 @@ export default function HomeSettingsPage() {
     const iconColors: Record<string, string> = {
         kerala: "#1673B8",
         offers: "#f59e0b",
-        domestic: "#3b82f6",
-        international: "#6366f1",
+        tours: "#6366f1",
         kochi: "#06b6d4",
         corporate: "#f43f5e",
         special_events: "#a855f7",
