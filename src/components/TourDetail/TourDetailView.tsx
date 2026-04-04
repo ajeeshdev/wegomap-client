@@ -299,13 +299,15 @@ export default function TourDetailView({ id }: { id: string }) {
                                                     dangerouslySetInnerHTML={{ __html: item.activity }}
                                                 />
                                                 {item.amenities && item.amenities.length > 0 && (
-                                                    <div className="dayAmenities mt-4 flex flex-wrap gap-2">
+                                                    <div className="dayAmenities mt-4 flex flex-wrap gap-3">
                                                         {item.amenities.map((am: any, aIdx: number) => {
                                                             const IconComp = ICON_MAP[am.icon] || Star;
                                                             return (
-                                                                <div key={aIdx} className={`dayAmenityBadge flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-${am.color || 'blue'}-50 border border-${am.color || 'blue'}-100 animate-in fade-in slide-in-from-bottom-1 duration-500`}>
-                                                                    <IconComp size={12} className={`text-${am.color || 'blue'}-600`} />
-                                                                    <span className={`text-[10px] font-black uppercase tracking-wider text-${am.color || 'blue'}-700`}>{am.label}</span>
+                                                                <div key={aIdx} className="flex items-center gap-3 bg-rose-50/40 rounded-xl p-1 pr-4 border border-rose-100/50 animate-in fade-in slide-in-from-bottom-2 duration-700">
+                                                                    <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-rose-500 shadow-sm">
+                                                                        <IconComp size={16} strokeWidth={2.5} />
+                                                                    </div>
+                                                                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-800">{am.label}</span>
                                                                 </div>
                                                             )
                                                         })}
