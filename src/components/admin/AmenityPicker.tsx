@@ -5,14 +5,18 @@ import {
   Building2, Utensils, Car, Plane, MapPin, Clock, 
   ShieldCheck, Sparkles, Waves, Mountain, Palmtree, 
   Camera, Tent, Wifi, Coffee, Music, Ticket, Star,
-  Heart, Sunset, ShoppingBag, Plus, X, LucideIcon
+  Heart, Sunset, ShoppingBag, Plus, X, LucideIcon,
+  BedDouble, Bed, Hotel, Bath, ShowerHead, ThermometerSnowflake,
+  Tv, Key, DoorOpen, Users, TreePalm
 } from 'lucide-react';
 
 const ICON_MAP: Record<string, LucideIcon> = {
   Building2, Utensils, Car, Plane, MapPin, Clock, 
   ShieldCheck, Sparkles, Waves, Mountain, Palmtree, 
   Camera, Tent, Wifi, Coffee, Music, Ticket, Star,
-  Heart, Sunset, ShoppingBag
+  Heart, Sunset, ShoppingBag, BedDouble, Bed, Hotel, 
+  Bath, ShowerHead, ThermometerSnowflake, Tv, Key, 
+  DoorOpen, Users, TreePalm
 };
 
 interface Amenity {
@@ -27,7 +31,7 @@ interface AmenityPickerProps {
   max?: number;
 }
 
-export default function AmenityPicker({ value = [], onChange, max = 4 }: AmenityPickerProps) {
+export default function AmenityPicker({ value = [], onChange, max = 6 }: AmenityPickerProps) {
   const addAmenity = () => {
     if (value.length >= max) return;
     onChange([...value, { icon: 'Star', label: '', color: 'blue' }]);

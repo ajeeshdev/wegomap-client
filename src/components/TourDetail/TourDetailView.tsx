@@ -14,14 +14,17 @@ import {
     ChevronDown, Send, ArrowLeft, Sparkles,
     Building2, Car, Utensils, Star, Phone,
     Calendar, Users, Info, User, Heart, MessageSquare, Quote, ThumbsUp, Share2,
-    Plane, Waves, Mountain, Palmtree, Camera, Tent, Wifi, Coffee, Music, Ticket, Sunset, ShoppingBag
+    Plane, Waves, Mountain, Palmtree, Camera, Tent, Wifi, Coffee, Music, Ticket, Sunset, ShoppingBag,
+    BedDouble, Bed, Hotel, Bath, ShowerHead, ThermometerSnowflake, Tv, Key, DoorOpen, TreePalm
 } from 'lucide-react';
 
 const ICON_MAP: Record<string, any> = {
     Building2, Utensils, Car, Plane, MapPin, Clock, 
     ShieldCheck, Sparkles, Waves, Mountain, Palmtree, 
     Camera, Tent, Wifi, Coffee, Music, Ticket, Star,
-    Heart, Sunset, ShoppingBag
+    Heart, Sunset, ShoppingBag, BedDouble, Bed, Hotel, 
+    Bath, ShowerHead, ThermometerSnowflake, Tv, Key, 
+    DoorOpen, TreePalm, Users
 };
 import { useEnquiry } from '@/context/EnquiryContext';
 
@@ -264,17 +267,6 @@ export default function TourDetailView({ id }: { id: string }) {
                                     dangerouslySetInnerHTML={{ __html: pkg.description }}
                                 />
 
-                                <div className="amenitiesGrid">
-                                    {pkg.amenities?.map((am, i) => {
-                                        const Icon = i === 0 ? Building2 : i === 1 ? Utensils : Car;
-                                        return (
-                                            <div key={i} className="amenity">
-                                                <div className={`iconBox ${am.color || (i === 0 ? 'blue' : i === 1 ? 'rose' : 'emerald')}`}><Icon size={24} /></div>
-                                                <span>{am.label}</span>
-                                            </div>
-                                        )
-                                    })}
-                                </div>
                             </div>
 
                             {/* Highlights */}

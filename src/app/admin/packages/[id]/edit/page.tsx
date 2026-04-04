@@ -69,17 +69,14 @@ export default function EditPackage() {
                 day: dayNum,
                 title: item.title || autoTitle,
                 description: item.description || item.activity || '',
-                image: item.image || item.img || ''
+                image: item.image || item.img || '',
+                amenities: item.amenities || []
               };
             }),
             noCostEmi: data.data.noCostEmi || '',
             averageRating: data.data.averageRating || 4.9,
             reviewCount: data.data.reviewCount || 150,
-            amenities: data.data.amenities?.length > 0 ? data.data.amenities : [
-              { icon: 'Building2', label: 'Luxury Stays', color: 'blue' },
-              { icon: 'Utensils', label: 'Fine Dining', color: 'rose' },
-              { icon: 'Car', label: 'Private Hub', color: 'emerald' }
-            ],
+            amenities: data.data.amenities || [],
             status: data.data.status || 'Published',
             order: data.data.order || 0
           });
