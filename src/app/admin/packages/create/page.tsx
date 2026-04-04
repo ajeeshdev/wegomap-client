@@ -266,6 +266,20 @@ export default function CreatePackage() {
                                        <div className="mt-2 p-1 bg-white rounded-xl border border-slate-100">
                                           <RichTextEditor value={item.description} onChange={(content) => { const ni = [...formData.itinerary]; ni[idx].description = content; setFormData({ ...formData, itinerary: ni }); }} height={400} />
                                        </div>
+                                       {/* Day Image Upload */}
+                                       <div className="mt-4 max-w-xs">
+                                          <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-2">Day Visual / Photo</label>
+                                          <ImageUpload
+                                             value={item.image}
+                                             onChange={(url) => {
+                                                const ni = [...formData.itinerary];
+                                                ni[idx].image = url;
+                                                setFormData({ ...formData, itinerary: ni });
+                                             }}
+                                             label=""
+                                             dimensions="800 x 500"
+                                          />
+                                       </div>
                                     </div>
                                     <button type="button" onClick={() => setFormData({ ...formData, itinerary: formData.itinerary.filter((_: any, i: number) => i !== idx) })} className="opacity-0 group-hover:opacity-100 transition-opacity text-slate-300 hover:text-emerald-500"><Trash2 size={16} /></button>
                                  </div>

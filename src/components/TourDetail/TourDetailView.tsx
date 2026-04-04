@@ -294,10 +294,13 @@ export default function TourDetailView({ id }: { id: string }) {
                                             <div className="dayLabel">Chapter 0{i + 1}</div>
                                             <h4>{item.day}</h4>
                                             <div className="activityGrid">
-                                                <p>{item.activity}</p>
+                                                <div 
+                                                    className="activityText tour-description-content"
+                                                    dangerouslySetInnerHTML={{ __html: item.activity }}
+                                                />
                                                 {item.image && (
-                                                    <div className="itineraryImage aspect-[16/10]">
-                                                        <Image src={getImageUrl(item.image)} alt={item.day} fill className="object-cover" unoptimized />
+                                                    <div className="itineraryImage aspect-[16/10] bg-slate-100 rounded-3xl overflow-hidden mt-6 border border-slate-50">
+                                                        <Image src={getImageUrl(item.image)} alt={item.day} fill className="object-cover transition-transform hover:scale-105 duration-700" unoptimized />
                                                     </div>
                                                 )}
                                             </div>

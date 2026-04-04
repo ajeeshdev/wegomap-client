@@ -354,6 +354,21 @@ export default function EditPackage() {
                         }} height={400} />
                       </div>
                     </div>
+                    <div className="admin-form-group">
+                       <label className="admin-form-label text-[10px] uppercase tracking-widest text-slate-400">Day Thumbnail / Image</label>
+                       <div className="mt-2 max-w-xs">
+                          <ImageUpload
+                             value={item.image}
+                             onChange={(url) => {
+                                const newItin = [...formData.itinerary];
+                                newItin[idx].image = url;
+                                setFormData({ ...formData, itinerary: newItin });
+                             }}
+                             label=""
+                             dimensions="800 x 500"
+                          />
+                       </div>
+                    </div>
                   </div>
                   <button
                     type="button"
