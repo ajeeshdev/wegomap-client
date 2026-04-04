@@ -301,15 +301,15 @@ export default function TourDetailView({ id }: { id: string }) {
                                                     />
                                                     
                                                     {item.amenities && item.amenities.length > 0 && (
-                                                        <div className="dayAmenities mt-6 flex flex-wrap gap-3">
+                                                        <div className="dayAmenities">
                                                             {item.amenities.map((am: any, aIdx: number) => {
                                                                 const IconComp = ICON_MAP[am.icon] || Star;
                                                                 return (
-                                                                    <div key={aIdx} className="flex items-center gap-3 bg-rose-50/40 rounded-xl p-1 pr-4 border border-rose-100/50 animate-in fade-in slide-in-from-bottom-2 duration-700">
-                                                                        <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-rose-500 shadow-sm">
-                                                                            <IconComp size={16} strokeWidth={2.5} />
+                                                                    <div key={aIdx} className="dayAmenityBadge">
+                                                                        <div className="amIcon">
+                                                                            <IconComp size={14} strokeWidth={2} />
                                                                         </div>
-                                                                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-800">{am.label}</span>
+                                                                        <span className="amLabel">{am.label}</span>
                                                                     </div>
                                                                 )
                                                             })}

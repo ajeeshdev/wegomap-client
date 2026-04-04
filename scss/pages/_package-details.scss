@@ -284,6 +284,54 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                             font-weight: 500;
                         }
 
+                        .dayAmenities {
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 1rem;
+                            margin-top: 1.5rem;
+
+                            .dayAmenityBadge {
+                                display: inline-flex;
+                                align-items: center;
+                                gap: 0.65rem;
+                                background-color: #fffaf9; 
+                                border: 1px solid #ffedea;
+                                border-radius: 50px;
+                                padding: 0.4rem 1.1rem 0.4rem 0.6rem;
+                                transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+                                &:hover {
+                                    transform: translateY(-2px);
+                                    box-shadow: 0 4px 12px rgba(255, 90, 61, 0.08); /* cosmic orange tint */
+                                }
+
+                                .amIcon {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    width: 28px;
+                                    height: 28px;
+                                    border-radius: 50%;
+                                    color: $cosmicOrange;
+                                    
+                                    svg {
+                                        width: 14px;
+                                        height: 14px;
+                                        stroke-width: 2px;
+                                    }
+                                }
+
+                                .amLabel {
+                                    font-size: 11px;
+                                    font-weight: 600;
+                                    text-transform: uppercase;
+                                    letter-spacing: 1px;
+                                    color: #1e293b;
+                                    margin-top: 2px;
+                                }
+                            }
+                        }
+
                         .itineraryImage {
                             position: relative;
                             border-radius: 1.5rem;
