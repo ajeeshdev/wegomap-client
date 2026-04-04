@@ -248,6 +248,20 @@ export default function EditPackage() {
             </div>
 
             <div className="admin-form-group pt-4 border-t border-slate-50">
+              <label className="admin-form-label text-sky-600 flex items-center gap-2 mb-4"> <MapPin size={12} /> Tour Highlights</label>
+              <div className="bg-sky-50/10 rounded-2xl p-4 border border-sky-100/50 shadow-inner">
+                <textarea 
+                  rows={4} 
+                  value={formData.highlights?.join('\n')} 
+                  onChange={e => setFormData({ ...formData, highlights: e.target.value.split('\n') })} 
+                  className="admin-form-textarea !bg-transparent border-none font-medium text-slate-700 h-32" 
+                  placeholder="Enter each highlight on a new line..."
+                ></textarea>
+                <p className="mt-2 text-[10px] text-slate-400 italic">Enter one highlight per line. These will appear with checkmarks on the package page.</p>
+              </div>
+            </div>
+
+            <div className="admin-form-group pt-4 border-t border-slate-50">
               <label className="admin-form-label flex items-center gap-2 mb-2"> <ShieldCheck size={12} className="text-blue-600" /> Terms & Conditions</label>
               <div className="bg-slate-50/50 rounded-2xl p-1 border border-slate-100 shadow-inner">
                 <RichTextEditor value={formData.terms} onChange={(content) => setFormData({ ...formData, terms: content })} height={250} />

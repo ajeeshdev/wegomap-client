@@ -201,6 +201,20 @@ export default function CreatePackage() {
                      </div>
 
                      <div className="editor-card">
+                        <div className="card-header"><h4 className="serif text-sky-600">Tour Highlights</h4></div>
+                        <textarea 
+                           rows={6} 
+                           value={formData.highlights?.join('\n')} 
+                           onChange={e => setFormData({ ...formData, highlights: e.target.value.split('\n') })} 
+                           className="bg-sky-50/10" 
+                           placeholder="Enter each highlight on a new line (One per line)..." 
+                        />
+                        <div className="p-4 bg-sky-50/20 border-t border-sky-100/50">
+                           <p className="text-[10px] text-sky-600 font-medium italic">Note: These will display with checkmarks in the Overview section of the tour page.</p>
+                        </div>
+                     </div>
+
+                     <div className="editor-card">
                         <div className="card-header"><h4 className="serif">Terms & Conditions</h4></div>
                         <div className="p-1">
                            <RichTextEditor value={formData.terms} onChange={(content) => setFormData({ ...formData, terms: content })} height={250} />
