@@ -262,19 +262,35 @@ export default function CreatePackage() {
                                        <span>{item.day || idx + 1}</span>
                                     </div>
                                     <div className="flex-1 space-y-4">
-                                       <input type="text" value={item.title} onChange={e => { const ni = [...formData.itinerary]; ni[idx] = { ...ni[idx], title: e.target.value }; setFormData({ ...formData, itinerary: ni }); }} placeholder="Activity Title" className="w-full bg-transparent border-b font-bold text-lg" />
+                                       <input type="text" value={item.title} onChange={e => { 
+                                          setFormData((prev: any) => {
+                                             const ni = [...prev.itinerary];
+                                             ni[idx] = { ...ni[idx], title: e.target.value };
+                                             return { ...prev, itinerary: ni };
+                                          });
+                                       }} placeholder="Activity Title" className="w-full bg-transparent border-b font-bold text-lg" />
+                                       
                                        <div className="mt-2 p-1 bg-white rounded-xl border border-slate-100">
-                                          <RichTextEditor value={item.description} onChange={(content) => { const ni = [...formData.itinerary]; ni[idx] = { ...ni[idx], description: content }; setFormData({ ...formData, itinerary: ni }); }} height={400} />
+                                          <RichTextEditor value={item.description} onChange={(content) => { 
+                                             setFormData((prev: any) => {
+                                                const ni = [...prev.itinerary];
+                                                ni[idx] = { ...ni[idx], description: content };
+                                                return { ...prev, itinerary: ni };
+                                             });
+                                          }} height={400} />
                                        </div>
+                                       
                                        {/* Day Image Upload */}
                                        <div className="mt-4 max-w-xs">
                                           <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-2">Day Visual / Photo</label>
                                           <ImageUpload
                                              value={item.image}
                                              onChange={(url) => {
-                                                const ni = [...formData.itinerary];
-                                                ni[idx] = { ...ni[idx], image: url };
-                                                setFormData({ ...formData, itinerary: ni });
+                                                setFormData((prev: any) => {
+                                                   const ni = [...prev.itinerary];
+                                                   ni[idx] = { ...ni[idx], image: url };
+                                                   return { ...prev, itinerary: ni };
+                                                });
                                              }}
                                              label=""
                                              dimensions="800 x 500"
