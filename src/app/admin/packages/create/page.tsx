@@ -20,6 +20,7 @@ export default function CreatePackage() {
       inclusions: [], exclusions: [], terms: '',
       itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '',
       averageRating: 4.9, reviewCount: 150, noCostEmi: '',
+      amenities: [{ icon: 'Building2', label: 'Luxury Stays', color: 'blue' }, { icon: 'Utensils', label: 'Fine Dining', color: 'rose' }, { icon: 'Car', label: 'Private Hub', color: 'emerald' }],
       status: 'Published', order: 0
    });
 
@@ -162,6 +163,28 @@ export default function CreatePackage() {
                                     <option value="">Select Category</option>
                                     {categories.map((cat: any) => <option key={cat._id} value={cat.title || cat.name}>{cat.title || cat.name}</option>)}
                                  </select>
+                              </div>
+                           </div>
+                           
+                           <div className="pt-6 border-t border-slate-100">
+                              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-4">Key Features / Amenities</label>
+                              <div className="grid grid-cols-3 gap-4">
+                                 {formData.amenities?.map((am: any, idx: number) => (
+                                    <div key={idx} className="admin-form-group">
+                                       <label className="text-[9px] font-bold text-slate-400 mb-1 block">Slot {idx + 1}</label>
+                                       <input 
+                                          type="text" 
+                                          value={am.label} 
+                                          onChange={e => {
+                                             const newAm = [...formData.amenities];
+                                             newAm[idx].label = e.target.value;
+                                             setFormData({ ...formData, amenities: newAm });
+                                          }} 
+                                          className="!h-10 text-sm font-bold"
+                                          placeholder="Label"
+                                       />
+                                    </div>
+                                 ))}
                               </div>
                            </div>
                         </div>

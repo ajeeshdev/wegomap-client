@@ -123,7 +123,11 @@ export default function TourDetailView({ id }: { id: string }) {
                         })),
                         inclusions: p.inclusions || [],
                         exclusions: p.exclusions || [],
-
+                        amenities: p.amenities?.length > 0 ? p.amenities : [
+                            { icon: 'Building2', label: 'Luxury Stays', color: 'blue' },
+                            { icon: 'Utensils', label: 'Fine Dining', color: 'rose' },
+                            { icon: 'Car', label: 'Private Hub', color: 'emerald' }
+                        ],
                     });
                     setLoading(false);
                     return;
@@ -253,18 +257,15 @@ export default function TourDetailView({ id }: { id: string }) {
                                 />
 
                                 <div className="amenitiesGrid">
-                                    <div className="amenity">
-                                        <div className="iconBox blue"><Building2 size={24} /></div>
-                                        <span>Luxury Stays</span>
-                                    </div>
-                                    <div className="amenity">
-                                        <div className="iconBox rose"><Utensils size={24} /></div>
-                                        <span>Fine Dining</span>
-                                    </div>
-                                    <div className="amenity">
-                                        <div className="iconBox emerald"><Car size={24} /></div>
-                                        <span>Private Hub</span>
-                                    </div>
+                                    {pkg.amenities?.map((am, i) => {
+                                        const Icon = i === 0 ? Building2 : i === 1 ? Utensils : Car;
+                                        return (
+                                            <div key={i} className="amenity">
+                                                <div className={`iconBox ${am.color || (i === 0 ? 'blue' : i === 1 ? 'rose' : 'emerald')}`}><Icon size={24} /></div>
+                                                <span>{am.label}</span>
+                                            </div>
+                                        )
+                                    })}
                                 </div>
                             </div>
 

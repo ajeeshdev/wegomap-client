@@ -21,6 +21,7 @@ export interface TourPackageDetail {
     exclusions: string[];
     averageRating?: number;
     reviewCount?: number;
+    amenities?: { icon: string, label: string, color?: string }[];
 }
 
 export const packagesData: Record<string, TourPackageDetail> = {

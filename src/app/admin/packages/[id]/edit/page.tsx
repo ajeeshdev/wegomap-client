@@ -21,6 +21,7 @@ export default function EditPackage() {
     images: [], thumb: '', thumb_alt: '', onoffer: false, isBestSeller: false,
     itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '',
     averageRating: 4.9, reviewCount: 150, noCostEmi: '',
+    amenities: [{ icon: 'Building2', label: 'Luxury Stays', color: 'blue' }, { icon: 'Utensils', label: 'Fine Dining', color: 'rose' }, { icon: 'Car', label: 'Private Hub', color: 'emerald' }],
     status: 'Published', order: 0
   });
 
@@ -68,6 +69,11 @@ export default function EditPackage() {
             noCostEmi: data.data.noCostEmi || '',
             averageRating: data.data.averageRating || 4.9,
             reviewCount: data.data.reviewCount || 150,
+            amenities: data.data.amenities?.length > 0 ? data.data.amenities : [
+              { icon: 'Building2', label: 'Luxury Stays', color: 'blue' },
+              { icon: 'Utensils', label: 'Fine Dining', color: 'rose' },
+              { icon: 'Car', label: 'Private Hub', color: 'emerald' }
+            ],
             status: data.data.status || 'Published',
             order: data.data.order || 0
           });
@@ -184,6 +190,28 @@ export default function EditPackage() {
                 <label className="admin-form-label flex items-center gap-2"> <Clock size={12} className="text-sky-500" /> Duration</label>
                 <input type="text" value={formData.duration} onChange={e => setFormData({ ...formData, duration: e.target.value })} className="admin-form-input font-bold" placeholder="e.g. 3 Days / 2 Nights" />
               </div>
+            </div>
+
+            <div className="pt-6 border-t border-slate-50">
+               <label className="admin-form-label mb-4 block text-[10px] uppercase tracking-widest text-slate-400">Key Features / Amenities (Slot 1, 2, 3)</label>
+               <div className="admin-form-grid-3">
+                  {formData.amenities?.map((am: any, idx: number) => (
+                    <div key={idx} className="admin-form-group">
+                       <label className="admin-form-label text-[9px]">Feature {idx + 1} Label</label>
+                       <input 
+                          type="text" 
+                          value={am.label} 
+                          onChange={e => {
+                             const newAm = [...formData.amenities];
+                             newAm[idx].label = e.target.value;
+                             setFormData({ ...formData, amenities: newAm });
+                          }} 
+                          className="admin-form-input !h-10 font-bold"
+                          placeholder={idx === 0 ? "Luxury Stays" : idx === 1 ? "Fine Dining" : "Private Hub"}
+                       />
+                    </div>
+                  ))}
+               </div>
             </div>
           </div>
 
