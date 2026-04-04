@@ -21,7 +21,7 @@ export default function CreatePackage() {
       inclusions: [], exclusions: [], terms: '',
       itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '',
       averageRating: 4.9, reviewCount: 150, noCostEmi: '',
-      amenities: [{ icon: 'Building2', label: 'Luxury Stays', color: 'blue' }, { icon: 'Utensils', label: 'Fine Dining', color: 'rose' }, { icon: 'Car', label: 'Private Hub', color: 'emerald' }],
+      amenities: [],
       status: 'Published', order: 0
    });
 
@@ -230,7 +230,7 @@ export default function CreatePackage() {
                      <div className="editor-card">
                         <div className="card-header flex justify-between items-center">
                            <h4 className="serif">Activity Plan</h4>
-                           <button type="button" onClick={() => setFormData({ ...formData, itinerary: [...(formData.itinerary || []), { day: (formData.itinerary?.length || 0) + 1, title: '', description: '' }] })} className="px-4 py-2 bg-blue-600 text-white rounded-full text-[10px] font-bold">+ Add Day</button>
+                           <button type="button" onClick={() => setFormData({ ...formData, itinerary: [...(formData.itinerary || []), { day: (formData.itinerary?.length || 0) + 1, title: '', description: '', image: '', amenities: [] }] })} className="px-4 py-2 bg-blue-600 text-white rounded-full text-[10px] font-bold">+ Add Day</button>
                         </div>
                         <div className="space-y-4 py-4">
                            {formData.itinerary?.map((item: any, idx: number) => (
