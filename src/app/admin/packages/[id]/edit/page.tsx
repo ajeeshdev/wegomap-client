@@ -340,7 +340,7 @@ export default function EditPackage() {
                       <label className="admin-form-label text-[10px] uppercase tracking-widest text-slate-400">Activity Title</label>
                       <input type="text" value={item.title} onChange={e => {
                         const newItin = [...formData.itinerary];
-                        newItin[idx].title = e.target.value;
+                        newItin[idx] = { ...newItin[idx], title: e.target.value };
                         setFormData({ ...formData, itinerary: newItin });
                       }} className="w-full bg-transparent border-b border-slate-100 py-3 focus:border-blue-600 outline-none font-bold text-xl text-slate-900 transition-all" placeholder="e.g. Arrival at Cochin" />
                     </div>
@@ -349,7 +349,7 @@ export default function EditPackage() {
                       <div className="mt-2 bg-white rounded-xl border border-slate-100 p-1">
                         <RichTextEditor value={item.description} onChange={(content) => {
                           const newItin = [...formData.itinerary];
-                          newItin[idx].description = content;
+                          newItin[idx] = { ...newItin[idx], description: content };
                           setFormData({ ...formData, itinerary: newItin });
                         }} height={400} />
                       </div>
@@ -361,7 +361,7 @@ export default function EditPackage() {
                              value={item.image}
                              onChange={(url) => {
                                 const newItin = [...formData.itinerary];
-                                newItin[idx].image = url;
+                                newItin[idx] = { ...newItin[idx], image: url };
                                 setFormData({ ...formData, itinerary: newItin });
                              }}
                              label=""
