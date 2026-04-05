@@ -1413,49 +1413,6 @@ export const packagesData: Record<string, TourPackageDetail> = {
                 }
         ]
 },
-    "ooty-tour-packages": {
-        "id": "29",
-        "slug": "ooty-tour-packages",
-        "title": "Ooty Tour Packages",
-        "location": "2N Ooty",
-        "duration": "2 Nights 3 Days",
-        "price": "\u20b9 14599",
-        "oldPrice": "\u20b9 16500",
-        "image": "/uploads/packages/8zogew9nlpyyvhabbux8k4nomjvcwhbxul19urz9240905041659.jpg",
-        "description": "",
-        "highlights": [
-                "Ooty , The Queen Of Hill Station, is a charming retreat in the Nilgiri Hills.\u00a0 Rolling Hills, Tea Plantation and eucalypyus forest creat a serene atmosphere.\u00a0 Explore scenic lakes, waterfalls and winding road, and visit ooty lake",
-                "Botanical Gardens, and Doddabetta Peak for panoramic views. A perfect getaway for nature lovers\u00a0and\u00a0families."
-        ],
-        "inclusions": [
-                "Base category twin room price valid for 2 people staying together",
-                "Cochin Airport, Railway, Bus stand Pickup and Drop",
-                "Driver charges, toll, parking, Fuel expense"
-        ],
-        "exclusions": [
-                "Any portage at airports and hotels, tips, all items of personal nature.",
-                "Services not mentioned in the inclusions",
-                "CP plans don\u2019t have Lunch and Dinner.",
-                "5% GST"
-        ],
-        "itinerary": [
-                {
-                        "day": "Day 1: Coimbatore Arrival to Ooty",
-                        "activity": "Ooty Lake and Botanical Garden Dolphin Nose and Ketti Valley Check in to the Resort, Overnight stay",
-                        "image": "/uploads/packages/day-images/sl01fizhfkmml4a4hnudjtq2tg2bhxugdsc9dehl241028040540.jpg"
-                },
-                {
-                        "day": "Day 2: Ooty Sightseeing",
-                        "activity": "Tea factory, Tea Museum Doddabetta Peak Toy train",
-                        "image": "/uploads/packages/day-images/oklmvxgkebzjb5iaoofiyqp2wu2udekxyl98ossy241028040609.jpg"
-                },
-                {
-                        "day": "Day 3: Ooty to Coimbatore Departure",
-                        "activity": "Isha Yoga Local sightseeings Local Shopping",
-                        "image": null
-                }
-        ]
-},
     "coorg-tour-package": {
         "id": "30",
         "slug": "coorg-tour-package",
