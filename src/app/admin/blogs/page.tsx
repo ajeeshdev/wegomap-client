@@ -115,7 +115,7 @@ export default function BlogsAdmin() {
                       </span>
                     </td>
                     <td className="cms-table-cell" style={{ fontSize: '11px', color: '#64748b', fontWeight: 500 }}>
-                      {item.createdAt ? new Date(item.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '---'}
+                      {(item.publishDate || item.createdAt) ? new Date(item.publishDate || item.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '---'}
                     </td>
                     <td className="cms-table-cell">
                       <div className="flex justify-center">
