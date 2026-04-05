@@ -50,6 +50,8 @@ export default function BlogsAdmin() {
   const filteredBlogs = blogs.filter((blog: any) => 
     (blog.title || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
     (blog.slug || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (blog.category || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (blog.categories || []).some((c: string) => c.toLowerCase().includes(searchTerm.toLowerCase())) ||
     (blog.author || '').toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -110,9 +112,19 @@ export default function BlogsAdmin() {
                       <div style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 600 }}>/{item.slug}</div>
                     </td>
                     <td className="cms-table-cell">
-                      <span className="cms-cat-badge">
-                        <Tag size={10} /> {item.category || 'General'}
-                      </span>
+                      <div className="flex flex-wrap gap-1 max-w-[150px]">
+                        {(item.categories && item.categories.length > 0) ? (
+                          item.categories.map((cat: string, i: number) => (
+                            <span key={i} className="cms-cat-badge whitespace-nowrap">
+                              <Tag size={10} /> {cat}
+                            </span>
+                          ))
+                        ) : (
+                          <span className="cms-cat-badge whitespace-nowrap">
+                            <Tag size={10} /> {item.category || 'General'}
+                          </span>
+                        )}
+                      </div>
                     </td>
                     <td className="cms-table-cell" style={{ fontSize: '11px', color: '#64748b', fontWeight: 500 }}>
                       {(item.publishDate || item.createdAt) ? new Date(item.publishDate || item.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '---'}
