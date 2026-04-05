@@ -18,7 +18,8 @@ export default function EditPackage() {
   const [formData, setFormData] = useState<any>({
     title: '', pcode: '', subtitle: '', slabel: '', location: '', description: '',
     price: '', oldamt: '', duration: '', highlights: [],
-    inclusions: [], exclusions: [], terms: '', category: '',
+    inclusions: [], exclusions: [], terms: '', categories: [],
+    category: '', // Legacy support
     images: [], thumb: '', thumb_alt: '', onoffer: false, isBestSeller: false,
     itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '',
     averageRating: 4.9, reviewCount: 150, noCostEmi: '',
@@ -90,7 +91,8 @@ export default function EditPackage() {
             reviewCount: data.data.reviewCount || 150,
             amenities: data.data.amenities || [],
             status: data.data.status || 'Published',
-            order: data.data.order || 0
+            order: data.data.order || 0,
+            categories: data.data.categories || (data.data.category ? [data.data.category] : [])
           });
         }
       } catch (err) {
@@ -439,17 +441,21 @@ export default function EditPackage() {
                 <div className="admin-form-group">
                   <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold"> <Tag size={10} className="text-blue-600" /> Category</label>
                   <select
-                    value={formData.category}
-                    onChange={e => setFormData({ ...formData, category: e.target.value })}
-                    className="admin-form-select font-bold text-slate-900 h-10 text-xs bg-white pl-4"
+                    multiple
+                    value={formData.categories || []}
+                    onChange={e => {
+                      const values = Array.from(e.target.selectedOptions).map(opt => opt.value);
+                      setFormData({ ...formData, categories: values });
+                    }}
+                    className="admin-form-select font-bold text-slate-900 h-32 text-xs bg-white pl-4 py-2"
                   >
-                    <option value="">Select Category</option>
                     {categories.map((cat: any) => (
                       <option key={cat._id} value={cat.title || cat.name}>
                         {cat.depth > 0 ? "— ".repeat(cat.depth) : ""}{cat.title || cat.name}
                       </option>
                     ))}
                   </select>
+                  <p className="text-[9px] text-slate-400 mt-2 px-1">Hold Ctrl/Cmd to select multiple categories.</p>
                 </div>
 
                 <div className="admin-form-group">

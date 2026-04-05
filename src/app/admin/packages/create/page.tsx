@@ -21,7 +21,7 @@ export default function CreatePackage() {
       inclusions: [], exclusions: [], terms: '',
       itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '',
       averageRating: 4.9, reviewCount: 150, noCostEmi: '',
-      amenities: [],
+      amenities: [], categories: [],
       status: 'Published', order: 0
    });
 
@@ -175,14 +175,22 @@ export default function CreatePackage() {
                               <div className="admin-form-group"><label>Duration</label><input type="text" value={formData.duration} onChange={e => setFormData({ ...formData, duration: e.target.value })} /></div>
                               <div className="admin-form-group">
                                  <label>Category</label>
-                                 <select value={formData.category} onChange={e => setFormData({ ...formData, category: e.target.value })} className="admin-form-select">
-                                    <option value="">Select Category</option>
-                                    {categories.map((cat: any) => (
-                                       <option key={cat._id} value={cat.title || cat.name}>
-                                         {cat.depth > 0 ? "— ".repeat(cat.depth) : ""}{cat.title || cat.name}
-                                       </option>
-                                     ))}
-                                 </select>
+                                 <select 
+                                    multiple
+                                    value={formData.categories || []} 
+                                    onChange={e => {
+                                       const values = Array.from(e.target.selectedOptions).map(opt => opt.value);
+                                       setFormData({ ...formData, categories: values });
+                                    }} 
+                                    className="admin-form-select h-32 py-2"
+                                  >
+                                     {categories.map((cat: any) => (
+                                        <option key={cat._id} value={cat.title || cat.name}>
+                                          {cat.depth > 0 ? "— ".repeat(cat.depth) : ""}{cat.title || cat.name}
+                                        </option>
+                                      ))}
+                                  </select>
+                                  <p className="text-[8px] text-slate-400 mt-2">Hold Ctrl/Cmd to select multiple.</p>
                               </div>
                            </div>
                          </div>
