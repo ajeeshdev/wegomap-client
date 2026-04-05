@@ -441,10 +441,10 @@ export default function TourDetailView({ id }: { id: string }) {
             {similarPackages.length > 0 && (
                 <section className="bg-slate-50 py-20 relative border-t border-slate-200/60">
                     <div className="homeContainer">
-                        <div className="flex items-end justify-between mb-12">
-                            <div>
-                                <h2 className="text-4xl font-black italic uppercase text-slate-900 leading-none mb-4">Similar Packages</h2>
-                                <p className="text-slate-500 font-medium">Explore other handpicked experiences</p>
+                        <div className="sectionHeader flex items-center justify-center mb-10 text-center">
+                            <div className="titleArea">
+                                <span className="sectionSubtitle">Explore More</span>
+                                <h2 className="sliderTitle" style={{ textTransform: 'none', fontStyle: 'normal' }}>Similar Packages</h2>
                             </div>
                         </div>
                         
