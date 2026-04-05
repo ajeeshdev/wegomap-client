@@ -107,7 +107,7 @@ export default async function RootSlugPage({ params }: PageProps) {
                         return nTarget === nCatSlug || nTarget === nCatTitle || nTarget === nCatName;
                     };
 
-                    const slugMatches = matches(pCat) || pCats.some(c => matches(c));
+                    const slugMatches = matches(pCat) || pCats.some((c: string) => matches(c));
                     return slugMatches;
                 });
 
@@ -153,6 +153,7 @@ export default async function RootSlugPage({ params }: PageProps) {
                 packages={combinedPackages}
                 readMoreHeading={dynamicCategory?.contentTitle || staticData.contentTitle || ""}
                 readMoreContent={dynamicCategory?.contentDesc || staticData.contentDesc}
+                description={dynamicCategory?.description || staticData.description}
             />
         );
     }

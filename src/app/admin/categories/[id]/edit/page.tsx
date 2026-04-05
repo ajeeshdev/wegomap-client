@@ -220,26 +220,37 @@ export default function EditCategory() {
                       className="admin-form-input h-14"
                     />
                   </div>
-                  <div className="admin-form-group">
-                    <label className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Banner Image URL</label>
+                    <div className="admin-form-group">
+                      <label className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Banner Image URL</label>
+                      <input 
+                        type="text" 
+                        value={formData.bannerImage} 
+                        onChange={e => setFormData({ ...formData, bannerImage: e.target.value })}
+                        className="admin-form-input h-14"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="admin-form-group mb-10 pb-10 border-b border-slate-100">
+                    <label className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-4 block">Top Introduction (One Paragraph)</label>
+                    <textarea 
+                      rows={4} 
+                      value={formData.description} 
+                      onChange={e => setFormData({ ...formData, description: e.target.value })}
+                      className="admin-form-input !h-32 py-4 px-6 rounded-3xl"
+                      placeholder="Add an introduction paragraph here... this will appear at the top of the category page."
+                    />
+                  </div>
+  
+                  <div className="admin-form-group mb-8">
+                    <label className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Read More Heading</label>
                     <input 
                       type="text" 
-                      value={formData.bannerImage} 
-                      onChange={e => setFormData({ ...formData, bannerImage: e.target.value })}
+                      value={formData.contentTitle} 
+                      onChange={e => setFormData({ ...formData, contentTitle: e.target.value })}
                       className="admin-form-input h-14"
                     />
                   </div>
-                </div>
-
-                <div className="admin-form-group mb-8">
-                  <label className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Read More Heading</label>
-                  <input 
-                    type="text" 
-                    value={formData.contentTitle} 
-                    onChange={e => setFormData({ ...formData, contentTitle: e.target.value })}
-                    className="admin-form-input h-14"
-                  />
-                </div>
 
                 <div className="bg-slate-50 rounded-[48px] p-3 border-2 border-slate-100 shadow-inner overflow-hidden transition-all focus-within:bg-white focus-within:shadow-2xl focus-within:shadow-blue-600/10 focus-within:border-orange-200">
                   <textarea 

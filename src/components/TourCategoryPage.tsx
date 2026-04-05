@@ -42,6 +42,7 @@ export interface TourCategoryPageProps {
     packages: TourPackage[];
     readMoreContent?: React.ReactNode;
     readMoreHeading?: string;
+    description?: string;
 }
 
 import DynamicPageBanner from './DynamicPageBanner';
@@ -56,6 +57,7 @@ export default function TourCategoryPage({
     packages,
     readMoreContent,
     readMoreHeading,
+    description,
 }: TourCategoryPageProps) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedPackage, setSelectedPackage] = useState('');
@@ -183,7 +185,16 @@ export default function TourCategoryPage({
             {/* ── Package Listings ── */}
             <section className="tourCatPackages allToursPage" style={{ background: '#f8fafc' }}>
                 <div className="homeContainer">
-                    <div className="tourCatBookedBadge">
+                    {description && (
+                        <div className="tourCatTopInfo mb-10 p-8 md:p-10 bg-white rounded-[40px] border border-slate-100/80 shadow-xl shadow-slate-200/20 backdrop-blur-sm relative overflow-hidden group hover:border-orange-100/50 transition-all duration-500">
+                             <div className="absolute top-0 right-0 w-32 h-32 bg-orange-50/30 rounded-bl-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+                             <p className="text-slate-600 text-lg md:text-xl font-medium leading-relaxed max-w-4xl tracking-tight">
+                                {description}
+                            </p>
+                        </div>
+                    )}
+
+                    <div className="tourCatBookedBadge mb-6">
                         <span className="tourCatBookedNum">{bookCount}</span> tours booked in the last 24 hours.
                     </div>
                     
