@@ -455,7 +455,7 @@ export default function TourDetailView({ id }: { id: string }) {
                             freeMode={true}
                             className="pb-12 px-4 -mx-4 package-slider-container"
                             breakpoints={{
-                                320: { slidesPerView: 1.2 },
+                                320: { slidesPerView: 1 },
                                 640: { slidesPerView: 2.2 },
                                 1024: { slidesPerView: 3 },
                                 1280: { slidesPerView: 4 }
