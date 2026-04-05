@@ -12485,6 +12485,12 @@ button.wishlistBtn {
   padding-left: 4rem;
   position: relative;
 }
+@media (max-width: 768px) {
+  .packageDetailPage .mainContent .detailsCol .itineraryTimeline {
+    padding-left: 2.25rem;
+    gap: 2rem;
+  }
+}
 .packageDetailPage .mainContent .detailsCol .itineraryTimeline::before {
   content: "";
   position: absolute;
@@ -12495,12 +12501,17 @@ button.wishlistBtn {
   background: linear-gradient(to bottom, #ff5a3d, #f1f5f9);
   border-radius: 4px;
 }
+@media (max-width: 768px) {
+  .packageDetailPage .mainContent .detailsCol .itineraryTimeline::before {
+    left: 0.75rem;
+  }
+}
 .packageDetailPage .mainContent .detailsCol .itineraryTimeline .timelineItem {
   position: relative;
 }
 .packageDetailPage .mainContent .detailsCol .itineraryTimeline .timelineItem .dot {
   position: absolute;
-  left: -3rem;
+  left: -2.5rem;
   top: 0.25rem;
   width: 1rem;
   height: 1rem;
@@ -12508,6 +12519,13 @@ button.wishlistBtn {
   border: 3px solid #ff5a3d;
   border-radius: 50%;
   z-index: 2;
+}
+@media (max-width: 768px) {
+  .packageDetailPage .mainContent .detailsCol .itineraryTimeline .timelineItem .dot {
+    left: -1.75rem;
+    width: 0.875rem;
+    height: 0.875rem;
+  }
 }
 .packageDetailPage .mainContent .detailsCol .itineraryTimeline .timelineItem .dayLabel {
   font-size: 12px;
@@ -12527,10 +12545,11 @@ button.wishlistBtn {
 .packageDetailPage .mainContent .detailsCol .itineraryTimeline .timelineItem .activityGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
+  gap: 1.5rem;
 }
 @media (min-width: 992px) {
   .packageDetailPage .mainContent .detailsCol .itineraryTimeline .timelineItem .activityGrid {
+    gap: 3rem;
     grid-template-columns: 1.2fr 1fr;
   }
 }
@@ -16728,7 +16747,7 @@ section.thank-you p {
   overflow: hidden;
   border-radius: 24px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
+  margin-bottom: 10px;
   transition: all 0.5s;
   background: #0f172a;
 }
@@ -16773,9 +16792,6 @@ section.thank-you p {
   text-transform: uppercase;
   color: #0f172a;
 }
-.blogsPage .blogsGrid .blogArticle .blogContent {
-  padding: 0 1.25rem;
-}
 .blogsPage .blogsGrid .blogArticle .blogContent .metaRow {
   display: flex;
   align-items: center;
@@ -16796,11 +16812,9 @@ section.thank-you p {
   color: #FF6B35;
 }
 .blogsPage .blogsGrid .blogArticle .blogContent h3 {
-  font-size: 1.5rem;
-  font-weight: 900;
+  font-size: 1rem;
   color: #0f172a;
   margin-bottom: 1.5rem;
-  line-height: 1.2;
   transition: color 0.2s;
 }
 .blogsPage .blogsGrid .blogArticle .blogContent .excerpt {
