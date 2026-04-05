@@ -34,6 +34,18 @@ const ICON_MAP: Record<string, any> = {
 };
 import { useEnquiry } from '@/context/EnquiryContext';
 
+// Utility to clean encoding issues (like â€ instead of -)
+const sanitizeText = (text: string | null | undefined): string => {
+    if (!text) return '';
+    return text
+        .replace(/â€“/g, '–')
+        .replace(/â€”/g, '—')
+        .replace(/â€/g, '–')
+        .replace(/&amp;/g, '&')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'");
+};
+
 export default function TourDetailView({ id }: { id: string }) {
     const [pkg, setPkg] = useState<TourPackageDetail | null>(null);
     const [loading, setLoading] = useState(true);
@@ -143,19 +155,19 @@ export default function TourDetailView({ id }: { id: string }) {
                     setPkg({
                         id: p._id,
                         slug: p.slug || p._id,
-                        title: p.title,
-                        location: p.location || 'Explore',
-                        duration: p.duration || p.days || 'Flexible Duration',
+                        title: sanitizeText(p.title),
+                        location: sanitizeText(p.location) || 'Explore',
+                        duration: sanitizeText(p.duration || p.days) || 'Flexible Duration',
                         price: p.price ? `₹ ${Number(p.price).toLocaleString()}` : 'Contact for Price',
                         oldPrice: p.oldamt ? `₹ ${Number(p.oldamt).toLocaleString()}` : undefined,
                         image: getImageUrl(p.thumb || (p.images && p.images[0]) || '/bg-placeholder.jpg'),
                         images: (p.images || []).map((img: string) => getImageUrl(img)),
-                        description: p.description || '',
-                        highlights: p.highlights || [],
+                        description: sanitizeText(p.description),
+                        highlights: (p.highlights || []).map((h: string) => sanitizeText(h)),
                         itinerary: (p.itinerary || []).map((item: any) => ({
                             ...item,
-                            day: typeof item.day === 'string' ? item.day : (item.title ? `Day ${item.day}: ${item.title}` : `Day ${item.day}`),
-                            activity: item.description || item.activity || '',
+                            day: sanitizeText(typeof item.day === 'string' ? item.day : (item.title ? `Day ${item.day}: ${item.title}` : `Day ${item.day}`)),
+                            activity: sanitizeText(item.description || item.activity || ''),
                             image: item.image ? getImageUrl(item.image) : item.image
                         })),
                         inclusions: p.inclusions || [],
@@ -183,19 +195,19 @@ export default function TourDetailView({ id }: { id: string }) {
                             setPkg({
                                 id: p._id,
                                 slug: p.slug || p._id,
-                                title: p.title,
-                                location: p.location || 'Explore',
-                                duration: p.duration || p.days || 'Flexible Duration',
+                                title: sanitizeText(p.title),
+                                location: sanitizeText(p.location) || 'Explore',
+                                duration: sanitizeText(p.duration || p.days) || 'Flexible Duration',
                                 price: p.price ? `₹ ${Number(p.price).toLocaleString()}` : 'Contact for Price',
                                 oldPrice: p.oldamt ? `₹ ${Number(p.oldamt).toLocaleString()}` : undefined,
                                 image: getImageUrl(p.thumb || (p.images && p.images[0]) || '/bg-placeholder.jpg'),
                                 images: (p.images || []).map((img: string) => getImageUrl(img)),
-                                description: p.description || '',
-                                highlights: p.highlights || [],
+                                description: sanitizeText(p.description),
+                                highlights: (p.highlights || []).map((h: string) => sanitizeText(h)),
                                 itinerary: (p.itinerary || []).map((item: any) => ({
                                     ...item,
-                                    day: typeof item.day === 'string' ? item.day : (item.title ? `Day ${item.day}: ${item.title}` : `Day ${item.day}`),
-                                    activity: item.description || item.activity || '',
+                                    day: sanitizeText(typeof item.day === 'string' ? item.day : (item.title ? `Day ${item.day}: ${item.title}` : `Day ${item.day}`)),
+                                    activity: sanitizeText(item.description || item.activity || ''),
                                     image: item.image ? getImageUrl(item.image) : item.image
                                 })),
                                 inclusions: p.inclusions || [],
@@ -217,9 +229,14 @@ export default function TourDetailView({ id }: { id: string }) {
                     const localPkg = packagesData[id];
                     setPkg({
                         ...localPkg,
+                        title: sanitizeText(localPkg.title),
+                        location: sanitizeText(localPkg.location),
+                        description: sanitizeText(localPkg.description),
                         image: getImageUrl(localPkg.image),
                         itinerary: localPkg.itinerary.map(item => ({
                             ...item,
+                            day: sanitizeText(item.day),
+                            activity: sanitizeText(item.activity),
                             image: item.image ? getImageUrl(item.image) : item.image
                         }))
                     });
