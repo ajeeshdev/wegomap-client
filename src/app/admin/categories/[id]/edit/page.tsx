@@ -4,6 +4,7 @@ import { API_URL } from '@/config';
 import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { Save, ArrowLeft, LayoutGrid, Type, Globe, Info, Clock, Sparkles, Zap, ShieldCheck, Layers } from 'lucide-react';
+import RichTextEditor from '@/components/admin/Editor';
 import { toast } from 'react-hot-toast';
 
 
@@ -214,12 +215,10 @@ export default function EditCategory() {
                     <label className="text-[10px] uppercase font-black tracking-[0.2em] text-blue-600 mb-4 block opacity-70">
                       Primary Intro Paragraph (Top of Category)
                     </label>
-                    <textarea 
-                      rows={4} 
+                    <RichTextEditor 
+                      height={250}
                       value={formData.description} 
-                      onChange={e => setFormData({ ...formData, description: e.target.value })}
-                      className="admin-form-input !h-32 !bg-white border-2 border-slate-100 rounded-3xl py-4 px-6 text-slate-700 font-bold"
-                      placeholder="Add an introduction paragraph here... this will appear at the top of the category page."
+                      onChange={content => setFormData({ ...formData, description: content })}
                     />
                 </div>
                 
@@ -254,15 +253,11 @@ export default function EditCategory() {
                     />
                   </div>
 
-                <div className="bg-slate-50 rounded-[48px] p-3 border-2 border-slate-100 shadow-inner overflow-hidden transition-all focus-within:bg-white focus-within:shadow-2xl focus-within:shadow-blue-600/10 focus-within:border-orange-200">
-                  <textarea 
-                    rows={6} 
-                    value={formData.contentDesc} 
-                    onChange={e => setFormData({ ...formData, contentDesc: e.target.value })} 
-                    className="admin-form-textarea !bg-transparent border-none font-bold text-slate-700 leading-relaxed h-[200px] px-8 py-6 text-lg scrollbar-hidden caret-blue-600" 
-                    placeholder="Extended content (HTML supported)..."
-                  ></textarea>
-                </div>
+                <RichTextEditor 
+                  height={400}
+                  value={formData.contentDesc} 
+                  onChange={content => setFormData({ ...formData, contentDesc: content })}
+                />
               </div>
 
               <div className="admin-form-group pt-12 border-t border-slate-100">
