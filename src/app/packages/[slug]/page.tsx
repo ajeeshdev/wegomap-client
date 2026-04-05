@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { API_URL } from '@/config';
 import { categoryData } from '@/data/categoryData';
 import { categoryMappings } from '@/data/categoryMappings';
 import { packagesData } from '@/data/packages';
@@ -22,7 +23,28 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         };
     }
     
-    // Check if it's a package
+    // Check API for Package data
+    try {
+        const res = await fetch(`${API_URL}/packages/slug/${slug}`, { next: { revalidate: 3600 } });
+        const json = await res.json();
+        if (json.success && json.data) {
+            const pkg = json.data;
+            return {
+                title: pkg.seo_title || `${pkg.title} | WEGOMAP`,
+                description: pkg.seo_meta || pkg.description?.substring(0, 160),
+                keywords: pkg.seo_keys || 'kerala, travel, package, holiday',
+                openGraph: {
+                    title: pkg.seo_title || pkg.title,
+                    description: pkg.seo_meta || pkg.description,
+                    images: [pkg.image].filter(Boolean),
+                }
+            };
+        }
+    } catch (e) {
+        console.error("Meta fetch error:", e);
+    }
+
+    // Fallback: Check if it's a static package
     if ((packagesData as any)[slug]) {
         const pkg = (packagesData as any)[slug];
         return {
