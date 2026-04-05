@@ -48,7 +48,26 @@ export default function EditCategory() {
         const res = await fetch(`${API_URL}/categories`);
         const data = await res.json();
         if (data.success) {
-          setCategories(data.data.filter((c: any) => c._id !== id));
+          const items = data.data.filter((c: any) => c._id !== id);
+          const map: Record<string, any> = {};
+          items.forEach((item: any) => { map[item._id] = { ...item, children: [] }; });
+          const roots: any[] = [];
+          items.forEach((item: any) => {
+            if (item.parent && map[item.parent]) {
+              map[item.parent].children.push(map[item._id]);
+            } else {
+              roots.push(map[item._id]);
+            }
+          });
+          const flattened: any[] = [];
+          const traverse = (nodes: any[], depth = 0) => {
+            nodes.sort((a, b) => (a.order || 0) - (b.order || 0)).forEach(node => {
+              flattened.push({ ...node, depth });
+              traverse(node.children, depth + 1);
+            });
+          };
+          traverse(roots);
+          setCategories(flattened);
         }
       } catch (err) { console.error('Failed to fetch categories', err); }
     };
@@ -196,11 +215,13 @@ export default function EditCategory() {
                 <select 
                   value={formData.parent} 
                   onChange={e => setFormData({ ...formData, parent: e.target.value })}
-                  className="admin-form-input font-black bg-slate-50 border-slate-100 rounded-2xl h-14 uppercase text-[11px] tracking-widest cursor-pointer hover:bg-white transition-all shadow-sm focus:ring-12 focus:ring-blue-600/5 appearance-none px-6"
+                  className="admin-form-input font-black bg-white border-slate-100 rounded-2xl h-14 uppercase text-[11px] tracking-widest cursor-pointer hover:bg-white transition-all shadow-sm focus:ring-12 focus:ring-blue-600/5 px-6"
                 >
                   <option value="">None (Top Level)</option>
                   {categories.map((cat: any) => (
-                    <option key={cat._id} value={cat._id}>{cat.title || cat.name}</option>
+                    <option key={cat._id} value={cat._id}>
+                      {cat.depth > 0 ? "— ".repeat(cat.depth) : ""}{cat.title || cat.name}
+                    </option>
                   ))}
                 </select>
               </div>
