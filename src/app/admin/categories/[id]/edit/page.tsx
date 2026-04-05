@@ -209,6 +209,19 @@ export default function EditCategory() {
                 <label className="admin-form-label flex items-center gap-3 mb-8">
                   <Info size={18} className="text-amber-500" /> Description / Content
                 </label>
+
+                <div className="admin-form-group mb-12 p-8 bg-blue-50/30 rounded-[40px] border-2 border-dashed border-blue-100 group focus-within:border-blue-400 transition-all">
+                    <label className="text-[10px] uppercase font-black tracking-[0.2em] text-blue-600 mb-4 block opacity-70">
+                      Primary Intro Paragraph (Top of Category)
+                    </label>
+                    <textarea 
+                      rows={4} 
+                      value={formData.description} 
+                      onChange={e => setFormData({ ...formData, description: e.target.value })}
+                      className="admin-form-input !h-32 !bg-white border-2 border-slate-100 rounded-3xl py-4 px-6 text-slate-700 font-bold"
+                      placeholder="Add an introduction paragraph here... this will appear at the top of the category page."
+                    />
+                </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                   <div className="admin-form-group">
@@ -229,17 +242,6 @@ export default function EditCategory() {
                         className="admin-form-input h-14"
                       />
                     </div>
-                  </div>
-
-                  <div className="admin-form-group mb-10 pb-10 border-b border-slate-100">
-                    <label className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-4 block">Top Introduction (One Paragraph)</label>
-                    <textarea 
-                      rows={4} 
-                      value={formData.description} 
-                      onChange={e => setFormData({ ...formData, description: e.target.value })}
-                      className="admin-form-input !h-32 py-4 px-6 rounded-3xl"
-                      placeholder="Add an introduction paragraph here... this will appear at the top of the category page."
-                    />
                   </div>
   
                   <div className="admin-form-group mb-8">
