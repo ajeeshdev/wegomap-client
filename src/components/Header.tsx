@@ -31,7 +31,7 @@ const keralaSubItems = [
 
 const domesticItems = [
     { name: 'Manali Tour Packages', href: '/manali-tour-packages' },
-    { name: 'Goa Tour Packages', href: '/goa-tour-packages-from-kerala' },
+    { name: 'Goa Tour Packages', href: '/goa-tour-packages' },
     { name: 'Ooty Tour Packages', href: '/ooty-tour-packages' },
     { name: 'Kodaikanal Tour Packages', href: '/kodaikanal-tour-packages' },
     { name: 'Coorg Tour Package', href: '/coorg-tour-package' },
