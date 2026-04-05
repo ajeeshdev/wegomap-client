@@ -457,8 +457,7 @@ export default function TourDetailView({ id }: { id: string }) {
                                 mobileFirst={true}
                                 responsive={[
                                     { breakpoint: 767, settings: { slidesToShow: 2, slidesToScroll: 1 } },
-                                    { breakpoint: 1023, settings: { slidesToShow: 3, slidesToScroll: 1 } },
-                                    { breakpoint: 1279, settings: { slidesToShow: 4, slidesToScroll: 1 } }
+                                    { breakpoint: 1023, settings: { slidesToShow: 3, slidesToScroll: 1 } }
                                 ]}
                             >
                             {similarPackages.map((spkg, i) => {
