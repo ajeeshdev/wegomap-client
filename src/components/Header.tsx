@@ -51,7 +51,7 @@ const domesticItems = [
 const internationalItems = [
     { name: 'Maldives Tour Packages', href: '/maldives-tour-packages' },
     { name: 'Thailand Tour Packages', href: '/thailand-tour-packages' },
-    { name: 'Bali Tour Packages', href: '/bali-tour-packagess' },
+    { name: 'Bali Tour Packages', href: '/bali-tour-packages' },
     { name: 'Dubai Tour Packages', href: '/dubai-tour-packages' },
     { name: 'Malaysia Tour Packages', href: '/malaysia-tour-packages' },
     { name: 'Singapore Tour Package', href: '/singapore-tour-packages' },
