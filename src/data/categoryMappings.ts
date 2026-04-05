@@ -156,9 +156,6 @@ export const categoryMappings : Record<string, string[]> = {
     "kodaikanal-tour-packages": [
         "kodaikanal-tour-package"
     ],
-    "ooty-tour-packages": [
-        "ooty-tour-packages"
-    ],
     "coorg-tour-package": [
         "coorg-tour-package",
         "coorg-mysore"

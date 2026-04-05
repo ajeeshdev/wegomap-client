@@ -1,111 +1,175 @@
-"use client";
-
-import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { API_URL } from '@/config';
-import TourDetailView from '@/components/TourDetail/TourDetailView';
-import LandingPageView from '@/components/LandingPage/LandingPageView';
-import LandingPageHeader from '@/components/LandingPage/LandingPageHeader';
-import Footer from '@/components/Footer';
-import MobileNav from '@/components/MobileNav';
-import FloatingWhatsApp from '@/components/FloatingWhatsApp';
-import MyraBot from '@/components/MyraBot';
-import { useEnquiry } from '@/context/EnquiryContext';
-
-import { redirect } from 'next/navigation';
+import type { Metadata } from 'next';
+import { API_URL, getImageUrl } from '@/config';
+import { categoryData } from '@/data/categoryData';
 import { categoryMappings } from '@/data/categoryMappings';
+import { packagesData } from '@/data/packages';
+import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
+import LandingPageWrapper from './LandingPageWrapper';
+import { redirect } from 'next/navigation';
 
-export default function PackageDetailPage() {
-    const { slug } = useParams();
-    const packageSlug = Array.isArray(slug) ? slug[0] : slug;
-    const [landingPage, setLandingPage] = useState<any>(null);
-    const [loading, setLoading] = useState(true);
-    const { setHideLayout } = useEnquiry();
-
-    useEffect(() => {
-        if (!loading) {
-            setHideLayout(!!landingPage);
-        }
-        return () => setHideLayout(false);
-    }, [loading, landingPage, setHideLayout]);
-
-
-    useEffect(() => {
-        async function checkLanding() {
-            if (!packageSlug) return;
-            try {
-                // 1. Check if this slug points to a landing page/campaign
-                const res = await fetch(`${API_URL}/pages?slug=${packageSlug}`);
-                const json = await res.json();
-                
-                if (json.success && json.data) {
-                    const page = json.data.find((p: any) => p.slug === packageSlug && p.isCampaign);
-                    if (page) {
-                        setLandingPage(page);
-                        setLoading(false);
-                        return;
-                    }
-                }
-
-                // 2. Check if it's an old blog URL that needs redirecting
-                const blogRes = await fetch(`${API_URL}/blogs/slug/${packageSlug}`);
-                const blogJson = await blogRes.json();
-                const blogData = Array.isArray(blogJson.data) ? blogJson.data[0] : blogJson.data;
-                if (blogJson.success && blogData && blogData.slug) {
-                    window.location.href = `/blogs/${packageSlug}`;
-                    return;
-                }
-
-                // 3. Check if it's an old package URL
-                const pkgRes = await fetch(`${API_URL}/packages/slug/${packageSlug}`);
-                const pkgJson = await pkgRes.json();
-                if (pkgJson.success && pkgJson.data) {
-                    window.location.href = `/packages/${packageSlug}`;
-                    return;
-                }
-            } catch (err) {
-                console.error("Redirect check failed", err);
-            } finally {
-                setLoading(false);
-            }
-        }
-        checkLanding();
-    }, [packageSlug]);
-
-    if (!packageSlug) return null;
-
-    if (loading) {
-        return (
-            <div className="flex items-center justify-center min-h-screen bg-white">
-                <div className="w-10 h-10 border-4 border-slate-100 border-t-indigo-600 rounded-full animate-spin"></div>
-            </div>
-        );
-    }
-
-    if (landingPage) {
-        return (
-            <>
-                <LandingPageHeader />
-                <LandingPageView data={landingPage} />
-                <Footer />
-                <MobileNav />
-                <FloatingWhatsApp />
-                <MyraBot />
-            </>
-        );
-    }
-
-    // Root slug now ONLY handles landing pages (campaigns). 
-    // If it matches a category mapping, redirect to /packages/[slug]
-    if (categoryMappings[packageSlug]) {
-        redirect(`/packages/${packageSlug}`);
-    }
-
-    // Otherwise standard tours should also be at /packages/[slug]
-    // redirect(`/packages/${packageSlug}`); 
-    // Wait, let's just 404 if not found at all, but for now we'll allow redirecting package detail too if they were at root
-    // But most tours are only at /packages/ anyway.
-    
-    return null;
+interface PageProps {
+    params: Promise<{ slug: string }>;
 }
 
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const { slug } = await params;
+    
+    // 1. Check if it's a Category
+    const staticMeta = categoryData[slug];
+    if (staticMeta) {
+        return {
+            title: staticMeta.seoTitle || staticMeta.title,
+            description: staticMeta.seoMeta || staticMeta.subtitle,
+            keywords: staticMeta.seoKeys,
+        };
+    }
+
+    try {
+        const catRes = await fetch(`${API_URL}/categories/slug/${slug}`, { next: { revalidate: 60 } });
+        const catJson = await catRes.json();
+        if (catJson.success && catJson.data) {
+            const cat = catJson.data;
+            return {
+                title: cat.seoTitle || cat.title || `${cat.name} | WEGOMAP`,
+                description: cat.seoMeta || cat.description?.substring(0, 160),
+            };
+        }
+
+        // 2. Check if it's a Landing Page
+        const pageRes = await fetch(`${API_URL}/pages?slug=${slug}`);
+        const pageJson = await pageRes.json();
+        if (pageJson.success && pageJson.data) {
+            const page = pageJson.data.find((p: any) => p.slug === slug && p.isCampaign);
+            if (page) {
+                return {
+                    title: page.title,
+                    description: page.description?.substring(0, 160),
+                };
+            }
+        }
+    } catch (e) {
+        console.error("Meta fetch error at root [slug]:", e);
+    }
+
+    return {
+        title: 'WEGOMAP | Trusted Travel Partner',
+    };
+}
+
+export default async function RootSlugPage({ params }: PageProps) {
+    const { slug } = await params;
+
+    let dynamicCategory = null;
+    let isCategory = false;
+
+    // 1. Check if it's a Category (API first)
+    try {
+        const catRes = await fetch(`${API_URL}/categories/slug/${slug}`, { next: { revalidate: 60 } });
+        const catJson = await catRes.json();
+        if (catJson.success && catJson.data) {
+            dynamicCategory = catJson.data;
+            isCategory = true;
+        }
+    } catch (e) {}
+
+    const staticData = categoryData[slug] || {};
+    const isStaticCategory = !!categoryMappings[slug];
+
+    if (isCategory || isStaticCategory) {
+        let dynamicPackages: TourPackage[] = [];
+        try {
+            const pkgRes = await fetch(`${API_URL}/packages`, { next: { revalidate: 60 } });
+            const pkgJson = await pkgRes.json();
+            if (pkgJson.success && pkgJson.data) {
+                const catTitle = (dynamicCategory?.title || staticData.title)?.toLowerCase();
+                const catName = dynamicCategory?.name?.toLowerCase();
+                const catSlug = (dynamicCategory?.slug || slug).toLowerCase();
+                const assignedPackageIds = dynamicCategory?.packages || [];
+
+                const filtered = pkgJson.data.filter((pkg: any) => {
+                    if (assignedPackageIds.length > 0) {
+                        return assignedPackageIds.includes(pkg._id);
+                    }
+                    const pCat = pkg.category?.toLowerCase();
+                    const pCats = Array.isArray(pkg.categories) ? pkg.categories.map((c: string) => c.toLowerCase()) : [];
+                    const matchesSlug = pCat === catSlug || pCats.includes(catSlug);
+                    const matchesTitle = (catTitle && (pCat === catTitle || pCats.includes(catTitle)));
+                    return matchesSlug || matchesTitle;
+                });
+
+                dynamicPackages = filtered.map((pkg: any) => ({
+                    _id: pkg._id,
+                    slug: pkg.slug,
+                    image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || pkg.image || '/bg-placeholder.jpg'),
+                    duration: pkg.duration,
+                    title: pkg.title,
+                    location: pkg.location,
+                    price: pkg.price ? `₹${pkg.price.toLocaleString()}` : 'N/A',
+                    originalPrice: pkg.oldamt ? `₹${Number(pkg.oldamt).toLocaleString()}` : null,
+                    detailUrl: `/packages/${pkg.slug || pkg._id}`
+                }));
+            }
+        } catch (e) {}
+
+        const staticSlugs = categoryMappings[slug] || [];
+        const staticPackages: TourPackage[] = staticSlugs.map(pSlug => {
+            const pkg = (packagesData as any)[pSlug];
+            if (!pkg) return null;
+            return {
+                image: pkg.image,
+                duration: pkg.duration || pkg.location,
+                title: pkg.title,
+                location: pkg.location,
+                price: pkg.price,
+                originalPrice: pkg.oldPrice,
+                detailUrl: `/packages/${pSlug}`
+            };
+        }).filter((p): p is TourPackage => p !== null);
+
+        const combinedPackages = [...dynamicPackages];
+        staticPackages.forEach(sp => {
+            if (!combinedPackages.find(dp => dp.slug === sp.slug)) combinedPackages.push(sp);
+        });
+
+        return (
+            <TourCategoryPage
+                title={dynamicCategory?.title || staticData.title || "Tours"}
+                subtitle={dynamicCategory?.subtitle || staticData.subtitle || ""}
+                bannerImage={dynamicCategory?.bannerImage || staticData.bannerImage || "/uploads/categories/default.jpg"}
+                packages={combinedPackages}
+                readMoreHeading={dynamicCategory?.contentTitle || staticData.contentTitle || ""}
+                readMoreContent={dynamicCategory?.contentDesc || staticData.contentDesc}
+            />
+        );
+    }
+
+    // 2. Check if it's a Landing Page (Campaign)
+    try {
+        const pageRes = await fetch(`${API_URL}/pages?slug=${slug}`);
+        const pageJson = await pageRes.json();
+        if (pageJson.success && pageJson.data) {
+            const page = pageJson.data.find((p: any) => p.slug === slug && p.isCampaign);
+            if (page) {
+                return <LandingPageWrapper data={page} />;
+            }
+        }
+    } catch (e) {}
+
+    // 3. Fallback: Check if it's a blog or package for redirect
+    try {
+        const blogRes = await fetch(`${API_URL}/blogs/slug/${slug}`);
+        const blogJson = await blogRes.json();
+        if (blogJson.success && blogJson.data) {
+             redirect(`/blogs/${slug}`);
+        }
+
+        const pkgRes = await fetch(`${API_URL}/packages/slug/${slug}`);
+        const pkgJson = await pkgRes.json();
+        if (pkgJson.success && pkgJson.data) {
+             redirect(`/packages/${slug}`);
+        }
+    } catch (e) {}
+
+    // 404 roughly
+    redirect('/');
+}
