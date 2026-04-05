@@ -71,16 +71,10 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/tours',
-        destination: '/packages',
+        source: '/tours/:path*',
+        destination: '/packages/:path*',
         permanent: true,
       },
-      {
-        source: '/:slug/tours/:id',
-        destination: '/:slug/packages/:id',
-        permanent: true,
-      },
-
     ];
   },
 };
