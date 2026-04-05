@@ -15,9 +15,15 @@ export default function CreateCategory() {
     parent: '',
     description: '',
     status: 'Active',
-    order: 0
+    order: 0,
+    packages: [] as string[],
+    bannerImage: '',
+    subtitle: '',
+    contentTitle: '',
+    contentDesc: ''
   });
   const [categories, setCategories] = useState<any[]>([]);
+  const [packages, setPackages] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -49,7 +55,19 @@ export default function CreateCategory() {
         }
       } catch (err) { console.error('Failed to fetch categories', err); }
     };
+
+    const fetchPackages = async () => {
+      try {
+        const res = await fetch(`${API_URL}/packages`);
+        const data = await res.json();
+        if (data.success) {
+          setPackages(data.data);
+        }
+      } catch (err) { console.error('Failed to fetch packages', err); }
+    };
+
     fetchCategories();
+    fetchPackages();
   }, []);
 
   const handleSubmit = async (e?: React.FormEvent) => {
@@ -159,16 +177,73 @@ export default function CreateCategory() {
 
               <div className="admin-form-group pt-12 border-t border-slate-100">
                 <label className="admin-form-label flex items-center gap-3 mb-8">
-                  <Info size={18} className="text-amber-500" /> Description
+                  <Info size={18} className="text-amber-500" /> Description / Content
                 </label>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                  <div className="admin-form-group">
+                    <label className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Subtitle</label>
+                    <input 
+                      type="text" 
+                      value={formData.subtitle} 
+                      onChange={e => setFormData({ ...formData, subtitle: e.target.value })}
+                      className="admin-form-input h-14"
+                    />
+                  </div>
+                  <div className="admin-form-group">
+                    <label className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Banner Image URL</label>
+                    <input 
+                      type="text" 
+                      value={formData.bannerImage} 
+                      onChange={e => setFormData({ ...formData, bannerImage: e.target.value })}
+                      className="admin-form-input h-14"
+                    />
+                  </div>
+                </div>
+
+                <div className="admin-form-group mb-8">
+                  <label className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Read More Heading</label>
+                  <input 
+                    type="text" 
+                    value={formData.contentTitle} 
+                    onChange={e => setFormData({ ...formData, contentTitle: e.target.value })}
+                    className="admin-form-input h-14"
+                  />
+                </div>
+
                 <div className="bg-slate-50 rounded-[48px] p-3 border-2 border-slate-100 shadow-inner overflow-hidden transition-all focus-within:bg-white focus-within:shadow-2xl focus-within:shadow-blue-600/10 focus-within:border-orange-200">
                   <textarea 
                     rows={6} 
-                    value={formData.description} 
-                    onChange={e => setFormData({ ...formData, description: e.target.value })} 
-                    className="admin-form-textarea !bg-transparent border-none font-bold text-slate-700 leading-relaxed h-[240px] px-8 py-6 text-lg scrollbar-hidden caret-blue-600" 
-                    placeholder="A short description of this category."
+                    value={formData.contentDesc} 
+                    onChange={e => setFormData({ ...formData, contentDesc: e.target.value })} 
+                    className="admin-form-textarea !bg-transparent border-none font-bold text-slate-700 leading-relaxed h-[200px] px-8 py-6 text-lg scrollbar-hidden caret-blue-600" 
+                    placeholder="Extended content (HTML supported)..."
                   ></textarea>
+                </div>
+              </div>
+
+              <div className="admin-form-group pt-12 border-t border-slate-100">
+                <label className="admin-form-label flex items-center gap-3 mb-8">
+                  <Layers size={18} className="text-blue-600" /> Assign Packages
+                </label>
+                <div className="admin-form-group">
+                  <p className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-4 px-2">Select packages to display on this category page:</p>
+                  <select 
+                    multiple
+                    value={formData.packages}
+                    onChange={e => {
+                      const values = Array.from(e.target.selectedOptions).map(opt => opt.value);
+                      setFormData({ ...formData, packages: values });
+                    }}
+                    className="admin-form-select h-64 font-bold text-slate-700 p-4 rounded-[32px] border-2 border-slate-100 bg-slate-50 focus:bg-white transition-all shadow-inner"
+                  >
+                    {packages.sort((a, b) => a.title.localeCompare(b.title)).map(pkg => (
+                      <option key={pkg._id} value={pkg._id} className="py-2 px-4 rounded-xl hover:bg-blue-50 transition-colors">
+                        {pkg.title} ({pkg.location})
+                      </option>
+                    ))}
+                  </select>
+                  <p className="mt-4 text-[10px] font-black text-slate-400 uppercase tracking-widest px-2 italic">Hold CMD/CTRL to select multiple packages.</p>
                 </div>
               </div>
             </div>

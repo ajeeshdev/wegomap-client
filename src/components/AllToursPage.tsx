@@ -194,19 +194,25 @@ export default function AllToursPage() {
                 if (data.success) {
                     const mapped = data.data.map((pkg: any) => {
                         const cmsCat = pkg.category?.toLowerCase() || '';
-                        const categories = ['all'];
+                        const cmsCats = Array.isArray(pkg.categories) ? pkg.categories : [];
+                        const categoriesSet = new Set(['all']);
                         
-                        if (cmsCat.includes('international')) categories.push('international');
-                        else if (cmsCat.includes('domestic')) categories.push('domestic');
-                        else if (cmsCat.includes('kerala')) categories.push('kerala');
+                        // Add individual category if exists
+                        if (cmsCat) categoriesSet.add(cmsCat);
                         
-                        if (cmsCat.includes('honeymoon')) categories.push('honeymoon');
-                        if (cmsCat.includes('family')) categories.push('family');
-                        if (cmsCat.includes('adventure')) categories.push('adventure');
+                        // Add all categories from multi-select
+                        cmsCats.forEach((c: string) => categoriesSet.add(c.toLowerCase()));
+
+                        // Convert back to array for easier processing
+                        const categories = Array.from(categoriesSet);
                         
-                        if (categories.length === 1 && cmsCat) {
-                            categories.push(cmsCat);
-                        }
+                        // Map them to internal filters for AllTours filter tabs
+                        if (categories.some(c => c.includes('international'))) categories.push('international');
+                        if (categories.some(c => c.includes('domestic'))) categories.push('domestic');
+                        if (categories.some(c => c.includes('kerala'))) categories.push('kerala');
+                        if (categories.some(c => c.includes('honeymoon'))) categories.push('honeymoon');
+                        if (categories.some(c => c.includes('family'))) categories.push('family');
+                        if (categories.some(c => c.includes('adventure'))) categories.push('adventure');
 
                         return {
                             slug: pkg.slug || pkg._id,

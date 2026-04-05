@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
-import { API_URL } from '@/config';
+import { API_URL, getImageUrl } from '@/config';
 import { categoryData } from '@/data/categoryData';
 import { categoryMappings } from '@/data/categoryMappings';
 import { packagesData } from '@/data/packages';
 import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 import TourDetailView from '@/components/TourDetail/TourDetailView';
+import { redirect } from 'next/navigation';
 
 interface PageProps {
     params: Promise<{ slug: string }>;
@@ -85,37 +86,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function DynamicPackagePage({ params }: PageProps) {
     const { slug } = await params;
 
-    // 1. Is it a category?
-    if (categoryMappings[slug]) {
-        const data = categoryData[slug] || {};
-        const packageSlugs = categoryMappings[slug] || [];
+    let shouldRedirect = !!categoryMappings[slug];
 
-        const packages: TourPackage[] = packageSlugs.map(pSlug => {
-            const pkg = (packagesData as any)[pSlug];
-            if (!pkg) return null;
-            return {
-                image: pkg.image,
-                duration: pkg.duration || pkg.location,
-                title: pkg.title,
-                location: pkg.location,
-                price: pkg.price,
-                originalPrice: pkg.oldPrice,
-                detailUrl: `/packages/${pSlug}`
-            };
-        }).filter((p): p is TourPackage => p !== null);
-
-        return (
-            <TourCategoryPage
-                title={data.title || "Tours"}
-                subtitle={data.subtitle || ""}
-                bannerImage={data.bannerImage || "/uploads/categories/default.jpg"}
-                packages={packages}
-                readMoreHeading={data.contentTitle || ""}
-                readMoreContent={data.contentDesc}
-            />
-        );
+    if (!shouldRedirect) {
+        try {
+            const catRes = await fetch(`${API_URL}/categories/slug/${slug}`, { next: { revalidate: 60 } });
+            const catJson = await catRes.json();
+            if (catJson.success && catJson.data) {
+                shouldRedirect = true;
+            }
+        } catch (e) {}
     }
 
-    // 2. Otherwise assume it's a tour detail
+    if (shouldRedirect) {
+        redirect(`/${slug}`);
+    }
+
+    // 2. Otherwise it's a tour detail
     return <TourDetailView id={slug} />;
 }
