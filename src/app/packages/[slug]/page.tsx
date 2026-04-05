@@ -27,18 +27,42 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     try {
         const res = await fetch(`${API_URL}/packages/slug/${slug}`, { next: { revalidate: 3600 } });
         const json = await res.json();
-        if (json.success && json.data) {
-            const pkg = json.data;
+        const p = json.data;
+        
+        if (json.success && p) {
             return {
-                title: pkg.seo_title || `${pkg.title} | WEGOMAP`,
-                description: pkg.seo_meta || pkg.description?.substring(0, 160),
-                keywords: pkg.seo_keys || 'kerala, travel, package, holiday',
+                title: p.seo_title || `${p.title} | WEGOMAP`,
+                description: p.seo_meta || p.description?.substring(0, 160),
+                keywords: p.seo_keys || 'kerala, travel, package, holiday',
                 openGraph: {
-                    title: pkg.seo_title || pkg.title,
-                    description: pkg.seo_meta || pkg.description,
-                    images: [pkg.image].filter(Boolean),
+                    title: p.seo_title || p.title,
+                    description: p.seo_meta || p.description,
+                    images: [p.image].filter(Boolean),
                 }
             };
+        }
+
+        // Secondary fallback: Match by Title if slug fails (Legacy Redirect Support)
+        if (packagesData[slug]) {
+            const staticTitle = packagesData[slug].title;
+            const searchRes = await fetch(`${API_URL}/packages`);
+            const searchJson = await searchRes.json();
+            if (searchJson.success && searchJson.data) {
+                const matchedPkg = searchJson.data.find((p: any) => p.title.trim().toLowerCase() === staticTitle.trim().toLowerCase());
+                if (matchedPkg) {
+                    const p = matchedPkg;
+                    return {
+                        title: p.seo_title || `${p.title} | WEGOMAP`,
+                        description: p.seo_meta || p.description?.substring(0, 160),
+                        keywords: p.seo_keys || 'kerala, travel, package, holiday',
+                        openGraph: {
+                            title: p.seo_title || p.title,
+                            description: p.seo_meta || p.description,
+                            images: [p.image].filter(Boolean),
+                        }
+                    };
+                }
+            }
         }
     } catch (e) {
         console.error("Meta fetch error:", e);
