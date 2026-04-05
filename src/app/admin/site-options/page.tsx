@@ -22,7 +22,8 @@ export default function SiteOptionsPage() {
         google_reviews: '',
         maintenance_mode: false,
         site_logo: '',
-        site_favicon: ''
+        site_favicon: '',
+        site_keywords: ''
     });
 
     const [contact, setContact] = useState({
@@ -243,6 +244,17 @@ export default function SiteOptionsPage() {
                                     onChange={e => setGeneral({...general, analytics_script: e.target.value})}
                                     rows={3}
                                     className="admin-form-input font-mono text-[11px] bg-slate-900 text-slate-300 border-slate-700"
+                                />
+                            </div>
+                            
+                            <div className="admin-form-group">
+                                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Global Site Keywords</label>
+                                <textarea 
+                                    value={general.site_keywords}
+                                    onChange={e => setGeneral({...general, site_keywords: e.target.value})}
+                                    rows={2}
+                                    className="admin-form-input font-medium text-[12px] bg-white border-slate-200"
+                                    placeholder="e.g. travel, kerala tours, houseboat booking..."
                                 />
                             </div>
 

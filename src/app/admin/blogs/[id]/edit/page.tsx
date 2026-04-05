@@ -344,6 +344,16 @@ export default function EditBlog() {
                     placeholder="Brief description for search engines..."
                   ></textarea>
                 </div>
+                <div className="admin-form-group">
+                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-1"> <Tag size={10} className="text-sky-600" /> SEO Keywords</label>
+                  <textarea
+                    rows={2}
+                    value={formData.seo_keys}
+                    onChange={e => setFormData({ ...formData, seo_keys: e.target.value })}
+                    className="admin-form-textarea text-[11px] font-medium text-slate-700 min-h-[60px]"
+                    placeholder="e.g. kerala, backwaters, travel tips..."
+                  ></textarea>
+                </div>
               </div>
             </div>
 

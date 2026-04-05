@@ -532,6 +532,10 @@ export default function EditPackage() {
                   <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold"> <Layers size={10} className="text-blue-600" /> SEO Description</label>
                   <textarea rows={3} value={formData.seo_meta} onChange={e => setFormData({ ...formData, seo_meta: e.target.value })} className="admin-form-textarea text-[11px] font-bold text-slate-700 leading-relaxed min-h-[80px] py-2" placeholder="Brief summary for indexing..."></textarea>
                 </div>
+                <div className="admin-form-group">
+                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold"> <Tag size={10} className="text-sky-600" /> SEO Keywords</label>
+                  <textarea rows={2} value={formData.seo_keys} onChange={e => setFormData({ ...formData, seo_keys: e.target.value })} className="admin-form-textarea text-[11px] font-bold text-slate-700 leading-relaxed min-h-[60px] py-2" placeholder="e.g. kerala, houseboat, honeymoon..."></textarea>
+                </div>
               </div>
 
               {/* Google Preview (Simplified for Sidebar) */}
