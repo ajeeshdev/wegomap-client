@@ -7,11 +7,9 @@ import { useRouter } from 'next/navigation';
 import { packagesData, TourPackageDetail } from '@/data/packages';
 import DynamicPageBanner from '@/components/DynamicPageBanner';
 import PackageCard from '@/components/PackageCard';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Autoplay, FreeMode } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/free-mode';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -439,7 +437,7 @@ export default function TourDetailView({ id }: { id: string }) {
 
             {/* Similar Packages Section */}
             {similarPackages.length > 0 && (
-                <section className="bg-slate-50 py-20 relative border-t border-slate-200/60">
+                <section className="bg-slate-50 py-20 relative border-t border-slate-200/60 commonPadding pb-0">
                     <div className="homeContainer">
                         <div className="sectionHeader flex items-center justify-center mb-10 text-center">
                             <div className="titleArea">
@@ -448,19 +446,20 @@ export default function TourDetailView({ id }: { id: string }) {
                             </div>
                         </div>
                         
-                        <Swiper
-                            modules={[Navigation, Autoplay, FreeMode]}
-                            spaceBetween={24}
-                            slidesPerView={"auto"}
-                            freeMode={true}
-                            className="pb-12 px-4 -mx-4 package-slider-container"
-                            breakpoints={{
-                                320: { slidesPerView: 1 },
-                                640: { slidesPerView: 2.2 },
-                                1024: { slidesPerView: 3 },
-                                1280: { slidesPerView: 4 }
-                            }}
-                        >
+                        <div className="-mx-2 pb-12">
+                            <Slider
+                                infinite={false}
+                                speed={500}
+                                slidesToShow={4}
+                                slidesToScroll={1}
+                                arrows={true}
+                                dots={false}
+                                responsive={[
+                                    { breakpoint: 1280, settings: { slidesToShow: 3 } },
+                                    { breakpoint: 1024, settings: { slidesToShow: 2.2 } },
+                                    { breakpoint: 640, settings: { slidesToShow: 1 } }
+                                ]}
+                            >
                             {similarPackages.map((spkg, i) => {
                                 const normalizedPkg = {
                                     slug: spkg.slug || spkg._id || '',
@@ -485,7 +484,7 @@ export default function TourDetailView({ id }: { id: string }) {
                                     _id: spkg._id
                                 };
                                 return (
-                                    <SwiperSlide key={`${spkg._id}-${i}`} className="h-auto">
+                                    <div key={`${spkg._id}-${i}`} className="px-2">
                                         <PackageCard 
                                             pkg={normalizedPkg}
                                             wishlist={wishlist}
@@ -508,10 +507,11 @@ export default function TourDetailView({ id }: { id: string }) {
                                             }}
                                             onEnquire={(e, title) => openEnquiry(title)}
                                         />
-                                    </SwiperSlide>
+                                    </div>
                                 );
                             })}
-                        </Swiper>
+                            </Slider>
+                        </div>
                     </div>
                 </section>
             )}
