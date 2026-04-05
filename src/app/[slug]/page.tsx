@@ -34,19 +34,37 @@ export default function PackageDetailPage() {
         async function checkLanding() {
             if (!packageSlug) return;
             try {
-                // Check if this slug points to a landing page/campaign
+                // 1. Check if this slug points to a landing page/campaign
                 const res = await fetch(`${API_URL}/pages?slug=${packageSlug}`);
                 const json = await res.json();
                 
                 if (json.success && json.data) {
-                    // find exact match in case query param is loose
                     const page = json.data.find((p: any) => p.slug === packageSlug && p.isCampaign);
                     if (page) {
                         setLandingPage(page);
+                        setLoading(false);
+                        return;
                     }
                 }
+
+                // 2. Check if it's an old blog URL that needs redirecting
+                const blogRes = await fetch(`${API_URL}/blogs/slug/${packageSlug}`);
+                const blogJson = await blogRes.json();
+                const blogData = Array.isArray(blogJson.data) ? blogJson.data[0] : blogJson.data;
+                if (blogJson.success && blogData && blogData.slug) {
+                    window.location.href = `/blogs/${packageSlug}`;
+                    return;
+                }
+
+                // 3. Check if it's an old package URL
+                const pkgRes = await fetch(`${API_URL}/packages/slug/${packageSlug}`);
+                const pkgJson = await pkgRes.json();
+                if (pkgJson.success && pkgJson.data) {
+                    window.location.href = `/packages/${packageSlug}`;
+                    return;
+                }
             } catch (err) {
-                console.error("Landing check failed", err);
+                console.error("Redirect check failed", err);
             } finally {
                 setLoading(false);
             }
