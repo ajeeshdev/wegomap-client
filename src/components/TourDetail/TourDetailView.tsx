@@ -446,7 +446,7 @@ export default function TourDetailView({ id }: { id: string }) {
                             </div>
                         </div>
                         
-                        <div className="-mx-2 pb-12">
+                        <div className="block w-full min-w-0 overflow-hidden pb-12 px-2">
                             <Slider
                                 infinite={false}
                                 speed={500}
@@ -455,9 +455,9 @@ export default function TourDetailView({ id }: { id: string }) {
                                 arrows={true}
                                 dots={false}
                                 responsive={[
-                                    { breakpoint: 1280, settings: { slidesToShow: 3 } },
-                                    { breakpoint: 1024, settings: { slidesToShow: 2 } },
-                                    { breakpoint: 768, settings: { slidesToShow: 1 } }
+                                    { breakpoint: 1280, settings: { slidesToShow: 3, slidesToScroll: 1 } },
+                                    { breakpoint: 1024, settings: { slidesToShow: 2, slidesToScroll: 1 } },
+                                    { breakpoint: 768, settings: { slidesToShow: 1, slidesToScroll: 1, centerMode: false } }
                                 ]}
                             >
                             {similarPackages.map((spkg, i) => {
