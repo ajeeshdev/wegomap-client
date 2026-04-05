@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         return {
             title: `${title} | WEGOMAP Travel Blog`,
             description: description,
+            keywords: blog.seo_keys || 'travel, kerala, holiday, wegomap',
             openGraph: {
                 title: title,
                 description: description,
