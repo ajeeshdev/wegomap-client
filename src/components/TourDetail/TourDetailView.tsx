@@ -7,9 +7,11 @@ import { useRouter } from 'next/navigation';
 import { packagesData, TourPackageDetail } from '@/data/packages';
 import DynamicPageBanner from '@/components/DynamicPageBanner';
 import PackageCard from '@/components/PackageCard';
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay, FreeMode } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/free-mode';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -446,19 +448,17 @@ export default function TourDetailView({ id }: { id: string }) {
                             </div>
                         </div>
                         
-                        <div className="block pb-12 px-2">
-                            <Slider
-                                infinite={false}
-                                speed={500}
-                                slidesToShow={1}
-                                slidesToScroll={1}
-                                arrows={true}
-                                dots={false}
-                                mobileFirst={true}
-                                responsive={[
-                                    { breakpoint: 767, settings: { slidesToShow: 2, slidesToScroll: 1 } },
-                                    { breakpoint: 1023, settings: { slidesToShow: 3, slidesToScroll: 1 } }
-                                ]}
+                        <div className="pb-12">
+                            <Swiper
+                                modules={[Navigation, Autoplay, FreeMode]}
+                                spaceBetween={24}
+                                slidesPerView={1}
+                                autoplay={{ delay: 4000, disableOnInteraction: false }}
+                                breakpoints={{
+                                    768: { slidesPerView: 2 },
+                                    1024: { slidesPerView: 3 }
+                                }}
+                                className="package-slider-container"
                             >
                             {similarPackages.map((spkg, i) => {
                                 const normalizedPkg = {
@@ -484,7 +484,7 @@ export default function TourDetailView({ id }: { id: string }) {
                                     _id: spkg._id
                                 };
                                 return (
-                                    <div key={`${spkg._id}-${i}`} className="px-2">
+                                    <SwiperSlide key={`${spkg._id}-${i}`} className="h-auto">
                                         <PackageCard 
                                             pkg={normalizedPkg}
                                             wishlist={wishlist}
@@ -507,10 +507,10 @@ export default function TourDetailView({ id }: { id: string }) {
                                             }}
                                             onEnquire={(e, title) => openEnquiry(title)}
                                         />
-                                    </div>
+                                    </SwiperSlide>
                                 );
                             })}
-                            </Slider>
+                            </Swiper>
                         </div>
                     </div>
                 </section>
