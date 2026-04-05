@@ -87,14 +87,28 @@ export default async function RootSlugPage({ params }: PageProps) {
                 const assignedPackageIds = dynamicCategory?.packages || [];
 
                 const filtered = pkgJson.data.filter((pkg: any) => {
+                    // 1. If packages are explicitly assigned to the category in CMS
                     if (assignedPackageIds.length > 0) {
                         return assignedPackageIds.includes(pkg._id);
                     }
-                    const pCat = pkg.category?.toLowerCase();
-                    const pCats = Array.isArray(pkg.categories) ? pkg.categories.map((c: string) => c.toLowerCase()) : [];
-                    const matchesSlug = pCat === catSlug || pCats.includes(catSlug);
-                    const matchesTitle = (catTitle && (pCat === catTitle || pCats.includes(catTitle)));
-                    return matchesSlug || matchesTitle;
+
+                    // 2. Fallback to automatic matching (robust)
+                    const pCat = pkg.category?.toLowerCase() || '';
+                    const pCats = (Array.isArray(pkg.categories) ? pkg.categories : [])
+                                    .map((c: string) => c.toLowerCase());
+                    
+                    const normalize = (s: string) => s.toLowerCase().replace(/-/g, ' ').trim();
+                    const nCatSlug = normalize(catSlug);
+                    const nCatTitle = catTitle ? normalize(catTitle) : '';
+                    const nCatName = dynamicCategory?.name ? normalize(dynamicCategory.name) : '';
+
+                    const matches = (target: string) => {
+                        const nTarget = normalize(target);
+                        return nTarget === nCatSlug || nTarget === nCatTitle || nTarget === nCatName;
+                    };
+
+                    const slugMatches = matches(pCat) || pCats.some(c => matches(c));
+                    return slugMatches;
                 });
 
                 dynamicPackages = filtered.map((pkg: any) => ({
