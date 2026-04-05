@@ -186,7 +186,7 @@ export default function TourCategoryPage({
             <section className="tourCatPackages allToursPage" style={{ background: '#f8fafc' }}>
                 <div className="homeContainer">
                     {description && (
-                        <div style={{padding:"0px 20px"}}>
+                        <div style={{padding:"20px 0px"}}>
                              <p>
                                 {description}
                             </p>
