@@ -6,6 +6,12 @@ import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { packagesData, TourPackageDetail } from '@/data/packages';
 import DynamicPageBanner from '@/components/DynamicPageBanner';
+import PackageCard from '@/components/PackageCard';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay, FreeMode } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/free-mode';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -34,6 +40,26 @@ export default function TourDetailView({ id }: { id: string }) {
     const [scrolled, setScrolled] = useState(false);
     const [wishlist, setWishlist] = useState<string[]>([]);
     const [user, setUser] = useState<any>(null);
+    const [similarPackages, setSimilarPackages] = useState<any[]>([]);
+
+    useEffect(() => {
+        const getSimilar = async () => {
+            try {
+                const res = await fetch(`${API_URL}/packages`);
+                if (res.headers.get('content-type')?.includes('application/json')) {
+                    const data = await res.json();
+                    if (data.success && Array.isArray(data.data)) {
+                        let published = data.data.filter((p: any) => p.status === 'Published' && p._id !== id && p.slug !== id);
+                        published.sort(() => 0.5 - Math.random());
+                        setSimilarPackages(published.slice(0, 6));
+                    }
+                }
+            } catch (e) {
+                console.error('Error fetching similar packages:', e);
+            }
+        };
+        getSimilar();
+    }, [id]);
 
 
     const { openEnquiry } = useEnquiry();
@@ -410,6 +436,85 @@ export default function TourDetailView({ id }: { id: string }) {
                     </div>
                 </div>
             </section>
+
+            {/* Similar Packages Section */}
+            {similarPackages.length > 0 && (
+                <section className="bg-slate-50 py-20 relative border-t border-slate-200/60">
+                    <div className="homeContainer">
+                        <div className="flex items-end justify-between mb-12">
+                            <div>
+                                <h2 className="text-4xl font-black italic uppercase text-slate-900 leading-none mb-4">Similar Packages</h2>
+                                <p className="text-slate-500 font-medium">Explore other handpicked experiences</p>
+                            </div>
+                        </div>
+                        
+                        <Swiper
+                            modules={[Navigation, Autoplay, FreeMode]}
+                            spaceBetween={24}
+                            slidesPerView={"auto"}
+                            freeMode={true}
+                            className="pb-12 px-4 -mx-4 package-slider-container"
+                            breakpoints={{
+                                320: { slidesPerView: 1.2 },
+                                640: { slidesPerView: 2.2 },
+                                1024: { slidesPerView: 3 },
+                                1280: { slidesPerView: 4 }
+                            }}
+                        >
+                            {similarPackages.map((spkg, i) => {
+                                const normalizedPkg = {
+                                    slug: spkg.slug || spkg._id || '',
+                                    title: spkg.title,
+                                    location: spkg.location,
+                                    duration: spkg.duration,
+                                    price: spkg.price ? `₹${Number(String(spkg.price).replace(/[^\d]/g, '')).toLocaleString()}` : 'N/A',
+                                    oldPrice: spkg.oldamt ? `₹${Number(String(spkg.oldamt).replace(/[^\d]/g, '')).toLocaleString()}` : null,
+                                    image: getImageUrl(spkg.thumb || (spkg.images && spkg.images[0]) || "/bg-placeholder.jpg"),
+                                    images: spkg.images || [],
+                                    subtitle: spkg.location || '',
+                                    highlights: [],
+                                    itinerary: [],
+                                    averageRating: spkg.averageRating || 4.9,
+                                    reviewCount: spkg.reviewCount || 150,
+                                    noCostEmi: spkg.noCostEmi,
+                                    totalPrice: spkg.totalPrice,
+                                    per: spkg.per || '/ Person',
+                                    onoffer: spkg.onoffer,
+                                    slabel: spkg.slabel,
+                                    href: `/packages/${spkg.slug || spkg._id}`,
+                                    _id: spkg._id
+                                };
+                                return (
+                                    <SwiperSlide key={`${spkg._id}-${i}`} className="h-auto">
+                                        <PackageCard 
+                                            pkg={normalizedPkg}
+                                            wishlist={wishlist}
+                                            toggleWishlist={async (pkgId, e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                const token = localStorage.getItem('token');
+                                                if (!token) return toast.error('Please login to save tours');
+                                                try {
+                                                    const res = await fetch(`${API_URL}/auth/wishlist/${pkgId}`, {
+                                                        method: 'PUT',
+                                                        headers: { 'Authorization': `Bearer ${token}` }
+                                                    });
+                                                    const data = await res.json();
+                                                    if (data.success) {
+                                                        setWishlist(data.data);
+                                                        toast.success(data.message);
+                                                    }
+                                                } catch (err) {}
+                                            }}
+                                            onEnquire={(e, title) => openEnquiry(title)}
+                                        />
+                                    </SwiperSlide>
+                                );
+                            })}
+                        </Swiper>
+                    </div>
+                </section>
+            )}
 
             {/* Mobile Sticky CTA */}
             <div className={`fixed bottom-0 left-0 right-0 z-[100] p-6 bg-white/90 backdrop-blur-2xl border-t border-slate-100 flex items-center gap-4 md:hidden transition-transform duration-500 ${scrolled ? 'translate-y-0' : 'translate-y-full'} rounded-t-[3rem] shadow-[0_-20px_60px_rgba(0,0,0,0.1)]`}>
