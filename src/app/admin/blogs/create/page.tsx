@@ -19,7 +19,8 @@ export default function CreateBlog() {
     featuredImage: '',
     featuredImageAlt: 'wegomap',
     content: '',
-    category: '',
+    category: '', // Legacy support
+    categories: [],
     author: 'Admin',
     publishDate: new Date().toISOString().split('T')[0],
     seo_title: '',
@@ -260,17 +261,21 @@ export default function CreateBlog() {
                 <div className="admin-form-group">
                   <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <Tag size={10} className="text-blue-600" /> Category</label>
                   <select
-                    value={formData.category}
-                    onChange={e => setFormData({ ...formData, category: e.target.value })}
-                    className="admin-form-input h-10 text-[11px] font-bold bg-white"
+                    multiple
+                    value={formData.categories || []}
+                    onChange={e => {
+                      const values = Array.from(e.target.selectedOptions).map(opt => opt.value);
+                      setFormData({ ...formData, categories: values });
+                    }}
+                    className="admin-form-input h-32 text-[11px] font-bold bg-white py-2"
                   >
-                    <option value="">Select Category</option>
                     {categories.map((cat: any) => (
                       <option key={cat._id} value={cat.title || cat.name}>
                         {cat.depth > 0 ? "— ".repeat(cat.depth) : ""}{cat.title || cat.name}
                       </option>
                     ))}
                   </select>
+                  <p className="text-[8px] text-slate-400 mt-2">Hold Ctrl/Cmd to select multiple.</p>
                 </div>
 
                 <div className="admin-form-group">
