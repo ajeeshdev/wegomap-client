@@ -235,8 +235,14 @@ export default function TourDetailView({ id }: { id: string }) {
                     </div>
                     <div className="tStat border-l border-slate-100 pl-8">
                         <span className="tLabel">Pricing</span>
-                        <div className="tValue priceValue">
-                            {pkg.price}
+                        <div className="tValue priceValue flex items-baseline gap-2">
+                            <span>{pkg.price}</span>
+                            <span className="text-[11px] text-slate-400 font-bold uppercase tracking-wider">/ Person</span>
+                            {pkg.oldPrice && (
+                                <span className="text-[12px] text-rose-400/70 line-through font-bold ml-1">
+                                    {pkg.oldPrice}
+                                </span>
+                            )}
                         </div>
                     </div>
                     <div className="tStat border-l border-slate-100 pl-8 flex items-center">
