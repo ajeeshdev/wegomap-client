@@ -13,9 +13,12 @@ export default function EditCategory() {
   const [formData, setFormData] = useState({
     title: '',
     slug: '',
+    parent: '',
     description: '',
-    status: 'Active'
+    status: 'Active',
+    order: 0
   });
+  const [categories, setCategories] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
@@ -29,7 +32,9 @@ export default function EditCategory() {
             title: data.data.title || data.data.name || '',
             slug: data.data.slug || '',
             description: data.data.description || '',
-            status: data.data.status || 'Active'
+            status: data.data.status || 'Active',
+            parent: data.data.parent || '',
+            order: data.data.order || 0
           });
         }
       } catch (err) {
@@ -38,7 +43,19 @@ export default function EditCategory() {
         setLoading(false);
       }
     }
-    if (id) fetchCategory();
+    const fetchCategories = async () => {
+      try {
+        const res = await fetch(`${API_URL}/categories`);
+        const data = await res.json();
+        if (data.success) {
+          setCategories(data.data.filter((c: any) => c._id !== id));
+        }
+      } catch (err) { console.error('Failed to fetch categories', err); }
+    };
+    if (id) {
+      fetchCategory();
+      fetchCategories();
+    }
   }, [id]);
 
   const handleSubmit = async (e?: React.FormEvent) => {
@@ -170,10 +187,34 @@ export default function EditCategory() {
           <div className="admin-form-card p-8 space-y-10">
              <h4 className="text-[10px] font-black uppercase tracking-[0.35em] text-slate-400 flex items-center gap-3">
               <div className="w-1.5 h-4 bg-blue-600 rounded-full"></div>
-              Status
+              Settings
             </h4>
             
             <div className="space-y-10">
+              <div className="admin-form-group">
+                <label className="admin-form-label text-[10px] uppercase tracking-[0.2em] text-slate-400 font-black mb-6 opacity-60">Parent Category</label>
+                <select 
+                  value={formData.parent} 
+                  onChange={e => setFormData({ ...formData, parent: e.target.value })}
+                  className="admin-form-input font-black bg-slate-50 border-slate-100 rounded-2xl h-14 uppercase text-[11px] tracking-widest cursor-pointer hover:bg-white transition-all shadow-sm focus:ring-12 focus:ring-blue-600/5 appearance-none px-6"
+                >
+                  <option value="">None (Top Level)</option>
+                  {categories.map((cat: any) => (
+                    <option key={cat._id} value={cat._id}>{cat.title || cat.name}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="admin-form-group">
+                <label className="admin-form-label text-[10px] uppercase tracking-[0.2em] text-slate-400 font-black mb-6 opacity-60">Display Order</label>
+                <input 
+                  type="number"
+                  value={formData.order} 
+                  onChange={e => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })}
+                  className="admin-form-input font-black bg-slate-50 border-slate-100 rounded-2xl h-14 uppercase text-[11px] tracking-widest hover:bg-white transition-all shadow-sm px-6 text-center" 
+                />
+              </div>
+
               <div className="admin-form-group">
                 <label className="admin-form-label text-[10px] uppercase tracking-[0.2em] text-slate-400 font-black mb-6 opacity-60">Publication Status</label>
                 <div className="relative group/status">

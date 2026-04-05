@@ -34,14 +34,26 @@ export default function EditPackage() {
         });
         const data = await res.json();
         if (data.success) {
-          const seen: Record<string, boolean> = {};
-          const unique = data.data.filter((item: any) => {
-            const key = (item.title || item.name || '').toLowerCase();
-            if (seen[key]) return false;
-            seen[key] = true;
-            return true;
+          const items = data.data;
+          const map: Record<string, any> = {};
+          items.forEach((item: any) => { map[item._id] = { ...item, children: [] }; });
+          const roots: any[] = [];
+          items.forEach((item: any) => {
+            if (item.parent && map[item.parent]) {
+              map[item.parent].children.push(map[item._id]);
+            } else {
+              roots.push(map[item._id]);
+            }
           });
-          setCategories(unique);
+          const flattened: any[] = [];
+          const traverse = (nodes: any[], depth = 0) => {
+            nodes.sort((a, b) => (a.order || 0) - (b.order || 0)).forEach(node => {
+              flattened.push({ ...node, depth });
+              traverse(node.children, depth + 1);
+            });
+          };
+          traverse(roots);
+          setCategories(flattened);
         }
       } catch (err) { console.error('Failed to fetch categories', err); }
     };
@@ -434,7 +446,7 @@ export default function EditPackage() {
                     <option value="">Select Category</option>
                     {categories.map((cat: any) => (
                       <option key={cat._id} value={cat.title || cat.name}>
-                        {cat.title || cat.name}
+                        {cat.depth > 0 ? "— ".repeat(cat.depth) : ""}{cat.title || cat.name}
                       </option>
                     ))}
                   </select>

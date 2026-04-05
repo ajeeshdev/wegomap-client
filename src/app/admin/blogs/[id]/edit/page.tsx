@@ -35,11 +35,26 @@ export default function EditBlog() {
         });
         const data = await res.json();
         if (data.success) {
-          const unique = Array.from(new Map(data.data.map((item: any) => [
-            (item.title || item.name || '').toLowerCase(),
-            item
-          ])).values());
-          setCategories(unique);
+          const items = data.data;
+          const map: Record<string, any> = {};
+          items.forEach((item: any) => { map[item._id] = { ...item, children: [] }; });
+          const roots: any[] = [];
+          items.forEach((item: any) => {
+            if (item.parent && map[item.parent]) {
+              map[item.parent].children.push(map[item._id]);
+            } else {
+              roots.push(map[item._id]);
+            }
+          });
+          const flattened: any[] = [];
+          const traverse = (nodes: any[], depth = 0) => {
+            nodes.sort((a, b) => (a.order || 0) - (b.order || 0)).forEach(node => {
+              flattened.push({ ...node, depth });
+              traverse(node.children, depth + 1);
+            });
+          };
+          traverse(roots);
+          setCategories(flattened);
         }
       } catch (err) { console.error('Failed to fetch categories', err); }
     };
@@ -287,7 +302,7 @@ export default function EditBlog() {
                     <option value="">Select Category</option>
                     {categories.map((cat: any) => (
                       <option key={cat._id} value={cat.title || cat.name}>
-                        {cat.title || cat.name}
+                        {cat.depth > 0 ? "— ".repeat(cat.depth) : ""}{cat.title || cat.name}
                       </option>
                     ))}
                   </select>
