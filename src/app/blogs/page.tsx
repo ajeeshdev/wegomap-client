@@ -88,7 +88,7 @@ export default function BlogsPage() {
                 breadcrumbs={[{ label: 'Blogs' }]}
             />
             <div className="homeContainer">
-                <div className="sectionHeader flex items-center justify-center mb-12  pb-0">
+                <div className="sectionHeader flex items-center justify-center mb-12 commonPadding  pb-0">
                     <div className="titleArea">
                         <span className="sectionSubtitle">Our Stories</span>
                         <h2 className="sliderTitle">Travel <span className="highlight">Blogs</span></h2>
