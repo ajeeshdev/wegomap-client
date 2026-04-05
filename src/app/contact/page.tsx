@@ -56,13 +56,29 @@ export default function ContactPage() {
         }
 
         try {
-            // Wait 1 second to simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1200));
+            const res = await fetch(`${API_URL}/leads`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    ...formData,
+                    source: 'Website Contact Page',
+                    url: window.location.href
+                })
+            });
 
-            setStatus({ type: 'success', message: 'Thank you! Your message has been sent successfully. We will contact you soon.' });
-            setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
-        } catch (error) {
-            setStatus({ type: 'error', message: 'Failed to send message. Please try again later.' });
+            const data = await res.json();
+
+            if (data.success) {
+                setStatus({ type: 'success', message: 'Thank you! Your message has been sent successfully. We will contact you soon.' });
+                setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
+            } else {
+                setStatus({ type: 'error', message: data.error || 'Failed to send message. Please try again later.' });
+            }
+        } catch (error: any) {
+            console.error('Contact Form Error:', error);
+            setStatus({ type: 'error', message: 'Failed to connect to the server. Please check your internet and try again.' });
         } finally {
             setLoading(false);
         }
