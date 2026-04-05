@@ -53,6 +53,7 @@ export default function PackagesAdmin() {
       (pkg.title || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
       (pkg.location || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
       (pkg.category || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (pkg.categories || []).some((c: string) => c.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (pkg.pcode || '').toLowerCase().includes(searchTerm.toLowerCase())
     )
     .sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
@@ -197,9 +198,19 @@ export default function PackagesAdmin() {
                       </div>
                     </td>
                     <td className="cms-table-cell">
-                      <span className="cms-cat-badge">
-                        <Tag size={10} /> {pkg.category || 'Platform Core'}
-                      </span>
+                      <div className="flex flex-wrap gap-1 max-w-[150px]">
+                        {(pkg.categories && pkg.categories.length > 0) ? (
+                          pkg.categories.map((cat: string, i: number) => (
+                            <span key={i} className="cms-cat-badge whitespace-nowrap">
+                              <Tag size={10} /> {cat}
+                            </span>
+                          ))
+                        ) : (
+                          <span className="cms-cat-badge whitespace-nowrap">
+                            <Tag size={10} /> {pkg.category || 'Standard'}
+                          </span>
+                        )}
+                      </div>
                     </td>
                     <td className="cms-table-cell">
                       <div className="flex items-center gap-2">
