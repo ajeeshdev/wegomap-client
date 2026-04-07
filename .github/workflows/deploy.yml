@@ -29,5 +29,6 @@ jobs:
           **/dist/**
           .next/**
           **/.next/**
+          **/public/tinymce/**
           .env
           .env.local
