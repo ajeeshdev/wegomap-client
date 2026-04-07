@@ -31,38 +31,15 @@ const keralaSubItems = [
 
 const domesticItems = [
     { name: 'Manali Tour Packages', href: '/manali-tour-packages' },
-    { name: 'Goa Tour Packages', href: '/goa-tour-packages' },
-    { name: 'Ooty Tour Packages', href: '/ooty-tour-packages' },
-    { name: 'Kodaikanal Tour Packages', href: '/kodaikanal-tour-packages' },
-    { name: 'Coorg Tour Package', href: '/coorg-tour-package' },
-    { name: 'Ooty & Kodaikanal Packages', href: '/ooty-kodaikanal-tour-packages' },
-    { name: 'Coorg / Mysore / Ooty', href: '/coorg-mysore-ooty' },
-    { name: 'Andaman Packages', href: '/andaman-packagess' },
-    { name: 'Varanasi Package', href: '/varanasi-packages' },
-    { name: 'Leh Ladakh Tour Package', href: '/leh-ladakh-tour-packages' },
-    { name: 'Kashmir Holiday Package', href: '/kashmir-holiday-packages' },
-    { name: 'Rajasthan Tour package', href: '/rajasthan-tour-packages' },
-    { name: 'Golden Triangle Tour Package', href: '/golden-triangle-tour-package' },
-    { name: 'Meghalaya Tour Package', href: '/meghalaya-tour-packages' },
-    { name: 'Lakshadweep Tour Package', href: '/lakshadweep-tour-packages' },
-    { name: 'Darjeeling Tour Package', href: '/darjeeling-tour-packages' },
+    
 ];
 
 const internationalItems = [
     { name: 'Maldives Tour Packages', href: '/maldives-tour-packages' },
-    { name: 'Thailand Tour Packages', href: '/thailand-tour-packages' },
-    { name: 'Bali Tour Packages', href: '/bali-tour-packages' },
-    { name: 'Dubai Tour Packages', href: '/dubai-tour-packages' },
-    { name: 'Malaysia Tour Packages', href: '/malaysia-tour-packages' },
-    { name: 'Singapore Tour Package', href: '/singapore-tour-packages' },
-    { name: 'Azerbaijan Tour Packages', href: '/azerbaijan-tour-packages' },
-    { name: 'Vietnam Package', href: '/vietnam-tour-packages' },
-    { name: 'Bhutan Package', href: '/bhutan-tour-packages' },
-    { name: 'Nepal Tour Packages', href: '/nepal-tour-packages' },
-    { name: 'Sri Lanka Tour Package', href: '/sri-lanka-tour-packages' },
+
 ];
 
-const tourItems = [
+const initialTourItems = [
     {
         name: 'Kerala Tour Packages',
         href: '/kerala-tour-packages',
@@ -87,7 +64,7 @@ const navLinks = [
     {
         name: 'Tours',
         href: '#',
-        dropdown: tourItems
+        dropdown: initialTourItems
     },
     { name: 'Events', href: '/events' },
     { name: 'Hotels', icon: 'Building2', href: '/hotels' },
@@ -109,6 +86,68 @@ export default function Header() {
     const [logo, setLogo] = useState('/assets/images/logo.png');
     const [isEnquireOpen, setIsEnquireOpen] = useState(false);
     const profileRef = useRef<HTMLDivElement>(null);
+    const [tourItems, setTourItems] = useState(initialTourItems);
+    
+    // Dynamic Categories fetch
+    useEffect(() => {
+        const fetchCategoriesMenu = async () => {
+            try {
+                const res = await fetch(`${API_URL}/categories`);
+                const json = await res.json();
+                
+                if (json.success) {
+                    const allCats = json.data;
+                    
+                    // Match parents by name (robust normalized check)
+                    const findChildren = (parentName: string) => {
+                        const parent = allCats.find((c: any) => 
+                            c.name.toLowerCase().includes(parentName.toLowerCase())
+                        );
+                        if (!parent) return null;
+                        return allCats
+                            .filter((c: any) => c.parent === parent._id)
+                            .sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
+                            .map((c: any) => ({ 
+                                name: c.name, 
+                                href: `/${c.slug}` 
+                            }));
+                    };
+
+                    const dynKerala = findChildren('kerala');
+                    const dynDomestic = findChildren('domestic');
+                    const dynInternational = findChildren('international');
+
+                    setTourItems(prev => prev.map(item => {
+                        if (item.name.toLowerCase().includes('kerala') && dynKerala) {
+                            return { ...item, dropdown: dynKerala };
+                        }
+                        if (item.name.toLowerCase().includes('domestic') && dynDomestic) {
+                            return { ...item, dropdown: dynDomestic };
+                        }
+                        if (item.name.toLowerCase().includes('international') && dynInternational) {
+                            return { ...item, dropdown: dynInternational };
+                        }
+                        return item;
+                    }));
+                }
+            } catch (err) {
+                console.error('Header categories fetch failed', err);
+            }
+        };
+        fetchCategoriesMenu();
+    }, []);
+
+    // Sync stateful tourItems into final nav links
+    useEffect(() => {
+        const syncDropdowns = (prev: any[]) => prev.map(item => {
+            if (item.name.toLowerCase() === 'tours') {
+                return { ...item, dropdown: tourItems };
+            }
+            return item;
+        });
+        setFinalHeaderLinks(prev => syncDropdowns(prev));
+        setFinalSidebarLinks(prev => syncDropdowns(prev));
+    }, [tourItems]);
 
 
     // Close profile dropdown when clicking outside
