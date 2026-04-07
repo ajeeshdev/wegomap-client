@@ -1,4 +1,4 @@
-name: 🚀 Deploy Client via FTP
+name: 🚀 Build & Deploy Client via FTP
 
 on:
   push:
@@ -6,29 +6,42 @@ on:
       - main
 
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  build-and-deploy:
+    name: 🏗️ Build & 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v4
 
-    - name: 📂 Sync files
+    - name: 🟢 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: 📦 Install dependencies
+      run: npm install
+
+    - name: 🏗️ Build Next.js app
+      run: npm run build
+      env:
+        NEXT_PUBLIC_API_URL: https://api-demo.wegomap.com/api
+
+    - name: 📂 Sync files to Hostinger
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
-        server: ${{ secrets.FTP_SERVER || 'ftp.wegomap.com' }}
+        server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        # Point this to your client folder on Hostinger
-        server-dir: ./ 
+        server-dir: ./
+        # We upload everything including the .next folder now
         exclude: |
           **/.git*
           **/.git*/**
           **/node_modules/**
-          **/out/**
-          **/dist/**
-          .next/**
-          **/.next/**
-          **/public/tinymce/**
           .env
           .env.local
+          README.md
+          tsconfig.json
+          next.config.ts
+          **/public/tinymce/**
