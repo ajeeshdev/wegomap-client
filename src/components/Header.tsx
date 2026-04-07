@@ -71,69 +71,113 @@ export default function Header() {
     const [isEnquireOpen, setIsEnquireOpen] = useState(false);
     const profileRef = useRef<HTMLDivElement>(null);
     const [tourItems, setTourItems] = useState(initialTourItems);
-    
-    // Dynamic Categories fetch
+
+    const [finalHeaderLinks, setFinalHeaderLinks] = useState<any[]>([]);
+    const [finalSidebarLinks, setFinalSidebarLinks] = useState<any[]>([]);
+
+    // Single sequential fetch: categories first, then nav options
     useEffect(() => {
-        const fetchCategoriesMenu = async () => {
+        const fetchAll = async () => {
+            // Step 1: Fetch categories and build populated tourItems
+            let populatedTourItems = [...initialTourItems];
             try {
-                const res = await fetch(`${API_URL}/categories`);
-                const json = await res.json();
-                
-                if (json.success) {
-                    const allCats = json.data;
-                    
-                    // Match parents by name (broader includes checking)
+                const catRes = await fetch(`${API_URL}/categories`, { cache: 'no-store' });
+                const catJson = await catRes.json();
+
+                if (catJson.success && Array.isArray(catJson.data)) {
+                    const allCats = catJson.data;
+
                     const findChildren = (searchTerm: string) => {
-                        const parent = allCats.find((c: any) => 
+                        const parent = allCats.find((c: any) =>
                             c.name?.toLowerCase().includes(searchTerm.toLowerCase())
                         );
-                        if (!parent) return null;
+                        if (!parent) return [];
                         const parentId = String(parent._id);
-                        
-                        const children = allCats
+                        return allCats
                             .filter((c: any) => c.parent && String(c.parent) === parentId)
                             .sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
-                            .map((c: any) => ({ 
-                                name: c.name || c.title || (c.slug ? c.slug.replace(/-/g, ' ').toUpperCase() : "Unnamed"), 
-                                href: `/${c.slug}` 
+                            .map((c: any) => ({
+                                name: c.name || c.title || (c.slug ? c.slug.replace(/-/g, ' ').toUpperCase() : 'Unnamed'),
+                                href: `/${c.slug}`,
                             }));
-                        
-                        return children.length > 0 ? children : [];
                     };
 
-                    setTourItems(prev => prev.map(item => {
-                        const lname = (item.name || "").toLowerCase();
-                        let found = null;
-                        if (lname.includes('kerala')) found = findChildren('kerala');
-                        else if (lname.includes('domestic')) found = findChildren('domestic');
-                        else if (lname.includes('international')) found = findChildren('international');
-                        
-                        // If it matches one of our headers, use children OR clear list if none found
-                        if (found !== null) return { ...item, dropdown: found };
-                        if (lname.includes('domestic') || lname.includes('international') || lname.includes('kerala')) {
-                           return { ...item, dropdown: [] }; // Clear if we found the header but no children
-                        }
+                    populatedTourItems = initialTourItems.map(item => {
+                        const lname = (item.name || '').toLowerCase();
+                        if (lname.includes('kerala')) return { ...item, dropdown: findChildren('kerala') };
+                        if (lname.includes('domestic')) return { ...item, dropdown: findChildren('domestic') };
+                        if (lname.includes('international')) return { ...item, dropdown: findChildren('international') };
                         return item;
-                    }));
+                    });
+                    setTourItems(populatedTourItems);
                 }
             } catch (err) {
                 console.error('Header categories fetch failed', err);
             }
-        };
-        fetchCategoriesMenu();
-    }, []);
 
-    // Sync stateful tourItems into final nav links
-    useEffect(() => {
-        const syncDropdowns = (prev: any[]) => prev.map(item => {
-            if ((item.name || "").toLowerCase() === 'tours') {
-                return { ...item, dropdown: tourItems };
+            // Step 2: Build navLinks snapshot with fresh categories already injected
+            const navWithCategories = navLinks.map(link =>
+                link.name?.toLowerCase() === 'tours'
+                    ? { ...link, dropdown: populatedTourItems }
+                    : link
+            );
+
+            // Step 3: Fetch nav options and inject populated tourItems
+            try {
+                const res = await fetch(`${API_URL}/options`, { cache: 'no-store' });
+                if (!res.headers.get('content-type')?.includes('application/json')) {
+                    throw new Error(`Non-JSON response from ${res.url}`);
+                }
+                const json = await res.json();
+
+                if (json.success) {
+                    const hlOpt = json.data.find((o: any) => o.key === 'header_links');
+                    if (hlOpt?.value) {
+                        const dynamicH = JSON.parse(hlOpt.value);
+                        if (Array.isArray(dynamicH) && dynamicH.length > 0) {
+                            const mergedH = dynamicH.map((dl: any) => {
+                                const match = navWithCategories.find(sl => sl.name?.toLowerCase() === dl.name?.toLowerCase());
+                                return { ...dl, dropdown: match ? match.dropdown : undefined };
+                            });
+                            setFinalHeaderLinks(mergedH);
+                        } else {
+                            setFinalHeaderLinks(navWithCategories);
+                        }
+                    } else {
+                        setFinalHeaderLinks(navWithCategories);
+                    }
+
+                    const slOpt = json.data.find((o: any) => o.key === 'sidebar_links');
+                    if (slOpt?.value) {
+                        const dynamicS = JSON.parse(slOpt.value);
+                        if (Array.isArray(dynamicS) && dynamicS.length > 0) {
+                            const mergedS = dynamicS.map((dl: any) => {
+                                const match = navWithCategories.find(sl => sl.name?.toLowerCase() === dl.name?.toLowerCase());
+                                return { ...dl, dropdown: match ? match.dropdown : undefined };
+                            });
+                            setFinalSidebarLinks(mergedS);
+                        } else {
+                            setFinalSidebarLinks(navWithCategories);
+                        }
+                    } else {
+                        setFinalSidebarLinks(navWithCategories);
+                    }
+
+                    const logoOpt = json.data.find((o: any) => o.key === 'site_logo');
+                    if (logoOpt?.value) setLogo(getImageUrl(logoOpt.value));
+                } else {
+                    setFinalHeaderLinks(navWithCategories);
+                    setFinalSidebarLinks(navWithCategories);
+                }
+            } catch (err) {
+                console.error('Header nav fetch failed', err);
+                setFinalHeaderLinks(navWithCategories);
+                setFinalSidebarLinks(navWithCategories);
             }
-            return item;
-        });
-        setFinalHeaderLinks(prev => syncDropdowns(prev));
-        setFinalSidebarLinks(prev => syncDropdowns(prev));
-    }, [tourItems]);
+        };
+
+        fetchAll();
+    }, []);
 
 
     // Close profile dropdown when clicking outside
@@ -194,71 +238,6 @@ export default function Header() {
         };
     }, []);
 
-    const [finalHeaderLinks, setFinalHeaderLinks] = useState<any[]>([]);
-    const [finalSidebarLinks, setFinalSidebarLinks] = useState<any[]>([]);
-
-
-    useEffect(() => {
-        const fetchNav = async () => {
-            try {
-                const res = await fetch(`${API_URL}/options`, { cache: 'no-store' });
-                if (!res.headers.get('content-type')?.includes('application/json')) {
-                    throw new Error(`API returned non-JSON response from ${res.url} (Status: ${res.status})`);
-                }
-                const json = await res.json();
-
-                if (json.success) {
-                    const hlOpt = json.data.find((o: any) => o.key === 'header_links');
-                    if (hlOpt && hlOpt.value) {
-
-                        const dynamicH = JSON.parse(hlOpt.value);
-                        if (Array.isArray(dynamicH) && dynamicH.length > 0) {
-                            const mergedH = dynamicH.map((dl: any) => {
-                                const staticMatch = navLinks.find(sl => sl.name?.toLowerCase() === dl.name?.toLowerCase());
-                                return { ...dl, dropdown: staticMatch ? staticMatch.dropdown : undefined };
-                            });
-                            setFinalHeaderLinks(mergedH);
-                        } else {
-                            setFinalHeaderLinks(navLinks);
-                        }
-                    } else {
-                        setFinalHeaderLinks(navLinks);
-                    }
-
-                    const slOpt = json.data.find((o: any) => o.key === 'sidebar_links');
-                    if (slOpt && slOpt.value) {
-                        const dynamicS = JSON.parse(slOpt.value);
-                        if (Array.isArray(dynamicS) && dynamicS.length > 0) {
-                            const mergedS = dynamicS.map((dl: any) => {
-                                const staticMatch = navLinks.find(sl => sl.name?.toLowerCase() === dl.name?.toLowerCase());
-                                return { ...dl, dropdown: staticMatch ? staticMatch.dropdown : undefined };
-                            });
-                            setFinalSidebarLinks(mergedS);
-                        } else {
-                            setFinalSidebarLinks(navLinks);
-                        }
-                    } else {
-                        setFinalSidebarLinks(navLinks);
-                    }
-
-                    const logoOpt = json.data.find((o: any) => o.key === 'site_logo');
-                    if (logoOpt && logoOpt.value) {
-                        setLogo(getImageUrl(logoOpt.value));
-                    }
-                } else {
-                    // Fail gracefully to static links
-                    setFinalHeaderLinks(navLinks);
-                    setFinalSidebarLinks(navLinks);
-                }
-            } catch (err) {
-                console.error('Failed to fetch nav', err);
-                setFinalHeaderLinks(navLinks);
-                setFinalSidebarLinks(navLinks);
-            }
-
-        };
-        fetchNav();
-    }, []);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
