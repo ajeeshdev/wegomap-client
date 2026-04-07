@@ -7996,12 +7996,6 @@ footer .footerBottom .socialLinks a:hover {
   transform: scale(1.15);
   transition: transform 10s ease-out;
 }
-.heroSection .heroBanner .slideContent .imageWrapper .overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.6));
-  z-index: 1;
-}
 .heroSection .heroBanner .slideContent .contentOverlay {
   position: absolute;
   inset: 0;
@@ -9888,6 +9882,12 @@ footer .footerBottom .socialLinks a:hover {
 .packageCardKerala img {
   transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
   z-index: 1;
+}
+.packageCardKerala .overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(to right, rgba(10, 15, 25, 0.7) 0%, rgba(10, 15, 25, 0.2) 60%, transparent 100%), linear-gradient(to top, rgba(10, 15, 25, 0.8) 0%, transparent 70%);
 }
 .packageCardKerala .ratingBadge {
   position: absolute;
