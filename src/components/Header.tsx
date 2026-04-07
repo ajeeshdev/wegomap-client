@@ -101,7 +101,7 @@ export default function Header() {
                     // Match parents by name (broader includes checking)
                     const findChildren = (searchTerm: string) => {
                         const parent = allCats.find((c: any) => 
-                            c.name.toLowerCase().includes(searchTerm.toLowerCase())
+                            c.name?.toLowerCase().includes(searchTerm.toLowerCase())
                         );
                         if (!parent) return null;
                         
@@ -109,7 +109,7 @@ export default function Header() {
                             .filter((c: any) => c.parent === parent._id)
                             .sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
                             .map((c: any) => ({ 
-                                name: c.name, 
+                                name: c.name || "Unnamed", 
                                 href: `/${c.slug}` 
                             }));
                         
