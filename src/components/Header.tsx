@@ -23,37 +23,21 @@ const DynamicIcon = ({ name, size = 16, className = "" }: { name: string, size?:
     return <IconComponent size={size} className={className} />;
 };
 
-const keralaSubItems = [
-    { name: 'Kerala Honeymoon Packages', href: '/kerala-honeymoon-packages' },
-    { name: 'Kerala Family Tour Packages', href: '/kerala-family-tour-packages' },
-    { name: 'Kerala Packages from Bangalore', href: '/kerala-tour-packages-from-bangalore' },
-];
-
-const domesticItems = [
-    { name: 'Manali Tour Packages', href: '/manali-tour-packages' },
-    
-];
-
-const internationalItems = [
-    { name: 'Maldives Tour Packages', href: '/maldives-tour-packages' },
-
-];
-
 const initialTourItems = [
     {
         name: 'Kerala Tour Packages',
         href: '/kerala-tour-packages',
-        dropdown: keralaSubItems
+        dropdown: []
     },
     {
         name: 'Domestic Tour Packages',
         href: '/domestic-tour-packages',
-        dropdown: domesticItems
+        dropdown: []
     },
     {
         name: 'International Tour Packages',
         href: '/international-tour-packages',
-        dropdown: internationalItems
+        dropdown: []
     },
     { name: 'Trending Destinations', href: '/trending' },
 ];
