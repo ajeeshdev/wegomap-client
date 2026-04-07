@@ -98,34 +98,37 @@ export default function Header() {
                 if (json.success) {
                     const allCats = json.data;
                     
-                    // Match parents by name (robust normalized check)
-                    const findChildren = (parentName: string) => {
+                    // Match parents by name (broader includes checking)
+                    const findChildren = (searchTerm: string) => {
                         const parent = allCats.find((c: any) => 
-                            c.name.toLowerCase().includes(parentName.toLowerCase())
+                            c.name.toLowerCase().includes(searchTerm.toLowerCase())
                         );
                         if (!parent) return null;
-                        return allCats
+                        
+                        const children = allCats
                             .filter((c: any) => c.parent === parent._id)
                             .sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
                             .map((c: any) => ({ 
                                 name: c.name, 
                                 href: `/${c.slug}` 
                             }));
+                        
+                        return children.length > 0 ? children : null;
                     };
 
-                    const dynKerala = findChildren('kerala');
-                    const dynDomestic = findChildren('domestic');
-                    const dynInternational = findChildren('international');
-
                     setTourItems(prev => prev.map(item => {
-                        if (item.name.toLowerCase().includes('kerala') && dynKerala) {
-                            return { ...item, dropdown: dynKerala };
+                        const lname = item.name.toLowerCase();
+                        if (lname.includes('kerala')) {
+                            const children = findChildren('kerala');
+                            if (children) return { ...item, dropdown: children };
                         }
-                        if (item.name.toLowerCase().includes('domestic') && dynDomestic) {
-                            return { ...item, dropdown: dynDomestic };
+                        if (lname.includes('domestic')) {
+                            const children = findChildren('domestic');
+                            if (children) return { ...item, dropdown: children };
                         }
-                        if (item.name.toLowerCase().includes('international') && dynInternational) {
-                            return { ...item, dropdown: dynInternational };
+                        if (lname.includes('international')) {
+                            const children = findChildren('international');
+                            if (children) return { ...item, dropdown: children };
                         }
                         return item;
                     }));
