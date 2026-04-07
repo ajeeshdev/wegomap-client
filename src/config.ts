@@ -1,15 +1,13 @@
 export const API_URL = (process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBLIC_API_URL.trim() !== '')  
     ? process.env.NEXT_PUBLIC_API_URL.replace(/\/+$/, '').trim() 
-    : (typeof window !== 'undefined' && window.location.hostname === 'localhost')
-        ? 'http://localhost:5001/api'
-        : 'https://api-demo.wegomap.com/api';
-
+    : (typeof window !== 'undefined')
+        ? (window.location.hostname.includes('demo.wegomap.com') || window.location.hostname === 'localhost')
+            ? (window.location.hostname === 'localhost' ? 'http://localhost:5001/api' : 'https://api-demo.wegomap.com/api')
+            : 'https://api.wegomap.com/api' // Default to main production API
+        : 'https://api.wegomap.com/api';
 
 // Derive uploads base URL from API URL (remove /api suffix)
-// Special handling: if relative or localhost, ensure we define a solid base for production uploads
-export const UPLOADS_URL = API_URL.startsWith('http') 
-    ? API_URL.replace(/\/api\/?$/, '') 
-    : 'https://api-demo.wegomap.com';
+export const UPLOADS_URL = API_URL.replace(/\/api\/?$/, '');
 
 /**
  * Resolves an image path to a full URL using the correct base.
