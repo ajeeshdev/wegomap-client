@@ -9,7 +9,7 @@ const outfit = Outfit({
   variable: "--font-outfit",
 });
 
-const dancingScript = Dancing_Script({
+const dancingScript = Outfit({
   subsets: ["latin"],
   variable: "--font-writing",
 });
@@ -20,12 +20,12 @@ export async function generateMetadata(): Promise<Metadata> {
   try {
     const res = await fetch(`${API_URL}/options`, { next: { revalidate: 60 } });
     const json = await res.json();
-    
+
     if (json.success && json.data) {
       const titleOpt = json.data.find((o: any) => o.key === 'site_title');
       const favOpt = json.data.find((o: any) => o.key === 'site_favicon');
       const descOpt = json.data.find((o: any) => o.key === 'site_description');
-      
+
       return {
         metadataBase: new URL('https://demo.wegomap.com'),
         title: titleOpt?.value || "Best Kerala Tour Packages | WEGOMAP",
