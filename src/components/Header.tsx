@@ -117,7 +117,7 @@ export default function Header() {
                     };
 
                     setTourItems(prev => prev.map(item => {
-                        const lname = item.name.toLowerCase();
+                        const lname = (item.name || "").toLowerCase();
                         if (lname.includes('kerala')) {
                             const children = findChildren('kerala');
                             if (children) return { ...item, dropdown: children };
@@ -143,7 +143,7 @@ export default function Header() {
     // Sync stateful tourItems into final nav links
     useEffect(() => {
         const syncDropdowns = (prev: any[]) => prev.map(item => {
-            if (item.name.toLowerCase() === 'tours') {
+            if ((item.name || "").toLowerCase() === 'tours') {
                 return { ...item, dropdown: tourItems };
             }
             return item;
@@ -231,7 +231,7 @@ export default function Header() {
                         const dynamicH = JSON.parse(hlOpt.value);
                         if (Array.isArray(dynamicH) && dynamicH.length > 0) {
                             const mergedH = dynamicH.map((dl: any) => {
-                                const staticMatch = navLinks.find(sl => sl.name.toLowerCase() === dl.name.toLowerCase());
+                                const staticMatch = navLinks.find(sl => sl.name?.toLowerCase() === dl.name?.toLowerCase());
                                 return { ...dl, dropdown: staticMatch ? staticMatch.dropdown : undefined };
                             });
                             setFinalHeaderLinks(mergedH);
@@ -247,7 +247,7 @@ export default function Header() {
                         const dynamicS = JSON.parse(slOpt.value);
                         if (Array.isArray(dynamicS) && dynamicS.length > 0) {
                             const mergedS = dynamicS.map((dl: any) => {
-                                const staticMatch = navLinks.find(sl => sl.name.toLowerCase() === dl.name.toLowerCase());
+                                const staticMatch = navLinks.find(sl => sl.name?.toLowerCase() === dl.name?.toLowerCase());
                                 return { ...dl, dropdown: staticMatch ? staticMatch.dropdown : undefined };
                             });
                             setFinalSidebarLinks(mergedS);
