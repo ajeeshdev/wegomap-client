@@ -109,7 +109,7 @@ export default function Header() {
                             .filter((c: any) => c.parent === parent._id)
                             .sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
                             .map((c: any) => ({ 
-                                name: c.name || "Unnamed", 
+                                name: c.name || c.title || "Unnamed", 
                                 href: `/${c.slug}` 
                             }));
                         
