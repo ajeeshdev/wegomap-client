@@ -88,9 +88,10 @@ export default function Header() {
                             c.name?.toLowerCase().includes(searchTerm.toLowerCase())
                         );
                         if (!parent) return null;
+                        const parentId = String(parent._id);
                         
                         const children = allCats
-                            .filter((c: any) => c.parent === parent._id)
+                            .filter((c: any) => c.parent && String(c.parent) === parentId)
                             .sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
                             .map((c: any) => ({ 
                                 name: c.name || c.title || (c.slug ? c.slug.replace(/-/g, ' ').toUpperCase() : "Unnamed"), 
