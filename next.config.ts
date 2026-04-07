@@ -28,6 +28,16 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'wegomap.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.wegomap.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'api.demo.wegomap.com',
         pathname: '/uploads/**',
       },
