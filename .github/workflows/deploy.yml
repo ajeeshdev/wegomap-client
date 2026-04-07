@@ -1,4 +1,4 @@
-name: 🚀 Build & Deploy Client via FTP
+name: 🚀 Ultra-Fast Zip Deploy via FTP
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-deploy:
-    name: 🏗️ Build & 🎉 Deploy
+    name: 🏗️ Build & 📦 Zip & 🚀 Deploy
     runs-on: ubuntu-latest
     steps:
     - name: 🚚 Get latest code
@@ -27,21 +27,22 @@ jobs:
       env:
         NEXT_PUBLIC_API_URL: https://api-demo.wegomap.com/api
 
-    - name: 📂 Sync files to Hostinger
+    - name: 📦 Create Deployment Zip
+      run: |
+        # Zip the essentials for a running Next.js app on Hostinger
+        zip -r deploy.zip .next public server.js package.json package-lock.json next.config.ts .env.production -x "node_modules/*" ".git/*" ".github/*"
+
+    - name: 📂 Upload Zip & Extractor
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         server-dir: ./
-        # We upload everything including the .next folder now
+        # Only upload the zip and the PHP extractor
+        local-dir: ./
         exclude: |
-          **/.git*
-          **/.git*/**
-          **/node_modules/**
-          .env
-          .env.local
-          README.md
-          tsconfig.json
-          next.config.ts
-          **/public/tinymce/**
+          **/*
+          !deploy.zip
+          !extract.php
+          !.ftp-deploy-sync-state.json
