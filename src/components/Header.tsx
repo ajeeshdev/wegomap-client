@@ -109,26 +109,24 @@ export default function Header() {
                             .filter((c: any) => c.parent === parent._id)
                             .sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
                             .map((c: any) => ({ 
-                                name: c.name || c.title || "Unnamed", 
+                                name: c.name || c.title || (c.slug ? c.slug.replace(/-/g, ' ').toUpperCase() : "Unnamed"), 
                                 href: `/${c.slug}` 
                             }));
                         
-                        return children.length > 0 ? children : null;
+                        return children.length > 0 ? children : [];
                     };
 
                     setTourItems(prev => prev.map(item => {
                         const lname = (item.name || "").toLowerCase();
-                        if (lname.includes('kerala')) {
-                            const children = findChildren('kerala');
-                            if (children) return { ...item, dropdown: children };
-                        }
-                        if (lname.includes('domestic')) {
-                            const children = findChildren('domestic');
-                            if (children) return { ...item, dropdown: children };
-                        }
-                        if (lname.includes('international')) {
-                            const children = findChildren('international');
-                            if (children) return { ...item, dropdown: children };
+                        let found = null;
+                        if (lname.includes('kerala')) found = findChildren('kerala');
+                        else if (lname.includes('domestic')) found = findChildren('domestic');
+                        else if (lname.includes('international')) found = findChildren('international');
+                        
+                        // If it matches one of our headers, use children OR clear list if none found
+                        if (found !== null) return { ...item, dropdown: found };
+                        if (lname.includes('domestic') || lname.includes('international') || lname.includes('kerala')) {
+                           return { ...item, dropdown: [] }; // Clear if we found the header but no children
                         }
                         return item;
                     }));
