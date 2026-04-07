@@ -23,60 +23,21 @@ const DynamicIcon = ({ name, size = 16, className = "" }: { name: string, size?:
     return <IconComponent size={size} className={className} />;
 };
 
-const keralaSubItems = [
-    { name: 'Kerala Honeymoon Packages', href: '/kerala-honeymoon-packages' },
-    { name: 'Kerala Family Tour Packages', href: '/kerala-family-tour-packages' },
-    { name: 'Kerala Packages from Bangalore', href: '/kerala-tour-packages-from-bangalore' },
-];
-
-const domesticItems = [
-    { name: 'Manali Tour Packages', href: '/manali-tour-packages' },
-    { name: 'Goa Tour Packages', href: '/goa-tour-packages' },
-    { name: 'Ooty Tour Packages', href: '/ooty-tour-packages' },
-    { name: 'Kodaikanal Tour Packages', href: '/kodaikanal-tour-packages' },
-    { name: 'Coorg Tour Package', href: '/coorg-tour-package' },
-    { name: 'Ooty & Kodaikanal Packages', href: '/ooty-kodaikanal-tour-packages' },
-    { name: 'Coorg / Mysore / Ooty', href: '/coorg-mysore-ooty' },
-    { name: 'Andaman Packages', href: '/andaman-packages' },
-    { name: 'Varanasi Package', href: '/varanasi-packages' },
-    { name: 'Leh Ladakh Tour Package', href: '/leh-ladakh-tour-packages' },
-    { name: 'Kashmir Holiday Package', href: '/kashmir-holiday-packages' },
-    { name: 'Rajasthan Tour package', href: '/rajasthan-tour-packages' },
-    { name: 'Golden Triangle Tour Package', href: '/golden-triangle-tour-package' },
-    { name: 'Meghalaya Tour Package', href: '/meghalaya-tour-packages' },
-    { name: 'Lakshadweep Tour Package', href: '/lakshadweep-tour-packages' },
-    { name: 'Darjeeling Tour Package', href: '/darjeeling-tour-packages' },
-];
-
-const internationalItems = [
-    { name: 'Maldives Tour Packages', href: '/maldives-tour-packages' },
-    { name: 'Thailand Tour Packages', href: '/thailand-tour-packages' },
-    { name: 'Bali Tour Packages', href: '/bali-tour-packages' },
-    { name: 'Dubai Tour Packages', href: '/dubai-tour-packages' },
-    { name: 'Malaysia Tour Packages', href: '/malaysia-tour-packages' },
-    { name: 'Singapore Tour Package', href: '/singapore-tour-packages' },
-    { name: 'Azerbaijan Tour Packages', href: '/azerbaijan-tour-packages' },
-    { name: 'Vietnam Package', href: '/vietnam-tour-packages' },
-    { name: 'Bhutan Package', href: '/bhutan-tour-packages' },
-    { name: 'Nepal Tour Packages', href: '/nepal-tour-packages' },
-    { name: 'Sri Lanka Tour Package', href: '/sri-lanka-tour-packages' },
-];
-
-const tourItems = [
+const initialTourItems = [
     {
         name: 'Kerala Tour Packages',
         href: '/kerala-tour-packages',
-        dropdown: keralaSubItems
+        dropdown: []
     },
     {
         name: 'Domestic Tour Packages',
         href: '/domestic-tour-packages',
-        dropdown: domesticItems
+        dropdown: []
     },
     {
         name: 'International Tour Packages',
         href: '/international-tour-packages',
-        dropdown: internationalItems
+        dropdown: []
     },
     { name: 'Trending Destinations', href: '/trending' },
 ];
@@ -87,7 +48,7 @@ const navLinks = [
     {
         name: 'Tours',
         href: '#',
-        dropdown: tourItems
+        dropdown: initialTourItems
     },
     { name: 'Events', href: '/events' },
     { name: 'Hotels', icon: 'Building2', href: '/hotels' },
@@ -109,6 +70,70 @@ export default function Header() {
     const [logo, setLogo] = useState('/assets/images/logo.png');
     const [isEnquireOpen, setIsEnquireOpen] = useState(false);
     const profileRef = useRef<HTMLDivElement>(null);
+    const [tourItems, setTourItems] = useState(initialTourItems);
+    
+    // Dynamic Categories fetch
+    useEffect(() => {
+        const fetchCategoriesMenu = async () => {
+            try {
+                const res = await fetch(`${API_URL}/categories`);
+                const json = await res.json();
+                
+                if (json.success) {
+                    const allCats = json.data;
+                    
+                    // Match parents by name (broader includes checking)
+                    const findChildren = (searchTerm: string) => {
+                        const parent = allCats.find((c: any) => 
+                            c.name?.toLowerCase().includes(searchTerm.toLowerCase())
+                        );
+                        if (!parent) return null;
+                        const parentId = String(parent._id);
+                        
+                        const children = allCats
+                            .filter((c: any) => c.parent && String(c.parent) === parentId)
+                            .sort((a: any, b: any) => (a.order || 0) - (b.order || 0))
+                            .map((c: any) => ({ 
+                                name: c.name || c.title || (c.slug ? c.slug.replace(/-/g, ' ').toUpperCase() : "Unnamed"), 
+                                href: `/${c.slug}` 
+                            }));
+                        
+                        return children.length > 0 ? children : [];
+                    };
+
+                    setTourItems(prev => prev.map(item => {
+                        const lname = (item.name || "").toLowerCase();
+                        let found = null;
+                        if (lname.includes('kerala')) found = findChildren('kerala');
+                        else if (lname.includes('domestic')) found = findChildren('domestic');
+                        else if (lname.includes('international')) found = findChildren('international');
+                        
+                        // If it matches one of our headers, use children OR clear list if none found
+                        if (found !== null) return { ...item, dropdown: found };
+                        if (lname.includes('domestic') || lname.includes('international') || lname.includes('kerala')) {
+                           return { ...item, dropdown: [] }; // Clear if we found the header but no children
+                        }
+                        return item;
+                    }));
+                }
+            } catch (err) {
+                console.error('Header categories fetch failed', err);
+            }
+        };
+        fetchCategoriesMenu();
+    }, []);
+
+    // Sync stateful tourItems into final nav links
+    useEffect(() => {
+        const syncDropdowns = (prev: any[]) => prev.map(item => {
+            if ((item.name || "").toLowerCase() === 'tours') {
+                return { ...item, dropdown: tourItems };
+            }
+            return item;
+        });
+        setFinalHeaderLinks(prev => syncDropdowns(prev));
+        setFinalSidebarLinks(prev => syncDropdowns(prev));
+    }, [tourItems]);
 
 
     // Close profile dropdown when clicking outside
@@ -189,7 +214,7 @@ export default function Header() {
                         const dynamicH = JSON.parse(hlOpt.value);
                         if (Array.isArray(dynamicH) && dynamicH.length > 0) {
                             const mergedH = dynamicH.map((dl: any) => {
-                                const staticMatch = navLinks.find(sl => sl.name.toLowerCase() === dl.name.toLowerCase());
+                                const staticMatch = navLinks.find(sl => sl.name?.toLowerCase() === dl.name?.toLowerCase());
                                 return { ...dl, dropdown: staticMatch ? staticMatch.dropdown : undefined };
                             });
                             setFinalHeaderLinks(mergedH);
@@ -205,7 +230,7 @@ export default function Header() {
                         const dynamicS = JSON.parse(slOpt.value);
                         if (Array.isArray(dynamicS) && dynamicS.length > 0) {
                             const mergedS = dynamicS.map((dl: any) => {
-                                const staticMatch = navLinks.find(sl => sl.name.toLowerCase() === dl.name.toLowerCase());
+                                const staticMatch = navLinks.find(sl => sl.name?.toLowerCase() === dl.name?.toLowerCase());
                                 return { ...dl, dropdown: staticMatch ? staticMatch.dropdown : undefined };
                             });
                             setFinalSidebarLinks(mergedS);
