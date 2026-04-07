@@ -2432,13 +2432,13 @@
         z-index: 1;
     }
 
-    .overlay {
-        position: absolute;
-        inset: 0;
-        z-index: 2;
-        background: linear-gradient(to right, rgba(10, 15, 25, 0.7) 0%, rgba(10, 15, 25, 0.2) 60%, transparent 100%),
-            linear-gradient(to top, rgba(10, 15, 25, 0.8) 0%, transparent 70%);
-    }
+    // .overlay {
+    //     position: absolute;
+    //     inset: 0;
+    //     z-index: 2;
+    //     background: linear-gradient(to right, rgba(10, 15, 25, 0.7) 0%, rgba(10, 15, 25, 0.2) 60%, transparent 100%),
+    //         linear-gradient(to top, rgba(10, 15, 25, 0.8) 0%, transparent 70%);
+    // }
 
     .ratingBadge {
         position: absolute;
