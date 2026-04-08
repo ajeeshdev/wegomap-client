@@ -36,6 +36,7 @@ interface PackageCardProps {
         slabel?: string;
         href?: string;
         _id?: string;
+        eventDate?: string;
     };
     wishlist: string[];
     toggleWishlist: (id: string, e: React.MouseEvent) => void;
