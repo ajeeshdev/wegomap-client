@@ -7,10 +7,12 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip admin, API, and static file paths
+  // Skip admin, API, CRM, and static file paths
   if (
     pathname.startsWith('/admin') ||
     pathname.startsWith('/api') ||
+    pathname.startsWith('/crm') ||
+    pathname.startsWith('/old-web') ||
     pathname.startsWith('/_next') ||
     pathname.startsWith('/static') ||
     pathname.includes('.')
@@ -52,6 +54,6 @@ export const config = {
      * - favicon.ico
      * - static files
      */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js|woff2?|ttf|otf|mp4|webm)).*)',
+    '/((?!_next/static|_next/image|favicon.ico|crm|old-web|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js|woff2?|ttf|otf|mp4|webm)).*)',
   ],
 };
