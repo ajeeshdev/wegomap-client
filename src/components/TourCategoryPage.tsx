@@ -204,7 +204,7 @@ export default function TourCategoryPage({
                     <div className="allToursControls" style={{ marginBottom: '2rem', borderRadius: '1.5rem', border: '1px solid #e2e8f0' }}>
                         <div className="allToursControlsInner">
                             {/* Search */}
-                            <div className="allToursSearch" style={{ flex: 1, maxWidth: '500px' }}>
+                            <div className="allToursSearch" style={{ maxWidth: '500px' }}>
 
 
                                 <Search size={16} className="allToursSearchIcon" />
