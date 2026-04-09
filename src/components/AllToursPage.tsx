@@ -318,6 +318,30 @@ export default function AllToursPage() {
         // Redundant as we now use EnquireModal, but kept for compatibility if needed
     };
 
+    useEffect(() => {
+        const handleScroll = () => {
+            const controls = document.querySelector('.allToursControls');
+            if (controls) {
+                const rect = controls.getBoundingClientRect();
+                // If the top of the controls is less than or equal to 0 (or a small buffer)
+                if (rect.top <= 80) { // 80 is roughly the header height or the sticky point
+                    document.body.classList.add('header-scrolled-controls');
+                } else {
+                    document.body.classList.remove('header-scrolled-controls');
+                }
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        // Initial check
+        handleScroll();
+        
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            document.body.classList.remove('header-scrolled-controls');
+        };
+    }, []);
+
 
     return (
         <div className="allToursPage">

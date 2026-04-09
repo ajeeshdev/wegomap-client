@@ -14267,6 +14267,7 @@ button.wishlistBtn {
 @media (max-width: 575px) {
   .allToursPage .allToursControls {
     top: 0;
+    z-index: 10000;
   }
 }
 .allToursPage .allToursControls .allToursControlsInner {

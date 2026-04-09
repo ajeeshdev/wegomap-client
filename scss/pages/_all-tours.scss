@@ -98,6 +98,7 @@
         box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.1);
             @include max(575){
                 top: 0;
+                z-index: 10000;
             }
         .allToursControlsInner {
             display: flex;
