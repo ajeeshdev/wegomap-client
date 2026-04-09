@@ -771,7 +771,6 @@ export default function LandingPageView({
                     Full Name
                   </label>
                   <input
-                    required
                     type="text"
                     placeholder="John Doe"
                     className="lp-modalInput"
@@ -787,10 +786,13 @@ export default function LandingPageView({
                   <input
                     required
                     type="tel"
-                    placeholder="+91 9876543210"
+                    placeholder="919876543210"
                     className="lp-modalInput"
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/\D/g, "");
+                      setFormData({ ...formData, phone: val });
+                    }}
                   />
                 </div>
               </div>
@@ -800,7 +802,6 @@ export default function LandingPageView({
                   Email Address
                 </label>
                 <input
-                  required
                   type="email"
                   placeholder="john@example.com"
                   className="lp-modalInput"

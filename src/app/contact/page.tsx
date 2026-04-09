@@ -41,7 +41,11 @@ export default function ContactPage() {
     }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+        let val = e.target.value;
+        if (e.target.name === 'phone') {
+            val = val.replace(/\D/g, '');
+        }
+        setFormData(prev => ({ ...prev, [e.target.name]: val }));
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -55,8 +59,8 @@ export default function ContactPage() {
         setLoading(true);
         setStatus({ type: null, message: '' });
 
-        if (!formData.name.trim() || !formData.phone.trim()) {
-            setStatus({ type: 'error', message: 'Name and Phone are required.' });
+        if (!formData.phone.trim()) {
+            setStatus({ type: 'error', message: 'Phone number is required.' });
             setLoading(false);
             return;
         }
@@ -164,17 +168,17 @@ export default function ContactPage() {
                             <form onSubmit={handleSubmit} className="cForm">
                                 <div className="formRow split">
                                     <div className="inputGroup">
-                                        <label>Full Name <span>*</span></label>
+                                        <label>Full Name</label>
                                         <div className="inputWrapper">
                                             <User size={18} className="iIcon" />
-                                            <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="John Doe" required />
+                                            <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="John Doe" />
                                         </div>
                                     </div>
                                     <div className="inputGroup">
                                         <label>Phone Number <span>*</span></label>
                                         <div className="inputWrapper">
                                             <Smartphone size={18} className="iIcon" />
-                                            <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 98765 43210" required />
+                                            <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="919876543210" required />
                                         </div>
                                     </div>
                                 </div>

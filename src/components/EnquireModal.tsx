@@ -107,7 +107,6 @@ export default function EnquireModal({ isOpen, onClose, packageName = 'General I
                                     <input
                                         type="text"
                                         placeholder="John Doe"
-                                        required
                                         value={formData.name}
                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                     />
@@ -120,10 +119,13 @@ export default function EnquireModal({ isOpen, onClose, packageName = 'General I
                                     <div className="enquireInputIcon"><Phone size={18} /></div>
                                     <input
                                         type="tel"
-                                        placeholder="+91 80860 00000"
+                                        placeholder="918086000000"
                                         required
                                         value={formData.phone}
-                                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                        onChange={(e) => {
+                                            const val = e.target.value.replace(/\D/g, '');
+                                            setFormData({ ...formData, phone: val });
+                                        }}
                                     />
                                 </div>
                             </div>
