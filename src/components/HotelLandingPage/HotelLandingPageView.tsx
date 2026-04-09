@@ -14,7 +14,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 
-import "../../../scss/components/_hotel-landing-page.scss";
 import { API_URL, getImageUrl } from "@/config";
 import { toast } from "react-hot-toast";
 import Link from "next/link";

@@ -25,8 +25,6 @@ import 'swiper/css/effect-fade';
 
 import ReCAPTCHA from "react-google-recaptcha";
 
-import "../../../scss/components/_landing-page.scss";
-
 import { API_URL, getImageUrl } from "@/config";
 import { toast } from "react-hot-toast";
 import PackageCard from "@/components/PackageCard";
