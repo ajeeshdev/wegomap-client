@@ -2271,7 +2271,7 @@ header .button-wrapper .modernHamburger {
   position: fixed;
   bottom: calc(85px + env(safe-area-inset-bottom, 0px));
   right: 15px;
-  z-index: 10001;
+  z-index: 1000;
 }
 @media (max-width: 1023px) {
   .floating-whatsapp {
