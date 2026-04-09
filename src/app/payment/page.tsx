@@ -44,6 +44,7 @@ export default function PaymentPage() {
         upi_phone: '+91 9778734488',
         bank_accounts: defaultBanks
     });
+    const [whatsappNumber, setWhatsappNumber] = useState('918113998989');
 
     useEffect(() => {
         const fetchPaymentDetails = async () => {
@@ -57,13 +58,18 @@ export default function PaymentPage() {
                         setPaymentDetails(prev => ({
                             ...prev,
                             ...parsed,
-                            // Ensure valid values for critical fields
                             razorpay_button_id: parsed.razorpay_button_id || prev.razorpay_button_id,
                             bank_accounts: (parsed.bank_accounts && parsed.bank_accounts.length > 0) ? parsed.bank_accounts : prev.bank_accounts
                         }));
                     }
+
+                    const whatsappOpt = json.data.find((o: any) => o.key === 'whatsapp');
+                    if (whatsappOpt?.value) {
+                        setWhatsappNumber(whatsappOpt.value.replace(/\D/g, ''));
+                    }
                 }
             } catch (e) {
+
                 console.error("Failed to fetch payment details", e);
             } finally {
                 setLoading(false);
@@ -269,10 +275,11 @@ export default function PaymentPage() {
                             <Phone size={16} />
                             +91 85903 70566
                         </a>
-                        <a href="https://wa.me/918590370566" target="_blank" rel="noreferrer" className="payHelpBtn whatsapp">
+                        <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer" className="payHelpBtn whatsapp">
                             <Smartphone size={16} />
                             WhatsApp Us
                         </a>
+
                     </div>
                 </div>
 

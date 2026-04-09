@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { API_URL } from '@/config';
 
 export default function FloatingWhatsApp() {
-    const [whatsappNumber, setWhatsappNumber] = useState('918590370566');
+    const [whatsappNumber, setWhatsappNumber] = useState('918113998989');
 
     useEffect(() => {
         const fetchWhatsApp = async () => {

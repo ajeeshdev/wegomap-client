@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Home, Briefcase, Calendar, User, MessageCircle } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import { API_URL } from '@/config';
 
 export default function MobileNav() {
     const pathname = usePathname();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [pressingIndex, setPressingIndex] = useState<number | null>(null);
+    const [whatsappNumber, setWhatsappNumber] = useState('918113998989');
 
     useEffect(() => {
+
         const checkAuth = () => {
             const token = localStorage.getItem('token');
             setIsLoggedIn(!!token);
@@ -16,11 +19,30 @@ export default function MobileNav() {
         checkAuth();
         window.addEventListener('storage', checkAuth);
         window.addEventListener('authChange', checkAuth);
+
+        const fetchWhatsApp = async () => {
+            try {
+                const res = await fetch(`${API_URL}/options`);
+                const data = await res.json();
+                if (data.success) {
+                    const whatsappOpt = data.data.find((opt: any) => opt.key === 'whatsapp');
+                    if (whatsappOpt?.value) {
+                        const cleaned = whatsappOpt.value.replace(/\D/g, '');
+                        setWhatsappNumber(cleaned);
+                    }
+                }
+            } catch (err) {
+                console.error("Failed to fetch WhatsApp number from CMS", err);
+            }
+        };
+        fetchWhatsApp();
+
         return () => {
             window.removeEventListener('storage', checkAuth);
             window.removeEventListener('authChange', checkAuth);
         };
     }, []);
+
 
     const navItems = [
         { name: 'Home', href: '/', icon: Home },
@@ -46,8 +68,9 @@ export default function MobileNav() {
                             return (
                                 <div key={item.name} className="centralNavItemWrapper">
                                     <a 
-                                        href="https://wa.me/918590370566"
+                                        href={`https://wa.me/${whatsappNumber}`}
                                         target="_blank"
+
                                         rel="noopener noreferrer"
                                         className="centralNavItem animated"
                                     >

@@ -33,9 +33,28 @@ export default function FaqPage() {
     const [loading, setLoading] = useState(true);
     const [openCategory, setOpenCategory] = useState<number | null>(0);
     const [openItem, setOpenItem] = useState<string | null>(null);
+    const [whatsappNumber, setWhatsappNumber] = useState('918113998989');
 
     useEffect(() => {
+        const fetchWhatsApp = async () => {
+            try {
+                const res = await fetch(`${API_URL}/options`);
+                const data = await res.json();
+                if (data.success) {
+                    const whatsappOpt = data.data.find((opt: any) => opt.key === 'whatsapp');
+                    if (whatsappOpt?.value) {
+                        const cleaned = whatsappOpt.value.replace(/\D/g, '');
+                        setWhatsappNumber(cleaned);
+                    }
+                }
+            } catch (err) {
+                console.error("Failed to fetch WhatsApp number from CMS", err);
+            }
+        };
+        fetchWhatsApp();
+
         const fetchFaqs = async () => {
+
             try {
                 const res = await fetch(`${API_URL}/faqs`);
                 const json = await res.json();
@@ -152,10 +171,11 @@ export default function FaqPage() {
                             <Phone size={18} />
                             Call Us
                         </a>
-                        <a href="https://wa.me/918590370566" target="_blank" rel="noreferrer" className="faqCtaBtn whatsapp">
+                        <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer" className="faqCtaBtn whatsapp">
                             <MessageCircle size={18} />
                             WhatsApp
                         </a>
+
                         <Link href="/contact" className="faqCtaBtn outline">
                             <Mail size={18} />
                             Send Message
