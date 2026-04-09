@@ -127,7 +127,6 @@ export default function EnquireModal({ isOpen, onClose, packageName = 'General I
                                     <input
                                         type="email"
                                         placeholder="john@example.com"
-                                        required
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                     />

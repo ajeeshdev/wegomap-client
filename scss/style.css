@@ -2274,7 +2274,7 @@ header .button-wrapper .modernHamburger {
   position: fixed;
   bottom: 74px;
   right: 0;
-  z-index: 1000;
+  z-index: 10001;
   width: 70px;
   height: 70px;
   display: flex;
@@ -2342,7 +2342,7 @@ header .button-wrapper .modernHamburger {
 }
 @media (max-width: 1023px) {
   .floating-whatsapp {
-    display: none;
+    display: flex;
     bottom: calc(60px + env(safe-area-inset-bottom, 0px) + 16px);
     right: 16px;
     width: 60px;
@@ -14232,7 +14232,7 @@ button.wishlistBtn {
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(226, 232, 240, 0.8);
   position: sticky;
-  top: 57px;
+  top: 70px;
   z-index: 100;
   box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.1);
 }

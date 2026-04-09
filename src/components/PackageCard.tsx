@@ -36,6 +36,7 @@ interface PackageCardProps {
         slabel?: string;
         href?: string;
         _id?: string;
+        eventDate?: string;
     };
     wishlist: string[];
     toggleWishlist: (id: string, e: React.MouseEvent) => void;
@@ -268,12 +269,20 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
                 </div>
 
                 {/* Action CTA */}
-                <button 
-                    className="enquireMainBtn"
-                    onClick={(e) => onEnquire(e, pkg.title)}
-                >
-                    Enquire Now
-                </button>
+                <div className="flex gap-3">
+                    <Link 
+                        href={`/packages/${pkg.slug}`}
+                        className="flex-1 flex items-center justify-center gap-2 border-2 border-slate-200 hover:border-slate-800 hover:bg-slate-800 hover:text-white transition-all rounded-xl py-3 font-bold text-sm"
+                    >
+                        Details
+                    </Link>
+                    <button 
+                        className="enquireMainBtn flex-[1.5]"
+                        onClick={(e) => onEnquire(e, pkg.title)}
+                    >
+                        Enquire Now
+                    </button>
+                </div>
             </div>
         </div>
     );

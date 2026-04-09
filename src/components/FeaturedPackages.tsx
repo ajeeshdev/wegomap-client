@@ -28,6 +28,7 @@ interface Package {
     isBestSeller: boolean;
     rating: number;
     images: string[];
+    eventDate?: string;
 }
 
 export default function FeaturedPackages() {
@@ -203,6 +204,16 @@ export default function FeaturedPackages() {
                                         >
                                             <Heart size={18} fill={wishlist.includes(pkg._id) ? "currentColor" : "none"} />
                                         </button>
+
+                                        {/* Event Date Badge */}
+                                        {pkg.eventDate && (
+                                            <div className="absolute bottom-6 left-6 z-10">
+                                                <div className="bg-slate-900/40 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10 flex items-center gap-2">
+                                                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
+                                                    <span className="text-[10px] font-black text-white uppercase tracking-widest">{pkg.eventDate}</span>
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
 
                                     {/* Content Area */}
@@ -274,6 +285,16 @@ export default function FeaturedPackages() {
                                     >
                                         <Heart size={18} fill={wishlist.includes(pkg._id) ? "currentColor" : "none"} />
                                     </button>
+
+                                    {/* Event Date Badge for domestic */}
+                                    {pkg.eventDate && (
+                                        <div className="absolute bottom-4 left-6 z-10 transition-transform group-hover:-translate-y-1">
+                                            <div className="bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-lg shadow-lg border border-white/20 flex items-center gap-1.5">
+                                                <div className="w-1 h-1 rounded-full bg-blue-500"></div>
+                                                <span className="text-[10px] font-bold text-slate-800 uppercase tracking-tighter">{pkg.eventDate}</span>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="flex items-center gap-1.5 text-[10px] font-black text-blue-600 uppercase tracking-widest mb-2">
                                     <MapPin size={10} /> {pkg.location}

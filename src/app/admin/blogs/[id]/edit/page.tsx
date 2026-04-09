@@ -31,7 +31,7 @@ export default function EditBlog() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch(`${API_URL}/categories`, {
+        const res = await fetch(`${API_URL}/categories?type=blog`, {
           headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
         const data = await res.json();

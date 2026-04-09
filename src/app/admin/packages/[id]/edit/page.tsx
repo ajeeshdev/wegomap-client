@@ -30,7 +30,7 @@ export default function EditPackage() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch(`${API_URL}/categories`, {
+        const res = await fetch(`${API_URL}/categories?type=package`, {
           headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
         const data = await res.json();
@@ -144,7 +144,7 @@ export default function EditPackage() {
   );
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-700">
+    <div className="space-y-8">
       {/* Header Section */}
       <div className="admin-page-header">
         <div className="flex items-center gap-4">

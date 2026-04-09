@@ -773,7 +773,7 @@ header {
     position: fixed;
     bottom: 74px;
     right: 0;
-    z-index: 1000;
+    z-index: 10001; // Increased to stay above other elements
     width: 70px;
     height: 70px;
     display: flex;
@@ -850,7 +850,7 @@ header {
 
     // On mobile screens, elevate it above the bottom navigation bar
     @media (max-width: 1023px) {
-        display: none;
+        display: flex; // Fix: was display: none
         bottom: calc(60px + env(safe-area-inset-bottom, 0px) + 16px);
         right: 16px;
         width: 60px;

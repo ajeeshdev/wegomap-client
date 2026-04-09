@@ -8,13 +8,20 @@ import { Edit, Trash2, Plus, Search, FolderOpen, Layers, MoreVertical, LayoutGri
 export default function CategorysAdmin() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [type, setType] = useState<string>('package');
   const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => { fetchData(); }, []);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const typeParam = params.get('type') || 'package';
+    setType(typeParam);
+    fetchData(typeParam);
+  }, []);
 
-  const fetchData = async () => {
+  const fetchData = async (categoryType?: string) => {
     try {
-      const res = await fetch(`${API_URL}/categories`);
+      const currentType = categoryType || type;
+      const res = await fetch(`${API_URL}/categories?type=${currentType}`);
       const json = await res.json();
       if (json.success) setData(json.data);
     } catch (err) { console.error(err); } 
@@ -54,11 +61,10 @@ export default function CategorysAdmin() {
       {/* Header Section */}
       <div className="admin-page-header">
         <div>
-          <h2 className="admin-page-title text-xl font-bold">
-            <div className="admin-page-title-indicator"></div>
-            Categories
+          <h2 className="admin-page-title text-xl font-bold capitalize">
+            {type === 'blog' ? 'Blog Categories' : 'Package Categories'}
           </h2>
-          <p className="admin-page-subtitle mt-1 text-slate-400">Manage categories for packages, blogs and other content.</p>
+          <p className="admin-page-subtitle mt-1 text-slate-400">Manage categories specifically for {type === 'blog' ? 'blog posts' : 'packages'}.</p>
         </div>
         <div className="flex items-center gap-4 w-full md:w-auto">
           <div className="admin-search-container">
@@ -71,7 +77,7 @@ export default function CategorysAdmin() {
               className="admin-search-input"
             />
           </div>
-          <Link href="/admin/categories/create" className="admin-btn admin-btn-primary flex-shrink-0">
+          <Link href={`/admin/categories/create?type=${type}`} className="admin-btn admin-btn-primary flex-shrink-0">
             <Plus size={18} /> Add Category
           </Link>
         </div>

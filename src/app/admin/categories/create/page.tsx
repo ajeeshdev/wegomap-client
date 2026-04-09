@@ -21,16 +21,21 @@ export default function CreateCategory() {
     bannerImage: '',
     subtitle: '',
     contentTitle: '',
-    contentDesc: ''
+    contentDesc: '',
+    type: 'package'
   });
   const [categories, setCategories] = useState<any[]>([]);
   const [packages, setPackages] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const typeParam = params.get('type') || 'package';
+    setFormData(prev => ({ ...prev, type: typeParam }));
+
     const fetchCategories = async () => {
       try {
-        const res = await fetch(`${API_URL}/categories`);
+        const res = await fetch(`${API_URL}/categories?type=${typeParam}`);
         const data = await res.json();
         if (data.success) {
           const items = data.data;
@@ -108,11 +113,10 @@ export default function CreateCategory() {
             <ArrowLeft size={22} />
           </button>
           <div className="min-w-0">
-            <h2 className="admin-page-title">
-              <div className="admin-page-title-indicator"></div>
-              Create New Category
+            <h2 className="admin-page-title capitalize">
+              Create New {formData.type} Category
             </h2>
-            <p className="admin-page-subtitle mt-1 text-slate-400">Add a new category for your tours or blogs.</p>
+            <p className="admin-page-subtitle mt-1 text-slate-400">Add a new category for your {formData.type === 'blog' ? 'blog posts' : 'tours'}.</p>
           </div>
         </div>
         <div className="flex items-center gap-4">
@@ -192,68 +196,74 @@ export default function CreateCategory() {
                     />
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                  <div className="admin-form-group">
-                    <label className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Subtitle</label>
-                    <input 
-                      type="text" 
-                      value={formData.subtitle} 
-                      onChange={e => setFormData({ ...formData, subtitle: e.target.value })}
-                      className="admin-form-input h-14"
-                    />
-                  </div>
-                    <div className="admin-form-group">
-                      <label className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Banner Image URL</label>
+                {formData.type === 'package' && (
+                  <>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                      <div className="admin-form-group">
+                        <label className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Subtitle</label>
+                        <input 
+                          type="text" 
+                          value={formData.subtitle} 
+                          onChange={e => setFormData({ ...formData, subtitle: e.target.value })}
+                          className="admin-form-input h-14"
+                        />
+                      </div>
+                      <div className="admin-form-group">
+                        <label className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Banner Image URL</label>
+                        <input 
+                          type="text" 
+                          value={formData.bannerImage} 
+                          onChange={e => setFormData({ ...formData, bannerImage: e.target.value })}
+                          className="admin-form-input h-14"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="admin-form-group mb-8">
+                      <label className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Read More Heading</label>
                       <input 
                         type="text" 
-                        value={formData.bannerImage} 
-                        onChange={e => setFormData({ ...formData, bannerImage: e.target.value })}
+                        value={formData.contentTitle} 
+                        onChange={e => setFormData({ ...formData, contentTitle: e.target.value })}
                         className="admin-form-input h-14"
                       />
                     </div>
-                  </div>
-  
-                  <div className="admin-form-group mb-8">
-                    <label className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-3 block">Read More Heading</label>
-                    <input 
-                      type="text" 
-                      value={formData.contentTitle} 
-                      onChange={e => setFormData({ ...formData, contentTitle: e.target.value })}
-                      className="admin-form-input h-14"
+
+                    <RichTextEditor 
+                      height={400}
+                      value={formData.contentDesc} 
+                      onChange={content => setFormData({ ...formData, contentDesc: content })}
                     />
+                  </>
+                )}
+              </div>
+
+              {formData.type === 'package' && (
+                <div className="admin-form-group pt-12 border-t border-slate-100">
+                  <label className="admin-form-label flex items-center gap-3 mb-8">
+                    <Layers size={18} className="text-blue-600" /> Assign Packages
+                  </label>
+                  <div className="admin-form-group">
+                    <p className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-4 px-2">Select packages to display on this category page:</p>
+                    <select 
+                      multiple
+                      value={formData.packages}
+                      onChange={e => {
+                        const values = Array.from(e.target.selectedOptions).map(opt => opt.value);
+                        setFormData({ ...formData, packages: values });
+                      }}
+                      className="admin-form-select h-64 font-bold text-slate-700 p-4 rounded-[32px] border-2 border-slate-100 bg-slate-50 focus:bg-white transition-all shadow-inner"
+                    >
+                      {packages.sort((a, b) => a.title.localeCompare(b.title)).map(pkg => (
+                        <option key={pkg._id} value={pkg._id} className="py-2 px-4 rounded-xl hover:bg-blue-50 transition-colors">
+                          {pkg.title} ({pkg.location})
+                        </option>
+                      ))}
+                    </select>
+                    <p className="mt-4 text-[10px] font-black text-slate-400 uppercase tracking-widest px-2 italic">Hold CMD/CTRL to select multiple packages.</p>
                   </div>
-
-                <RichTextEditor 
-                  height={400}
-                  value={formData.contentDesc} 
-                  onChange={content => setFormData({ ...formData, contentDesc: content })}
-                />
-              </div>
-
-              <div className="admin-form-group pt-12 border-t border-slate-100">
-                <label className="admin-form-label flex items-center gap-3 mb-8">
-                  <Layers size={18} className="text-blue-600" /> Assign Packages
-                </label>
-                <div className="admin-form-group">
-                  <p className="text-[10px] uppercase font-black tracking-widest text-slate-400 mb-4 px-2">Select packages to display on this category page:</p>
-                  <select 
-                    multiple
-                    value={formData.packages}
-                    onChange={e => {
-                      const values = Array.from(e.target.selectedOptions).map(opt => opt.value);
-                      setFormData({ ...formData, packages: values });
-                    }}
-                    className="admin-form-select h-64 font-bold text-slate-700 p-4 rounded-[32px] border-2 border-slate-100 bg-slate-50 focus:bg-white transition-all shadow-inner"
-                  >
-                    {packages.sort((a, b) => a.title.localeCompare(b.title)).map(pkg => (
-                      <option key={pkg._id} value={pkg._id} className="py-2 px-4 rounded-xl hover:bg-blue-50 transition-colors">
-                        {pkg.title} ({pkg.location})
-                      </option>
-                    ))}
-                  </select>
-                  <p className="mt-4 text-[10px] font-black text-slate-400 uppercase tracking-widest px-2 italic">Hold CMD/CTRL to select multiple packages.</p>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>

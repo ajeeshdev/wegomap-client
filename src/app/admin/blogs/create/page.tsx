@@ -31,7 +31,7 @@ export default function CreateBlog() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch(`${API_URL}/categories`, {
+        const res = await fetch(`${API_URL}/categories?type=blog`, {
           headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
         const data = await res.json();
@@ -122,17 +122,14 @@ export default function CreateBlog() {
   return (
     <div className="space-y-6 animate-in fade-in duration-700 pb-20">
       {/* Header Section */}
-      <div className="admin-page-header ">
+      <div className="admin-page-header">
         <div className="flex items-center gap-4">
           <button onClick={() => router.push('/admin/blogs')} className="admin-back-btn">
-            <ArrowLeft size={20} />
+            <ArrowLeft size={18} />
           </button>
           <div>
-            <h2 className="admin-page-title">
-              <div className="admin-page-title-indicator"></div>
-              Create New Blog
-            </h2>
-            <p className="admin-page-subtitle mt-1 text-slate-400">Write and publish a new blog post.</p>
+            <h1 className="admin-page-title">Create New Blog</h1>
+            <p className="admin-page-subtitle">Write and publish a new blog post.</p>
           </div>
         </div>
         <div className="flex items-center gap-3">
@@ -142,9 +139,9 @@ export default function CreateBlog() {
           <button
             onClick={() => handleSubmit()}
             disabled={loading}
-            className="admin-btn admin-btn-primary h-11"
+            className="admin-btn admin-btn-primary"
           >
-            <Safe size={18} /> {loading ? 'Saving...' : 'Publish Blog'}
+            <Save size={18} /> {loading ? 'Saving...' : 'Publish Blog'}
           </button>
         </div>
       </div>
@@ -154,11 +151,10 @@ export default function CreateBlog() {
         <div className="space-y-6">
 
           {/* Article Content Section */}
-          <div className="admin-form-card space-y-6">
-            <h3 className="admin-form-section-title">
-              <div className="admin-page-title-indicator bg-blue-600"></div>
+          <div className="admin-form-card">
+            <h2 className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-10 pb-4 border-b border-slate-50 flex items-center gap-3">
               Post Content
-            </h3>
+            </h2>
 
             <div className="admin-form-grid-2 pt-2">
               <div className="admin-form-group md:col-span-2">
@@ -257,9 +253,9 @@ export default function CreateBlog() {
                 <div className="w-1 h-3 bg-blue-600 rounded-full"></div>
                 Metadata
               </h4>
-              <div className="admin-form-grid-3">
+              <div className="space-y-6">
                 <div className="admin-form-group">
-                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <Tag size={10} className="text-blue-600" /> Category</label>
+                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <Tag size={10} className="text-blue-600" /> Categories</label>
                   <select
                     multiple
                     value={formData.categories || []}
@@ -267,36 +263,38 @@ export default function CreateBlog() {
                       const values = Array.from(e.target.selectedOptions).map(opt => opt.value);
                       setFormData({ ...formData, categories: values });
                     }}
-                    className="admin-form-input h-32 text-[11px] font-bold bg-white py-2"
+                    className="admin-form-input min-h-[160px] text-[11px] font-bold bg-white py-2"
                   >
                     {categories.map((cat: any) => (
-                      <option key={cat._id} value={cat.title || cat.name}>
+                      <option key={cat._id} value={cat.title || cat.name} className="py-1">
                         {cat.depth > 0 ? "— ".repeat(cat.depth) : ""}{cat.title || cat.name}
                       </option>
                     ))}
                   </select>
-                  <p className="text-[8px] text-slate-400 mt-2">Hold Ctrl/Cmd to select multiple.</p>
+                  <p className="text-[9px] text-slate-400 mt-2">Hold Ctrl/Cmd to select multiple.</p>
                 </div>
 
-                <div className="admin-form-group">
-                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <Clock size={10} className="text-blue-600" /> Date</label>
-                  <input
-                    type="date"
-                    value={formData.publishDate}
-                    onChange={e => setFormData({ ...formData, publishDate: e.target.value })}
-                    className="admin-form-input h-10 text-[11px] font-bold"
-                  />
-                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="admin-form-group">
+                    <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <Clock size={10} className="text-blue-600" /> Date</label>
+                    <input
+                      type="date"
+                      value={formData.publishDate}
+                      onChange={e => setFormData({ ...formData, publishDate: e.target.value })}
+                      className="admin-form-input h-10 text-[11px] font-bold"
+                    />
+                  </div>
 
-                <div className="admin-form-group">
-                  <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <User size={10} className="text-sky-500" /> Author</label>
-                  <input
-                    type="text"
-                    value={formData.author}
-                    onChange={e => setFormData({ ...formData, author: e.target.value })}
-                    className="admin-form-input h-10 text-[11px] font-bold"
-                    placeholder="Admin"
-                  />
+                  <div className="admin-form-group">
+                    <label className="admin-form-label text-[10px] flex items-center gap-2 text-slate-500 font-bold mb-2"> <User size={10} className="text-sky-500" /> Author</label>
+                    <input
+                      type="text"
+                      value={formData.author}
+                      onChange={e => setFormData({ ...formData, author: e.target.value })}
+                      className="admin-form-input h-10 text-[11px] font-bold"
+                      placeholder="Admin"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
