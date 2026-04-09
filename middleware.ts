@@ -4,6 +4,11 @@ import { NextRequest, NextResponse } from 'next/server';
 // Instead, we proxy to the API route to get redirections, or we use a cached approach.
 // For a cleaner edge-compatible approach, we store redirections in a public JSON file.
 
+// Simple in-memory cache for redirections to avoid hitting the API on every request
+let cachedRedirections: any[] | null = null;
+let lastFetchTime = 0;
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -20,25 +25,35 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Fetch redirections from our API
+  // Fetch redirections from our API with caching
   try {
-    const baseUrl = request.nextUrl.origin;
-    const res = await fetch(`${baseUrl}/api/redirections`, { cache: 'no-store' });
-    if (!res.ok) return NextResponse.next();
-
-    const json = await res.json();
-    const redirections: Array<{ from: string; to: string; type: string; active: boolean }> = json.data || [];
-
-    const match = redirections.find(
-      (r) => r.active && r.from && r.from === pathname
-    );
-
-    if (match) {
-      const redirectUrl = new URL(match.to.startsWith('http') ? match.to : match.to, request.nextUrl.origin);
-      const statusCode = match.type === '302' ? 302 : 301;
-      return NextResponse.redirect(redirectUrl, { status: statusCode });
+    const now = Date.now();
+    if (!cachedRedirections || (now - lastFetchTime > CACHE_TTL)) {
+      const baseUrl = request.nextUrl.origin;
+      const res = await fetch(`${baseUrl}/api/redirections`, { 
+        headers: { 'Cache-Control': 'no-cache' } 
+      });
+      
+      if (res.ok) {
+        const json = await res.json();
+        cachedRedirections = json.data || [];
+        lastFetchTime = now;
+      }
     }
-  } catch {
+
+    if (cachedRedirections) {
+      const match = cachedRedirections.find(
+        (r) => r.active && r.from && r.from === pathname
+      );
+
+      if (match) {
+        const redirectUrl = new URL(match.to.startsWith('http') ? match.to : match.to, request.nextUrl.origin);
+        const statusCode = match.type === '302' ? 302 : 301;
+        return NextResponse.redirect(redirectUrl, { status: statusCode });
+      }
+    }
+  } catch (err) {
+    console.error('Middleware redirection fetch error:', err);
     // If middleware fetch fails, just continue normally
   }
 
