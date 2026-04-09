@@ -1,11 +1,34 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { API_URL } from '@/config';
 
 export default function FloatingWhatsApp() {
+    const [whatsappNumber, setWhatsappNumber] = useState('918590370566');
+
+    useEffect(() => {
+        const fetchWhatsApp = async () => {
+            try {
+                const res = await fetch(`${API_URL}/options`);
+                const data = await res.json();
+                if (data.success) {
+                    const whatsappOpt = data.data.find((opt: any) => opt.key === 'whatsapp');
+                    if (whatsappOpt?.value) {
+                        // Clean the number from any non-numeric characters for the wa.me link
+                        const cleaned = whatsappOpt.value.replace(/\D/g, '');
+                        setWhatsappNumber(cleaned);
+                    }
+                }
+            } catch (err) {
+                console.error("Failed to load WhatsApp number from CMS", err);
+            }
+        };
+        fetchWhatsApp();
+    }, []);
+
     return (
         <a
-            href="https://wa.me/918590370566" // Replaced with actual phone number if one exists, using the one from Footer (+918590370566)
+            href={`https://wa.me/${whatsappNumber}`}
             target="_blank"
             rel="noopener noreferrer"
             className="floating-whatsapp"
