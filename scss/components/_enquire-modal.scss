@@ -208,15 +208,23 @@
 
 .enquireFormSide {
     flex: 1;
-    padding: 1rem;
+    padding: 1.5rem 1rem;
 
     @media (min-width: 768px) {
         padding: 1.5rem 2rem;
     }
+
+    @media (max-height: 700px) {
+        padding: 1rem;
+    }
 }
 
 .enquireFormHeader {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
+
+    @media (min-width: 768px) {
+        margin-bottom: 1.5rem;
+    }
 
     .enquireLabel {
         display: block;
@@ -226,7 +234,7 @@
         letter-spacing: 0.3em;
         font-size: 0.625rem;
         font-style: italic;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.25rem;
     }
 
     .enquireTitle {
@@ -255,8 +263,12 @@
 .enquireForm {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 0.75rem;
     animation: slideUpFade 0.6s ease-out forwards;
+
+    @media (min-width: 768px) {
+        gap: 1.25rem;
+    }
 }
 
 @keyframes slideUpFade {
@@ -272,7 +284,7 @@
 
 .enquireInterestBadge {
     background: #f8fafc;
-    padding: 0.75rem 1.25rem;
+    padding: 0.5rem 1rem;
     border-radius: 1.25rem;
     border: 1px solid #f1f5f9;
     display: flex;
@@ -286,9 +298,9 @@
     }
 
     .enquireInterestIcon {
-        width: 3rem;
-        height: 3rem;
-        border-radius: 1.25rem;
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 1rem;
         background: #fff;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         display: flex;
@@ -298,6 +310,12 @@
         border: 1px solid rgba($primaryColor, 0.1);
         position: relative;
         overflow: hidden;
+
+        @media (min-width: 768px) {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 1.25rem;
+        }
 
         &::after {
             content: '';
@@ -316,12 +334,18 @@
     .enquireInterestInfo {
         label {
             display: block;
-            font-size: 0.625rem;
+            font-size: 0.55rem;
             font-weight: 900;
             color: #94a3b8;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 0.125rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 0px;
+
+            @media (min-width: 768px) {
+                font-size: 0.625rem;
+                letter-spacing: 0.2em;
+                margin-bottom: 0.125rem;
+            }
         }
 
         div {
@@ -329,11 +353,12 @@
             font-weight: 900;
             font-style: italic;
             text-transform: uppercase;
-            font-size: 0.875rem;
-            // white-space: nowrap;
-            // overflow: hidden;
-            // text-overflow: ellipsis;
+            font-size: 0.75rem;
             max-width: 200px;
+
+            @media (min-width: 768px) {
+                font-size: 0.875rem;
+            }
         }
     }
 }
@@ -341,17 +366,18 @@
 .enquireFormGrid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 0.75rem;
 
     @media (min-width: 768px) {
         grid-template-columns: 1fr 1fr 1fr;
+        gap: 1.5rem;
     }
 }
 
 .enquireInputGroup {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.25rem;
 
     label {
         font-size: 0.625rem;
@@ -419,9 +445,13 @@
             outline: none;
             transition: all 0.3s;
             resize: none;
-            min-height: 60px;
+            min-height: 45px;
             font-family: inherit;
             line-height: 1.5;
+
+            @media (min-width: 768px) {
+                min-height: 60px;
+            }
 
             &::placeholder {
                 color: #cbd5e1;
@@ -445,7 +475,7 @@
     width: 100%;
     background: $primaryColor;
     border: none;
-    padding: 1.25rem;
+    padding: 1rem;
     border-radius: 1.25rem;
     color: #fff;
     font-weight: 900;
@@ -459,39 +489,16 @@
     cursor: pointer;
     box-shadow: 0 10px 15px -3px rgba($primaryColor, 0.2);
     transition: all 0.3s;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
 
-    &:hover {
-        background: #0f172a;
-        box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.2), 0 0 20px rgba($primaryColor, 0.2);
-        transform: translateY(-2px);
-
-        .sendIcon {
-            transform: translate(6px, -6px);
-        }
-    }
-
-    &:disabled {
-        opacity: 0.7;
-        cursor: not-allowed;
-    }
-
-    .sendIcon {
-        transition: transform 0.3s;
-    }
-
-    .spinner {
-        width: 1rem;
-        height: 1rem;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        border-top-color: #fff;
-        border-radius: 9999px;
-        animation: spin 0.8s linear infinite;
+    @media (min-width: 768px) {
+        padding: 1.25rem;
+        margin-top: 1rem;
     }
 }
 
 .enquirePrivacyNote {
-    margin-top: 2rem;
+    margin-top: 1rem;
     text-align: center;
     color: #94a3b8;
     font-weight: 700;
@@ -499,6 +506,10 @@
     font-size: 0.625rem;
     text-transform: uppercase;
     letter-spacing: 0.2em;
+
+    @media (min-width: 768px) {
+        margin-top: 2rem;
+    }
 }
 
 @keyframes spin {
