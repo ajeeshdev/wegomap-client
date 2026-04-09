@@ -486,7 +486,7 @@ export default function TourDetailView({ id }: { id: string }) {
                                 </div>
 
                                 <p className="bk-note">
-                                    RESPONSE WITHIN 24 HOURS
+                                   Quick Response
                                 </p>
                             </div>
                         </div>

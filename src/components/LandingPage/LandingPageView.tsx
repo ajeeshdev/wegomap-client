@@ -838,7 +838,8 @@ export default function LandingPageView({
               </div>
 
               <p className="lp-modalSubmitNote">
-                RESPONSE WITHIN 24 HOURS
+                                                  Quick Response
+
               </p>
             </form>
           </div>
