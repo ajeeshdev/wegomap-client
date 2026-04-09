@@ -19,6 +19,11 @@ export default function EventDetailPage() {
     const [event, setEvent] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success'>('idle');
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        phone: ''
+    });
 
     const slugOrId = params.slug;
 
@@ -183,14 +188,40 @@ export default function EventDetailPage() {
                                                 <label>Full Name</label>
                                                 <div className="ed-input-group">
                                                     <User size={18} />
-                                                    <input required type="text" placeholder="Your name" />
+                                                    <input 
+                                                        type="text" 
+                                                        placeholder="Your name" 
+                                                        value={formData.name}
+                                                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="ed-field">
+                                                <label>Mobile Number <span>*</span></label>
+                                                <div className="ed-input-group">
+                                                    <Phone size={18} />
+                                                    <input 
+                                                        required 
+                                                        type="tel" 
+                                                        placeholder="919876543210" 
+                                                        value={formData.phone}
+                                                        onChange={(e) => {
+                                                            const val = e.target.value.replace(/\D/g, '');
+                                                            setFormData({...formData, phone: val});
+                                                        }}
+                                                    />
                                                 </div>
                                             </div>
                                             <div className="ed-field">
                                                 <label>Email Address</label>
                                                 <div className="ed-input-group">
                                                     <ShieldCheck size={18} />
-                                                    <input required type="email" placeholder="Your email" />
+                                                    <input 
+                                                        type="email" 
+                                                        placeholder="Your email" 
+                                                        value={formData.email}
+                                                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                                                    />
                                                 </div>
                                             </div>
                                             <button disabled={formStatus === 'loading'} type="submit" className="ed-submit-btn">
