@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { API_URL } from '@/config';
-import { Mail, Lock, ArrowRight, Eye, EyeOff, Globe, Star } from 'lucide-react';
+import { Mail, Lock, ArrowRight, Eye, EyeOff, Globe, Star, ChevronLeft } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
 export default function UserLogin() {
@@ -409,8 +409,26 @@ export default function UserLogin() {
                             </span>
                         </div>
 
+                        {/* Back Button */}
+                        <div style={{ marginBottom: '1.5rem' }}>
+                            <Link href="/" style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '0.5rem',
+                                color: '#64748b',
+                                fontSize: '0.875rem',
+                                fontWeight: 600,
+                                textDecoration: 'none',
+                                transition: 'color 0.2s',
+                            }}>
+                                <ChevronLeft size={16} />
+                                Back to Website
+                            </Link>
+                        </div>
+
                         {/* Header */}
                         <div style={{ marginBottom: '2rem' }}>
+
                             <h2 style={{
                                 fontSize: '1.875rem',
                                 fontWeight: 900,
