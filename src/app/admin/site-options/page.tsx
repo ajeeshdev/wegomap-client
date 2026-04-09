@@ -33,7 +33,8 @@ export default function SiteOptionsPage() {
         whatsapp: '',
         email1: '',
         email2: '',
-        email3: ''
+        email3: '',
+        lead_admin_email: ''
     });
 
     const [social, setSocial] = useState({
@@ -306,7 +307,7 @@ export default function SiteOptionsPage() {
                                 </div>
                             </div>
                             
-                            <div className="admin-form-grid-3 pt-2">
+                            <div className="admin-form-grid-4 pt-2">
                                 <div className="admin-form-group">
                                     <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Email Info</label>
                                     <input type="email" value={contact.email1} onChange={e => setContact({...contact, email1: e.target.value})} className="admin-form-input !h-9" />
@@ -318,6 +319,16 @@ export default function SiteOptionsPage() {
                                 <div className="admin-form-group">
                                     <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Email Admin</label>
                                     <input type="email" value={contact.email3} onChange={e => setContact({...contact, email3: e.target.value})} className="admin-form-input !h-9" />
+                                </div>
+                                <div className="admin-form-group">
+                                    <label className="text-[11px] font-bold text-blue-600 uppercase tracking-widest block mb-1">Lead Recipient Email</label>
+                                    <input 
+                                        type="email" 
+                                        value={contact.lead_admin_email} 
+                                        onChange={e => setContact({...contact, lead_admin_email: e.target.value})} 
+                                        className="admin-form-input !h-9 border-blue-100 bg-blue-50/30" 
+                                        placeholder="Receive enquiries here"
+                                    />
                                 </div>
                             </div>
                         </div>
