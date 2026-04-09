@@ -23,7 +23,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 
-import ReCAPTCHA from "react-google-recaptcha";
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 import { API_URL, getImageUrl } from "@/config";
 import { toast } from "react-hot-toast";
@@ -161,7 +161,7 @@ export default function LandingPageView({
     email: "",
     message: "",
   });
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [faqItems, setFaqItems] = useState<FaqItem[]>([]);
@@ -286,13 +286,14 @@ export default function LandingPageView({
   const handleQuickPlanSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!captchaToken) {
-      toast.error('Please verify that you are not a robot');
+    if (!executeRecaptcha) {
+      toast.error('reCAPTCHA not loaded. Please try again.');
       return;
     }
 
     setIsSubmitting(true);
     try {
+      const token = await executeRecaptcha('quick_plan');
       const res = await fetch(`${API_URL}/leads`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -301,7 +302,7 @@ export default function LandingPageView({
           destination: selectedPackage || data.title,
           source: 'Landing Page',
           url: typeof window !== "undefined" ? window.location.href : "",
-          captchaToken
+          captchaToken: token
         }),
       });
       const json = await res.json();
@@ -309,7 +310,6 @@ export default function LandingPageView({
         toast.success("Request sent successfully!");
         setQuickPlanOpen(false);
         setFormData({ name: "", phone: "", email: "", message: "" });
-        setCaptchaToken(null);
       } else {
         toast.error(json.error || "Failed to send request");
       }
@@ -319,6 +319,7 @@ export default function LandingPageView({
       setIsSubmitting(false);
     }
   };
+
 
 
 
@@ -821,12 +822,6 @@ export default function LandingPageView({
                 />
               </div>
 
-              <div className="captchaWrapper mb-4">
-                <ReCAPTCHA
-                  sitekey="6LeisK4sAAAAAEcMyZmRgYnmLPiwxHrE29Pzm4xL"
-                  onChange={(token) => setCaptchaToken(token)}
-                />
-              </div>
 
               <div className="lp-modalSubmitRow">
                 <button

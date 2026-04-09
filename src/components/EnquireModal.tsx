@@ -1,11 +1,10 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { MapPin, User, Mail, Phone, X, Send, Sparkles, Clock, ShieldCheck, MessageSquare } from 'lucide-react';
+import { MapPin, User, Mail, Phone, X, Send, ShieldCheck, MessageSquare } from 'lucide-react';
 import { API_URL } from '@/config';
 import { toast } from 'react-hot-toast';
-
-import ReCAPTCHA from "react-google-recaptcha";
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 interface EnquireModalProps {
     isOpen: boolean;
@@ -14,13 +13,13 @@ interface EnquireModalProps {
 }
 
 export default function EnquireModal({ isOpen, onClose, packageName = 'General Inquiry' }: EnquireModalProps) {
+    const { executeRecaptcha } = useGoogleReCaptcha();
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
         email: '',
         message: ''
     });
-    const [captchaToken, setCaptchaToken] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
 
@@ -38,13 +37,14 @@ export default function EnquireModal({ isOpen, onClose, packageName = 'General I
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!captchaToken) {
-            toast.error('Please verify that you are not a robot');
+        if (!executeRecaptcha) {
+            toast.error('reCAPTCHA not loaded. Please try again.');
             return;
         }
 
         setIsSubmitting(true);
         try {
+            const token = await executeRecaptcha('enquire_modal');
             const res = await fetch(`${API_URL}/leads`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -53,7 +53,7 @@ export default function EnquireModal({ isOpen, onClose, packageName = 'General I
                     destination: packageName,
                     source: 'Website Global Enquire',
                     url: typeof window !== "undefined" ? window.location.href : "",
-                    captchaToken
+                    captchaToken: token
                 })
             });
             const data = await res.json();
@@ -61,7 +61,6 @@ export default function EnquireModal({ isOpen, onClose, packageName = 'General I
                 toast.success('Your inquiry has been sent! Our expert will contact you shortly.');
                 onClose();
                 setFormData({ name: '', phone: '', email: '', message: '' });
-                setCaptchaToken(null);
             } else {
                 toast.error(data.error || 'Failed to send inquiry');
             }
@@ -82,8 +81,6 @@ export default function EnquireModal({ isOpen, onClose, packageName = 'General I
                 <button onClick={onClose} className="enquireCloseBtn">
                     <X size={20} />
                 </button>
-
-                
 
                 <div className="enquireFormSide">
                     <div className="enquireFormHeader">
@@ -156,13 +153,6 @@ export default function EnquireModal({ isOpen, onClose, packageName = 'General I
                                     rows={2}
                                 />
                             </div>
-                        </div>
-
-                        <div className="captchaWrapper mb-4">
-                            <ReCAPTCHA
-                                sitekey="6LeisK4sAAAAAEcMyZmRgYnmLPiwxHrE29Pzm4xL"
-                                onChange={(token) => setCaptchaToken(token)}
-                            />
                         </div>
 
                         <button

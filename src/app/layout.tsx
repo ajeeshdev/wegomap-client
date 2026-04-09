@@ -61,6 +61,8 @@ export const viewport: Viewport = {
 import LayoutWrapper from "@/components/LayoutWrapper";
 import { Toaster } from 'react-hot-toast';
 import { EnquiryProvider } from '@/context/EnquiryContext';
+import CaptchaProvider from '@/components/CaptchaProvider';
+
 
 export default function RootLayout({
   children,
@@ -75,10 +77,13 @@ export default function RootLayout({
       <body className={`${outfit.variable} ${dancingScript.variable} font-sans antialiased text-slate-900 bg-white`}>
         <AppGoogleAuthProvider>
           <EnquiryProvider>
-            <LayoutWrapper>
-              {children}
-            </LayoutWrapper>
+            <CaptchaProvider>
+              <LayoutWrapper>
+                {children}
+              </LayoutWrapper>
+            </CaptchaProvider>
           </EnquiryProvider>
+
           <BootstrapClient />
           <Toaster position="top-right" containerStyle={{ zIndex: 999999999 }} />
         </AppGoogleAuthProvider>

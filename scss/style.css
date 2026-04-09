@@ -2029,7 +2029,7 @@ header .button-wrapper .modernHamburger {
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 20000;
+    z-index: 200;
   }
   .mobileBottomNavWrapper.mmt-final-style {
     background: rgba(255, 255, 255, 0.98);
@@ -2272,6 +2272,13 @@ header .button-wrapper .modernHamburger {
   bottom: calc(85px + env(safe-area-inset-bottom, 0px));
   right: 15px;
   z-index: 10001;
+}
+@media (max-width: 1023px) {
+  .floating-whatsapp {
+    display: none;
+  }
+}
+.floating-whatsapp {
   width: 70px;
   height: 70px;
   display: flex;
@@ -2339,11 +2346,7 @@ header .button-wrapper .modernHamburger {
 }
 @media (max-width: 1023px) {
   .floating-whatsapp {
-    display: flex;
-    bottom: calc(60px + env(safe-area-inset-bottom, 0px) + 16px);
-    right: 16px;
-    width: 60px;
-    height: 60px;
+    display: none;
   }
 }
 

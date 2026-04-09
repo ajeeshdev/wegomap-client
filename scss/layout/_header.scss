@@ -507,7 +507,7 @@ header {
         bottom: 0;
         left: 0;
         right: 0;
-        z-index: 20000; // Increased to be above everything including headers
+        z-index: 200; // Increased to be above everything including headers
         
         &.mmt-final-style {
             background: rgba(255, 255, 255, 0.98); 
@@ -775,7 +775,8 @@ header {
     @media (max-width: 1023px) {
         display: none;
     }
-    width: 70px;
+    width: 70px; 
+    
     height: 70px;
     display: flex;
     align-items: center;
@@ -851,10 +852,6 @@ header {
 
     // On mobile screens, elevate it above the bottom navigation bar
     @media (max-width: 1023px) {
-        display: flex; // Fix: was display: none
-        bottom: calc(60px + env(safe-area-inset-bottom, 0px) + 16px);
-        right: 16px;
-        width: 60px;
-        height: 60px;
+       display: none;
     }
 }
