@@ -1,6 +1,9 @@
 // All Tours Listing Page Styles
 @import "../helpers/variables";
 
+.header-scrolled-controls header{
+    transform: translateY(-100%);
+}
 .allToursPage {
     padding-top: 0;
     @media (max-width: 767px) {
@@ -98,7 +101,7 @@
         box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.1);
             @include max(575){
                 top: 0;
-                z-index: 10000;
+         
             }
         .allToursControlsInner {
             display: flex;
