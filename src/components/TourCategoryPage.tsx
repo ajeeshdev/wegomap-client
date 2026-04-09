@@ -201,7 +201,7 @@ export default function TourCategoryPage({
                     </div>
                     
                     {/* Filter + Search Strip */}
-                    <div className="allToursControls" style={{ position: 'static', marginBottom: '2rem', borderRadius: '1.5rem', border: '1px solid #e2e8f0' }}>
+                    <div className="allToursControls" style={{ marginBottom: '2rem', borderRadius: '1.5rem', border: '1px solid #e2e8f0' }}>
                         <div className="allToursControlsInner">
                             {/* Search */}
                             <div className="allToursSearch" style={{ flex: 1, maxWidth: '500px' }}>

@@ -14174,10 +14174,6 @@ button.wishlistBtn {
   --secondary-color: #8CC647;
 }
 
-.header-scrolled-controls header {
-  transform: translateY(-100%);
-}
-
 .allToursPage {
   padding-top: 0;
 }
@@ -14270,7 +14266,7 @@ button.wishlistBtn {
 }
 @media (max-width: 575px) {
   .allToursPage .allToursControls {
-    top: 0;
+    top: 63px;
   }
 }
 .allToursPage .allToursControls .allToursControlsInner {
