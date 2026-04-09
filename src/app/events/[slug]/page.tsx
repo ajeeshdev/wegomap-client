@@ -203,7 +203,7 @@ export default function EventDetailPage() {
                                                     <input 
                                                         required 
                                                         type="tel" 
-                                                        placeholder="919876543210" 
+                                                        placeholder="Your number" 
                                                         value={formData.phone}
                                                         onChange={(e) => {
                                                             const val = e.target.value.replace(/\D/g, '');

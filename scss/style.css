@@ -7503,16 +7503,26 @@ footer .footerBottom .socialLinks a:hover {
 
 .enquireFormSide {
   flex: 1;
-  padding: 1rem;
+  padding: 1.5rem 1rem;
 }
 @media (min-width: 768px) {
   .enquireFormSide {
     padding: 1.5rem 2rem;
   }
 }
+@media (max-height: 700px) {
+  .enquireFormSide {
+    padding: 1rem;
+  }
+}
 
 .enquireFormHeader {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+@media (min-width: 768px) {
+  .enquireFormHeader {
+    margin-bottom: 1.5rem;
+  }
 }
 .enquireFormHeader .enquireLabel {
   display: block;
@@ -7522,7 +7532,7 @@ footer .footerBottom .socialLinks a:hover {
   letter-spacing: 0.3em;
   font-size: 0.625rem;
   font-style: italic;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 .enquireFormHeader .enquireTitle {
   font-size: 1.875rem;
@@ -7548,8 +7558,13 @@ footer .footerBottom .socialLinks a:hover {
 .enquireForm {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.75rem;
   animation: slideUpFade 0.6s ease-out forwards;
+}
+@media (min-width: 768px) {
+  .enquireForm {
+    gap: 1.25rem;
+  }
 }
 
 @keyframes slideUpFade {
@@ -7564,7 +7579,7 @@ footer .footerBottom .socialLinks a:hover {
 }
 .enquireInterestBadge {
   background: #f8fafc;
-  padding: 0.75rem 1.25rem;
+  padding: 0.5rem 1rem;
   border-radius: 1.25rem;
   border: 1px solid #f1f5f9;
   display: flex;
@@ -7577,9 +7592,9 @@ footer .footerBottom .socialLinks a:hover {
   border-color: rgba(255, 107, 53, 0.1);
 }
 .enquireInterestBadge .enquireInterestIcon {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 1.25rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 1rem;
   background: #fff;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   display: flex;
@@ -7589,6 +7604,13 @@ footer .footerBottom .socialLinks a:hover {
   border: 1px solid rgba(255, 107, 53, 0.1);
   position: relative;
   overflow: hidden;
+}
+@media (min-width: 768px) {
+  .enquireInterestBadge .enquireInterestIcon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.25rem;
+  }
 }
 .enquireInterestBadge .enquireInterestIcon::after {
   content: "";
@@ -7603,37 +7625,50 @@ footer .footerBottom .socialLinks a:hover {
 }
 .enquireInterestBadge .enquireInterestInfo label {
   display: block;
-  font-size: 0.625rem;
+  font-size: 0.55rem;
   font-weight: 900;
   color: #94a3b8;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  margin-bottom: 0.125rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 0px;
+}
+@media (min-width: 768px) {
+  .enquireInterestBadge .enquireInterestInfo label {
+    font-size: 0.625rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 0.125rem;
+  }
 }
 .enquireInterestBadge .enquireInterestInfo div {
   color: #0f172a;
   font-weight: 900;
   font-style: italic;
   text-transform: uppercase;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   max-width: 200px;
+}
+@media (min-width: 768px) {
+  .enquireInterestBadge .enquireInterestInfo div {
+    font-size: 0.875rem;
+  }
 }
 
 .enquireFormGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 0.75rem;
 }
 @media (min-width: 768px) {
   .enquireFormGrid {
     grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
   }
 }
 
 .enquireInputGroup {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
 }
 .enquireInputGroup label {
   font-size: 0.625rem;
@@ -7697,9 +7732,14 @@ footer .footerBottom .socialLinks a:hover {
   outline: none;
   transition: all 0.3s;
   resize: none;
-  min-height: 60px;
+  min-height: 45px;
   font-family: inherit;
   line-height: 1.5;
+}
+@media (min-width: 768px) {
+  .enquireInputWrapper.textarea textarea {
+    min-height: 60px;
+  }
 }
 .enquireInputWrapper.textarea textarea::-moz-placeholder {
   color: #cbd5e1;
@@ -7722,7 +7762,7 @@ footer .footerBottom .socialLinks a:hover {
   width: 100%;
   background: #FF6B35;
   border: none;
-  padding: 1.25rem;
+  padding: 1rem;
   border-radius: 1.25rem;
   color: #fff;
   font-weight: 900;
@@ -7736,34 +7776,17 @@ footer .footerBottom .socialLinks a:hover {
   cursor: pointer;
   box-shadow: 0 10px 15px -3px rgba(255, 107, 53, 0.2);
   transition: all 0.3s;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
-.enquireSubmitBtn:hover {
-  background: #0f172a;
-  box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.2), 0 0 20px rgba(255, 107, 53, 0.2);
-  transform: translateY(-2px);
-}
-.enquireSubmitBtn:hover .sendIcon {
-  transform: translate(6px, -6px);
-}
-.enquireSubmitBtn:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-.enquireSubmitBtn .sendIcon {
-  transition: transform 0.3s;
-}
-.enquireSubmitBtn .spinner {
-  width: 1rem;
-  height: 1rem;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: #fff;
-  border-radius: 9999px;
-  animation: spin 0.8s linear infinite;
+@media (min-width: 768px) {
+  .enquireSubmitBtn {
+    padding: 1.25rem;
+    margin-top: 1rem;
+  }
 }
 
 .enquirePrivacyNote {
-  margin-top: 2rem;
+  margin-top: 1rem;
   text-align: center;
   color: #94a3b8;
   font-weight: 700;
@@ -7771,6 +7794,11 @@ footer .footerBottom .socialLinks a:hover {
   font-size: 0.625rem;
   text-transform: uppercase;
   letter-spacing: 0.2em;
+}
+@media (min-width: 768px) {
+  .enquirePrivacyNote {
+    margin-top: 2rem;
+  }
 }
 
 @keyframes spin {
@@ -14236,6 +14264,11 @@ button.wishlistBtn {
   z-index: 100;
   box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.1);
 }
+@media (max-width: 575px) {
+  .allToursPage .allToursControls {
+    top: 0;
+  }
+}
 .allToursPage .allToursControls .allToursControlsInner {
   display: flex;
   align-items: center;
@@ -17481,7 +17514,6 @@ section.thank-you p {
 }
 .eventsPage.detail-v3 .ed-overview-card {
   background-color: #fff;
-  border: 1px solid #f1f5f9;
   border-radius: 2.5rem;
   padding: 0;
   position: relative;
