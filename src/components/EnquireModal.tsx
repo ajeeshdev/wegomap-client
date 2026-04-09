@@ -5,6 +5,8 @@ import { MapPin, User, Mail, Phone, X, Send, Sparkles, Clock, ShieldCheck, Messa
 import { API_URL } from '@/config';
 import { toast } from 'react-hot-toast';
 
+import ReCAPTCHA from "react-google-recaptcha";
+
 interface EnquireModalProps {
     isOpen: boolean;
     onClose: () => void;
@@ -16,8 +18,9 @@ export default function EnquireModal({ isOpen, onClose, packageName = 'General I
         name: '',
         phone: '',
         email: '',
-        requirements: ''
+        message: ''
     });
+    const [captchaToken, setCaptchaToken] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
 
@@ -34,6 +37,12 @@ export default function EnquireModal({ isOpen, onClose, packageName = 'General I
 
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (!captchaToken) {
+            toast.error('Please verify that you are not a robot');
+            return;
+        }
+
         setIsSubmitting(true);
         try {
             const res = await fetch(`${API_URL}/leads`, {
@@ -43,14 +52,16 @@ export default function EnquireModal({ isOpen, onClose, packageName = 'General I
                     ...formData,
                     destination: packageName,
                     source: 'Website Global Enquire',
-                    url: typeof window !== "undefined" ? window.location.href : ""
+                    url: typeof window !== "undefined" ? window.location.href : "",
+                    captchaToken
                 })
             });
             const data = await res.json();
             if (data.success) {
                 toast.success('Your inquiry has been sent! Our expert will contact you shortly.');
                 onClose();
-                setFormData({ name: '', phone: '', email: '', requirements: '' });
+                setFormData({ name: '', phone: '', email: '', message: '' });
+                setCaptchaToken(null);
             } else {
                 toast.error(data.error || 'Failed to send inquiry');
             }
@@ -140,11 +151,18 @@ export default function EnquireModal({ isOpen, onClose, packageName = 'General I
                                 <div className="enquireInputIcon"><MessageSquare size={18} /></div>
                                 <textarea
                                     placeholder="Tell us about your trip details..."
-                                    value={formData.requirements}
-                                    onChange={(e) => setFormData({ ...formData, requirements: e.target.value })}
+                                    value={formData.message}
+                                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                                     rows={2}
                                 />
                             </div>
+                        </div>
+
+                        <div className="captchaWrapper mb-4">
+                            <ReCAPTCHA
+                                sitekey="6LeisK4sAAAAAEcMyZmRgYnmLPiwxHrE29Pzm4xL"
+                                onChange={(token) => setCaptchaToken(token)}
+                            />
                         </div>
 
                         <button

@@ -17,6 +17,16 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
+
+import ReCAPTCHA from "react-google-recaptcha";
+
+import "../../../scss/components/_landing-page.scss";
+
 import { API_URL, getImageUrl } from "@/config";
 import { toast } from "react-hot-toast";
 import PackageCard from "@/components/PackageCard";
@@ -151,7 +161,9 @@ export default function LandingPageView({
     name: "",
     phone: "",
     email: "",
+    message: "",
   });
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [faqItems, setFaqItems] = useState<FaqItem[]>([]);
@@ -275,6 +287,12 @@ export default function LandingPageView({
 
   const handleQuickPlanSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!captchaToken) {
+      toast.error('Please verify that you are not a robot');
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       const res = await fetch(`${API_URL}/leads`, {
@@ -285,13 +303,15 @@ export default function LandingPageView({
           destination: selectedPackage || data.title,
           source: 'Landing Page',
           url: typeof window !== "undefined" ? window.location.href : "",
+          captchaToken
         }),
       });
       const json = await res.json();
       if (json.success) {
         toast.success("Request sent successfully!");
         setQuickPlanOpen(false);
-        setFormData({ name: "", phone: "", email: "" });
+        setFormData({ name: "", phone: "", email: "", message: "" });
+        setCaptchaToken(null);
       } else {
         toast.error(json.error || "Failed to send request");
       }
@@ -785,6 +805,28 @@ export default function LandingPageView({
                   type="email"
                   placeholder="john@example.com"
                   className="lp-modalInput"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                />
+              </div>
+
+              <div className="lp-modalFieldStack lp-modalFieldStack--spaced">
+                <label className="lp-modalFieldLabel">
+                  Your Message (Optional)
+                </label>
+                <textarea
+                  placeholder="Tell us about your trip details..."
+                  className="lp-modalInput"
+                  style={{ height: '80px', paddingTop: '12px' }}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                />
+              </div>
+
+              <div className="captchaWrapper mb-4">
+                <ReCAPTCHA
+                  sitekey="6LeisK4sAAAAAEcMyZmRgYnmLPiwxHrE29Pzm4xL"
+                  onChange={(token) => setCaptchaToken(token)}
                 />
               </div>
 

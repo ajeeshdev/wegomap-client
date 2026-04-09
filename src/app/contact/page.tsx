@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { MapPin, Mail, PhoneCall, Send, Clock, Building, User, MailCheck, Smartphone, Captions } from 'lucide-react';
 import DynamicPageBanner from '@/components/DynamicPageBanner';
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function ContactPage() {
     const [formData, setFormData] = useState({
@@ -15,6 +16,7 @@ export default function ContactPage() {
         message: ''
     });
     const [loading, setLoading] = useState(false);
+    const [captchaToken, setCaptchaToken] = useState<string | null>(null);
     const [status, setStatus] = useState<{ type: 'success' | 'error' | null, message: string }>({ type: null, message: '' });
 
     // Dynamic contact details from CMS options
@@ -55,6 +57,12 @@ export default function ContactPage() {
             return;
         }
 
+        if (!captchaToken) {
+            setStatus({ type: 'error', message: 'Please verify that you are not a robot.' });
+            setLoading(false);
+            return;
+        }
+
         try {
             const res = await fetch(`${API_URL}/leads`, {
                 method: 'POST',
@@ -64,7 +72,8 @@ export default function ContactPage() {
                 body: JSON.stringify({
                     ...formData,
                     source: 'Website Contact Page',
-                    url: window.location.href
+                    url: window.location.href,
+                    captchaToken
                 })
             });
 
@@ -73,6 +82,7 @@ export default function ContactPage() {
             if (data.success) {
                 setStatus({ type: 'success', message: 'Thank you! Your message has been sent successfully. We will contact you soon.' });
                 setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
+                setCaptchaToken(null);
             } else {
                 setStatus({ type: 'error', message: data.error || 'Failed to send message. Please try again later.' });
             }
@@ -217,6 +227,13 @@ export default function ContactPage() {
                                         {status.message}
                                     </div>
                                 )}
+
+                                <div className="captchaWrapper mb-4">
+                                    <ReCAPTCHA
+                                        sitekey="6LeisK4sAAAAAEcMyZmRgYnmLPiwxHrE29Pzm4xL"
+                                        onChange={(token) => setCaptchaToken(token)}
+                                    />
+                                </div>
 
                                 <button type="submit" className="submitBtn" disabled={loading}>
                                     {loading ? (
