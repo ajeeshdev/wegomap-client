@@ -77,6 +77,10 @@ export default function TourCategoryPage({
     const [showFilters, setShowFilters] = useState(false);
 
 
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [sortOrder, durationRange, searchQuery]);
+
     const filtered = useMemo(() => {
         let list = packages
             .filter((p: any) => p.status === 'Published' || !p.status)

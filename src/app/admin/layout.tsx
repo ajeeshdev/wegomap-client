@@ -23,31 +23,58 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [siteTitle, setSiteTitle] = useState('WEGOMAP');
   const [favicon, setFavicon] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const userProfile = localStorage.getItem('userProfile');
-    
-    if (!token) {
-        router.push('/login');
-        return;
-    }
+    const fetchUser = async () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            router.push('/login');
+            return;
+        }
 
-    try {
-        if (userProfile) {
-            const user = JSON.parse(userProfile);
-            if (user.role !== 'admin' && user.role !== 'manager') {
+        try {
+            const response = await fetch(`${API_URL}/auth/me`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            const data = await response.json();
+            if (data.success) {
+                const userData = data.data;
+                if (userData.role !== 'admin' && userData.role !== 'manager') {
+                    router.push('/login');
+                    return;
+                }
+                setUser(userData);
+                localStorage.setItem('userProfile', JSON.stringify(userData));
+                setAuthorized(true);
+            } else {
                 router.push('/login');
-                return;
+            }
+        } catch (e) {
+            // If API fails, try fallback to localStorage
+            const userProfile = localStorage.getItem('userProfile');
+            if (userProfile) {
+                const userData = JSON.parse(userProfile);
+                setUser(userData);
+                setAuthorized(true);
+            } else {
+                router.push('/login');
             }
         }
-        setAuthorized(true);
-    } catch (e) {
-        router.push('/login');
-    }
+    };
 
+    fetchUser();
     fetchSettings();
-  }, [router]);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userProfile');
+    localStorage.removeItem('user');
+    window.location.href = '/';
+  };
 
   // Auto-close sidebar on route change (mobile)
   useEffect(() => {
@@ -124,7 +151,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       icon: FileText,
       subItems: [
         { label: 'All blogs', href: '/admin/blogs' },
-        { label: 'Blog categories', href: '/admin/categories' },
+        { label: 'Blog categories', href: '/admin/categories?type=blog' },
       ]
     },
     { 
@@ -134,7 +161,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       subItems: [
         { label: 'Packages', href: '/admin/packages' },
         { label: 'Add Package', href: '/admin/packages/create' },
-        { label: 'Package Categories', href: '/admin/categories' },
+        { label: 'Package Categories', href: '/admin/categories?type=package' },
       ]
     },
     { label: 'Destinations', href: '/admin/destinations', icon: MapPin },
@@ -240,11 +267,51 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       label: 'Advanced', 
       href: '/admin/users', 
       icon: Sliders,
+      permission: 'admin', // Only admins see user manager
       subItems: [
         { label: 'Admin Role Manager', href: '/admin/users' },
       ]
     },
-  ];
+  ].filter(item => {
+    // Admins see everything
+    if (user?.role === 'admin') return true;
+    
+    // If item has a specific permission required
+    if (item.permission) {
+        if (item.permission === 'admin') return user?.role === 'admin';
+        return user?.permissions?.includes(item.permission);
+    }
+
+    // Map labels to permission IDs for modules
+    const permissionMap: Record<string, string> = {
+        'Blogs': 'blogs',
+        'Packages': 'packages',
+        'Hotels': 'hotels',
+        'Events': 'events',
+        'Special Events': 'special_events',
+        'Enquiries': 'enquiries',
+        'Landing Page': 'landing_pages',
+        'Site Pages': 'site_pages',
+        'Destinations': 'destinations',
+        'Home': 'home_settings',
+        'General Settings': 'site_options',
+        'Customers': 'customers',
+        'Houseboat': 'houseboat',
+        'Cabs': 'cabs',
+        'Faqs': 'faqs',
+        'Banners': 'banners',
+        'Services': 'services',
+        'SEO': 'seo'
+    };
+
+    const requiredPerm = permissionMap[item.label];
+    if (requiredPerm) {
+        return user?.permissions?.includes(requiredPerm);
+    }
+
+    // Default: visible (Dashboard, logout, etc are usually public for admins/managers)
+    return true;
+  });
 
   return (
     <div className="admin-layout selection:bg-blue-600/20">
@@ -336,10 +403,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         {/* Footer actions */}
         <div className="admin-sidebar-footer">
-          <Link href="/" className="admin-logout-btn">
-            <LogOut size={18} className="admin-logout-icon" />
-            <span>Exit CMS</span>
-          </Link>
+          <button 
+            onClick={handleLogout} 
+            className="admin-logout-btn w-full flex items-center gap-3 px-6 py-4 border-t border-white/5 hover:bg-white/5 transition-all text-slate-400 hover:text-white"
+          >
+            <LogOut size={18} className="admin-logout-icon text-rose-500" />
+            <span className="font-bold text-[11px] uppercase tracking-widest">Logout System</span>
+          </button>
         </div>
       </div>
 

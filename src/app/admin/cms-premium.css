@@ -1,13 +1,16 @@
 .property-edit-container .property-edit-header {
-  display: flex;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 9999 !important;
+  display: flex !important;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2.5rem;
-  background: #fff;
-  padding: 1.5rem 2rem;
-  border-radius: 20px;
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.04);
-  border: 1px solid #f1f5f9;
+  padding: 1.25rem 2rem !important;
+  background: #ffffff !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+  margin: -1rem -1.25rem 2.5rem -1.25rem !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 0 !important;
 }
 .property-edit-container .property-edit-header .header-left {
   display: flex;
@@ -119,12 +122,6 @@
   font-weight: 700;
   color: #0f172a;
   margin: 0;
-}
-.property-edit-container {
-  /* Form Elements - Fixed Spacing */
-}
-.property-edit-container .admin-form-group {
-  margin-bottom: 1.5rem;
 }
 .property-edit-container .admin-form-group label {
   font-size: 0.75rem;

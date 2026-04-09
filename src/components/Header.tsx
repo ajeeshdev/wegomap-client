@@ -343,6 +343,13 @@ export default function Header() {
 
                                 {isProfileOpen && (
                                     <div className="profileDropdown">
+                                        <button 
+                                            onClick={() => setIsProfileOpen(false)}
+                                            className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors p-1"
+                                            aria-label="Close Profile Menu"
+                                        >
+                                            <X size={18} />
+                                        </button>
                                         {userProfile?.name && (
                                             <div className="dropdownItem" style={{ pointerEvents: 'none', paddingBottom: '0.75rem', borderBottom: '1px solid #f1f5f9', marginBottom: '0.5rem' }}>
                                                 <div style={{ display: 'flex', flexDirection: 'column' }}>

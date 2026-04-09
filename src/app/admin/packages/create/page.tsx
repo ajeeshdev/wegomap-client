@@ -28,7 +28,7 @@ export default function CreatePackage() {
    useEffect(() => {
       const fetchCategories = async () => {
       try {
-        const res = await fetch(`${API_URL}/categories`, {
+        const res = await fetch(`${API_URL}/categories?type=package`, {
           headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
         const data = await res.json();
@@ -97,7 +97,7 @@ export default function CreatePackage() {
    ];
 
    return (
-      <div className="property-edit-container animate-in fade-in duration-700">
+      <div className="property-edit-container">
          <div className="property-edit-header">
             <div className="header-left">
                <button onClick={() => router.push('/admin/packages')} className="back-btn"><ArrowLeft size={18} /></button>
