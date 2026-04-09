@@ -9,7 +9,7 @@ const outfit = Outfit({
   variable: "--font-outfit",
 });
 
-const dancingScript = Outfit({
+const dancingScript = Dancing_Script({
   subsets: ["latin"],
   variable: "--font-writing",
 });
