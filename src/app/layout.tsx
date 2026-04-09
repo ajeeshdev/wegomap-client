@@ -76,13 +76,13 @@ export default function RootLayout({
       </head>
       <body className={`${outfit.variable} ${dancingScript.variable} font-sans antialiased text-slate-900 bg-white`}>
         <AppGoogleAuthProvider>
-          <EnquiryProvider>
-            <CaptchaProvider>
+          <CaptchaProvider>
+            <EnquiryProvider>
               <LayoutWrapper>
                 {children}
               </LayoutWrapper>
-            </CaptchaProvider>
-          </EnquiryProvider>
+            </EnquiryProvider>
+          </CaptchaProvider>
 
           <BootstrapClient />
           <Toaster position="top-right" containerStyle={{ zIndex: 999999999 }} />
