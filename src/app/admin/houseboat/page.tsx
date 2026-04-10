@@ -1,21 +1,34 @@
 "use client";
+import { getImageUrl } from "@/config";
 
 import { API_URL } from '@/config';
 import { useEffect, useState } from 'react';
-import { Ship, Save, Sparkles, Zap, ShieldCheck } from 'lucide-react';
+import Link from 'next/link';
+import { Edit, Trash2, Plus, Search, Ship, Anchor, Waves, Sparkles, MoreVertical, Zap, Clock, ShieldCheck, Layers, MapPin, Globe, LayoutGrid, Settings } from 'lucide-react';
+import { toast } from 'react-hot-toast';
+import '../cms-premium.scss';
 
-export default function HouseboatPricingAdmin() {
-  const [pricing, setPricing] = useState({
-    deluxe: { price: '', old_price: '' },
-    premium: { price: '', old_price: '' },
-    luxury: { price: '', old_price: '' }
-  });
+export default function HouseboatMainAdmin() {
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [activeTab, setActiveTab] = useState('inventory'); // 'inventory' | 'pricing'
+  const [pricing, setPricing] = useState<Record<string, any>>({});
+  const [savingPricing, setSavingPricing] = useState(false);
 
-  useEffect(() => {
+  useEffect(() => { 
+    fetchData(); 
     fetchPricing();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const res = await fetch(`${API_URL}/houseboats`);
+      const json = await res.json();
+      if (json.success) setData(json.data);
+    } catch (err) { console.error(err); }
+    finally { setLoading(false); }
+  };
 
   const fetchPricing = async () => {
     try {
@@ -26,14 +39,26 @@ export default function HouseboatPricingAdmin() {
       }
     } catch (err) {
       console.error(err);
-    } finally {
-      setLoading(false);
     }
   };
 
-  const handleSave = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSaving(true);
+  const handleDelete = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this houseboat?')) return;
+    try {
+      const res = await fetch(`${API_URL}/houseboats/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+      });
+      const json = await res.json();
+      if (json.success) {
+        setData(data.filter((item: any) => item._id !== id));
+        toast.success('Vessel removed from fleet');
+      }
+    } catch (err) { console.error('Failed to delete', err); }
+  }
+
+  const handleSavePricing = async () => {
+    setSavingPricing(true);
     try {
       const res = await fetch(`${API_URL}/options/bulk`, {
         method: 'POST',
@@ -42,144 +67,170 @@ export default function HouseboatPricingAdmin() {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify({
-          options: [
-            { key: 'houseboat_package', value: pricing, type: 'pricing' }
-          ]
+          options: [{ key: 'houseboat_package', value: pricing, type: 'pricing' }]
         })
       });
       const data = await res.json();
-      if (data.success) {
-        alert('Pricing updated successfully!');
-      }
+      if (data.success) toast.success('Pricing protocols updated');
     } catch (err) {
-      console.error(err);
-      alert('Failed to update pricing');
+      toast.error('Sync failed');
     } finally {
-      setSaving(false);
+      setSavingPricing(false);
     }
   };
 
-  const handleChange = (category: string, field: string, value: string) => {
-    setPricing(prev => ({
-      ...prev,
-      [category]: { ...prev[category as keyof typeof prev], [field]: value }
-    }));
-  };
-
-  if (loading) return (
-    <div className="cms-page-wrapper flex items-center justify-center p-10">
-      <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-    </div>
+  const filteredData = data.filter((item: any) =>
+    (item.title || item.name || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (item.category || '').toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
-    <div className="cms-page-wrapper">
-      <div className="admin-page-header">
-        <div>
-          <h2 className="admin-page-title">
-            <div className="admin-page-title-indicator"></div>
-            Houseboat Packages
-          </h2>
-          <p className="admin-page-subtitle">Update pricing for different luxury houseboat categories.</p>
+    <div className="property-edit-container animate-in fade-in duration-700">
+      {/* Header Section */}
+      <div className="property-edit-header">
+        <div className="header-left">
+           <div className="p-3 bg-slate-50 border border-slate-100 rounded-full text-blue-600"><Ship size={20} /></div>
+           <div>
+              <h2 className="serif text-2xl font-bold leading-tight">Houseboat Hub</h2>
+              <p className="status-badge">COMMAND CENTER : <span className="active">{activeTab.toUpperCase()}</span></p>
+           </div>
+        </div>
+        <div className="flex items-center gap-3">
+          {activeTab === 'inventory' && (
+            <>
+              <div className="relative hidden md:block w-64">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
+                <input
+                  type="text"
+                  placeholder="Search vessels..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10 !bg-slate-50 border-none !h-11 font-semibold text-xs"
+                />
+              </div>
+              <Link href="/admin/houseboats/create" className="save-btn !h-11">
+                <Plus size={16} /> Add Vessel
+              </Link>
+            </>
+          )}
+          {activeTab === 'pricing' && (
+            <button onClick={handleSavePricing} disabled={savingPricing} className="save-btn !h-11">
+              <ShieldCheck size={18} /> {savingPricing ? 'Applying...' : 'Apply Pricing'}
+            </button>
+          )}
         </div>
       </div>
 
-      <form onSubmit={handleSave} className="flex flex-col gap-10">
-        <div className="grid grid-cols-1 gap-8">
-          {['deluxe', 'premium', 'luxury'].map((cat) => (
-            <div key={cat} className="admin-card group">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-bl-full -mr-16 -mt-16 group-hover:bg-orange-50 transition-colors duration-500"></div>
-              
-              <div className="flex flex-col md:flex-row gap-12 relative z-10">
-                <div className="w-full md:w-1/3">
-                   <div className="flex items-center gap-5 mb-6">
-                      <div className="admin-icon-enclosure">
-                        <Ship size={24} />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-black text-slate-800 uppercase tracking-tight">{cat}</h3>
-                        <div className="flex items-center gap-2 mt-1">
-                          <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
-                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Active Tier</span>
+      <div className="property-edit-layout">
+        <div className="content-area">
+          {/* Navigation Tabs */}
+          <div className="tabs-header !mb-6">
+            <button 
+              onClick={() => setActiveTab('inventory')}
+              className={`tab-btn-top ${activeTab === 'inventory' ? 'active' : ''}`}
+            >
+              <div className="icon-wrap"><Anchor size={14} /></div>
+              <span>Active Fleet</span>
+            </button>
+            <button 
+              onClick={() => setActiveTab('pricing')}
+              className={`tab-btn-top ${activeTab === 'pricing' ? 'active' : ''}`}
+            >
+              <div className="icon-wrap"><Zap size={14} /></div>
+              <span>Pricing Global</span>
+            </button>
+          </div>
+
+          {/* Content Display */}
+          {activeTab === 'inventory' ? (
+            loading ? (
+              <div className="editor-card flex flex-col items-center justify-center p-20 gap-4">
+                <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                <p className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Syncing fleet data...</p>
+              </div>
+            ) : (
+              <div className="tab-panel">
+                <div className="space-y-4">
+                  {filteredData.map((item: any) => (
+                    <div key={item._id} className="editor-card hover:border-blue-200 transition-all group">
+                      <div className="p-6 flex items-center gap-6">
+                        <div className="w-20 h-20 rounded-2xl bg-slate-50 flex items-center justify-center text-blue-600 border border-slate-100 flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all overflow-hidden relative">
+                          {item.thumb ? (
+                            <img src={getImageUrl(item.thumb)} alt="" className="w-full h-full object-cover" />
+                          ) : (
+                            <Ship size={24} />
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-3 mb-1">
+                            <h3 className="font-black text-slate-900 uppercase text-[12px] tracking-tight">{item.title || item.name}</h3>
+                            <span className="px-2 py-0.5 bg-blue-50 text-blue-600 rounded-md text-[8px] font-black uppercase tracking-widest border border-blue-100">
+                              {item.category || 'Standard'}
+                            </span>
+                          </div>
+                          <p className="text-[10px] text-slate-400 line-clamp-1 font-medium italic">{item.short_desc || 'No brief description set.'}</p>
+                          <div className="flex items-center gap-4 mt-3">
+                            <span className="text-[9px] font-black text-slate-300 uppercase tracking-widest flex items-center gap-1">
+                              <ShieldCheck size={10} className="text-emerald-500" /> ID: #{String(item._id).toUpperCase().slice(-6)}
+                            </span>
+                            <span className="text-[9px] font-black text-emerald-600 uppercase tracking-widest flex items-center gap-1">
+                              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div> {item.status || 'Active'}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Link href={`/admin/houseboats/${item._id}/edit`} className="p-2.5 bg-slate-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all border border-slate-100 shadow-sm" title="Edit Properties">
+                            <Edit size={16} />
+                          </Link>
+                          <button onClick={() => handleDelete(item._id)} className="p-2.5 bg-slate-50 text-slate-300 rounded-xl hover:bg-red-500 hover:text-white transition-all border border-slate-100 shadow-sm" title="Decommission">
+                            <Trash2 size={16} />
+                          </button>
                         </div>
                       </div>
-                   </div>
-                   <p className="text-xs font-medium text-slate-500 leading-relaxed italic">Adjust primary and discounted rates for this category. Changes reflect immediately in frontend search results.</p>
+                    </div>
+                  ))}
+                  {filteredData.length === 0 && (
+                    <div className="editor-card p-20 text-center text-slate-300">
+                      <Ship size={48} className="mx-auto mb-4 opacity-10" />
+                      <p className="font-black text-[10px] uppercase tracking-widest">No vessels found in hangar</p>
+                    </div>
+                  )}
                 </div>
-
-                <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8 items-end border-l border-slate-100/50 pl-0 md:pl-12">
-                  <div className="space-y-3">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-1">Current Base Price (₹)</label>
-                    <input 
-                      type="text" 
-                      value={(pricing as any)[cat]?.price || ''}
-                      onChange={e => handleChange(cat, 'price', e.target.value)}
-                      className="admin-search-input !px-6 !h-16 font-bold text-xl !bg-white"
-                      placeholder="e.g. 15999"
-                    />
+              </div>
+            )
+          ) : (
+            <div className="tab-panel">
+              <div className="editor-card p-10">
+                <div className="flex items-center gap-4 mb-10">
+                  <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-lg shadow-blue-200"><Zap size={20} /></div>
+                  <div>
+                    <h3 className="serif text-xl font-bold">Global Price Protocol</h3>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-1">Configures starting rates for tiers across the platform</p>
                   </div>
-                  <div className="space-y-3">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-1">Strikethrough Price (₹)</label>
-                    <input 
-                      type="text" 
-                      value={(pricing as any)[cat]?.old_price || ''}
-                      onChange={e => handleChange(cat, 'old_price', e.target.value)}
-                      className="admin-search-input !px-6 !h-16 font-bold text-xl !text-slate-400 !bg-slate-50/50"
-                      placeholder="e.g. 19999"
-                    />
-                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  {Object.entries(pricing).map(([key, data]: any) => (
+                    <div key={key} className="p-6 bg-slate-50 rounded-[32px] border border-slate-100 group hover:bg-white hover:border-blue-200 transition-all duration-500">
+                      <div className="flex items-center justify-between mb-6">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 px-3 py-1 bg-white rounded-lg border border-slate-100 group-hover:border-blue-100 group-hover:text-blue-600 transition-colors">{key}</span>
+                        <Sparkles size={14} className="text-slate-200 group-hover:text-blue-600 transition-colors" />
+                      </div>
+                      <div className="admin-form-group mb-0">
+                        <label>Base Price (₹)</label>
+                        <input 
+                          type="text" 
+                          value={data.price} 
+                          onChange={e => setPricing({...pricing, [key]: {...data, price: e.target.value}})}
+                          className="title-input !text-xl !font-black !bg-white"
+                        />
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
-          ))}
+          )}
         </div>
-
-        <div className="admin-sticky-action-bar">
-            <div className="flex items-center gap-3">
-                <div className="admin-action-bar-icon">
-                    <ShieldCheck size={20} />
-                </div>
-                <div>
-                    <h4 className="text-[11px] font-black text-slate-900 uppercase tracking-tight">System Integrity</h4>
-                    <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">Encrypted Pricing Update Protocol</p>
-                </div>
-            </div>
-            <button 
-              type="submit"
-              disabled={saving}
-              className="admin-btn admin-btn-primary h-14 px-12 flex items-center gap-3 disabled:opacity-50"
-            >
-              {saving ? (
-                  <>
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                      Processing...
-                  </>
-              ) : (
-                  <>
-                      <Sparkles size={18} /> Update Pricing
-                  </>
-              )}
-            </button>
-        </div>
-      </form>
-
-      {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 mb-10">
-          <div className="admin-stat-card admin-stat-card--primary">
-               <div className="admin-card-corner admin-card-corner--strong"></div>
-               <h5 className="admin-stat-label">Total Tiers</h5>
-               <p className="admin-stat-value">03</p>
-          </div>
-          <div className="admin-stat-card admin-stat-card--slate">
-               <div className="admin-card-corner"></div>
-               <h5 className="admin-stat-label">Tier Coverage</h5>
-               <p className="admin-stat-value">100%</p>
-          </div>
-          <div className="admin-stat-card admin-stat-card--emerald">
-               <div className="admin-card-corner admin-card-corner--strong"></div>
-               <h5 className="admin-stat-label">Visibility</h5>
-               <p className="admin-stat-value">Live</p>
-          </div>
       </div>
     </div>
   );

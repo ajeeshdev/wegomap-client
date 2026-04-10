@@ -250,5 +250,11 @@ export const categoryMappings : Record<string, string[]> = {
         "maldives-tour-package",
         "dubai-tour-package",
         "sri-lanka"
+    ],
+    "cruise-packages": [
+        "thailand-tour-package-premium",
+        "dubai-tour-package",
+        "maldives-tour-package",
+        "malaysia-3-nights-4-days"
     ]
 };

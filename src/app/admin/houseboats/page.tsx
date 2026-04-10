@@ -4,7 +4,7 @@ import { getImageUrl } from "@/config";
 import { API_URL } from '@/config';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Edit, Trash2, Plus, Search, Ship, Anchor, Waves, Sparkles, MoreVertical, Zap, Clock, ShieldCheck, Layers, MapPin } from 'lucide-react';
+import { Edit, Trash2, Plus, Search, Ship, Anchor, Waves, Sparkles, MoreVertical, Zap, Clock, ShieldCheck, Layers, MapPin, Globe } from 'lucide-react';
 
 export default function HouseboatsAdmin() {
   const [data, setData] = useState([]);
@@ -127,6 +127,9 @@ export default function HouseboatsAdmin() {
                     </td>
                     <td className="px-8 py-6 text-right">
                       <div className="flex items-center justify-end gap-2 transition-all duration-300">
+                        <Link href={`/cruises/${item.slug || item._id}`} target="_blank" className="p-2.5 bg-white border border-slate-200 rounded-xl text-slate-400 hover:bg-slate-900 hover:text-white transition-all shadow-sm active:scale-95 group/view" title="View on Site">
+                           <Globe size={16} />
+                        </Link>
                         <Link href={`/admin/houseboats/${item._id}/edit`} className="p-2.5 bg-white border border-slate-200 rounded-xl text-blue-600 hover:bg-blue-600 hover:text-white transition-all shadow-sm active:scale-95 group/edit" title="Edit">
                           <Edit size={16} className="group-hover/edit:rotate-12 transition-transform" />
                         </Link>

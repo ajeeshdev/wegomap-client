@@ -51,19 +51,19 @@ export default function SlidersAdmin() {
           </h2>
           <p className="admin-page-subtitle">Manage hero banners</p>
         </div>
-        <div className="flex items-center gap-3 w-full md:w-auto">
-          <div className="relative flex-1 md:w-64">
+        <div className="flex items-center gap-3">
+          <div className="relative w-64 hidden md:block">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
             <input
               type="text"
-              placeholder="Search..."
+              placeholder="Search hero banners..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="admin-search-input pl-9 h-10 text-[10px]"
+              className="admin-search-input pl-9 h-9 text-[11px] font-medium"
             />
           </div>
-          <Link href="/admin/sliders/create" className="admin-btn admin-btn-primary h-10 px-5 text-[10px]">
-            Add Slider
+          <Link href="/admin/sliders/create" className="admin-btn admin-btn-primary h-9 px-4 text-[11px]">
+            <Plus size={14} /> Add Slider
           </Link>
         </div>
       </div>
@@ -105,11 +105,11 @@ export default function SlidersAdmin() {
               <div className="p-4 flex flex-col justify-between flex-1">
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <div className="text-[9px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
-                      <Clock size={11} className="text-blue-600" /> Status
+                    <div className="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
+                      <Sparkles size={11} className="text-blue-500" /> Visibility
                     </div>
-                    <div className="flex items-center gap-1 px-1.5 py-0.5 bg-emerald-50 text-emerald-600 rounded text-[8px] font-bold border border-emerald-100">
-                      Active
+                    <div className="flex items-center gap-1 px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded-full text-[9px] font-bold border border-emerald-100">
+                      Live on Site
                     </div>
                   </div>
 
@@ -123,15 +123,15 @@ export default function SlidersAdmin() {
                       </div>
                     </div>
                   ) : (
-                    <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest text-center py-2.5 border border-dashed border-slate-100 rounded-lg bg-slate-50 italic">No link defined</div>
+                    <div className="text-[9px] font-bold text-slate-300 uppercase tracking-tighter text-center py-2.5 border border-dashed border-slate-200 rounded-xl bg-slate-50/30 italic">No Target Link Defined</div>
                   )}
                 </div>
 
                 <div className="flex items-center gap-2 pt-4">
-                  <Link href={`/admin/sliders/${item._id}/edit`} className="flex-1 flex items-center justify-center gap-2 h-9 bg-white border border-slate-200 rounded-lg text-blue-600 font-bold uppercase tracking-widest text-[9px] hover:bg-blue-600 hover:text-white transition-all shadow-sm active:scale-95">
+                  <Link href={`/admin/sliders/${item._id}/edit`} className="flex-1 flex items-center justify-center gap-2 h-9 bg-white border border-slate-200 rounded-lg text-slate-700 font-bold uppercase tracking-widest text-[9px] hover:bg-slate-900 hover:text-white transition-all shadow-sm active:scale-95">
                     <Edit size={12} /> Edit Slide
                   </Link>
-                  <button onClick={() => handleDelete(item._id)} className="w-9 h-9 flex items-center justify-center bg-white border border-slate-200 rounded-lg text-emerald-500 hover:bg-emerald-500 hover:text-white transition-all shadow-sm active:scale-95 shrink-0">
+                  <button onClick={() => handleDelete(item._id)} className="w-9 h-9 flex items-center justify-center bg-white border border-red-100 rounded-lg text-red-500 hover:bg-red-500 hover:text-white transition-all shadow-sm active:scale-95 shrink-0">
                     <Trash2 size={14} />
                   </button>
                 </div>

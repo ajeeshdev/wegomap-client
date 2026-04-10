@@ -31,7 +31,7 @@ export const siteData = {
       "id": "6",
       "title": "Sail Away in Luxury",
       "btntext": "View More",
-      "btnurl": "/cruise-packages/",
+      "btnurl": "/cruises/",
       "image": "https://api-demo.wegomap.com/uploads/sliders/47i1zjrs0f2dSgQUuuIc3wIBajZyoqVIwDnybQ7L250901035243.jpg",
       "slide_title": "Exotic cruise",
       "slide_subtitle": "Relaxation with ocean views"

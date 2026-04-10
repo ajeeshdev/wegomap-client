@@ -168,12 +168,14 @@ export default function CreateCategory() {
                     <Globe size={14} className="text-sky-500" /> Link (URL)
                   </label>
                   <div className="relative group/routing">
-                    <span className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 font-black text-[11px] tracking-widest z-10">/</span>
+                    {!formData.slug && (
+                      <span className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 font-black text-[11px] tracking-widest z-10 pointer-events-none">/</span>
+                    )}
                     <input 
                       type="text" 
                       value={formData.slug} 
                       onChange={e => setFormData({ ...formData, slug: e.target.value })} 
-                      className="admin-form-input pl-10 font-black h-16 px-8 rounded-3xl text-blue-600 bg-slate-50 border-slate-100 group-hover/routing:bg-white transition-all uppercase tracking-widest" 
+                      className={`admin-form-input ${formData.slug ? 'px-8' : 'pl-10'} font-black h-16 rounded-3xl text-blue-600 bg-slate-50 border-slate-100 group-hover/routing:bg-white transition-all uppercase tracking-widest`} 
                       placeholder="honeymoon-specials" 
                     />
                   </div>

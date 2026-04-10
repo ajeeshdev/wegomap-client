@@ -64,6 +64,8 @@ import { EnquiryProvider } from '@/context/EnquiryContext';
 import CaptchaProvider from '@/components/CaptchaProvider';
 
 
+import "../../scss/style.scss";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -71,9 +73,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <head>
-        <link rel="stylesheet" href="/scss/style.css" />
-      </head>
       <body className={`${outfit.variable} ${dancingScript.variable} font-sans antialiased text-slate-900 bg-white`}>
         <AppGoogleAuthProvider>
           <CaptchaProvider>

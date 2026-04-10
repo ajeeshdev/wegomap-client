@@ -843,5 +843,40 @@
         from { transform: translateX(-50%) translateY(40px); opacity: 0; }
         to { transform: translateX(-50%) translateY(0); opacity: 1; }
     }
+
+    // ── Load More / Infinite Scroll ──
+    .allToursLoadMore {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: center;
+        padding: 2rem 0 5rem 0;
+        
+        .loaderContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.25rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+
+            .spinner {
+                color: $cosmicOrange;
+                animation: spin 1s linear infinite;
+            }
+        }
+
+        .loadMorePlaceholder {
+            height: 100px;
+            width: 100%;
+        }
+    }
+
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
 }
 
