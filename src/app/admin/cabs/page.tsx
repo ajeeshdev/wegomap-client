@@ -17,6 +17,12 @@ export default function CabsAdmin() {
   const [pricing, setPricing] = useState<any>(defaultPricing);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [vehicleTypes, setVehicleTypes] = useState([
+    { key: 'sedan', label: 'Sedan', icon: '🚗' },
+    { key: 'innova', label: 'Innova', icon: '🚐' },
+    { key: 'seater912', label: '9/12 Seater', icon: '🚌' },
+    { key: 'seater17', label: '17 Seater', icon: '🚍' }
+  ]);
 
   useEffect(() => { fetchPricing(); }, []);
 
@@ -96,13 +102,6 @@ export default function CabsAdmin() {
       <p className="font-black text-slate-400 uppercase tracking-widest text-[10px]">Accessing Fleet Matrix...</p>
     </div>
   );
-
-  const [vehicleTypes, setVehicleTypes] = useState([
-    { key: 'sedan', label: 'Sedan', icon: '🚗' },
-    { key: 'innova', label: 'Innova', icon: '🚐' },
-    { key: 'seater912', label: '9/12 Seater', icon: '🚌' },
-    { key: 'seater17', label: '17 Seater', icon: '🚍' }
-  ]);
 
   const addVehicleType = () => {
     const name = prompt("Enter Vehicle Name (e.g. Luxury SUV):");
