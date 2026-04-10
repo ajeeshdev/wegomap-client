@@ -194,10 +194,10 @@ export default function CreateHotelLandingPage({ params: paramsProp }: { params?
     <div className="property-edit-container animate-in fade-in duration-700">
       <div className="property-edit-header">
         <div className="header-left">
-           <Link href="/admin/hotel-landing-page" className="p-3 bg-slate-50 border border-slate-100 rounded-full hover:bg-white hover:shadow-md transition-all"><ArrowLeft size={18} /></Link>
+           <Link href="/admin/hotel-landing-page" className="p-3 bg-slate-50 border border-slate-100 rounded-full hover:bg-white hover:shadow-md transition-all text-slate-600"><ArrowLeft size={18} /></Link>
            <div>
-              <h2>{isEdit ? 'Property Editing' : 'New Property Landing'}</h2>
-              <p className="status-badge">Status: <span>{formData.status}</span></p>
+              <h2 className="serif text-2xl font-bold leading-tight">{isEdit ? 'Property Editing' : 'New Property Landing'}</h2>
+              <p className="status-badge">CURRENT STATUS: <span className="active">{formData.status}</span></p>
            </div>
         </div>
         <button onClick={handleSubmit} className="save-btn">
@@ -206,52 +206,51 @@ export default function CreateHotelLandingPage({ params: paramsProp }: { params?
       </div>
 
       <div className="property-edit-layout">
-        <div className="tabs-sidebar">
-           {tabs.map(t => (
-              <button key={t.id} onClick={()=>setActiveTab(t.id)} className={`tab-btn ${activeTab === t.id ? 'active' : ''}`}>
-                 <div className="icon-wrap">{t.icon}</div>
-                 {t.label}
-              </button>
-           ))}
-        </div>
+        <div className="content-area">
+           <div className="tabs-header">
+              {tabs.map(t => (
+                 <button key={t.id} onClick={()=>setActiveTab(t.id)} className={`tab-btn-top ${activeTab === t.id ? 'active' : ''}`}>
+                    <div className="icon-wrap">{t.icon}</div>
+                    <span>{t.label}</span>
+                 </button>
+              ))}
+           </div>
 
-        <div className="content-area animate-in slide-in-from-bottom-2 duration-500">
            {activeTab === 'identification' && (
-              <div className="editor-card">
-                 <div className="card-header"><h4 className="serif">Identity & SEO Metadata</h4></div>
-                 <div className="grid grid-cols-2 gap-6">
-                    <div className="admin-form-group"><label>Property Internal Title</label><input type="text" value={formData.title} onChange={e=>setFormData({...formData, title: e.target.value})} /></div>
-                    <div className="admin-form-group"><label>URL Slug</label><input type="text" value={formData.slug} onChange={e=>setFormData({...formData, slug: e.target.value})} className="font-mono" /></div>
+              <div className="tab-panel">
+                 <div className="editor-card">
+                    <div className="card-header"><h4 className="serif">Property Identity</h4></div>
+                    <div className="card-body">
+                       <div className="admin-form-group"><label>Property Internal Title</label><input type="text" value={formData.title} onChange={e=>setFormData({...formData, title: e.target.value})} className="title-input" /></div>
+                       <div className="admin-form-group"><label>Meta Search Title</label><input type="text" value={formData.seo_title} onChange={e=>setFormData({...formData, seo_title: e.target.value})} /></div>
+                       <div className="admin-form-group"><label>Search Description (SEO)</label><textarea value={formData.seo_description} onChange={e=>setFormData({...formData, seo_description: e.target.value})} rows={3} /></div>
+                    </div>
                  </div>
-                 <div className="admin-form-group"><label>Meta Search Title</label><input type="text" value={formData.seo_title} onChange={e=>setFormData({...formData, seo_title: e.target.value})} /></div>
-                 <div className="admin-form-group"><label>Search Description (SEO)</label><textarea value={formData.seo_description} onChange={e=>setFormData({...formData, seo_description: e.target.value})} rows={3} /></div>
               </div>
            )}
 
            {activeTab === 'content' && (
-              <div className="space-y-6">
+              <div className="tab-panel">
                  <div className="editor-card">
-                    <div className="card-header"><h4 className="serif">Hero Visuals</h4></div>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                       <ImageUpload value={formData.banner_image} onChange={url=>setFormData({...formData, banner_image: url})} label="Main Banner" dimensions="1920 x 800" />
-                       <div className="space-y-4">
-                          <div className="admin-form-group"><label>Display Header</label><input type="text" value={formData.banner_title} onChange={e=>setFormData({...formData, banner_title: e.target.value})} /></div>
-                          <div className="admin-form-group"><label>Sub-header Kicker</label><input type="text" value={formData.subtitle} onChange={e=>setFormData({...formData, subtitle: e.target.value})} /></div>
-                          <div className="admin-form-group"><label>Story Intro Text</label><textarea value={formData.banner_description} onChange={e=>setFormData({...formData, banner_description: e.target.value})} rows={4} /></div>
-                       </div>
+                    <div className="card-header"><h4 className="serif">Hero Content</h4></div>
+                    <div className="card-body">
+                       <div className="admin-form-group"><label>Display Header</label><input type="text" value={formData.banner_title} onChange={e=>setFormData({...formData, banner_title: e.target.value})} className="title-input" /></div>
+                       <div className="admin-form-group"><label>Sub-header Kicker</label><input type="text" value={formData.subtitle} onChange={e=>setFormData({...formData, subtitle: e.target.value})} /></div>
+                       <div className="admin-form-group"><label>Story Intro Text</label><textarea value={formData.banner_description} onChange={e=>setFormData({...formData, banner_description: e.target.value})} rows={4} /></div>
                     </div>
                  </div>
                  <div className="editor-card">
                     <div className="card-header"><h4 className="serif">Storytelling About</h4></div>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                       <div className="space-y-4">
-                          <div className="admin-form-group"><label>About Section Title</label><input type="text" value={formData.about_title} onChange={e=>setFormData({...formData, about_title: e.target.value})} /></div>
-                          <div className="admin-form-group"><label>Detailed Description</label><textarea value={formData.about_description} onChange={e=>setFormData({...formData, about_description: e.target.value})} rows={8} /></div>
-                          <div className="admin-form-group"><label>Key Traits (One per line)</label><textarea value={formData.about_features.join('\n')} onChange={e=>setFormData({...formData, about_features: e.target.value.split('\n')})} rows={5} className="font-mono text-xs" /></div>
-                       </div>
-                       <div className="space-y-4">
-                          <ImageUpload value={formData.about_image} onChange={url=>setFormData({...formData, about_image: url})} label="Story Illustration" dimensions="1200 x 800" />
-                          <div className="admin-form-group"><label>Float Badge Caption</label><input type="text" value={formData.about_badge_text} onChange={e=>setFormData({...formData, about_badge_text: e.target.value})} /></div>
+                    <div className="card-body">
+                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                          <div className="space-y-4">
+                             <div className="admin-form-group"><label>About Section Title</label><input type="text" value={formData.about_title} onChange={e=>setFormData({...formData, about_title: e.target.value})} /></div>
+                             <div className="admin-form-group"><label>Detailed Description</label><textarea value={formData.about_description} onChange={e=>setFormData({...formData, about_description: e.target.value})} rows={8} /></div>
+                          </div>
+                          <div className="space-y-4">
+                             <div className="admin-form-group"><label>Key Traits (One per line)</label><textarea value={formData.about_features.join('\n')} onChange={e=>setFormData({...formData, about_features: e.target.value.split('\n')})} rows={5} className="font-mono text-xs" /></div>
+                             <div className="admin-form-group"><label>Float Badge Caption</label><input type="text" value={formData.about_badge_text} onChange={e=>setFormData({...formData, about_badge_text: e.target.value})} /></div>
+                          </div>
                        </div>
                     </div>
                  </div>
@@ -259,76 +258,69 @@ export default function CreateHotelLandingPage({ params: paramsProp }: { params?
            )}
 
            {activeTab === 'rooms' && (
-              <div className="space-y-8">
-                 <div className="flex items-center justify-between"><h4 className="text-lg font-bold serif">Accommodations & Gallery</h4><button onClick={()=>setFormData({...formData, hotel_rooms: [...formData.hotel_rooms, { title:'', description:'', images:[], facilities:[] }]})} className="add-item-btn"><Plus size={14}/> Add New Room</button></div>
-                 <div className="space-y-4">
-                    {formData.hotel_rooms.map((room, idx) => (
-                       <div key={idx} className="repeater-item group">
-                          <button onClick={()=>{const r=[...formData.hotel_rooms]; r.splice(idx,1); setFormData({...formData, hotel_rooms: r});}} className="remove-btn"><Trash2 size={14}/></button>
-                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                             <div className="space-y-4">
-                                <div className="admin-form-group"><label>Room Class Title</label><input type="text" value={room.title} onChange={e=>{const r=[...formData.hotel_rooms]; r[idx].title=e.target.value; setFormData({...formData, hotel_rooms: r});}} placeholder="Superior Deluxe, etc." /></div>
-                                <div className="admin-form-group"><label>Description</label><textarea value={room.description} onChange={e=>{const r=[...formData.hotel_rooms]; r[idx].description=e.target.value; setFormData({...formData, hotel_rooms: r});}} rows={4} placeholder="Brief details about the space..." /></div>
-                                <div className="admin-form-group"><label>Highlights</label><input type="text" value={room.facilities.join(', ')} onChange={e=>{const r=[...formData.hotel_rooms]; r[idx].facilities=e.target.value.split(',').map(s=>s.trim()); setFormData({...formData, hotel_rooms: r});}} className="text-xs" placeholder="WiFi, AC, Bed size... (comma separated)" /></div>
-                             </div>
-                             <div className="grid grid-cols-1 gap-3">
-                                {room.images?.map((img:string, iIdx:number) => (
-                                   <div key={iIdx} className="relative">
-                                      <ImageUpload value={img} onChange={url=>{const r=[...formData.hotel_rooms]; r[idx].images[iIdx]=url; setFormData({...formData, hotel_rooms: r});}} label={`#${iIdx+1}`} hideRemove={true} dimensions="1200 x 800" />
-                                      <button onClick={()=>{const r=[...formData.hotel_rooms]; r[idx].images.splice(iIdx,1); setFormData({...formData, hotel_rooms: r});}} className="absolute -top-1 -right-1 p-1 bg-red-500 text-white rounded-full shadow-lg z-20"><X size={10}/></button>
+              <div className="tab-panel">
+                 <div className="editor-card">
+                    <div className="card-header flex-header">
+                       <h4 className="serif">Accommodations</h4>
+                       <button onClick={()=>setFormData({...formData, hotel_rooms: [...formData.hotel_rooms, { title:'', description:'', images:[], facilities:[] }]})} className="add-day-btn">+ Add Room</button>
+                    </div>
+                    <div className="card-body">
+                       <div className="space-y-6">
+                          {formData.hotel_rooms.map((room, idx) => (
+                             <div key={idx} className="itinerary-item">
+                                <button onClick={()=>{const r=[...formData.hotel_rooms]; r.splice(idx,1); setFormData({...formData, hotel_rooms: r});}} className="remove-day-btn"><Trash2 size={14}/></button>
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                   <div className="space-y-4">
+                                      <div className="admin-form-group"><label>Room Class Title</label><input type="text" value={room.title} onChange={e=>{const r=[...formData.hotel_rooms]; r[idx].title=e.target.value; setFormData({...formData, hotel_rooms: r});}} placeholder="Superior Deluxe, etc." className="title-input" /></div>
+                                      <div className="admin-form-group"><label>Description</label><textarea value={room.description} onChange={e=>{const r=[...formData.hotel_rooms]; r[idx].description=e.target.value; setFormData({...formData, hotel_rooms: r});}} rows={4} placeholder="Brief details about the space..." /></div>
+                                      <div className="admin-form-group"><label>Highlights</label><input type="text" value={room.facilities.join(', ')} onChange={e=>{const r=[...formData.hotel_rooms]; r[idx].facilities=e.target.value.split(',').map(s=>s.trim()); setFormData({...formData, hotel_rooms: r});}} className="text-xs" /></div>
                                    </div>
-                                ))}
-                                <button onClick={()=>{const r=[...formData.hotel_rooms]; if(!r[idx].images) r[idx].images=[]; r[idx].images.push(''); setFormData({...formData, hotel_rooms: r});}} className="aspect-square border-2 border-dashed border-slate-200 rounded-lg flex flex-col items-center justify-center text-slate-400 hover:border-slate-800 hover:text-slate-800 transition-all gap-2"><Plus size={20}/><span className="text-[10px] font-bold uppercase tracking-widest">Image</span></button>
+                                   <div className="grid grid-cols-1 gap-3">
+                                      {room.images?.map((img:string, iIdx:number) => (
+                                         <div key={iIdx} className="relative">
+                                            <ImageUpload value={img} onChange={url=>{const r=[...formData.hotel_rooms]; r[idx].images[iIdx]=url; setFormData({...formData, hotel_rooms: r});}} label={`#${iIdx+1}`} dimensions="1200 x 800" />
+                                            <button onClick={()=>{const r=[...formData.hotel_rooms]; r[idx].images.splice(iIdx,1); setFormData({...formData, hotel_rooms: r});}} className="absolute -top-1 -right-1 p-1 bg-red-500 text-white rounded-full shadow-lg z-20"><X size={10}/></button>
+                                         </div>
+                                      ))}
+                                      <button onClick={()=>{const r=[...formData.hotel_rooms]; if(!r[idx].images) r[idx].images=[]; r[idx].images.push(''); setFormData({...formData, hotel_rooms: r});}} className="add-day-btn mt-2 !bg-slate-100 !text-slate-600 border border-slate-200">+ Add Room Image</button>
+                                   </div>
+                                </div>
                              </div>
-                          </div>
+                          ))}
                        </div>
-                    ))}
+                    </div>
                  </div>
-                 <div className="editor-card mt-6">
-                    <div className="card-header flex items-center justify-between"><h4 className="serif">Property Image Portfolio</h4><button onClick={()=>setFormData({...formData, gallery_images: [...formData.gallery_images, '']})} className="text-slate-900 font-bold text-sm underline-decoration">+ More Photos</button></div>
-                    <div className="gallery-grid">
-                       {formData.gallery_images.map((img, idx) => (
-                          <div key={idx} className="relative group">
-                             <ImageUpload value={img} onChange={url=>{const g=[...formData.gallery_images]; g[idx]=url; setFormData({...formData, gallery_images: g});}} label="IMG" hideRemove={true} dimensions="1200 x 800" />
-                             <button onClick={()=>{const g=[...formData.gallery_images]; g.splice(idx,1); setFormData({...formData, gallery_images: g});}} className="absolute -top-1 -right-1 p-1.5 bg-red-500 text-white rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all z-20"><X size={10}/></button>
-                          </div>
-                       ))}
+                 <div className="editor-card">
+                    <div className="card-header"><h4 className="serif">Property Portfolio</h4></div>
+                    <div className="card-body">
+                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                          {formData.gallery_images.map((img, idx) => (
+                             <div key={idx} className="relative group">
+                                <ImageUpload value={img} onChange={url=>{const g=[...formData.gallery_images]; g[idx]=url; setFormData({...formData, gallery_images: g});}} label="PHOTO" dimensions="1200 x 800" />
+                                <button onClick={()=>{const g=[...formData.gallery_images]; g.splice(idx,1); setFormData({...formData, gallery_images: g});}} className="remove-day-btn opacity-100"><X size={10}/></button>
+                             </div>
+                          ))}
+                          <button onClick={()=>setFormData({...formData, gallery_images: [...formData.gallery_images, '']})} className="aspect-square border-2 border-dashed border-slate-100 rounded-2xl flex flex-col items-center justify-center text-slate-400 hover:bg-slate-50 transition-all">+ Add Photo</button>
+                       </div>
                     </div>
                  </div>
               </div>
            )}
 
            {activeTab === 'amenities' && (
-              <div className="space-y-6">
+              <div className="tab-panel">
                  <div className="editor-card">
-                    <div className="card-header flex items-center justify-between"><h4 className="serif">Resort Specialities</h4><button onClick={()=>setFormData({...formData, hotel_facilities: [...formData.hotel_facilities, { icon:'Wifi', title:'', description:'' }]})} className="text-sm font-bold underline decoration-slate-300">+ Add Facility</button></div>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                       {formData.hotel_facilities.map((fac, idx) => (
-                          <div key={idx} className="repeater-item space-y-3">
-                             <button onClick={()=>{const f=[...formData.hotel_facilities]; f.splice(idx,1); setFormData({...formData, hotel_facilities: f});}} className="remove-btn"><Trash2 size={12}/></button>
-                             <div className="flex gap-3">
-                                <IconPicker value={fac.icon} onChange={val => {
-                                   const f=[...formData.hotel_facilities]; 
-                                   f[idx].icon=val; 
-                                   setFormData({...formData, hotel_facilities:f});
-                                }} />
-                                <input type="text" value={fac.title} onChange={e=>{const f=[...formData.hotel_facilities]; f[idx].title=e.target.value; setFormData({...formData, hotel_facilities:f});}} placeholder="Heated Pool, etc." className="flex-1 font-bold border-0 bg-white" />
-                             </div>
-                             <textarea value={fac.description} onChange={e=>{const f=[...formData.hotel_facilities]; f[idx].description=e.target.value; setFormData({...formData, hotel_facilities:f});}} rows={2} className="text-[11px] border-0 bg-slate-50 p-2" placeholder="Briefly describe this feature..." />
-                          </div>
-                       ))}
-                    </div>
-                 </div>
-                 <div className="editor-card">
-                    <div className="card-header flex items-center justify-between"><h4 className="serif">Exclusive Benefits (Why Us)</h4><button onClick={()=>setFormData({...formData, why_choose_points: [...formData.why_choose_points, { icon:'Check', title:'', description:'' }]})} className="text-sm font-bold underline decoration-slate-300">+ Add Note</button></div>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                       <ImageUpload value={formData.why_choose_image} onChange={url=>setFormData({...formData, why_choose_image: url})} label="Experience Visual" dimensions="1200 x 800" />
-                       <div className="space-y-3">
-                          {formData.why_choose_points.map((pt, idx) => (
-                             <div key={idx} className="repeater-item !p-4">
-                                <button onClick={()=>{const p=[...formData.why_choose_points]; p.splice(idx,1); setFormData({...formData, why_choose_points: p});}} className="remove-btn"><X size={12}/></button>
-                                <input type="text" value={pt.title} onChange={e=>{const p=[...formData.why_choose_points]; p[idx].title=e.target.value; setFormData({...formData, why_choose_points: p});}} className="font-bold text-xs mb-1 border-0 bg-transparent w-full" placeholder="USP Heading" />
-                                <textarea value={pt.description} onChange={e=>{const p=[...formData.why_choose_points]; p[idx].description=e.target.value; setFormData({...formData, why_choose_points: p});}} rows={2} className="text-[10px] border-0 bg-slate-100 p-2 w-full" placeholder="Quick details..." />
+                    <div className="card-header flex-header"><h4 className="serif">Resort Specialities</h4><button onClick={()=>setFormData({...formData, hotel_facilities: [...formData.hotel_facilities, { icon:'Wifi', title:'', description:'' }]})} className="add-day-btn">+ Add Facility</button></div>
+                    <div className="card-body">
+                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                          {formData.hotel_facilities.map((fac, idx) => (
+                             <div key={idx} className="itinerary-item">
+                                <button onClick={()=>{const f=[...formData.hotel_facilities]; f.splice(idx,1); setFormData({...formData, hotel_facilities: f});}} className="remove-day-btn"><Trash2 size={12}/></button>
+                                <div className="flex gap-3 mb-3">
+                                   <IconPicker value={fac.icon} onChange={val => { const f=[...formData.hotel_facilities]; f[idx].icon=val; setFormData({...formData, hotel_facilities:f}); }} />
+                                   <input type="text" value={fac.title} onChange={e=>{const f=[...formData.hotel_facilities]; f[idx].title=e.target.value; setFormData({...formData, hotel_facilities:f});}} placeholder="Feature title" className="title-input !text-base" />
+                                </div>
+                                <textarea value={fac.description} onChange={e=>{const f=[...formData.hotel_facilities]; f[idx].description=e.target.value; setFormData({...formData, hotel_facilities:f});}} rows={2} placeholder="Description..." />
                              </div>
                           ))}
                        </div>
@@ -337,61 +329,83 @@ export default function CreateHotelLandingPage({ params: paramsProp }: { params?
               </div>
            )}
 
-           {activeTab === 'local' && (
-              <div className="space-y-8">
-                 <div className="editor-card">
-                    <div className="card-header flex items-center justify-between"><h4 className="serif">Local Exploration</h4><button onClick={()=>setFormData({...formData, nearby_attractions: [...formData.nearby_attractions, { title:'', distance:'', description:'' }]})} className="text-sm font-bold border-b border-dotted">+ Add New Spot</button></div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                       {formData.nearby_attractions.map((att, idx) => (
-                          <div key={idx} className="repeater-item group">
-                             <button onClick={()=>{const a=[...formData.nearby_attractions]; a.splice(idx,1); setFormData({...formData, nearby_attractions: a});}} className="remove-btn"><Trash2 size={12}/></button>
-                             <div className="flex flex-wrap gap-4">
-                                <input type="text" value={att.title} onChange={e=>{const a=[...formData.nearby_attractions]; a[idx].title=e.target.value; setFormData({...formData, nearby_attractions: a});}} className="font-bold text-sm bg-transparent border-0 w-100" placeholder="Destination Name" />
-                                <input type="text" value={att.distance} onChange={e=>{const a=[...formData.nearby_attractions]; a[idx].distance=e.target.value; setFormData({...formData, nearby_attractions: a});}} className="w-100 text-xs font-bold bg-slate-100 rounded-lg h-8" placeholder="2.5 KM" />
-                             </div>
-                             <textarea value={att.description} onChange={e=>{const a=[...formData.nearby_attractions]; a[idx].description=e.target.value; setFormData({...formData, nearby_attractions: a});}} rows={2} className="text-[11px] mt-2 bg-slate-50/50 p-2 border-0 w-full" placeholder="Why should guests visit here?..." />
-                          </div>
-                       ))}
-                    </div>
-                 </div>
-                 <div className="editor-card">
-                    <div className="card-header flex items-center justify-between"><h4 className="serif">Guest Wall of Love</h4><button onClick={()=>setFormData({...formData, testimonials: [...formData.testimonials, { content:'', author:'', date:'' }]})} className="text-sm font-bold border-b border-dotted">+ Add Feedback</button></div>
-                    <div className="space-y-4">
-                       {formData.testimonials.map((t, idx) => (
-                          <div key={idx} className="repeater-item border-l-4 border-l-slate-200">
-                             <button onClick={()=>{const ts=[...formData.testimonials]; ts.splice(idx,1); setFormData({...formData, testimonials: ts});}} className="remove-btn"><Trash2 size={12}/></button>
-                             <textarea value={t.content} onChange={e=>{const ts=[...formData.testimonials]; ts[idx].content=e.target.value; setFormData({...formData, testimonials: ts});}} rows={4} className="italic serif !text-base bg-transparent border-0 w-full mb-3" placeholder="Paste the review content here..." />
-                             <div className="flex gap-4 pt-4 border-t border-slate-100">
-                                <input type="text" value={t.author} onChange={e=>{const ts=[...formData.testimonials]; ts[idx].author=e.target.value; setFormData({...formData, testimonials: ts});}} className="text-xs font-black uppercase tracking-widest border-0 bg-transparent" placeholder="Guest Name" />
-                                <input type="text" value={t.date} onChange={e=>{const ts=[...formData.testimonials]; ts[idx].date=e.target.value; setFormData({...formData, testimonials: ts});}} className="text-[10px] text-slate-400 border-0 bg-transparent" placeholder="Date (Optional)" />
-                             </div>
-                          </div>
-                       ))}
-                    </div>
-                 </div>
-              </div>
-           )}
-
            {activeTab === 'contact' && (
-              <div className="editor-card">
-                 <div className="card-header"><h4 className="serif">Public Contact & Maps</h4></div>
-                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                    <div className="space-y-4">
-                       <div className="admin-form-group"><label>Google Maps Embed (Iframe)</label><textarea value={formData.google_maps_iframe} onChange={e=>setFormData({...formData, google_maps_iframe: e.target.value})} rows={10} className="font-mono text-[10px] !bg-slate-50 shadow-inner p-4" /></div>
-                       <div className="admin-form-group"><label>Location Identifier (for Weather)</label><input type="text" value={formData.location} onChange={e=>setFormData({...formData, location: e.target.value})} placeholder="Munnar, etc." /></div>
-                    </div>
-                    <div className="space-y-6">
-                       <div className="admin-form-group"><label>Business Address</label><textarea value={formData.footer_address} onChange={e=>setFormData({...formData, footer_address: e.target.value})} rows={3} /></div>
-                       <div className="grid grid-cols-2 gap-4">
-                          <div className="admin-form-group"><label>Front Desk Phone</label><input type="text" value={formData.cta_phone} onChange={e=>setFormData({...formData, cta_phone: e.target.value})} /></div>
-                          <div className="admin-form-group"><label>Direct WhatsApp</label><input type="text" value={formData.whatsapp_number} onChange={e=>setFormData({...formData, whatsapp_number: e.target.value})} /></div>
+              <div className="tab-panel">
+                 <div className="editor-card">
+                    <div className="card-header"><h4 className="serif">Public Contact & Maps</h4></div>
+                    <div className="card-body">
+                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                          <div className="space-y-4">
+                             <div className="admin-form-group"><label>Google Maps Embed (Iframe)</label><textarea value={formData.google_maps_iframe} onChange={e=>setFormData({...formData, google_maps_iframe: e.target.value})} rows={10} className="font-mono text-xs" /></div>
+                             <div className="admin-form-group"><label>Location Identifier (for Weather)</label><input type="text" value={formData.location} onChange={e=>setFormData({...formData, location: e.target.value})} placeholder="Munnar, etc." /></div>
+                          </div>
+                          <div className="space-y-6">
+                             <div className="admin-form-group"><label>Business Address</label><textarea value={formData.footer_address} onChange={e=>setFormData({...formData, footer_address: e.target.value})} rows={3} /></div>
+                             <div className="grid grid-cols-2 gap-4">
+                                <div className="admin-form-group"><label>Front Desk Phone</label><input type="text" value={formData.cta_phone} onChange={e=>setFormData({...formData, cta_phone: e.target.value})} /></div>
+                                <div className="admin-form-group"><label>Direct WhatsApp</label><input type="text" value={formData.whatsapp_number} onChange={e=>setFormData({...formData, whatsapp_number: e.target.value})} /></div>
+                             </div>
+                             <div className="admin-form-group"><label>Official Guest Email</label><input type="text" value={formData.footer_email} onChange={e=>setFormData({...formData, footer_email: e.target.value})} /></div>
+                          </div>
                        </div>
-                       <div className="admin-form-group"><label>Official Guest Email</label><input type="text" value={formData.footer_email} onChange={e=>setFormData({...formData, footer_email: e.target.value})} /></div>
                     </div>
                  </div>
               </div>
            )}
         </div>
+
+        <div className="meta-sidebar">
+           <div className="meta-card">
+              <div className="card-header"><h4 className="serif">Publishing</h4></div>
+              <div className="card-body">
+                 <div className="meta-item">
+                    <label>URL Slug</label>
+                    <div className="relative">
+                       {!formData.slug && (
+                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono pointer-events-none">/</span>
+                       )}
+                       <input 
+                          type="text" 
+                          value={formData.slug} 
+                          onChange={e=>setFormData({...formData, slug: e.target.value})} 
+                          className={`slug-input ${formData.slug ? 'px-3' : 'pl-8'}`} 
+                       />
+                    </div>
+                 </div>
+                 <div className="meta-item">
+                    <div className="toggle-row">
+                       <label>Page Status</label>
+                       <input type="checkbox" checked={formData.status === 'Published'} onChange={e => setFormData({ ...formData, status: e.target.checked ? 'Published' : 'Draft' })} className="sr-only peer" />
+                       <div className="toggle-switch"></div>
+                    </div>
+                 </div>
+                 <div className="meta-item">
+                    <label>Campaign Mode</label>
+                    <div className="toggle-row">
+                       <label>Is Campaign Page</label>
+                       <input type="checkbox" checked={formData.isCampaign} onChange={e => setFormData({ ...formData, isCampaign: e.target.checked })} className="sr-only peer" />
+                       <div className="toggle-switch"></div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+
+           <div className="meta-card">
+              <div className="card-header"><h4 className="serif">Main Asset</h4></div>
+              <div className="card-body">
+                 <ImageUpload value={formData.banner_image} onChange={url=>setFormData({...formData, banner_image: url})} label="Banner Image" dimensions="1920 x 800" />
+                 <p className="help-text mt-4">This is the background used for the top hero section.</p>
+              </div>
+           </div>
+
+           <div className="meta-card">
+              <div className="card-header"><h4 className="serif">Story Illustration</h4></div>
+              <div className="card-body">
+                 <ImageUpload value={formData.about_image} onChange={url=>setFormData({...formData, about_image: url})} label="Primary Photo" dimensions="1200 x 800" />
+              </div>
+           </div>
+        </div>
+
       </div>
     </div>
   );

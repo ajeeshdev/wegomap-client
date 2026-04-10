@@ -59,6 +59,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function RootSlugPage({ params }: PageProps) {
     const { slug } = await params;
 
+    if (slug === 'cruise-packages') {
+        redirect('/cruises');
+    }
+
     let dynamicCategory = null;
     let isCategory = false;
 
@@ -73,7 +77,7 @@ export default async function RootSlugPage({ params }: PageProps) {
     } catch (e) {}
 
     const staticData = categoryData[slug] || {};
-    const isStaticCategory = !!categoryMappings[slug];
+    const isStaticCategory = !!categoryData[slug];
 
     if (isCategory || isStaticCategory) {
         let dynamicPackages: TourPackage[] = [];

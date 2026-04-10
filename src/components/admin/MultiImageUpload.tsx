@@ -84,7 +84,8 @@ export default function MultiImageUpload({ value, onChange, label = "Gallery Ass
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-        {value.map((url, index) => (
+        {(value || []).map((url, index) => (
+
           <div key={index} className="relative group rounded-2xl overflow-hidden border border-slate-200 shadow-sm aspect-square bg-slate-50 transition-all hover:shadow-md">
             <img src={url} alt={`Gallery ${index}`} className="w-full h-full object-cover transition-all duration-500" />
             <div className="absolute top-2 right-2 flex items-center justify-center">

@@ -69,76 +69,90 @@ export default function CreatePage() {
       </div>
 
       <div className="property-edit-layout">
-        <div className="tabs-sidebar">
-           {tabs.map((tab) => {
-              const Icon = tab.icon;
-              return (
-                 <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`tab-btn ${activeTab === tab.id ? 'active' : ''}`}>
-                    <Icon size={16} /> <span>{tab.label}</span>
-                 </button>
-              );
-           })}
-           
-           <div className="mt-8 pt-8 border-t border-slate-100 px-4">
-              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-4">Publish Visibility</label>
-              <select value={formData.status} onChange={e => setFormData({ ...formData, status: e.target.value })} className="admin-form-select !bg-white">
-                <option value="Published">🟢 Published</option>
-                <option value="Draft">🟡 Draft</option>
-              </select>
-              
-              <div className="mt-6 pt-6 border-t border-slate-50">
-                 <label className="flex items-center justify-between cursor-pointer group">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Quick Loading</span>
-                    <input type="checkbox" checked={formData.isStatic} onChange={e => setFormData({ ...formData, isStatic: e.target.checked })} className="sr-only peer" />
-                    <div className="w-10 h-6 bg-slate-200 rounded-full peer-checked:bg-emerald-500 transition-all relative">
-                       <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-all peer-checked:left-5"></div>
-                    </div>
-                 </label>
-              </div>
-           </div>
+        <div className="content-area">
+          <div className="tabs-header">
+             {tabs.map((tab) => {
+                const Icon = tab.icon;
+                return (
+                   <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`tab-btn-top ${activeTab === tab.id ? 'active' : ''}`}>
+                      <div className="icon-wrap"><Icon size={14} /></div>
+                      <span>{tab.label}</span>
+                   </button>
+                );
+             })}
+          </div>
+
+          {activeTab === 'content' && (
+             <div className="tab-panel">
+                <div className="editor-card">
+                   <div className="card-header"><h4 className="serif">Page Identification</h4></div>
+                   <div className="card-body">
+                      <div className="admin-form-group">
+                         <label>Page Title</label>
+                         <input type="text" value={formData.title} onChange={e => {const v=e.target.value; setFormData({...formData, title:v, slug:v.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')});}} placeholder="e.g. Terms of Service..." className="title-input" />
+                      </div>
+                   </div>
+                </div>
+
+                <div className="editor-card">
+                   <div className="card-header"><h4 className="serif">Page Content</h4></div>
+                   <div className="card-body no-padding">
+                      <RichTextEditor value={formData.content} onChange={(content) => setFormData({ ...formData, content })} height={600} />
+                   </div>
+                </div>
+
+                <div className="editor-card">
+                   <div className="card-header"><h4 className="serif">Short Summary</h4></div>
+                   <div className="card-body">
+                      <textarea rows={4} value={formData.excerpt} onChange={e => setFormData({ ...formData, excerpt: e.target.value })} placeholder="A short summary for previews..." />
+                   </div>
+                </div>
+             </div>
+          )}
+
+          {activeTab === 'config' && (
+             <div className="tab-panel">
+                <div className="editor-card">
+                   <div className="card-header"><h4 className="serif">Search Engine Optimization</h4></div>
+                   <div className="card-body">
+                      <div className="admin-form-group">
+                         <label>Meta Title</label>
+                         <input type="text" value={formData.seo_title} onChange={e => setFormData({...formData, seo_title: e.target.value})} />
+                      </div>
+                      <div className="admin-form-group">
+                         <label>Meta Description</label>
+                         <textarea rows={3} value={formData.seo_description} onChange={e => setFormData({...formData, seo_description: e.target.value})} />
+                      </div>
+                   </div>
+                </div>
+             </div>
+          )}
         </div>
 
-        <div className="content-area">
-           {activeTab === 'content' && (
-              <div className="space-y-6">
-                 <div className="editor-card">
-                    <div className="card-header"><h4 className="serif">Page Identification</h4></div>
-                    <div className="grid grid-cols-2 gap-6">
-                       <div className="admin-form-group">
-                          <label>Page Title</label>
-                          <input type="text" value={formData.title} onChange={e => {const v=e.target.value; setFormData({...formData, title:v, slug:v.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')});}} placeholder="e.g. Terms of Service..." className="text-xl font-bold" />
-                       </div>
-                       <div className="admin-form-group">
-                          <label>Public URL Path</label>
-                          <div className="relative"><span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-mono">/</span><input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} className="pl-6 font-mono text-blue-600" /></div>
-                       </div>
+        <div className="meta-sidebar">
+           <div className="meta-card">
+              <div className="card-header"><h4 className="serif">Publishing</h4></div>
+              <div className="card-body">
+                 <div className="meta-item">
+                    <label>URL Slug</label>
+                    <input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} className="slug-input" />
+                 </div>
+                 <div className="meta-item">
+                    <label>Privacy Status</label>
+                    <select value={formData.status} onChange={e => setFormData({ ...formData, status: e.target.value })}>
+                      <option value="Published">🟢 Published</option>
+                      <option value="Draft">🔴 Draft</option>
+                    </select>
+                 </div>
+                 <div className="meta-item">
+                    <div className="toggle-row">
+                       <label>Quick Loading</label>
+                       <input type="checkbox" checked={formData.isStatic} onChange={e => setFormData({ ...formData, isStatic: e.target.checked })} className="sr-only peer" />
+                       <div className="toggle-switch"></div>
                     </div>
                  </div>
-
-                 <div className="editor-card">
-                    <div className="card-header"><h4 className="serif">Page Content</h4></div>
-                    <div className="bg-slate-50/30 rounded-2xl border border-slate-100 overflow-hidden">
-                       <RichTextEditor value={formData.content} onChange={(content) => setFormData({ ...formData, content })} height={600} />
-                    </div>
-                 </div>
-
-                 <div className="editor-card">
-                    <div className="card-header"><h4 className="serif">Short Summary</h4></div>
-                    <textarea rows={4} value={formData.excerpt} onChange={e => setFormData({ ...formData, excerpt: e.target.value })} placeholder="A short summary for previews..." />
-                 </div>
               </div>
-           )}
-
-
-
-           {activeTab === 'config' && (
-              <div className="editor-card">
-                 <div className="py-20 text-center">
-                    <Settings size={40} className="text-slate-200 mx-auto mb-4" />
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">No advanced settings available.</p>
-                 </div>
-              </div>
-           )}
+           </div>
         </div>
       </div>
     </div>

@@ -37,8 +37,9 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation, Pagination, EffectFade } from 'swiper/modules';
+import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
-import OfferBanner from "@/components/OfferBanner";
+const OfferBanner = dynamic(() => import("@/components/OfferBanner"), { ssr: false });
 import WishlistButton from "@/components/WishlistButton";
 import { API_URL, getImageUrl } from "@/config";
 import { toast } from 'react-hot-toast';
@@ -127,7 +128,7 @@ export default function Home() {
     { name: "Tours", icon: "MapPin", active: true, href: "/packages" },
     { name: "Hotels", icon: "Building2", href: "/hotels" },
     { name: "Events", icon: "Calendar", href: "/events" },
-    { name: "Cruises", icon: "Ship", href: "/cruise-packages" },
+    { name: "Cruises", icon: "Ship", href: "/cruises" },
     { name: "Blogs", icon: "FileText", href: "/blogs" },
     { name: "Contact", icon: "Phone", href: "/contact" },
   ];

@@ -1,11 +1,11 @@
 "use client";
 
 import { API_URL, getImageUrl } from '@/config';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Search, MapPin, Clock, Filter, X, User, Mail, Phone, Heart, Star, MessageSquare, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { Search, MapPin, Clock, Filter, X, User, Mail, Phone, Heart, Star, MessageSquare, ChevronLeft, ChevronRight, ArrowRight, Loader2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import DynamicPageBanner from '@/components/DynamicPageBanner';
 import EnquireModal from '@/components/EnquireModal';
@@ -113,6 +113,9 @@ export default function AllToursPage() {
     const [selectedPackage, setSelectedPackage] = useState('');
     const [cmsPackages, setCmsPackages] = useState<PackageCardData[]>([]);
     const [loading, setLoading] = useState(true);
+    const [visibleCount, setVisibleCount] = useState(6);
+    const [loadingMore, setLoadingMore] = useState(false);
+    const observerTarget = useRef<HTMLDivElement>(null);
     const [wishlist, setWishlist] = useState<string[]>([]);
     const [formData, setFormData] = useState({
         name: '',
@@ -307,6 +310,38 @@ export default function AllToursPage() {
         }
         return list;
     }, [allCombinedPackages, activeFilter, searchQuery, sortOrder, durationRange]);
+
+    // Reset visibleCount when filters change
+    useEffect(() => {
+        setVisibleCount(6);
+    }, [activeFilter, searchQuery, sortOrder, durationRange]);
+
+    const loadMore = useCallback(() => {
+        if (visibleCount < filtered.length && !loadingMore) {
+            setLoadingMore(true);
+            setTimeout(() => {
+                setVisibleCount(prev => prev + 6);
+                setLoadingMore(false);
+            }, 600);
+        }
+    }, [visibleCount, filtered.length, loadingMore]);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            entries => {
+                if (entries[0].isIntersecting) {
+                    loadMore();
+                }
+            },
+            { threshold: 0.1, rootMargin: '100px' }
+        );
+
+        if (observerTarget.current) {
+            observer.observe(observerTarget.current);
+        }
+
+        return () => observer.disconnect();
+    }, [loadMore]);
 
     const handleEnquire = (e: React.MouseEvent, pkgTitle: string) => {
         e.preventDefault();
@@ -523,17 +558,33 @@ export default function AllToursPage() {
                         <button onClick={() => { setActiveFilter('all'); setSearchQuery(''); }}>Clear Filters</button>
                     </div>
                 ) : (
-                    filtered.map((pkg, i) => (
-                        <PackageCard 
-                            key={`${pkg.slug}-${i}`}
-                            pkg={pkg}
-                            wishlist={wishlist}
-                            toggleWishlist={toggleWishlist}
-                            onEnquire={handleEnquire}
-                        />
-                    ))
+                    <>
+                        {filtered.slice(0, visibleCount).map((pkg, i) => (
+                            <PackageCard 
+                                key={`${pkg.slug}-${i}`}
+                                pkg={pkg}
+                                wishlist={wishlist}
+                                toggleWishlist={toggleWishlist}
+                                onEnquire={handleEnquire}
+                            />
+                        ))}
+                    </>
                 )}
             </section>
+
+            {/* Infinite Scroll Sentinel */}
+            {visibleCount < filtered.length && (
+                <div ref={observerTarget} className="allToursLoadMore">
+                    {loadingMore ? (
+                        <div className="loaderContainer">
+                            <Loader2 className="spinner" size={32} />
+                            <span>Discovering more packages...</span>
+                        </div>
+                    ) : (
+                        <div className="loadMorePlaceholder" />
+                    )}
+                </div>
+            )}
 
             {/* ── Quick Plan Modal ── */}
             <EnquireModal 

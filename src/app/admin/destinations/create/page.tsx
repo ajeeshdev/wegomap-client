@@ -62,54 +62,70 @@ export default function CreateDestination() {
       </div>
 
       <div className="property-edit-layout">
-        <div className="tabs-sidebar">
-           <button className="tab-btn active">
-              <MapPin size={16} /> <span>General Info</span>
-           </button>
-           
-           <div className="mt-8 pt-8 border-t border-slate-100 px-4">
-              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-4">Publication</label>
-              <select value={formData.status} onChange={e => setFormData({ ...formData, status: e.target.value })} className="admin-form-select !bg-white">
-                <option value="Active">Published</option>
-                <option value="Hidden">Draft / Hidden</option>
-              </select>
+        <div className="content-area">
+          <div className="tabs-header">
+             <button className="tab-btn-top active">
+                <div className="icon-wrap"><MapPin size={14} /></div>
+                <span>General Information</span>
+             </button>
+          </div>
 
-              <div className="mt-8">
-                 <ImageUpload value={formData.image} onChange={(url) => setFormData({ ...formData, image: url })} label="Featured Cover" dimensions="1200 x 800" />
-              </div>
-           </div>
+          <div className="space-y-6">
+             <div className="editor-card">
+                <div className="card-header"><h4 className="serif">Location Profile</h4></div>
+                <div className="card-body">
+                   <div className="grid grid-cols-2 gap-6">
+                      <div className="admin-form-group">
+                         <label>Destination Name</label>
+                         <input type="text" value={formData.title} onChange={e => {const v=e.target.value; setFormData({...formData, title:v, slug:v.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')});}} placeholder="e.g. Munnar, Kerala" className="title-input" />
+                      </div>
+                      <div className="admin-form-group">
+                         <label>URL Slug</label>
+                         <input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} placeholder="munnar" className="slug-input" />
+                      </div>
+                   </div>
+                </div>
+             </div>
+
+             <div className="editor-card">
+                <div className="card-header"><h4 className="serif">Rich Description</h4></div>
+                <div className="card-body no-padding">
+                   <RichTextEditor value={formData.content} onChange={(content) => setFormData({ ...formData, content })} height={400} />
+                </div>
+             </div>
+
+             <div className="editor-card">
+                <div className="card-header"><h4 className="serif">Search Summary</h4></div>
+                <div className="card-body">
+                   <textarea rows={4} value={formData.excerpt} onChange={e => setFormData({ ...formData, excerpt: e.target.value })} placeholder="A brief summary for listings..." />
+                </div>
+             </div>
+          </div>
         </div>
 
-        <div className="content-area">
-           <div className="space-y-6">
-              <div className="editor-card">
-                 <div className="card-header"><h4 className="serif">Location Profile</h4></div>
-                 <div className="grid grid-cols-2 gap-6">
-                    <div className="admin-form-group">
-                       <label>Destination Name</label>
-                       <input type="text" value={formData.title} onChange={e => {const v=e.target.value; setFormData({...formData, title:v, slug:v.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')});}} placeholder="e.g. Munnar, Kerala" className="text-xl font-bold" />
-                    </div>
-                    <div className="admin-form-group">
-                       <label>URL Slug</label>
-                       <input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} placeholder="munnar" className="font-mono text-blue-600" />
-                    </div>
+        <div className="meta-sidebar">
+           <div className="meta-card">
+              <div className="card-header"><h4 className="serif">Publication</h4></div>
+              <div className="card-body">
+                 <div className="meta-item">
+                    <label>Visibility</label>
+                    <select value={formData.status} onChange={e => setFormData({ ...formData, status: e.target.value })}>
+                      <option value="Active">🟢 Published</option>
+                      <option value="Hidden">🔴 Hidden</option>
+                    </select>
                  </div>
               </div>
+           </div>
 
-              <div className="editor-card">
-                 <div className="card-header"><h4 className="serif">Rich Description</h4></div>
-                 <div className="bg-slate-50/30 rounded-2xl border border-slate-100 overflow-hidden">
-                    <RichTextEditor value={formData.content} onChange={(content) => setFormData({ ...formData, content })} height={400} />
-                 </div>
-              </div>
-
-              <div className="editor-card">
-                 <div className="card-header"><h4 className="serif">Search Summary</h4></div>
-                 <textarea rows={4} value={formData.excerpt} onChange={e => setFormData({ ...formData, excerpt: e.target.value })} placeholder="A brief summary for listings..." />
+           <div className="meta-card">
+              <div className="card-header"><h4 className="serif">Featured Visual</h4></div>
+              <div className="card-body">
+                 <ImageUpload value={formData.image} onChange={(url) => setFormData({ ...formData, image: url })} label="Location Cover" dimensions="1200 x 800" />
               </div>
            </div>
         </div>
       </div>
+
     </div>
   );
 }

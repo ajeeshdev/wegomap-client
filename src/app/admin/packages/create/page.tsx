@@ -3,7 +3,14 @@
 import { API_URL } from '@/config';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Save, ArrowLeft, Image as ImageIcon, Info, Map as MapIcon, List, Search, Trash2, Globe, Sparkles, Clock, ShieldCheck, Layers, Tag, IndianRupee, Zap, MapPin, Shield as Safe } from 'lucide-react';
+import Link from 'next/link';
+import { 
+  Save, ArrowLeft, Info, List, Map, Search, Trash2, Globe, 
+  Sparkles, Clock, ShieldCheck, Layers, IndianRupee, Zap, 
+  MapPin, Shield as Safe, ChevronDown, Check, LayoutPanelTop, 
+  Settings, Image as ImageIcon, Plus, X
+} from 'lucide-react';
+
 import ImageUpload from '@/components/admin/ImageUpload';
 import MultiImageUpload from '@/components/admin/MultiImageUpload';
 import RichTextEditor from '@/components/admin/Editor';
@@ -16,51 +23,54 @@ export default function CreatePackage() {
 
    const [loading, setLoading] = useState(false);
    const [categories, setCategories] = useState<any[]>([]);
+   const [activeTab, setActiveTab] = useState('basic');
+   const [catDropdown, setCatDropdown] = useState(false);
+
    const [formData, setFormData] = useState<any>({
       title: '', pcode: '', subtitle: '', slabel: '', location: '', description: '',
-      inclusions: [], exclusions: [], terms: '',
+      inclusions: [], exclusions: [], terms: '', highlights: [],
       itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '',
       averageRating: 4.9, reviewCount: 150, noCostEmi: '',
-      amenities: [], categories: [],
+      amenities: [], categories: [], images: [], thumb: '', thumb_alt: 'wegomap',
       status: 'Published', order: 0
    });
 
    useEffect(() => {
       const fetchCategories = async () => {
-      try {
-        const res = await fetch(`${API_URL}/categories?type=package`, {
-          headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
-        });
-        const data = await res.json();
-        if (data.success) {
-          const items = data.data;
-          const map: Record<string, any> = {};
-          items.forEach((item: any) => { map[item._id] = { ...item, children: [] }; });
-          const roots: any[] = [];
-          items.forEach((item: any) => {
-            if (item.parent && map[item.parent]) {
-              map[item.parent].children.push(map[item._id]);
-            } else {
-              roots.push(map[item._id]);
-            }
-          });
-          const flattened: any[] = [];
-          const traverse = (nodes: any[], depth = 0) => {
-            nodes.sort((a, b) => (a.order || 0) - (b.order || 0)).forEach(node => {
-              flattened.push({ ...node, depth });
-              traverse(node.children, depth + 1);
+         try {
+            const res = await fetch(`${API_URL}/categories?type=package`, {
+               headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
             });
-          };
-          traverse(roots);
-          setCategories(flattened);
-        }
-      } catch (err) { console.error('Failed to fetch categories', err); }
-    };
-    fetchCategories();
-  }, []);
+            const data = await res.json();
+            if (data.success) {
+               const items = data.data;
+               const map: Record<string, any> = {};
+               items.forEach((item: any) => { map[item._id] = { ...item, children: [] }; });
+               const roots: any[] = [];
+               items.forEach((item: any) => {
+                  if (item.parent && map[item.parent]) {
+                     map[item.parent].children.push(map[item._id]);
+                  } else {
+                     roots.push(map[item._id]);
+                  }
+               });
+               const flattened: any[] = [];
+               const traverse = (nodes: any[], depth = 0) => {
+                  nodes.sort((a, b) => (a.order || 0) - (b.order || 0)).forEach(node => {
+                     flattened.push({ ...node, depth });
+                     traverse(node.children, depth + 1);
+                  });
+               };
+               traverse(roots);
+               setCategories(flattened);
+            }
+         } catch (err) { console.error('Failed to fetch categories', err); }
+      };
+      fetchCategories();
+   }, []);
 
-   const handleSubmit = async (e?: React.FormEvent) => {
-      if (e) e.preventDefault();
+   const handleSubmit = async () => {
+      if (!formData.title) return toast.error('Package title is required');
       setLoading(true);
       try {
          const res = await fetch(`${API_URL}/packages`, {
@@ -86,282 +96,259 @@ export default function CreatePackage() {
       }
    };
 
-   const [activeTab, setActiveTab] = useState('basic');
-
    const tabs = [
-      { id: 'basic', label: 'Basic Info', icon: Layers },
-      { id: 'pricing', label: 'Pricing & Strategy', icon: IndianRupee },
-      { id: 'itinerary', label: 'Detailed Itinerary', icon: MapIcon },
-      { id: 'gallery', label: 'Visual Assets', icon: ImageIcon },
-      { id: 'seo', label: 'Search Indexing', icon: Globe },
+      { id: 'basic', label: 'Essential Info', icon: <Info size={16} /> },
+      { id: 'content', label: 'Narrative & Terms', icon: <List size={16} /> },
+      { id: 'itinerary', label: 'Tour Strategy', icon: <Map size={16} /> },
+      { id: 'visuals', label: 'Visual Media', icon: <ImageIcon size={16} /> },
    ];
 
    return (
-      <div className="property-edit-container">
+      <div className="property-edit-container animate-in fade-in duration-700">
          <div className="property-edit-header">
             <div className="header-left">
-               <button onClick={() => router.push('/admin/packages')} className="back-btn"><ArrowLeft size={18} /></button>
-               <div className="title-area">
-                  <h1 className="serif">Add New Package</h1>
-                  <div className="status-badge">PACKAGE CODE: <span className="active">{formData.pcode || 'PENDING'}</span></div>
+               <Link href="/admin/packages" className="p-3 bg-slate-50 border border-slate-100 rounded-full hover:bg-white hover:shadow-md transition-all text-slate-600">
+                  <ArrowLeft size={18} />
+               </Link>
+               <div>
+                  <h2 className="serif text-2xl font-bold leading-tight">New Tour Package</h2>
+                  <p className="status-badge">STATUS: <span className="active">{formData.status}</span></p>
                </div>
             </div>
-            <div className="header-actions">
-               <button onClick={() => handleSubmit()} disabled={loading} className="save-btn"><Safe size={16} /> {loading ? 'Saving...' : 'Save Package'}</button>
-            </div>
+            <button onClick={handleSubmit} disabled={loading} className="save-btn">
+               <ShieldCheck size={18} /> {loading ? 'Saving...' : 'Publish Changes'}
+            </button>
          </div>
 
          <div className="property-edit-layout">
-            <div className="tabs-sidebar">
-               {tabs.map((tab) => {
-                  const Icon = tab.icon;
-                  return (
-                     <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`tab-btn ${activeTab === tab.id ? 'active' : ''}`}>
-                        <Icon size={16} /> <span>{tab.label}</span>
+            <div className="content-area">
+               <div className="tabs-header">
+                  {tabs.map(t => (
+                     <button key={t.id} onClick={() => setActiveTab(t.id)} className={`tab-btn-top ${activeTab === t.id ? 'active' : ''}`}>
+                        <div className="icon-wrap">{t.icon}</div>
+                        <span>{t.label}</span>
                      </button>
-                  );
-               })}
+                  ))}
+               </div>
 
-               <div className="mt-8 pt-8 border-t border-slate-100 px-4 space-y-6">
-                  <div>
-                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-4">Package Code</label>
-                     <input type="text" value={formData.pcode} onChange={e => setFormData({ ...formData, pcode: e.target.value.toUpperCase() })} className="admin-form-input !h-10 font-mono text-center uppercase" placeholder="WM-KRL-001" />
-                  </div>
-
-                  <div>
-                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-4">Visibility & Status</label>
-                     <div className="space-y-4">
-                        <label className="flex items-center justify-between cursor-pointer group">
-                           <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Active Status</span>
-                           <input type="checkbox" checked={formData.status === 'Published'} onChange={e => setFormData({ ...formData, status: e.target.checked ? 'Published' : 'Draft' })} className="sr-only peer" />
-                           <div className="w-10 h-6 bg-slate-200 rounded-full peer-checked:bg-blue-600 transition-all relative">
-                              <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-all peer-checked:translate-x-4 shadow-sm"></div>
+               <div className="tab-panel">
+                  {activeTab === 'basic' && (
+                     <div className="space-y-6">
+                        <div className="editor-card">
+                           <div className="card-header"><h4 className="serif">Fundamental Identity</h4></div>
+                           <div className="card-body">
+                              <div className="admin-form-group">
+                                 <label>Commercial Title</label>
+                                 <input type="text" value={formData.title} onChange={e => {
+                                    const v = e.target.value; 
+                                    setFormData({ ...formData, title: v, pcode: v.substring(0,3).toUpperCase() + Math.floor(Math.random()*1000) });
+                                 }} placeholder="Munnar Luxury Escape..." className="title-input" />
+                              </div>
+                              <div className="grid grid-cols-2 gap-6">
+                                 <div className="admin-form-group"><label>Lead Subtitle</label><input type="text" value={formData.subtitle} onChange={e => setFormData({ ...formData, subtitle: e.target.value })} /></div>
+                                 <div className="admin-form-group"><label>Promo Highlight</label><input type="text" value={formData.slabel} onChange={e => setFormData({ ...formData, slabel: e.target.value })} className="promo-input" /></div>
+                              </div>
+                              <div className="grid grid-cols-2 gap-6">
+                                 <div className="admin-form-group"><label>Geographic Focus</label><input type="text" value={formData.location} onChange={e => setFormData({ ...formData, location: e.target.value })} /></div>
+                                 <div className="admin-form-group"><label>Temporal Duration</label><input type="text" value={formData.duration} onChange={e => setFormData({ ...formData, duration: e.target.value })} placeholder="e.g. 3D / 2N" /></div>
+                              </div>
                            </div>
-                        </label>
-                        <div className="pt-2">
-                           <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Display Order</label>
-                           <input type="number" value={formData.order} onChange={e => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })} className="admin-form-input !h-9 font-bold text-center" placeholder="0" />
+                        </div>
+
+                        <div className="editor-card">
+                           <div className="card-header"><h4 className="serif">Financial Architecture</h4></div>
+                           <div className="card-body">
+                              <div className="admin-form-grid-3">
+                                 <div className="admin-form-group"><label className="regular-price-label">Rack Rate (₹)</label><input type="number" value={formData.oldamt} onChange={e => setFormData({ ...formData, oldamt: e.target.value })} className="regular-price-input" /></div>
+                                 <div className="admin-form-group"><label className="offer-price-label">Live Offer (₹)</label><input type="number" value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} className="offer-price-input" /></div>
+                                 <div className="admin-form-group"><label className="emi-label">Monthly EMI (₹)</label><input type="number" value={formData.noCostEmi} onChange={e => setFormData({ ...formData, noCostEmi: e.target.value })} /></div>
+                              </div>
+                              <div className="admin-form-grid-2 mt-4">
+                                 <div className="admin-form-group"><label className="rating-label">Social Rating</label><input type="number" step="0.1" value={formData.averageRating} onChange={e => setFormData({ ...formData, averageRating: e.target.value })} /></div>
+                                 <div className="admin-form-group"><label className="review-label">Verified Reviews</label><input type="number" value={formData.reviewCount} onChange={e => setFormData({ ...formData, reviewCount: e.target.value })} /></div>
+                              </div>
+                           </div>
                         </div>
                      </div>
-                  </div>
+                  )}
 
-                     <ImageUpload 
-                        value={formData.thumb} 
-                        onChange={(url) => setFormData({ ...formData, thumb: url })} 
-                        altValue={formData.thumb_alt}
-                        onAltChange={(alt) => setFormData({ ...formData, thumb_alt: alt })}
-                        label="Primary Thumbnail" 
-                        dimensions="1200 x 800"
-                      />
+                  {activeTab === 'content' && (
+                     <div className="space-y-6">
+                        <div className="editor-card">
+                           <div className="card-header"><h4 className="serif">Narrative Description</h4></div>
+                           <div className="card-body no-padding">
+                              <RichTextEditor value={formData.description} onChange={(content) => setFormData({ ...formData, description: content })} height={400} />
+                           </div>
+                        </div>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                           <div className="editor-card">
+                              <div className="card-header flex-header"><h4 className="serif">Inclusions</h4></div>
+                              <div className="card-body no-padding">
+                                 <textarea rows={10} value={formData.inclusions?.join('\n')} onChange={e => setFormData({ ...formData, inclusions: e.target.value.split('\n') })} className="inclusion-textarea p-4" placeholder="One per line..." />
+                              </div>
+                           </div>
+                           <div className="editor-card">
+                              <div className="card-header flex-header"><h4 className="serif">Exclusions</h4></div>
+                              <div className="card-body no-padding">
+                                 <textarea rows={10} value={formData.exclusions?.join('\n')} onChange={e => setFormData({ ...formData, exclusions: e.target.value.split('\n') })} className="exclusion-textarea p-4" placeholder="One per line..." />
+                              </div>
+                           </div>
+                        </div>
+                        <div className="editor-card">
+                           <div className="card-header"><h4 className="serif">Highlights List</h4></div>
+                           <div className="card-body no-padding">
+                              <textarea rows={6} value={formData.highlights?.join('\n')} onChange={e => setFormData({ ...formData, highlights: e.target.value.split('\n') })} className="highlight-textarea p-4" placeholder="Key selling points, one per line..." />
+                           </div>
+                        </div>
+                        <div className="editor-card">
+                           <div className="card-header"><h4 className="serif">Terms & Conditions</h4></div>
+                           <div className="card-body no-padding">
+                              <RichTextEditor value={formData.terms} onChange={(content) => setFormData({ ...formData, terms: content })} height={300} />
+                           </div>
+                        </div>
+                     </div>
+                  )}
+
+                  {activeTab === 'itinerary' && (
+                     <div className="editor-card">
+                        <div className="card-header flex-header">
+                           <h4 className="serif">Strategic Itinerary</h4>
+                           <button onClick={() => setFormData({ ...formData, itinerary: [...formData.itinerary, { day: formData.itinerary.length + 1, title: '', description: '', image: '', amenities: [] }] })} className="add-day-btn">+ Add Tactical Day</button>
+                        </div>
+                        <div className="card-body">
+                           <div className="itinerary-list">
+                              {formData.itinerary.map((item: any, idx: number) => (
+                                 <div key={idx} className="itinerary-item group">
+                                    <button onClick={() => {
+                                       const ni = [...formData.itinerary];
+                                       ni.splice(idx, 1);
+                                       setFormData({ ...formData, itinerary: ni });
+                                    }} className="remove-day-btn"><Trash2 size={14} /></button>
+                                    
+                                    <div className="admin-form-group">
+                                       <label>Day {item.day || idx + 1}: Goal Title</label>
+                                       <input type="text" value={item.title} onChange={e => {
+                                          const ni = [...formData.itinerary];
+                                          ni[idx].title = e.target.value;
+                                          setFormData({ ...formData, itinerary: ni });
+                                       }} className="day-title-input" />
+                                    </div>
+                                    
+                                    <div className="itinerary-footer">
+                                       <div className="space-y-4">
+                                          <ImageUpload value={item.image} onChange={url => {
+                                             const ni = [...formData.itinerary];
+                                             ni[idx].image = url;
+                                             setFormData({ ...formData, itinerary: ni });
+                                          }} label="Day Visual" dimensions="800 x 500" />
+                                          <AmenityPicker value={item.amenities || []} onChange={am => {
+                                             const ni = [...formData.itinerary];
+                                             ni[idx].amenities = am;
+                                             setFormData({ ...formData, itinerary: ni });
+                                          }} max={4} />
+                                       </div>
+                                       <div className="admin-form-group">
+                                          <label>Operational Details</label>
+                                          <RichTextEditor value={item.description} onChange={c => {
+                                             const ni = [...formData.itinerary];
+                                             ni[idx].description = c;
+                                             setFormData({ ...formData, itinerary: ni });
+                                          }} height={250} />
+                                       </div>
+                                    </div>
+                                 </div>
+                              ))}
+                           </div>
+                        </div>
+                     </div>
+                  )}
+
+                  {activeTab === 'visuals' && (
+                     <div className="space-y-6">
+                        <div className="editor-card">
+                           <div className="card-header"><h4 className="serif">Primary Showcase</h4></div>
+                           <div className="card-body">
+                              <ImageUpload value={formData.thumb} onChange={url => setFormData({ ...formData, thumb: url })} label="Package Thumbnail" dimensions="1200 x 800" />
+                           </div>
+                        </div>
+                        <div className="editor-card">
+                           <div className="card-header"><h4 className="serif">Gallery Assets</h4></div>
+                           <div className="card-body">
+                              <MultiImageUpload value={formData.images} onChange={urls => setFormData({ ...formData, images: urls })} label="High-Res Gallery" dimensions="1200 x 800" />
+                           </div>
+                        </div>
+                     </div>
+                  )}
                </div>
             </div>
 
-            <div className="content-area">
-               {activeTab === 'basic' && (
-                  <div className="space-y-6">
-                     <div className="editor-card">
-                        <div className="card-header"><h4 className="serif">Basic Identification</h4></div>
-                        <div className="space-y-6">
-                           <div className="admin-form-group">
-                              <label>Package Title</label>
-                              <input type="text" value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} placeholder="e.g. Kerala Backwaters Magic" className="text-xl font-bold" />
-                           </div>
-                           <div className="admin-form-grid-2">
-                              <div className="admin-form-group"><label>Subtitle</label><input type="text" value={formData.subtitle} onChange={e => setFormData({ ...formData, subtitle: e.target.value })} /></div>
-                              <div className="admin-form-group"><label>Promo Label</label><input type="text" value={formData.slabel} onChange={e => setFormData({ ...formData, slabel: e.target.value })} className="text-emerald-500 font-bold" /></div>
-                           </div>
-                           <div className="admin-form-grid-3">
-                              <div className="admin-form-group"><label>Location</label><input type="text" value={formData.location} onChange={e => setFormData({ ...formData, location: e.target.value })} /></div>
-                              <div className="admin-form-group"><label>Duration</label><input type="text" value={formData.duration} onChange={e => setFormData({ ...formData, duration: e.target.value })} /></div>
-                              <div className="admin-form-group">
-                                 <label>Category</label>
-                                 <select 
-                                    multiple
-                                    value={formData.categories || []} 
-                                    onChange={e => {
-                                       const values = Array.from(e.target.selectedOptions).map(opt => opt.value);
-                                       setFormData({ ...formData, categories: values });
-                                    }} 
-                                    className="admin-form-select h-32 py-2"
-                                  >
-                                     {categories.map((cat: any) => (
-                                        <option key={cat._id} value={cat.title || cat.name}>
-                                          {cat.depth > 0 ? "— ".repeat(cat.depth) : ""}{cat.title || cat.name}
-                                        </option>
-                                      ))}
-                                  </select>
-                                  <p className="text-[8px] text-slate-400 mt-2">Hold Ctrl/Cmd to select multiple.</p>
-                              </div>
-                           </div>
-                         </div>
-                      </div>
-
-                     <div className="editor-card">
-                        <div className="card-header"><h4 className="serif">Detailed Overview</h4></div>
-                        <div className="p-1">
-                           <RichTextEditor value={formData.description} onChange={(content) => setFormData({ ...formData, description: content })} height={300} />
+            <div className="meta-sidebar">
+               <div className="meta-card">
+                  <div className="card-header"><h4 className="serif">Classification</h4></div>
+                  <div className="card-body">
+                     <div className={`custom-dropdown ${catDropdown ? 'open' : ''}`}>
+                        <div className="dropdown-toggle" onClick={() => setCatDropdown(!catDropdown)}>
+                           <div className="selected-count">{formData.categories?.length || 0} Nodes Selected</div>
+                           <ChevronDown size={14} className={`chevron ${catDropdown ? 'rotate' : ''}`} />
                         </div>
-                     </div>
-                  </div>
-               )}
-
-               {activeTab === 'pricing' && (
-                  <div className="space-y-6">
-                     <div className="editor-card">
-                        <div className="card-header"><h4 className="serif">Pricing Strategy</h4></div>
-                        <div className="admin-form-grid-5">
-                           <div className="admin-form-group"><label className="text-slate-400 font-bold">Regular Price (₹)</label><input type="number" value={formData.oldamt} onChange={e => setFormData({ ...formData, oldamt: e.target.value })} className="font-bold text-slate-400 line-through" /></div>
-                           <div className="admin-form-group"><label className="text-blue-600 font-bold">Offer Price (₹)</label><input type="number" value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} className="font-black text-blue-600 text-lg" /></div>
-                           <div className="admin-form-group"><label className="text-orange-600 font-bold">EMI (₹)</label><input type="number" value={formData.noCostEmi} onChange={e => setFormData({ ...formData, noCostEmi: e.target.value })} className="font-bold text-orange-600" placeholder="e.g. 1999" /></div>
-                           <div className="admin-form-group"><label className="text-yellow-600 font-bold">Rating (0-5)</label><input type="number" step="0.1" value={formData.averageRating} onChange={e => setFormData({ ...formData, averageRating: e.target.value })} className="font-bold text-yellow-600" /></div>
-                           <div className="admin-form-group"><label className="text-slate-500 font-bold">Reviews</label><input type="number" value={formData.reviewCount} onChange={e => setFormData({ ...formData, reviewCount: e.target.value })} className="font-bold text-slate-500" /></div>
-                        </div>
-                     </div>
-
-                     <div className="grid grid-cols-2 gap-6">
-                        <div className="editor-card">
-                           <div className="card-header"><h4 className="serif text-emerald-600">Inclusions</h4></div>
-                           <textarea rows={8} value={formData.inclusions?.join('\n')} onChange={e => setFormData({ ...formData, inclusions: e.target.value.split('\n') })} className="bg-emerald-50/10" placeholder="One per line..." />
-                        </div>
-                        <div className="editor-card">
-                           <div className="card-header"><h4 className="serif text-emerald-600">Exclusions</h4></div>
-                           <textarea rows={8} value={formData.exclusions?.join('\n')} onChange={e => setFormData({ ...formData, exclusions: e.target.value.split('\n') })} className="bg-rose-50/10" placeholder="One per line..." />
-                        </div>
-                     </div>
-
-                     <div className="editor-card">
-                        <div className="card-header"><h4 className="serif text-sky-600">Tour Highlights</h4></div>
-                        <textarea 
-                           rows={6} 
-                           value={formData.highlights?.join('\n')} 
-                           onChange={e => setFormData({ ...formData, highlights: e.target.value.split('\n') })} 
-                           className="bg-sky-50/10" 
-                           placeholder="Enter each highlight on a new line (One per line)..." 
-                        />
-                        <div className="p-4 bg-sky-50/20 border-t border-sky-100/50">
-                           <p className="text-[10px] text-sky-600 font-medium italic">Note: These will display with checkmarks in the Overview section of the tour page.</p>
-                        </div>
-                     </div>
-
-                     <div className="editor-card">
-                        <div className="card-header"><h4 className="serif">Terms & Conditions</h4></div>
-                        <div className="p-1">
-                           <RichTextEditor value={formData.terms} onChange={(content) => setFormData({ ...formData, terms: content })} height={250} />
-                        </div>
-                     </div>
-                  </div>
-               )}
-
-               {activeTab === 'itinerary' && (
-                  <div className="space-y-6">
-                     <div className="editor-card">
-                        <div className="card-header flex justify-between items-center">
-                           <h4 className="serif">Activity Plan</h4>
-                           <button type="button" onClick={() => setFormData({ ...formData, itinerary: [...(formData.itinerary || []), { day: (formData.itinerary?.length || 0) + 1, title: '', description: '', image: '', amenities: [] }] })} className="px-4 py-2 bg-blue-600 text-white rounded-full text-[10px] font-bold">+ Add Day</button>
-                        </div>
-                        <div className="space-y-4 py-4">
-                           {formData.itinerary?.map((item: any, idx: number) => (
-                              <div key={idx} className="p-6 bg-slate-50/50 rounded-2xl border border-slate-100 relative group">
-                                 <div className="flex gap-6">
-                                    <div className="w-10 h-10 bg-white rounded-lg border flex flex-col items-center justify-center font-bold text-blue-600 shrink-0">
-                                       <span className="text-[6px] uppercase opacity-50">Day</span>
-                                       <span>{item.day || idx + 1}</span>
-                                    </div>
-                                    <div className="flex-1 space-y-3">
-                                       <input type="text" value={item.title} onChange={e => { 
-                                          setFormData((prev: any) => {
-                                             const ni = [...prev.itinerary];
-                                             ni[idx] = { ...ni[idx], title: e.target.value };
-                                             return { ...prev, itinerary: ni };
-                                          });
-                                       }} placeholder="Activity Title" className="w-full bg-transparent border-b font-bold text-lg py-1" />
-                                       
-                                       <div className="mt-1 p-0.5 bg-white rounded-xl border border-slate-100">
-                                          <RichTextEditor value={item.description} onChange={(content) => { 
-                                             setFormData((prev: any) => {
-                                                const ni = [...prev.itinerary];
-                                                ni[idx] = { ...ni[idx], description: content };
-                                                return { ...prev, itinerary: ni };
-                                             });
-                                          }} height={300} />
+                        {catDropdown && (
+                           <div className="dropdown-list">
+                              {categories.map((cat: any) => {
+                                 const isSelected = formData.categories?.includes(cat.title || cat.name);
+                                 return (
+                                    <div key={cat._id} className={`dropdown-item ${isSelected ? 'selected' : ''}`} onClick={() => {
+                                       const current = formData.categories || [];
+                                       const val = cat.title || cat.name;
+                                       if (isSelected) {
+                                          setFormData({ ...formData, categories: current.filter((c: string) => c !== val) });
+                                       } else {
+                                          setFormData({ ...formData, categories: [...current, val] });
+                                       }
+                                    }}>
+                                       <div className="item-content">
+                                          {cat.depth > 0 && <span className="indent">{"— ".repeat(cat.depth)}</span>}
+                                          <span className="label">{cat.title || cat.name}</span>
                                        </div>
-                                       
-                                       <div className="mt-2 flex flex-wrap items-start gap-4">
-                                          <div className="max-w-[200px] shrink-0">
-                                             <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-2">Day Photo</label>
-                                             <ImageUpload
-                                                value={item.image}
-                                                onChange={(url) => {
-                                                   setFormData((prev: any) => {
-                                                      const ni = [...prev.itinerary];
-                                                      ni[idx] = { ...ni[idx], image: url };
-                                                      return { ...prev, itinerary: ni };
-                                                   });
-                                                }}
-                                                label=""
-                                                dimensions="800 x 500"
-                                             />
-                                          </div>
-                                          <div className="flex-1 min-w-[200px]">
-                                             <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-2">Day Highlights</label>
-                                             <AmenityPicker
-                                                value={item.amenities || []}
-                                                onChange={(am) => {
-                                                   setFormData((prev: any) => {
-                                                      const ni = [...prev.itinerary];
-                                                      ni[idx] = { ...ni[idx], amenities: am };
-                                                      return { ...prev, itinerary: ni };
-                                                   });
-                                                }}
-                                                max={4}
-                                             />
-                                          </div>
-                                       </div>
+                                       {isSelected && <Check size={12} className="check-icon" />}
                                     </div>
-                                    <button type="button" onClick={() => setFormData({ ...formData, itinerary: formData.itinerary.filter((_: any, i: number) => i !== idx) })} className="opacity-0 group-hover:opacity-100 transition-opacity text-slate-300 hover:text-emerald-500 absolute top-4 right-4"><Trash2 size={14} /></button>
-                                 </div>
-                              </div>
-                           ))}
-                           {(!formData.itinerary || formData.itinerary.length === 0) && (
-                              <div className="text-center py-20 border-2 border-dashed border-slate-100 rounded-3xl"><p className="text-slate-300 text-xs italic">No itinerary defined.</p></div>
-                           )}
-                        </div>
-                     </div>
-                  </div>
-               )}
-
-               {activeTab === 'gallery' && (
-                  <div className="editor-card">
-                     <div className="card-header"><h4 className="serif">Package Gallery</h4></div>
-                     <div className="p-4">
-                        <MultiImageUpload value={formData.images} onChange={(urls) => setFormData({ ...formData, images: urls })} label="Upload Gallery Images" dimensions="1200 x 800" />
-                     </div>
-                  </div>
-               )}
-
-               {activeTab === 'seo' && (
-                  <div className="space-y-6">
-                     <div className="editor-card">
-                        <div className="card-header"><h4 className="serif">Indexing Settings</h4></div>
-                        <div className="space-y-4">
-                           <div className="admin-form-group"><label>Meta Title</label><input type="text" value={formData.seo_title} onChange={e => setFormData({ ...formData, seo_title: e.target.value })} /></div>
-                           <div className="admin-form-group"><label>URL Slug</label><input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} className="font-mono text-blue-600" /></div>
-                           <div className="admin-form-group"><label>Meta Description</label><textarea rows={4} value={formData.seo_meta} onChange={e => setFormData({ ...formData, seo_meta: e.target.value })} /></div>
-                        </div>
-                     </div>
-
-                     <div className="editor-card bg-slate-900 border-slate-800">
-                        <div className="card-header border-slate-800"><h4 className="serif text-white">Crawler View</h4></div>
-                        <div className="p-8">
-                           <div className="max-w-xl">
-                              <h4 className="text-orange-400 text-xl font-bold mb-1">{formData.seo_title || formData.title || 'Untitled Package'}</h4>
-                              <p className="text-emerald-500 text-xs font-mono mb-2">https://wegomap.digital/packages/{formData.slug || 'url-slug'}</p>
-                              <p className="text-slate-400 text-sm italic">{formData.seo_meta || 'No description provided.'}</p>
+                                 );
+                              })}
                            </div>
+                        )}
+                     </div>
+                     <p className="help-text mt-2">Tag this package to relevant discovery nodes.</p>
+                  </div>
+               </div>
+
+               <div className="meta-card">
+                  <div className="card-header"><h4 className="serif">Publishing Audit</h4></div>
+                  <div className="card-body space-y-4">
+                     <div className="meta-item">
+                        <label>Protocol Code</label>
+                        <input type="text" value={formData.pcode} onChange={e => setFormData({ ...formData, pcode: e.target.value.toUpperCase() })} className="slug-input" />
+                     </div>
+                     <div className="meta-item">
+                        <div className="toggle-row">
+                           <label>Visibility Protocol</label>
+                           <input type="checkbox" checked={formData.status === 'Published'} onChange={e => setFormData({ ...formData, status: e.target.checked ? 'Published' : 'Draft' })} className="sr-only peer" />
+                           <div className="toggle-switch"></div>
                         </div>
                      </div>
+                     <div className="meta-item">
+                        <label>Display Priority</label>
+                        <input type="number" value={formData.order} onChange={e => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })} />
+                     </div>
                   </div>
-               )}
+               </div>
+
+               <div className="meta-card dark-card">
+                  <div className="card-header"><h4 className="serif">Crawler Intelligence</h4></div>
+                  <div className="crawler-preview">
+                     <div className="preview-title">{formData.title || 'Draft Blueprint'}</div>
+                     <div className="preview-url">wegomap.com/packages/{formData.pcode?.toLowerCase()}</div>
+                     <div className="preview-desc">{formData.description?.replace(/<[^>]*>/g, '').substring(0, 160)}...</div>
+                  </div>
+               </div>
             </div>
          </div>
       </div>

@@ -128,12 +128,14 @@ export default function EditOfferBanner() {
                       <ExternalLink size={14} className="text-orange-400" /> Destination Link (Optional)
                     </label>
                     <div className="relative">
-                      <span className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 font-mono text-[11px] font-black">URL</span>
+                      {!formData.link && (
+                        <span className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 font-mono text-[11px] font-black pointer-events-none">URL</span>
+                      )}
                       <input
                         type="text"
                         value={formData.link}
                         onChange={e => setFormData({ ...formData, link: e.target.value })}
-                        className="admin-form-input pl-14 font-mono text-[11px] text-blue-600 font-bold h-14"
+                        className={`admin-form-input ${formData.link ? 'px-8' : 'pl-14'} font-mono text-[11px] text-blue-600 font-bold h-14`}
                         placeholder="https://wegomap.com/kerala-special"
                       />
                     </div>

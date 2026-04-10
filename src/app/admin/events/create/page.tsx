@@ -3,9 +3,11 @@
 import { API_URL } from '@/config';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { Save, ArrowLeft, Ticket, Type, Image as ImageIcon, Sparkles, Link as LinkIcon, Info, Briefcase, Zap, Globe, ShieldCheck, Clock, Layers } from 'lucide-react';
 import ImageUpload from '@/components/admin/ImageUpload';
 import RichTextEditor from '@/components/admin/Editor';
+import { toast } from 'react-hot-toast';
 import '../../cms-premium.scss';
 
 export default function CreateEvent() {
@@ -21,8 +23,8 @@ export default function CreateEvent() {
   });
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
+  const handleSubmit = async () => {
+    if (!formData.title) return toast.error('Event title required');
     setLoading(true);
     try {
       const formDataToSubmit = { ...formData, images: [formData.image] };
@@ -36,13 +38,14 @@ export default function CreateEvent() {
       });
       const data = await res.json();
       if (data.success) {
+        toast.success('Event created successfully');
         router.push('/admin/events');
       } else {
-        alert(data.error || 'Creation failed');
+        toast.error(data.error || 'Creation failed');
       }
     } catch (err) {
       console.error(err);
-      alert('Request failed');
+      toast.error('Network error');
     } finally {
       setLoading(false);
     }
@@ -52,65 +55,102 @@ export default function CreateEvent() {
     <div className="property-edit-container animate-in fade-in duration-700">
       <div className="property-edit-header">
         <div className="header-left">
-           <button onClick={() => router.push('/admin/events')} className="back-btn"><ArrowLeft size={18} /></button>
-           <div className="title-area">
-              <h1 className="serif">Add New Event</h1>
-              <div className="status-badge">STATUS: <span className="active">{formData.status.toUpperCase()}</span></div>
+           <Link href="/admin/events" className="p-3 bg-slate-50 border border-slate-100 rounded-full hover:bg-white hover:shadow-md transition-all text-slate-600"><ArrowLeft size={18} /></Link>
+           <div>
+              <h2 className="serif text-2xl font-bold leading-tight">Host New Event</h2>
+              <p className="status-badge">CURRENT FOCUS: <span className="active">{formData.status}</span></p>
            </div>
         </div>
         <div className="header-actions">
-           <button onClick={() => handleSubmit()} disabled={loading} className="save-btn"><ShieldCheck size={16} /> {loading ? 'Saving...' : 'Save Event'}</button>
+           <button onClick={handleSubmit} disabled={loading} className="save-btn">
+             <ShieldCheck size={18} /> {loading ? 'Saving...' : 'Deploy Event'}
+           </button>
         </div>
       </div>
 
       <div className="property-edit-layout">
-        <div className="tabs-sidebar">
-           <button className="tab-btn active">
-              <Ticket size={16} /> <span>Main Info</span>
-           </button>
-           
-           <div className="mt-8 pt-8 border-t border-slate-100 px-4">
-              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-4">Event Status</label>
-              <select value={formData.status} onChange={e => setFormData({ ...formData, status: e.target.value })} className="admin-form-select !bg-white">
-                <option value="Active">🟢 Visible</option>
-                <option value="Hidden">🔴 Hidden</option>
-              </select>
+        <div className="content-area">
+          <div className="tabs-header">
+             <button className="tab-btn-top active">
+                <div className="icon-wrap"><Ticket size={14} /></div>
+                <span>Event Designer</span>
+             </button>
+          </div>
 
-              <div className="mt-8">
-                 <ImageUpload value={formData.image} onChange={(url) => setFormData({ ...formData, image: url })} label="Cover Media" dimensions="1200 x 800" />
-              </div>
-           </div>
+          <div className="tab-panel">
+            <div className="space-y-6">
+               <div className="editor-card">
+                  <div className="card-header"><h4 className="serif">Core Identity</h4></div>
+                  <div className="card-body">
+                     <div className="grid grid-cols-2 gap-8">
+                        <div className="admin-form-group">
+                           <label>Commercial Title</label>
+                           <input type="text" value={formData.title} onChange={e => {
+                              const v = e.target.value;
+                              setFormData({ ...formData, title: v, slug: v.toLowerCase().replace(/ /g, '-') });
+                           }} placeholder="Kerala Arts Festival..." className="title-input" />
+                        </div>
+                        <div className="admin-form-group">
+                           <label>URL Slug</label>
+                           <div className="relative">
+                              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-300 font-mono text-xs">/</span>
+                              <input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} className="pl-6 font-mono text-xs text-blue-600" />
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div className="editor-card">
+                  <div className="card-header"><h4 className="serif">Hero Presentation</h4></div>
+                  <div className="card-body">
+                     <div className="grid grid-cols-2 gap-8">
+                        <div className="admin-form-group"><label>Display Headline</label><input type="text" value={formData.heroHeading} onChange={e => setFormData({ ...formData, heroHeading: e.target.value })} placeholder="Join the celebration" /></div>
+                        <div className="admin-form-group"><label>Secondary Legend</label><input type="text" value={formData.heroSubtext} onChange={e => setFormData({ ...formData, heroSubtext: e.target.value })} placeholder="Cultural mastery revealed" /></div>
+                     </div>
+                  </div>
+               </div>
+
+               <div className="editor-card">
+                  <div className="card-header"><h4 className="serif">Narrative Content</h4></div>
+                  <div className="card-body no-padding">
+                     <RichTextEditor value={formData.description} onChange={(description) => setFormData({ ...formData, description })} height={450} />
+                  </div>
+               </div>
+            </div>
+          </div>
         </div>
 
-        <div className="content-area">
-           <div className="space-y-6">
-              <div className="editor-card">
-                 <div className="card-header"><h4 className="serif">Event Identity</h4></div>
-                 <div className="grid grid-cols-2 gap-6">
-                    <div className="admin-form-group">
-                       <label>Event Name</label>
-                       <input type="text" value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} placeholder="KERALA BOAT RACING..." className="text-xl font-bold" />
+        <div className="meta-sidebar">
+           <div className="meta-card">
+              <div className="card-header"><h4 className="serif">Publishing Audit</h4></div>
+              <div className="card-body space-y-4">
+                 <div className="meta-item">
+                    <div className="toggle-row">
+                       <label>Visibility Protocol</label>
+                       <input type="checkbox" checked={formData.status === 'Active'} onChange={e => setFormData({ ...formData, status: e.target.checked ? 'Active' : 'Hidden' })} className="sr-only peer" />
+                       <div className="toggle-switch"></div>
                     </div>
-                    <div className="admin-form-group">
-                       <label>URL Slug</label>
-                       <input type="text" value={formData.slug} onChange={e => setFormData({ ...formData, slug: e.target.value })} placeholder="boat-racing-event" className="font-mono text-blue-600" />
+                 </div>
+                 
+                 <div className="mt-6 p-4 bg-slate-50 rounded-2xl border border-slate-100 italic">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center">
+                        <Zap size={12} />
+                      </div>
+                      <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Global Reach</span>
+                    </div>
+                    <div className="text-[10px] font-bold text-slate-500 leading-relaxed">
+                       Events are automatically disseminated across all connected marketing channels upon deployment.
                     </div>
                  </div>
               </div>
+           </div>
 
-              <div className="editor-card">
-                 <div className="card-header"><h4 className="serif">Hero Display</h4></div>
-                 <div className="grid grid-cols-2 gap-6">
-                    <div className="admin-form-group"><label>Display Heading</label><input type="text" value={formData.heroHeading} onChange={e => setFormData({ ...formData, heroHeading: e.target.value })} /></div>
-                    <div className="admin-form-group"><label>Hero Subtext</label><input type="text" value={formData.heroSubtext} onChange={e => setFormData({ ...formData, heroSubtext: e.target.value })} /></div>
-                 </div>
-              </div>
-
-              <div className="editor-card">
-                 <div className="card-header"><h4 className="serif">Event Narrative</h4></div>
-                 <div className="bg-slate-50/30 rounded-2xl border border-slate-100 overflow-hidden">
-                    <RichTextEditor value={formData.description} onChange={(description) => setFormData({ ...formData, description })} height={450} />
-                 </div>
+           <div className="meta-card">
+              <div className="card-header"><h4 className="serif">Primary Visual</h4></div>
+              <div className="card-body">
+                 <ImageUpload value={formData.image} onChange={(url) => setFormData({ ...formData, image: url })} label="High-Res Landscape Resource" dimensions="1200 x 800" />
               </div>
            </div>
         </div>

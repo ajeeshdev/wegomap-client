@@ -107,7 +107,7 @@ export default function ServicesAdminPage() {
             </div>
 
             {/* Quick Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-4">
+            <div className="grid grid-cols-4 gap-6 mb-8">
                 {[
                     { label: 'Active Services', val: services.filter(s => s.status === 'Active').length, icon: <Zap size={22} />, color: '#10b981', bg: '#f0fdf4' },
                     { label: 'Draft Services', val: services.filter(s => s.status === 'Inactive').length, icon: <Edit size={22} />, color: '#f59e0b', bg: '#fffbeb' },

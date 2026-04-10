@@ -4,6 +4,7 @@ import { getImageUrl } from "@/config";
 import { API_URL } from '@/config';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { Save, ArrowLeft, Image as ImageIcon, Type, MousePointerClick, AlignLeft, ShieldAlert, Sparkles, Zap, Globe, Clock, ExternalLink, ShieldCheck, Layers, Shield as Safe } from 'lucide-react';
 import ImageUpload from '@/components/admin/ImageUpload';
 
@@ -46,162 +47,132 @@ export default function CreateSlider() {
   };
 
   return (
-    <div className="space-y-12 animate-in fade-in duration-1000">
-      {/* Header Section */}
-      <div className="admin-page-header">
-        <div className="flex items-center gap-6">
-          <button onClick={() => router.push('/admin/sliders')} className="admin-back-btn">
-            <ArrowLeft size={22} />
-          </button>
-          <div className="min-w-0">
-            <h2 className="admin-page-title">
-              <div className="admin-page-title-indicator"></div>
-              Design Hero Canvas
-            </h2>
-            <p className="admin-page-subtitle mt-1 text-slate-400">Composing a new high-fidelity visual narrative for the global storefront</p>
-          </div>
+    <div className="property-edit-container animate-in fade-in duration-700">
+      <div className="property-edit-header">
+        <div className="header-left">
+           <Link href="/admin/sliders" className="p-3 bg-slate-50 border border-slate-100 rounded-full hover:bg-white hover:shadow-md transition-all text-slate-600"><ArrowLeft size={18} /></Link>
+           <div>
+              <h2 className="serif text-2xl font-bold leading-tight">Design Hero Canvas</h2>
+              <p className="status-badge">CURRENT STATUS: <span className="active">{formData.status}</span></p>
+           </div>
         </div>
-        <div className="flex items-center gap-4">
-          <button onClick={() => router.push('/admin/sliders')} className="admin-btn admin-btn-secondary">
-            Discard
-          </button>
-          <button
-            onClick={() => handleSubmit()}
-            disabled={loading}
-            className="admin-btn admin-btn-primary h-12 px-8"
-          >
-            <ShieldCheck size={20} /> {loading ? 'Compiling...' : 'Deploy Canvas'}
-          </button>
+        <div className="header-actions">
+           <button onClick={() => handleSubmit()} disabled={loading} className="save-btn">
+             <ShieldCheck size={18} /> {loading ? 'Compiling...' : 'Deploy Canvas'}
+           </button>
         </div>
       </div>
 
-      <div className="admin-form-grid">
-        {/* Main Content Area */}
-        <div className="lg:col-span-3">
-          <div className="admin-form-card">
-            <div className="relative z-10 space-y-16">
-              <h3 className="admin-form-section-title">
-                <div className="admin-section-icon admin-section-icon--orange"></div>
-                Visual Blueprint & Variable Stack
-              </h3>
+      <div className="property-edit-layout">
+        <div className="content-area">
+           <div className="tabs-header">
+              <button className="tab-btn-top active">
+                 <div className="icon-wrap"><Layers size={14} /></div>
+                 <span>Slide Designer</span>
+              </button>
+           </div>
 
-              <div className="space-y-12">
-                <div className="admin-form-group">
-                  <label className="admin-form-label flex items-center gap-3 mb-4">
-                    <Type size={14} className="text-blue-600" /> Primary Headline Identity (Master Title)
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.title}
-                    onChange={e => setFormData({ ...formData, title: e.target.value })}
-                    className="admin-form-input text-2xl font-black uppercase tracking-tight h-16 px-8 rounded-3xl"
-                    placeholder="EXPERIENCE KERALA MASTERCORE..."
-                  />
-                </div>
-
-                <div className="admin-form-grid-2 admin-form-grid-2--bordered">
-                  <div className="admin-form-group">
-                    <label className="admin-form-label flex items-center gap-3 mb-4">
-                      <Zap size={14} className="text-amber-500" /> Decorative Accent (Subtitle / Slugline)
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.subtitle}
-                      onChange={e => setFormData({ ...formData, subtitle: e.target.value })}
-                      className="admin-form-input font-black text-blue-600 uppercase tracking-[0.2em] text-[11px] h-14"
-                      placeholder="THE ULTIMATE ESCAPE PROTOCOL"
-                    />
-                  </div>
-
-                  <div className="admin-form-group">
-                    <label className="admin-form-label flex items-center gap-3 mb-4">
-                      <ExternalLink size={14} className="text-orange-400" /> structural Redirect Identifier (URL / Action)
-                    </label>
-                    <div className="relative">
-                      <span className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 font-mono text-[11px] font-black">/</span>
-                      <input
-                        type="text"
-                        value={formData.link}
-                        onChange={e => setFormData({ ...formData, link: e.target.value })}
-                        className="admin-form-input pl-10 font-mono text-[11px] text-blue-600 font-bold h-14"
-                        placeholder="munnar-escape-blueprint"
+           <div className="tab-panel">
+             <div className="space-y-6">
+                <div className="editor-card">
+                  <div className="card-header"><h4 className="serif">Narrative Configuration</h4></div>
+                  <div className="card-body">
+                    <div className="admin-form-group">
+                      <label>Headline / Main Title</label>
+                      <input 
+                        type="text" 
+                        value={formData.title} 
+                        onChange={e => setFormData({ ...formData, title: e.target.value })} 
+                        placeholder="Enter breathtaking headline..." 
+                        className="title-input"
                       />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-8 mt-6">
+                       <div className="admin-form-group">
+                         <label>Lead Text / Subtitle</label>
+                         <input 
+                           type="text" 
+                           value={formData.subtitle} 
+                           onChange={e => setFormData({ ...formData, subtitle: e.target.value })} 
+                           placeholder="e.g. THE ULTIMATE ESCAPE PROTOCOL"
+                           className="font-bold tracking-tight text-sm"
+                         />
+                       </div>
+                       <div className="admin-form-group">
+                         <label>Interaction Link (URL)</label>
+                         <div className="relative">
+                           <Globe className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-300" size={14} />
+                           <input 
+                             type="text" 
+                             value={formData.link} 
+                             onChange={e => setFormData({ ...formData, link: e.target.value })} 
+                             className="pl-9 font-mono text-blue-600 !text-xs" 
+                             placeholder="/packages/..."
+                           />
+                         </div>
+                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="admin-form-group pt-12 border-t border-slate-50">
-                  <div className="space-y-10 pt-4">
-                    <ImageUpload
+                <div className="editor-card">
+                  <div className="card-header"><h4 className="serif">Hero Background</h4></div>
+                  <div className="card-body">
+                    <ImageUpload 
                       value={formData.image}
-                      onChange={(url) => setFormData({ ...formData, image: url })}
+                      onChange={url => setFormData({ ...formData, image: url })}
                       altValue={formData.imageAlt}
-                      onAltChange={(alt) => setFormData({ ...formData, imageAlt: alt })}
-                      label="Master Asset Visual"
+                      onAltChange={alt => setFormData({ ...formData, imageAlt: alt })}
+                      label="High-Res Landscape Resource"
                       dimensions="1920 x 800"
                     />
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+
+                <div className="editor-card bg-slate-900 border-none p-12 relative overflow-hidden h-64 flex flex-col items-center justify-center text-center group">
+                  <div className="absolute inset-0 bg-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+                  <div className="relative z-10 space-y-4">
+                    <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-white border border-white/20 backdrop-blur-xl mx-auto mb-4">
+                      <Sparkles size={32} />
+                    </div>
+                    <p className="text-[10px] font-black text-white uppercase tracking-[0.3em] opacity-40">Live Preview Identity</p>
+                    <h2 className="text-2xl font-black text-white px-8 line-clamp-1">{formData.title || 'Untitled Narrative'}</h2>
+                    <div className="flex items-center justify-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                      <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">{formData.status}</span>
+                    </div>
+                  </div>
+                </div>
+             </div>
+           </div>
         </div>
 
-        {/* Sidebar Space */}
-        <div className="admin-form-sidebar">
-          <div className="admin-form-card p-8 space-y-10">
-            <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 flex items-center gap-2">
-              <div className="w-1 h-3 bg-blue-600 rounded-full"></div>
-              Publication Hub
-            </h4>
-            <div className="space-y-8 text-center">
-              <div className="admin-form-group">
-                <label className="admin-form-label text-[10px] uppercase tracking-[0.2em] mb-3 block opacity-60">Render Protocol Status</label>
-                <select
-                  value={formData.status}
-                  onChange={e => setFormData({ ...formData, status: e.target.value })}
-                  className="admin-form-select font-black bg-slate-50 border-slate-100 rounded-2xl h-14 uppercase text-[10px] tracking-widest cursor-pointer hover:bg-white transition-all shadow-sm focus:ring-8 focus:ring-blue-600/5 text-center"
-                >
-                  <option value="Active">Operational / Live</option>
-                  <option value="Hidden">Draft / Archive Node</option>
-                </select>
+        <div className="meta-sidebar">
+           <div className="meta-card">
+              <div className="card-header"><h4 className="serif">Publishing Audit</h4></div>
+              <div className="card-body space-y-6">
+                 <div className="meta-item">
+                    <div className="toggle-row">
+                       <label>Protocol Visibility</label>
+                       <input type="checkbox" checked={formData.status === 'Active'} onChange={e => setFormData({ ...formData, status: e.target.checked ? 'Active' : 'Hidden' })} className="sr-only peer" />
+                       <div className="toggle-switch"></div>
+                    </div>
+                 </div>
+                 
+                 <div className="mt-6 p-4 bg-slate-50 rounded-2xl border border-slate-100 italic">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-6 h-6 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center">
+                        <Clock size={12} />
+                      </div>
+                      <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Priority Index</span>
+                    </div>
+                    <div className="text-[10px] font-bold text-slate-500 leading-relaxed">
+                       The hero canvas will be rendered at the root priority level of the array.
+                    </div>
+                 </div>
               </div>
-
-              <div className="pt-8 border-t border-slate-50">
-                <div className="flex items-start gap-4 bg-slate-50/50 p-6 rounded-[32px] border border-slate-100 italic transition-all hover:bg-white hover:shadow-sm">
-                  <div className="w-10 h-10 rounded-xl bg-orange-100/50 flex items-center justify-center text-blue-600 shrink-0">
-                    <Clock size={20} />
-                  </div>
-                  <div className="text-left">
-                    <p className="text-[9px] text-slate-400 font-black uppercase tracking-[0.2em] leading-none mb-2">Context Index</p>
-                    <p className="text-[11px] text-slate-500 font-bold uppercase tracking-tight leading-relaxed opacity-60">The hero canvas will be rendered at the root priority level of the array.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="admin-form-card p-12 bg-slate-900 border-slate-800 relative overflow-hidden h-80 group shadow-2xl">
-            {formData.image && (
-              <div className="absolute inset-0 opacity-10 filter blur-sm scale-110 transition-opacity duration-1000 group-hover:opacity-30">
-                <img src={getImageUrl(formData.image)} className="w-small h-small object-cover" />
-              </div>
-            )}
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent h-full"></div>
-            <div className="relative z-10 flex flex-col items-center justify-center gap-8 h-full text-center py-4">
-              <div className="admin-icon-box bg-white/10 text-white w-24 h-24 rounded-[40px] border border-white/20 backdrop-blur-3xl group-hover:bg-blue-600 transition-all duration-700 shadow-2xl group-hover:scale-110">
-                <Sparkles size={48} className="group-hover:rotate-12 transition-transform duration-700" />
-              </div>
-              <div className="admin-space-y-4">
-                <div className="text-[10px] font-black text-white uppercase tracking-[0.4em] mb-2 leading-none opacity-60">Simulation Preview</div>
-                <p className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] px-10 leading-relaxed italic opacity-80 min-h-[3rem] line-clamp-2">{formData.title || 'Draft Campaign Manuscript'}</p>
-                <div className="flex items-center justify-center gap-3 pt-2">
-                  <ShieldCheck size={14} className="text-emerald-500" />
-                  <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Master Protocol Ready</span>
-                </div>
-              </div>
-            </div>
-          </div>
+           </div>
         </div>
       </div>
     </div>
