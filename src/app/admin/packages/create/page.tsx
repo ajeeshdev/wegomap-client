@@ -288,7 +288,7 @@ export default function CreatePackage() {
                   <div className="card-body">
                      <div className={`custom-dropdown ${catDropdown ? 'open' : ''}`}>
                         <div className="dropdown-toggle" onClick={() => setCatDropdown(!catDropdown)}>
-                           <div className="selected-count">{formData.categories?.length || 0} Nodes Selected</div>
+                           <div className="selected-count">{formData.categories?.length || 0} Categories</div>
                            <ChevronDown size={14} className={`chevron ${catDropdown ? 'rotate' : ''}`} />
                         </div>
                         {catDropdown && (
