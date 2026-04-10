@@ -147,7 +147,10 @@ export default function Hero() {
             window.addEventListener('scroll', handleScroll, { passive: true });
             handleScroll();
         }
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            document.body.classList.remove('mobile-search-sticky');
+        };
     }, []);
 
     // Close suggestions on outside click

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { API_URL, getImageUrl } from '@/config';
 import { useState, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import {
     X, ChevronDown, ChevronRight, User, Heart, Info, Users, Contact,
     Home, Search, Phone, Mail, MapPin, Package, Calendar, Building2,
@@ -71,6 +72,7 @@ export default function Header() {
     const [isEnquireOpen, setIsEnquireOpen] = useState(false);
     const profileRef = useRef<HTMLDivElement>(null);
     const [tourItems, setTourItems] = useState(initialTourItems);
+    const pathname = usePathname();
 
     const [finalHeaderLinks, setFinalHeaderLinks] = useState<any[]>([]);
     const [finalSidebarLinks, setFinalSidebarLinks] = useState<any[]>([]);
@@ -209,6 +211,14 @@ export default function Header() {
         handleScroll();
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    // Cleanup stuck classes and states on route change
+    useEffect(() => {
+        setIsSearchSticky(false);
+        setIsOpen(false);
+        document.body.classList.remove('mobile-search-sticky');
+        document.body.classList.remove('header-scrolled-controls');
+    }, [pathname]);
 
     // Handle Auth State
     useEffect(() => {
