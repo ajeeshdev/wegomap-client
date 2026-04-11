@@ -115,13 +115,15 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
         : (rawPrice * 2).toLocaleString();
 
     // Features Mapping
-    const features = [
-        "Intercity Car Transfers",
-        "7 Activities Included",
-        "3-4 Star Premium Hotels",
-        "Daily Breakfast & Meals",
-        "Airport Pickup & Drop"
-    ];
+    const features = (pkg.highlights && pkg.highlights.length > 0)
+        ? pkg.highlights.slice(0, 5)
+        : [
+            "Intercity Car Transfers",
+            "7 Activities Included",
+            "3-4 Star Premium Hotels",
+            "Daily Breakfast & Meals",
+            "Airport Pickup & Drop"
+        ];
 
     return (
         <div className="detailedPackageCard group">
