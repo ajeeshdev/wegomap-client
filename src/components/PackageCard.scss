@@ -110,6 +110,10 @@
     grid-template-columns: 1fr 1fr;
     gap: 6px;
     margin-bottom: 14px;
+
+    &.singleFeature {
+        grid-template-columns: 1fr;
+    }
 }
 
 .featureItem {
