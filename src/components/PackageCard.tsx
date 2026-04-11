@@ -217,8 +217,8 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
                     )}
                 </div>
 
-                {/* Main Features Grid (Two Columns) */}
-                <div className="featuresGrid">
+                {/* Main Features Grid (Two Columns or Single) */}
+                <div className={`featuresGrid ${features.length === 1 ? 'singleFeature' : ''}`}>
                     {features.map((f, i) => (
                         <div key={i} className="featureItem">• {f}</div>
                     ))}
