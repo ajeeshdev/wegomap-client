@@ -81,10 +81,13 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
     // Pricing data parsing
     const rawPrice = parseInt(pkg.price?.toString().replace(/[^\d]/g, '') || '0') || 0;
     const emiValue = Number(pkg.noCostEmi) || Math.round(rawPrice / 3);
-    const emi = emiValue.toLocaleString();
+    const emi = emiValue.toLocaleString('en-IN');
     const totalPrice = pkg.totalPrice 
-        ? Number(pkg.totalPrice).toLocaleString() 
-        : (rawPrice * 2).toLocaleString();
+        ? Number(pkg.totalPrice).toLocaleString('en-IN') 
+        : (rawPrice * 2).toLocaleString('en-IN');
+    
+    // Also format the main price
+    const displayMainPrice = rawPrice.toLocaleString('en-IN');
 
     const features = (pkg.highlights && pkg.highlights.length > 0)
         ? pkg.highlights.slice(0, 5)
@@ -225,7 +228,7 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
                     <div className="mainPriceSection">
                         <div className="pricePrimary">
                             <span className="currencySymbol">₹</span>
-                            <span className="mainValue">{rawPrice.toLocaleString()}</span>
+                            <span className="mainValue">{displayMainPrice}</span>
                             <span className="priceLabel">{pkg.per === 'Person' ? 'Per Person' : (pkg.per || "Per Person")}</span>
                         </div>
                         <div className="priceSecondary">

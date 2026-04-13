@@ -123,7 +123,15 @@ export async function POST(req: NextRequest) {
       console.error('Failed to fetch hotels for sitemap', e);
     }
 
-    const xml = buildXml(urls);
+    // Deduplicate by loc (same URL can appear from both static data and API)
+    const seen = new Set<string>();
+    const uniqueUrls = urls.filter(u => {
+      if (seen.has(u.loc)) return false;
+      seen.add(u.loc);
+      return true;
+    });
+
+    const xml = buildXml(uniqueUrls);
 
     // Write to public/sitemap.xml (served as /sitemap.xml)
     const publicPath = join(process.cwd(), 'public', 'sitemap.xml');
@@ -131,8 +139,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: `Sitemap generated with ${urls.length} URLs`,
-      urlCount: urls.length,
+      message: `Sitemap generated with ${uniqueUrls.length} URLs (${urls.length - uniqueUrls.length} duplicates removed)`,
+      urlCount: uniqueUrls.length,
+      duplicatesRemoved: urls.length - uniqueUrls.length,
       path: '/sitemap.xml',
       xml,
     });

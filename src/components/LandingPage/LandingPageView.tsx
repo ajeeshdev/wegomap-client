@@ -92,6 +92,9 @@ type PackageCard = {
   per?: string;
   thumb?: string;
   images?: string[];
+  highlights?: string[];
+  subtitle?: string;
+  itinerary?: any[];
 };
 
 type FaqItem = {
@@ -427,9 +430,9 @@ export default function LandingPageView({
                   oldPrice: pkg.oldamt ? `₹${Number(String(pkg.oldamt).replace(/[^\d]/g, '')).toLocaleString()}` : null,
                   image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || "/bg-placeholder.jpg"),
                   images: pkg.images || [],
-                  subtitle: pkg.location || '',
-                  highlights: [],
-                  itinerary: [],
+                  subtitle: pkg.subtitle || pkg.location || '',
+                  highlights: pkg.highlights || [],
+                  itinerary: pkg.itinerary || [],
                   averageRating: (pkg as any).averageRating || 4.9,
                   reviewCount: (pkg as any).reviewCount || 150,
                   noCostEmi: (pkg as any).noCostEmi,

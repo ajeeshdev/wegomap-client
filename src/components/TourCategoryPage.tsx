@@ -27,10 +27,20 @@ export interface TourPackage {
     title: string;
     location: string;
     price: string;
-    originalPrice: string;
+    originalPrice: string | null;
     strip?: string;
     detailUrl: string;
     packCode?: string;
+    highlights?: string[];
+    itinerary?: any[];
+    subtitle?: string;
+    averageRating?: number;
+    reviewCount?: number;
+    noCostEmi?: number;
+    totalPrice?: number;
+    per?: string;
+    onoffer?: boolean;
+    slabel?: string;
 }
 
 export interface TourCategoryPageProps {
@@ -312,16 +322,16 @@ export default function TourCategoryPage({
                                 oldPrice: pkg.originalPrice,
                                 image: pkg.image,
                                 images: (pkg as any).images || [],
-                                subtitle: (pkg as any).subtitle || '',
-                                highlights: (pkg as any).highlights || [],
-                                itinerary: (pkg as any).itinerary || [],
-                                averageRating: (pkg as any).averageRating || 4.9,
-                                reviewCount: (pkg as any).reviewCount || 150,
-                                noCostEmi: (pkg as any).noCostEmi,
-                                totalPrice: (pkg as any).totalPrice,
-                                per: (pkg as any).per || '/ Person',
-                                onoffer: (pkg as any).onoffer,
-                                slabel: (pkg as any).slabel,
+                                subtitle: pkg.subtitle || '',
+                                highlights: pkg.highlights || [],
+                                itinerary: pkg.itinerary || [],
+                                averageRating: pkg.averageRating || 4.9,
+                                reviewCount: pkg.reviewCount || 150,
+                                noCostEmi: pkg.noCostEmi,
+                                totalPrice: pkg.totalPrice,
+                                per: pkg.per || '/ Person',
+                                onoffer: pkg.onoffer,
+                                slabel: pkg.slabel,
                                 _id: pkg._id
                             };
                             return (
