@@ -11,6 +11,9 @@
     "postinstall": "npm run copy-tinymce"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
     "@popperjs/core": "^2.11.8",
     "@react-oauth/google": "^0.13.4",
     "@tinymce/tinymce-react": "^6.3.0",

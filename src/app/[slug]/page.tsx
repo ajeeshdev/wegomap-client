@@ -135,13 +135,14 @@ export default async function RootSlugPage({ params }: PageProps) {
                     totalPrice: pkg.totalPrice,
                     per: pkg.per,
                     onoffer: pkg.onoffer,
-                    slabel: pkg.slabel
+                    slabel: pkg.slabel,
+                    order: pkg.order
                 }));
             }
         } catch (e) {}
 
 
-        const combinedPackages = [...dynamicPackages];
+        const combinedPackages = [...dynamicPackages].sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
 
         return (
             <TourCategoryPage
