@@ -237,11 +237,14 @@ export default function Hero() {
                             ))}
                         </Swiper>
                     ) : isLoadingSlides ? (
-                        <div className="h-[60vh] bg-slate-900 flex items-center justify-center rounded-[32px] overflow-hidden">
-                            <div className="w-12 h-12 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
+                        <div className="mt-[56px] md:mt-[80px] h-[50vh] md:h-[60vh] min-h-[350px] md:min-h-[450px] bg-slate-900 flex items-center justify-center rounded-[24px] md:rounded-[32px] overflow-hidden">
+                            <div className="flex flex-col items-center gap-4">
+                                <div className="w-10 h-10 border-4 border-white/10 border-t-orange-500 rounded-full animate-spin"></div>
+                                <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest">Loading Journey...</p>
+                            </div>
                         </div>
                     ) : (
-                        <div className="h-[60vh] bg-slate-900 flex items-center justify-center rounded-[32px] overflow-hidden">
+                        <div className="mt-[56px] md:mt-[80px] h-[50vh] md:h-[60vh] min-h-[350px] md:min-h-[450px] bg-slate-900 flex items-center justify-center rounded-[24px] md:rounded-[32px] overflow-hidden">
                             <h1 className="text-white text-2xl font-bold">Welcome to WEGOMAP</h1>
                         </div>
                     )}

@@ -41,16 +41,34 @@ export default function SEOAdmin() {
     const title = (item.title || item.name || '').toLowerCase();
     const slug = (item.slug || '').toLowerCase();
     
-    // Simple filter to exclude clearly package/event related landing pages if any
-    // though most in Page collection are probably static pages
-    const excludes = ['package', 'event', 'blog'];
-    const matchesExclude = excludes.some(exc => title.includes(exc) || slug.includes(exc));
+    // System pages and utility routes that shouldn't be in SEO management
+    const systemSlugs = [
+      '404', 
+      'thankyou', 
+      'thank-you', 
+      'test', 
+      'testtest', 
+      'terms-and-conditions', 
+      'privacy-policy',
+      'refund-policy',
+      'trending',
+      'aroma',
+      'coorg-mysore-ooty',
+      'kerala-alleppey-boat-house',
+      'keralapeopleplans',
+      'thailand-tour'
+    ];
     
-    return !matchesExclude && title.includes(searchTerm.toLowerCase());
+    // Filter to exclude clearly package related landing pages or system pages
+    const excludes = ['package'];
+    const isSystemPage = systemSlugs.some(s => slug === s || slug.startsWith(s + '-'));
+    const isPackagePage = excludes.some(exc => title.includes(exc) || slug.includes(exc));
+    
+    return !isSystemPage && !isPackagePage && title.includes(searchTerm.toLowerCase());
   });
 
   // Sort major pages to the top
-  const majorSlugs = ['home', 'about', 'services', 'contact', 'blogs', 'tours'];
+  const majorSlugs = ['home', 'about', 'services', 'hotels', 'events', 'cruises', 'blogs', 'tours', 'cabs', 'kerala-taxi-service', 'contact'];
   const sortedData = [...filteredData].sort((a: any, b: any) => {
     const aIndex = majorSlugs.indexOf(a.slug);
     const bIndex = majorSlugs.indexOf(b.slug);

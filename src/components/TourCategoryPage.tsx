@@ -194,6 +194,8 @@ export default function TourCategoryPage({
                 breadcrumbs={[{ label: title }]}
                 variant="large"
                 centered={true}
+                showEnquire={true}
+                onEnquire={() => handleQuickPlan(`Category: ${title}`)}
             />
 
             {/* ── Package Listings ── */}

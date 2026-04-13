@@ -63,6 +63,10 @@ export default async function RootSlugPage({ params }: PageProps) {
         redirect('/cruises');
     }
 
+    if (slug === 'kerala-taxi-service') {
+        redirect('/cabs');
+    }
+
     let dynamicCategory = null;
     let isCategory = false;
 

@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import {
     X, ChevronDown, ChevronRight, User, Heart, Info, Users, Contact,
     Home, Search, Phone, Mail, MapPin, Package, Calendar, Building2,
-    Ship, Globe, Zap, MessageSquare, HelpCircle, Compass, Star, FileText
+    Ship, Globe, Zap, MessageSquare, HelpCircle, Compass, Star, FileText, Car
 } from 'lucide-react';
 import Image from 'next/image';
 import EnquireModal from './EnquireModal';
@@ -15,7 +15,7 @@ import EnquireModal from './EnquireModal';
 
 const IconMap: Record<string, any> = {
     Home, Info, Users, Phone, Mail, MapPin, Heart, Package, Calendar, Building2,
-    Ship, Globe, Zap, MessageSquare, HelpCircle, Star, Compass, FileText, Search, Contact, ClipboardList: FileText
+    Ship, Globe, Zap, MessageSquare, HelpCircle, Star, Compass, FileText, Search, Contact, Car, ClipboardList: FileText
 };
 
 const DynamicIcon = ({ name, size = 16, className = "" }: { name: string, size?: number, className?: string }) => {
@@ -54,6 +54,7 @@ const navLinks = [
     { name: 'Events', href: '/events' },
     { name: 'Hotels', icon: 'Building2', href: '/hotels' },
     { name: 'Cruises', href: '/cruises' },
+    { name: 'Cabs', icon: 'Car', href: '/cabs' },
     { name: 'Payment', href: '/payment' },
     { name: 'Blogs', href: '/blogs' },
     { name: 'FAQ', href: '/faq' },

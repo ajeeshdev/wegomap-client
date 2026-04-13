@@ -22,6 +22,8 @@ interface DynamicPageBannerProps {
     variant?: 'standard' | 'large';
     breadcrumbs: { label: string; href?: string }[];
     centered?: boolean;
+    showEnquire?: boolean;
+    onEnquire?: () => void;
 }
 
 
@@ -34,7 +36,9 @@ export default function DynamicPageBanner({
     fallbackImage,
     variant = 'standard',
     breadcrumbs,
-    centered = false
+    centered = false,
+    showEnquire = false,
+    onEnquire
 }: DynamicPageBannerProps) {
     const pathname = usePathname();
     const [banner, setBanner] = useState<BannerData | null>(null);
@@ -87,9 +91,14 @@ export default function DynamicPageBanner({
 
     const finalTitle = title || banner?.title || fallbackTitle;
     
-    // If we're loading and have no title yet, we can return null or a skeleton
-    // to prevent showing "Explore Your Journey" or other generic fallbacks.
-    if (!finalTitle && loading) return <div className={`pageBanner noImage variant-${variant}`} />;
+    // If we're loading and have no title yet, we can return a skeleton or a themed loader
+    if (!finalTitle && loading) return (
+        <div className={`pageBanner noImage variant-${variant}`}>
+            <div className="pageBannerInner h-full flex items-center justify-center">
+                <div className="w-10 h-10 border-4 border-white/10 border-t-orange-500 rounded-full animate-spin" />
+            </div>
+        </div>
+    );
 
     return (
         <PageBanner
@@ -100,6 +109,8 @@ export default function DynamicPageBanner({
             breadcrumbs={breadcrumbs}
             variant={variant}
             centered={centered}
+            showEnquire={showEnquire}
+            onEnquire={onEnquire}
         />
     );
 }

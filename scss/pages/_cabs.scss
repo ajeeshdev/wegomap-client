@@ -1,0 +1,197 @@
+@import "../helpers/variables";
+@import "../helpers/media-queries";
+
+.cabs-listing-wrapper {
+    background-color: #f8fafc;
+    min-height: 100vh;
+    padding-bottom: 8rem;
+
+    .cabs-listing-container {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+        position: relative;
+    }
+
+    .pricing-matrix-section {
+        .pricing-table-container {
+            background: #fff;
+            border-radius: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f1f5f9;
+            overflow: auto;
+            
+            table {
+                width: 100%;
+                border-spacing: 0;
+                min-width: 900px;
+                
+                th {
+                    background: #f8fafc;
+                    padding: 2.5rem 1.5rem;
+                    text-transform: uppercase;
+                    font-size: 0.7rem;
+                    letter-spacing: 0.15em;
+                    font-weight: 900;
+                    color: #94a3b8;
+                    border-bottom: 1px solid #f1f5f9;
+                    text-align: center;
+                    
+                    &:first-child {
+                        text-align: left;
+                        padding-left: 3rem;
+                    }
+                }
+                
+                td {
+                    padding: 2.5rem 1.5rem;
+                    border-bottom: 1px solid #f8fafc;
+                    text-align: center;
+                    vertical-align: middle;
+                    
+                    &:first-child {
+                        text-align: left;
+                        padding-left: 3rem;
+                    }
+                    
+                    .vehicle-info {
+                        display: flex;
+                        align-items: center;
+                        gap: 1.5rem;
+                        
+                        .v-avatar {
+                            width: 3.5rem;
+                            height: 3.5rem;
+                            border-radius: 1.25rem;
+                            background: rgba($cosmicOrange, 0.1);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: $cosmicOrange;
+                            font-weight: 900;
+                            font-size: 1.25rem;
+                            border: 1px solid rgba($cosmicOrange, 0.1);
+                        }
+                        
+                        .v-details {
+                            .v-name {
+                                color: #0f172a;
+                                font-weight: 900;
+                                text-transform: uppercase;
+                                letter-spacing: -0.01em;
+                                font-size: 1.15rem;
+                                line-height: 1.2;
+                            }
+                            .v-tag {
+                                color: #94a3b8;
+                                font-size: 0.65rem;
+                                font-weight: 900;
+                                text-transform: uppercase;
+                                letter-spacing: 0.1em;
+                                margin-top: 0.3rem;
+                            }
+                        }
+                    }
+                    
+                    .price-val {
+                        font-size: 1.5rem;
+                        font-weight: 900;
+                        color: #0f172a;
+                        line-height: 1;
+                    }
+                    
+                    .price-label {
+                        font-size: 0.6rem;
+                        font-weight: 800;
+                        color: #cbd5e1;
+                        text-transform: uppercase;
+                        letter-spacing: 0.1em;
+                        margin-top: 0.4rem;
+                    }
+                }
+                
+                tr:last-child td {
+                    border-bottom: none;
+                }
+                
+                tr:hover td {
+                    background: #fcfcfc;
+                }
+            }
+        }
+        
+        .custom-quote-banner {
+            margin-top: 5rem;
+            background: #0f172a;
+            border-radius: 3rem;
+            padding: 5rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 40px 80px -20px rgba(15, 23, 42, 0.3);
+            
+            &::before {
+                content: '';
+                position: absolute;
+                top: -30%;
+                right: -10%;
+                width: 500px;
+                height: 500px;
+                background: radial-gradient(circle, rgba($cosmicOrange, 0.1) 0%, transparent 70%);
+                border-radius: 50%;
+            }
+            
+            .banner-content {
+                position: relative;
+                z-index: 5;
+                max-width: 700px;
+                margin: 0 auto;
+            }
+            
+            h4 {
+                color: #fff;
+                font-size: 2.5rem;
+                font-weight: 900;
+                margin-bottom: 1.5rem;
+                letter-spacing: -0.02em;
+            }
+            
+            p {
+                color: #64748b;
+                font-size: 1.1rem;
+                margin-bottom: 3rem;
+                line-height: 1.7;
+                font-weight: 500;
+            }
+            
+            .cta-btn {
+                background: $cosmicOrange;
+                color: #fff !important;
+                padding: 1.4rem 3.5rem;
+                border-radius: 1.5rem;
+                font-weight: 900;
+                text-transform: uppercase;
+                letter-spacing: 0.15em;
+                font-size: 0.85rem;
+                display: inline-flex;
+                align-items: center;
+                gap: 1rem;
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                box-shadow: 0 20px 40px rgba($cosmicOrange, 0.3);
+                
+                &:hover {
+                    transform: translateY(-8px);
+                    background: lighten($cosmicOrange, 5%);
+                    box-shadow: 0 30px 60px rgba($cosmicOrange, 0.4);
+                }
+                
+                svg {
+                    transition: transform 0.3s ease;
+                }
+                
+                &:hover svg {
+                    transform: translateX(5px);
+                }
+            }
+        }
+    }
+}

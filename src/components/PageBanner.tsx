@@ -3,8 +3,9 @@
 import React, { Fragment } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Home, ChevronRight, Star } from 'lucide-react';
+import { Home, ChevronRight, Star, MessageSquare } from 'lucide-react';
 import { getImageUrl } from '@/config';
+import { useEnquiry } from '@/context/EnquiryContext';
 
 export interface BreadcrumbItem {
     label: string;
@@ -19,6 +20,8 @@ interface PageBannerProps {
     backgroundImage?: string;
     variant?: 'standard' | 'large';
     centered?: boolean;
+    showEnquire?: boolean;
+    onEnquire?: () => void;
 }
 
 export default function PageBanner({ 
@@ -28,8 +31,19 @@ export default function PageBanner({
     breadcrumbs, 
     backgroundImage, 
     variant = 'standard',
-    centered = false
+    centered = false,
+    showEnquire = false,
+    onEnquire
 }: PageBannerProps) {
+    const { openEnquiry } = useEnquiry();
+
+    const handleEnquiry = () => {
+        if (onEnquire) {
+            onEnquire();
+        } else {
+            openEnquiry(title);
+        }
+    };
 
     return (
         <div className={`pageBanner ${backgroundImage ? 'hasImage' : 'noImage'} variant-${variant} ${centered ? 'isCentered' : ''}`}>
@@ -82,6 +96,18 @@ export default function PageBanner({
                             {title}
                         </h1>
                         {subtitle && <p className="pageBannerDescription">{subtitle}</p>}
+                        
+                        {showEnquire && (
+                            <div className="pageBannerActions mt-8">
+                                <button 
+                                    onClick={handleEnquiry}
+                                    className="bannerEnquireBtn px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-2xl flex items-center gap-3 transition-all shadow-xl shadow-orange-500/20 active:scale-95 text-sm uppercase tracking-widest"
+                                >
+                                    <MessageSquare size={18} />
+                                    Enquire Now
+                                </button>
+                            </div>
+                        )}
                         
                         {centered && (
                             <div className="googleReviewsBadge">

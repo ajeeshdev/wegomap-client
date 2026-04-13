@@ -4,14 +4,14 @@
 
 .pageBanner {
     position: relative;
-    height: 350px; 
-    min-height: 350px;
+    height: 280px; 
+    min-height: 280px;
     width: 100%;
     display: flex;
     align-items: center;
     overflow: hidden;
     background-color: #0c1221;
-    margin-top: 60px;
+    margin-top: 56px;
     z-index: 5;
 
     @include min(768) {
@@ -20,7 +20,7 @@
     }
 
     &.noImage {
-        height: 300px;
+        height: 240px;
         @include min(768) { height: 400px; }
     }
 
@@ -157,6 +157,48 @@
                 padding-left: 1rem;
             }
         }
+
+        .pageBannerActions {
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+
+            .bannerEnquireBtn {
+                background: $cosmicOrange !important;
+                border: none !important;
+                box-shadow: 0 15px 30px rgba($cosmicOrange, 0.3) !important;
+                height: 52px;
+                padding: 0 2.5rem !important;
+                font-size: 11px !important;
+                font-weight: 900 !important;
+                letter-spacing: 0.15em !important;
+                border-radius: 12px !important;
+                text-transform: uppercase;
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+                
+                svg {
+                    transition: transform 0.4s ease;
+                    color: #fff !important;
+                }
+
+                &:hover {
+                    background: #fff !important;
+                    color: $cosmicOrange !important;
+                    transform: translateY(-5px) !important;
+                    box-shadow: 0 20px 40px rgba(0,0,0,0.3) !important;
+                    
+                    svg {
+                        color: $cosmicOrange !important;
+                        transform: scale(1.2) rotate(-10deg);
+                    }
+                }
+
+                &:active {
+                    transform: translateY(-2px) scale(0.98) !important;
+                }
+            }
+        }
     }
 
     &.isCentered {
@@ -178,6 +220,15 @@
                 border-left: none;
                 padding-left: 0;
                 margin: 1.5rem auto 0;
+            }
+
+            .pageBannerActions {
+                justify-content: center;
+                margin-top: 2rem;
+
+                @include max(767) {
+                    margin-top: 1.5rem;
+                }
             }
         }
 

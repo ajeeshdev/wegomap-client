@@ -236,12 +236,6 @@ export default function TourDetailView({ id }: { id: string }) {
                         </div>
                     </div>
                     <div className="tStat border-l border-slate-100 pl-8">
-                        <span className="tLabel">Location</span>
-                        <div className="tValue">
-                            <MapPin size={16} /> {pkg.location}
-                        </div>
-                    </div>
-                    <div className="tStat border-l border-slate-100 pl-8">
                         <span className="tLabel">Pricing</span>
                         <div className="tValue priceValue flex items-baseline gap-2">
                             <span>{pkg.price}</span>
@@ -253,10 +247,17 @@ export default function TourDetailView({ id }: { id: string }) {
                             )}
                         </div>
                     </div>
-                    <div className="tStat border-l border-slate-100 pl-8 flex items-center">
+                    <div className="tStat border-l border-slate-100 pl-8 flex items-center gap-4">
+                        <button 
+                            onClick={() => openEnquiry(pkg.title)}
+                            className="enquire-now-btn"
+                        >
+                            <MessageSquare size={16} />
+                            Enquire Now
+                        </button>
                         <button
                             onClick={(e) => toggleWishlist(pkg.id, e)}
-                            className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-black uppercase text-[10px] tracking-widest transition-all ${wishlist.includes(pkg.id) ? 'bg-rose-500 text-white shadow-lg shadow-rose-200' : 'bg-slate-50 text-slate-400 hover:text-rose-500 hover:bg-rose-50'}`}
+                            className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-black uppercase text-[10px] tracking-widest transition-all heartWish ${wishlist.includes(pkg.id) ? 'bg-rose-500 text-white shadow-lg shadow-rose-200' : 'bg-slate-50 text-slate-400 hover:text-rose-500 hover:bg-rose-50'}`}
                         >
                             <Heart size={16} fill={wishlist.includes(pkg.id) ? "currentColor" : "none"} />
                             {wishlist.includes(pkg.id) ? 'Saved' : 'Save to Wishlist'}

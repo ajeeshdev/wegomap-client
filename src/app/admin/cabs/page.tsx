@@ -31,11 +31,30 @@ export default function CabsAdmin() {
       const res = await fetch(`${API_URL}/options?key=cab_pricing`);
       const json = await res.json();
       if (json.success && json.data.length > 0) {
-        const fetchedData = json.data[0].value;
+        let fetchedData = json.data[0].value;
+        
+        // Safety check: if data comes back as a string, try to parse it or reset if invalid
+        if (typeof fetchedData === 'string') {
+          try {
+            fetchedData = JSON.parse(fetchedData);
+          } catch (e) {
+            console.error("Failed to parse cab_pricing", e);
+            fetchedData = {};
+          }
+        }
+        
+        // Ensure fetchedData is an actual object and not null or some other type
+        if (!fetchedData || typeof fetchedData !== 'object' || Array.isArray(fetchedData)) {
+          fetchedData = {};
+        }
+
         const mergedData: any = { ...defaultPricing };
         
-        // Find keys that are not in defaults (custom vehicles)
-        const customVehicles = Object.keys(fetchedData)
+        // Filter out numeric keys that might be leftovers from previous corruption
+        const validKeys = Object.keys(fetchedData).filter(key => isNaN(Number(key)));
+
+        // Find custom vehicles
+        const customVehicles = validKeys
           .filter(key => !Object.keys(defaultPricing).includes(key))
           .map(key => ({
             key,
@@ -49,7 +68,7 @@ export default function CabsAdmin() {
           return [...baseTypes, ...customVehicles];
         });
 
-        Object.keys(fetchedData).forEach(key => {
+        validKeys.forEach(key => {
           mergedData[key] = {
             ...(defaultPricing[key as keyof typeof defaultPricing] || { n2d3: '', n3d4: '', n4d5: '', n5d6: '', n6d7: '' }),
             ...fetchedData[key]
@@ -88,9 +107,12 @@ export default function CabsAdmin() {
       const data = await res.json();
       if (data.success) {
         toast.success('Transport rates synchronized successfully');
+      } else {
+        toast.error(data.error || 'Failed to save pricing data');
       }
     } catch (err) { 
-        toast.error('Sync failure detected');
+        toast.error('Sync failure detected: Network or Authorization error');
+        console.error(err);
     } finally { 
         setSaving(false); 
     }
