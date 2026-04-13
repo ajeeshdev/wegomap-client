@@ -111,14 +111,15 @@
   gap: 6px;
   margin-bottom: 14px;
 }
+.featuresGrid.singleFeature {
+  grid-template-columns: 1fr;
+}
 
 .featureItem {
   font-size: 10px;
   font-weight: 700;
   color: #64748b;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.4;
 }
 
 .detailedPricingBox {

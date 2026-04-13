@@ -182,85 +182,10 @@ export default function TourDetailView({ id }: { id: string }) {
                     return;
                 }
 
-                // If slug lookup failed, check if we have a static title to search by (Legacy Redirect Support)
-                if (id && packagesData[id]) {
-                    const staticTitle = packagesData[id].title;
-                    const searchRes = await fetch(`${API_URL}/packages`);
-                    const searchData = await searchRes.json();
-                    if (searchData.success && searchData.data) {
-                        const matchedPkg = searchData.data.find((p: any) => p.title.trim().toLowerCase() === staticTitle.trim().toLowerCase());
-                        if (matchedPkg) {
-                            console.log('Matched package by TITLE:', matchedPkg.title);
-                            const p = matchedPkg;
-                            setPkg({
-                                id: p._id,
-                                slug: p.slug || p._id,
-                                title: sanitizeText(p.title),
-                                location: sanitizeText(p.location) || 'Explore',
-                                duration: sanitizeText(p.duration || p.days) || 'Flexible Duration',
-                                price: p.price ? `₹ ${Number(p.price).toLocaleString()}` : 'Contact for Price',
-                                oldPrice: p.oldamt ? `₹ ${Number(p.oldamt).toLocaleString()}` : undefined,
-                                image: getImageUrl(p.thumb || (p.images && p.images[0]) || '/bg-placeholder.jpg'),
-                                images: (p.images || []).map((img: string) => getImageUrl(img)),
-                                description: sanitizeText(p.description),
-                                highlights: (p.highlights || []).map((h: string) => sanitizeText(h)),
-                                itinerary: (p.itinerary || []).map((item: any) => ({
-                                    ...item,
-                                    day: sanitizeText(typeof item.day === 'string' ? item.day : (item.title ? `Day ${item.day}: ${item.title}` : `Day ${item.day}`)),
-                                    activity: sanitizeText(item.description || item.activity || ''),
-                                    image: item.image ? getImageUrl(item.image) : item.image
-                                })),
-                                inclusions: p.inclusions || [],
-                                exclusions: p.exclusions || [],
-                                amenities: p.amenities?.length > 0 ? p.amenities : [
-                                    { icon: 'Building2', label: 'Luxury Stays', color: 'blue' },
-                                    { icon: 'Utensils', label: 'Fine Dining', color: 'rose' },
-                                    { icon: 'Car', label: 'Private Hub', color: 'emerald' }
-                                ],
-                            });
-                            setLoading(false);
-                            return;
-                        }
-                    }
-                }
-
-                // Fallback to local hardcoded data if API fails or No data
-                if (id && packagesData[id]) {
-                    const localPkg = packagesData[id];
-                    setPkg({
-                        ...localPkg,
-                        title: sanitizeText(localPkg.title),
-                        location: sanitizeText(localPkg.location),
-                        description: sanitizeText(localPkg.description),
-                        image: getImageUrl(localPkg.image),
-                        itinerary: localPkg.itinerary.map(item => ({
-                            ...item,
-                            day: sanitizeText(item.day),
-                            activity: sanitizeText(item.activity),
-                            image: item.image ? getImageUrl(item.image) : item.image
-                        }))
-                    });
-                    setLoading(false);
-                    return;
-                }
-
                 setPkg(null);
             } catch (err) {
                 console.error('Fetch error:', err);
-                // Last ditch effort: Try local data if network failed
-                if (id && packagesData[id]) {
-                    const localPkg = packagesData[id];
-                    setPkg({
-                        ...localPkg,
-                        image: getImageUrl(localPkg.image),
-                        itinerary: localPkg.itinerary.map(item => ({
-                            ...item,
-                            image: item.image ? getImageUrl(item.image) : item.image
-                        }))
-                    });
-                } else {
-                    setPkg(null);
-                }
+                setPkg(null);
             } finally {
                 setLoading(false);
             }

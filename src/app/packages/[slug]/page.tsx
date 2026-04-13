@@ -43,40 +43,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             };
         }
 
-        // Secondary fallback: Match by Title if slug fails (Legacy Redirect Support)
-        if (packagesData[slug]) {
-            const staticTitle = packagesData[slug].title;
-            const searchRes = await fetch(`${API_URL}/packages`);
-            const searchJson = await searchRes.json();
-            if (searchJson.success && searchJson.data) {
-                const matchedPkg = searchJson.data.find((p: any) => p.title.trim().toLowerCase() === staticTitle.trim().toLowerCase());
-                if (matchedPkg) {
-                    const p = matchedPkg;
-                    return {
-                        title: p.seo_title || `${p.title} | WEGOMAP`,
-                        description: p.seo_meta || p.description?.substring(0, 160),
-                        keywords: p.seo_keys || 'kerala, travel, package, holiday',
-                        openGraph: {
-                            title: p.seo_title || p.title,
-                            description: p.seo_meta || p.description,
-                            images: [p.image].filter(Boolean),
-                        }
-                    };
-                }
-            }
-        }
+
     } catch (e) {
         console.error("Meta fetch error:", e);
     }
 
-    // Fallback: Check if it's a static package
-    if ((packagesData as any)[slug]) {
-        const pkg = (packagesData as any)[slug];
-        return {
-            title: `${pkg.title} | WEGOMAP`,
-            description: pkg.description?.substring(0, 160),
-        };
-    }
+
 
     return {
         title: 'Tour Packages | WEGOMAP',
@@ -86,7 +58,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function DynamicPackagePage({ params }: PageProps) {
     const { slug } = await params;
 
-    let shouldRedirect = !!categoryMappings[slug];
+    let shouldRedirect = false;
 
     if (!shouldRedirect) {
         try {

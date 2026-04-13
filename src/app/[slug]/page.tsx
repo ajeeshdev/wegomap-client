@@ -129,25 +129,7 @@ export default async function RootSlugPage({ params }: PageProps) {
             }
         } catch (e) {}
 
-        const staticSlugs = categoryMappings[slug] || [];
-        const staticPackages: TourPackage[] = staticSlugs.map(pSlug => {
-            const pkg = (packagesData as any)[pSlug];
-            if (!pkg) return null;
-            return {
-                image: pkg.image,
-                duration: pkg.duration || pkg.location,
-                title: pkg.title,
-                location: pkg.location,
-                price: pkg.price,
-                originalPrice: pkg.oldPrice,
-                detailUrl: `/packages/${pSlug}`
-            };
-        }).filter((p): p is TourPackage => p !== null);
-
         const combinedPackages = [...dynamicPackages];
-        staticPackages.forEach(sp => {
-            if (!combinedPackages.find(dp => dp.slug === sp.slug)) combinedPackages.push(sp);
-        });
 
         return (
             <TourCategoryPage

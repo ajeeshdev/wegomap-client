@@ -65,35 +65,7 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
         }
     }
 
-    // Fallback: extract itinerary from static packagesData if empty in API
     let finalItinerary = pkg.itinerary || [];
-    if (finalItinerary.length === 0) {
-        // Direct Slug Match (Most accurate as it links to the detail page)
-        let fallbackPkg: any = packagesData[pkg.slug];
-
-        // If no slug match, try Title + Location/Subtitle normalization as backup
-        if (!fallbackPkg) {
-            const normalize = (s: string) => s?.toLowerCase().trim().replace(/[\s\/\-•|]/g, '') || '';
-            const normTitle = normalize(pkg.title);
-            const normSubtitle = normalize(pkg.subtitle || '');
-
-            fallbackPkg = Object.values(packagesData).find(p => {
-                const staticTitle = normalize(p.title);
-                const staticLocation = normalize(p.location);
-                if (staticTitle === normTitle) {
-                    if (normSubtitle) {
-                        return staticLocation === normSubtitle || staticLocation.includes(normSubtitle) || normSubtitle.includes(staticLocation);
-                    }
-                    return true;
-                }
-                return false;
-            });
-        }
-
-        if (fallbackPkg && fallbackPkg.itinerary) {
-            finalItinerary = fallbackPkg.itinerary;
-        }
-    }
 
     // All images for slider (including itinerary photos)
     const itineraryPhotos = finalItinerary 
@@ -114,16 +86,9 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
         ? Number(pkg.totalPrice).toLocaleString() 
         : (rawPrice * 2).toLocaleString();
 
-    // Features Mapping
     const features = (pkg.highlights && pkg.highlights.length > 0)
         ? pkg.highlights.slice(0, 5)
-        : [
-            "Intercity Car Transfers",
-            "7 Activities Included",
-            "3-4 Star Premium Hotels",
-            "Daily Breakfast & Meals",
-            "Airport Pickup & Drop"
-        ];
+        : [];
 
     return (
         <div className="detailedPackageCard group">

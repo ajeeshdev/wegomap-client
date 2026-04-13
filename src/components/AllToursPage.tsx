@@ -256,19 +256,8 @@ export default function AllToursPage() {
     }, []);
 
     const allCombinedPackages = useMemo(() => {
-        // Merge CMS packages with static packages, prioritizing CMS by Slug/Title if needed
-        const combined = [...cmsPackages];
-        const cmsSlugs = new Set(combined.map(p => p.slug));
-        const cmsTitles = new Set(combined.map(p => p.title.toLowerCase()));
-        
-        ALL_PACKAGES.forEach(p => {
-            // Only add static package if it's not already in CMS by slug or title
-            if (!cmsSlugs.has(p.slug) && !cmsTitles.has(p.title.toLowerCase())) {
-                combined.push(p);
-                cmsSlugs.add(p.slug);
-            }
-        });
-        return combined.sort((a, b) => (a.order || 0) - (b.order || 0));
+        // Return only CMS packages
+        return [...cmsPackages].sort((a, b) => (a.order || 0) - (b.order || 0));
     }, [cmsPackages]);
 
     useEffect(() => {
