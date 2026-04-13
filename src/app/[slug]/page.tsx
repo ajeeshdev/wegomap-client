@@ -124,7 +124,18 @@ export default async function RootSlugPage({ params }: PageProps) {
                     location: pkg.location,
                     price: pkg.price ? `₹${pkg.price.toLocaleString()}` : 'N/A',
                     originalPrice: pkg.oldamt ? `₹${Number(pkg.oldamt).toLocaleString()}` : null,
-                    detailUrl: `/packages/${pkg.slug || pkg._id}`
+                    detailUrl: `/packages/${pkg.slug || pkg._id}`,
+                    // Pass through additional fields for PackageCard
+                    highlights: pkg.highlights || [],
+                    subtitle: pkg.subtitle || '',
+                    itinerary: pkg.itinerary || [],
+                    averageRating: pkg.averageRating,
+                    reviewCount: pkg.reviewCount,
+                    noCostEmi: pkg.noCostEmi,
+                    totalPrice: pkg.totalPrice,
+                    per: pkg.per,
+                    onoffer: pkg.onoffer,
+                    slabel: pkg.slabel
                 }));
             }
         } catch (e) {}
@@ -134,13 +145,26 @@ export default async function RootSlugPage({ params }: PageProps) {
             const pkg = (packagesData as any)[pSlug];
             if (!pkg) return null;
             return {
+                _id: pkg._id,
+                slug: pSlug,
                 image: pkg.image,
                 duration: pkg.duration || pkg.location,
                 title: pkg.title,
                 location: pkg.location,
                 price: pkg.price,
                 originalPrice: pkg.oldPrice,
-                detailUrl: `/packages/${pSlug}`
+                detailUrl: `/packages/${pSlug}`,
+                // Pass through additional fields for PackageCard
+                highlights: pkg.highlights || [],
+                subtitle: pkg.subtitle || pkg.location || '',
+                itinerary: pkg.itinerary || [],
+                averageRating: pkg.averageRating,
+                reviewCount: pkg.reviewCount,
+                noCostEmi: pkg.noCostEmi,
+                totalPrice: pkg.totalPrice,
+                per: pkg.per,
+                onoffer: pkg.onoffer,
+                slabel: pkg.slabel
             };
         }).filter((p): p is TourPackage => p !== null);
 
