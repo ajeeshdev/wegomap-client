@@ -98,11 +98,12 @@ export default function EditPackage() {
             thumb_alt: data.data.thumb_alt || 'wegomap',
             itinerary: (data.data.itinerary || []).map((item: any, idx: number) => {
               const dayNum = typeof item.day === 'number' ? item.day : (parseInt(String(item.day)) || idx + 1);
+              const desc = item.description || item.activity || item.activityDetails || item.details || '';
               return {
                 ...item,
                 day: dayNum,
                 title: item.title || '',
-                description: item.description || item.activity || '',
+                description: desc,
                 image: item.image || item.img || '',
                 amenities: item.amenities || []
               };

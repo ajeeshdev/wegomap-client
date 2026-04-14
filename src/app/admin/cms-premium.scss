@@ -234,6 +234,8 @@
     }
 
     &::placeholder { color: #cbd5e1; }
+    position: relative;
+    z-index: 5;
   }
 
   .toggle-switch {
@@ -362,6 +364,9 @@
       border-bottom: 2px solid #e2e8f0 !important;
       border-radius: 0 !important;
       padding: 0.5rem 0 !important;
+      position: relative !important;
+      z-index: 10 !important;
+      cursor: text !important;
       &:focus { border-color: var(--primary) !important; box-shadow: none !important; }
     }
 
