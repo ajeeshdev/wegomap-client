@@ -431,7 +431,13 @@ export default function LandingPageView({
                   image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || "/bg-placeholder.jpg"),
                   images: pkg.images || [],
                   subtitle: pkg.subtitle || pkg.location || '',
-                  highlights: pkg.highlights || [],
+                  highlights: (pkg.highlights && pkg.highlights.length > 0)
+                      ? pkg.highlights
+                      : (pkg.new_highlight || pkg.new_highlights)
+                          ? Array.from((pkg.new_highlight || pkg.new_highlights).matchAll(/<li[^>]*>([\s\S]*?)<\/li>/gi)).map((m: any) => m[1].replace(/<[^>]+>/g, '').trim()).filter(Boolean)
+                          : (pkg.highlights_list && pkg.highlights_list.length > 0)
+                              ? pkg.highlights_list
+                              : [],
                   inclusions: (pkg as any).inclusions || [],
                   itinerary: pkg.itinerary || [],
                   averageRating: (pkg as any).averageRating || 4.9,

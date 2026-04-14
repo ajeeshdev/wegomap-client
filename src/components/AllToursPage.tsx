@@ -228,7 +228,11 @@ export default function AllToursPage() {
                             image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || pkg.image || '/bg-placeholder.jpg'),
                             images: pkg.images || [],
                             subtitle: pkg.subtitle || '',
-                            highlights: pkg.highlights || [],
+                            highlights: (pkg.highlights && pkg.highlights.length > 0) 
+                                ? pkg.highlights 
+                                : (pkg.new_highlight || pkg.new_highlights) 
+                                    ? Array.from((pkg.new_highlight || pkg.new_highlights).matchAll(/<li[^>]*>([\s\S]*?)<\/li>/gi)).map((m: any) => m[1].replace(/<[^>]+>/g, '').trim()).filter(Boolean)
+                                    : [],
                             inclusions: pkg.inclusions || [],
                             itinerary: pkg.itinerary || [],
                             categories: categories,

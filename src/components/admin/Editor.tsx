@@ -15,7 +15,7 @@ export default function RichTextEditor({ value, onChange, height = 400 }: RichTe
   const [showRaw, setShowRaw] = useState(false);
 
   return (
-    <div className="rich-editor-wrapper rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white relative z-20">
+    <div className="rich-editor-wrapper rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white relative">
       <div className="flex justify-end p-2 bg-slate-50 border-b border-slate-100">
         <button 
           type="button"
@@ -37,7 +37,8 @@ export default function RichTextEditor({ value, onChange, height = 400 }: RichTe
         />
       ) : (
         <Editor
-          tinymceScriptSrc="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.7.0/tinymce.min.js"
+          tinymceScriptSrc="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.3/tinymce.min.js"
+          onInit={(evt, editor) => editorRef.current = editor}
           licenseKey="gpl"
           value={value || ''}
           onEditorChange={(content) => onChange(content)}

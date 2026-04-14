@@ -90,11 +90,18 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
     // Also format the main price
     const displayMainPrice = rawPrice.toLocaleString('en-IN');
 
-    const features = (pkg.highlights && pkg.highlights.length > 0)
-        ? pkg.highlights.slice(0, 5)
-        : (pkg.inclusions && pkg.inclusions.length > 0)
-            ? pkg.inclusions.slice(0, 5)
-            : [];
+    const highlights = Array.isArray(pkg.highlights) ? pkg.highlights : [];
+    const inclusions = Array.isArray(pkg.inclusions) ? pkg.inclusions : [];
+    
+    let features: string[] = [];
+    if (highlights.length > 0) {
+        features = highlights.slice(0, 5);
+    } else if (inclusions.length > 0) {
+        features = inclusions.slice(0, 5);
+    } else if (pkg.duration) {
+        // Fallback to duration if nothing else
+        features = [pkg.duration];
+    }
 
     return (
         <div className="detailedPackageCard group">

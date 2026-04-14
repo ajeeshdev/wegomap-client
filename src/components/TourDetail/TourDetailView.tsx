@@ -12,6 +12,8 @@ import { Navigation, Autoplay, FreeMode } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/free-mode';
+import './TourDetailView.css';
+
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -319,14 +321,18 @@ export default function TourDetailView({ id }: { id: string }) {
                             <div className="mb-12">
                                 <h3 className="sectionTitle">Tour Highlights</h3>
                                 <div className="highlightsGrid">
-                                    {pkg.highlights.map((highlight, i) => (
-                                        <div key={i} className="highlightItem">
-                                            <div className="checkIcon">
-                                                <Check size={18} strokeWidth={4} />
+                                    {pkg.highlights && pkg.highlights.length > 0 ? (
+                                        pkg.highlights.map((highlight, i) => (
+                                            <div key={i} className="highlightItem">
+                                                <div className="checkIcon">
+                                                    <Check size={18} strokeWidth={4} />
+                                                </div>
+                                                <span>{highlight}</span>
                                             </div>
-                                            <span>{highlight}</span>
-                                        </div>
-                                    ))}
+                                        ))
+                                    ) : (
+                                        <div className="text-slate-400 italic">No specific highlights listed for this tour.</div>
+                                    )}
                                 </div>
                             </div>
 
@@ -392,7 +398,7 @@ export default function TourDetailView({ id }: { id: string }) {
                                 </div>
                                 <div className="featureCol">
                                     <div className="featureHeader">
-                                        <div className="featureIcon exclusion"><Info size={20} strokeWidth={2.5} /></div>
+                                        <div className="featureIcon exclusion"><X size={20} strokeWidth={2.5} /></div>
                                         <h3>What's not included</h3>
                                     </div>
                                     <ul className="featureList">
