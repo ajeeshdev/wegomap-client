@@ -37,7 +37,8 @@ export default function RichTextEditor({ value, onChange, height = 400 }: RichTe
         />
       ) : (
         <Editor
-          apiKey="no-api-key"
+          tinymceScriptSrc="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.7.0/tinymce.min.js"
+          licenseKey="gpl"
           value={value || ''}
           onEditorChange={(content) => onChange(content)}
           init={{
