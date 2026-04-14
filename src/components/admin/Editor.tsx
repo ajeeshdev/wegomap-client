@@ -2,7 +2,7 @@
 
 import { API_URL } from '@/config';
 import { Editor } from '@tinymce/tinymce-react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Code, Type } from 'lucide-react';
 
 interface RichTextEditorProps {
@@ -13,6 +13,7 @@ interface RichTextEditorProps {
 
 export default function RichTextEditor({ value, onChange, height = 400 }: RichTextEditorProps) {
   const [showRaw, setShowRaw] = useState(false);
+  const editorRef = useRef<any>(null);
 
   return (
     <div className="rich-editor-wrapper rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white relative">
@@ -37,9 +38,7 @@ export default function RichTextEditor({ value, onChange, height = 400 }: RichTe
         />
       ) : (
         <Editor
-          tinymceScriptSrc="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.3/tinymce.min.js"
           onInit={(evt, editor) => editorRef.current = editor}
-          licenseKey="gpl"
           value={value || ''}
           onEditorChange={(content) => onChange(content)}
           init={{
