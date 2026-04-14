@@ -16,6 +16,20 @@ import AmenityPicker from '@/components/admin/AmenityPicker';
 import { toast } from 'react-hot-toast';
 import '../../../cms-premium.scss';
 
+const cleanStringList = (items: any[] = []) =>
+  items
+    .map(item => typeof item === 'string' ? item.trim() : item)
+    .filter(Boolean);
+
+const cleanItinerary = (items: any[] = []) =>
+  items.map((item: any, idx: number) => ({
+    day: Number(item.day) || idx + 1,
+    title: (item.title || '').trim(),
+    description: item.description || '',
+    image: (item.image || '').trim(),
+    amenities: Array.isArray(item.amenities) ? item.amenities.filter(Boolean) : []
+  }));
+
 export default function EditPackage() {
   const router = useRouter();
   const { id } = useParams();
@@ -114,7 +128,15 @@ export default function EditPackage() {
   const handleSubmit = async () => {
     setSaving(true);
     try {
-      const formDataToSubmit = { ...formData };
+      const formDataToSubmit = {
+        ...formData,
+        highlights: cleanStringList(formData.highlights),
+        inclusions: cleanStringList(formData.inclusions),
+        exclusions: cleanStringList(formData.exclusions),
+        categories: cleanStringList(formData.categories),
+        images: cleanStringList(formData.images),
+        itinerary: cleanItinerary(formData.itinerary)
+      };
       delete formDataToSubmit._id;
       delete formDataToSubmit.__v;
       delete formDataToSubmit.createdAt;

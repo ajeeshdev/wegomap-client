@@ -46,6 +46,21 @@ const sanitizeText = (text: string | null | undefined): string => {
         .replace(/&#39;/g, "'");
 };
 
+const extractListItemsFromHtml = (html: string | null | undefined): string[] => {
+    if (!html) return [];
+
+    const listItems = Array.from(html.matchAll(/<li[^>]*>([\s\S]*?)<\/li>/gi))
+        .map(match => sanitizeText(match[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()))
+        .filter(Boolean);
+
+    if (listItems.length > 0) {
+        return listItems;
+    }
+
+    const plainText = sanitizeText(html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim());
+    return plainText ? [plainText] : [];
+};
+
 export default function TourDetailView({ id }: { id: string }) {
     const [pkg, setPkg] = useState<TourPackageDetail | null>(null);
     const [loading, setLoading] = useState(true);
@@ -152,6 +167,23 @@ export default function TourDetailView({ id }: { id: string }) {
 
                 if (data.success && data.data) {
                     const p = data.data;
+                    const legacyPkg = (packagesData as Record<string, TourPackageDetail>)[p.slug || id];
+                    const currentHighlights = (p.highlights || [])
+                        .map((h: string) => sanitizeText(h))
+                        .filter(Boolean);
+                    const legacyHighlights = extractListItemsFromHtml(p.new_highlight);
+                    const currentItinerary = (p.itinerary || []).map((item: any) => ({
+                        ...item,
+                        day: sanitizeText(typeof item.day === 'string' ? item.day : (item.title ? `Day ${item.day}: ${item.title}` : `Day ${item.day}`)),
+                        activity: sanitizeText(item.description || item.activity || ''),
+                        image: item.image ? getImageUrl(item.image) : item.image
+                    })).filter((item: any) => item.day || item.activity || item.image || (item.amenities && item.amenities.length > 0));
+                    const legacyItinerary = (legacyPkg?.itinerary || []).map((item: any) => ({
+                        ...item,
+                        day: sanitizeText(item.day),
+                        activity: sanitizeText(item.activity || item.description || ''),
+                        image: item.image ? getImageUrl(item.image) : item.image
+                    }));
                     setPkg({
                         id: p._id,
                         slug: p.slug || p._id,
@@ -163,13 +195,12 @@ export default function TourDetailView({ id }: { id: string }) {
                         image: getImageUrl(p.thumb || (p.images && p.images[0]) || '/bg-placeholder.jpg'),
                         images: (p.images || []).map((img: string) => getImageUrl(img)),
                         description: sanitizeText(p.description),
-                        highlights: (p.highlights || []).map((h: string) => sanitizeText(h)),
-                        itinerary: (p.itinerary || []).map((item: any) => ({
-                            ...item,
-                            day: sanitizeText(typeof item.day === 'string' ? item.day : (item.title ? `Day ${item.day}: ${item.title}` : `Day ${item.day}`)),
-                            activity: sanitizeText(item.description || item.activity || ''),
-                            image: item.image ? getImageUrl(item.image) : item.image
-                        })),
+                        highlights: currentHighlights.length > 0
+                            ? currentHighlights
+                            : legacyHighlights.length > 0
+                                ? legacyHighlights
+                                : (legacyPkg?.highlights || []).map((h: string) => sanitizeText(h)).filter(Boolean),
+                        itinerary: currentItinerary.length > 0 ? currentItinerary : legacyItinerary,
                         inclusions: p.inclusions || [],
                         exclusions: p.exclusions || [],
                         amenities: p.amenities?.length > 0 ? p.amenities : [

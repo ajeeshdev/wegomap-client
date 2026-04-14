@@ -18,6 +18,20 @@ import AmenityPicker from '@/components/admin/AmenityPicker';
 import { toast } from 'react-hot-toast';
 import '../../cms-premium.scss';
 
+const cleanStringList = (items: any[] = []) =>
+   items
+      .map(item => typeof item === 'string' ? item.trim() : item)
+      .filter(Boolean);
+
+const cleanItinerary = (items: any[] = []) =>
+   items.map((item: any, idx: number) => ({
+      day: Number(item.day) || idx + 1,
+      title: (item.title || '').trim(),
+      description: item.description || '',
+      image: (item.image || '').trim(),
+      amenities: Array.isArray(item.amenities) ? item.amenities.filter(Boolean) : []
+   }));
+
 export default function CreatePackage() {
    const router = useRouter();
 
@@ -73,13 +87,22 @@ export default function CreatePackage() {
       if (!formData.title) return toast.error('Package title is required');
       setLoading(true);
       try {
+         const payload = {
+            ...formData,
+            highlights: cleanStringList(formData.highlights),
+            inclusions: cleanStringList(formData.inclusions),
+            exclusions: cleanStringList(formData.exclusions),
+            categories: cleanStringList(formData.categories),
+            images: cleanStringList(formData.images),
+            itinerary: cleanItinerary(formData.itinerary)
+         };
          const res = await fetch(`${API_URL}/packages`, {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',
                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify(payload)
          });
          const data = await res.json();
          if (data.success) {
