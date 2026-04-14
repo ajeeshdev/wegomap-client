@@ -38,8 +38,8 @@ export default function RichTextEditor({ value, onChange, height = 400 }: RichTe
         />
       ) : (
         <Editor
+          tinymceScriptSrc="https://cdn.jsdelivr.net/npm/tinymce@6/tinymce.min.js"
           onInit={(evt, editor) => editorRef.current = editor}
-          licenseKey="gpl"
           value={value || ''}
           onEditorChange={(content) => onChange(content)}
           init={{
