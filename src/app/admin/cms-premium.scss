@@ -644,6 +644,19 @@
     &:disabled { opacity: 0.5; cursor: not-allowed; }
   }
 
+  /* Hide TinyMCE Promo and Cloud Notifications */
+  .tox-notifications-container, 
+  .tox-promotion, 
+  .tox-statusbar__branding, 
+  .tox-silver-sink[style*="z-index: 1001"],
+  .tox-tinymce-aux { 
+      display: none !important; 
+  }
+
+  .tox-dialog-wrap {
+      z-index: 999999 !important;
+  }
+
   .add-day-btn {
     padding: 0.5rem 1.25rem;
     background: var(--primary);

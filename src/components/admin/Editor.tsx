@@ -39,6 +39,7 @@ export default function RichTextEditor({ value, onChange, height = 400 }: RichTe
       ) : (
         <Editor
           onInit={(evt, editor) => editorRef.current = editor}
+          licenseKey="gpl"
           value={value || ''}
           onEditorChange={(content) => onChange(content)}
           init={{
