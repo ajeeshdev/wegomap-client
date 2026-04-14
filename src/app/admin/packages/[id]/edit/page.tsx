@@ -113,7 +113,12 @@ export default function EditPackage() {
             reviewCount: data.data.reviewCount || 150,
             status: data.data.status || 'Published',
             order: data.data.order || 0,
-            categories: data.data.categories || (data.data.category ? [data.data.category] : [])
+            categories: data.data.categories || (data.data.category ? [data.data.category] : []),
+            highlights: (data.data.highlights && data.data.highlights.length > 0)
+              ? data.data.highlights
+              : (data.data.new_highlight || data.data.new_highlights)
+                ? Array.from((data.data.new_highlight || data.data.new_highlights).matchAll(/<li[^>]*>([\s\S]*?)<\/li>/gi)).map((m: any) => m[1].replace(/<[^>]+>/g, '').trim()).filter(Boolean)
+                : []
           });
         }
       } catch (err) {

@@ -90,7 +90,19 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
     // Also format the main price
     const displayMainPrice = rawPrice.toLocaleString('en-IN');
 
-    const highlights = Array.isArray(pkg.highlights) ? pkg.highlights : [];
+    const extractHighlights = (p: any) => {
+        if (Array.isArray(p.highlights) && p.highlights.length > 0) return p.highlights;
+        const html = p.new_highlight || p.new_highlights || p.highlights_list;
+        if (typeof html === 'string' && html.includes('<li')) {
+            return Array.from(html.matchAll(/<li[^>]*>([\s\S]*?)<\/li>/gi))
+                .map(m => m[1].replace(/<[^>]+>/g, '').trim())
+                .filter(Boolean);
+        }
+        if (Array.isArray(p.highlights_list) && p.highlights_list.length > 0) return p.highlights_list;
+        return [];
+    };
+
+    const highlights = extractHighlights(pkg);
     const inclusions = Array.isArray(pkg.inclusions) ? pkg.inclusions : [];
     
     let features: string[] = [];
@@ -99,7 +111,6 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
     } else if (inclusions.length > 0) {
         features = inclusions.slice(0, 5);
     } else if (pkg.duration) {
-        // Fallback to duration if nothing else
         features = [pkg.duration];
     }
 

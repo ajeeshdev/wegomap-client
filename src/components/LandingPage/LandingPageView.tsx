@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 
 import {
@@ -13,16 +12,6 @@ import {
   Users,
   X,
 } from "lucide-react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
-import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/effect-fade';
-
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 import { API_URL, getImageUrl } from "@/config";
@@ -81,7 +70,7 @@ interface LandingPageContent {
   package_ids?: unknown[];
 }
 
-type PackageCard = {
+type PackageItem = {
   _id?: string;
   slug: string;
   title: string;
@@ -94,7 +83,23 @@ type PackageCard = {
   images?: string[];
   highlights?: string[];
   subtitle?: string;
-  itinerary?: any[];
+  itinerary?: {
+    title?: string;
+    image?: string;
+    description?: string;
+  }[];
+  status?: string;
+  order?: number;
+  new_highlight?: string;
+  new_highlights?: string;
+  highlights_list?: string[];
+  inclusions?: string[];
+  averageRating?: number;
+  reviewCount?: number;
+  noCostEmi?: number;
+  totalPrice?: number;
+  onoffer?: boolean;
+  slabel?: string;
 };
 
 type FaqItem = {
@@ -149,11 +154,11 @@ export default function LandingPageView({
 }: {
   data: LandingPageContent;
 }) {
-  const packages: PackageCard[] = useMemo(() => {
+  const packages: PackageItem[] = useMemo(() => {
     if (!Array.isArray(data?.package_ids) || data.package_ids.length === 0) return [];
-    return (data.package_ids as any[])
-      .filter((p: any) => p.status === 'Published' || !p.status)
-      .sort((a: any, b: any) => (a.order || 0) - (b.order || 0)) as PackageCard[];
+    return (data.package_ids as PackageItem[])
+      .filter((p) => p.status === 'Published' || !p.status)
+      .sort((a, b) => (a.order || 0) - (b.order || 0));
   }, [data.package_ids]);
   const [quickPlanOpen, setQuickPlanOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState("");
@@ -232,26 +237,6 @@ export default function LandingPageView({
   }, []);
 
 
-
-  const fetchWishlist = async () => {
-    try {
-      const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
-      if (token) {
-        const res = await fetch(`${API_URL}/auth/me`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (res.headers.get("content-type")?.includes("application/json")) {
-          const data = await res.json();
-          if (data.success && data.data.wishlist) {
-            setWishlist(data.data.wishlist);
-          }
-        }
-      }
-    } catch (e) {
-      console.error("Failed to fetch wishlist", e);
-    }
-  };
-
   const toggleWishlist = async (id: string, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -266,19 +251,38 @@ export default function LandingPageView({
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.headers.get("content-type")?.includes("application/json")) {
-        const data = await res.json();
-        if (data.success) {
-          setWishlist(data.data);
-          toast.success(data.message);
+        const json = await res.json();
+        if (json.success) {
+          setWishlist(json.data);
+          toast.success(json.message);
         }
       }
-    } catch (err) {
+    } catch {
       toast.error("Failed to update wishlist");
     }
   };
 
   useEffect(() => {
-    fetchWishlist();
+    const fetchWishlistInternal = async () => {
+      try {
+        const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+        if (token) {
+          const res = await fetch(`${API_URL}/auth/me`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          if (res.headers.get("content-type")?.includes("application/json")) {
+            const json = await res.json();
+            if (json.success && json.data.wishlist) {
+              setWishlist(json.data.wishlist);
+            }
+          }
+        }
+      } catch (e) {
+        console.error("Failed to fetch wishlist", e);
+      }
+    };
+
+    fetchWishlistInternal();
   }, []);
 
   const handleOpenQuickPlan = (pkgTitle?: string) => {
@@ -316,7 +320,7 @@ export default function LandingPageView({
       } else {
         toast.error(json.error || "Failed to send request");
       }
-    } catch (err) {
+    } catch {
       toast.error("Failed to send request");
     } finally {
       setIsSubmitting(false);
@@ -434,19 +438,19 @@ export default function LandingPageView({
                   highlights: (pkg.highlights && pkg.highlights.length > 0)
                       ? pkg.highlights
                       : (pkg.new_highlight || pkg.new_highlights)
-                          ? Array.from((pkg.new_highlight || pkg.new_highlights).matchAll(/<li[^>]*>([\s\S]*?)<\/li>/gi)).map((m: any) => m[1].replace(/<[^>]+>/g, '').trim()).filter(Boolean)
+                          ? Array.from((pkg.new_highlight || pkg.new_highlights)!.matchAll(/<li[^>]*>([\s\S]*?)<\/li>/gi)).map((m) => m[1].replace(/<[^>]+>/g, '').trim()).filter(Boolean)
                           : (pkg.highlights_list && pkg.highlights_list.length > 0)
                               ? pkg.highlights_list
                               : [],
-                  inclusions: (pkg as any).inclusions || [],
+                  inclusions: pkg.inclusions || [],
                   itinerary: pkg.itinerary || [],
-                  averageRating: (pkg as any).averageRating || 4.9,
-                  reviewCount: (pkg as any).reviewCount || 150,
-                  noCostEmi: (pkg as any).noCostEmi,
-                  totalPrice: (pkg as any).totalPrice,
+                  averageRating: pkg.averageRating || 4.9,
+                  reviewCount: pkg.reviewCount || 150,
+                  noCostEmi: pkg.noCostEmi,
+                  totalPrice: pkg.totalPrice,
                   per: pkg.per || '/ Person',
-                  onoffer: (pkg as any).onoffer,
-                  slabel: (pkg as any).slabel,
+                  onoffer: pkg.onoffer,
+                  slabel: pkg.slabel,
                   _id: pkg._id
                 };
 
