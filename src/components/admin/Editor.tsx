@@ -37,13 +37,12 @@ export default function RichTextEditor({ value, onChange, height = 400 }: RichTe
         />
       ) : (
         <Editor
-          tinymceScriptSrc="/tinymce/tinymce.min.js"
-          licenseKey="gpl"
+          apiKey="no-api-key"
           value={value || ''}
           onEditorChange={(content) => onChange(content)}
           init={{
             height: height,
-            menubar: 'file edit view insert format tools table',
+            menubar: true,
             plugins: [
               'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
               'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
@@ -57,6 +56,11 @@ export default function RichTextEditor({ value, onChange, height = 400 }: RichTe
             skin: 'oxide',
             promotion: false,
             branding: false,
+            setup: (editor) => {
+              editor.on('init', () => {
+                console.log('Editor is ready');
+              });
+            },
             images_upload_handler: async (blobInfo: any) => {
               const formData = new FormData();
               formData.append('image', blobInfo.blob(), blobInfo.filename());
@@ -77,7 +81,6 @@ export default function RichTextEditor({ value, onChange, height = 400 }: RichTe
                 const json = await res.json();
                 if (!json.success) throw new Error('Upload failed: ' + json.error);
 
-                // Construct the full URL for the uploaded image
                 const baseUrl = apiUrl.replace(/\/api$/, '');
                 return `${baseUrl}${json.data}`;
               } catch (err) {
