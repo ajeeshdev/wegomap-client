@@ -26,6 +26,7 @@ interface PackageCardProps {
         images?: string[];
         subtitle?: string;
         highlights?: string[];
+        inclusions?: string[];
         itinerary?: any[];
         averageRating?: number;
         reviewCount?: number;
@@ -91,7 +92,9 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
 
     const features = (pkg.highlights && pkg.highlights.length > 0)
         ? pkg.highlights.slice(0, 5)
-        : [];
+        : (pkg.inclusions && pkg.inclusions.length > 0)
+            ? pkg.inclusions.slice(0, 5)
+            : [];
 
     return (
         <div className="detailedPackageCard group">

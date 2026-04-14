@@ -432,6 +432,7 @@ export default function LandingPageView({
                   images: pkg.images || [],
                   subtitle: pkg.subtitle || pkg.location || '',
                   highlights: pkg.highlights || [],
+                  inclusions: (pkg as any).inclusions || [],
                   itinerary: pkg.itinerary || [],
                   averageRating: (pkg as any).averageRating || 4.9,
                   reviewCount: (pkg as any).reviewCount || 150,

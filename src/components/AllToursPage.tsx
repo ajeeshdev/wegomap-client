@@ -51,6 +51,7 @@ interface PackageCardData {
     images?: string[];
     subtitle?: string;
     highlights?: string[];
+    inclusions?: string[];
     itinerary?: any[];
     categories: string[];
     averageRating?: number;
@@ -228,6 +229,7 @@ export default function AllToursPage() {
                             images: pkg.images || [],
                             subtitle: pkg.subtitle || '',
                             highlights: pkg.highlights || [],
+                            inclusions: pkg.inclusions || [],
                             itinerary: pkg.itinerary || [],
                             categories: categories,
                             averageRating: pkg.averageRating,
