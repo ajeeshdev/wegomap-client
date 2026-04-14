@@ -167,11 +167,11 @@ export default function TourDetailView({ id }: { id: string }) {
 
                 if (data.success && data.data) {
                     const p = data.data;
-                    const legacyPkg = (packagesData as Record<string, TourPackageDetail>)[p.slug || id];
+                    const legacyPkg = (packagesData as Record<string, TourPackageDetail>)[p.slug || id] || Object.values(packagesData).find((pkg: any) => pkg.title === p.title);
                     const currentHighlights = (p.highlights || [])
                         .map((h: string) => sanitizeText(h))
                         .filter(Boolean);
-                    const legacyHighlights = extractListItemsFromHtml(p.new_highlight);
+                    const legacyHighlights = extractListItemsFromHtml(p.new_highlight || p.new_highlights);
                     const currentItinerary = (p.itinerary || []).map((item: any) => ({
                         ...item,
                         day: sanitizeText(typeof item.day === 'string' ? item.day : (item.title ? `Day ${item.day}: ${item.title}` : `Day ${item.day}`)),
