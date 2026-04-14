@@ -45,6 +45,9 @@ yarn-error.log*
 # Generated CSS
 public/scss/
 
+# TinyMCE assets (copied from node_modules via postinstall)
+public/tinymce/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
