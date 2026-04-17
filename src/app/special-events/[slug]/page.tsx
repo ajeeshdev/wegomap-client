@@ -12,13 +12,16 @@ import {
 } from 'lucide-react';
 import DynamicPageBanner from '@/components/DynamicPageBanner';
 import { toast } from 'react-hot-toast';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 export default function SpecialEventDetailPage() {
     const params = useParams();
     const router = useRouter();
+    const { executeRecaptcha } = useGoogleReCaptcha();
     const [event, setEvent] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success'>('idle');
+    const [formData, setFormData] = useState({ name: '', phone: '', email: '' });
 
     const slugOrId = params.slug;
 
@@ -65,11 +68,44 @@ export default function SpecialEventDetailPage() {
 
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!formData.phone) {
+            toast.error('Please enter your phone number.');
+            return;
+        }
+        if (!executeRecaptcha) {
+            toast.error('reCAPTCHA not ready. Please try again.');
+            return;
+        }
         setFormStatus('loading');
-        setTimeout(() => {
-            setFormStatus('success');
-            toast.success("Application received successfully!");
-        }, 1500);
+        try {
+            const token = await executeRecaptcha('special_event_form');
+            const res = await fetch(`${API_URL}/leads`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: formData.name || 'Guest',
+                    phone: formData.phone,
+                    email: formData.email,
+                    destination: event?.title || 'Special Event',
+                    message: `Special Event Application: ${event?.title}`,
+                    source: 'Website Global Enquire',
+                    url: typeof window !== 'undefined' ? window.location.href : '',
+                    captchaToken: token
+                })
+            });
+            const data = await res.json();
+            if (data.success) {
+                setFormStatus('success');
+                toast.success('Application received! Our team will contact you shortly.');
+                setFormData({ name: '', phone: '', email: '' });
+            } else {
+                setFormStatus('idle');
+                toast.error(data.error || 'Submission failed. Please try again.');
+            }
+        } catch (err) {
+            setFormStatus('idle');
+            toast.error('Network error. Please try again.');
+        }
     };
 
     if (loading) {
@@ -185,21 +221,37 @@ export default function SpecialEventDetailPage() {
                                                 <label>Full Name</label>
                                                 <div className="ed-input-group">
                                                     <User size={18} />
-                                                    <input type="text" placeholder="Your name" />
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Your name"
+                                                        value={formData.name}
+                                                        onChange={e => setFormData({ ...formData, name: e.target.value })}
+                                                    />
                                                 </div>
                                             </div>
                                             <div className="ed-field">
                                                 <label>Phone Number <span>*</span></label>
                                                 <div className="ed-input-group">
                                                     <Phone size={18} />
-                                                    <input required type="tel" placeholder="Your number" />
+                                                    <input
+                                                        required
+                                                        type="tel"
+                                                        placeholder="Your number"
+                                                        value={formData.phone}
+                                                        onChange={e => setFormData({ ...formData, phone: e.target.value.replace(/\D/g, '') })}
+                                                    />
                                                 </div>
                                             </div>
                                             <div className="ed-field">
                                                 <label>Email Address</label>
                                                 <div className="ed-input-group">
                                                     <ShieldCheck size={18} />
-                                                    <input type="email" placeholder="Your email" />
+                                                    <input
+                                                        type="email"
+                                                        placeholder="Your email"
+                                                        value={formData.email}
+                                                        onChange={e => setFormData({ ...formData, email: e.target.value })}
+                                                    />
                                                 </div>
                                             </div>
                                             <button disabled={formStatus === 'loading'} type="submit" className="ed-submit-btn">
