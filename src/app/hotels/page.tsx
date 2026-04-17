@@ -11,6 +11,7 @@ export default function HotelsListingPage() {
     const [hotels, setHotels] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
+    const [bannerData, setBannerData] = useState<any>({});
 
     useEffect(() => {
         async function fetchHotels() {
@@ -28,6 +29,18 @@ export default function HotelsListingPage() {
             }
         }
         fetchHotels();
+
+        // Fetch CMS banner settings
+        fetch(`${API_URL}/options`)
+            .then(r => r.json())
+            .then(json => {
+                if (json.success && json.data) {
+                    const opt = json.data.find((o: any) => o.key === 'hotels_page_settings');
+                    if (opt) {
+                        try { const p = JSON.parse(opt.value); if (p.banner) setBannerData(p.banner); } catch {}
+                    }
+                }
+            }).catch(() => {});
     }, []);
 
     const filteredHotels = hotels.filter(h => 
@@ -45,11 +58,14 @@ export default function HotelsListingPage() {
 
     return (
         <div className="hotels-listing-wrapper">
-            <DynamicPageBanner 
+            <DynamicPageBanner
+                title={bannerData.title || undefined}
+                subtitle={bannerData.subtitle || undefined}
+                preTitle={bannerData.preTitle || undefined}
                 fallbackTitle={"Premium Stay\nExperiences."}
                 fallbackSubtitle="Explore our curated collection of luxury hotels and resorts for your next getaway."
                 fallbackPreTitle="Stay with WEGOMAP"
-                fallbackImage="aroma_hero_kerala_1774025974860.png"
+                fallbackImage={bannerData.image || "aroma_hero_kerala_1774025974860.png"}
                 breadcrumbs={[{ label: 'Hotels' }]}
             />
 

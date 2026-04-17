@@ -208,6 +208,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         { label: 'Contact Page', href: '/admin/contact-page' },
         { label: 'Tours Page', href: '/admin/tours-page' },
         { label: 'Cruises Page', href: '/admin/cruises-page' },
+        { label: 'Hotels Page', href: '/admin/hotels-page' },
         { label: 'Payment Page', href: '/admin/payment-page' },
         { label: 'Testimonials', href: '/admin/testimonials' },
         { label: 'Amenities', href: '/admin/amenities' },
