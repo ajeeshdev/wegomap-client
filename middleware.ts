@@ -25,6 +25,15 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // ── Enforce lowercase URLs ──────────────────────────────────────────────────
+  // If the path has any uppercase letter, 301 redirect to lowercase version
+  const lowercasePath = pathname.toLowerCase();
+  if (pathname !== lowercasePath) {
+    const url = request.nextUrl.clone();
+    url.pathname = lowercasePath;
+    return NextResponse.redirect(url, { status: 301 });
+  }
+
   // Fetch redirections from our API with caching
   try {
     const now = Date.now();
