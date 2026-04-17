@@ -245,14 +245,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { label: 'Houseboat', href: '/admin/houseboat', icon: Anchor },
     { label: 'Cabs', href: '/admin/cabs', icon: Car },
     { label: 'Faqs', href: '/admin/faqs', icon: HelpCircle },
-    { 
-      label: 'Banners', 
-      href: '/admin/banners', 
-      icon: ImageIcon,
-      subItems: [
-        { label: 'All Banners', href: '/admin/banners' },
-      ]
-    },
+
     { 
       label: 'Services', 
       href: '/admin/services', 
@@ -304,7 +297,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         'Houseboat': 'houseboat',
         'Cabs': 'cabs',
         'Faqs': 'faqs',
-        'Banners': 'banners',
         'Services': 'services',
         'SEO': 'seo'
     };
