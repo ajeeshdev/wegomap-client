@@ -264,7 +264,7 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
          return;
       }
 
-      const effectiveWa = (data.whatsapp_number || bookingWhatsapp || '').replace(/\D/g, '');
+      const effectiveWa = (bookingWhatsapp || data.whatsapp_number || '').replace(/\D/g, '');
       if (!effectiveWa) return;
       const message = `Hi, I'm interested in booking a stay at ${data.title}.\n\n` +
          `📅 Check-in: ${checkIn}\n` +
@@ -625,8 +625,8 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
                               </div>
                               <div className="flex items-center justify-between gap-6 flex-wrap mt-8">
                                  <button className="submit-btn-final">Send Request</button>
-                                 {(data.whatsapp_number || bookingWhatsapp) && (
-                                    <a href={`https://wa.me/${(data.whatsapp_number || bookingWhatsapp).replace(/\D/g, '')}`} className="wa-final-link" target="_blank">
+                                 {(bookingWhatsapp || data.whatsapp_number) && (
+                                    <a href={`https://wa.me/${(bookingWhatsapp || data.whatsapp_number || '').replace(/\D/g, '')}`} className="wa-final-link" target="_blank">
                                        <MessageSquare size={16} /> WhatsApp Inquiry
                                     </a>
                                  )}
