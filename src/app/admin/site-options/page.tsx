@@ -31,6 +31,7 @@ export default function SiteOptionsPage() {
         phone1: '',
         phone2: '',
         whatsapp: '',
+        booking_whatsapp: '',
         email1: '',
         email2: '',
         email3: '',
@@ -302,9 +303,21 @@ export default function SiteOptionsPage() {
                                     <input type="text" value={contact.phone2} onChange={e => setContact({...contact, phone2: e.target.value})} className="admin-form-input !h-9" />
                                 </div>
                                 <div className="admin-form-group">
-                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">WhatsApp</label>
-                                    <input type="text" value={contact.whatsapp} onChange={e => setContact({...contact, whatsapp: e.target.value})} className="admin-form-input !h-9" />
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">WhatsApp <span className="text-slate-400 normal-case font-normal">(Floating Chat Widget)</span></label>
+                                    <input type="text" value={contact.whatsapp} onChange={e => setContact({...contact, whatsapp: e.target.value})} className="admin-form-input !h-9" placeholder="918113998989" />
                                 </div>
+                            </div>
+
+                            <div className="admin-form-group">
+                                <label className="text-[11px] font-bold text-green-600 uppercase tracking-widest block mb-1">📲 Booking WhatsApp Number <span className="text-slate-400 normal-case font-normal">(used on Book Now buttons)</span></label>
+                                <input
+                                    type="text"
+                                    value={contact.booking_whatsapp}
+                                    onChange={e => setContact({...contact, booking_whatsapp: e.target.value.replace(/\D/g, '')})}
+                                    className="admin-form-input !h-9 border-green-100 bg-green-50/30"
+                                    placeholder="918113998989 (with country code, no + or spaces)"
+                                />
+                                <p className="text-[10px] text-slate-400 mt-1">Format: country code + number e.g. <code>918113998989</code></p>
                             </div>
                             
                             <div className="admin-form-grid-4 pt-2">
