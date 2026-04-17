@@ -2,14 +2,16 @@
 
 import { API_URL } from '@/config';
 import { useEffect, useState } from 'react';
-import { Save, Layout, FileText, Heart, Target, Sparkles, ArrowRight, ShieldCheck, Globe, Star, Info } from 'lucide-react';
+import { Save, Layout, FileText, Heart, Target, Sparkles, ArrowRight, ShieldCheck, Globe, Star, Info, Image as ImageIcon } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import Link from 'next/link';
+import ImageUpload from '@/components/admin/ImageUpload';
 
 interface AboutContent {
     banner: {
         title: string;
         subtitle: string;
+        image: string;
     };
     story: {
         heading: string;
@@ -29,7 +31,8 @@ interface AboutContent {
 const DEFAULT_CONTENT: AboutContent = {
     banner: {
         title: "We plan your\nDream Destinations.!",
-        subtitle: "Learn about WEGOMAP — your trusted travel partner since 2012."
+        subtitle: "Learn about WEGOMAP — your trusted travel partner since 2012.",
+        image: "/assets/images/banners/about-banner.png"
     },
     story: {
         heading: "WEGOMAP is a one-stop travel solution to destinations around the world.",
@@ -171,6 +174,16 @@ export default function AboutSettingsPage() {
                                     onChange={e => setContent({ ...content, banner: { ...content.banner, subtitle: e.target.value } })}
                                     className="admin-form-input"
                                     placeholder="Describe your company's core essence..."
+                                />
+                            </div>
+
+                            <div className="admin-form-group">
+                                <label className="admin-form-label mb-4 flex items-center gap-2">
+                                     Banner Background Image
+                                </label>
+                                <ImageUpload 
+                                    value={content.banner.image}
+                                    onChange={val => setContent({ ...content, banner: { ...content.banner, image: val } })}
                                 />
                             </div>
                         </div>

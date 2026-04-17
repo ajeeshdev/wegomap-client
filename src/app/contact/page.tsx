@@ -20,6 +20,7 @@ export default function ContactPage() {
     const [status, setStatus] = useState<{ type: 'success' | 'error' | null, message: string }>({ type: null, message: '' });
 
     const [options, setOptions] = useState<Record<string, string>>({});
+    const [bannerData, setBannerData] = useState<any>({});
 
     useEffect(() => {
         const fetchOptions = async () => {
@@ -32,6 +33,14 @@ export default function ContactPage() {
                         mappedOptions[opt.key] = opt.value;
                     });
                     setOptions(mappedOptions);
+
+                    const bannerOpt = data.data.find((o: any) => o.key === 'contact_page_settings');
+                    if (bannerOpt) {
+                        try {
+                            const parsed = JSON.parse(bannerOpt.value);
+                            if (parsed.banner) setBannerData(parsed.banner);
+                        } catch (e) {}
+                    }
                 }
             } catch (err) {
                 console.error("Failed to load options from CMS", err);
@@ -96,10 +105,15 @@ export default function ContactPage() {
     return (
         <div className="contactPage">
             <DynamicPageBanner
+                title={bannerData.title || undefined}
+                subtitle={bannerData.subtitle || undefined}
+                preTitle={bannerData.preTitle || undefined}
                 fallbackTitle="Contact Us"
                 fallbackSubtitle="We'd love to hear from you. Feel free to reach out for bookings and inquiries."
                 fallbackPreTitle="Get In Touch"
+                fallbackImage={bannerData.image || undefined}
                 breadcrumbs={[{ label: 'Contact Us' }]}
+                skipApiFetch={true}
             />
 
             <div className="contactBody homeContainer">

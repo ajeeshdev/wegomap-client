@@ -59,6 +59,7 @@ function formatDate(dateStr?: string): string {
 export default function BlogsPage() {
     const [blogs, setBlogs] = useState<Blog[]>(staticBlogs);
     const [loading, setLoading] = useState(false);
+    const [bannerData, setBannerData] = useState<any>({});
 
     useEffect(() => {
         async function getBlogs() {
@@ -68,24 +69,41 @@ export default function BlogsPage() {
                 if (data.success && data.data.length > 0) {
                     setBlogs(sortByDateDesc(data.data));
                 }
-                // else keep the static blogs
             } catch (err) {
-                // Network error – static blogs are already set
                 console.error(err);
             } finally {
                 setLoading(false);
             }
         }
+        async function getBanner() {
+            try {
+                const res = await fetch(`${API_URL}/options`);
+                const json = await res.json();
+                if (json.success && json.data) {
+                    const opt = json.data.find((o: any) => o.key === 'blogs_page_settings');
+                    if (opt) {
+                        const parsed = JSON.parse(opt.value);
+                        if (parsed.banner) setBannerData(parsed.banner);
+                    }
+                }
+            } catch (err) { console.error(err); }
+        }
         getBlogs();
+        getBanner();
     }, []);
 
     return (
         <div className="blogsPage">
             <DynamicPageBanner
+                title={bannerData.title || undefined}
+                subtitle={bannerData.subtitle || undefined}
+                preTitle={bannerData.preTitle || undefined}
                 fallbackTitle="Travel Blogs"
                 fallbackSubtitle="Insider tips, destination guides, and travel stories to inspire your next journey."
                 fallbackPreTitle="Insider Stories"
+                fallbackImage={bannerData.image || undefined}
                 breadcrumbs={[{ label: 'Blogs' }]}
+                skipApiFetch={true}
             />
             <div className="homeContainer">
                 <div className="sectionHeader flex items-center justify-center mb-12 commonPadding  pb-0">

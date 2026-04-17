@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Save, Layout, FileText, Briefcase, Globe, ShieldCheck, Zap, Info, Type, AlignLeft, Sparkles } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import Link from 'next/link';
+import ImageUpload from '@/components/admin/ImageUpload';
 
 interface ServicesPageContent {
     intro: {
@@ -12,7 +13,13 @@ interface ServicesPageContent {
         title: string;
         highlightText: string;
         description: string;
-    }
+    };
+    banner: {
+        title: string;
+        subtitle: string;
+        preTitle: string;
+        image: string;
+    };
 }
 
 const DEFAULT_CONTENT: ServicesPageContent = {
@@ -21,6 +28,12 @@ const DEFAULT_CONTENT: ServicesPageContent = {
         title: "Your journey,",
         highlightText: "our expertise.",
         description: "WEGOMAP offers comprehensive solutions for all your travel needs. From booking your initial transport to finding the perfect accommodation, our dedicated team manages everything so you can focus on building beautiful memories."
+    },
+    banner: {
+        title: "Our Services",
+        subtitle: "Traveling – It leaves you speechless, then turns you into a storyteller.",
+        preTitle: "Premium Offerings",
+        image: ""
     }
 };
 
@@ -119,6 +132,65 @@ export default function ServicesSettingsPage() {
             <div className="max-w-5xl mx-auto space-y-8">
                 {/* Main Content Area */}
                 <div className="admin-form-card">
+                    <h3 className="admin-form-section-title">
+                        <div className="admin-section-icon admin-section-icon--sm admin-section-icon--blue"></div>
+                        <span className="text-black font-black">Banner Information</span>
+                    </h3>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <div className="space-y-6">
+                            <div className="admin-form-group">
+                                <label className="admin-form-label mb-2 flex items-center gap-2">
+                                     <span className="text-black font-black text-[11px] uppercase tracking-wider">Banner Pre-Title</span>
+                                </label>
+                                <input 
+                                    type="text"
+                                    value={content.banner?.preTitle}
+                                    onChange={e => setContent({ ...content, banner: { ...content.banner, preTitle: e.target.value } })}
+                                    className="admin-form-input font-bold text-black"
+                                    placeholder="e.g. Premium Offerings"
+                                />
+                            </div>
+                            <div className="admin-form-group">
+                                <label className="admin-form-label mb-2 flex items-center gap-2">
+                                     <span className="text-black font-black text-[11px] uppercase tracking-wider">Banner Title</span>
+                                </label>
+                                <input 
+                                    type="text"
+                                    value={content.banner?.title}
+                                    onChange={e => setContent({ ...content, banner: { ...content.banner, title: e.target.value } })}
+                                    className="admin-form-input font-bold text-black"
+                                    placeholder="e.g. Our Services"
+                                />
+                            </div>
+                            <div className="admin-form-group">
+                                <label className="admin-form-label mb-2 flex items-center gap-2">
+                                     <span className="text-black font-black text-[11px] uppercase tracking-wider">Banner Subtitle</span>
+                                </label>
+                                <textarea 
+                                    rows={2}
+                                    value={content.banner?.subtitle}
+                                    onChange={e => setContent({ ...content, banner: { ...content.banner, subtitle: e.target.value } })}
+                                    className="admin-form-input font-bold text-black"
+                                    placeholder="e.g. Traveling – It leaves you speechless..."
+                                />
+                            </div>
+                        </div>
+                        <div>
+                             <label className="admin-form-label mb-2 flex items-center gap-2">
+                                     <span className="text-black font-black text-[11px] uppercase tracking-wider">Banner Background Image</span>
+                            </label>
+                            <ImageUpload 
+                                value={content.banner?.image}
+                                onChange={url => setContent({ ...content, banner: { ...content.banner, image: url } })}
+                                label="Banner Image"
+                                dimensions="1920 x 600"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="border-t border-slate-100 my-8"></div>
+
                     <h3 className="admin-form-section-title">
                         <div className="admin-section-icon admin-section-icon--sm admin-section-icon--amber"></div>
                         <span className="text-black font-black">Main Page Headers</span>

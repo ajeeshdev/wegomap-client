@@ -19,7 +19,7 @@ const carouselImages = [
 ];
 
 interface AboutData {
-    banner: { title: string; subtitle: string; };
+    banner: { title: string; subtitle: string; image?: string; };
     story: { heading: string; leftText: string; rightText: string; };
     values: { title: string; description: string; }[];
     stats: { label: string; count: string; }[];
@@ -85,10 +85,11 @@ export default function AboutPage() {
 
             {/* ── Page Banner (Custom fallback for About) ── */}
             <DynamicPageBanner
+                category="about"
                 title={data.banner.title}
                 subtitle={data.banner.subtitle}
                 fallbackPreTitle="Our Legacy"
-                fallbackImage="/assets/images/banners/about-banner.png"
+                fallbackImage={data.banner.image || "/assets/images/banners/about-banner.png"}
                 breadcrumbs={[{ label: 'About Us' }]}
             />
 

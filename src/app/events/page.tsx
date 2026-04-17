@@ -11,6 +11,7 @@ export default function EventsCombinedPage() {
     const [events, setEvents] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [pageContent, setPageContent] = useState<any>(null);
+    const [bannerData, setBannerData] = useState<any>({});
 
     useEffect(() => {
         const fetchAllData = async () => {
@@ -23,16 +24,20 @@ export default function EventsCombinedPage() {
                 const eventsData = await eventsRes.json();
                 const specData = await specRes.json();
                 const optionsData = await optionsRes.json();
-                
+
                 let allEvents: any[] = [];
                 if (eventsData.success) allEvents = [...allEvents, ...eventsData.data.map((e: any) => ({ ...e, type: 'Corporate' }))];
                 if (specData.success) allEvents = [...allEvents, ...specData.data.map((e: any) => ({ ...e, type: 'Special' }))];
-                
+
                 setEvents(allEvents);
 
                 if (optionsData.success && optionsData.data) {
                     const opt = optionsData.data.find((o: any) => o.key === 'events_page_settings');
-                    if (opt) setPageContent(JSON.parse(opt.value));
+                    if (opt) {
+                        const parsed = JSON.parse(opt.value);
+                        setPageContent(parsed);
+                        if (parsed.banner) setBannerData(parsed.banner);
+                    }
                 }
             } catch (err) {
                 console.error("Failed to fetch events data:", err);
@@ -60,15 +65,20 @@ export default function EventsCombinedPage() {
 
     return (
         <main className="eventsPage bg-white">
-            
+
             {/* 1. Hero Banner */}
             <DynamicPageBanner
-                fallbackTitle="Experience the\nUnforgettable"
+                title={bannerData.title || undefined}
+                subtitle={bannerData.subtitle || undefined}
+                preTitle={bannerData.preTitle || undefined}
+                fallbackTitle="Experience the
+Unforgettable"
                 fallbackSubtitle="WEGOMAP orchestrates world-class corporate summits, cultural festivals, and bespoke celebrations across Kerala."
                 fallbackPreTitle="Premium Event Management"
-                fallbackImage="/uploads/categories/ubqf5mc4ve1g6yqwmnsyiyek9fkld9akyp6g2lar220406065334.jpg"
+                fallbackImage={bannerData.image || "/uploads/categories/ubqf5mc4ve1g6yqwmnsyiyek9fkld9akyp6g2lar220406065334.jpg"}
                 breadcrumbs={[{ label: 'Events' }]}
                 variant="standard"
+                skipApiFetch={true}
             />
 
             {/* 2. Intro Section */}
@@ -82,7 +92,7 @@ export default function EventsCombinedPage() {
                                     {corporate.title}
                                 </h2>
                             </div>
-                            
+
                             <div className="contentBody">
                                 <p>{corporate.description1}</p>
                                 <p>{corporate.description2}</p>
@@ -93,13 +103,12 @@ export default function EventsCombinedPage() {
                         <div className="introImage">
                             <div className="imageContainer">
                                 <Image
-                                    src="/uploads/premium-event-setup.png"
+                                    src={pageContent?.corporate?.introImage || "/uploads/premium-event-setup.png"}
                                     alt="Premium Corporate Event Specialist"
                                     fill
-                                    
                                 />
                             </div>
-                            
+
                             {/* Floating Highlight Card */}
                             <div className="floatingStat">
                                 <div className="icon">
@@ -135,8 +144,8 @@ export default function EventsCombinedPage() {
                     ) : (
                         <div className="eventsGrid">
                             {events.map((event, idx) => (
-                                <Link 
-                                    key={event._id} 
+                                <Link
+                                    key={event._id}
                                     href={event.type === 'Special' ? `/special-events/${event.slug || event._id}` : `/events/${event.slug || event._id}`}
                                     className="block h-full"
                                 >
@@ -152,14 +161,14 @@ export default function EventsCombinedPage() {
                                             <div className={`category-tag ${event.type === 'Corporate' ? 'corporate' : 'special'}`}>
                                                 {event.type}
                                             </div>
-                                            
+
                                             <div className="card-overlay">
                                                 <div className="action-pill">
                                                     Explore details <ArrowRight size={14} />
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div className="cardContent">
                                             <div className="location-meta">
                                                 <MapPin size={12} /> {event.location || 'Kochi, Kerala'}
@@ -167,7 +176,7 @@ export default function EventsCombinedPage() {
                                             <h4 className="packageTitle">
                                                 {event.title}
                                             </h4>
-                                            
+
                                             <div className="event-footer">
                                                 <div className="join-event">
                                                     JOIN EVENT

@@ -185,14 +185,21 @@ export default function SpecialEventDetailPage() {
                                                 <label>Full Name</label>
                                                 <div className="ed-input-group">
                                                     <User size={18} />
-                                                    <input required type="text" placeholder="Your name" />
+                                                    <input type="text" placeholder="Your name" />
+                                                </div>
+                                            </div>
+                                            <div className="ed-field">
+                                                <label>Phone Number <span>*</span></label>
+                                                <div className="ed-input-group">
+                                                    <Phone size={18} />
+                                                    <input required type="tel" placeholder="Your number" />
                                                 </div>
                                             </div>
                                             <div className="ed-field">
                                                 <label>Email Address</label>
                                                 <div className="ed-input-group">
                                                     <ShieldCheck size={18} />
-                                                    <input required type="email" placeholder="Your email" />
+                                                    <input type="email" placeholder="Your email" />
                                                 </div>
                                             </div>
                                             <button disabled={formStatus === 'loading'} type="submit" className="ed-submit-btn">

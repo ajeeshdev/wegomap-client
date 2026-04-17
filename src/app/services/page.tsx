@@ -3,10 +3,10 @@
 import { API_URL } from '@/config';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Plus, Check, Scissors, Layers, Settings, HelpCircle, ArrowRight, Sparkles } from 'lucide-react';
+import { Plus, Check, Scissors, Layers, Settings, HelpCircle } from 'lucide-react';
 import DynamicPageBanner from '@/components/DynamicPageBanner';
 
-// Mock Icon Display Component
+// Icon Display Component
 const IconDisplay = ({ iconName }: { iconName: string }) => {
     switch (iconName) {
         case 'Plus': return <Plus size={32} />;
@@ -19,27 +19,24 @@ const IconDisplay = ({ iconName }: { iconName: string }) => {
     }
 };
 
-const pageContent = {
-    title: "Comprehensive",
-    highlightText: "Solutions.",
-    subtitle: "YOUR JOURNEY, YOUR EXPERTISE.",
-    description: "Discover our range of professional travel services designed to make your journey seamless, from hotel bookings to event management and private transport."
-};
-
 export default function ServicesPage() {
     const [services, setServices] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    const [bannerData, setBannerData] = useState<any>({});
+    const [introData, setIntroData] = useState({
+        subtitle: "YOUR JOURNEY, YOUR EXPERTISE.",
+        title: "Comprehensive",
+        highlightText: "Solutions.",
+        description: "Discover our range of professional travel services designed to make your journey seamless, from hotel bookings to event management and private transport."
+    });
 
     useEffect(() => {
         const fetchServices = async () => {
             try {
                 const res = await fetch(`${API_URL}/services`);
-                
-                // Safety check for JSON content-type
                 if (!res.headers.get('content-type')?.includes('application/json')) {
                     throw new Error(`API returned non-JSON response: ${res.status} ${res.statusText}`);
                 }
-
                 const data = await res.json();
                 if (data.success) {
                     setServices(data.data);
@@ -50,18 +47,39 @@ export default function ServicesPage() {
                 setLoading(false);
             }
         };
+
+        const fetchCmsData = async () => {
+            try {
+                const res = await fetch(`${API_URL}/options`);
+                const json = await res.json();
+                if (json.success && json.data) {
+                    const opt = json.data.find((o: any) => o.key === 'services_page_content');
+                    if (opt) {
+                        const parsed = JSON.parse(opt.value);
+                        if (parsed.banner) setBannerData(parsed.banner);
+                        if (parsed.intro) setIntroData(prev => ({ ...prev, ...parsed.intro }));
+                    }
+                }
+            } catch (err) { console.error(err); }
+        };
+
         fetchServices();
+        fetchCmsData();
     }, []);
 
     return (
         <div className="servicesListingPage">
             <DynamicPageBanner
+                title={bannerData.title || undefined}
+                subtitle={bannerData.subtitle || undefined}
+                preTitle={bannerData.preTitle || undefined}
                 fallbackTitle="Our Services"
                 fallbackSubtitle="Traveling – It leaves you speechless, then turns you into a storyteller."
                 fallbackPreTitle="Premium Offerings"
-                fallbackImage="/assets/images/banners/about-banner.png"
+                fallbackImage={bannerData.image || "/assets/images/banners/about-banner.png"}
                 breadcrumbs={[{ label: 'Services' }]}
                 variant="standard"
+                skipApiFetch={true}
             />
 
             {/* Main Content */}
@@ -69,12 +87,12 @@ export default function ServicesPage() {
                 <div className="homeContainer">
                     <div className="sectionHeader flex items-center justify-center mb-20">
                         <div className="titleArea">
-                            <span className="sectionSubtitle">{pageContent.subtitle}</span>
+                            <span className="sectionSubtitle">{introData.subtitle}</span>
                             <h2 className="sliderTitle">
-                                {pageContent.title} {pageContent.highlightText}
+                                {introData.title} {introData.highlightText}
                             </h2>
                             <div className="sectionHeaderDescription mt-0 max-w-3xl text-slate-500 font-medium leading-relaxed">
-                                {pageContent.description}
+                                {introData.description}
                             </div>
                         </div>
                     </div>
@@ -99,9 +117,6 @@ export default function ServicesPage() {
                             ))}
                         </div>
                     )}
-
-                    {/* Additional Sub-services or CTA */}
-        
                 </div>
             </section>
         </div>

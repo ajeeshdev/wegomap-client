@@ -45,6 +45,7 @@ export default function PaymentPage() {
         bank_accounts: defaultBanks
     });
     const [whatsappNumber, setWhatsappNumber] = useState('918113998989');
+    const [bannerData, setBannerData] = useState<any>({});
 
     useEffect(() => {
         const fetchPaymentDetails = async () => {
@@ -67,9 +68,16 @@ export default function PaymentPage() {
                     if (whatsappOpt?.value) {
                         setWhatsappNumber(whatsappOpt.value.replace(/\D/g, ''));
                     }
+
+                    const bannerOpt = json.data.find((o: any) => o.key === 'payment_page_settings');
+                    if (bannerOpt) {
+                        try {
+                            const parsed = JSON.parse(bannerOpt.value);
+                            if (parsed.banner) setBannerData(parsed.banner);
+                        } catch (e) {}
+                    }
                 }
             } catch (e) {
-
                 console.error("Failed to fetch payment details", e);
             } finally {
                 setLoading(false);
@@ -79,7 +87,6 @@ export default function PaymentPage() {
     }, []);
 
     useEffect(() => {
-        // Initialize Razorpay button manually - only if ID is provided
         if (!loading && paymentDetails.razorpay_button_id && razorpayFormRef.current && razorpayFormRef.current.children.length === 0) {
             const script = document.createElement('script');
             script.src = "https://checkout.razorpay.com/v1/payment-button.js";
@@ -92,10 +99,15 @@ export default function PaymentPage() {
     return (
         <div className="paymentPage">
             <DynamicPageBanner
+                title={bannerData.title || undefined}
+                subtitle={bannerData.subtitle || undefined}
+                preTitle={bannerData.preTitle || undefined}
                 fallbackTitle="Payment Options"
                 fallbackSubtitle="Secure and hassle-free payment channels for your dream trip."
                 fallbackPreTitle="Secure Transactions"
+                fallbackImage={bannerData.image || undefined}
                 breadcrumbs={[{ label: 'Payment' }]}
+                skipApiFetch={true}
             />
 
             <div className="paymentBody homeContainer">

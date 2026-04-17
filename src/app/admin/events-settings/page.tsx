@@ -4,6 +4,7 @@ import { API_URL } from '@/config';
 import { useEffect, useState } from 'react';
 import { Save, Calendar, Sparkles, Type, AlignLeft, PartyPopper, Info } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import ImageUpload from '@/components/admin/ImageUpload';
 
 interface EventsConfiguration {
     corporate: {
@@ -13,12 +14,19 @@ interface EventsConfiguration {
         description2: string;
         statLabel: string;
         statCount: string;
+        introImage: string;
     };
     special: {
         subtitle: string;
         title: string;
         description: string;
-    }
+    };
+    banner: {
+        title: string;
+        subtitle: string;
+        preTitle: string;
+        image: string;
+    };
 }
 
 const DEFAULT_CONTENT: EventsConfiguration = {
@@ -28,12 +36,19 @@ const DEFAULT_CONTENT: EventsConfiguration = {
         description1: "At WEGOMAP, we redefine what it means to host an extraordinary gathering. Whether you're orchestrating a flagship corporate summit in Kochi or a milestone cultural celebration, our event management team blends creative vision with flawless technical execution.",
         description2: "From high-impact venue selection and advanced staging to seamless guest logistics and digital engagement, we manage every layer of the experience. We don't just plan events; we create lasting impressions.",
         statLabel: "Venues Partnered",
-        statCount: "100+"
+        statCount: "100+",
+        introImage: ""
     },
     special: {
         subtitle: "Curative Calendar",
         title: "DISCOVER OUR CURATED CALENDAR.",
         description: "Explore our exclusive calendar of signature activities and seasonal events. From luxury houseboat retreats to cultural immersive experiences, we curate every detail to ensure your special moments are truly unforgettable."
+    },
+    banner: {
+        title: "Events & Experiences",
+        subtitle: "Crafting moments that matter. From corporate excellence to cultural celebrations.",
+        preTitle: "Curated Events",
+        image: ""
     }
 };
 
@@ -58,7 +73,8 @@ export default function EventsSettingsPage() {
                         const savedContent = JSON.parse(opt.value);
                         setContent({
                             corporate: { ...DEFAULT_CONTENT.corporate, ...savedContent.corporate },
-                            special: { ...DEFAULT_CONTENT.special, ...savedContent.special }
+                            special: { ...DEFAULT_CONTENT.special, ...savedContent.special },
+                            banner: { ...DEFAULT_CONTENT.banner, ...savedContent.banner }
                         });
                     } catch (e) {
                         console.error('Failed to parse settings', e);
@@ -130,6 +146,71 @@ export default function EventsSettingsPage() {
             </div>
 
             <div className="max-w-6xl mx-auto space-y-12">
+                {/* 0. Page Banner Information */}
+                <div className="admin-form-card !p-8">
+                    <div className="flex items-center gap-3 mb-8 border-b border-slate-50 pb-6">
+                        <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
+                             <Sparkles size={22} />
+                        </div>
+                        <div>
+                            <h3 className="text-lg font-black text-black uppercase">Main Page Banner</h3>
+                            <p className="text-xs text-slate-400 font-bold">Hero section details for /events</p>
+                        </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="space-y-6">
+                            <div className="admin-form-group">
+                                <label className="admin-form-label mb-2 flex items-center gap-2">
+                                     <span className="text-black font-black text-[11px] uppercase tracking-wider">Banner Pre-Title</span>
+                                </label>
+                                <input 
+                                    type="text"
+                                    value={content.banner?.preTitle}
+                                    onChange={e => setContent({ ...content, banner: { ...content.banner, preTitle: e.target.value } })}
+                                    className="admin-form-input font-bold text-black"
+                                    placeholder="Curated Events"
+                                />
+                            </div>
+                            <div className="admin-form-group">
+                                <label className="admin-form-label mb-2 flex items-center gap-2">
+                                     <span className="text-black font-black text-[11px] uppercase tracking-wider">Banner Title</span>
+                                </label>
+                                <input 
+                                    type="text"
+                                    value={content.banner?.title}
+                                    onChange={e => setContent({ ...content, banner: { ...content.banner, title: e.target.value } })}
+                                    className="admin-form-input font-bold text-black"
+                                    placeholder="Events & Experiences"
+                                />
+                            </div>
+                            <div className="admin-form-group">
+                                <label className="admin-form-label mb-2 flex items-center gap-2">
+                                     <span className="text-black font-black text-[11px] uppercase tracking-wider">Banner Subtitle</span>
+                                </label>
+                                <textarea 
+                                    rows={2}
+                                    value={content.banner?.subtitle}
+                                    onChange={e => setContent({ ...content, banner: { ...content.banner, subtitle: e.target.value } })}
+                                    className="admin-form-input font-bold text-black"
+                                    placeholder="Crafting moments that matter..."
+                                />
+                            </div>
+                        </div>
+                        <div>
+                             <label className="admin-form-label mb-2 flex items-center gap-2">
+                                     <span className="text-black font-black text-[11px] uppercase tracking-wider">Background Image</span>
+                            </label>
+                            <ImageUpload 
+                                value={content.banner?.image}
+                                onChange={url => setContent({ ...content, banner: { ...content.banner, image: url } })}
+                                label="Banner Image"
+                                dimensions="1920 x 600"
+                            />
+                        </div>
+                    </div>
+                </div>
+
                 {/* 1. Corporate Events Panel */}
                 <div className="admin-form-card !p-8">
                     <div className="flex items-center gap-3 mb-8 border-b border-slate-50 pb-6">
@@ -192,6 +273,20 @@ export default function EventsSettingsPage() {
                                         className="admin-form-input font-bold text-black"
                                     />
                                 </div>
+                            </div>
+
+                            {/* Intro Section Image */}
+                            <div className="admin-form-group pt-2">
+                                <label className="admin-form-label mb-2">
+                                    <span className="text-black font-black text-[11px] uppercase tracking-wider">Intro Section Image</span>
+                                    <span className="block text-[10px] text-slate-400 font-medium mt-0.5">The photo shown on the right side of the intro section</span>
+                                </label>
+                                <ImageUpload
+                                    value={content.corporate.introImage}
+                                    onChange={url => setContent({ ...content, corporate: { ...content.corporate, introImage: url } })}
+                                    label="Intro Image"
+                                    dimensions="800 x 600"
+                                />
                             </div>
                         </div>
 

@@ -14,6 +14,7 @@ export default function CruisesListingPage() {
     const [pricing, setPricing] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
+    const [bannerData, setBannerData] = useState<any>({});
 
     useEffect(() => {
         async function fetchData() {
@@ -28,6 +29,19 @@ export default function CruisesListingPage() {
 
                 if (hbJson.success) setHouseboats(hbJson.data);
                 if (optJson.success && optJson.data.length > 0) setPricing(optJson.data[0].value);
+
+                // Fetch cruises banner settings
+                const bannerRes = await fetch(`${API_URL}/options`);
+                const bannerJson = await bannerRes.json();
+                if (bannerJson.success && bannerJson.data) {
+                    const opt = bannerJson.data.find((o: any) => o.key === 'cruises_page_settings');
+                    if (opt) {
+                        try {
+                            const parsed = JSON.parse(opt.value);
+                            if (parsed.banner) setBannerData(parsed.banner);
+                        } catch (e) {}
+                    }
+                }
             } catch (err) {
                 console.error("Failed to fetch cruise data", err);
             } finally {
@@ -53,11 +67,15 @@ export default function CruisesListingPage() {
     return (
         <div className="cruises-listing-wrapper">
             <DynamicPageBanner 
-                fallbackTitle={"Luxury Backwater\nCruises."}
+                title={bannerData.title || undefined}
+                subtitle={bannerData.subtitle || undefined}
+                preTitle={bannerData.preTitle || undefined}
+                fallbackTitle="Luxury Backwater Cruises"
                 fallbackSubtitle="Experience the serene backwaters of Alleppey and Kumarakom on our premium houseboats."
                 fallbackPreTitle="Cruises & Houseboats"
-                fallbackImage="/hero-houseboat.jpg" 
+                fallbackImage={bannerData.image || "/hero-houseboat.jpg"}
                 breadcrumbs={[{ label: 'Cruises' }]}
+                skipApiFetch={true}
             />
 
             <div className="homeContainer cruises-listing-container">

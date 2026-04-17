@@ -3,8 +3,10 @@
 import { API_URL } from '@/config';
 import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { Save, ArrowLeft, FileText, Sparkles, Clock, Zap, Layout, Settings, Layers } from 'lucide-react';
+import { Save, ArrowLeft, FileText, Sparkles, Clock, Zap, Layout, Settings, Layers, Image as ImageIcon } from 'lucide-react';
 import RichTextEditor from '@/components/admin/Editor';
+import ImageUpload from '@/components/admin/ImageUpload';
+import { getImageUrl } from '@/config';
 
 export default function EditPage() {
   const router = useRouter();
@@ -17,7 +19,11 @@ export default function EditPage() {
     seo_title: '',
     seo_description: '',
     seo_keys: '',
-    seo_canonical: ''
+    seo_canonical: '',
+    banner_title: '',
+    banner_subtitle: '',
+    banner_pre_title: '',
+    banner_image: ''
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -36,10 +42,14 @@ export default function EditPage() {
             seo_title: d.seo_title || '',
             seo_description: d.seo_description || '',
             seo_keys: d.seo_keys || '',
-            seo_canonical: d.seo_canonical || ''
+            seo_canonical: d.seo_canonical || '',
+            banner_title: d.banner_title || '',
+            banner_subtitle: d.banner_subtitle || '',
+            banner_pre_title: d.banner_pre_title || '',
+            banner_image: d.banner_image || ''
           });
         }
-      } catch (err) { console.error(err); } 
+      } catch (err) { console.error(err); }
       finally { setLoading(false); }
     }
     if (id) fetchPage();
@@ -51,14 +61,14 @@ export default function EditPage() {
     try {
       const res = await fetch(`${API_URL}/pages/${id}`, {
         method: 'PUT',
-        headers: { 
-          'Content-Type': 'application/json', 
-          'Authorization': `Bearer ${localStorage.getItem('token')}` 
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify(formData)
       });
       if (res.ok) router.push('/admin/pages');
-    } catch (err) { console.error(err); } 
+    } catch (err) { console.error(err); }
     finally { setSaving(false); }
   };
 
@@ -83,8 +93,8 @@ export default function EditPage() {
           <button onClick={() => router.push('/admin/pages')} className="admin-btn admin-btn-secondary">
             Discard
           </button>
-          <button 
-            onClick={handleSubmit} 
+          <button
+            onClick={handleSubmit}
             disabled={saving}
             className="admin-btn admin-btn-primary h-11 px-6"
           >
@@ -105,20 +115,77 @@ export default function EditPage() {
 
               <div className="admin-form-group">
                 <label className="admin-form-label">Page Heading / Title</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={formData.title}
-                  onChange={e => setFormData({...formData, title: e.target.value})}
+                  onChange={e => setFormData({ ...formData, title: e.target.value })}
                   className="admin-form-input"
                   placeholder="e.g. Welcome to WEGOMAP"
                 />
               </div>
 
+              {/* Banner Section */}
+              <div className="pt-6 border-t border-slate-100 space-y-8">
+                <div className="flex items-center justify-between">
+                    <h4 className="text-[10px] font-black uppercase tracking-widest text-blue-600">Banner Information</h4>
+                    <span className="text-[9px] font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded tracking-tighter uppercase italic">Visible at page hero</span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-6">
+                        <div className="admin-form-group">
+                            <label className="admin-form-label mb-1">Banner Title</label>
+                            <input
+                                type="text"
+                                value={formData.banner_title}
+                                onChange={e => setFormData({ ...formData, banner_title: e.target.value })}
+                                className="admin-form-input"
+                                placeholder="e.g. Experience the Unforgettable"
+                            />
+                        </div>
+                        <div className="admin-form-group">
+                            <label className="admin-form-label mb-1">Banner Pre-Title</label>
+                            <input
+                                type="text"
+                                value={formData.banner_pre_title}
+                                onChange={e => setFormData({ ...formData, banner_pre_title: e.target.value })}
+                                className="admin-form-input"
+                                placeholder="e.g. Premium Event Management"
+                            />
+                        </div>
+                        <div className="admin-form-group">
+                            <label className="admin-form-label mb-1">Banner Subtitle / Description</label>
+                            <textarea
+                                rows={3}
+                                value={formData.banner_subtitle}
+                                onChange={e => setFormData({ ...formData, banner_subtitle: e.target.value })}
+                                className="admin-form-input"
+                                placeholder="e.g. WEGOMAP orchestrates world-class corporate summits..."
+                            />
+                        </div>
+                    </div>
+
+                    {/* Banner Image Upload */}
+                    <div className="admin-form-group">
+                        <label className="admin-form-label mb-3 flex items-center gap-2">
+                             Banner Background Image
+                        </label>
+                        <ImageUpload
+                            value={formData.banner_image}
+                            onChange={val => setFormData({ ...formData, banner_image: val })}
+                        />
+                        <p className="text-[10px] text-slate-400 mt-3 italic leading-relaxed">
+                            Recommended: High resolution 1920x600px or similar wide aspect ratio. Darker images work best for white text overlay.
+                        </p>
+                    </div>
+                </div>
+              </div>
+
               <div className="admin-form-group">
                 <label className="text-xs font-semibold uppercase tracking-wider text-blue-600 ml-1">Page Content</label>
-                <RichTextEditor 
+                <RichTextEditor
                   value={formData.content}
-                  onChange={content => setFormData({...formData, content})}
+                  onChange={content => setFormData({ ...formData, content })}
                 />
               </div>
             </div>

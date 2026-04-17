@@ -118,6 +118,7 @@ export default function AllToursPage() {
     const [loadingMore, setLoadingMore] = useState(false);
     const observerTarget = useRef<HTMLDivElement>(null);
     const [wishlist, setWishlist] = useState<string[]>([]);
+    const [bannerData, setBannerData] = useState<any>({});
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
@@ -259,6 +260,21 @@ export default function AllToursPage() {
             }
         }
         fetchPackages();
+
+        // Fetch banner data from tours_page_settings
+        (async () => {
+            try {
+                const res = await fetch(`${API_URL}/options`);
+                const json = await res.json();
+                if (json.success && json.data) {
+                    const opt = json.data.find((o: any) => o.key === 'tours_page_settings');
+                    if (opt) {
+                        const parsed = JSON.parse(opt.value);
+                        if (parsed.banner) setBannerData(parsed.banner);
+                    }
+                }
+            } catch (e) { console.error(e); }
+        })();
     }, []);
 
     const allCombinedPackages = useMemo(() => {
@@ -375,14 +391,19 @@ export default function AllToursPage() {
 
     return (
         <div className="allToursPage">
-            {/* Hero Banner */}
             <DynamicPageBanner
-                fallbackTitle="Explore All\nDestinations."
+                title={bannerData.title || undefined}
+                subtitle={bannerData.subtitle || undefined}
+                preTitle={bannerData.preTitle || undefined}
+                fallbackTitle="Explore All
+Destinations."
                 fallbackSubtitle={`Browse ${allCombinedPackages.length}+ handpicked packages — from Kerala backwaters to international escapes.`}
                 fallbackPreTitle="Curated Journeys"
+                fallbackImage={bannerData.image || undefined}
                 breadcrumbs={[{ label: 'All Packages' }]}
                 variant="large"
                 centered={true}
+                skipApiFetch={true}
             />
 
             {/* Filter + Search Strip */}

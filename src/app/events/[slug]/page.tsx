@@ -5,9 +5,9 @@ import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { 
-    Calendar, MapPin, Share2, Clock, Users, 
-    ArrowRight, Zap, CheckCircle2, Sparkles, Phone, User, 
+import {
+    Calendar, MapPin, Share2, Clock, Users,
+    ArrowRight, Zap, CheckCircle2, Sparkles, Phone, User,
     Send, ShieldCheck, Info, ArrowLeft
 } from 'lucide-react';
 import DynamicPageBanner from '@/components/DynamicPageBanner';
@@ -32,7 +32,7 @@ export default function EventDetailPage() {
             try {
                 let res = await fetch(`${API_URL}/events/${slugOrId}`);
                 let data = await res.json();
-                
+
                 if (data.success) {
                     setEvent(data.data);
                 } else {
@@ -47,11 +47,11 @@ export default function EventDetailPage() {
                         ]);
                         const allEventsData = await allEventsRes.json();
                         const allSpecData = await allSpecRes.json();
-                        
+
                         let allEvents: any[] = [];
                         if (allEventsData.success) allEvents = [...allEvents, ...allEventsData.data];
                         if (allSpecData.success) allEvents = [...allSpecData.data];
-                        
+
                         const found = allEvents.find((e: any) => e.slug === slugOrId || e._id === slugOrId);
                         if (found) setEvent(found);
                     }
@@ -104,7 +104,7 @@ export default function EventDetailPage() {
 
     return (
         <main className="eventsPage detail-v3">
-            
+
             <DynamicPageBanner
                 fallbackTitle={event.title}
                 fallbackSubtitle={event.location || "Kerala, India"}
@@ -115,14 +115,14 @@ export default function EventDetailPage() {
                 ]}
                 variant="standard"
             />
-            
+
             <div className="homeContainer">
                 <div className="ed-stats-bar">
                     <div className="ed-stat-grid">
                         <div className="ed-stat-item">
                             <span className="ed-stat-label">Event Date</span>
                             <div className="ed-stat-value">
-                                <Calendar size={16} /> 
+                                <Calendar size={16} />
                                 {event.date ? new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Join Now'}
                             </div>
                         </div>
@@ -151,7 +151,7 @@ export default function EventDetailPage() {
             <section className="ed-main-content">
                 <div className="homeContainer">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-                        
+
                         <div className="lg:col-span-8">
                             <div className="ed-overview-card">
                                 <h2 className="ed-overview-header">
@@ -180,7 +180,7 @@ export default function EventDetailPage() {
                                 ) : (
                                     <>
                                         <div className="ed-card-header">
-                                            <h4>Apply for <span>Admission.</span></h4>
+                                            <h4>Apply Now</h4>
                                             <p>Secure your spot at this curated experience.</p>
                                         </div>
                                         <form onSubmit={handleFormSubmit} className="ed-form space-y-5">
@@ -188,11 +188,11 @@ export default function EventDetailPage() {
                                                 <label>Full Name</label>
                                                 <div className="ed-input-group">
                                                     <User size={18} />
-                                                    <input 
-                                                        type="text" 
-                                                        placeholder="Your name" 
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Your name"
                                                         value={formData.name}
-                                                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                                     />
                                                 </div>
                                             </div>
@@ -200,14 +200,14 @@ export default function EventDetailPage() {
                                                 <label>Mobile Number <span>*</span></label>
                                                 <div className="ed-input-group">
                                                     <Phone size={18} />
-                                                    <input 
-                                                        required 
-                                                        type="tel" 
-                                                        placeholder="Your number" 
+                                                    <input
+                                                        required
+                                                        type="tel"
+                                                        placeholder="Your number"
                                                         value={formData.phone}
                                                         onChange={(e) => {
                                                             const val = e.target.value.replace(/\D/g, '');
-                                                            setFormData({...formData, phone: val});
+                                                            setFormData({ ...formData, phone: val });
                                                         }}
                                                     />
                                                 </div>
@@ -216,11 +216,11 @@ export default function EventDetailPage() {
                                                 <label>Email Address</label>
                                                 <div className="ed-input-group">
                                                     <ShieldCheck size={18} />
-                                                    <input 
-                                                        type="email" 
-                                                        placeholder="Your email" 
+                                                    <input
+                                                        type="email"
+                                                        placeholder="Your email"
                                                         value={formData.email}
-                                                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                                     />
                                                 </div>
                                             </div>

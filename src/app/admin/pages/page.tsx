@@ -17,35 +17,35 @@ export default function PagesAdmin() {
       const res = await fetch(`${API_URL}/pages`);
       const json = await res.json();
       if (json.success) setData(json.data);
-    } catch (err) { console.error(err); } 
+    } catch (err) { console.error(err); }
     finally { setLoading(false); }
   };
   const policySlugs = [
-    'privacy-policy', 
-    'refund-policy', 
+    'privacy-policy',
+    'refund-policy',
     'terms-and-conditions'
   ];
 
-  const filteredData = data.filter((item: any) => 
+  const filteredData = data.filter((item: any) =>
     policySlugs.includes(item.slug) &&
     (item.title || item.slug || '').toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleDelete = async (id: string) => {
     if (confirm('Are you sure you want to delete this page?')) {
-        try {
-            const token = localStorage.getItem('token');
-            const res = await fetch(`${API_URL}/pages/${id}`, {
-                method: 'DELETE',
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-            const result = await res.json();
-            if (result.success) {
-                setData(data.filter((d: any) => d._id !== id));
-            }
-        } catch (e) {
-            console.error('Delete failed', e);
+      try {
+        const token = localStorage.getItem('token');
+        const res = await fetch(`${API_URL}/pages/${id}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const result = await res.json();
+        if (result.success) {
+          setData(data.filter((d: any) => d._id !== id));
         }
+      } catch (e) {
+        console.error('Delete failed', e);
+      }
     }
   };
 
@@ -62,9 +62,9 @@ export default function PagesAdmin() {
         <div className="flex items-center gap-4">
           <div className="relative group w-64">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors" size={16} />
-            <input 
-              type="text" 
-              placeholder="Search main pages..." 
+            <input
+              type="text"
+              placeholder="Search main pages..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="admin-search-input pl-10 h-11 text-xs"
@@ -122,8 +122,8 @@ export default function PagesAdmin() {
                     </td>
                     <td className="px-10 py-8 text-right">
                       <div className="flex justify-end gap-3">
-                        <Link 
-                          href={`/admin/pages/${item._id}/edit`} 
+                        <Link
+                          href={`/admin/pages/${item._id}/edit`}
                           className="inline-flex items-center gap-2 h-10 px-5 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg shadow-slate-200 active:scale-95"
                         >
                           <Edit size={14} className="text-amber-400" /> Edit Page

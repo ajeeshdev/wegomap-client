@@ -195,16 +195,22 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       ]
     },
     { 
-      label: 'Site Pages', // Changed from 'Landing Page'
+      label: 'Site Pages',
       href: '/admin/pages', 
       icon: File,
       subItems: [
-        { label: 'All Pages', href: '/admin/pages' },
-        { label: 'Add New Page', href: '/admin/pages/create' },
+        { label: 'Policy Pages', href: '/admin/pages' },
         { label: 'About Page', href: '/admin/about-page' },
         { label: 'Services Page', href: '/admin/services-page' },
+        { label: 'Events Page', href: '/admin/events-settings' },
+        { label: 'Blogs Page', href: '/admin/blogs-page' },
+        { label: 'FAQ Page', href: '/admin/faq-page' },
+        { label: 'Contact Page', href: '/admin/contact-page' },
+        { label: 'Tours Page', href: '/admin/tours-page' },
+        { label: 'Cruises Page', href: '/admin/cruises-page' },
+        { label: 'Payment Page', href: '/admin/payment-page' },
         { label: 'Testimonials', href: '/admin/testimonials' },
-        { label: 'Amenities', href: '/admin/amenities' }, // Fixed typo 'Aminities'
+        { label: 'Amenities', href: '/admin/amenities' },
       ]
     },
     { 
@@ -245,7 +251,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       icon: ImageIcon,
       subItems: [
         { label: 'All Banners', href: '/admin/banners' },
-        { label: 'Add New Banner', href: '/admin/banners/create' },
       ]
     },
     { 

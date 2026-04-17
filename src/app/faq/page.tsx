@@ -34,6 +34,7 @@ export default function FaqPage() {
     const [openCategory, setOpenCategory] = useState<number | null>(0);
     const [openItem, setOpenItem] = useState<string | null>(null);
     const [whatsappNumber, setWhatsappNumber] = useState('918113998989');
+    const [bannerData, setBannerData] = useState<any>({});
 
     useEffect(() => {
         const fetchWhatsApp = async () => {
@@ -46,9 +47,16 @@ export default function FaqPage() {
                         const cleaned = whatsappOpt.value.replace(/\D/g, '');
                         setWhatsappNumber(cleaned);
                     }
+                    const bannerOpt = data.data.find((opt: any) => opt.key === 'faq_page_settings');
+                    if (bannerOpt) {
+                        try {
+                            const parsed = JSON.parse(bannerOpt.value);
+                            if (parsed.banner) setBannerData(parsed.banner);
+                        } catch (e) {}
+                    }
                 }
             } catch (err) {
-                console.error("Failed to fetch WhatsApp number from CMS", err);
+                console.error("Failed to fetch options from CMS", err);
             }
         };
         fetchWhatsApp();
@@ -98,10 +106,16 @@ export default function FaqPage() {
     return (
         <div className="faqPage">
             <DynamicPageBanner
-                fallbackTitle="Frequently Asked\nQuestions"
+                title={bannerData.title || undefined}
+                subtitle={bannerData.subtitle || undefined}
+                preTitle={bannerData.preTitle || undefined}
+                fallbackTitle="Frequently Asked
+Questions"
                 fallbackSubtitle="Everything you need to know before you travel with WEGOMAP."
                 fallbackPreTitle="Common Queries"
+                fallbackImage={bannerData.image || undefined}
                 breadcrumbs={[{ label: 'FAQ' }]}
+                skipApiFetch={true}
             />
 
             <div className="faqBody homeContainer">

@@ -1586,6 +1586,15 @@ input[type=number] {
   display: none !important;
 }
 
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mb-6 {
+  margin-bottom: 30px;
+}
+
 header {
   position: fixed;
   top: 0;
@@ -18906,25 +18915,162 @@ section.thank-you p {
   padding-bottom: 6rem;
   position: relative;
 }
-.cabs-listing-wrapper .hotels-header-row {
-  margin-bottom: 4rem;
+.cabs-listing-wrapper .pricing-matrix-section .pricing-table-container {
+  background: #fff;
+  border-radius: 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f1f5f9;
+  overflow: auto;
 }
-.cabs-listing-wrapper .hotels-header-row .hotels-title-area .hotels-page-pretitle {
-  font-family: var(--font-writing);
-  color: #ff5a3d;
-  font-size: 1.5rem;
-  display: block;
-  margin-bottom: 0.5rem;
+.cabs-listing-wrapper .pricing-matrix-section .pricing-table-container table {
+  width: 100%;
+  border-spacing: 0;
+  min-width: 900px;
 }
-.cabs-listing-wrapper .hotels-header-row .hotels-title-area .hotels-page-title {
+.cabs-listing-wrapper .pricing-matrix-section .pricing-table-container table th {
+  background: #f8fafc;
+  padding: 2.5rem 1.5rem;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
   font-weight: 900;
-  font-size: 3.5rem;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  margin-bottom: 1.5rem;
+  color: #94a3b8;
+  border-bottom: 1px solid #f1f5f9;
+  text-align: center;
 }
-.cabs-listing-wrapper .hotels-grid {
-  gap: 3rem;
+.cabs-listing-wrapper .pricing-matrix-section .pricing-table-container table th:first-child {
+  text-align: left;
+  padding-left: 3rem;
+}
+.cabs-listing-wrapper .pricing-matrix-section .pricing-table-container table td {
+  padding: 2.5rem 1.5rem;
+  border-bottom: 1px solid #f8fafc;
+  text-align: center;
+  vertical-align: middle;
+}
+.cabs-listing-wrapper .pricing-matrix-section .pricing-table-container table td:first-child {
+  text-align: left;
+  padding-left: 3rem;
+}
+.cabs-listing-wrapper .pricing-matrix-section .pricing-table-container table td .vehicle-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.cabs-listing-wrapper .pricing-matrix-section .pricing-table-container table td .vehicle-info .v-avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1.25rem;
+  background: rgba(255, 90, 61, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff5a3d;
+  font-weight: 900;
+  font-size: 1.25rem;
+  border: 1px solid rgba(255, 90, 61, 0.1);
+}
+.cabs-listing-wrapper .pricing-matrix-section .pricing-table-container table td .vehicle-info .v-details .v-name {
+  color: #0f172a;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+.cabs-listing-wrapper .pricing-matrix-section .pricing-table-container table td .vehicle-info .v-details .v-tag {
+  color: #94a3b8;
+  font-size: 0.65rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.3rem;
+}
+.cabs-listing-wrapper .pricing-matrix-section .pricing-table-container table td .price-val {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1;
+}
+.cabs-listing-wrapper .pricing-matrix-section .pricing-table-container table td .price-label {
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: #cbd5e1;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.4rem;
+}
+.cabs-listing-wrapper .pricing-matrix-section .pricing-table-container table tr:last-child td {
+  border-bottom: none;
+}
+.cabs-listing-wrapper .pricing-matrix-section .pricing-table-container table tr:hover td {
+  background: #fcfcfc;
+}
+.cabs-listing-wrapper .pricing-matrix-section .custom-quote-banner {
+  margin-top: 5rem;
+  background: #0f172a;
+  border-radius: 3rem;
+  padding: 5rem 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 40px 80px -20px rgba(15, 23, 42, 0.3);
+}
+.cabs-listing-wrapper .pricing-matrix-section .custom-quote-banner::before {
+  content: "";
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 90, 61, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.cabs-listing-wrapper .pricing-matrix-section .custom-quote-banner .banner-content {
+  position: relative;
+  z-index: 5;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.cabs-listing-wrapper .pricing-matrix-section .custom-quote-banner h4 {
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+.cabs-listing-wrapper .pricing-matrix-section .custom-quote-banner p {
+  color: #64748b;
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+  line-height: 1.7;
+  font-weight: 500;
+}
+.cabs-listing-wrapper .pricing-matrix-section .custom-quote-banner .cta-btn {
+  background: #ff5a3d;
+  color: #fff !important;
+  padding: 1.4rem 3.5rem;
+  border-radius: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 20px 40px rgba(255, 90, 61, 0.3);
+}
+.cabs-listing-wrapper .pricing-matrix-section .custom-quote-banner .cta-btn:hover {
+  transform: translateY(-8px);
+  background: rgb(255, 111.6881443299, 86.5);
+  box-shadow: 0 30px 60px rgba(255, 90, 61, 0.4);
+}
+.cabs-listing-wrapper .pricing-matrix-section .custom-quote-banner .cta-btn svg {
+  transition: transform 0.3s ease;
+}
+.cabs-listing-wrapper .pricing-matrix-section .custom-quote-banner .cta-btn:hover svg {
+  transform: translateX(5px);
 }
 
 .role-manager-page .rm-tabs {

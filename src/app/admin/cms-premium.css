@@ -237,6 +237,10 @@
 .property-edit-container input::placeholder, .property-edit-container textarea::placeholder, .property-edit-container select::placeholder {
   color: #cbd5e1;
 }
+.property-edit-container input, .property-edit-container textarea, .property-edit-container select {
+  position: relative;
+  z-index: 5;
+}
 .property-edit-container .toggle-switch {
   width: 44px;
   height: 24px;
@@ -291,6 +295,31 @@
 .property-edit-container .admin-form-group .slug-input {
   font-family: monospace;
   color: var(--primary);
+}
+.property-edit-container .admin-form-group input:not([type=checkbox]):not([type=radio]), .property-edit-container .admin-form-group textarea, .property-edit-container .admin-form-group select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 1.5px solid #e2e8f0;
+  background: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1e293b;
+  transition: all 0.2s ease;
+  cursor: text;
+}
+.property-edit-container .admin-form-group input:not([type=checkbox]):not([type=radio]):focus, .property-edit-container .admin-form-group textarea:focus, .property-edit-container .admin-form-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+}
+.property-edit-container .admin-form-group input:not([type=checkbox]):not([type=radio])::-moz-placeholder, .property-edit-container .admin-form-group textarea::-moz-placeholder, .property-edit-container .admin-form-group select::-moz-placeholder {
+  color: #94a3b8;
+  font-weight: 500;
+}
+.property-edit-container .admin-form-group input:not([type=checkbox]):not([type=radio])::placeholder, .property-edit-container .admin-form-group textarea::placeholder, .property-edit-container .admin-form-group select::placeholder {
+  color: #94a3b8;
+  font-weight: 500;
 }
 .property-edit-container .admin-form-grid-2 {
   display: grid;
@@ -419,6 +448,9 @@
   border-bottom: 2px solid #e2e8f0 !important;
   border-radius: 0 !important;
   padding: 0.5rem 0 !important;
+  position: relative !important;
+  z-index: 10 !important;
+  cursor: text !important;
 }
 .property-edit-container .itinerary-item .day-title-input:focus {
   border-color: var(--primary) !important;
@@ -750,6 +782,19 @@
 .property-edit-container .save-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+.property-edit-container {
+  /* Hide TinyMCE Promo and Cloud Notifications */
+}
+.property-edit-container .tox-notifications-container,
+.property-edit-container .tox-promotion,
+.property-edit-container .tox-statusbar__branding,
+.property-edit-container .tox-silver-sink[style*="z-index: 1001"],
+.property-edit-container .tox-tinymce-aux {
+  display: none !important;
+}
+.property-edit-container .tox-dialog-wrap {
+  z-index: 999999 !important;
 }
 .property-edit-container .add-day-btn {
   padding: 0.5rem 1.25rem;

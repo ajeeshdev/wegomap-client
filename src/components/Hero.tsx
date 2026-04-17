@@ -42,7 +42,7 @@ export default function Hero() {
                         title: s.title || '',
                         subtitle: s.subtitle || "Explore the world with WEGOMAP",
                         buttonText: "Discover Now",
-                        buttonHref: s.link || '/packages',
+                        buttonHref: s.link || s.btnurl || '/packages',
                         imgDesktop: getImageUrl(s.image),
                         imgMobile: getImageUrl(s.image),
                         imgPortrait: getImageUrl(s.image)
