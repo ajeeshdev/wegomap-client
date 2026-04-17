@@ -132,6 +132,7 @@ function formatINR(input: any): string {
 export default function HotelLandingPageView({ data }: { data: HotelLandingPageContent }) {
    const [hydrated, setHydrated] = useState(false);
    const [logo, setLogo] = useState<string>("/assets/images/logo.png");
+   const [bookingWhatsapp, setBookingWhatsapp] = useState<string>('');
    const [temp, setTemp] = useState<string>("...");
    const [condition, setCondition] = useState<string>("Loading Weather...");
    const [weatherIcon, setWeatherIcon] = useState<string>("Sun");
@@ -153,6 +154,8 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
                const logoOpt = json.data.find((o: any) => o.key === 'site_logo');
                if (logoOpt && logoOpt.value) setLogo(getImageUrl(logoOpt.value));
                else setLogo('/assets/images/logo.png');
+               const waOpt = json.data.find((o: any) => o.key === 'booking_whatsapp');
+               if (waOpt && waOpt.value) setBookingWhatsapp(waOpt.value.replace(/\D/g, ''));
             }
          } catch (err) {
             // Silent failure for options fetch - use default
@@ -261,13 +264,14 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
          return;
       }
 
-      if (!data.whatsapp_number) return;
+      const effectiveWa = (data.whatsapp_number || bookingWhatsapp || '').replace(/\D/g, '');
+      if (!effectiveWa) return;
       const message = `Hi, I'm interested in booking a stay at ${data.title}.\n\n` +
          `📅 Check-in: ${checkIn}\n` +
          `📅 Check-out: ${checkOut}\n` +
          `👥 Guests: ${adults}, ${children}\n\n` +
          `Please let me know about availability.`;
-      const waUrl = `https://wa.me/${data.whatsapp_number.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
+      const waUrl = `https://wa.me/${effectiveWa}?text=${encodeURIComponent(message)}`;
       window.open(waUrl, '_blank');
    };
 
@@ -621,8 +625,8 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
                               </div>
                               <div className="flex items-center justify-between gap-6 flex-wrap mt-8">
                                  <button className="submit-btn-final">Send Request</button>
-                                 {data.whatsapp_number && (
-                                    <a href={`https://wa.me/${data.whatsapp_number.replace(/\D/g, '')}`} className="wa-final-link" target="_blank">
+                                 {(data.whatsapp_number || bookingWhatsapp) && (
+                                    <a href={`https://wa.me/${(data.whatsapp_number || bookingWhatsapp).replace(/\D/g, '')}`} className="wa-final-link" target="_blank">
                                        <MessageSquare size={16} /> WhatsApp Inquiry
                                     </a>
                                  )}
