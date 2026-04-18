@@ -25,19 +25,32 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
 
     try {
-        const catRes = await fetch(`${API_URL}/categories/slug/${slug}`, { next: { revalidate: 60 } });
+        const [catRes, pageRes, optsRes] = await Promise.all([
+            fetch(`${API_URL}/categories/slug/${slug}`, { next: { revalidate: 60 } }),
+            fetch(`${API_URL}/pages?slug=${slug}`),
+            fetch(`${API_URL}/options`)
+        ]);
+
+        let globalKeywords = undefined;
+        if (optsRes.ok) {
+            const optsJson = await optsRes.json();
+            if (optsJson.success && optsJson.data) {
+                const keysOpt = optsJson.data.find((o: any) => o.key === 'site_keywords');
+                if (keysOpt?.value) globalKeywords = keysOpt.value;
+            }
+        }
+
         const catJson = await catRes.json();
         if (catJson.success && catJson.data) {
             const cat = catJson.data;
             return {
                 title: cat.seoTitle || cat.title || `${cat.name} | WEGOMAP`,
                 description: cat.seoMeta || cat.description?.substring(0, 160),
-                keywords: cat.seoKeys || undefined,
+                keywords: cat.seoKeys || globalKeywords,
             };
         }
 
         // 2. Check if it's a Landing Page
-        const pageRes = await fetch(`${API_URL}/pages?slug=${slug}`);
         const pageJson = await pageRes.json();
         if (pageJson.success && pageJson.data) {
             const page = pageJson.data.find((p: any) => p.slug === slug && p.isCampaign);
@@ -45,7 +58,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
                 return {
                     title: page.seo_title || page.title,
                     description: page.seo_description || page.description?.substring(0, 160),
-                    keywords: page.seo_keys || undefined,
+                    keywords: page.seo_keys || globalKeywords,
                     alternates: page.seo_canonical ? { canonical: page.seo_canonical } : undefined,
                 };
             }

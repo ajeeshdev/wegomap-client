@@ -139,11 +139,11 @@ export default function Footer() {
                                 <div className="footer-bottom-v2 pt-3">
 
                                     <div className="footer-social-hub mt-4 mb-4">
-                                        {options.fb && <a href={options.fb} className="social-pill" target="_blank" rel="noreferrer"><Facebook size={20} /></a>}
-                                        {options.twitter && <a href={options.twitter} className="social-pill" target="_blank" rel="noreferrer"><Twitter size={20} /></a>}
+                                        {options.facebook && <a href={options.facebook} className="social-pill" target="_blank" rel="noreferrer"><Facebook size={20} /></a>}
+                                        {options.pinterest && <a href={options.pinterest} className="social-pill" target="_blank" rel="noreferrer"><Twitter size={20} /></a>}
                                         {options.instagram && <a href={options.instagram} className="social-pill" target="_blank" rel="noreferrer"><Instagram size={20} /></a>}
                                         {options.linkedin && <a href={options.linkedin} className="social-pill" target="_blank" rel="noreferrer"><Linkedin size={20} /></a>}
-                                        {!options.fb && !options.twitter && !options.instagram && !options.linkedin && (
+                                        {!options.facebook && !options.pinterest && !options.instagram && !options.linkedin && (
                                             <>
                                                 <a href="https://facebook.com/wegomap" className="social-pill" target="_blank" rel="noreferrer"><Facebook size={20} /></a>
                                                 <a href="https://twitter.com/wegomap" className="social-pill" target="_blank" rel="noreferrer"><Twitter size={20} /></a>

@@ -30,19 +30,21 @@ export async function generateMetadata(): Promise<Metadata> {
     let defaultDesc = "Experience the magic of God’s Own Country with WEGOMAP, your reliable Kerala travel partner.";
     let favIconUrl = "/favicon.ico";
 
+    let pageKeywords: string | undefined = undefined;
+
     if (optsJson.success && optsJson.data) {
       const titleOpt = optsJson.data.find((o: any) => o.key === 'site_title');
       const favOpt = optsJson.data.find((o: any) => o.key === 'site_favicon');
       const descOpt = optsJson.data.find((o: any) => o.key === 'site_description');
+      const keysOpt = optsJson.data.find((o: any) => o.key === 'site_keywords');
       
       if (titleOpt?.value) defaultTitle = titleOpt.value;
       if (descOpt?.value) defaultDesc = descOpt.value;
       if (favOpt?.value) favIconUrl = getImageUrl(favOpt.value);
+      if (keysOpt?.value) pageKeywords = keysOpt.value;
     }
 
     // Try to get specific 'home' page SEO overrides
-    let pageKeywords: string | undefined = undefined;
-    
     if (pagesJson.success && pagesJson.data) {
       const homePage = pagesJson.data.find((p: any) => p.slug === 'home');
       if (homePage) {
