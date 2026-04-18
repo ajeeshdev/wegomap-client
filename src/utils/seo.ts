@@ -11,11 +11,12 @@ export async function generatePageMetadata(slug: string, fallbackTitle: string):
         if (json.success && json.data) {
             const page = json.data.find((p: any) => p.slug === slug);
             if (page) {
-                if (page.seo_title || page.seo_description || page.seo_meta) {
+                if (page.seo_title || page.seo_description || page.seo_keys) {
                     return {
                         title: page.seo_title || page.title || fallbackTitle,
-                        description: page.seo_description || page.seo_meta || undefined,
-                        keywords: page.seo_keywords || undefined,
+                        description: page.seo_description || undefined,
+                        keywords: page.seo_keys || undefined,
+                        alternates: page.seo_canonical ? { canonical: page.seo_canonical } : undefined,
                     };
                 }
                 return {

@@ -41,12 +41,17 @@ export async function generateMetadata(): Promise<Metadata> {
     }
 
     // Try to get specific 'home' page SEO overrides
+    let pageKeywords: string | undefined = undefined;
+    
     if (pagesJson.success && pagesJson.data) {
       const homePage = pagesJson.data.find((p: any) => p.slug === 'home');
       if (homePage) {
         if (homePage.seo_title) defaultTitle = homePage.seo_title;
-        if (homePage.seo_description || homePage.seo_meta) {
-          defaultDesc = homePage.seo_description || homePage.seo_meta;
+        if (homePage.seo_description) {
+          defaultDesc = homePage.seo_description;
+        }
+        if (homePage.seo_keys) {
+          pageKeywords = homePage.seo_keys;
         }
       }
     }
@@ -55,6 +60,7 @@ export async function generateMetadata(): Promise<Metadata> {
       metadataBase: new URL('https://www.wegomap.com'),
       title: defaultTitle,
       description: defaultDesc,
+      keywords: pageKeywords,
       robots: "index, follow",
       icons: {
         icon: favIconUrl,

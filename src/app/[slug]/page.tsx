@@ -32,6 +32,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             return {
                 title: cat.seoTitle || cat.title || `${cat.name} | WEGOMAP`,
                 description: cat.seoMeta || cat.description?.substring(0, 160),
+                keywords: cat.seoKeys || undefined,
             };
         }
 
@@ -42,8 +43,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             const page = pageJson.data.find((p: any) => p.slug === slug && p.isCampaign);
             if (page) {
                 return {
-                    title: page.title,
-                    description: page.description?.substring(0, 160),
+                    title: page.seo_title || page.title,
+                    description: page.seo_description || page.description?.substring(0, 160),
+                    keywords: page.seo_keys || undefined,
+                    alternates: page.seo_canonical ? { canonical: page.seo_canonical } : undefined,
                 };
             }
         }
