@@ -18,26 +18,50 @@ import { API_URL, getImageUrl } from "@/config";
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
-    const res = await fetch(`${API_URL}/options`, { next: { revalidate: 60 } });
-    const json = await res.json();
+    const [optsRes, pagesRes] = await Promise.all([
+      fetch(`${API_URL}/options`, { next: { revalidate: 60 } }),
+      fetch(`${API_URL}/pages?slug=home`, { next: { revalidate: 60 } })
+    ]);
+    
+    const optsJson = await optsRes.json();
+    const pagesJson = await pagesRes.json();
 
-    if (json.success && json.data) {
-      const titleOpt = json.data.find((o: any) => o.key === 'site_title');
-      const favOpt = json.data.find((o: any) => o.key === 'site_favicon');
-      const descOpt = json.data.find((o: any) => o.key === 'site_description');
+    let defaultTitle = "Best Kerala Tour Packages | WEGOMAP";
+    let defaultDesc = "Experience the magic of God’s Own Country with WEGOMAP, your reliable Kerala travel partner.";
+    let favIconUrl = "/favicon.ico";
 
-      return {
-        metadataBase: new URL('https://demo.wegomap.com'),
-        title: titleOpt?.value || "Best Kerala Tour Packages | WEGOMAP",
-        description: descOpt?.value || "Experience the magic of God’s Own Country with WEGOMAP, your reliable Kerala travel partner.",
-        robots: "noindex, nofollow",
-        icons: {
-          icon: getImageUrl(favOpt?.value) || "/favicon.ico",
-          shortcut: getImageUrl(favOpt?.value) || "/favicon.ico",
-          apple: getImageUrl(favOpt?.value) || "/favicon.ico",
-        }
-      };
+    if (optsJson.success && optsJson.data) {
+      const titleOpt = optsJson.data.find((o: any) => o.key === 'site_title');
+      const favOpt = optsJson.data.find((o: any) => o.key === 'site_favicon');
+      const descOpt = optsJson.data.find((o: any) => o.key === 'site_description');
+      
+      if (titleOpt?.value) defaultTitle = titleOpt.value;
+      if (descOpt?.value) defaultDesc = descOpt.value;
+      if (favOpt?.value) favIconUrl = getImageUrl(favOpt.value);
     }
+
+    // Try to get specific 'home' page SEO overrides
+    if (pagesJson.success && pagesJson.data) {
+      const homePage = pagesJson.data.find((p: any) => p.slug === 'home');
+      if (homePage) {
+        if (homePage.seo_title) defaultTitle = homePage.seo_title;
+        if (homePage.seo_description || homePage.seo_meta) {
+          defaultDesc = homePage.seo_description || homePage.seo_meta;
+        }
+      }
+    }
+
+    return {
+      metadataBase: new URL('https://www.wegomap.com'),
+      title: defaultTitle,
+      description: defaultDesc,
+      robots: "index, follow",
+      icons: {
+        icon: favIconUrl,
+        shortcut: favIconUrl,
+        apple: favIconUrl,
+      }
+    };
   } catch (err) {
     console.error("Metadata fetch error:", err);
   }

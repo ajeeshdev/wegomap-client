@@ -2,11 +2,9 @@ import { Suspense } from 'react';
 import AllToursPage from '@/components/AllToursPage';
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-    title: 'All Tour Packages | WEGOMAP — Kerala & International Tours',
-    description: 'Browse all tour packages offered by WEGOMAP — Kerala, international, honeymoon, family, and adventure tours. Filter by category and find your perfect trip.',
-    keywords: 'tour packages, kerala tours, international packages, honeymoon packages, wegomap',
-};
+import { generatePageMetadata } from '@/utils/seo';
+
+export const generateMetadata = () => generatePageMetadata('packages', 'All Tour Packages');
 
 export default function ToursPage() {
     return (
