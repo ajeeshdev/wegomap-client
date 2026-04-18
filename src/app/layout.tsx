@@ -96,14 +96,29 @@ import CaptchaProvider from '@/components/CaptchaProvider';
 
 import "../../scss/style.scss";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  let analyticsScript = '';
+  try {
+    const res = await fetch(`${API_URL}/options`, { next: { revalidate: 60 } });
+    const json = await res.json();
+    if (json.success && json.data) {
+      const scriptOpt = json.data.find((o: any) => o.key === 'analytics_script');
+      if (scriptOpt?.value) analyticsScript = scriptOpt.value;
+    }
+  } catch (err) {
+    console.error("Failed to load tracking scripts:", err);
+  }
+
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body className={`${outfit.variable} ${dancingScript.variable} font-sans antialiased text-slate-900 bg-white`}>
+        {analyticsScript && (
+           <div id="site-tracking-scripts" dangerouslySetInnerHTML={{ __html: analyticsScript }} style={{ display: 'none' }} />
+        )}
         <AppGoogleAuthProvider>
           <CaptchaProvider>
             <EnquiryProvider>
