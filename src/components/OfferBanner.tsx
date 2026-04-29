@@ -68,7 +68,7 @@ export default function OfferBanner() {
                                     <Link href={banner.link} className="block w-full h-full relative">
                                         <Image
                                             src={getImageUrl(banner.image)}
-                                            alt={banner.title || 'Offer'}
+                                            alt={banner.imageAlt || banner.title || 'Offer'}
                                             fill
                                             className="object-cover transition-transform duration-700 hover:scale-105"
                                         />
@@ -77,7 +77,7 @@ export default function OfferBanner() {
                                     <div className="w-full h-full relative">
                                         <Image
                                             src={getImageUrl(banner.image)}
-                                            alt={banner.title || 'Offer'}
+                                            alt={banner.imageAlt || banner.title || 'Offer'}
                                             fill
                                             className="object-cover"
                                         />

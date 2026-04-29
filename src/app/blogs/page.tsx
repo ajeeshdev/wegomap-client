@@ -127,7 +127,7 @@ export default function BlogsPage() {
                                         {(blog.featuredImage || blog.image) ? (
                                             <Image
                                                 src={getImageUrl(blog.featuredImage || blog.image || '')}
-                                                alt={blog.title}
+                                                alt={blog.featuredImageAlt || blog.title}
                                                 fill
                                                 style={{ objectFit: 'cover' }}
                                                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"

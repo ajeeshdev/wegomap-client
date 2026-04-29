@@ -15,6 +15,7 @@ export default function CreateSpecialEvent() {
     heroSubtext: '',
     description: '',
     image: '',
+    imageAlt: '',
     slug: '',
     status: 'Active',
     date: '',

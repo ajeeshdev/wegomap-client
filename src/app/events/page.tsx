@@ -153,7 +153,7 @@ Unforgettable"
                                         <div className="imageWrapper eventWrapper">
                                             <Image
                                                 src={event.images?.[0] || "/assets/site/assets/images/event.jpg"}
-                                                alt={event.title}
+                                                alt={event.imageAlt || event.title}
                                                 fill
                                                 className="img-premium"
                                             />

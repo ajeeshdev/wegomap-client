@@ -104,7 +104,7 @@ export default function BlogDetailPage() {
                 {(blog.featuredImage || blog.image) && (
                     <Image
                         src={getImageUrl(blog.featuredImage || blog.image || '')}
-                        alt={blog.title}
+                        alt={blog.featuredImageAlt || blog.title}
                         fill
                         className="hero-image"
                     />
@@ -222,7 +222,7 @@ export default function BlogDetailPage() {
                                                 <Link key={relBlog.id} href={`/blogs/${relBlog.slug}`} className="related-item">
                                                     <div className="image-wrap">
                                                         {relBlog.image && (
-                                                            <Image src={getImageUrl(relBlog.image)} alt={relBlog.title} fill />
+                                                            <Image src={getImageUrl(relBlog.image)} alt={relBlog.featuredImageAlt || relBlog.title} fill />
                                                         )}
                                                     </div>
                                                     <div className="content-wrap">

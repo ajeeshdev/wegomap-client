@@ -16,6 +16,7 @@ export default function EditDestination() {
     content: '',
     excerpt: '',
     image: '',
+    imageAlt: '',
     status: 'Active'
   });
   const [loading, setLoading] = useState(true);
@@ -33,6 +34,7 @@ export default function EditDestination() {
             content: data.data.content || '',
             excerpt: data.data.excerpt || '',
             image: data.data.image || '',
+            imageAlt: data.data.imageAlt || 'wegomap',
             status: data.data.status || 'Active'
           });
         }
@@ -184,6 +186,8 @@ export default function EditDestination() {
                 <ImageUpload
                   value={formData.image}
                   onChange={(url) => setFormData({ ...formData, image: url })}
+                  altValue={formData.imageAlt}
+                  onAltChange={(alt) => setFormData({ ...formData, imageAlt: alt })}
                   label="Main Image"
                   dimensions="1200 x 800"
                 />

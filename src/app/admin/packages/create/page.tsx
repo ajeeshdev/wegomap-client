@@ -45,7 +45,8 @@ export default function CreatePackage() {
       inclusions: [], exclusions: [], terms: '', highlights: [],
       itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '',
       averageRating: 4.9, reviewCount: 150, noCostEmi: '',
-      amenities: [], categories: [], images: [], thumb: '', thumb_alt: 'wegomap',
+      amenities: [], categories: [], images: [], thumb: '',
+    thumbAlt: 'wegomap',
       status: 'Published', order: 0
    });
 
@@ -236,7 +237,8 @@ export default function CreatePackage() {
                      <div className="editor-card">
                         <div className="card-header flex-header">
                            <h4 className="serif">Strategic Itinerary</h4>
-                           <button onClick={() => setFormData({ ...formData, itinerary: [...formData.itinerary, { day: formData.itinerary.length + 1, title: '', description: '', image: '', amenities: [] }] })} className="add-day-btn">+ Add Tactical Day</button>
+                           <button onClick={() => setFormData({ ...formData, itinerary: [...formData.itinerary, { day: formData.itinerary.length + 1, title: '', description: '', image: '',
+    imageAlt: '', amenities: [] }] })} className="add-day-btn">+ Add Tactical Day</button>
                         </div>
                         <div className="card-body">
                            <div className="itinerary-list">
@@ -259,11 +261,22 @@ export default function CreatePackage() {
                                     
                                     <div className="itinerary-footer">
                                        <div className="space-y-4">
-                                          <ImageUpload value={item.image} onChange={url => {
-                                             const ni = [...formData.itinerary];
-                                             ni[idx].image = url;
-                                             setFormData({ ...formData, itinerary: ni });
-                                          }} label="Day Visual" dimensions="800 x 500" />
+                                          <ImageUpload 
+                                             value={item.image} 
+                                             onChange={url => {
+                                                const ni = [...formData.itinerary];
+                                                ni[idx].image = url;
+                                                setFormData({ ...formData, itinerary: ni });
+                                             }} 
+                                             altValue={item.imageAlt}
+                                             onAltChange={alt => {
+                                                const ni = [...formData.itinerary];
+                                                ni[idx].imageAlt = alt;
+                                                setFormData({ ...formData, itinerary: ni });
+                                             }}
+                                             label="Day Visual" 
+                                             dimensions="800 x 500" 
+                                          />
                                           <AmenityPicker value={item.amenities || []} onChange={am => {
                                              const ni = [...formData.itinerary];
                                              ni[idx].amenities = am;
@@ -291,7 +304,14 @@ export default function CreatePackage() {
                         <div className="editor-card">
                            <div className="card-header"><h4 className="serif">Primary Showcase</h4></div>
                            <div className="card-body">
-                              <ImageUpload value={formData.thumb} onChange={url => setFormData({ ...formData, thumb: url })} label="Package Thumbnail" dimensions="1200 x 800" />
+                              <ImageUpload 
+                                 value={formData.thumb} 
+                                 onChange={url => setFormData({ ...formData, thumb: url })} 
+                                 altValue={formData.thumbAlt}
+                                 onAltChange={alt => setFormData({ ...formData, thumbAlt: alt })}
+                                 label="Package Thumbnail" 
+                                 dimensions="1200 x 800" 
+                              />
                            </div>
                         </div>
                         <div className="editor-card">

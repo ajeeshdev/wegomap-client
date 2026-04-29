@@ -18,6 +18,7 @@ export default function EditCab() {
     capacity: '4',
     type: 'Sedan',
     image: '',
+    imageAlt: '',
     status: 'Available'
   });
   const [loading, setLoading] = useState(true);
@@ -37,6 +38,7 @@ export default function EditCab() {
             capacity: data.data.capacity || '4',
             type: data.data.type || 'Sedan',
             image: data.data.image || '',
+            imageAlt: data.data.imageAlt || '',
             status: data.data.status || 'Available'
           });
         }

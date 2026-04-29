@@ -368,7 +368,7 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
             <div className="container-ctn">
                <div className="about-grid">
                   <div className="about-img-wrap">
-                     <img src={getImageUrl(data.about_image)} className="main-img" alt="Lobby" />
+                     <img src={getImageUrl(data.about_image)} className="main-img" alt={data.about_image_alt || "Lobby"} />
                      {data.about_badge_text && (
                         <div className="privacy-badge">
                            <span className="number">100%</span>
@@ -474,7 +474,7 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
                      </div>
                   </div>
                   <div className="why-image">
-                     <img src={getImageUrl(data.why_choose_image)} alt="Why Choose" className="side-img" />
+                     <img src={getImageUrl(data.why_choose_image)} alt={data.why_choose_image_alt || "Why Choose"} className="side-img" />
                   </div>
                </div>
             </div>

@@ -116,7 +116,7 @@ export default function CruisesListingPage() {
                                 <div className="thumb-wrapper">
                                     <Image 
                                         src={hb.thumb ? getImageUrl(hb.thumb) : '/hero-houseboat.jpg'} 
-                                        alt={hb.title || hb.name}
+                                        alt={hb.imageAlt || hb.thumbAlt || hb.title || hb.name}
                                         fill
                                     />
                                     <div className="overlay" />

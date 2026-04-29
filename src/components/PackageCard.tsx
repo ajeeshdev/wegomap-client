@@ -38,6 +38,8 @@ interface PackageCardProps {
         href?: string;
         _id?: string;
         eventDate?: string;
+        thumbAlt?: string;
+        imageAlt?: string;
     };
     wishlist: string[];
     toggleWishlist: (id: string, e: React.MouseEvent) => void;
@@ -134,7 +136,7 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
                                 >
                                     <Image
                                         src={img}
-                                        alt={`${pkg.title} - ${idx + 1}`}
+                                        alt={pkg.thumbAlt || pkg.imageAlt || `${pkg.title} - ${idx + 1}`}
                                         fill
                                         className="object-cover transform group-hover:scale-110 transition-transform duration-700"
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -156,7 +158,7 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
                     >
                         <Image
                             src={pkg.image}
-                            alt={pkg.title}
+                            alt={pkg.thumbAlt || pkg.imageAlt || pkg.title}
                             fill
                             className="object-cover transform group-hover:scale-110 transition-transform duration-700"
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

@@ -157,7 +157,7 @@ export default function WishlistPage() {
                                             <div className="cardImageContainer">
                                                 <Image
                                                     src={getImageUrl(pkg.images?.[0] || pkg.image || pkg.thumb || '/bg-placeholder.jpg')}
-                                                    alt={pkg.title}
+                                                    alt={pkg.imageAlt || pkg.thumbAlt || pkg.title}
                                                     fill
                                                     className="cardImage"
                                                     unoptimized

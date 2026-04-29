@@ -14,6 +14,7 @@ export default function CreateTestimonial() {
     review: '',
     rating: 5,
     image: '',
+    imageAlt: '',
     status: 'published'
   });
   const [loading, setLoading] = useState(false);

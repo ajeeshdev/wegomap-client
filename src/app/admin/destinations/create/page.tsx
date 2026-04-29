@@ -16,6 +16,7 @@ export default function CreateDestination() {
     content: '',
     excerpt: '',
     image: '',
+    imageAlt: '',
     status: 'Active'
   });
   const [loading, setLoading] = useState(false);
@@ -120,8 +121,14 @@ export default function CreateDestination() {
            <div className="meta-card">
               <div className="card-header"><h4 className="serif">Featured Visual</h4></div>
               <div className="card-body">
-                 <ImageUpload value={formData.image} onChange={(url) => setFormData({ ...formData, image: url })} label="Location Cover" dimensions="1200 x 800" />
-              </div>
+                 <ImageUpload
+                  value={formData.image}
+                  onChange={(url) => setFormData({ ...formData, image: url })}
+                  altValue={formData.imageAlt}
+                  onAltChange={(alt) => setFormData({ ...formData, imageAlt: alt })}
+                  label="Main Image"
+                  dimensions="1200 x 800"
+                />  </div>
            </div>
         </div>
       </div>

@@ -178,7 +178,8 @@ export default function TourDetailView({ id }: { id: string }) {
                         ...item,
                         day: sanitizeText(typeof item.day === 'string' ? item.day : (item.title ? `Day ${item.day}: ${item.title}` : `Day ${item.day}`)),
                         activity: sanitizeText(item.description || item.activity || ''),
-                        image: item.image ? getImageUrl(item.image) : item.image
+                        image: item.image ? getImageUrl(item.image) : item.image,
+                        imageAlt: item.imageAlt || ''
                     })).filter((item: any) => item.day || item.activity || item.image || (item.amenities && item.amenities.length > 0));
                     const legacyItinerary = (legacyPkg?.itinerary || []).map((item: any) => ({
                         ...item,
@@ -195,6 +196,7 @@ export default function TourDetailView({ id }: { id: string }) {
                         price: p.price ? `₹ ${Number(p.price).toLocaleString()}` : 'Contact for Price',
                         oldPrice: p.oldamt ? `₹ ${Number(p.oldamt).toLocaleString()}` : undefined,
                         image: getImageUrl(p.thumb || (p.images && p.images[0]) || '/bg-placeholder.jpg'),
+                        thumbAlt: p.thumbAlt || '',
                         images: (p.images || []).map((img: string) => getImageUrl(img)),
                         description: sanitizeText(p.description),
                         highlights: currentHighlights.length > 0
@@ -252,6 +254,7 @@ export default function TourDetailView({ id }: { id: string }) {
             <DynamicPageBanner
                 fallbackTitle={pkg.title}
                 fallbackImage={pkg.image}
+                fallbackImageAlt={pkg.thumbAlt}
                 fallbackSubtitle={pkg.location}
                 fallbackPreTitle="Package Details"
                 breadcrumbs={[
@@ -371,7 +374,7 @@ export default function TourDetailView({ id }: { id: string }) {
 
                                                 {item.image && (
                                                     <div className="itineraryImage aspect-[16/10] bg-slate-100 rounded-3xl overflow-hidden mt-0 md:mt-0 border border-slate-50">
-                                                        <Image src={getImageUrl(item.image)} alt={item.day} fill className="object-cover transition-transform hover:scale-105 duration-700" unoptimized />
+                                                        <Image src={getImageUrl(item.image)} alt={item.imageAlt || item.day} fill className="object-cover transition-transform hover:scale-105 duration-700" unoptimized />
                                                     </div>
                                                 )}
                                             </div>
@@ -489,6 +492,7 @@ export default function TourDetailView({ id }: { id: string }) {
                                     price: spkg.price ? `₹${Number(String(spkg.price).replace(/[^\d]/g, '')).toLocaleString()}` : 'N/A',
                                     oldPrice: spkg.oldamt ? `₹${Number(String(spkg.oldamt).replace(/[^\d]/g, '')).toLocaleString()}` : null,
                                     image: getImageUrl(spkg.thumb || (spkg.images && spkg.images[0]) || "/bg-placeholder.jpg"),
+                                    thumbAlt: spkg.thumbAlt || '',
                                     images: spkg.images || [],
                                     subtitle: spkg.location || '',
                                     highlights: [],

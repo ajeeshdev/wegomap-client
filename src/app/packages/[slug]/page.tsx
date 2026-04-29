@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     
     // Check API for Package data
     try {
-        const res = await fetch(`${API_URL}/packages/slug/${slug}`, { next: { revalidate: 3600 } });
+        const res = await fetch(`${API_URL}/packages/slug/${slug}`, { next: { revalidate: 60 } });
         const json = await res.json();
         const p = json.data;
         

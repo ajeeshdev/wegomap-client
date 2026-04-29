@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     let blog: any = null;
     try {
         // Try to fetch from API first
-        const res = await fetch(`${API_URL}/blogs/slug/${slug}`, { next: { revalidate: 3600 } });
+        const res = await fetch(`${API_URL}/blogs/slug/${slug}`, { next: { revalidate: 60 } });
         const data = await res.json();
         if (data.success && data.data) {
             blog = Array.isArray(data.data) ? data.data[0] : data.data;

@@ -17,6 +17,7 @@ export default function CreateCab() {
     capacity: '4',
     type: 'Sedan',
     image: '',
+    imageAlt: '',
     status: 'Available'
   });
   const [loading, setLoading] = useState(false);

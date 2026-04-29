@@ -99,6 +99,7 @@ export default function CreateHotelLandingPage({ params: paramsProp }: { params?
     
     // Banner Section
     banner_image: '',
+    imageAlt: '',
     banner_title: '',
     subtitle: '',
     banner_description: '',

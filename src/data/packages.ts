@@ -3,6 +3,7 @@ export interface ItineraryDay {
     description?: string;
     activity: string;
     image?: string | null;
+    imageAlt?: string;
     amenities?: { icon: string; label: string; color: string }[];
 }
 
@@ -15,6 +16,8 @@ export interface TourPackageDetail {
     price: string;
     oldPrice?: string;
     image: string;
+    thumbAlt?: string;
+    imageAlt?: string;
     images?: string[];
     description: string;
     highlights: string[];

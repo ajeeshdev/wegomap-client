@@ -18,6 +18,7 @@ interface PageBannerProps {
     preTitle?: string;
     breadcrumbs: BreadcrumbItem[];
     backgroundImage?: string;
+    imageAlt?: string;
     variant?: 'standard' | 'large';
     centered?: boolean;
     showEnquire?: boolean;
@@ -29,7 +30,8 @@ export default function PageBanner({
     subtitle, 
     preTitle, 
     breadcrumbs, 
-    backgroundImage, 
+    backgroundImage,
+    imageAlt, 
     variant = 'standard',
     centered = false,
     showEnquire = false,
@@ -54,7 +56,7 @@ export default function PageBanner({
                 <div className="pageBannerImg">
                     <Image
                         src={getImageUrl(backgroundImage)}
-                        alt={title}
+                        alt={imageAlt || title}
                         fill
                         style={{ objectFit: 'cover' }}
                         priority

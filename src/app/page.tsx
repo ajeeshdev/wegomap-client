@@ -226,6 +226,7 @@ export default function Home() {
       price: pkg.price ? `₹${pkg.price.toLocaleString()}` : 'N/A',
       oldPrice: pkg.oldamt ? `₹${Number(pkg.oldamt).toLocaleString()}` : null,
       image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || '/bg-placeholder.jpg'),
+      thumbAlt: pkg.thumbAlt,
       href: `/packages/${pkg.slug || pkg._id}`,
       averageRating: pkg.averageRating,
       reviewCount: pkg.reviewCount,
@@ -268,6 +269,7 @@ export default function Home() {
   const kochiExperiences = destinations.map(d => ({
       title: d.name || d.title || 'Experience',
       image: getImageUrl(d.image || d.thumb || '/bg-placeholder.jpg'),
+      imageAlt: d.imageAlt || d.thumbAlt,
       href: `/packages?q=${encodeURIComponent(d.name || d.title || '')}`,
       averageRating: d.averageRating || 0
   }));
@@ -347,7 +349,7 @@ export default function Home() {
                     >
                       {threeDIcon ? (
                         <div className="threeDIconWrapper">
-                          <Image src={threeDIcon} alt={service.name} width={28} height={28} />
+                          <Image src={threeDIcon} alt={service.imageAlt || service.name} width={28} height={28} />
                         </div>
                       ) : (
                         <Icon size={18} />
@@ -425,7 +427,7 @@ export default function Home() {
               <SwiperSlide key={idx} className="h-auto">
                 <Link href={item.href || "/packages"} className="block h-full">
                   <div className="packageCardKerala group">
-                    <Image src={getImageUrl(item.image)} alt={item.title} fill className="object-cover"  />
+                    <Image src={getImageUrl(item.image)} alt={item.imageAlt || item.thumbAlt || item.title} fill className="object-cover"  />
                     <div className="overlay"></div>
                     <div className="cardContent">
                       <div className="topSection">
@@ -523,7 +525,7 @@ export default function Home() {
               <SwiperSlide key={idx} className="h-auto">
                 <Link href={item.href || "/packages"} className="block h-full">
                   <div className="packageCardKerala group">
-                    <Image src={getImageUrl(item.image)} alt={item.title} fill className="object-cover"  />
+                    <Image src={getImageUrl(item.image)} alt={item.imageAlt || item.thumbAlt || item.title} fill className="object-cover"  />
                     <div className="overlay"></div>
                     <div className="cardContent">
                       <div className="topSection">
@@ -620,7 +622,7 @@ export default function Home() {
               <SwiperSlide key={idx} className="h-auto">
                 <Link href={item.href || "/packages"} className="block h-full">
                   <div className="packageCardKerala group">
-                    <Image src={getImageUrl(item.image)} alt={item.title} fill className="object-cover"  />
+                    <Image src={getImageUrl(item.image)} alt={item.imageAlt || item.thumbAlt || item.title} fill className="object-cover"  />
                     <div className="overlay"></div>
                     <div className="cardContent">
                       <div className="topSection">
@@ -724,7 +726,7 @@ export default function Home() {
                     <div className="imageWrapper">
                       <Image 
                         src={event.images?.[0] || "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800"} 
-                        alt={event.title} 
+                        alt={event.imageAlt || event.title} 
                         fill 
                         className="object-cover" 
                          
@@ -834,7 +836,7 @@ export default function Home() {
                 <Link href={`/events/${item.slug || item._id}`} className="block h-full">
                   <div className="packageCardSmall group">
                     <div className="imageWrapper">
-                      <Image src={item.images?.[0] || "/assets/site/assets/images/event.jpg"} alt={item.title} fill className="object-cover"  />
+                      <Image src={item.images?.[0] || "/assets/site/assets/images/event.jpg"} alt={item.imageAlt || item.thumbAlt || item.title} fill className="object-cover"  />
                       {item.averageRating !== undefined && item.averageRating > 0 && (
                         <div className="ratingBadge">
                             <Star size={12} fill="currentColor" />
@@ -932,7 +934,7 @@ export default function Home() {
                 <Link href={item.href} className="block h-full cursor-pointer">
                     <div className="packageCardLocation group">
                     <div className="imageWrapper">
-                        <Image src={getImageUrl(item.image)} alt={item.title} fill className="object-cover"  />
+                        <Image src={getImageUrl(item.image)} alt={item.imageAlt || item.thumbAlt || item.title} fill className="object-cover"  />
                         {item.averageRating !== undefined && item.averageRating > 0 && (
                           <div className="ratingBadge">
                             <Star size={12} fill="currentColor" />

@@ -58,7 +58,7 @@ export default function SpecialEventsPage() {
                                             <div className="imageWrapper relative aspect-[16/10] overflow-hidden">
                                                 <Image 
                                                     src={event.images?.[0] || "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800"} 
-                                                    alt={event.title} 
+                                                    alt={event.imageAlt || event.title} 
                                                     fill 
                                                     className="object-cover transform group-hover:scale-110 transition-transform duration-700" 
                                                 />

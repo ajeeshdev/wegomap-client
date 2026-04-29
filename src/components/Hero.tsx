@@ -45,7 +45,8 @@ export default function Hero() {
                         buttonHref: s.link || s.btnurl || '/packages',
                         imgDesktop: getImageUrl(s.image),
                         imgMobile: getImageUrl(s.image),
-                        imgPortrait: getImageUrl(s.image)
+                        imgPortrait: getImageUrl(s.image),
+                        imageAlt: s.imageAlt
                     }));
                     setSlides(dynamicSlides);
                 } else {
@@ -94,6 +95,7 @@ export default function Hero() {
                     title: pkg.title,
                     href: `/packages/${pkg.slug || pkg._id}`,
                     image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || ''),
+                    thumbAlt: pkg.thumbAlt,
                     meta: pkg.duration || pkg.location,
                 }))];
             }
@@ -104,6 +106,7 @@ export default function Hero() {
                     title: evt.title,
                     href: `/events/${evt.slug || evt._id}`,
                     image: getImageUrl(evt.image || ''),
+                    imageAlt: evt.imageAlt,
                     meta: 'Corporate Event',
                 }))];
             }
@@ -114,6 +117,7 @@ export default function Hero() {
                     title: evt.title,
                     href: `/special-events/${evt.slug || evt._id}`,
                     image: getImageUrl(evt.image || ''),
+                    imageAlt: evt.imageAlt,
                     meta: 'Special Occasion',
                 }))];
             }
@@ -215,7 +219,7 @@ export default function Hero() {
                                                 <source media="(max-width: 768px)" srcSet={slide.imgMobile || slide.imgDesktop} />
                                                 <Image
                                                     src={slide.imgDesktop || '/bg-placeholder.jpg'}
-                                                    alt={slide.title || 'Slide'}
+                                                    alt={slide.imageAlt || slide.title || 'Slide'}
                                                     fill
                                                     className="object-cover"
                                                     priority={idx === 0}
@@ -301,7 +305,7 @@ export default function Hero() {
                                     >
                                         <div className="suggestionImg">
                                             {s.image ? (
-                                                <Image src={getImageUrl(s.image)} alt={s.title} fill style={{ objectFit: 'cover' }} unoptimized />
+                                                <Image src={getImageUrl(s.image)} alt={s.imageAlt || s.thumbAlt || s.title} fill style={{ objectFit: 'cover' }} unoptimized />
                                             ) : (
                                                 <div className="w-small h-small bg-slate-200 flex items-center justify-center"><MapPin size={14} className="text-slate-400" /></div>
                                             )}

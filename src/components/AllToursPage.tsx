@@ -60,6 +60,8 @@ interface PackageCardData {
     order?: number;
     onoffer?: boolean;
     slabel?: string;
+    thumbAlt?: string;
+    imageAlt?: string;
 }
 
 function buildAllPackages(): PackageCardData[] {
@@ -95,6 +97,8 @@ function buildAllPackages(): PackageCardData[] {
             reviewCount: pkg.reviewCount,
             onoffer: pkg.onoffer,
             slabel: pkg.slabel,
+            thumbAlt: pkg.thumbAlt,
+            imageAlt: pkg.imageAlt,
         });
     });
 
@@ -227,6 +231,7 @@ export default function AllToursPage() {
                             price: pkg.price ? `₹${pkg.price.toLocaleString()}` : 'N/A',
                             oldPrice: pkg.oldamt ? `₹${Number(pkg.oldamt).toLocaleString()}` : null,
                             image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || pkg.image || '/bg-placeholder.jpg'),
+                            thumbAlt: pkg.thumbAlt || '',
                             images: pkg.images || [],
                             subtitle: pkg.subtitle || '',
                             highlights: (pkg.highlights && pkg.highlights.length > 0) 

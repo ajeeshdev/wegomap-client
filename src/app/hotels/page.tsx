@@ -110,7 +110,7 @@ export default function HotelsListingPage() {
                                 <div className="hotel-card-image-wrap">
                                     <Image 
                                         src={hotel.banner_image ? getImageUrl(hotel.banner_image) : '/bg-placeholder.jpg'} 
-                                        alt={hotel.title}
+                                        alt={hotel.imageAlt || hotel.thumbAlt || hotel.title}
                                         fill
                                         
                                     />

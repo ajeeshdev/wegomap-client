@@ -22,7 +22,9 @@ export default function EditHouseboat() {
     price: '',
     category: 'Deluxe',
     image: '',
+    imageAlt: '',
     thumb: '',
+    thumbAlt: '',
     status: 'Available'
   });
   const [loading, setLoading] = useState(true);
@@ -42,7 +44,9 @@ export default function EditHouseboat() {
             price: data.data.price || '',
             category: data.data.category || 'Deluxe',
             image: data.data.image || '',
+            imageAlt: data.data.imageAlt || '',
             thumb: data.data.thumb || '',
+            thumbAlt: data.data.thumbAlt || '',
             status: data.data.status || 'Available'
           });
         }

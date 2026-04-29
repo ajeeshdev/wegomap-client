@@ -36,6 +36,7 @@ export default function CreateLandingPage({ params: paramsProp }: { params?: { i
     banner_old_amount: '',
     banner_description: '',
     banner_image: '',
+    imageAlt: '',
 
     about_title: '',
     about_description: '',

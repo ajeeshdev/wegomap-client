@@ -10,6 +10,7 @@ interface BannerData {
     subtitle?: string;
     preTitle?: string;
     image?: string;
+    imageAlt?: string;
 }
 
 interface DynamicPageBannerProps {
@@ -20,6 +21,7 @@ interface DynamicPageBannerProps {
     fallbackSubtitle?: string;
     fallbackPreTitle?: string;
     fallbackImage?: string;
+    fallbackImageAlt?: string;
     variant?: 'standard' | 'large';
     breadcrumbs: { label: string; href?: string }[];
     centered?: boolean;
@@ -38,6 +40,7 @@ export default function DynamicPageBanner({
     fallbackSubtitle,
     fallbackPreTitle,
     fallbackImage,
+    fallbackImageAlt,
     variant = 'standard',
     breadcrumbs,
     centered = false,
@@ -82,6 +85,7 @@ export default function DynamicPageBanner({
 
                 if (bData.success && bData.data) {
                     merged.image = bData.data.image;
+                    merged.imageAlt = bData.data.banner_image_alt || bData.data.imageAlt;
                 }
 
                 if (pData.success && pData.data) {
@@ -89,6 +93,7 @@ export default function DynamicPageBanner({
                     merged.subtitle = pData.data.banner_subtitle || pData.data.subtitle;
                     merged.preTitle = pData.data.banner_pre_title;
                     if (pData.data.banner_image) merged.image = pData.data.banner_image;
+                    if (pData.data.banner_image_alt) merged.imageAlt = pData.data.banner_image_alt;
                 }
 
                 setBanner(Object.keys(merged).length > 0 ? merged : null);
@@ -105,7 +110,8 @@ export default function DynamicPageBanner({
     const finalTitle = title || banner?.title || fallbackTitle;
     const finalSubtitle = subtitle || banner?.subtitle || fallbackSubtitle;
     const finalPreTitle = preTitle || banner?.preTitle || fallbackPreTitle || (breadcrumbs.length > 0 ? breadcrumbs[breadcrumbs.length - 1].label : 'Explore');
-    const finalImage = fallbackImage || banner?.image;
+    const finalImage = banner?.image || fallbackImage;
+    const finalImageAlt = banner?.imageAlt || fallbackImageAlt;
 
     // If we're loading and have no title yet, we can return a skeleton or a themed loader
     if (!finalTitle && loading) return (
@@ -122,6 +128,7 @@ export default function DynamicPageBanner({
             subtitle={finalSubtitle}
             preTitle={finalPreTitle}
             backgroundImage={finalImage}
+            imageAlt={finalImageAlt}
             breadcrumbs={breadcrumbs}
             variant={variant}
             centered={centered}

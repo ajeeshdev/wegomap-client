@@ -15,6 +15,7 @@ export default function EditTestimonial() {
     review: '',
     rating: 5,
     image: '',
+    imageAlt: '',
     status: 'published'
   });
   const [loading, setLoading] = useState(true);
@@ -32,6 +33,7 @@ export default function EditTestimonial() {
             review: data.data.review || '',
             rating: data.data.rating || 5,
             image: data.data.image || '',
+            imageAlt: data.data.imageAlt || '',
             status: data.data.status || 'published'
           });
         }

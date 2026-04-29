@@ -19,6 +19,7 @@ export default function EditEvent() {
     heroSubtext: '',
     description: '',
     image: '',
+    imageAlt: '',
     slug: '',
     status: 'Active'
   });
@@ -37,6 +38,7 @@ export default function EditEvent() {
             heroSubtext: data.data.heroSubtext || '',
             description: data.data.description || '',
             image: data.data.images?.[0] || '',
+            imageAlt: data.data.imageAlt || '',
             slug: data.data.slug || '',
             status: data.data.status || 'Active'
           });
@@ -170,7 +172,14 @@ export default function EditEvent() {
            <div className="meta-card">
               <div className="card-header"><h4 className="serif">Primary Visual</h4></div>
               <div className="card-body">
-                 <ImageUpload value={formData.image} onChange={(url) => setFormData({ ...formData, image: url })} label="High-Res Landscape Resource" dimensions="1200 x 800" />
+                 <ImageUpload 
+                    value={formData.image} 
+                    onChange={(url) => setFormData({ ...formData, image: url })} 
+                    label="High-Res Landscape Resource" 
+                    dimensions="1200 x 800" 
+                    altValue={formData.imageAlt}
+                    onAltChange={alt => setFormData({ ...formData, imageAlt: alt })}
+                />
               </div>
            </div>
         </div>

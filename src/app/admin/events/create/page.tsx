@@ -18,6 +18,7 @@ export default function CreateEvent() {
     heroSubtext: '',
     description: '',
     image: '',
+    imageAlt: '',
     slug: '',
     status: 'Active'
   });
@@ -150,7 +151,14 @@ export default function CreateEvent() {
            <div className="meta-card">
               <div className="card-header"><h4 className="serif">Primary Visual</h4></div>
               <div className="card-body">
-                 <ImageUpload value={formData.image} onChange={(url) => setFormData({ ...formData, image: url })} label="High-Res Landscape Resource" dimensions="1200 x 800" />
+                 <ImageUpload 
+                    value={formData.image} 
+                    onChange={(url) => setFormData({ ...formData, image: url })} 
+                    label="High-Res Landscape Resource" 
+                    dimensions="1200 x 800" 
+                    altValue={formData.imageAlt}
+                    onAltChange={alt => setFormData({ ...formData, imageAlt: alt })}
+                />
               </div>
            </div>
         </div>

@@ -139,6 +139,7 @@ export default async function RootSlugPage({ params }: PageProps) {
                     _id: pkg._id,
                     slug: pkg.slug,
                     image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || pkg.image || '/bg-placeholder.jpg'),
+                    thumbAlt: pkg.thumbAlt,
                     duration: pkg.duration,
                     title: pkg.title,
                     location: pkg.location,

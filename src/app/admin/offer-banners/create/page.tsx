@@ -11,6 +11,7 @@ export default function CreateOfferBanner() {
   const [formData, setFormData] = useState({
     title: '',
     image: '',
+    imageAlt: '',
     imageAlt: 'wegomap',
     link: '',
     active: true

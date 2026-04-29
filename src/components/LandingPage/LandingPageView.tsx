@@ -433,6 +433,7 @@ export default function LandingPageView({
                   price: pkg.price ? `₹${Number(String(pkg.price).replace(/[^\d]/g, '')).toLocaleString()}` : 'N/A',
                   oldPrice: pkg.oldamt ? `₹${Number(String(pkg.oldamt).replace(/[^\d]/g, '')).toLocaleString()}` : null,
                   image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || "/bg-placeholder.jpg"),
+                  thumbAlt: pkg.thumbAlt,
                   images: pkg.images || [],
                   subtitle: pkg.subtitle || pkg.location || '',
                   highlights: (pkg.highlights && pkg.highlights.length > 0)

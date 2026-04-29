@@ -109,6 +109,7 @@ export default function EventDetailPage() {
                 fallbackTitle={event.title}
                 fallbackSubtitle={event.location || "Kerala, India"}
                 fallbackImage={event.images?.[0] || "/uploads/categories/ubqf5mc4ve1g6yqwmnsyiyek9fkld9akyp6g2lar220406065334.jpg"}
+                fallbackImageAlt={event.imageAlt || event.title}
                 breadcrumbs={[
                     { label: 'Events', href: '/events' },
                     { label: event.title }

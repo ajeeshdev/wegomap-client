@@ -163,7 +163,7 @@ export default function FeaturedPackages() {
                                         {pkg.images && pkg.images.length > 0 ? (
                                             <Image
                                                 src={getImageUrl(pkg.images?.[0] || (pkg as any).image || (pkg as any).thumb)}
-                                                alt={pkg.title}
+                                                alt={pkg.imageAlt || pkg.thumbAlt || pkg.title}
                                                 fill
                                                 className="object-cover group-hover:scale-110 transition-transform duration-700"
                                                 unoptimized
@@ -263,7 +263,7 @@ export default function FeaturedPackages() {
                                     {pkg.images && pkg.images.length > 0 ? (
                                         <Image
                                             src={getImageUrl(pkg.images?.[0] || (pkg as any).image || (pkg as any).thumb)}
-                                            alt={pkg.title}
+                                            alt={pkg.imageAlt || pkg.thumbAlt || pkg.title}
                                             fill
                                             className="object-cover group-hover:scale-110 transition-transform duration-700"
                                             unoptimized

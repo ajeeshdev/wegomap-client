@@ -21,7 +21,9 @@ export default function CreateHouseboat() {
     price: '',
     category: 'Deluxe',
     image: '',
+    imageAlt: '',
     thumb: '',
+    thumbAlt: '',
     status: 'Available'
   });
   const [loading, setLoading] = useState(false);
