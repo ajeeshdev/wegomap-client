@@ -64,20 +64,6 @@ const nextConfig = {
     silenceDeprecations: ['import', 'legacy-js-api', 'if-function', 'global-builtin', 'color-functions']
   },
   typescript: { ignoreBuildErrors: true },
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'X-Robots-Tag',
-            value: 'noindex, nofollow',
-          },
-        ],
-      },
-    ]
-  },
-
   async redirects() {
     return [
       {

@@ -77,7 +77,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Best Kerala Tour Packages | WEGOMAP",
     description: "Experience the magic of God’s Own Country with WEGOMAP, your reliable Kerala travel partner.",
-    robots: "noindex, nofollow",
+    robots: "index, follow",
   };
 }
 
