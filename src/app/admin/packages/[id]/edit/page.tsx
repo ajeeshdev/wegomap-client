@@ -175,6 +175,7 @@ export default function EditPackage() {
      { id: 'content', label: 'Narrative & Terms', icon: <List size={16} /> },
      { id: 'itinerary', label: 'Tour Strategy', icon: <Map size={16} /> },
      { id: 'visuals', label: 'Visual Media', icon: <ImageIcon size={16} /> },
+     { id: 'seo', label: 'SEO Config', icon: <Search size={16} /> },
   ];
 
   if (loading) return (
@@ -374,6 +375,64 @@ export default function EditPackage() {
                    </div>
                 </div>
              )}
+
+             {activeTab === 'seo' && (
+                <div className="space-y-6">
+                   <div className="editor-card">
+                      <div className="card-header"><h4 className="serif">Search Engine Optimization</h4></div>
+                      <div className="card-body space-y-4">
+                         <div className="admin-form-group">
+                            <label>SEO Title <span className="text-slate-400 normal-case font-normal">(60 chars max)</span></label>
+                            <input 
+                               type="text" 
+                               value={formData.seo_title} 
+                               onChange={e => setFormData({ ...formData, seo_title: e.target.value })} 
+                               className="admin-form-input" 
+                               placeholder={formData.title} 
+                            />
+                         </div>
+                         <div className="admin-form-group">
+                            <label>SEO Description <span className="text-slate-400 normal-case font-normal">(160 chars max)</span></label>
+                            <textarea 
+                               value={formData.seo_meta} 
+                               onChange={e => setFormData({ ...formData, seo_meta: e.target.value })} 
+                               rows={3} 
+                               className="admin-form-input" 
+                            />
+                         </div>
+                         <div className="admin-form-group">
+                            <label>Focus Keywords <span className="text-slate-400 normal-case font-normal">(comma separated)</span></label>
+                            <input 
+                               type="text" 
+                               value={formData.seo_keys} 
+                               onChange={e => setFormData({ ...formData, seo_keys: e.target.value })} 
+                               className="admin-form-input" 
+                            />
+                         </div>
+                         <div className="admin-form-group">
+                            <label>Canonical URL <span className="text-slate-400 normal-case font-normal">(optional)</span></label>
+                            <input 
+                               type="url" 
+                               value={formData.canonical} 
+                               onChange={e => setFormData({ ...formData, canonical: e.target.value })} 
+                               className="admin-form-input font-mono text-[11px]" 
+                               placeholder="https://www.wegomap.com/packages/..." 
+                            />
+                         </div>
+                         <div className="admin-form-group">
+                            <label>Custom Slug <span className="text-slate-400 normal-case font-normal">(Leave empty to auto-generate)</span></label>
+                            <input 
+                               type="text" 
+                               value={formData.slug} 
+                               onChange={e => setFormData({ ...formData, slug: e.target.value })} 
+                               className="admin-form-input font-mono text-[11px]" 
+                               placeholder="e.g. 3-nights-munnar-package" 
+                            />
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             )}
            </div>
         </div>
 
@@ -439,9 +498,9 @@ export default function EditPackage() {
            <div className="meta-card dark-card">
               <div className="card-header"><h4 className="serif">Crawler Intelligence</h4></div>
               <div className="crawler-preview">
-                 <div className="preview-title">{formData.title || 'Draft Blueprint'}</div>
-                 <div className="preview-url">wegomap.com/packages/{formData.pcode?.toLowerCase()}</div>
-                 <div className="preview-desc">{formData.description?.replace(/<[^>]*>/g, '').substring(0, 160)}...</div>
+                 <div className="preview-title">{formData.seo_title || formData.title || 'Draft Blueprint'}</div>
+                 <div className="preview-url">wegomap.com/packages/{formData.slug || formData.pcode?.toLowerCase()}</div>
+                 <div className="preview-desc">{formData.seo_meta || formData.description?.replace(/<[^>]*>/g, '').substring(0, 160)}...</div>
               </div>
            </div>
         </div>
