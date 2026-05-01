@@ -251,7 +251,6 @@ export default function TourDetailView({ id }: { id: string }) {
 
     return (
         <div className="packageDetailPage">
-            {pkg.other_meta && <div dangerouslySetInnerHTML={{ __html: pkg.other_meta }} style={{ display: 'none' }} />}
             <DynamicPageBanner
                 fallbackTitle={pkg.title}
                 fallbackImage={pkg.image}

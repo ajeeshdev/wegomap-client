@@ -6,6 +6,7 @@ import { packagesData } from '@/data/packages';
 import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 import TourDetailView from '@/components/TourDetail/TourDetailView';
 import { redirect } from 'next/navigation';
+import parse from 'html-react-parser';
 
 interface PageProps {
     params: Promise<{ slug: string }>;
@@ -77,6 +78,20 @@ export default async function DynamicPackagePage({ params }: PageProps) {
         redirect(`/${slug}`);
     }
 
+    let packageData = null;
+    try {
+        const pkgRes = await fetch(`${API_URL}/packages/slug/${slug}`, { next: { revalidate: 60 } });
+        const pkgJson = await pkgRes.json();
+        if (pkgJson.success && pkgJson.data) {
+            packageData = pkgJson.data;
+        }
+    } catch (e) {}
+
     // 2. Otherwise it's a tour detail
-    return <TourDetailView id={slug} />;
+    return (
+        <>
+            {packageData?.other_meta && parse(packageData.other_meta)}
+            <TourDetailView id={slug} />
+        </>
+    );
 }
