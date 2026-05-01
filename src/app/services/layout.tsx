@@ -1,3 +1,4 @@
+import SEOMetaInjector from '@/components/SEOMetaInjector';
 import type { Metadata } from 'next';
 
 import { generatePageMetadata } from '@/utils/seo';

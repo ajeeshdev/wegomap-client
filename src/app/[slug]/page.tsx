@@ -6,6 +6,7 @@ import { packagesData } from '@/data/packages';
 import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 import LandingPageWrapper from './LandingPageWrapper';
 import { redirect } from 'next/navigation';
+import parse from 'html-react-parser';
 
 interface PageProps {
     params: Promise<{ slug: string }>;
@@ -166,15 +167,18 @@ export default async function RootSlugPage({ params }: PageProps) {
         const combinedPackages = [...dynamicPackages].sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
 
         return (
-            <TourCategoryPage
-                title={dynamicCategory?.title || staticData.title || "Tours"}
-                subtitle={dynamicCategory?.subtitle || staticData.subtitle || ""}
-                bannerImage={dynamicCategory?.bannerImage || staticData.bannerImage || "/uploads/categories/default.jpg"}
-                packages={combinedPackages}
-                readMoreHeading={dynamicCategory?.contentTitle || staticData.contentTitle || ""}
-                readMoreContent={dynamicCategory?.contentDesc || staticData.contentDesc}
-                description={dynamicCategory?.description || staticData.description}
-            />
+            <>
+                {dynamicCategory?.other_meta && parse(dynamicCategory.other_meta)}
+                <TourCategoryPage
+                    title={dynamicCategory?.title || staticData.title || "Tours"}
+                    subtitle={dynamicCategory?.subtitle || staticData.subtitle || ""}
+                    bannerImage={dynamicCategory?.bannerImage || staticData.bannerImage || "/uploads/categories/default.jpg"}
+                    packages={combinedPackages}
+                    readMoreHeading={dynamicCategory?.contentTitle || staticData.contentTitle || ""}
+                    readMoreContent={dynamicCategory?.contentDesc || staticData.contentDesc}
+                    description={dynamicCategory?.description || staticData.description}
+                />
+            </>
         );
     }
 
@@ -185,7 +189,12 @@ export default async function RootSlugPage({ params }: PageProps) {
         if (pageJson.success && pageJson.data) {
             const page = pageJson.data.find((p: any) => p.slug === slug && p.isCampaign);
             if (page) {
-                return <LandingPageWrapper data={page} />;
+                return (
+                    <>
+                        {page.seo_meta && parse(page.seo_meta)}
+                        <LandingPageWrapper data={page} />
+                    </>
+                );
             }
         }
     } catch (e) {}

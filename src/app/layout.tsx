@@ -45,6 +45,7 @@ export async function generateMetadata(): Promise<Metadata> {
     }
 
     // Try to get specific 'home' page SEO overrides
+    let canonicalUrl: string | undefined = undefined;
     if (pagesJson.success && pagesJson.data) {
       const homePage = pagesJson.data.find((p: any) => p.slug === 'home');
       if (homePage) {
@@ -54,6 +55,9 @@ export async function generateMetadata(): Promise<Metadata> {
         }
         if (homePage.seo_keys) {
           pageKeywords = homePage.seo_keys;
+        }
+        if (homePage.seo_canonical) {
+          canonicalUrl = homePage.seo_canonical;
         }
       }
     }
@@ -68,7 +72,10 @@ export async function generateMetadata(): Promise<Metadata> {
         icon: favIconUrl,
         shortcut: favIconUrl,
         apple: favIconUrl,
-      }
+      },
+      alternates: canonicalUrl ? {
+        canonical: canonicalUrl,
+      } : undefined
     };
   } catch (err) {
     console.error("Metadata fetch error:", err);
