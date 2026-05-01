@@ -63,6 +63,7 @@ interface HotelLandingPageContent {
    about_subtitle?: string;
    about_description?: string;
    about_image?: string;
+   about_image_alt?: string;
    about_badge_text?: string;
    about_features?: string[];
 
@@ -82,6 +83,7 @@ interface HotelLandingPageContent {
    why_choose_subtitle?: string;
    why_choose_title?: string;
    why_choose_image?: string;
+   why_choose_image_alt?: string;
    why_choose_points?: {
       icon: string;
       title: string;
