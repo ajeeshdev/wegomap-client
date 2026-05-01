@@ -39,6 +39,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
                     title: p.seo_title || p.title,
                     description: p.seo_meta || p.description,
                     images: [p.image].filter(Boolean),
+                },
+                alternates: {
+                    canonical: p.canonical || undefined
                 }
             };
         }

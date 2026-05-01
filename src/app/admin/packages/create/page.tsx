@@ -43,7 +43,7 @@ export default function CreatePackage() {
    const [formData, setFormData] = useState<any>({
       title: '', pcode: '', subtitle: '', slabel: '', location: '', description: '',
       inclusions: [], exclusions: [], terms: '', highlights: [],
-      itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '',
+      itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '', other_meta: '',
       averageRating: 4.9, reviewCount: 150, noCostEmi: '',
       amenities: [], categories: [], images: [], thumb: '',
     thumbAlt: 'wegomap',
@@ -365,6 +365,16 @@ export default function CreatePackage() {
                                     onChange={e => setFormData({ ...formData, canonical: e.target.value })} 
                                     className="admin-form-input font-mono text-[11px]" 
                                     placeholder="https://www.wegomap.com/packages/..." 
+                                 />
+                              </div>
+                              <div className="admin-form-group">
+                                 <label>Other Meta Tags & Scripts <span className="text-slate-400 normal-case font-normal">(Raw HTML/JSON-LD for &lt;head&gt;)</span></label>
+                                 <textarea 
+                                    value={formData.other_meta || ''} 
+                                    onChange={e => setFormData({ ...formData, other_meta: e.target.value })} 
+                                    className="admin-form-input font-mono text-[11px] bg-slate-900 text-emerald-400 border-slate-700" 
+                                    rows={4}
+                                    placeholder={`<script type="application/ld+json">\n  { ... }\n</script>`} 
                                  />
                               </div>
                               <div className="admin-form-group">
