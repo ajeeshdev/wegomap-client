@@ -7,6 +7,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 import TourDetailView from '@/components/TourDetail/TourDetailView';
 import { redirect } from 'next/navigation';
 import parse from 'html-react-parser';
+import { parseSeoMeta } from '@/utils/parseSeoMeta';
 
 interface PageProps {
     params: Promise<{ slug: string }>;
@@ -32,18 +33,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         const p = json.data;
         
         if (json.success && p) {
+            // Parse the other_meta field (arbitrary HTML meta tags)
+            const parsedOtherMeta = p.other_meta ? parseSeoMeta(p.other_meta) : {};
+
+            // Determine canonical: explicit field first, then from other_meta
+            const canonicalUrl = p.canonical || parsedOtherMeta.alternates?.canonical || undefined;
+
             return {
                 title: p.seo_title || `${p.title} | WEGOMAP`,
-                description: p.seo_meta || p.description?.substring(0, 160),
+                description: p.seo_description || p.description?.substring(0, 160),
                 keywords: p.seo_keys || 'kerala, travel, package, holiday',
                 openGraph: {
                     title: p.seo_title || p.title,
-                    description: p.seo_meta || p.description,
+                    description: p.seo_description || p.description,
                     images: [p.image].filter(Boolean),
+                    ...((parsedOtherMeta.openGraph as any) || {}),
                 },
-                alternates: {
-                    canonical: p.canonical || undefined
-                }
+                alternates: canonicalUrl ? { canonical: canonicalUrl } : undefined,
+                other: parsedOtherMeta.other,
             };
         }
 

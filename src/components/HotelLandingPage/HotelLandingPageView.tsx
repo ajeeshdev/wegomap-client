@@ -205,18 +205,10 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
          } finally { setWeatherLoading(false); }
       };
       fetchWeather();
-
-      const meta = document.createElement('meta');
-      meta.name = "robots";
-      meta.content = "noindex, nofollow";
-      document.head.appendChild(meta);
-      document.body.style.paddingBottom = "0px";
-
       // Swiper doesn't typically need a manual resize event on mount for hydration
       // but if issues arise, a small timeout might be considered.
 
       return () => {
-         document.head.removeChild(meta);
          document.body.style.paddingBottom = "";
       };
    }, []);

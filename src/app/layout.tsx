@@ -15,6 +15,7 @@ const dancingScript = Dancing_Script({
 });
 
 import { API_URL, getImageUrl } from "@/config";
+import { parseSeoMeta } from "@/utils/parseSeoMeta";
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
@@ -46,6 +47,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
     // Try to get specific 'home' page SEO overrides
     let canonicalUrl: string | undefined = undefined;
+    let parsedHomeMeta: ReturnType<typeof parseSeoMeta> = {};
     if (pagesJson.success && pagesJson.data) {
       const homePage = pagesJson.data.find((p: any) => p.slug === 'home');
       if (homePage) {
@@ -58,6 +60,13 @@ export async function generateMetadata(): Promise<Metadata> {
         }
         if (homePage.seo_canonical) {
           canonicalUrl = homePage.seo_canonical;
+        }
+        if (homePage.seo_meta) {
+          parsedHomeMeta = parseSeoMeta(homePage.seo_meta);
+          // seo_canonical takes priority over any canonical in seo_meta
+          if (!canonicalUrl && parsedHomeMeta.alternates?.canonical) {
+            canonicalUrl = parsedHomeMeta.alternates.canonical;
+          }
         }
       }
     }
@@ -75,7 +84,9 @@ export async function generateMetadata(): Promise<Metadata> {
       },
       alternates: canonicalUrl ? {
         canonical: canonicalUrl,
-      } : undefined
+      } : undefined,
+      other: parsedHomeMeta.other,
+      openGraph: parsedHomeMeta.openGraph as any,
     };
   } catch (err) {
     console.error("Metadata fetch error:", err);

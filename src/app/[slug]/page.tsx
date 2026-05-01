@@ -7,6 +7,7 @@ import TourCategoryPage, { TourPackage } from '@/components/TourCategoryPage';
 import LandingPageWrapper from './LandingPageWrapper';
 import { redirect } from 'next/navigation';
 import parse from 'html-react-parser';
+import { parseSeoMeta } from '@/utils/parseSeoMeta';
 
 interface PageProps {
     params: Promise<{ slug: string }>;
@@ -56,11 +57,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         if (pageJson.success && pageJson.data) {
             const page = pageJson.data.find((p: any) => p.slug === slug && p.isCampaign);
             if (page) {
+                const parsedMeta = page.seo_meta ? parseSeoMeta(page.seo_meta) : {};
+                const canonicalUrl = page.seo_canonical || parsedMeta.alternates?.canonical || undefined;
                 return {
                     title: page.seo_title || page.title,
                     description: page.seo_description || page.description?.substring(0, 160),
                     keywords: page.seo_keys || globalKeywords,
-                    alternates: page.seo_canonical ? { canonical: page.seo_canonical } : undefined,
+                    alternates: canonicalUrl ? { canonical: canonicalUrl } : undefined,
+                    other: parsedMeta.other,
+                    openGraph: parsedMeta.openGraph as any,
                 };
             }
         }
@@ -72,6 +77,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         title: 'WEGOMAP | Trusted Travel Partner',
     };
 }
+
 
 export default async function RootSlugPage({ params }: PageProps) {
     const { slug } = await params;

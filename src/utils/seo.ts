@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { API_URL } from '@/config';
+import { parseSeoMeta } from './parseSeoMeta';
 
 export async function generatePageMetadata(slug: string, fallbackTitle: string): Promise<Metadata> {
     try {
@@ -24,17 +25,18 @@ export async function generatePageMetadata(slug: string, fallbackTitle: string):
         if (json.success && json.data) {
             const page = json.data.find((p: any) => p.slug === slug);
             if (page) {
-                if (page.seo_title || page.seo_description || page.seo_keys) {
-                    return {
-                        title: page.seo_title || page.title || fallbackTitle,
-                        description: page.seo_description || undefined,
-                        keywords: page.seo_keys || globalKeywords,
-                        alternates: page.seo_canonical ? { canonical: page.seo_canonical } : undefined,
-                    };
-                }
+                // Parse any arbitrary seo_meta HTML tags (custom meta, link, scripts)
+                const parsedMeta = page.seo_meta ? parseSeoMeta(page.seo_meta) : {};
+
                 return {
-                    title: `${page.title || fallbackTitle} | WEGOMAP`,
-                    keywords: globalKeywords,
+                    title: page.seo_title || page.title || fallbackTitle,
+                    description: page.seo_description || undefined,
+                    keywords: page.seo_keys || globalKeywords,
+                    alternates: page.seo_canonical
+                        ? { canonical: page.seo_canonical }
+                        : parsedMeta.alternates,
+                    other: parsedMeta.other,
+                    openGraph: parsedMeta.openGraph as any,
                 };
             }
         }
