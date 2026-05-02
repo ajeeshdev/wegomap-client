@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function middleware(request: NextRequest) {
+export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Skip admin, API, CRM, and static file paths
@@ -17,8 +17,6 @@ export async function middleware(request: NextRequest) {
   }
 
   // ── Enforce lowercase URLs ──────────────────────────────────────────────────
-  // If the path has any uppercase letter, 301 redirect to lowercase version
-  // e.g. /Hotels → /hotels, /Special-Events/Fest → /special-events/fest
   const lowercasePath = pathname.toLowerCase();
   if (pathname !== lowercasePath) {
     const url = request.nextUrl.clone();
@@ -31,13 +29,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths EXCEPT:
-     * - _next/static
-     * - _next/image
-     * - favicon.ico
-     * - static files with extensions
-     */
     '/((?!_next/static|_next/image|favicon.ico|crm|old-web|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js|woff2?|ttf|otf|mp4|webm)).*)',
   ],
 };
