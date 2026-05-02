@@ -103,14 +103,14 @@ export default function MultiImageUpload({ value, onChange, label = "Gallery Ass
           </div>
         ))}
 
-        <div className="relative group aspect-square">
+        <label className="relative group aspect-square block cursor-pointer">
           <input
             type="file"
             multiple
             accept="image/*"
             onChange={handleFileChange}
             disabled={uploading}
-            className="absolute inset-0 w-small h-small opacity-0 cursor-pointer z-10"
+            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-50"
           />
           <div className={`
             h-full border-2 border-dashed rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300
@@ -126,7 +126,7 @@ export default function MultiImageUpload({ value, onChange, label = "Gallery Ass
               {uploading ? 'UPLOADING...' : 'ADD IMAGE'}
             </span>
           </div>
-        </div>
+        </label>
       </div>
 
       {error && (

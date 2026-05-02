@@ -138,13 +138,13 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
           )}
         </div>
       ) : (
-        <div className="relative group">
+        <label className="relative group block cursor-pointer">
           <input
             type="file"
             accept="image/*"
             onChange={handleFileChange}
             disabled={uploading}
-            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-50"
           />
           <div className={`
             border-2 border-dashed rounded-2xl p-10 flex flex-col items-center justify-center gap-4 transition-all duration-300
@@ -152,7 +152,7 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
           `}>
             <div className={`
               w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500
-              ${uploading ? 'bg-blue-600 text-white animate-bounce' : 'bg-white text-blue-400 shadow-sm group-hover:scale-110 group-hover:bg-blue-600'}
+              ${uploading ? 'bg-blue-600 text-white animate-bounce' : 'bg-white text-blue-400 shadow-sm group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white'}
             `}>
               {uploading ? <Loader2 size={24} className="animate-spin" /> : <Upload size={22} strokeWidth={2.5} />}
             </div>
@@ -165,7 +165,7 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
               </p>
             </div>
           </div>
-        </div>
+        </label>
       )}
 
       {error && (
