@@ -42,6 +42,7 @@ export default function CreatePackage() {
 
    const [formData, setFormData] = useState<any>({
       title: '', pcode: '', subtitle: '', slabel: '', location: '', description: '',
+      duration: '', oldamt: '', price: '',
       inclusions: [], exclusions: [], terms: '', highlights: [],
       itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '', other_meta: '',
       averageRating: 4.9, reviewCount: 150, noCostEmi: '',
