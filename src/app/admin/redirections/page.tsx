@@ -6,7 +6,8 @@ import { Plus, Trash2, Edit2, Save, X, ArrowRight, RotateCcw, ChevronDown, Check
 import { toast } from 'react-hot-toast';
 
 interface Redirect {
-  id: string;
+  id?: string;         // legacy (file-based)
+  _id?: string;        // MongoDB ObjectId
   from: string;
   to: string;
   type: '301' | '302';
@@ -55,7 +56,7 @@ export default function RedirectionsPage() {
     try {
       const res = await fetch('/api/redirections', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
         body: JSON.stringify(newForm),
       });
       const data = await res.json();
@@ -77,7 +78,7 @@ export default function RedirectionsPage() {
     try {
       const res = await fetch('/api/redirections', {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
         body: JSON.stringify({ id, ...editForm }),
       });
       const data = await res.json();
@@ -93,13 +94,14 @@ export default function RedirectionsPage() {
     }
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (redirect: Redirect) => {
+    const docId = redirect._id || redirect.id;
     if (!confirm('Delete this redirect?')) return;
     try {
       const res = await fetch('/api/redirections', {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id }),
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
+        body: JSON.stringify({ id: docId }),
       });
       const data = await res.json();
       if (data.success) {
@@ -112,11 +114,12 @@ export default function RedirectionsPage() {
   };
 
   const handleToggleActive = async (redirect: Redirect) => {
+    const docId = redirect._id || redirect.id;
     try {
       const res = await fetch('/api/redirections', {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...redirect, active: !redirect.active }),
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
+        body: JSON.stringify({ id: docId, from: redirect.from, to: redirect.to, type: redirect.type, active: !redirect.active }),
       });
       const data = await res.json();
       if (data.success) {
@@ -282,7 +285,7 @@ export default function RedirectionsPage() {
                       </select>
                     </div>
                     <div className="flex items-center gap-2 mt-3">
-                      <button onClick={() => handleUpdate(redirect.id)} disabled={saving} className="admin-btn admin-btn-primary h-8 px-4 text-xs flex items-center gap-1.5">
+                      <button onClick={() => handleUpdate(redirect._id || redirect.id || '')} disabled={saving} className="admin-btn admin-btn-primary h-8 px-4 text-xs flex items-center gap-1.5">
                         <Save size={12} /> {saving ? '...' : 'Update'}
                       </button>
                       <button onClick={() => setEditingId(null)} className="admin-btn h-8 px-3 bg-white border border-slate-200 text-slate-500 text-xs flex items-center gap-1.5">
@@ -315,13 +318,13 @@ export default function RedirectionsPage() {
                     </div>
                     <div className="flex items-center gap-1.5">
                       <button
-                        onClick={() => { setEditingId(redirect.id); setEditForm(redirect); setShowAddForm(false); }}
+                        onClick={() => { setEditingId(redirect._id || redirect.id || ''); setEditForm(redirect); setShowAddForm(false); }}
                         className="w-7 h-7 rounded-lg flex items-center justify-center text-slate-300 hover:text-blue-600 hover:bg-blue-50 transition-all border border-slate-100 hover:border-blue-200"
                       >
                         <Edit2 size={12} />
                       </button>
                       <button
-                        onClick={() => handleDelete(redirect.id)}
+                        onClick={() => handleDelete(redirect)}
                         className="w-7 h-7 rounded-lg flex items-center justify-center text-slate-300 hover:text-rose-600 hover:bg-rose-50 transition-all border border-slate-100 hover:border-rose-200"
                       >
                         <Trash2 size={12} />

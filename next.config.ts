@@ -1,27 +1,4 @@
 import type { NextConfig } from "next";
-import { readFileSync } from "fs";
-import { join } from "path";
-
-function loadRedirections() {
-  try {
-    const data = readFileSync(join(process.cwd(), 'src', 'data', 'redirections.json'), 'utf-8');
-    const rules = JSON.parse(data) as Array<{ from: string; to: string; type: string; active: boolean }>;
-    return rules
-      .filter(r => r.active && r.from && r.to)
-      .map(r => {
-        // Strip domain prefix if entered as full URL (e.g. https://wegomap.com/about → /about)
-        const source = r.from.replace(/^https?:\/\/[^/]+/, '') || '/';
-        const destination = r.to.replace(/^https?:\/\/[^/]+/, '') || '/';
-        return {
-          source,
-          destination,
-          permanent: r.type === '301',
-        };
-      });
-  } catch {
-    return [];
-  }
-}
 
 // eslint and typescript flags reduce server memory usage during production builds
 const nextConfig = {
@@ -88,16 +65,12 @@ const nextConfig = {
   },
   typescript: { ignoreBuildErrors: true },
   async redirects() {
-    const cmsRedirects = loadRedirections();
     return [
-      // Static hardcoded redirects
       {
         source: '/tours/:path*',
         destination: '/packages/:path*',
         permanent: true,
       },
-      // Dynamic CMS-driven redirects (from Admin > URL Redirections)
-      ...cmsRedirects,
     ];
   },
 };
