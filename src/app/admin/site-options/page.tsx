@@ -244,7 +244,7 @@ export default function SiteOptionsPage() {
                                 <textarea 
                                     value={general.analytics_script}
                                     onChange={e => setGeneral({...general, analytics_script: e.target.value})}
-                                    rows={3}
+                                    rows={10}
                                     className="admin-form-input font-mono text-[11px] bg-slate-900 text-slate-300 border-slate-700"
                                 />
                             </div>

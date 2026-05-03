@@ -47,7 +47,7 @@ export default function CreatePackage() {
       itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '', other_meta: '',
       averageRating: 4.9, reviewCount: 150, noCostEmi: '',
       amenities: [], categories: [], images: [], thumb: '',
-    thumbAlt: 'wegomap',
+    thumbAlt: 'wegomap', showGallery: false,
       status: 'Published', order: 0
    });
 
@@ -442,9 +442,20 @@ export default function CreatePackage() {
                      </div>
                      <div className="meta-item">
                         <div className="toggle-row">
-                           <label>Visibility Protocol</label>
-                           <input type="checkbox" checked={formData.status === 'Published'} onChange={e => setFormData({ ...formData, status: e.target.checked ? 'Published' : 'Draft' })} className="sr-only peer" />
-                           <div className="toggle-switch"></div>
+                           <label className="flex items-center justify-between w-full cursor-pointer group">
+                              <span className="text-[11px] font-black uppercase tracking-widest text-slate-400 group-hover:text-slate-600 transition-colors">Visibility</span>
+                              <input type="checkbox" checked={formData.status === 'Published'} onChange={e => setFormData({ ...formData, status: e.target.checked ? 'Published' : 'Draft' })} className="sr-only peer" />
+                              <div className="toggle-switch peer-checked:bg-emerald-500"></div>
+                           </label>
+                        </div>
+                     </div>
+                     <div className="meta-item">
+                        <div className="toggle-row">
+                           <label className="flex items-center justify-between w-full cursor-pointer group">
+                              <span className="text-[11px] font-black uppercase tracking-widest text-slate-400 group-hover:text-slate-600 transition-colors">Show Gallery</span>
+                              <input type="checkbox" checked={formData.showGallery} onChange={e => setFormData({ ...formData, showGallery: e.target.checked })} className="sr-only peer" />
+                              <div className="toggle-switch peer-checked:bg-emerald-500"></div>
+                           </label>
                         </div>
                      </div>
                      <div className="meta-item">

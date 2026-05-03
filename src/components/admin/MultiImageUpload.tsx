@@ -83,10 +83,9 @@ export default function MultiImageUpload({ value, onChange, label = "Gallery Ass
         )}
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+      <div className="flex flex-wrap gap-5">
         {(value || []).map((url, index) => (
-
-          <div key={index} className="relative group rounded-2xl overflow-hidden border border-slate-200 shadow-sm aspect-square bg-slate-50 transition-all hover:shadow-md">
+          <div key={index} className="relative group w-[calc(50%-10px)] md:w-48 lg:w-56 aspect-[3/2] rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-slate-50 transition-all hover:shadow-md">
             <img src={url} alt={`Gallery ${index}`} className="w-full h-full object-cover transition-all duration-500" />
             <div className="absolute top-2 right-2 flex items-center justify-center">
               <button
@@ -103,7 +102,7 @@ export default function MultiImageUpload({ value, onChange, label = "Gallery Ass
           </div>
         ))}
 
-        <label className="relative group aspect-square block cursor-pointer">
+        <label className="relative group w-[calc(50%-10px)] md:w-48 lg:w-56 aspect-[3/2] block cursor-pointer">
           <input
             type="file"
             multiple
@@ -122,7 +121,7 @@ export default function MultiImageUpload({ value, onChange, label = "Gallery Ass
             `}>
               {uploading ? <Loader2 size={20} className="animate-spin" /> : <Plus size={20} />}
             </div>
-            <span className="text-[7px] font-black uppercase tracking-widest text-slate-400 text-center px-4">
+            <span className="text-[8px] font-black uppercase tracking-widest text-slate-400 text-center px-2">
               {uploading ? 'UPLOADING...' : 'ADD IMAGE'}
             </span>
           </div>

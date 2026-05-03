@@ -212,6 +212,7 @@ export default function TourDetailView({ id }: { id: string }) {
                             { icon: 'Utensils', label: 'Fine Dining', color: 'rose' },
                             { icon: 'Car', label: 'Private Hub', color: 'emerald' }
                         ],
+                        showGallery: p.showGallery || false,
                     });
                     setLoading(false);
                     return;
@@ -339,6 +340,8 @@ export default function TourDetailView({ id }: { id: string }) {
                                 </div>
                             </div>
 
+                        
+
                             {/* Itinerary */}
                             <div className="itinerarySection">
                                 <h3 className="sectionTitle">Itinerary</h3>
@@ -415,6 +418,39 @@ export default function TourDetailView({ id }: { id: string }) {
                                 </div>
                             </div>
 
+                                            {/* Gallery Section */}
+                            {pkg.showGallery && pkg.images && pkg.images.length > 0 && (
+                                <div className="mb-16">
+                                    <h3 className="sectionTitle">Gallery</h3>
+                                    <div className="gallerySlider relative">
+                                        <Swiper
+                                            modules={[Navigation, Autoplay, FreeMode]}
+                                            spaceBetween={15}
+                                            slidesPerView={1.2}
+                                            autoplay={{ delay: 3500 }}
+                                            breakpoints={{
+                                                640: { slidesPerView: 2.2 },
+                                                1024: { slidesPerView: 2.5 }
+                                            }}
+                                            className="rounded-3xl"
+                                        >
+                                            {pkg.images.map((img, i) => (
+                                                <SwiperSlide key={i}>
+                                                    <div className="aspect-[16/10] relative rounded-3xl overflow-hidden border border-slate-100 shadow-sm group">
+                                                        <Image 
+                                                            src={getImageUrl(img)} 
+                                                            alt={`${pkg.title} Gallery ${i + 1}`} 
+                                                            fill 
+                                                            className="object-cover transition-transform duration-700 group-hover:scale-110" 
+                                                            unoptimized 
+                                                        />
+                                                    </div>
+                                                </SwiperSlide>
+                                            ))}
+                                        </Swiper>
+                                    </div>
+                                </div>
+                            )}
 
                         </div>
 

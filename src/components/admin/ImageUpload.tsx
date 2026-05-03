@@ -92,7 +92,7 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
         </div>
 
       {value ? (
-        <div className={`relative group overflow-hidden rounded-2xl border-2 border-slate-100 bg-slate-50 transition-all hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/5 ${size === 'icon' ? 'w-24 h-24 mx-auto' :
+        <div className={`relative group overflow-hidden rounded-2xl border-2 border-slate-100 bg-slate-50 transition-all hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/5 ${size === 'icon' ? ' h-24 mx-auto' :
           size === 'small' ? 'aspect-[4/4]' :
             size === 'landscape' ? 'aspect-[3/1]' :
               'max-w-full aspect-video'
@@ -108,20 +108,19 @@ export default function ImageUpload({ value, onChange, label = "Featured Image",
                 <span className="text-[9px] font-black text-slate-700 uppercase tracking-tight leading-none">Active</span>
               </div>
 
-              <div className="relative">
+              <label className="relative cursor-pointer group/change">
                 <input
                   type="file"
                   accept="image/*"
                   onChange={handleFileChange}
                   disabled={uploading}
-                  title=""
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                  className="absolute inset-0 w-full h-full d-none cursor-pointer z-20"
                 />
-                <button className="bg-blue-600 text-white px-2.5 py-1.5 rounded-lg text-[9px] changeBtn font-black uppercase tracking-widest hover:bg-blue-700 transition-all flex items-center justify-center gap-1.5 leading-none">
+                <div className="bg-blue-600 text-white p-2 rounded-lg text-[9px] font-black uppercase tracking-widest group-hover/change:bg-blue-700 transition-all flex items-center justify-center gap-1.5 leading-none pointer-events-none">
                   {uploading ? <Loader2 size={10} className="animate-spin" /> : <Upload size={10} strokeWidth={3} />}
                   <span>Change</span>
-                </button>
-              </div>
+                </div>
+              </label>
             </div>
           </div>
 

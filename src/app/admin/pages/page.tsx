@@ -79,61 +79,76 @@ export default function PagesAdmin() {
           <p className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Loading Primary Nodes...</p>
         </div>
       ) : (
-        <div className="bg-white ">
+        <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
+          <style jsx>{`
+            .premium-table-row {
+              transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .premium-table-row:hover {
+              background: linear-gradient(to right, #f8fafc, #ffffff);
+              transform: translateX(4px);
+            }
+            .route-badge {
+              background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+              border: 1px solid #bfdbfe;
+            }
+          `}</style>
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-50/50 border-b border-slate-100">
-                  <th className="pl-10 pr-6 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] w-28">ID</th>
-                  <th className="px-6 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Platform Route</th>
-                  <th className="px-6 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Meta Strategy</th>
-                  <th className="pr-10 pl-6 py-6 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] text-right">Actions</th>
+                <tr className="bg-slate-50/80 border-b border-slate-100">
+                  <th className="pl-10 pr-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] w-28">ID</th>
+                  <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Platform Route</th>
+                  <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Meta Strategy</th>
+                  <th className="pr-10 pl-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] text-right">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-50">
                 {filteredData.map((item: any, index: number) => (
-                  <tr key={item._id} className="group hover:bg-slate-50/80 transition-all">
-                    <td className="pl-10 pr-6 py-8">
-                      <span className="text-xs font-black text-slate-300">{(index + 1).toString().padStart(2, '0')}</span>
+                  <tr key={item._id} className="premium-table-row group">
+                    <td className="pl-10 pr-6 py-5">
+                      <span className="text-xs font-black text-slate-400/50 tracking-tighter">{(index + 1).toString().padStart(2, '0')}</span>
                     </td>
-                    <td className="px-6 py-8">
-                      <div className="flex flex-col gap-1.5">
-                        <div className="font-black text-slate-900 uppercase tracking-tight text-sm flex items-center gap-2">
-                          <FileText size={14} className="text-blue-600" />
+                    <td className="px-6 py-5">
+                      <div className="flex flex-col gap-1">
+                        <div className="font-bold text-slate-900 uppercase tracking-tight text-[13px] flex items-center gap-2">
+                          <div className="p-1.5 bg-blue-50 text-blue-600 rounded-lg">
+                            <FileText size={12} strokeWidth={2.5} />
+                          </div>
                           {item.title || item.name || item.slug}
                         </div>
-                        <div className="text-[10px] font-mono text-blue-600 font-bold bg-orange-50 px-3 py-1 rounded-lg w-fit">
+                        <div className="text-[10px] font-mono text-blue-600 font-bold route-badge px-2.5 py-0.5 rounded-md w-fit">
                           /{item.slug === 'home' ? '' : item.slug}
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-8">
+                    <td className="px-6 py-5">
                       {item.seo_title ? (
-                        <div className="space-y-1">
+                        <div className="space-y-0.5">
                           <div className="text-[11px] font-bold text-slate-700 line-clamp-1 italic">{item.seo_title}</div>
                           <div className="text-[9px] text-slate-400 font-medium line-clamp-1 max-w-xs">{item.seo_description || 'No description meta defined'}</div>
                         </div>
                       ) : (
                         <div className="flex items-center gap-2 text-rose-400">
                           <div className="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse"></div>
-                          <span className="text-[10px] font-black uppercase tracking-widest">Incomplete Strategy</span>
+                          <span className="text-[9px] font-black uppercase tracking-widest">Incomplete Strategy</span>
                         </div>
                       )}
                     </td>
-                    <td className="px-10 py-8 text-right">
-                      <div className="flex justify-end gap-3">
+                    <td className="px-10 py-5 text-right">
+                      <div className="flex justify-end gap-2.5">
                         <Link
                           href={`/admin/pages/${item._id}/edit`}
-                          className="inline-flex items-center gap-2 h-10 px-5 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg shadow-slate-200 active:scale-95"
+                          className="inline-flex items-center gap-2 h-9 px-4 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 transition-all shadow-md shadow-slate-200 active:scale-95 hover:-translate-y-0.5"
                         >
-                          <Edit size={14} className="text-amber-400" /> Edit Page
+                          <Edit size={12} className="text-amber-400" /> Edit Page
                         </Link>
                         <button
                           onClick={() => handleDelete(item._id)}
-                          className="inline-flex items-center justify-center w-10 h-10 bg-white border border-slate-200 text-rose-500 rounded-xl hover:bg-rose-50 hover:border-rose-100 transition-all focus:outline-none"
+                          className="inline-flex items-center justify-center w-9 h-9 bg-white border border-slate-200 text-slate-400 rounded-xl hover:bg-rose-50 hover:border-rose-200 hover:text-rose-500 transition-all focus:outline-none hover:shadow-sm"
                           title="Delete Page"
                         >
-                          <Trash2 size={16} strokeWidth={2.5} />
+                          <Trash2 size={14} strokeWidth={2} />
                         </button>
                       </div>
                     </td>

@@ -46,7 +46,7 @@ export default function EditPackage() {
     images: [], thumb: '', thumbAlt: '', onoffer: false, isBestSeller: false,
     itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '', other_meta: '',
     averageRating: 4.9, reviewCount: 150, noCostEmi: '',
-    amenities: [],
+    amenities: [], showGallery: false,
     status: 'Published', order: 0
   });
 
@@ -111,6 +111,7 @@ export default function EditPackage() {
             noCostEmi: data.data.noCostEmi || '',
             averageRating: data.data.averageRating || 4.9,
             reviewCount: data.data.reviewCount || 150,
+            showGallery: data.data.showGallery || false,
             status: data.data.status || 'Published',
             order: data.data.order || 0,
             categories: data.data.categories || (data.data.category ? [data.data.category] : []),
@@ -493,9 +494,20 @@ export default function EditPackage() {
                  </div>
                  <div className="meta-item">
                     <div className="toggle-row">
-                       <label>Visibility Protocol</label>
-                       <input type="checkbox" checked={formData.status === 'Published'} onChange={e => setFormData({ ...formData, status: e.target.checked ? 'Published' : 'Draft' })} className="sr-only peer" />
-                       <div className="toggle-switch"></div>
+                       <label className="flex items-center justify-between w-full cursor-pointer group">
+                          <span className="text-[11px] font-black uppercase tracking-widest text-slate-400 group-hover:text-slate-600 transition-colors">Visibility</span>
+                          <input type="checkbox" checked={formData.status === 'Published'} onChange={e => setFormData({ ...formData, status: e.target.checked ? 'Published' : 'Draft' })} className="sr-only peer" />
+                          <div className="toggle-switch peer-checked:bg-emerald-500"></div>
+                       </label>
+                    </div>
+                 </div>
+                 <div className="meta-item">
+                    <div className="toggle-row">
+                       <label className="flex items-center justify-between w-full cursor-pointer group">
+                          <span className="text-[11px] font-black uppercase tracking-widest text-slate-400 group-hover:text-slate-600 transition-colors">Show Gallery</span>
+                          <input type="checkbox" checked={formData.showGallery} onChange={e => setFormData({ ...formData, showGallery: e.target.checked })} className="sr-only peer" />
+                          <div className="toggle-switch peer-checked:bg-emerald-500"></div>
+                       </label>
                     </div>
                  </div>
                  <div className="meta-item">

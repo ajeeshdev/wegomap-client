@@ -26,6 +26,7 @@ export interface TourPackageDetail {
     exclusions: string[];
     averageRating?: number;
     reviewCount?: number;
+    showGallery?: boolean;
     amenities?: { icon: string, label: string, color?: string }[];
 }
 
