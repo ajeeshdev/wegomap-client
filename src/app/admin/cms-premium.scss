@@ -184,7 +184,7 @@
     background: #fff;
     border-radius: 16px;
     border: 1px solid #f1f5f9;
-    overflow: hidden;
+    // overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
 
     .card-header {
@@ -669,6 +669,13 @@
   }
 
   .serif { font-family: 'DM Serif Display', serif; }
+
+  .custom-scrollbar {
+    &::-webkit-scrollbar { width: 4px; }
+    &::-webkit-scrollbar-track { background: transparent; }
+    &::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+    &::-webkit-scrollbar-thumb:hover { background: #cbd5e1; }
+  }
 }
 
 @keyframes fadeIn {

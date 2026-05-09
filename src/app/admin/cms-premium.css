@@ -187,7 +187,6 @@
   background: #fff;
   border-radius: 16px;
   border: 1px solid #f1f5f9;
-  overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
 }
 .property-edit-container .editor-card .card-header {
@@ -810,6 +809,19 @@
 }
 .property-edit-container .serif {
   font-family: "DM Serif Display", serif;
+}
+.property-edit-container .custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.property-edit-container .custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.property-edit-container .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 10px;
+}
+.property-edit-container .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
 }
 
 @keyframes fadeIn {
