@@ -49,7 +49,16 @@ export function parseSeoMeta(html: string): {
                     other['robots'] = content;
                 } else {
                     // Push as `other` for Next.js metadata
-                    other[name] = content;
+                    const existing = other[name];
+                    if (existing) {
+                        if (Array.isArray(existing)) {
+                            existing.push(content);
+                        } else {
+                            other[name] = [existing, content];
+                        }
+                    } else {
+                        other[name] = content;
+                    }
                 }
             }
         } else if (tagName === 'link') {
