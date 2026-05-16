@@ -32,17 +32,23 @@ export async function generateMetadata(): Promise<Metadata> {
     let favIconUrl = "/favicon.ico";
 
     let pageKeywords: string | undefined = undefined;
+    let analyticsMeta: any = {};
 
     if (optsJson.success && optsJson.data) {
       const titleOpt = optsJson.data.find((o: any) => o.key === 'site_title');
       const favOpt = optsJson.data.find((o: any) => o.key === 'site_favicon');
       const descOpt = optsJson.data.find((o: any) => o.key === 'site_description');
       const keysOpt = optsJson.data.find((o: any) => o.key === 'site_keywords');
+      const scriptOpt = optsJson.data.find((o: any) => o.key === 'analytics_script');
       
       if (titleOpt?.value) defaultTitle = titleOpt.value;
       if (descOpt?.value) defaultDesc = descOpt.value;
       if (favOpt?.value) favIconUrl = getImageUrl(favOpt.value);
       if (keysOpt?.value) pageKeywords = keysOpt.value;
+      
+      if (scriptOpt?.value) {
+        analyticsMeta = parseSeoMeta(scriptOpt.value);
+      }
     }
 
     // Try to get specific 'home' page SEO overrides
@@ -85,8 +91,14 @@ export async function generateMetadata(): Promise<Metadata> {
       alternates: canonicalUrl ? {
         canonical: canonicalUrl,
       } : undefined,
-      other: parsedHomeMeta.other,
-      openGraph: parsedHomeMeta.openGraph as any,
+      other: {
+        ...analyticsMeta.other,
+        ...parsedHomeMeta.other,
+      },
+      openGraph: {
+        ...analyticsMeta.openGraph,
+        ...parsedHomeMeta.openGraph,
+      } as any,
     };
   } catch (err) {
     console.error("Metadata fetch error:", err);
