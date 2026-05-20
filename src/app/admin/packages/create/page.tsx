@@ -450,6 +450,15 @@ export default function CreatePackage() {
                         </div>
                      </div>
                      <div className="meta-item">
+                      <div className="toggle-row">
+                         <label className="flex items-center justify-between w-full cursor-pointer group">
+                            <span className="text-[11px] font-black uppercase tracking-widest text-slate-400 group-hover:text-slate-600 transition-colors">On Offer (Special Badge)</span>
+                            <input type="checkbox" checked={formData.onoffer} onChange={e => setFormData({ ...formData, onoffer: e.target.checked })} className="sr-only peer" />
+                            <div className="toggle-switch peer-checked:bg-emerald-500"></div>
+                         </label>
+                      </div>
+                   </div>
+                   <div className="meta-item">
                         <div className="toggle-row">
                            <label className="flex items-center justify-between w-full cursor-pointer group">
                               <span className="text-[11px] font-black uppercase tracking-widest text-slate-400 group-hover:text-slate-600 transition-colors">Show Gallery</span>
