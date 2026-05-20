@@ -77,6 +77,20 @@ export async function generateMetadata(): Promise<Metadata> {
       }
     }
 
+    const getGoogleVerification = (metaObj: any) => {
+      const gv = metaObj?.['google-site-verification'];
+      if (!gv) return undefined;
+      return Array.isArray(gv) ? gv : [gv];
+    };
+
+    let googleVerifications = [
+      ...(getGoogleVerification(analyticsMeta.other) || []),
+      ...(getGoogleVerification(parsedHomeMeta.other) || [])
+    ];
+    
+    // remove duplicates
+    googleVerifications = Array.from(new Set(googleVerifications));
+
     return {
       metadataBase: new URL('https://www.wegomap.com'),
       title: defaultTitle,
@@ -90,6 +104,9 @@ export async function generateMetadata(): Promise<Metadata> {
       },
       alternates: canonicalUrl ? {
         canonical: canonicalUrl,
+      } : undefined,
+      verification: googleVerifications.length > 0 ? {
+        google: googleVerifications.length === 1 ? googleVerifications[0] : googleVerifications,
       } : undefined,
       other: {
         ...analyticsMeta.other,
