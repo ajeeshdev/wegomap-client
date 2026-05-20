@@ -219,16 +219,16 @@ export default function EditPackage() {
                    <div className="card-header"><h4 className="serif">Fundamental Identity</h4></div>
                    <div className="card-body">
                      <div className="admin-form-group">
-                       <label>Commercial Title</label>
+                       <label>Package Title</label>
                        <input type="text" value={formData.title || ''} onChange={e => setFormData({ ...formData, title: e.target.value })} className="title-input" />
                      </div>
                      <div className="grid grid-cols-2 gap-6">
-                       <div className="admin-form-group"><label>Lead Subtitle</label><input type="text" value={formData.subtitle || ''} onChange={e => setFormData({ ...formData, subtitle: e.target.value })} /></div>
-                       <div className="admin-form-group"><label>Promo Label</label><input type="text" value={formData.slabel || ''} onChange={e => setFormData({ ...formData, slabel: e.target.value })} className="promo-input" /></div>
+                       <div className="admin-form-group"><label> Subtitle</label><input type="text" value={formData.subtitle || ''} onChange={e => setFormData({ ...formData, subtitle: e.target.value })} /></div>
+                       <div className="admin-form-group"><label>Small Label</label><input type="text" value={formData.slabel || ''} onChange={e => setFormData({ ...formData, slabel: e.target.value })} className="promo-input" /></div>
                      </div>
                      <div className="grid grid-cols-2 gap-6">
-                       <div className="admin-form-group"><label>Geographic Focus</label><input type="text" value={formData.location || ''} onChange={e => setFormData({ ...formData, location: e.target.value })} /></div>
-                       <div className="admin-form-group"><label>Temporal Duration</label><input type="text" value={formData.duration || ''} onChange={e => setFormData({ ...formData, duration: e.target.value })} /></div>
+                       <div className="admin-form-group"><label>Location</label><input type="text" value={formData.location || ''} onChange={e => setFormData({ ...formData, location: e.target.value })} /></div>
+                       <div className="admin-form-group"><label>Package Duration</label><input type="text" value={formData.duration || ''} onChange={e => setFormData({ ...formData, duration: e.target.value })} /></div>
                      </div>
                    </div>
                  </div>
@@ -237,8 +237,8 @@ export default function EditPackage() {
                     <div className="card-header"><h4 className="serif">Financial Architecture</h4></div>
                     <div className="card-body">
                        <div className="admin-form-grid-3">
-                          <div className="admin-form-group"><label className="regular-price-label">Rack Rate (₹)</label><input type="number" value={formData.oldamt || ''} onChange={e => setFormData({ ...formData, oldamt: e.target.value })} className="regular-price-input" /></div>
-                          <div className="admin-form-group"><label className="offer-price-label">Live Offer (₹)</label><input type="number" value={formData.price || ''} onChange={e => setFormData({ ...formData, price: e.target.value })} className="offer-price-input" /></div>
+                          <div className="admin-form-group"><label className="regular-price-label">Actual Price (₹)</label><input type="number" value={formData.oldamt || ''} onChange={e => setFormData({ ...formData, oldamt: e.target.value })} className="regular-price-input" /></div>
+                          <div className="admin-form-group"><label className="offer-price-label">Offer Price (₹)</label><input type="number" value={formData.price || ''} onChange={e => setFormData({ ...formData, price: e.target.value })} className="offer-price-input" /></div>
                           <div className="admin-form-group"><label className="emi-label">Monthly EMI (₹)</label><input type="number" value={formData.noCostEmi || ''} onChange={e => setFormData({ ...formData, noCostEmi: e.target.value })} /></div>
                        </div>
                        <div className="admin-form-grid-2 mt-4">
@@ -504,7 +504,7 @@ export default function EditPackage() {
                  <div className="meta-item">
                     <div className="toggle-row">
                        <label className="flex items-center justify-between w-full cursor-pointer group">
-                          <span className="text-[11px] font-black uppercase tracking-widest text-slate-400 group-hover:text-slate-600 transition-colors">On Offer (Special Badge)</span>
+                          <span className="text-[11px] font-black uppercase tracking-widest text-slate-400 group-hover:text-slate-600 transition-colors"> (Special Badge)</span>
                           <input type="checkbox" checked={formData.onoffer} onChange={e => setFormData({ ...formData, onoffer: e.target.checked })} className="sr-only peer" />
                           <div className="toggle-switch peer-checked:bg-emerald-500"></div>
                        </label>
