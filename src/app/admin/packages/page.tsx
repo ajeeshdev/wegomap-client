@@ -90,7 +90,7 @@ function SortableRow({ pkg, onDelete, onStatusToggle, onOrderChange }: SortableR
                 </span>
                 {pkg.onoffer && (
                   <span className="px-1.5 py-0.5 bg-rose-50 text-emerald-500 rounded-lg text-[8px] font-black uppercase tracking-tighter border border-rose-100 flex items-center gap-1">
-                    <Zap size={8} className="fill-current" /> Special Offer
+                    <Zap size={8} className="fill-current" /> {pkg.slabel || 'Special Offer'}
                   </span>
                 )}
               </div>
