@@ -42,7 +42,7 @@ export default function EditPackage() {
   const [formData, setFormData] = useState<any>({
     title: '', pcode: '', subtitle: '', slabel: '', location: '', description: '',
     price: '', oldamt: '', duration: '', highlights: [],
-    inclusions: [], exclusions: [], terms: '', extraContact: '', faq: '', categories: [],
+    inclusions: [], exclusions: [], terms: '', extraContact: '', faq: [], categories: [],
     images: [], thumb: '', thumbAlt: '', onoffer: false, isBestSeller: false,
     itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '', other_meta: '',
     averageRating: 4.9, reviewCount: 150, noCostEmi: '',
@@ -109,7 +109,7 @@ export default function EditPackage() {
               };
             }),
             extraContact: data.data.extraContact || '',
-            faq: data.data.faq || '',
+            faq: Array.isArray(data.data.faq) ? data.data.faq : [],
             noCostEmi: data.data.noCostEmi || '',
             averageRating: data.data.averageRating || 4.9,
             reviewCount: data.data.reviewCount || 150,
@@ -144,7 +144,8 @@ export default function EditPackage() {
         exclusions: cleanStringList(formData.exclusions),
         categories: cleanStringList(formData.categories),
         images: cleanStringList(formData.images),
-        itinerary: cleanItinerary(formData.itinerary)
+        itinerary: cleanItinerary(formData.itinerary),
+        faq: (formData.faq || []).filter((f: any) => f.question?.trim() || f.answer?.trim())
       };
       delete formDataToSubmit._id;
       delete formDataToSubmit.__v;
@@ -293,9 +294,43 @@ export default function EditPackage() {
                     </div>
                  </div>
                  <div className="editor-card">
-                    <div className="card-header"><h4 className="serif">FAQ Section</h4></div>
-                    <div className="card-body no-padding">
-                       <RichTextEditor value={formData.faq} onChange={(content) => setFormData({ ...formData, faq: content })} height={300} />
+                    <div className="card-header flex-header">
+                       <h4 className="serif">FAQ Section</h4>
+                       <button onClick={() => setFormData({ ...formData, faq: [...(formData.faq || []), { question: '', answer: '' }] })} className="add-day-btn">+ Add FAQ</button>
+                    </div>
+                    <div className="card-body">
+                       <div className="itinerary-list">
+                          {(formData.faq || []).map((item: any, idx: number) => (
+                             <div key={idx} className="itinerary-item group relative p-4 bg-slate-50 rounded-xl mb-4">
+                                <button onClick={() => {
+                                   const ni = [...formData.faq];
+                                   ni.splice(idx, 1);
+                                   setFormData({ ...formData, faq: ni });
+                                }} className="remove-day-btn absolute top-3 right-3"><Trash2 size={14} /></button>
+                                
+                                <div className="admin-form-group mb-4">
+                                   <label>Question {idx + 1}</label>
+                                   <input type="text" value={item.question} onChange={e => {
+                                      const ni = [...formData.faq];
+                                      ni[idx].question = e.target.value;
+                                      setFormData({ ...formData, faq: ni });
+                                   }} className="day-title-input" placeholder="e.g. What is the best time to visit?" />
+                                </div>
+                                
+                                <div className="admin-form-group">
+                                   <label>Answer</label>
+                                   <textarea rows={3} value={item.answer} onChange={e => {
+                                      const ni = [...formData.faq];
+                                      ni[idx].answer = e.target.value;
+                                      setFormData({ ...formData, faq: ni });
+                                   }} className="admin-form-input" placeholder="Provide a helpful answer..." />
+                                </div>
+                             </div>
+                          ))}
+                          {(!formData.faq || formData.faq.length === 0) && (
+                             <div className="text-center py-6 text-slate-400 text-sm">No FAQs added yet. Click "+ Add FAQ" to start.</div>
+                          )}
+                       </div>
                     </div>
                  </div>
                </div>

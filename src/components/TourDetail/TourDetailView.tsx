@@ -70,6 +70,7 @@ export default function TourDetailView({ id }: { id: string }) {
     const [wishlist, setWishlist] = useState<string[]>([]);
     const [user, setUser] = useState<any>(null);
     const [similarPackages, setSimilarPackages] = useState<any[]>([]);
+    const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
     useEffect(() => {
         const getSimilar = async () => {
@@ -214,7 +215,7 @@ export default function TourDetailView({ id }: { id: string }) {
                         ],
                         showGallery: p.showGallery || false,
                         extraContact: p.extraContact || '',
-                        faq: p.faq || '',
+                        faq: Array.isArray(p.faq) ? p.faq : [],
                     });
                     setLoading(false);
                     return;
@@ -464,13 +465,30 @@ export default function TourDetailView({ id }: { id: string }) {
                                 </div>
                             )}
 
-                            {pkg.faq && (
+                            {pkg.faq && Array.isArray(pkg.faq) && pkg.faq.length > 0 && (
                                 <div className="mb-16">
                                     <h3 className="sectionTitle">FAQ</h3>
-                                    <div 
-                                        className="description tour-description-content"
-                                        dangerouslySetInnerHTML={{ __html: pkg.faq }}
-                                    />
+                                    <div className="faq-container space-y-4">
+                                        {pkg.faq.map((item: any, idx: number) => (
+                                            <div key={idx} className="faq-item bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+                                                <button 
+                                                    className="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition-colors"
+                                                    onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
+                                                >
+                                                    <span className="font-semibold text-slate-800 text-left pr-4">{item.question}</span>
+                                                    <ChevronDown 
+                                                        size={20} 
+                                                        className={`text-slate-400 transition-transform duration-300 ${activeFaq === idx ? 'rotate-180' : ''}`} 
+                                                    />
+                                                </button>
+                                                {activeFaq === idx && (
+                                                    <div className="px-6 py-4 border-t border-slate-100 text-slate-600 bg-white">
+                                                        {item.answer}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             )}
 

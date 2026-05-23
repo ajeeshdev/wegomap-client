@@ -29,7 +29,7 @@ export interface TourPackageDetail {
     showGallery?: boolean;
     amenities?: { icon: string, label: string, color?: string }[];
     extraContact?: string;
-    faq?: string;
+    faq?: { question: string, answer: string }[];
 }
 
 export const packagesData: Record<string, TourPackageDetail> = {
