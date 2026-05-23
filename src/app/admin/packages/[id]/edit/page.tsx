@@ -42,7 +42,7 @@ export default function EditPackage() {
   const [formData, setFormData] = useState<any>({
     title: '', pcode: '', subtitle: '', slabel: '', location: '', description: '',
     price: '', oldamt: '', duration: '', highlights: [],
-    inclusions: [], exclusions: [], terms: '', categories: [],
+    inclusions: [], exclusions: [], terms: '', extraContact: '', faq: '', categories: [],
     images: [], thumb: '', thumbAlt: '', onoffer: false, isBestSeller: false,
     itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '', other_meta: '',
     averageRating: 4.9, reviewCount: 150, noCostEmi: '',
@@ -108,6 +108,8 @@ export default function EditPackage() {
                 amenities: item.amenities || []
               };
             }),
+            extraContact: data.data.extraContact || '',
+            faq: data.data.faq || '',
             noCostEmi: data.data.noCostEmi || '',
             averageRating: data.data.averageRating || 4.9,
             reviewCount: data.data.reviewCount || 150,
@@ -282,6 +284,18 @@ export default function EditPackage() {
                     <div className="card-header"><h4 className="serif">Terms & Conditions</h4></div>
                     <div className="card-body no-padding">
                        <RichTextEditor value={formData.terms} onChange={(content) => setFormData({ ...formData, terms: content })} height={300} />
+                    </div>
+                 </div>
+                 <div className="editor-card">
+                    <div className="card-header"><h4 className="serif">Extra Contact</h4></div>
+                    <div className="card-body no-padding">
+                       <RichTextEditor value={formData.extraContact} onChange={(content) => setFormData({ ...formData, extraContact: content })} height={300} />
+                    </div>
+                 </div>
+                 <div className="editor-card">
+                    <div className="card-header"><h4 className="serif">FAQ Section</h4></div>
+                    <div className="card-body no-padding">
+                       <RichTextEditor value={formData.faq} onChange={(content) => setFormData({ ...formData, faq: content })} height={300} />
                     </div>
                  </div>
                </div>

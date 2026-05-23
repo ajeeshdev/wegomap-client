@@ -43,7 +43,7 @@ export default function CreatePackage() {
    const [formData, setFormData] = useState<any>({
       title: '', pcode: '', subtitle: '', slabel: '', location: '', description: '',
       duration: '', oldamt: '', price: '',
-      inclusions: [], exclusions: [], terms: '', highlights: [],
+      inclusions: [], exclusions: [], terms: '', extraContact: '', faq: '', highlights: [],
       itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '', other_meta: '',
       averageRating: 4.9, reviewCount: 150, noCostEmi: '',
       amenities: [], categories: [], images: [], thumb: '',
@@ -230,6 +230,18 @@ export default function CreatePackage() {
                            <div className="card-header"><h4 className="serif">Terms & Conditions</h4></div>
                            <div className="card-body no-padding">
                               <RichTextEditor value={formData.terms} onChange={(content) => setFormData({ ...formData, terms: content })} height={300} />
+                           </div>
+                        </div>
+                        <div className="editor-card">
+                           <div className="card-header"><h4 className="serif">Extra Contact</h4></div>
+                           <div className="card-body no-padding">
+                              <RichTextEditor value={formData.extraContact} onChange={(content) => setFormData({ ...formData, extraContact: content })} height={300} />
+                           </div>
+                        </div>
+                        <div className="editor-card">
+                           <div className="card-header"><h4 className="serif">FAQ Section</h4></div>
+                           <div className="card-body no-padding">
+                              <RichTextEditor value={formData.faq} onChange={(content) => setFormData({ ...formData, faq: content })} height={300} />
                            </div>
                         </div>
                      </div>

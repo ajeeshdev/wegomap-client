@@ -28,6 +28,8 @@ export interface TourPackageDetail {
     reviewCount?: number;
     showGallery?: boolean;
     amenities?: { icon: string, label: string, color?: string }[];
+    extraContact?: string;
+    faq?: string;
 }
 
 export const packagesData: Record<string, TourPackageDetail> = {

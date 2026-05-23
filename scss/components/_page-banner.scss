@@ -4,7 +4,7 @@
 
 .pageBanner {
     position: relative;
-    height: 280px; 
+    height: 350px; 
     min-height: 280px;
     width: 100%;
     display: flex;
@@ -79,7 +79,9 @@
         z-index: 10;
         width: 100%;
         padding: 4rem 0 2rem;
-        
+        @include max(767) {
+            padding: 0;
+        }
         @include min(768) {
             padding: 0;
         }

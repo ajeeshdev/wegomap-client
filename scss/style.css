@@ -3427,7 +3427,7 @@ footer .footerBottom .socialLinks a:hover {
 
 .pageBanner {
   position: relative;
-  height: 280px;
+  height: 350px;
   min-height: 280px;
   width: 100%;
   display: flex;
@@ -3506,6 +3506,11 @@ footer .footerBottom .socialLinks a:hover {
   z-index: 10;
   width: 100%;
   padding: 4rem 0 2rem;
+}
+@media (max-width: 767px) {
+  .pageBanner .pageBannerInner {
+    padding: 0;
+  }
 }
 @media (min-width: 768px) {
   .pageBanner .pageBannerInner {
@@ -12416,6 +12421,13 @@ button.wishlistBtn {
     text-align: center;
   }
 }
+@media (max-width: 767px) {
+  .packageDetailPage .tourStatsRow .tourStatsGrid {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+}
 .packageDetailPage .tourStatsRow .tStat {
   flex-wrap: wrap;
   display: flex;
@@ -12454,6 +12466,11 @@ button.wishlistBtn {
   .packageDetailPage .tourStatsRow .tStat:nth-child(3) .enquire-now-btn, .packageDetailPage .tourStatsRow .tStat:nth-child(3) .heartWish {
     width: 100%;
     flex: 1;
+  }
+}
+@media (max-width: 767px) {
+  .packageDetailPage .tourStatsRow .tStat:nth-child(2) {
+    padding: 0 10px !important;
   }
 }
 @media (min-width: 1025px) {

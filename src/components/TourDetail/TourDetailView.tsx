@@ -213,6 +213,8 @@ export default function TourDetailView({ id }: { id: string }) {
                             { icon: 'Car', label: 'Private Hub', color: 'emerald' }
                         ],
                         showGallery: p.showGallery || false,
+                        extraContact: p.extraContact || '',
+                        faq: p.faq || '',
                     });
                     setLoading(false);
                     return;
@@ -418,7 +420,7 @@ export default function TourDetailView({ id }: { id: string }) {
                                 </div>
                             </div>
 
-                                            {/* Gallery Section */}
+                            {/* Gallery Section */}
                             {pkg.showGallery && pkg.images && pkg.images.length > 0 && (
                                 <div className="mb-16">
                                     <h3 className="sectionTitle">Gallery</h3>
@@ -449,6 +451,26 @@ export default function TourDetailView({ id }: { id: string }) {
                                             ))}
                                         </Swiper>
                                     </div>
+                                </div>
+                            )}
+
+                            {pkg.extraContact && (
+                                <div className="mb-16">
+                                    <h3 className="sectionTitle">Extra Information</h3>
+                                    <div 
+                                        className="description tour-description-content"
+                                        dangerouslySetInnerHTML={{ __html: pkg.extraContact }}
+                                    />
+                                </div>
+                            )}
+
+                            {pkg.faq && (
+                                <div className="mb-16">
+                                    <h3 className="sectionTitle">FAQ</h3>
+                                    <div 
+                                        className="description tour-description-content"
+                                        dangerouslySetInnerHTML={{ __html: pkg.faq }}
+                                    />
                                 </div>
                             )}
 

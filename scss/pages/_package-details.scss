@@ -42,6 +42,11 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                 margin-top: -40px;
                 text-align: center;
             }
+            @include max(767) {
+                display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+            }
         }
 
         .tStat {
@@ -87,7 +92,12 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                     }
                 }
             }
+            @include max(767) {
+                 &:nth-child(2) {
+                    padding: 0 10px!important;
             
+                }
+            }
             &:last-child {
                 @media (min-width: 1025px) {
                     margin-left: auto;
