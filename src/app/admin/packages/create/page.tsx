@@ -242,13 +242,13 @@ export default function CreatePackage() {
                         <div className="editor-card">
                            <div className="card-header flex-header">
                               <h4 className="serif">FAQ Section</h4>
-                              <button onClick={() => setFormData({ ...formData, faq: [...(formData.faq || []), { question: '', answer: '' }] })} className="add-day-btn">+ Add FAQ</button>
+                              <button type="button" onClick={() => setFormData({ ...formData, faq: [...(formData.faq || []), { question: '', answer: '' }] })} className="add-day-btn">+ Add FAQ</button>
                            </div>
                            <div className="card-body">
                               <div className="itinerary-list">
                                  {(formData.faq || []).map((item: any, idx: number) => (
                                     <div key={idx} className="itinerary-item group relative p-4 bg-slate-50 rounded-xl mb-4">
-                                       <button onClick={() => {
+                                       <button type="button" onClick={() => {
                                           const ni = [...formData.faq];
                                           ni.splice(idx, 1);
                                           setFormData({ ...formData, faq: ni });

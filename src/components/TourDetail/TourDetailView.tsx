@@ -469,25 +469,30 @@ export default function TourDetailView({ id }: { id: string }) {
                                 <div className="mb-16">
                                     <h3 className="sectionTitle">FAQ</h3>
                                     <div className="faq-container space-y-4">
-                                        {pkg.faq.map((item: any, idx: number) => (
+                                        {pkg.faq.map((item: any, idx: number) => {
+                                            if (!item || typeof item !== 'object') return null;
+                                            return (
                                             <div key={idx} className="faq-item bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
                                                 <button 
+                                                    type="button"
                                                     className="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition-colors"
                                                     onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
                                                 >
-                                                    <span className="font-semibold text-slate-800 text-left pr-4">{item.question}</span>
+                                                    <span className="font-semibold text-slate-800 text-left pr-4 text-sm md:text-base">{item.question || 'FAQ'}</span>
                                                     <ChevronDown 
                                                         size={20} 
-                                                        className={`text-slate-400 transition-transform duration-300 ${activeFaq === idx ? 'rotate-180' : ''}`} 
+                                                        className={`text-slate-400 transition-transform duration-300 flex-shrink-0 ${activeFaq === idx ? 'rotate-180' : ''}`} 
                                                     />
                                                 </button>
-                                                {activeFaq === idx && (
-                                                    <div className="px-6 py-4 border-t border-slate-100 text-slate-600 bg-white">
-                                                        {item.answer}
+                                                <div 
+                                                    className={`overflow-hidden transition-all duration-300 ease-in-out ${activeFaq === idx ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+                                                >
+                                                    <div className="px-6 py-4 border-t border-slate-100 text-slate-600 bg-white text-sm md:text-base leading-relaxed">
+                                                        {item.answer || ''}
                                                     </div>
-                                                )}
+                                                </div>
                                             </div>
-                                        ))}
+                                        )})}
                                     </div>
                                 </div>
                             )}
