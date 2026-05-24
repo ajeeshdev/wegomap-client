@@ -472,22 +472,22 @@ export default function TourDetailView({ id }: { id: string }) {
                                         {pkg.faq.map((item: any, idx: number) => {
                                             if (!item || typeof item !== 'object') return null;
                                             return (
-                                            <div key={idx} className="faq-item bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+                                            <div key={idx} className="faq-item bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm mb-4">
                                                 <button 
                                                     type="button"
-                                                    className="w-full px-6 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition-colors"
+                                                    className="w-full px-6 py-5 flex items-center justify-between bg-slate-50 hover:bg-slate-100 transition-colors"
                                                     onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
                                                 >
-                                                    <span className="font-semibold text-slate-800 text-left pr-4 text-sm md:text-base">{item.question || 'FAQ'}</span>
+                                                    <span className="font-semibold text-slate-800 text-left pr-4 text-base md:text-lg">{item.question || 'FAQ'}</span>
                                                     <ChevronDown 
-                                                        size={20} 
+                                                        size={24} 
                                                         className={`text-slate-400 transition-transform duration-300 flex-shrink-0 ${activeFaq === idx ? 'rotate-180' : ''}`} 
                                                     />
                                                 </button>
                                                 <div 
                                                     className={`overflow-hidden transition-all duration-300 ease-in-out ${activeFaq === idx ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
                                                 >
-                                                    <div className="px-6 py-4 border-t border-slate-100 text-slate-600 bg-white text-sm md:text-base leading-relaxed">
+                                                    <div className="px-6 py-5 border-t border-slate-100 text-slate-600 bg-white text-base leading-relaxed">
                                                         {item.answer || ''}
                                                     </div>
                                                 </div>
