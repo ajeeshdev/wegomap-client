@@ -98,10 +98,10 @@ export default function CruisesListingPage() {
                             <span className="pre-title">Premium Selection</span>
                         </div>
                         <h1 className="main-title">
-                            Available Houseboats
+                            {pageContent.listingTitle || "Available Houseboats"}
                         </h1>
                         <p className="sub-title">
-                            From traditional deluxe boats to modern luxury cruisers, find your perfect stay on the water.
+                            {pageContent.listingSubtitle || "From traditional deluxe boats to modern luxury cruisers, find your perfect stay on the water."}
                         </p>
                     </div>
                     

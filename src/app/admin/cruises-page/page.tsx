@@ -13,6 +13,8 @@ interface CruisesPageContent {
     honeymoonDelights?: string;
     rulesNote?: string;
     additionalDetails?: string;
+    listingTitle?: string;
+    listingSubtitle?: string;
 }
 
 const DEFAULT_RULES = [
@@ -51,7 +53,9 @@ const DEFAULT_CONTENT: CruisesPageContent = {
     rules: DEFAULT_RULES,
     honeymoonDelights: "Flower Bed Decoration, Candle light dinner & cake",
     rulesNote: "Season rates / Hike rates for Pooja, Onam, Diwali, and other Public Holidays",
-    additionalDetails: ""
+    additionalDetails: "",
+    listingTitle: "Available Houseboats",
+    listingSubtitle: "From traditional deluxe boats to modern luxury cruisers, find your perfect stay on the water."
 };
 
 export default function CruisesSettingsPage() {
@@ -75,7 +79,9 @@ export default function CruisesSettingsPage() {
                             rules: saved.rules || DEFAULT_CONTENT.rules,
                             honeymoonDelights: saved.honeymoonDelights || DEFAULT_CONTENT.honeymoonDelights,
                             rulesNote: saved.rulesNote || DEFAULT_CONTENT.rulesNote,
-                            additionalDetails: saved.additionalDetails || ""
+                            additionalDetails: saved.additionalDetails || "",
+                            listingTitle: saved.listingTitle || DEFAULT_CONTENT.listingTitle,
+                            listingSubtitle: saved.listingSubtitle || DEFAULT_CONTENT.listingSubtitle
                         });
                     } catch (e) { console.error(e); }
                 }
@@ -159,6 +165,27 @@ export default function CruisesSettingsPage() {
                         <div>
                             <label className="admin-form-label mb-2"><span className="text-black font-black text-[11px] uppercase tracking-wider">Background Image</span></label>
                             <ImageUpload value={content.banner?.image} onChange={url => setContent({ ...content, banner: { ...content.banner, image: url } })} label="Banner Image" dimensions="1920 x 600" />
+                        </div>
+                    </div>
+                </div>
+
+                {/* LISTING HEADER SECTION */}
+                <div className="admin-form-card !p-8" style={{ marginTop: '50px' }}>
+                    <div className="flex items-center gap-3 mb-8 border-b border-slate-50 pb-6">
+                        <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600"><Sparkles size={22} /></div>
+                        <div>
+                            <h3 className="text-lg font-black text-black uppercase">Fleet Listing Header</h3>
+                            <p className="text-xs text-slate-400 font-bold">Configure the main title and introduction text showing above the houseboat listing</p>
+                        </div>
+                    </div>
+                    <div className="space-y-6">
+                        <div className="admin-form-group">
+                            <label className="admin-form-label mb-2"><span className="text-black font-black text-[11px] uppercase tracking-wider">Listing Main Title</span></label>
+                            <input type="text" value={content.listingTitle || ''} onChange={e => setContent({ ...content, listingTitle: e.target.value })} className="admin-form-input font-bold text-black" placeholder="Available Houseboats" />
+                        </div>
+                        <div className="admin-form-group">
+                            <label className="admin-form-label mb-2"><span className="text-black font-black text-[11px] uppercase tracking-wider">Listing Description Subtitle</span></label>
+                            <textarea rows={3} value={content.listingSubtitle || ''} onChange={e => setContent({ ...content, listingSubtitle: e.target.value })} className="admin-form-input font-bold text-black" placeholder="From traditional deluxe boats to modern luxury cruisers, find your perfect stay on the water." />
                         </div>
                     </div>
                 </div>
