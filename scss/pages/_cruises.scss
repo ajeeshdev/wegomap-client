@@ -15,7 +15,8 @@
         }
 
         .header-content {
-            max-width: 650px;
+            max-width: 100%;
+            width: 100%;
 
             .pre-title-wrapper {
                 display: flex;
@@ -1069,10 +1070,7 @@
                 }
 
                 .guideline-item {
-                    background-color: #fff;
-                    border: 1px solid #f1f5f9;
-                    border-radius: 20px;
-                    padding: 16px 20px;
+                   
                     display: flex;
                     align-items: flex-start;
                     gap: 14px;

@@ -96,7 +96,7 @@ export default function CruisesListingPage() {
 
             <div className="homeContainer cruises-listing-container">
                 <div className="listing-header">
-                    <div className="header-content">
+                    <div className="header-content w-100">
                         <div className="pre-title-wrapper">
                             <span className="line"></span>
                             <span className="pre-title">Premium Selection</span>
@@ -108,21 +108,7 @@ export default function CruisesListingPage() {
                             {pageContent.listingSubtitle || "From traditional deluxe boats to modern luxury cruisers, find your perfect stay on the water."}
                         </p>
                     </div>
-                    
-                    <div className="search-box-wrapper">
-                        <Search className="search-icon" size={18} />
-                        <input 
-                            type="text" 
-                            placeholder="Search by name or category..." 
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
-                        {searchTerm && (
-                            <button onClick={() => setSearchTerm('')} className="clear-btn">
-                                <X size={16} />
-                            </button>
-                        )}
-                    </div>
+                 
                 </div>
 
                 <div className="fleet-grid">
@@ -213,7 +199,6 @@ export default function CruisesListingPage() {
                                 <span className="pre-title">Important Guidelines</span>
                             </div>
                             <h2 className="section-title">Houseboat Rules</h2>
-                            <p className="sub-title">To ensure a safe, comfortable, and memorable cruising experience, please review the onboard policies below.</p>
                         </div>
 
                         <div className="rules-container">
