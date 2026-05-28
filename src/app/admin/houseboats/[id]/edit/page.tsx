@@ -156,7 +156,16 @@ export default function EditHouseboat() {
                   </div>
                </div>
 
-         
+               <div className="editor-card">
+                  <div className="card-header"><h4 className="serif">Vessel Narrative</h4></div>
+                  <div className="card-body no-padding">
+                     <RichTextEditor 
+                       value={formData.description} 
+                       onChange={(description) => setFormData({ ...formData, description })} 
+                       height={500}
+                     />
+                  </div>
+               </div>
             </div>
           </div>
         </div>
@@ -189,7 +198,7 @@ export default function EditHouseboat() {
                     <label>Old Rate (₹) [Strikethrough]</label>
                     <div className="relative">
                        <IndianRupee size={12} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-                       <input type="text" value={formData.oldPrice} onChange={e => setFormData({ ...formData, oldPrice: e.target.value })} className="pl-8 font-black text-slate-400 line-through" placeholder="0.00" />
+                       <input type="text" value={formData.oldPrice || ''} onChange={e => setFormData({ ...formData, oldPrice: e.target.value })} className="pl-8 font-black text-slate-400 line-through" placeholder="0.00" />
                     </div>
                  </div>
 

@@ -168,7 +168,7 @@ export default function CreateHouseboat() {
                     <label>Old Rate (₹) [Strikethrough]</label>
                     <div className="relative">
                        <IndianRupee size={12} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-                       <input type="text" value={formData.oldPrice} onChange={e => setFormData({ ...formData, oldPrice: e.target.value })} className="pl-8 font-black text-slate-400 line-through" placeholder="0.00" />
+                       <input type="text" value={formData.oldPrice || ''} onChange={e => setFormData({ ...formData, oldPrice: e.target.value })} className="pl-8 font-black text-slate-400 line-through" placeholder="0.00" />
                     </div>
                  </div>
 
