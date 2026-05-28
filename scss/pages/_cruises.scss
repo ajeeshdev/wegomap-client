@@ -968,4 +968,268 @@
             }
         }
     }
+
+    .houseboat-rules-section {
+        margin-top: 96px;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 96px;
+
+        .rules-header {
+            max-width: 650px;
+            margin-bottom: 60px;
+
+            .pre-title-wrapper {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 16px;
+
+                .line {
+                    width: 32px;
+                    height: 1px;
+                    background-color: var(--primary-color, #2563eb);
+                }
+
+                .pre-title {
+                    color: var(--primary-color, #2563eb);
+                    font-weight: 900;
+                    font-size: 10px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.3em;
+                }
+            }
+
+            .section-title {
+                font-family: var(--serif-font, serif);
+                font-size: 40px;
+                font-weight: 700;
+                color: #0f172a;
+                line-height: 1.2;
+
+                @media (min-width: 768px) {
+                    font-size: 48px;
+                }
+            }
+
+            .sub-title {
+                color: #64748b;
+                margin-top: 20px;
+                font-size: 18px;
+            }
+        }
+
+        .rules-container {
+            width: 100%;
+
+            .guidelines-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 16px;
+
+                @media (min-width: 768px) {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+
+                .guideline-item {
+                    background-color: #fff;
+                    border: 1px solid #f1f5f9;
+                    border-radius: 20px;
+                    padding: 16px 20px;
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 14px;
+                    transition: all 0.3s;
+
+                    &:hover {
+                        border-color: #e2e8f0;
+                        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+
+                        .bullet-wrapper {
+                            background-color: #d1fae5;
+                            .bullet-icon {
+                                color: #059669;
+                            }
+                        }
+                    }
+
+                    .bullet-wrapper {
+                        width: 28px;
+                        height: 28px;
+                        border-radius: 50%;
+                        background-color: #f0fdf4;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-shrink: 0;
+                        transition: all 0.3s;
+
+                        .bullet-icon {
+                            color: #10b981;
+                            transition: all 0.3s;
+                        }
+                    }
+
+                    .guideline-text {
+                        font-size: 13px;
+                        font-weight: 600;
+                        color: #475569;
+                        line-height: 1.5;
+                    }
+                }
+            }
+        }
+
+        .honeymoon-spotlight-card {
+            margin-top: 60px;
+            background: linear-gradient(135deg, #fff5f5 0%, #fff1f2 100%);
+            border: 1px solid #ffe4e6;
+            border-radius: 32px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -10px rgba(244, 63, 94, 0.08);
+            transition: all 0.4s;
+
+            &:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 20px 40px -15px rgba(244, 63, 94, 0.15);
+
+                .spotlight-glow {
+                    opacity: 0.25;
+                }
+            }
+
+            .spotlight-glow {
+                position: absolute;
+                bottom: -80px;
+                right: -80px;
+                width: 256px;
+                height: 256px;
+                background-color: #f43f5e;
+                border-radius: 50%;
+                filter: blur(80px);
+                opacity: 0.15;
+                transition: all 0.4s;
+            }
+
+            .card-content {
+                position: relative;
+                z-index: 10;
+
+                .badge-row {
+                    margin-bottom: 16px;
+
+                    .romantic-badge {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 6px;
+                        padding: 6px 12px;
+                        background-color: #ffe4e6;
+                        border-radius: 12px;
+                        color: #e11d48;
+
+                        .icon {
+                            color: #f43f5e;
+                        }
+
+                        span {
+                            font-size: 9px;
+                            font-weight: 900;
+                            text-transform: uppercase;
+                            letter-spacing: 0.1em;
+                        }
+                    }
+                }
+
+                .spotlight-title {
+                    font-family: var(--serif-font, serif);
+                    font-size: 28px;
+                    font-weight: 700;
+                    color: #9f1239;
+                    line-height: 1.2;
+                }
+
+                .spotlight-value {
+                    color: #e11d48;
+                    font-size: 18px;
+                    font-weight: 800;
+                    margin-top: 12px;
+                    line-height: 1.4;
+                    letter-spacing: -0.01em;
+                }
+            }
+        }
+
+        .rules-warning-note {
+            margin-top: 24px;
+            padding: 16px 24px;
+            background-color: #fffbeb;
+            border: 1px solid #fef3c7;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            .warning-icon {
+                color: #d97706;
+                flex-shrink: 0;
+            }
+
+            .warning-text {
+                font-size: 13px;
+                color: #b45309;
+                font-weight: 600;
+                line-height: 1.4;
+            }
+        }
+
+        .cruises-additional-details {
+            margin-top: 60px;
+            background-color: #fff;
+            border: 1px solid #f1f5f9;
+            border-radius: 32px;
+            padding: 40px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+
+            // Rich HTML typography styles
+            h1, h2, h3, h4, h5, h6 {
+                font-family: var(--serif-font, serif);
+                color: #0f172a;
+                font-weight: 700;
+                margin-top: 24px;
+                margin-bottom: 16px;
+                line-height: 1.3;
+            }
+
+            h2 { font-size: 24px; }
+            h3 { font-size: 20px; }
+
+            p {
+                font-size: 15px;
+                color: #475569;
+                line-height: 1.8;
+                margin-bottom: 16px;
+            }
+
+            ul, ol {
+                margin-bottom: 16px;
+                padding-left: 24px;
+
+                li {
+                    font-size: 14px;
+                    color: #475569;
+                    margin-bottom: 8px;
+                    line-height: 1.6;
+                }
+            }
+
+            strong {
+                color: #0f172a;
+                font-weight: 700;
+            }
+        }
+    }
 }

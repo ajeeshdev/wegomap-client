@@ -4,7 +4,7 @@ import { API_URL, getImageUrl } from '@/config';
 import { useState, useEffect, useMemo } from 'react';
 /* Refresh forced */
 import Image from 'next/image';
-import { Search, Ship, Anchor, Waves, MapPin, Wind, Sparkles, X, ShieldCheck, Utensils, Zap } from 'lucide-react';
+import { Search, Ship, Anchor, Waves, MapPin, Wind, Sparkles, X, ShieldCheck, Utensils, Zap, Clock, Coffee, CheckCircle, AlertTriangle } from 'lucide-react';
 import DynamicPageBanner from '@/components/DynamicPageBanner';
 import { useEnquiry } from '@/context/EnquiryContext';
 
@@ -14,7 +14,13 @@ export default function CruisesListingPage() {
     const [pricing, setPricing] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
-    const [bannerData, setBannerData] = useState<any>({});
+    const [pageContent, setPageContent] = useState<any>({
+        banner: {},
+        rules: [],
+        honeymoonDelights: "",
+        rulesNote: "",
+        additionalDetails: ""
+    });
 
     useEffect(() => {
         async function fetchData() {
@@ -30,7 +36,7 @@ export default function CruisesListingPage() {
                 if (hbJson.success) setHouseboats(hbJson.data);
                 if (optJson.success && optJson.data.length > 0) setPricing(optJson.data[0].value);
 
-                // Fetch cruises banner settings
+                // Fetch cruises banner and page settings
                 const bannerRes = await fetch(`${API_URL}/options`);
                 const bannerJson = await bannerRes.json();
                 if (bannerJson.success && bannerJson.data) {
@@ -38,7 +44,13 @@ export default function CruisesListingPage() {
                     if (opt) {
                         try {
                             const parsed = JSON.parse(opt.value);
-                            if (parsed.banner) setBannerData(parsed.banner);
+                            setPageContent({
+                                banner: parsed.banner || {},
+                                rules: parsed.rules || [],
+                                honeymoonDelights: parsed.honeymoonDelights || "",
+                                rulesNote: parsed.rulesNote || "",
+                                additionalDetails: parsed.additionalDetails || ""
+                            });
                         } catch (e) {}
                     }
                 }
@@ -67,13 +79,13 @@ export default function CruisesListingPage() {
     return (
         <div className="cruises-listing-wrapper">
             <DynamicPageBanner 
-                title={bannerData.title || undefined}
-                subtitle={bannerData.subtitle || undefined}
-                preTitle={bannerData.preTitle || undefined}
+                title={pageContent.banner?.title || undefined}
+                subtitle={pageContent.banner?.subtitle || undefined}
+                preTitle={pageContent.banner?.preTitle || undefined}
                 fallbackTitle="Luxury Backwater Cruises"
                 fallbackSubtitle="Experience the serene backwaters of Alleppey and Kumarakom on our premium houseboats."
                 fallbackPreTitle="Cruises & Houseboats"
-                fallbackImage={bannerData.image || "/hero-houseboat.jpg"}
+                fallbackImage={pageContent.banner?.image || "/hero-houseboat.jpg"}
                 breadcrumbs={[{ label: 'Cruises' }]}
                 skipApiFetch={true}
             />
@@ -174,6 +186,65 @@ export default function CruisesListingPage() {
                     )}
                 </div>
 
+                {/* HOUSEBOAT RULES SECTION */}
+                {pageContent.rules && pageContent.rules.length > 0 && (
+                    <div className="houseboat-rules-section animate-in fade-in duration-700">
+                        <div className="rules-header">
+                            <div className="pre-title-wrapper">
+                                <span className="line"></span>
+                                <span className="pre-title">Important Guidelines</span>
+                            </div>
+                            <h2 className="section-title">Houseboat Rules</h2>
+                            <p className="sub-title">To ensure a safe, comfortable, and memorable cruising experience, please review the onboard policies below.</p>
+                        </div>
+
+                        <div className="rules-container">
+                            <ul className="guidelines-list">
+                                {pageContent.rules.map((rule: string, idx: number) => (
+                                    <li key={idx} className="guideline-item">
+                                        <span className="bullet-wrapper">
+                                            <CheckCircle className="bullet-icon" size={16} />
+                                        </span>
+                                        <p className="guideline-text">{rule}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* HONEYMOON DELIGHTS SPOTLIGHT */}
+                        {pageContent.honeymoonDelights && (
+                            <div className="honeymoon-spotlight-card">
+                                <div className="spotlight-glow"></div>
+                                <div className="card-content">
+                                    <div className="badge-row">
+                                        <div className="romantic-badge">
+                                            <Sparkles size={12} className="icon" />
+                                            <span>Exclusive Benefit</span>
+                                        </div>
+                                    </div>
+                                    <h3 className="spotlight-title">Honeymoon Delights Included</h3>
+                                    <p className="spotlight-value">{pageContent.honeymoonDelights}</p>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* HOLIDAY WARNING NOTE */}
+                        {pageContent.rulesNote && (
+                            <div className="rules-warning-note">
+                                <AlertTriangle className="warning-icon" size={18} />
+                                <span className="warning-text"><strong>*Note:</strong> {pageContent.rulesNote}</span>
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                {/* ADDITIONAL DETAILS RICH TEXT HTML */}
+                {pageContent.additionalDetails && (
+                    <div className="cruises-additional-details" style={{ marginTop: '20px' }}>
+                        <div dangerouslySetInnerHTML={{ __html: pageContent.additionalDetails }} className="prose max-w-none text-slate-700" />
+                    </div>
+                )}
+
                 <div className="cta-banner">
                     <div className="cta-content">
                         <div className="text-side">
@@ -189,28 +260,7 @@ export default function CruisesListingPage() {
                     </div>
                 </div>
 
-                <div className="features-grid">
-                    <div className="feature-item">
-                        <div className="icon-wrapper"><ShieldCheck size={32} /></div>
-                        <h4 className="feature-title">Verified Fleet</h4>
-                        <p className="feature-desc">Every vessel undergoes rigorous safety and quality audits.</p>
-                    </div>
-                    <div className="feature-item">
-                        <div className="icon-wrapper"><Utensils size={32} /></div>
-                        <h4 className="feature-title">Chef Onboard</h4>
-                        <p className="feature-desc">Authentic Kerala cuisine prepared fresh with local ingredients.</p>
-                    </div>
-                    <div className="feature-item">
-                        <div className="icon-wrapper"><Zap size={32} /></div>
-                        <h4 className="feature-title">Tiered Comfort</h4>
-                        <p className="feature-desc">Transparent pricing for Deluxe, Premium, and Luxury stays.</p>
-                    </div>
-                    <div className="feature-item">
-                        <div className="icon-wrapper"><Wind size={32} /></div>
-                        <h4 className="feature-title">Climate Control</h4>
-                        <p className="feature-desc">Fully air-conditioned cabins for a comfortable night stay.</p>
-                    </div>
-                </div>
+                
             </div>
         </div>
     );

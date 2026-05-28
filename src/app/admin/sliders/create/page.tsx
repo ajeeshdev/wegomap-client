@@ -13,7 +13,6 @@ export default function CreateSlider() {
     title: '',
     subtitle: '',
     image: '',
-    imageAlt: '',
     imageAlt: 'wegomap',
     link: '',
     status: 'Active'
