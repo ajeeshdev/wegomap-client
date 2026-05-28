@@ -325,11 +325,22 @@
                             letter-spacing: 0.2em;
                             margin-bottom: 4px;
                         }
+                        .price-values {
+                            display: flex;
+                            align-items: baseline;
+                            gap: 8px;
+                        }
                         .amount {
                             font-size: 24px;
                             font-weight: 900;
                             color: #0f172a;
                             letter-spacing: -0.05em;
+                        }
+                        .old-amount {
+                            font-size: 14px;
+                            font-weight: 700;
+                            color: #94a3b8;
+                            text-decoration: line-through;
                         }
                     }
 

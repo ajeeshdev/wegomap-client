@@ -19,6 +19,7 @@ export default function CreateHouseboat() {
     short_desc: '',
     description: '',
     price: '',
+    oldPrice: '',
     category: 'Deluxe',
     image: '',
     imageAlt: '',
@@ -160,6 +161,14 @@ export default function CreateHouseboat() {
                     <div className="relative">
                        <IndianRupee size={12} className="absolute left-3 top-1/2 -translate-y-1/2 text-emerald-500" />
                        <input type="text" value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} className="pl-8 font-black text-slate-900" placeholder="0.00" />
+                    </div>
+                 </div>
+
+                 <div className="meta-item">
+                    <label>Old Rate (₹) [Strikethrough]</label>
+                    <div className="relative">
+                       <IndianRupee size={12} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                       <input type="text" value={formData.oldPrice} onChange={e => setFormData({ ...formData, oldPrice: e.target.value })} className="pl-8 font-black text-slate-400 line-through" placeholder="0.00" />
                     </div>
                  </div>
 

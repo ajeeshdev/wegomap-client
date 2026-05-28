@@ -163,9 +163,16 @@ export default function CruisesListingPage() {
                                     <div className="footer">
                                         <div className="price-info">
                                             <p className="label">Starting from</p>
-                                            <p className="amount">
-                                                ₹{hb.price || (pricing && pricing[hb.category?.toLowerCase()]?.price)}
-                                            </p>
+                                            <div className="price-values">
+                                                <span className="amount">
+                                                    ₹{hb.price || (pricing && pricing[hb.category?.toLowerCase()]?.price)}
+                                                </span>
+                                                {(hb.oldPrice || (pricing && pricing[hb.category?.toLowerCase()]?.oldPrice)) && (
+                                                    <span className="old-amount">
+                                                        ₹{hb.oldPrice || (pricing && pricing[hb.category?.toLowerCase()]?.oldPrice)}
+                                                    </span>
+                                                )}
+                                            </div>
                                         </div>
                                         
                                         <button 

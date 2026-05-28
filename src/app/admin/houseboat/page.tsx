@@ -215,13 +215,22 @@ export default function HouseboatMainAdmin() {
                         <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 px-3 py-1 bg-white rounded-lg border border-slate-100 group-hover:border-blue-100 group-hover:text-blue-600 transition-colors">{key}</span>
                         <Sparkles size={14} className="text-slate-200 group-hover:text-blue-600 transition-colors" />
                       </div>
-                      <div className="admin-form-group mb-0">
+                      <div className="admin-form-group mb-4">
                         <label>Base Price (₹)</label>
                         <input 
                           type="text" 
-                          value={data.price} 
+                          value={data.price || ''} 
                           onChange={e => setPricing({...pricing, [key]: {...data, price: e.target.value}})}
                           className="title-input !text-xl !font-black !bg-white"
+                        />
+                      </div>
+                      <div className="admin-form-group mb-0">
+                        <label>Old Price (₹) [Strikethrough]</label>
+                        <input 
+                          type="text" 
+                          value={data.oldPrice || ''} 
+                          onChange={e => setPricing({...pricing, [key]: {...data, oldPrice: e.target.value}})}
+                          className="title-input !text-xl !font-black !bg-white text-slate-400 line-through"
                         />
                       </div>
                     </div>
