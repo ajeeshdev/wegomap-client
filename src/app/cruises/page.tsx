@@ -19,7 +19,9 @@ export default function CruisesListingPage() {
         rules: [],
         honeymoonDelights: "",
         rulesNote: "",
-        additionalDetails: ""
+        additionalDetails: "",
+        listingTitle: "",
+        listingSubtitle: ""
     });
 
     useEffect(() => {
@@ -49,7 +51,9 @@ export default function CruisesListingPage() {
                                 rules: parsed.rules || [],
                                 honeymoonDelights: parsed.honeymoonDelights || "",
                                 rulesNote: parsed.rulesNote || "",
-                                additionalDetails: parsed.additionalDetails || ""
+                                additionalDetails: parsed.additionalDetails || "",
+                                listingTitle: parsed.listingTitle || "",
+                                listingSubtitle: parsed.listingSubtitle || ""
                             });
                         } catch (e) {}
                     }
