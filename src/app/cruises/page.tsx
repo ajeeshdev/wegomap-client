@@ -160,6 +160,13 @@ export default function CruisesListingPage() {
                                         <p className="short-desc">{hb.short_desc}</p>
                                     )}
                                     
+                                    {hb.description && (
+                                        <div 
+                                            className="vessel-narrative-content" 
+                                            dangerouslySetInnerHTML={{ __html: hb.description }} 
+                                        />
+                                    )}
+                                    
                                     <div className="footer">
                                         <div className="price-info">
                                             <p className="label">Starting from</p>

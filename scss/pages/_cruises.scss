@@ -309,6 +309,30 @@
                     margin-bottom: 24px;
                 }
 
+                .vessel-narrative-content {
+                    color: #475569;
+                    font-size: 14px;
+                    line-height: 1.6;
+                    margin-bottom: 24px;
+                    
+                    p {
+                        margin-bottom: 12px;
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+                    }
+                    
+                    ul, ol {
+                        margin-left: 20px;
+                        margin-bottom: 12px;
+                        list-style-type: disc;
+                    }
+                    
+                    li {
+                        margin-bottom: 4px;
+                    }
+                }
+
                 .footer {
                     padding-top: 24px;
                     border-top: 1px solid #f8fafc;
