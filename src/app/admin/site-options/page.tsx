@@ -61,6 +61,13 @@ export default function SiteOptionsPage() {
         bank_accounts: [] as any[]
     });
 
+    const [floatingButtons, setFloatingButtons] = useState({
+        enable_floating_buttons: true,
+        instagram_url: '',
+        whatsapp_number: '',
+        phone_number: ''
+    });
+
     useEffect(() => {
         fetchOptions();
     }, []);
@@ -88,6 +95,13 @@ export default function SiteOptionsPage() {
                             setPayment(parsed);
                         } catch(e) {}
                     }
+
+                    if (opt.key === 'floating_buttons') {
+                        try {
+                            const parsed = JSON.parse(opt.value);
+                            setFloatingButtons(prev => ({ ...prev, ...parsed }));
+                        } catch(e) {}
+                    }
                 });
                 
                 setGeneral(gen);
@@ -112,7 +126,8 @@ export default function SiteOptionsPage() {
                 ...Object.entries(contact).map(([k, v]) => ({ key: k, value: String(v) })),
                 ...Object.entries(social).map(([k, v]) => ({ key: k, value: String(v) })),
                 ...Object.entries(footer).map(([k, v]) => ({ key: k, value: String(v) })),
-                { key: 'payment_details', value: JSON.stringify(payment) }
+                { key: 'payment_details', value: JSON.stringify(payment) },
+                { key: 'floating_buttons', value: JSON.stringify(floatingButtons) }
             ];
 
             const res = await fetch(`${API_URL}/options/bulk`, {
@@ -582,6 +597,62 @@ export default function SiteOptionsPage() {
                                             No bank accounts added
                                         </div>
                                     )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Floating Buttons Section */}
+                    <div className="admin-form-card">
+                        <div className="space-y-6">
+                            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                                <div>
+                                    <h3 className="admin-form-section-title text-base font-semibold text-slate-800 m-0 border-none pb-0">
+                                        Floating Buttons
+                                    </h3>
+                                    <p className="text-[10px] text-slate-400 mt-1">Enable and customize floating sticky buttons (Instagram, WhatsApp, Call) on the right side of pages.</p>
+                                </div>
+                                <label className="relative inline-block w-10 h-5 cursor-pointer">
+                                    <input 
+                                        type="checkbox" 
+                                        checked={floatingButtons.enable_floating_buttons}
+                                        onChange={e => setFloatingButtons({...floatingButtons, enable_floating_buttons: e.target.checked})}
+                                        className="sr-only peer"
+                                    />
+                                    <span className="block w-full h-full bg-slate-200 rounded-full peer-checked:bg-emerald-500 transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:w-4 after:h-4 after:bg-white after:rounded-full after:shadow after:transition-transform peer-checked:after:translate-x-5"></span>
+                                </label>
+                            </div>
+
+                            <div className="admin-form-grid-3">
+                                <div className="admin-form-group">
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Instagram URL</label>
+                                    <input 
+                                        type="url" 
+                                        value={floatingButtons.instagram_url} 
+                                        onChange={e => setFloatingButtons({...floatingButtons, instagram_url: e.target.value})} 
+                                        className="admin-form-input !h-9" 
+                                        placeholder="https://instagram.com/wegomap"
+                                    />
+                                </div>
+                                <div className="admin-form-group">
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">WhatsApp Number</label>
+                                    <input 
+                                        type="text" 
+                                        value={floatingButtons.whatsapp_number} 
+                                        onChange={e => setFloatingButtons({...floatingButtons, whatsapp_number: e.target.value})} 
+                                        className="admin-form-input !h-9" 
+                                        placeholder="918113998989"
+                                    />
+                                </div>
+                                <div className="admin-form-group">
+                                    <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Call Phone Number</label>
+                                    <input 
+                                        type="text" 
+                                        value={floatingButtons.phone_number} 
+                                        onChange={e => setFloatingButtons({...floatingButtons, phone_number: e.target.value})} 
+                                        className="admin-form-input !h-9" 
+                                        placeholder="+918113998989"
+                                    />
                                 </div>
                             </div>
                         </div>

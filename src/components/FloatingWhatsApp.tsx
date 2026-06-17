@@ -11,7 +11,7 @@ export default function FloatingWhatsApp() {
             try {
                 const res = await fetch(`${API_URL}/options`);
                 const data = await res.json();
-                if (data.success) {
+                if (data.success && data.data) {
                     const whatsappOpt = data.data.find((opt: any) => opt.key === 'whatsapp');
                     if (whatsappOpt?.value) {
                         // Clean the number from any non-numeric characters for the wa.me link

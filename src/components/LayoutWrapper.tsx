@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileNav from "@/components/MobileNav";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import FloatingButtons from "@/components/FloatingButtons";
 import MyraBot from "@/components/MyraBot";
 
 import { useEnquiry } from '@/context/EnquiryContext';
@@ -29,6 +30,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                     <Footer />
                     <MobileNav />
                     <FloatingWhatsApp />
+                    <FloatingButtons />
                     <MyraBot />
                 </>
             )}

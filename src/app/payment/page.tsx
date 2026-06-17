@@ -186,10 +186,10 @@ export default function PaymentPage() {
                             {/* Front */}
                             <div className="payUpiCardFront">
                                 <Image
-                                    src="/assets/site/assets/images/pay-online.png"
-                                    alt="Pay Online"
-                                    width={220}
-                                    height={120}
+                                    src="/assets/site/assets/images/razorpay-logo.svg"
+                                    alt="Razorpay Pay Online"
+                                    width={180}
+                                    height={90}
                                     style={{ objectFit: 'contain' }}
                                     
                                 />
