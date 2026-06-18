@@ -9482,6 +9482,17 @@ footer .footerBottom .socialLinks a:hover {
   border-color: #fff;
   transform: translateY(-8px);
 }
+.mainFooter .footerWrapper .cta-container .luxeBtn.luxury.whatsapp-cta-btn {
+  border: 2px solid rgba(37, 211, 102, 0.25);
+  color: #25d366;
+}
+.mainFooter .footerWrapper .cta-container .luxeBtn.luxury.whatsapp-cta-btn:hover {
+  background: rgba(37, 211, 102, 0.1);
+  border-color: #25d366;
+  color: #25d366;
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(37, 211, 102, 0.25);
+}
 .mainFooter .footerWrapper .footer-bottom-v2 {
   position: relative;
   z-index: 2;
@@ -12463,7 +12474,8 @@ button.wishlistBtn {
     flex-direction: column !important;
     width: 100%;
   }
-  .packageDetailPage .tourStatsRow .tStat:nth-child(3) .enquire-now-btn, .packageDetailPage .tourStatsRow .tStat:nth-child(3) .heartWish {
+  .packageDetailPage .tourStatsRow .tStat:nth-child(3) .enquire-now-btn,
+  .packageDetailPage .tourStatsRow .tStat:nth-child(3) .heartWish {
     width: 100%;
     flex: 1;
   }
@@ -12792,7 +12804,8 @@ button.wishlistBtn {
 }
 .packageDetailPage .mainContent .detailsCol .itineraryTimeline .timelineItem .activityGrid .dayAmenities .dayAmenityBadge:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 90, 61, 0.08); /* cosmic orange tint */
+  box-shadow: 0 4px 12px rgba(255, 90, 61, 0.08);
+  /* cosmic orange tint */
 }
 .packageDetailPage .mainContent .detailsCol .itineraryTimeline .timelineItem .activityGrid .dayAmenities .dayAmenityBadge .amIcon {
   display: flex;
@@ -12942,6 +12955,19 @@ button.wishlistBtn {
 .packageDetailPage .mainContent .bookingCol .bookingCard .ctaGroup .bk-btn-primary:hover {
   background: #e53e39;
   transform: translateY(-2px);
+}
+.packageDetailPage .mainContent .bookingCol .bookingCard .ctaGroup .bk-btn-whatsapp {
+  background: #25D366;
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 14px 0 rgba(37, 211, 102, 0.3);
+  text-decoration: none;
+}
+.packageDetailPage .mainContent .bookingCol .bookingCard .ctaGroup .bk-btn-whatsapp:hover {
+  background: #20ba5a;
+  transform: translateY(-2px);
+  color: #fff;
+  box-shadow: 0 6px 20px 0 rgba(37, 211, 102, 0.45);
 }
 .packageDetailPage .mainContent .bookingCol .bookingCard .ctaGroup .bk-btn-secondary {
   background: #fff;
@@ -13450,7 +13476,8 @@ button.wishlistBtn {
   transition: all 0.3s ease-in-out;
 }
 .packageDetailPage .custom-faq-container .custom-faq-item.active .custom-faq-answer-container {
-  max-height: 1000px; /* arbitrary large value to fit content */
+  max-height: 1000px;
+  /* arbitrary large value to fit content */
   opacity: 1;
 }
 .packageDetailPage .custom-faq-container .custom-faq-item .custom-faq-answer {

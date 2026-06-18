@@ -20,7 +20,7 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
         position: relative;
         margin-top: -60px;
         z-index: 50;
-        
+
         .tourStatsGrid {
             display: flex;
             align-items: center;
@@ -42,17 +42,18 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                 margin-top: -40px;
                 text-align: center;
             }
+
             @include max(767) {
                 display: flex;
-        flex-wrap: wrap;
-        flex-direction: column;
+                flex-wrap: wrap;
+                flex-direction: column;
             }
         }
 
         .tStat {
             flex-wrap: wrap;
             display: flex;
-                        gap: 0.5rem;
+            gap: 0.5rem;
             flex: 1;
 
             &.items-center {
@@ -79,25 +80,28 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                     gap: 0.75rem !important;
                     padding-top: .75rem !important;
                     border-top: 1px solid #f1f5f9 !important;
-                    
+
                     // Specific button behavior on small mobile
                     @media (max-width: 480px) {
                         flex-direction: column !important;
                         width: 100%;
-                        
-                        .enquire-now-btn, .heartWish {
+
+                        .enquire-now-btn,
+                        .heartWish {
                             width: 100%;
                             flex: 1;
                         }
                     }
                 }
             }
+
             @include max(767) {
-                 &:nth-child(2) {
-                    padding: 0 10px!important;
-            
+                &:nth-child(2) {
+                    padding: 0 10px !important;
+
                 }
             }
+
             &:last-child {
                 @media (min-width: 1025px) {
                     margin-left: auto;
@@ -143,7 +147,7 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                     font-size: 1.5rem;
                     line-height: 1;
                     letter-spacing: -0.02em;
-                    
+
                     @media (max-width: 640px) {
                         font-size: 1.35rem;
                     }
@@ -176,7 +180,7 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                 color: #fff;
                 transform: translateY(-3px);
                 box-shadow: 0 15px 35px rgba($cosmicBlue, 0.2);
-                
+
                 svg {
                     color: $cosmicOrange;
                     transform: translateX(2px);
@@ -254,8 +258,12 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                     gap: 0.75rem;
                     color: $cosmicBlue;
                     text-transform: none;
-                    
-                    svg { color: $cosmicOrange; width: 22px; height: 22px; }
+
+                    svg {
+                        color: $cosmicOrange;
+                        width: 22px;
+                        height: 22px;
+                    }
 
                     &::after {
                         display: none; // Removing the weird orange dash we had globally early
@@ -269,8 +277,10 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                     font-weight: 400;
                     margin-bottom: 1rem;
                     white-space: pre-line;
-                    
-                    p { margin-bottom: 1.5rem; }
+
+                    p {
+                        margin-bottom: 1.5rem;
+                    }
                 }
 
                 .amenitiesGrid {
@@ -294,7 +304,11 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                             background: rgba($cosmicOrange, 0.05);
                             color: $cosmicOrange;
                             border-radius: 0.75rem;
-                            svg { width: 20px; height: 20px; }
+
+                            svg {
+                                width: 20px;
+                                height: 20px;
+                            }
                         }
 
                         span {
@@ -430,7 +444,7 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                                 display: inline-flex;
                                 align-items: center;
                                 gap: 0.65rem;
-                                background-color: #fffaf9; 
+                                background-color: #fffaf9;
                                 border: 1px solid #ffedea;
                                 border-radius: 50px;
                                 padding: 0.4rem 1.1rem 0.4rem 0.6rem;
@@ -438,7 +452,8 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
 
                                 &:hover {
                                     transform: translateY(-2px);
-                                    box-shadow: 0 4px 12px rgba(255, 90, 61, 0.08); /* cosmic orange tint */
+                                    box-shadow: 0 4px 12px rgba(255, 90, 61, 0.08);
+                                    /* cosmic orange tint */
                                 }
 
                                 .amIcon {
@@ -449,7 +464,7 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                                     height: 28px;
                                     border-radius: 10px;
                                     color: $cosmicOrange;
-                                    
+
                                     svg {
                                         width: 24px;
                                         height: 24px;
@@ -473,10 +488,12 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                             border-radius: 1.5rem;
                             overflow: hidden;
                             border: 4px solid #fff;
-                            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+                            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
                             transition: all 0.5s ease;
 
-                            &:hover { transform: translateY(-10px) rotate(-1deg); }
+                            &:hover {
+                                transform: translateY(-10px) rotate(-1deg);
+                            }
                         }
                     }
                 }
@@ -491,7 +508,7 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                 border-radius: 1.5rem;
                 background: #fff;
                 border: 1px solid #f1f5f9;
-                box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
+                box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
 
                 .bk-price-row {
                     display: flex;
@@ -531,8 +548,13 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                         font-weight: 700;
                         color: #0f172a;
 
-                        span { margin-left: 2px; }
-                        svg { color: #0ea5e9; }
+                        span {
+                            margin-left: 2px;
+                        }
+
+                        svg {
+                            color: #0ea5e9;
+                        }
                     }
                 }
 
@@ -583,7 +605,7 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                     display: flex;
                     flex-direction: column;
                     gap: 1rem;
-                    
+
                     .bk-btn {
                         width: 100%;
                         display: flex;
@@ -608,6 +630,21 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                         &:hover {
                             background: #e53e39;
                             transform: translateY(-2px);
+                        }
+                    }
+
+                    .bk-btn-whatsapp {
+                        background: #25D366;
+                        color: #fff;
+                        border: none;
+                        box-shadow: 0 4px 14px 0 rgba(37, 211, 102, 0.3);
+                        text-decoration: none;
+
+                        &:hover {
+                            background: #20ba5a;
+                            transform: translateY(-2px);
+                            color: #fff;
+                            box-shadow: 0 6px 20px 0 rgba(37, 211, 102, 0.45);
                         }
                     }
 
@@ -638,13 +675,19 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
 }
 
 .tour-description-content {
-    h3 { font-size: 1.5rem; font-weight: 950; margin: 2rem 0 1rem; color: $cosmicBlue; }
-    ul { 
-        list-style: none; 
-        margin-left: 0; 
-        margin: 1.5rem; 
+    h3 {
+        font-size: 1.5rem;
+        font-weight: 950;
+        margin: 2rem 0 1rem;
+        color: $cosmicBlue;
+    }
+
+    ul {
+        list-style: none;
+        margin-left: 0;
+        margin: 1.5rem;
         padding: 0;
-        
+
         li {
             position: relative;
             padding-left: 2.25rem;
@@ -652,7 +695,7 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
             color: #475569;
             line-height: 1.7;
             font-weight: 500;
-            
+
             &::before {
                 content: "";
                 position: absolute;
@@ -675,7 +718,11 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
             }
         }
     }
-    strong { font-weight: 900; color: $cosmicBlue; }
+
+    strong {
+        font-weight: 900;
+        color: $cosmicBlue;
+    }
 }
 
 /* ==========================================================================
@@ -747,7 +794,7 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                 font-weight: 500;
 
                 span {
-                   color: #475569;
+                    color: #475569;
                 }
 
                 .icon-check {
@@ -990,6 +1037,7 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                         font-weight: 600;
                         color: #0f172a;
                     }
+
                     .gr-subtitle {
                         font-size: 0.75rem;
                         color: #64748b;
@@ -1002,8 +1050,12 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                 gap: 0.25rem;
                 margin-bottom: 1.5rem;
                 color: #cbd5e1;
-                
-                button { background: none; border: none; cursor: pointer; }
+
+                button {
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                }
 
                 .gr-star-btn {
                     padding: 0.5rem;
@@ -1192,7 +1244,8 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
         }
 
         &.active .custom-faq-answer-container {
-            max-height: 1000px; /* arbitrary large value to fit content */
+            max-height: 1000px;
+            /* arbitrary large value to fit content */
             opacity: 1;
         }
 

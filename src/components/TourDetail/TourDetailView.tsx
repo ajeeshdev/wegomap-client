@@ -27,11 +27,11 @@ import {
 } from 'lucide-react';
 
 const ICON_MAP: Record<string, any> = {
-    Building2, Utensils, Car, Plane, MapPin, Clock, 
-    ShieldCheck, Sparkles, Waves, Mountain, Palmtree, 
+    Building2, Utensils, Car, Plane, MapPin, Clock,
+    ShieldCheck, Sparkles, Waves, Mountain, Palmtree,
     Camera, Tent, Wifi, Coffee, Music, Ticket, Star,
-    Heart, Sunset, ShoppingBag, BedDouble, Bed, Hotel, 
-    Bath, ShowerHead, ThermometerSnowflake, Tv, Key, 
+    Heart, Sunset, ShoppingBag, BedDouble, Bed, Hotel,
+    Bath, ShowerHead, ThermometerSnowflake, Tv, Key,
     DoorOpen, TreePalm, Users
 };
 import { useEnquiry } from '@/context/EnquiryContext';
@@ -288,7 +288,7 @@ export default function TourDetailView({ id }: { id: string }) {
                         </div>
                     </div>
                     <div className="tStat border-l border-slate-100 pl-8 flex items-center gap-4">
-                        <button 
+                        <button
                             onClick={() => openEnquiry(pkg.title)}
                             className="enquire-now-btn"
                         >
@@ -343,7 +343,7 @@ export default function TourDetailView({ id }: { id: string }) {
                                 </div>
                             </div>
 
-                        
+
 
                             {/* Itinerary */}
                             <div className="itinerarySection">
@@ -356,11 +356,11 @@ export default function TourDetailView({ id }: { id: string }) {
                                             <h4>{item.day}</h4>
                                             <div className="activityGrid">
                                                 <div className="flex flex-col">
-                                                    <div 
+                                                    <div
                                                         className="activityText tour-description-content mb-4"
                                                         dangerouslySetInnerHTML={{ __html: item.description || item.activity || '' }}
                                                     />
-                                                    
+
                                                     {item.amenities && item.amenities.length > 0 && (
                                                         <div className="dayAmenities">
                                                             {item.amenities.map((am: any, aIdx: number) => {
@@ -440,12 +440,12 @@ export default function TourDetailView({ id }: { id: string }) {
                                             {pkg.images.map((img, i) => (
                                                 <SwiperSlide key={i}>
                                                     <div className="aspect-[16/10] relative rounded-3xl overflow-hidden border border-slate-100 shadow-sm group">
-                                                        <Image 
-                                                            src={getImageUrl(img)} 
-                                                            alt={`${pkg.title} Gallery ${i + 1}`} 
-                                                            fill 
-                                                            className="object-cover transition-transform duration-700 group-hover:scale-110" 
-                                                            unoptimized 
+                                                        <Image
+                                                            src={getImageUrl(img)}
+                                                            alt={`${pkg.title} Gallery ${i + 1}`}
+                                                            fill
+                                                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                                            unoptimized
                                                         />
                                                     </div>
                                                 </SwiperSlide>
@@ -458,7 +458,7 @@ export default function TourDetailView({ id }: { id: string }) {
                             {pkg.extraContact && (
                                 <div className="mb-16">
                                     <h3 className="sectionTitle">Extra Information</h3>
-                                    <div 
+                                    <div
                                         className="description tour-description-content"
                                         dangerouslySetInnerHTML={{ __html: pkg.extraContact }}
                                     />
@@ -472,25 +472,26 @@ export default function TourDetailView({ id }: { id: string }) {
                                         {pkg.faq.map((item: any, idx: number) => {
                                             if (!item || typeof item !== 'object') return null;
                                             return (
-                                            <div key={idx} className={`custom-faq-item ${activeFaq === idx ? 'active' : ''}`}>
-                                                <button 
-                                                    type="button"
-                                                    className="custom-faq-button"
-                                                    onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
-                                                >
-                                                    <span className="custom-faq-question">{item.question || 'FAQ'}</span>
-                                                    <ChevronDown 
-                                                        size={20} 
-                                                        className={`custom-faq-chevron ${activeFaq === idx ? 'active' : ''}`} 
-                                                    />
-                                                </button>
-                                                <div className="custom-faq-answer-container">
-                                                    <div className="custom-faq-answer">
-                                                        {item.answer || ''}
+                                                <div key={idx} className={`custom-faq-item ${activeFaq === idx ? 'active' : ''}`}>
+                                                    <button
+                                                        type="button"
+                                                        className="custom-faq-button"
+                                                        onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
+                                                    >
+                                                        <span className="custom-faq-question">{item.question || 'FAQ'}</span>
+                                                        <ChevronDown
+                                                            size={20}
+                                                            className={`custom-faq-chevron ${activeFaq === idx ? 'active' : ''}`}
+                                                        />
+                                                    </button>
+                                                    <div className="custom-faq-answer-container">
+                                                        <div className="custom-faq-answer">
+                                                            {item.answer || ''}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        )})}
+                                            )
+                                        })}
                                     </div>
                                 </div>
                             )}
@@ -531,7 +532,7 @@ export default function TourDetailView({ id }: { id: string }) {
                                 </div>
 
                                 <p className="bk-note">
-                                   Quick Response
+                                    Quick Response
                                 </p>
                             </div>
                         </div>
@@ -549,7 +550,7 @@ export default function TourDetailView({ id }: { id: string }) {
                                 <h2 className="sliderTitle" style={{ textTransform: 'none', fontStyle: 'normal' }}>Similar Packages</h2>
                             </div>
                         </div>
-                        
+
                         <div className="pb-12">
                             <Swiper
                                 modules={[Navigation, Autoplay, FreeMode]}
@@ -562,57 +563,57 @@ export default function TourDetailView({ id }: { id: string }) {
                                 }}
                                 className="package-slider-container"
                             >
-                            {similarPackages.map((spkg, i) => {
-                                const normalizedPkg = {
-                                    slug: spkg.slug || spkg._id || '',
-                                    title: spkg.title,
-                                    location: spkg.location,
-                                    duration: spkg.duration,
-                                    price: spkg.price ? `₹${Number(String(spkg.price).replace(/[^\d]/g, '')).toLocaleString()}` : 'N/A',
-                                    oldPrice: spkg.oldamt ? `₹${Number(String(spkg.oldamt).replace(/[^\d]/g, '')).toLocaleString()}` : null,
-                                    image: getImageUrl(spkg.thumb || (spkg.images && spkg.images[0]) || "/bg-placeholder.jpg"),
-                                    thumbAlt: spkg.thumbAlt || '',
-                                    images: spkg.images || [],
-                                    subtitle: spkg.location || '',
-                                    highlights: [],
-                                    itinerary: [],
-                                    averageRating: spkg.averageRating || 4.9,
-                                    reviewCount: spkg.reviewCount || 150,
-                                    noCostEmi: spkg.noCostEmi,
-                                    totalPrice: spkg.totalPrice,
-                                    per: spkg.per || '/ Person',
-                                    onoffer: spkg.onoffer,
-                                    slabel: spkg.slabel,
-                                    href: `/packages/${spkg.slug || spkg._id}`,
-                                    _id: spkg._id
-                                };
-                                return (
-                                    <SwiperSlide key={`${spkg._id}-${i}`} className="h-auto">
-                                        <PackageCard 
-                                            pkg={normalizedPkg}
-                                            wishlist={wishlist}
-                                            toggleWishlist={async (pkgId, e) => {
-                                                e.preventDefault();
-                                                e.stopPropagation();
-                                                const token = localStorage.getItem('token');
-                                                if (!token) return toast.error('Please login to save tours');
-                                                try {
-                                                    const res = await fetch(`${API_URL}/auth/wishlist/${pkgId}`, {
-                                                        method: 'PUT',
-                                                        headers: { 'Authorization': `Bearer ${token}` }
-                                                    });
-                                                    const data = await res.json();
-                                                    if (data.success) {
-                                                        setWishlist(data.data);
-                                                        toast.success(data.message);
-                                                    }
-                                                } catch (err) {}
-                                            }}
-                                            onEnquire={(e, title) => openEnquiry(title)}
-                                        />
-                                    </SwiperSlide>
-                                );
-                            })}
+                                {similarPackages.map((spkg, i) => {
+                                    const normalizedPkg = {
+                                        slug: spkg.slug || spkg._id || '',
+                                        title: spkg.title,
+                                        location: spkg.location,
+                                        duration: spkg.duration,
+                                        price: spkg.price ? `₹${Number(String(spkg.price).replace(/[^\d]/g, '')).toLocaleString()}` : 'N/A',
+                                        oldPrice: spkg.oldamt ? `₹${Number(String(spkg.oldamt).replace(/[^\d]/g, '')).toLocaleString()}` : null,
+                                        image: getImageUrl(spkg.thumb || (spkg.images && spkg.images[0]) || "/bg-placeholder.jpg"),
+                                        thumbAlt: spkg.thumbAlt || '',
+                                        images: spkg.images || [],
+                                        subtitle: spkg.location || '',
+                                        highlights: [],
+                                        itinerary: [],
+                                        averageRating: spkg.averageRating || 4.9,
+                                        reviewCount: spkg.reviewCount || 150,
+                                        noCostEmi: spkg.noCostEmi,
+                                        totalPrice: spkg.totalPrice,
+                                        per: spkg.per || '/ Person',
+                                        onoffer: spkg.onoffer,
+                                        slabel: spkg.slabel,
+                                        href: `/packages/${spkg.slug || spkg._id}`,
+                                        _id: spkg._id
+                                    };
+                                    return (
+                                        <SwiperSlide key={`${spkg._id}-${i}`} className="h-auto">
+                                            <PackageCard
+                                                pkg={normalizedPkg}
+                                                wishlist={wishlist}
+                                                toggleWishlist={async (pkgId, e) => {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    const token = localStorage.getItem('token');
+                                                    if (!token) return toast.error('Please login to save tours');
+                                                    try {
+                                                        const res = await fetch(`${API_URL}/auth/wishlist/${pkgId}`, {
+                                                            method: 'PUT',
+                                                            headers: { 'Authorization': `Bearer ${token}` }
+                                                        });
+                                                        const data = await res.json();
+                                                        if (data.success) {
+                                                            setWishlist(data.data);
+                                                            toast.success(data.message);
+                                                        }
+                                                    } catch (err) { }
+                                                }}
+                                                onEnquire={(e, title) => openEnquiry(title)}
+                                            />
+                                        </SwiperSlide>
+                                    );
+                                })}
                             </Swiper>
                         </div>
                     </div>

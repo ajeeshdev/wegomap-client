@@ -25,13 +25,13 @@ interface PageBannerProps {
     onEnquire?: () => void;
 }
 
-export default function PageBanner({ 
-    title, 
-    subtitle, 
-    preTitle, 
-    breadcrumbs, 
+export default function PageBanner({
+    title,
+    subtitle,
+    preTitle,
+    breadcrumbs,
     backgroundImage,
-    imageAlt, 
+    imageAlt,
     variant = 'standard',
     centered = false,
     showEnquire = false,
@@ -98,10 +98,10 @@ export default function PageBanner({
                             {title}
                         </h1>
                         {subtitle && <p className="pageBannerDescription">{subtitle}</p>}
-                        
+
                         {showEnquire && (
                             <div className="pageBannerActions mt-8">
-                                <button 
+                                <button
                                     onClick={handleEnquiry}
                                     className="bannerEnquireBtn px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-2xl flex items-center gap-3 transition-all shadow-xl shadow-orange-500/20 active:scale-95 text-sm uppercase tracking-widest"
                                 >
@@ -110,13 +110,13 @@ export default function PageBanner({
                                 </button>
                             </div>
                         )}
-                        
+
                         {centered && (
                             <div className="googleReviewsBadge">
                                 <span className="googleIcon">G</span>
                                 <span className="rating">4.8</span>
                                 <div className="stars">
-                                    {[1,2,3,4,5].map(s => <Star key={s} size={12} fill="#fbbf24" color="#fbbf24" />)}
+                                    {[1, 2, 3, 4, 5].map(s => <Star key={s} size={12} fill="#fbbf24" color="#fbbf24" />)}
                                 </div>
                                 <span className="count">450 Google reviews</span>
                             </div>
