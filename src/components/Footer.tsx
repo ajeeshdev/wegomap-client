@@ -79,6 +79,13 @@ export default function Footer() {
 
     const { openEnquiry } = useEnquiry();
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            openEnquiry("General Inquiry");
+        }, 30000); // every 30 seconds
+        return () => clearInterval(interval);
+    }, [openEnquiry]);
+
     return (
         <footer className="mainFooter">
             <div className="homeContainer">

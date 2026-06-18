@@ -80,6 +80,7 @@ type PackageItem = {
   oldamt?: number | string;
   per?: string;
   thumb?: string;
+  thumbAlt?: string;
   images?: string[];
   highlights?: string[];
   subtitle?: string;
@@ -292,6 +293,16 @@ export default function LandingPageView({
 
   const handleQuickPlanSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!formData.name.trim()) {
+      toast.error('Please enter your full name.');
+      return;
+    }
+
+    if (!formData.phone.trim()) {
+      toast.error('Please enter your phone number.');
+      return;
+    }
 
     if (!executeRecaptcha) {
       toast.error('reCAPTCHA not loaded. Please try again.');
@@ -788,6 +799,7 @@ export default function LandingPageView({
                   <input
                     type="text"
                     placeholder="John Doe"
+                    required
                     className="lp-modalInput"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}

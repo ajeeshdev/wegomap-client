@@ -68,6 +68,12 @@ export default function ContactPage() {
         setLoading(true);
         setStatus({ type: null, message: '' });
 
+        if (!formData.name.trim()) {
+            setStatus({ type: 'error', message: 'Full name is required.' });
+            setLoading(false);
+            return;
+        }
+
         if (!formData.phone.trim()) {
             setStatus({ type: 'error', message: 'Phone number is required.' });
             setLoading(false);
@@ -182,10 +188,10 @@ export default function ContactPage() {
                             <form onSubmit={handleSubmit} className="cForm">
                                 <div className="formRow split">
                                     <div className="inputGroup">
-                                        <label>Full Name</label>
+                                        <label>Full Name <span>*</span></label>
                                         <div className="inputWrapper">
                                             <User size={18} className="iIcon" />
-                                            <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="John Doe" />
+                                            <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="John Doe" required />
                                         </div>
                                     </div>
                                     <div className="inputGroup">

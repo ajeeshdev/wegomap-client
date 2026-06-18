@@ -601,16 +601,16 @@ export default function HotelLandingPageView({ data }: { data: HotelLandingPageC
                            <div className="form-fields">
                               <div className="field-triple-row">
                                  <div className="admin-form-group">
-                                    <label>Your Name</label>
-                                    <input type="text" placeholder="John Doe" />
+                                    <label>Your Name <span>*</span></label>
+                                    <input type="text" placeholder="John Doe" required />
                                  </div>
                                  <div className="admin-form-group">
                                     <label>Email Address</label>
                                     <input type="email" placeholder="john@example.com" />
                                  </div>
                                  <div className="admin-form-group">
-                                    <label>Phone Number</label>
-                                    <input type="text" placeholder="+91 000 000 0000" />
+                                    <label>Phone Number <span>*</span></label>
+                                    <input type="text" placeholder="+91 000 000 0000" required />
                                  </div>
                               </div>
                               <div className="admin-form-group mt-6">

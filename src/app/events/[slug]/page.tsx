@@ -67,6 +67,14 @@ export default function EventDetailPage() {
 
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!formData.name.trim()) {
+            toast.error('Please enter your name.');
+            return;
+        }
+        if (!formData.phone.trim()) {
+            toast.error('Please enter your phone number.');
+            return;
+        }
         setFormStatus('loading');
         setTimeout(() => {
             setFormStatus('success');
@@ -186,10 +194,11 @@ export default function EventDetailPage() {
                                         </div>
                                         <form onSubmit={handleFormSubmit} className="ed-form space-y-5">
                                             <div className="ed-field">
-                                                <label>Full Name</label>
+                                                <label>Full Name <span>*</span></label>
                                                 <div className="ed-input-group">
                                                     <User size={18} />
                                                     <input
+                                                        required
                                                         type="text"
                                                         placeholder="Your name"
                                                         value={formData.name}

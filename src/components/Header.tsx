@@ -61,10 +61,27 @@ const navLinks = [
     { name: 'Contact', href: '/contact' },
 ];
 
+const transformLinks = (links: any[], populatedTours: any[]) => {
+    let filtered = links.filter(link => link.name?.toLowerCase() !== 'tours');
+    const tourNames = populatedTours.map(t => t.name.toLowerCase());
+    filtered = filtered.filter(link => !tourNames.includes(link.name?.toLowerCase()));
+    const servicesIndex = filtered.findIndex(link => link.name?.toLowerCase() === 'services');
+    if (servicesIndex !== -1) {
+        filtered.splice(servicesIndex + 1, 0, ...populatedTours);
+    } else {
+        filtered.splice(2, 0, ...populatedTours);
+    }
+    return filtered;
+};
+
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-    const [activeMobileMenu, setActiveMobileMenu] = useState<string | null>(null);
+    const [openMobileMenus, setOpenMobileMenus] = useState<Record<string, boolean>>({
+        'Kerala Tour Packages': true,
+        'Domestic Tour Packages': true,
+        'International Tour Packages': true
+    });
     const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userProfile, setUserProfile] = useState<any>(null);
@@ -142,12 +159,12 @@ export default function Header() {
                                 const match = navWithCategories.find(sl => sl.name?.toLowerCase() === dl.name?.toLowerCase());
                                 return { ...dl, dropdown: match ? match.dropdown : undefined };
                             });
-                            setFinalHeaderLinks(mergedH);
+                            setFinalHeaderLinks(transformLinks(mergedH, populatedTourItems));
                         } else {
-                            setFinalHeaderLinks(navWithCategories);
+                            setFinalHeaderLinks(transformLinks(navWithCategories, populatedTourItems));
                         }
                     } else {
-                        setFinalHeaderLinks(navWithCategories);
+                        setFinalHeaderLinks(transformLinks(navWithCategories, populatedTourItems));
                     }
 
                     const slOpt = json.data.find((o: any) => o.key === 'sidebar_links');
@@ -158,24 +175,24 @@ export default function Header() {
                                 const match = navWithCategories.find(sl => sl.name?.toLowerCase() === dl.name?.toLowerCase());
                                 return { ...dl, dropdown: match ? match.dropdown : undefined };
                             });
-                            setFinalSidebarLinks(mergedS);
+                            setFinalSidebarLinks(transformLinks(mergedS, populatedTourItems));
                         } else {
-                            setFinalSidebarLinks(navWithCategories);
+                            setFinalSidebarLinks(transformLinks(navWithCategories, populatedTourItems));
                         }
                     } else {
-                        setFinalSidebarLinks(navWithCategories);
+                        setFinalSidebarLinks(transformLinks(navWithCategories, populatedTourItems));
                     }
 
                     const logoOpt = json.data.find((o: any) => o.key === 'site_logo');
                     if (logoOpt?.value) setLogo(getImageUrl(logoOpt.value));
                 } else {
-                    setFinalHeaderLinks(navWithCategories);
-                    setFinalSidebarLinks(navWithCategories);
+                    setFinalHeaderLinks(transformLinks(navWithCategories, populatedTourItems));
+                    setFinalSidebarLinks(transformLinks(navWithCategories, populatedTourItems));
                 }
             } catch (err) {
                 console.error('Header nav fetch failed', err);
-                setFinalHeaderLinks(navWithCategories);
-                setFinalSidebarLinks(navWithCategories);
+                setFinalHeaderLinks(transformLinks(navWithCategories, populatedTourItems));
+                setFinalSidebarLinks(transformLinks(navWithCategories, populatedTourItems));
             }
         };
 
@@ -261,7 +278,10 @@ export default function Header() {
     };
 
     const toggleMobileMenu = (name: string) => {
-        setActiveMobileMenu(activeMobileMenu === name ? null : name);
+        setOpenMobileMenus(prev => ({
+            ...prev,
+            [name]: !prev[name]
+        }));
     };
 
     const toggleSubMenu = (e: React.MouseEvent, name: string) => {
@@ -511,7 +531,7 @@ export default function Header() {
                                                 className="p-2 -mr-2"
                                                 onClick={(e) => { e.stopPropagation(); toggleMobileMenu(link.name); }}
                                             >
-                                                <ChevronDown size={18} className={`transform transition-transform ${activeMobileMenu === link.name ? 'rotate-180' : ''}`} />
+                                                <ChevronDown size={18} className={`transform transition-transform ${openMobileMenus[link.name] ? 'rotate-180' : ''}`} />
                                             </button>
                                         </div>
                                     ) : (
@@ -522,7 +542,7 @@ export default function Header() {
                                     )}
                                 </div>
 
-                                {link.dropdown && activeMobileMenu === link.name && (
+                                {link.dropdown && openMobileMenus[link.name] && (
                                     <div className="mobileSubMenu">
                                         {link.dropdown.map((sub: any) => (
                                             <div key={sub.name} className="mobileSubItem">

@@ -273,7 +273,7 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
                         className="enquireMainBtn flex-[1.5]"
                         onClick={(e) => onEnquire(e, pkg.title)}
                     >
-                        Enquire Now
+                        Get My Plan
                     </button>
                 </div>
             </div>

@@ -68,6 +68,10 @@ export default function SpecialEventDetailPage() {
 
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!formData.name.trim()) {
+            toast.error('Please enter your name.');
+            return;
+        }
         if (!formData.phone) {
             toast.error('Please enter your phone number.');
             return;
@@ -218,10 +222,11 @@ export default function SpecialEventDetailPage() {
                                         </div>
                                         <form onSubmit={handleFormSubmit} className="ed-form space-y-5">
                                             <div className="ed-field">
-                                                <label>Full Name</label>
+                                                <label>Full Name <span>*</span></label>
                                                 <div className="ed-input-group">
                                                     <User size={18} />
                                                     <input
+                                                        required
                                                         type="text"
                                                         placeholder="Your name"
                                                         value={formData.name}

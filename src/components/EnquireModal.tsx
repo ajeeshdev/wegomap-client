@@ -37,6 +37,16 @@ export default function EnquireModal({ isOpen, onClose, packageName = 'General I
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        if (!formData.name.trim()) {
+            toast.error('Please enter your full name.');
+            return;
+        }
+
+        if (!formData.phone.trim()) {
+            toast.error('Please enter your phone number.');
+            return;
+        }
+
         if (!executeRecaptcha) {
             toast.error('reCAPTCHA not loaded. Please try again.');
             return;
@@ -85,7 +95,8 @@ export default function EnquireModal({ isOpen, onClose, packageName = 'General I
                 <div className="enquireFormSide">
                     <div className="enquireFormHeader">
                         <span className="enquireLabel">Get a Free Quote</span>
-                        <h2 className="enquireTitle">Quick Enquiry.</h2>
+                        <h2 className="enquireTitle">Fill form
+Get your offers!</h2>
                     </div>
 
                     <form onSubmit={handleFormSubmit} className="enquireForm">
@@ -107,6 +118,7 @@ export default function EnquireModal({ isOpen, onClose, packageName = 'General I
                                     <input
                                         type="text"
                                         placeholder="John Doe"
+                                        required
                                         value={formData.name}
                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                     />
@@ -169,7 +181,7 @@ export default function EnquireModal({ isOpen, onClose, packageName = 'General I
                                 </>
                             ) : (
                                 <>
-                                    Send Inquiry Request
+                                    Get My Plan)
                                     <Send size={16} className="sendIcon" />
                                 </>
                             )}
