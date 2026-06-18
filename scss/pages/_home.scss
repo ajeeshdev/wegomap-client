@@ -1878,6 +1878,19 @@
                         transform: translateY(-8px);
                     }
                 }
+
+                &.whatsapp-cta-btn {
+                    border: 2px solid rgba(37, 211, 102, 0.25);
+                    color: #25d366;
+
+                    &:hover {
+                        background: rgba(37, 211, 102, 0.1);
+                        border-color: #25d366;
+                        color: #25d366;
+                        transform: translateY(-8px);
+                        box-shadow: 0 15px 35px rgba(37, 211, 102, 0.25);
+                    }
+                }
             }
         }
 
