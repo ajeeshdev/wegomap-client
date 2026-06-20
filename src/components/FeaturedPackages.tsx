@@ -29,6 +29,8 @@ interface Package {
     rating: number;
     images: string[];
     eventDate?: string;
+    imageAlt?: string;
+    thumbAlt?: string;
 }
 
 export default function FeaturedPackages() {

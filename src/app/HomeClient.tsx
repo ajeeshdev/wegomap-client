@@ -928,7 +928,7 @@ export default function HomeClient({ initialSlides }: { initialSlides?: any[] })
                     <Link href={item.href} className="block h-full cursor-pointer">
                       <div className="packageCardLocation group">
                         <div className="imageWrapper">
-                          <Image src={getImageUrl(item.image)} alt={item.imageAlt || item.thumbAlt || item.title} fill className="object-cover" />
+                          <Image src={getImageUrl(item.image)} alt={item.imageAlt || item.title} fill className="object-cover" />
                           {item.averageRating !== undefined && item.averageRating > 0 && (
                             <div className="ratingBadge">
                               <Star size={12} fill="currentColor" />

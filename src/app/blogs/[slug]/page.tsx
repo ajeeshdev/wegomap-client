@@ -21,6 +21,7 @@ interface Blog {
     content: string;
     image?: string;
     featuredImage?: string;
+    featuredImageAlt?: string;
     slug: string;
 }
 

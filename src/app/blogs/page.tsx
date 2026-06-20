@@ -20,6 +20,7 @@ interface Blog {
     excerpt: string;
     image?: string;
     featuredImage?: string;
+    featuredImageAlt?: string;
 }
 
 // Map siteData blogs to a unified shape, sorted newest-first
