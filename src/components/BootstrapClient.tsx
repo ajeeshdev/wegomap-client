@@ -4,10 +4,8 @@ import { useEffect } from "react";
 
 export default function BootstrapClient() {
     useEffect(() => {
-        // Import top-level bootstrap package — has built-in TS types in v5
-        void import("bootstrap").catch((err) =>
-            console.error("Failed to load Bootstrap:", err)
-        );
+        // Dynamically import Bootstrap JS only on the client side
+        require("bootstrap/dist/js/bootstrap.bundle.min.js");
     }, []);
 
     return null;

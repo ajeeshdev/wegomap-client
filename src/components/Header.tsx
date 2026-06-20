@@ -216,7 +216,7 @@ export default function Header() {
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20);
-            
+
             // Sync with mobile search sticky state
             if (window.innerWidth <= 768) {
                 const isSticky = document.body.classList.contains('mobile-search-sticky');
@@ -290,11 +290,11 @@ export default function Header() {
     };
 
     return (
-        <header 
+        <header
             className={scrolled ? 'scrolled' : ''}
-            style={isSearchSticky ? { 
-                opacity: 0, 
-                zIndex: -1, 
+            style={isSearchSticky ? {
+                opacity: 0,
+                zIndex: -1,
                 pointerEvents: 'none',
                 transform: 'translateY(-50%)',
                 transition: 'opacity 0.4s ease-in-out'
@@ -374,7 +374,7 @@ export default function Header() {
 
                                 {isProfileOpen && (
                                     <div className="profileDropdown">
-                                        <button 
+                                        <button
                                             onClick={() => setIsProfileOpen(false)}
                                             className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors p-1"
                                             aria-label="Close Profile Menu"
@@ -425,10 +425,9 @@ export default function Header() {
                             </div>
                         ) : (
                             <>
-                                <button 
-                                    onClick={() => setIsEnquireOpen(true)} 
+                                <button
+                                    onClick={() => setIsEnquireOpen(true)}
                                     className="enquire-link"
-                                    aria-label="Open enquiry form"
                                 >
                                     Enquire Now
                                 </button>
@@ -528,7 +527,7 @@ export default function Header() {
                                                     {link.name}
                                                 </span>
                                             )}
-                                            <button 
+                                            <button
                                                 className="p-2 -mr-2"
                                                 onClick={(e) => { e.stopPropagation(); toggleMobileMenu(link.name); }}
                                             >
@@ -559,7 +558,7 @@ export default function Header() {
                                                                     {sub.name}
                                                                 </span>
                                                             )}
-                                                            <button 
+                                                            <button
                                                                 className="p-2 -mr-2"
                                                                 onClick={(e) => toggleSubMenu(e, sub.name)}
                                                             >
@@ -596,7 +595,6 @@ export default function Header() {
                                 setIsEnquireOpen(true);
                             }}
                             className="enquireBtn"
-                            aria-label="Open enquiry form"
                         >
                             Enquire Now
                         </button>
@@ -621,10 +619,10 @@ export default function Header() {
                     </div>
                 </div>
             </div>
-            <EnquireModal 
-                isOpen={isEnquireOpen} 
-                onClose={() => setIsEnquireOpen(false)} 
-                packageName="General Inquiry" 
+            <EnquireModal
+                isOpen={isEnquireOpen}
+                onClose={() => setIsEnquireOpen(false)}
+                packageName="General Inquiry"
             />
         </header>
 

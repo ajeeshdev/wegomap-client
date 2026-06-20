@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
       fetch(`${API_URL}/options`, { next: { revalidate: 60 } }),
       fetch(`${API_URL}/pages?slug=home`, { next: { revalidate: 60 } })
     ]);
-    
+
     const optsJson = await optsRes.json();
     const pagesJson = await pagesRes.json();
 
@@ -40,12 +40,12 @@ export async function generateMetadata(): Promise<Metadata> {
       const descOpt = optsJson.data.find((o: any) => o.key === 'site_description');
       const keysOpt = optsJson.data.find((o: any) => o.key === 'site_keywords');
       const scriptOpt = optsJson.data.find((o: any) => o.key === 'analytics_script');
-      
+
       if (titleOpt?.value) defaultTitle = titleOpt.value;
       if (descOpt?.value) defaultDesc = descOpt.value;
       if (favOpt?.value) favIconUrl = getImageUrl(favOpt.value);
       if (keysOpt?.value) pageKeywords = keysOpt.value;
-      
+
       if (scriptOpt?.value) {
         analyticsMeta = parseSeoMeta(scriptOpt.value);
       }
@@ -87,7 +87,7 @@ export async function generateMetadata(): Promise<Metadata> {
       ...(getGoogleVerification(analyticsMeta.other) || []),
       ...(getGoogleVerification(parsedHomeMeta.other) || [])
     ];
-    
+
     // remove duplicates
     googleVerifications = Array.from(new Set(googleVerifications));
 
@@ -133,13 +133,14 @@ import type { Viewport } from 'next';
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 import LayoutWrapper from "@/components/LayoutWrapper";
 import { Toaster } from 'react-hot-toast';
 import { EnquiryProvider } from '@/context/EnquiryContext';
 import CaptchaProvider from '@/components/CaptchaProvider';
-import ClientAnalytics from '@/components/ClientAnalytics';
 
 
 import "../../scss/style.scss";
@@ -162,16 +163,11 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en">
-      <head>
-        {/* Preconnect for Google Fonts */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* DNS-prefetch for CMS API */}
-        <link rel="dns-prefetch" href="https://api-demo.wegomap.com" />
-        <link rel="preconnect" href="https://api-demo.wegomap.com" />
-      </head>
+    <html lang="en" data-scroll-behavior="smooth">
       <body className={`${outfit.variable} ${dancingScript.variable} font-sans antialiased text-slate-900 bg-white`}>
+        {analyticsScript && (
+          <div id="site-tracking-scripts" dangerouslySetInnerHTML={{ __html: analyticsScript }} style={{ display: 'none' }} />
+        )}
         <AppGoogleAuthProvider>
           <CaptchaProvider>
             <EnquiryProvider>
@@ -184,8 +180,6 @@ export default async function RootLayout({
           <BootstrapClient />
           <Toaster position="top-right" containerStyle={{ zIndex: 999999999 }} />
         </AppGoogleAuthProvider>
-        {/* Analytics injected after hydration so it doesn't block rendering */}
-        {analyticsScript && <ClientAnalytics html={analyticsScript} />}
       </body>
     </html>
   );

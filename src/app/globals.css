@@ -1,12 +1,9 @@
 @import "tailwindcss";
 @source "../**/*.{ts,tsx}";
 @source "../../scss/**/*.{scss,css}";
-
 html {
   scroll-behavior: smooth;
 }
-
-
 
 
 @layer base {

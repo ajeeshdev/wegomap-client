@@ -82,49 +82,49 @@ export default function Hero() {
             fetch(`${API_URL}/events`),
             fetch(`${API_URL}/special-events`)
         ])
-        .then(async ([pkgsRes, eventsRes, specRes]) => {
-            const pkgsData = await pkgsRes.json();
-            const eventsData = await eventsRes.json();
-            const specData = await specRes.json();
+            .then(async ([pkgsRes, eventsRes, specRes]) => {
+                const pkgsData = await pkgsRes.json();
+                const eventsData = await eventsRes.json();
+                const specData = await specRes.json();
 
-            let masterIndex: any[] = [];
+                let masterIndex: any[] = [];
 
-            if (pkgsData.success) {
-                masterIndex = [...masterIndex, ...pkgsData.data.map((pkg: any) => ({
-                    type: 'package',
-                    title: pkg.title,
-                    href: `/packages/${pkg.slug || pkg._id}`,
-                    image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || ''),
-                    thumbAlt: pkg.thumbAlt,
-                    meta: pkg.duration || pkg.location,
-                }))];
-            }
+                if (pkgsData.success) {
+                    masterIndex = [...masterIndex, ...pkgsData.data.map((pkg: any) => ({
+                        type: 'package',
+                        title: pkg.title,
+                        href: `/packages/${pkg.slug || pkg._id}`,
+                        image: getImageUrl(pkg.thumb || (pkg.images && pkg.images[0]) || ''),
+                        thumbAlt: pkg.thumbAlt,
+                        meta: pkg.duration || pkg.location,
+                    }))];
+                }
 
-            if (eventsData.success) {
-                masterIndex = [...masterIndex, ...eventsData.data.map((evt: any) => ({
-                    type: 'event',
-                    title: evt.title,
-                    href: `/events/${evt.slug || evt._id}`,
-                    image: getImageUrl(evt.image || ''),
-                    imageAlt: evt.imageAlt,
-                    meta: 'Corporate Event',
-                }))];
-            }
+                if (eventsData.success) {
+                    masterIndex = [...masterIndex, ...eventsData.data.map((evt: any) => ({
+                        type: 'event',
+                        title: evt.title,
+                        href: `/events/${evt.slug || evt._id}`,
+                        image: getImageUrl(evt.image || ''),
+                        imageAlt: evt.imageAlt,
+                        meta: 'Corporate Event',
+                    }))];
+                }
 
-            if (specData.success) {
-                masterIndex = [...masterIndex, ...specData.data.map((evt: any) => ({
-                    type: 'special',
-                    title: evt.title,
-                    href: `/special-events/${evt.slug || evt._id}`,
-                    image: getImageUrl(evt.image || ''),
-                    imageAlt: evt.imageAlt,
-                    meta: 'Special Occasion',
-                }))];
-            }
+                if (specData.success) {
+                    masterIndex = [...masterIndex, ...specData.data.map((evt: any) => ({
+                        type: 'special',
+                        title: evt.title,
+                        href: `/special-events/${evt.slug || evt._id}`,
+                        image: getImageUrl(evt.image || ''),
+                        imageAlt: evt.imageAlt,
+                        meta: 'Special Occasion',
+                    }))];
+                }
 
-            setSearchIndex(masterIndex);
-        })
-        .catch(err => console.error("Failed to load search data", err));
+                setSearchIndex(masterIndex);
+            })
+            .catch(err => console.error("Failed to load search data", err));
     }, []);
 
     useEffect(() => {
@@ -260,9 +260,7 @@ export default function Hero() {
                                 <MapPin size={20} className="locationIcon" />
                                 <input
                                     ref={inputRef}
-                                    id="hero-search"
                                     type="text"
-                                    aria-label="Search destinations or events"
                                     placeholder="Search Destinations or Events"
                                     value={query}
                                     onChange={e => {
@@ -276,7 +274,6 @@ export default function Hero() {
                                 {query && (
                                     <button
                                         className="searchClearBtn"
-                                        aria-label="Clear search"
                                         onClick={() => { setQuery(''); setShowSuggestions(false); inputRef.current?.focus(); }}
                                     >
                                         <X size={16} />
@@ -285,7 +282,6 @@ export default function Hero() {
                             </div>
                             <button
                                 className="submitBtn"
-                                aria-label="Search packages"
                                 onClick={() => {
                                     if (query.trim()) {
                                         router.push(`/packages?q=${encodeURIComponent(query)}`);
