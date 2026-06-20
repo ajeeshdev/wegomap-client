@@ -428,6 +428,7 @@ export default function Header() {
                                 <button 
                                     onClick={() => setIsEnquireOpen(true)} 
                                     className="enquire-link"
+                                    aria-label="Open enquiry form"
                                 >
                                     Enquire Now
                                 </button>
@@ -595,6 +596,7 @@ export default function Header() {
                                 setIsEnquireOpen(true);
                             }}
                             className="enquireBtn"
+                            aria-label="Open enquiry form"
                         >
                             Enquire Now
                         </button>

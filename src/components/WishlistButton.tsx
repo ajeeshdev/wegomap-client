@@ -14,7 +14,7 @@ export default function WishlistButton({ id, wishlist, toggleWishlist, className
     return (
         <button
             className={`wishlistBtn ${isSelected ? 'selected' : ''} ${className}`}
-            aria-label="Add to wishlist"
+            aria-label={isSelected ? "Remove from wishlist" : "Add to wishlist"}
             onClick={(e) => toggleWishlist(id, e)}
         >
             <Heart size={18} fill={isSelected ? "currentColor" : "none"} />

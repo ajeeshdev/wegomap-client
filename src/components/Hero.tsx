@@ -260,7 +260,9 @@ export default function Hero() {
                                 <MapPin size={20} className="locationIcon" />
                                 <input
                                     ref={inputRef}
+                                    id="hero-search"
                                     type="text"
+                                    aria-label="Search destinations or events"
                                     placeholder="Search Destinations or Events"
                                     value={query}
                                     onChange={e => {
@@ -274,6 +276,7 @@ export default function Hero() {
                                 {query && (
                                     <button
                                         className="searchClearBtn"
+                                        aria-label="Clear search"
                                         onClick={() => { setQuery(''); setShowSuggestions(false); inputRef.current?.focus(); }}
                                     >
                                         <X size={16} />
@@ -282,6 +285,7 @@ export default function Hero() {
                             </div>
                             <button
                                 className="submitBtn"
+                                aria-label="Search packages"
                                 onClick={() => {
                                     if (query.trim()) {
                                         router.push(`/packages?q=${encodeURIComponent(query)}`);

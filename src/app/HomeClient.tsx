@@ -427,7 +427,7 @@ export default function Home() {
               <SwiperSlide key={idx} className="h-auto">
                 <Link href={item.href || "/packages"} className="block h-full">
                   <div className="packageCardKerala group">
-                    <Image src={getImageUrl(item.image)} alt={item.imageAlt || item.thumbAlt || item.title} fill className="object-cover"  />
+                    <Image src={getImageUrl(item.image)} alt={item.imageAlt || item.thumbAlt || item.title || 'Tour package'} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" className="object-cover" />
                     <div className="overlay"></div>
                     <div className="cardContent">
                       <div className="topSection">
@@ -525,7 +525,7 @@ export default function Home() {
               <SwiperSlide key={idx} className="h-auto">
                 <Link href={item.href || "/packages"} className="block h-full">
                   <div className="packageCardKerala group">
-                    <Image src={getImageUrl(item.image)} alt={item.imageAlt || item.thumbAlt || item.title} fill className="object-cover"  />
+                    <Image src={getImageUrl(item.image)} alt={item.imageAlt || item.thumbAlt || item.title || 'Kerala tour package'} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" className="object-cover"  />
                     <div className="overlay"></div>
                     <div className="cardContent">
                       <div className="topSection">
@@ -622,7 +622,7 @@ export default function Home() {
               <SwiperSlide key={idx} className="h-auto">
                 <Link href={item.href || "/packages"} className="block h-full">
                   <div className="packageCardKerala group">
-                    <Image src={getImageUrl(item.image)} alt={item.imageAlt || item.thumbAlt || item.title} fill className="object-cover"  />
+                    <Image src={getImageUrl(item.image)} alt={item.imageAlt || item.thumbAlt || item.title || 'Tour package'} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" className="object-cover"  />
                     <div className="overlay"></div>
                     <div className="cardContent">
                       <div className="topSection">
@@ -724,10 +724,11 @@ export default function Home() {
 
 
                     <div className="imageWrapper">
-                      <Image 
+                        <Image 
                         src={event.images?.[0] || "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800"} 
-                        alt={event.imageAlt || event.title} 
+                        alt={event.imageAlt || event.title || 'Special event'} 
                         fill 
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         className="object-cover" 
                          
                       />
@@ -934,7 +935,7 @@ export default function Home() {
                 <Link href={item.href} className="block h-full cursor-pointer">
                     <div className="packageCardLocation group">
                     <div className="imageWrapper">
-                        <Image src={getImageUrl(item.image)} alt={item.imageAlt || item.thumbAlt || item.title} fill className="object-cover"  />
+                        <Image src={getImageUrl(item.image)} alt={item.imageAlt || item.title || 'Destination'} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw" className="object-cover"  />
                         {item.averageRating !== undefined && item.averageRating > 0 && (
                           <div className="ratingBadge">
                             <Star size={12} fill="currentColor" />

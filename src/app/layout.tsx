@@ -133,14 +133,13 @@ import type { Viewport } from 'next';
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 };
 
 import LayoutWrapper from "@/components/LayoutWrapper";
 import { Toaster } from 'react-hot-toast';
 import { EnquiryProvider } from '@/context/EnquiryContext';
 import CaptchaProvider from '@/components/CaptchaProvider';
+import ClientAnalytics from '@/components/ClientAnalytics';
 
 
 import "../../scss/style.scss";
@@ -163,11 +162,16 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en">
+      <head>
+        {/* Preconnect for Google Fonts */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* DNS-prefetch for CMS API */}
+        <link rel="dns-prefetch" href="https://api-demo.wegomap.com" />
+        <link rel="preconnect" href="https://api-demo.wegomap.com" />
+      </head>
       <body className={`${outfit.variable} ${dancingScript.variable} font-sans antialiased text-slate-900 bg-white`}>
-        {analyticsScript && (
-           <div id="site-tracking-scripts" dangerouslySetInnerHTML={{ __html: analyticsScript }} style={{ display: 'none' }} />
-        )}
         <AppGoogleAuthProvider>
           <CaptchaProvider>
             <EnquiryProvider>
@@ -180,6 +184,8 @@ export default async function RootLayout({
           <BootstrapClient />
           <Toaster position="top-right" containerStyle={{ zIndex: 999999999 }} />
         </AppGoogleAuthProvider>
+        {/* Analytics injected after hydration so it doesn't block rendering */}
+        {analyticsScript && <ClientAnalytics html={analyticsScript} />}
       </body>
     </html>
   );
