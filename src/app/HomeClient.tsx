@@ -53,7 +53,7 @@ import 'swiper/css/effect-fade';
 
 
 
-export default function Home() {
+export default function HomeClient({ initialSlides }: { initialSlides?: any[] }) {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [showMore, setShowMore] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -274,18 +274,12 @@ export default function Home() {
     averageRating: d.averageRating || 0
   }));
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-white flex-col gap-4">
-        <div className="w-16 h-16 border-4 border-cosmic-orange border-t-transparent rounded-full animate-spin"></div>
-        <p className="font-black text-slate-400 uppercase tracking-widest text-xs">Loading Experience...</p>
-      </div>
-    );
-  }
+  // The page will now render immediately so the Hero and Header are visible instantly.
+  // The sections below the fold will safely wait for their respective data arrays to populate.
 
   return (
     <div className="flex flex-col bg-white">
-      <Hero />
+      <Hero initialSlides={initialSlides} />
 
       {/* Secondary Sticky Navigation Strip */}
       <div className="secondaryStickyNav">

@@ -14,7 +14,7 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 
-export default function Hero() {
+export default function Hero({ initialSlides }: { initialSlides?: any[] }) {
     const router = useRouter();
     const searchRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -23,13 +23,14 @@ export default function Hero() {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [activeSuggestion, setActiveSuggestion] = useState(-1);
 
-    const [slides, setSlides] = useState<any[]>([]);
-    const [isLoadingSlides, setIsLoadingSlides] = useState(true);
+    const [slides, setSlides] = useState<any[]>(initialSlides || []);
+    const [isLoadingSlides, setIsLoadingSlides] = useState(!initialSlides || initialSlides.length === 0);
     const [searchIndex, setSearchIndex] = useState<any[]>([]);
 
     useEffect(() => {
-        // Fetch dynamic sliders
-        fetch(`${API_URL}/sliders`)
+        // Fetch dynamic sliders only if not provided by SSR
+        if (!initialSlides || initialSlides.length === 0) {
+            fetch(`${API_URL}/sliders`)
             .then(res => {
                 if (!res.headers.get('content-type')?.includes('application/json')) {
                     throw new Error(`API returned non-JSON response from ${res.url} (Status: ${res.status})`);
@@ -75,6 +76,7 @@ export default function Hero() {
                 }]);
             })
             .finally(() => setIsLoadingSlides(false));
+        }
 
         // Fetch search data: packages, corporate events, and special events
         Promise.all([
