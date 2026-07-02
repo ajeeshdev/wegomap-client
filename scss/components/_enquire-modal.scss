@@ -246,6 +246,9 @@
         text-transform: uppercase;
         position: relative;
         display: inline-block;
+        @include max(575){
+            font-size: 1.3rem;
+        }
 
         &::after {
             content: '';

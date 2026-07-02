@@ -338,9 +338,12 @@ $premiumShadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12);
                         color: $cosmicOrange;
                         display: flex;
                         align-items: center;
-                        justify-content: flex-start;
+                        justify-content: center;
                         flex-shrink: 0;
                         margin-top: 2px;
+                        path{
+                            stroke: #fff;
+                        }
                     }
 
                     span {

@@ -251,6 +251,7 @@ export default function AllToursPage() {
                             slabel: pkg.slabel,
                             status: pkg.status || 'Published',
                             order: pkg.order || 0,
+                            iconFeatures: Array.isArray(pkg.iconFeatures) ? pkg.iconFeatures : [],
                             _id: pkg._id
                         };
                     })

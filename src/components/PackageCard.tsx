@@ -5,11 +5,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, Navigation } from 'swiper/modules';
-import { Star, Check, ArrowRight, CreditCard } from 'lucide-react';
+import { Star, Check, ArrowRight, CreditCard,
+    Hotel, Eye, Utensils, UserCheck, Car, FileCheck, Plane, Anchor, Camera,
+    Coffee, Moon, ShieldPlus, Ship, Dumbbell, Truck, ParkingCircle, Ticket, Smartphone, Headphones, MapPin, Clock, ShieldCheck, Sparkles
+} from 'lucide-react';
 import { getImageUrl } from '@/config';
 import WishlistButton from './WishlistButton';
 import { packagesData } from '@/data/packages';
 import './PackageCard.scss';
+
+const CARD_ICON_MAP: Record<string, any> = {
+    Hotel, Eye, Utensils, UserCheck, Car, FileCheck, Plane, Anchor, Camera,
+    Coffee, Moon, ShieldPlus, Ship, Dumbbell, Truck, ParkingCircle, Ticket, Smartphone, Headphones,
+    MapPin, Clock, ShieldCheck, Sparkles
+};
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -36,6 +45,7 @@ interface PackageCardProps {
         onoffer?: boolean;
         slabel?: string;
         href?: string;
+        iconFeatures?: { icon: string; label: string; enabled: boolean }[];
         _id?: string;
         eventDate?: string;
         thumbAlt?: string;
@@ -207,6 +217,47 @@ export default function PackageCard({ pkg, wishlist, toggleWishlist, onEnquire }
                         </div>
                     )}
                 </div>
+
+                {/* Icon Features - icon on top, label below */}
+                {Array.isArray((pkg as any).iconFeatures) && (pkg as any).iconFeatures.filter((f: any) => f.enabled).length > 0 && (() => {
+                    const iconColorMap: Record<string, string> = {
+                        Hotel: '#4a90d9', Eye: '#f5a623', Utensils: '#f5a623',
+                        UserCheck: '#4a90d9', Car: '#27ae60', FileCheck: '#8e44ad',
+                        Plane: '#2980b9', Anchor: '#1a6fa8', Camera: '#e67e22',
+                        Coffee: '#a0522d', Moon: '#6c5ce7', ShieldPlus: '#27ae60',
+                        Ship: '#2980b9', Dumbbell: '#e74c3c', Truck: '#e67e22',
+                        ParkingCircle: '#95a5a6', Ticket: '#e74c3c',
+                        Smartphone: '#3498db', Headphones: '#9b59b6',
+                    };
+                    const iconBgMap: Record<string, string> = {
+                        Hotel: '#dbeafe', Eye: '#fef3c7', Utensils: '#fef3c7',
+                        UserCheck: '#dbeafe', Car: '#dcfce7', FileCheck: '#f3e8ff',
+                        Plane: '#dbeafe', Anchor: '#e0f2fe', Camera: '#ffedd5',
+                        Coffee: '#fef3e2', Moon: '#ede9fe', ShieldPlus: '#dcfce7',
+                        Ship: '#dbeafe', Dumbbell: '#fee2e2', Truck: '#ffedd5',
+                        ParkingCircle: '#f1f5f9', Ticket: '#fee2e2',
+                        Smartphone: '#dbeafe', Headphones: '#f3e8ff',
+                    };
+                    return (
+                        <div className="iconFeaturesStrip">
+                            {(pkg as any).iconFeatures.filter((f: any) => f.enabled).slice(0, 20).map((feat: any, i: number) => {
+                                const IconComp = CARD_ICON_MAP[feat.icon];
+                                const iconColor = iconColorMap[feat.icon] || '#4a90d9';
+                                const iconBg = iconBgMap[feat.icon] || '#dbeafe';
+                                return (
+                                    <div key={i} className="cardIconItem">
+                                        <div className="cardIconBox" style={{ background: iconBg }}>
+                                            {IconComp && <IconComp size={22} strokeWidth={1.8} color={iconColor} />}
+                                        </div>
+                                        <span className="cardIconLabel">
+                                            {feat.label}
+                                        </span>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    );
+                })()}
 
                 {/* Main Features Grid (Two Columns or Single) */}
                 <div className={`featuresGrid ${features.length === 1 ? 'singleFeature' : ''}`}>

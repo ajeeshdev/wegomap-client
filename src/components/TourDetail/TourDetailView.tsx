@@ -23,7 +23,8 @@ import {
     Building2, Car, Utensils, Star, Phone,
     Calendar, Users, Info, User, Heart, MessageSquare, Quote, ThumbsUp, Share2,
     Plane, Waves, Mountain, Palmtree, Camera, Tent, Wifi, Coffee, Music, Ticket, Sunset, ShoppingBag,
-    BedDouble, Bed, Hotel, Bath, ShowerHead, ThermometerSnowflake, Tv, Key, DoorOpen, TreePalm
+    BedDouble, Bed, Hotel, Bath, ShowerHead, ThermometerSnowflake, Tv, Key, DoorOpen, TreePalm,
+    Eye, UserCheck, FileCheck, Anchor, Moon, ShieldPlus, Ship, Dumbbell, Truck, ParkingCircle, Smartphone, Headphones
 } from 'lucide-react';
 
 const ICON_MAP: Record<string, any> = {
@@ -32,7 +33,10 @@ const ICON_MAP: Record<string, any> = {
     Camera, Tent, Wifi, Coffee, Music, Ticket, Star,
     Heart, Sunset, ShoppingBag, BedDouble, Bed, Hotel,
     Bath, ShowerHead, ThermometerSnowflake, Tv, Key,
-    DoorOpen, TreePalm, Users
+    DoorOpen, TreePalm, Users,
+    // Icon Feature icons
+    Eye, UserCheck, FileCheck, Anchor, Moon, ShieldPlus,
+    Ship, Dumbbell, Truck, ParkingCircle, Smartphone, Headphones
 };
 import { useEnquiry } from '@/context/EnquiryContext';
 
@@ -216,6 +220,7 @@ export default function TourDetailView({ id }: { id: string }) {
                         showGallery: p.showGallery || false,
                         extraContact: p.extraContact || '',
                         faq: Array.isArray(p.faq) ? p.faq : [],
+                        iconFeatures: Array.isArray(p.iconFeatures) ? p.iconFeatures : [],
                     });
                     setLoading(false);
                     return;
@@ -327,6 +332,51 @@ export default function TourDetailView({ id }: { id: string }) {
                             {/* Highlights */}
                             <div className="mb-12">
                                 <h3 className="sectionTitle">Tour Highlights</h3>
+
+                                {/* Icon Features - icon on top, label below */}
+                                {pkg.iconFeatures && pkg.iconFeatures.filter((f: any) => f.enabled).length > 0 && (() => {
+                                    const iconColorMap: Record<string, string> = {
+                                        Hotel: '#4a90d9', Eye: '#f5a623', Utensils: '#f5a623',
+                                        UserCheck: '#4a90d9', Car: '#27ae60', FileCheck: '#8e44ad',
+                                        Plane: '#2980b9', Anchor: '#1a6fa8', Camera: '#e67e22',
+                                        Coffee: '#a0522d', Moon: '#6c5ce7', ShieldPlus: '#27ae60',
+                                        Ship: '#2980b9', Dumbbell: '#e74c3c', Truck: '#e67e22',
+                                        ParkingCircle: '#95a5a6', Ticket: '#e74c3c',
+                                        Smartphone: '#3498db', Headphones: '#9b59b6',
+                                    };
+                                    const iconBgMap: Record<string, string> = {
+                                        Hotel: '#dbeafe', Eye: '#fef3c7', Utensils: '#fef3c7',
+                                        UserCheck: '#dbeafe', Car: '#dcfce7', FileCheck: '#f3e8ff',
+                                        Plane: '#dbeafe', Anchor: '#e0f2fe', Camera: '#ffedd5',
+                                        Coffee: '#fef3e2', Moon: '#ede9fe', ShieldPlus: '#dcfce7',
+                                        Ship: '#dbeafe', Dumbbell: '#fee2e2', Truck: '#ffedd5',
+                                        ParkingCircle: '#f1f5f9', Ticket: '#fee2e2',
+                                        Smartphone: '#dbeafe', Headphones: '#f3e8ff',
+                                    };
+                                    return (
+                                        <div className="iconFeatureScroll">
+                                            {pkg.iconFeatures!.filter((f: any) => f.enabled).map((feat: any, i: number) => {
+                                                const IconComp = ICON_MAP[feat.icon];
+                                                const iconColor = iconColorMap[feat.icon] || '#4a90d9';
+                                                const iconBg = iconBgMap[feat.icon] || '#dbeafe';
+                                                return (
+                                                    <div key={i} className="iconFeatItem">
+                                                        <div className="iconFeatBox" style={{
+                                                            background: iconBg,
+                                                            flexShrink: 0,
+                                                        }}>
+                                                            {IconComp && <IconComp size={28} strokeWidth={1.6} color={iconColor} />}
+                                                        </div>
+                                                        <span className="iconFeatLabel">
+                                                            {feat.label}
+                                                        </span>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    );
+                                })()}
+
                                 <div className="highlightsGrid">
                                     {pkg.highlights && pkg.highlights.length > 0 ? (
                                         pkg.highlights.map((highlight, i) => (

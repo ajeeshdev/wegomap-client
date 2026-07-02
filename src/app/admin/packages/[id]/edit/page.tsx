@@ -7,7 +7,9 @@ import Link from 'next/link';
 import { 
   Save, ArrowLeft, Image as ImageIcon, Info, Map, List, Search, Trash2, Globe, Sparkles, 
   Clock, ShieldCheck, Layers, Tag, IndianRupee, Zap, MapPin, Shield as Safe, 
-  ChevronDown, Check, LayoutPanelTop, Settings, Plus, X
+  ChevronDown, Check, LayoutPanelTop, Settings, Plus, X,
+  Hotel, Eye, Utensils, UserCheck, Car, FileCheck, Plane, Anchor, Camera,
+  Coffee, Moon, ShieldPlus, Ship, Dumbbell, Truck, ParkingCircle, Ticket, Smartphone, Headphones
 } from 'lucide-react';
 import ImageUpload from '@/components/admin/ImageUpload';
 import MultiImageUpload from '@/components/admin/MultiImageUpload';
@@ -16,10 +18,55 @@ import AmenityPicker from '@/components/admin/AmenityPicker';
 import { toast } from 'react-hot-toast';
 import '../../../cms-premium.scss';
 
+const DEFAULT_ICON_FEATURES = [
+  { icon: 'Hotel',         label: 'Hotel' },
+  { icon: 'Eye',           label: 'Sightseeing' },
+  { icon: 'Utensils',      label: 'Meals' },
+  { icon: 'UserCheck',     label: 'Tour Guide' },
+  { icon: 'Car',           label: 'Cab' },
+  { icon: 'FileCheck',     label: 'Visa' },
+  { icon: 'Plane',         label: 'Flight Tickets' },
+  { icon: 'Anchor',        label: 'Boating' },
+  { icon: 'Camera',        label: 'Photoshoot' },
+  { icon: 'Coffee',        label: 'Breakfast' },
+  { icon: 'Moon',          label: 'Dinner' },
+  { icon: 'ShieldPlus',    label: 'Insurance' },
+  { icon: 'Ship',          label: 'Cruise' },
+  { icon: 'Dumbbell',      label: 'Activities' },
+  { icon: 'Truck',         label: 'Jeep Safari' },
+  { icon: 'ParkingCircle', label: 'Toll & Parking' },
+  { icon: 'Ticket',        label: 'Entry Tickets' },
+  { icon: 'Smartphone',    label: 'SIM' },
+  { icon: 'Headphones',    label: '24*7 Support' },
+];
+
+const ICON_MAP: Record<string, React.ReactNode> = {
+  Hotel: <Hotel size={18} />,
+  Eye: <Eye size={18} />,
+  Utensils: <Utensils size={18} />,
+  UserCheck: <UserCheck size={18} />,
+  Car: <Car size={18} />,
+  FileCheck: <FileCheck size={18} />,
+  Plane: <Plane size={18} />,
+  Anchor: <Anchor size={18} />,
+  Camera: <Camera size={18} />,
+  Coffee: <Coffee size={18} />,
+  Moon: <Moon size={18} />,
+  ShieldPlus: <ShieldPlus size={18} />,
+  Ship: <Ship size={18} />,
+  Dumbbell: <Dumbbell size={18} />,
+  Truck: <Truck size={18} />,
+  ParkingCircle: <ParkingCircle size={18} />,
+  Ticket: <Ticket size={18} />,
+  Smartphone: <Smartphone size={18} />,
+  Headphones: <Headphones size={18} />,
+};
+
 const cleanStringList = (items: any[] = []) =>
   items
     .map(item => typeof item === 'string' ? item.trim() : item)
     .filter(Boolean);
+
 
 const cleanItinerary = (items: any[] = []) =>
   items.map((item: any, idx: number) => ({
@@ -47,7 +94,8 @@ export default function EditPackage() {
     itinerary: [], seo_title: '', slug: '', seo_meta: '', seo_keys: '', canonical: '', other_meta: '',
     averageRating: 4.9, reviewCount: 150, noCostEmi: '',
     amenities: [], showGallery: false,
-    status: 'Published', order: 0
+    status: 'Published', order: 0,
+    iconFeatures: DEFAULT_ICON_FEATURES.map(f => ({ ...f, enabled: false }))
   });
 
   useEffect(() => {
@@ -121,7 +169,14 @@ export default function EditPackage() {
               ? data.data.highlights
               : (data.data.new_highlight || data.data.new_highlights)
                 ? Array.from((data.data.new_highlight || data.data.new_highlights).matchAll(/<li[^>]*>([\s\S]*?)<\/li>/gi)).map((m: any) => m[1].replace(/<[^>]+>/g, '').trim()).filter(Boolean)
-                : []
+                : [],
+            iconFeatures: (() => {
+              const saved: any[] = data.data.iconFeatures || [];
+              return DEFAULT_ICON_FEATURES.map(def => {
+                const found = saved.find((s: any) => s.icon === def.icon);
+                return found ? { ...def, ...found } : { ...def, enabled: false };
+              });
+            })()
           });
         }
       } catch (err) {
@@ -275,12 +330,87 @@ export default function EditPackage() {
                        </div>
                     </div>
                  </div>
-                 <div className="editor-card">
-                    <div className="card-header"><h4 className="serif">Highlights List</h4></div>
-                    <div className="card-body no-padding">
-                       <textarea rows={6} value={formData.highlights?.join('\n')} onChange={e => setFormData({ ...formData, highlights: e.target.value.split('\n') })} className="highlight-textarea p-4" placeholder="Key selling points..." />
-                    </div>
-                 </div>
+                  {/* ── Icon Features Section ── */}
+                  <div className="editor-card">
+                     <div className="card-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <h4 className="serif">Icon Features</h4>
+                        <span style={{ fontSize: '11px', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                           Click tile to toggle · Edit text inline
+                        </span>
+                     </div>
+                     <div className="card-body">
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))', gap: '10px' }}>
+                           {(formData.iconFeatures || []).map((feat: any, idx: number) => (
+                              <div
+                                 key={feat.icon}
+                                 onClick={() => {
+                                    const updated = [...formData.iconFeatures];
+                                    updated[idx] = { ...updated[idx], enabled: !updated[idx].enabled };
+                                    setFormData({ ...formData, iconFeatures: updated });
+                                 }}
+                                 style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '10px',
+                                    padding: '10px 12px',
+                                    borderRadius: '10px',
+                                    border: feat.enabled ? '2px solid #3b82f6' : '2px solid #e2e8f0',
+                                    background: feat.enabled ? '#eff6ff' : '#f8fafc',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.18s ease',
+                                    userSelect: 'none',
+                                 }}
+                              >
+                                 <span style={{
+                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                    width: 36, height: 36, borderRadius: '8px', flexShrink: 0,
+                                    background: feat.enabled ? '#3b82f6' : '#e2e8f0',
+                                    color: feat.enabled ? '#fff' : '#64748b',
+                                    transition: 'all 0.18s ease'
+                                 }}>
+                                    {ICON_MAP[feat.icon]}
+                                 </span>
+                                 <input
+                                    type="text"
+                                    value={feat.label}
+                                    onClick={e => e.stopPropagation()}
+                                    onChange={e => {
+                                       e.stopPropagation();
+                                       const updated = [...formData.iconFeatures];
+                                       updated[idx] = { ...updated[idx], label: e.target.value };
+                                       setFormData({ ...formData, iconFeatures: updated });
+                                    }}
+                                    style={{
+                                       flex: 1,
+                                       border: 'none',
+                                       background: 'transparent',
+                                       fontSize: '13px',
+                                       fontWeight: 600,
+                                       color: feat.enabled ? '#1e40af' : '#475569',
+                                       outline: 'none',
+                                       minWidth: 0,
+                                       cursor: 'text',
+                                    }}
+                                 />
+                                 {feat.enabled && (
+                                    <Check size={14} style={{ color: '#3b82f6', flexShrink: 0 }} />
+                                 )}
+                              </div>
+                           ))}
+                        </div>
+                        <p style={{ marginTop: '10px', fontSize: '11px', color: '#94a3b8' }}>
+                           Select which features are included. Only enabled items will be shown on the package page.
+                        </p>
+                     </div>
+                  </div>
+
+                  <div className="editor-card">
+                     <div className="card-header"><h4 className="serif">Highlights List</h4></div>
+                     <div className="card-body no-padding">
+                        <textarea rows={6} value={formData.highlights?.join('\n')} onChange={e => setFormData({ ...formData, highlights: e.target.value.split('\n') })} className="highlight-textarea p-4" placeholder="Key selling points..." />
+                     </div>
+                  </div>
+
                  <div className="editor-card">
                     <div className="card-header"><h4 className="serif">Terms & Conditions</h4></div>
                     <div className="card-body no-padding">

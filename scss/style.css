@@ -3597,6 +3597,7 @@ footer .footerBottom .socialLinks a:hover {
   margin-top: 2rem;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 1.5rem;
 }
 .pageBanner .pageBannerContent .pageBannerActions .bannerEnquireBtn {
@@ -3627,6 +3628,41 @@ footer .footerBottom .socialLinks a:hover {
   transform: scale(1.2) rotate(-10deg);
 }
 .pageBanner .pageBannerContent .pageBannerActions .bannerEnquireBtn:active {
+  transform: translateY(-2px) scale(0.98) !important;
+}
+.pageBanner .pageBannerContent .pageBannerActions .bannerWhatsappBtn {
+  background: #25D366 !important;
+  border: none !important;
+  box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3) !important;
+  height: 52px;
+  padding: 0 2.5rem !important;
+  font-size: 11px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.15em !important;
+  border-radius: 12px !important;
+  text-transform: uppercase;
+  color: #fff !important;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+.pageBanner .pageBannerContent .pageBannerActions .bannerWhatsappBtn svg {
+  transition: transform 0.4s ease;
+  color: #fff !important;
+}
+.pageBanner .pageBannerContent .pageBannerActions .bannerWhatsappBtn:hover {
+  background: #fff !important;
+  color: #25D366 !important;
+  transform: translateY(-5px) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3) !important;
+}
+.pageBanner .pageBannerContent .pageBannerActions .bannerWhatsappBtn:hover svg {
+  color: #25D366 !important;
+  transform: scale(1.2) rotate(-10deg);
+}
+.pageBanner .pageBannerContent .pageBannerActions .bannerWhatsappBtn:active {
   transform: translateY(-2px) scale(0.98) !important;
 }
 .pageBanner.isCentered .pageBannerInner {
@@ -7606,6 +7642,11 @@ footer .footerBottom .socialLinks a:hover {
   text-transform: uppercase;
   position: relative;
   display: inline-block;
+}
+@media (max-width: 575px) {
+  .enquireFormHeader .enquireTitle {
+    font-size: 1.3rem;
+  }
 }
 .enquireFormHeader .enquireTitle::after {
   content: "";
@@ -12695,9 +12736,12 @@ button.wishlistBtn {
   color: #ff5a3d;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   flex-shrink: 0;
   margin-top: 2px;
+}
+.packageDetailPage .mainContent .detailsCol .highlightsGrid .highlightItem .checkIcon path {
+  stroke: #fff;
 }
 .packageDetailPage .mainContent .detailsCol .highlightsGrid .highlightItem span {
   font-size: 1rem;

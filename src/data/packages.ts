@@ -30,6 +30,7 @@ export interface TourPackageDetail {
     amenities?: { icon: string, label: string, color?: string }[];
     extraContact?: string;
     faq?: { question: string, answer: string }[];
+    iconFeatures?: { icon: string; label: string; enabled: boolean }[];
 }
 
 export const packagesData: Record<string, TourPackageDetail> = {

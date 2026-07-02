@@ -94,7 +94,6 @@
   font-size: 11px;
   font-weight: 600;
   color: #64748b;
-  margin-bottom: 12px;
 }
 .itineraryRow .itItem {
   display: flex;
@@ -107,7 +106,6 @@
 
 .featuresGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 6px;
   margin-bottom: 14px;
 }
@@ -249,5 +247,60 @@
   }
   .mainValue {
     font-size: 18px;
+  }
+}
+/* Icon Features Strip */
+.iconFeaturesStrip {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 4px 0;
+}
+
+.iconFeaturesStrip::-webkit-scrollbar {
+  display: none;
+}
+
+.iconFeaturesStrip .cardIconItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  text-align: center;
+  flex: 0 0 calc((20% - 48px) / 5); /* exactly 5 items in a row on desktop */
+}
+
+.iconFeaturesStrip .cardIconBox {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.iconFeaturesStrip .cardIconLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: #374151;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .iconFeaturesStrip {
+    gap: 10px;
+  }
+  .iconFeaturesStrip .cardIconItem {
+    flex: 0 0 52px;
   }
 }/*# sourceMappingURL=PackageCard.css.map */

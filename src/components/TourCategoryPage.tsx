@@ -334,6 +334,7 @@ export default function TourCategoryPage({
                                 per: pkg.per || '/ Person',
                                 onoffer: pkg.onoffer,
                                 slabel: pkg.slabel,
+                                iconFeatures: Array.isArray((pkg as any).iconFeatures) ? (pkg as any).iconFeatures : [],
                                 _id: pkg._id
                             };
                             return (
