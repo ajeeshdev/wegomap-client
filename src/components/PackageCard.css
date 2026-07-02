@@ -106,6 +106,7 @@
 
 .featuresGrid {
   display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 6px;
   margin-bottom: 14px;
 }
