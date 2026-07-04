@@ -75,9 +75,13 @@ html {
   }
 }
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 body {
   transition: 0.5s ease all;
-  overflow-x: hidden;
 }
 
 .container-header {
@@ -12637,6 +12641,9 @@ button.wishlistBtn {
     grid-template-columns: 1fr 380px;
     gap: 5rem;
   }
+}
+.packageDetailPage .mainContent .detailsCol {
+  min-width: 0;
 }
 .packageDetailPage .mainContent .detailsCol .sectionTitle {
   font-size: 1.5rem;

@@ -164,7 +164,8 @@ export default async function RootSlugPage({ params }: PageProps) {
                     per: pkg.per,
                     onoffer: pkg.onoffer,
                     slabel: pkg.slabel,
-                    order: pkg.order
+                    order: pkg.order,
+                    iconFeatures: pkg.iconFeatures || []
                 }));
             }
         } catch (e) {}

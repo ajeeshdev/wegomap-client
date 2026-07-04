@@ -101,6 +101,7 @@ type PackageItem = {
   totalPrice?: number;
   onoffer?: boolean;
   slabel?: string;
+  iconFeatures?: { icon: string; label: string; enabled: boolean }[];
 };
 
 type FaqItem = {
@@ -463,7 +464,8 @@ export default function LandingPageView({
                   per: pkg.per || '/ Person',
                   onoffer: pkg.onoffer,
                   slabel: pkg.slabel,
-                  _id: pkg._id
+                  _id: pkg._id,
+                  iconFeatures: pkg.iconFeatures || []
                 };
 
                 return (

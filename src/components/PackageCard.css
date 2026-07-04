@@ -258,7 +258,6 @@
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  gap: 12px;
   margin-bottom: 12px;
   padding: 4px 0;
 }
@@ -273,7 +272,7 @@
   align-items: center;
   gap: 5px;
   text-align: center;
-  flex: 0 0 calc((20% - 48px) / 5); /* exactly 5 items in a row on desktop */
+  flex: 0 0 calc((100% - 48px) / 5); /* exactly 5 items in a row on desktop */
 }
 
 .iconFeaturesStrip .cardIconBox {

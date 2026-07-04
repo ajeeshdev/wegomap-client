@@ -635,7 +635,8 @@ export default function TourDetailView({ id }: { id: string }) {
                                         onoffer: spkg.onoffer,
                                         slabel: spkg.slabel,
                                         href: `/packages/${spkg.slug || spkg._id}`,
-                                        _id: spkg._id
+                                        _id: spkg._id,
+                                        iconFeatures: spkg.iconFeatures || []
                                     };
                                     return (
                                         <SwiperSlide key={`${spkg._id}-${i}`} className="h-auto">
