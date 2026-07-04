@@ -63,6 +63,8 @@
     gap: 12px;
     margin-bottom: 28px;
     padding-bottom: 6px;
+    width: 100%;
+    max-width: 100%;
 }
 
 .iconFeatureScroll::-webkit-scrollbar {

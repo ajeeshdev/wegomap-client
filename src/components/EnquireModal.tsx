@@ -29,9 +29,12 @@ export default function EnquireModal({ isOpen, onClose, packageName = 'General I
             document.body.style.overflow = 'hidden';
         } else {
             const timer = setTimeout(() => setIsVisible(false), 300);
-            document.body.style.overflow = 'unset';
+            document.body.style.overflow = '';
             return () => clearTimeout(timer);
         }
+        return () => {
+            document.body.style.overflow = '';
+        };
     }, [isOpen]);
 
     const handleFormSubmit = async (e: React.FormEvent) => {

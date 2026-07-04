@@ -32,10 +32,13 @@
   }
 }
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 body {
   transition: 0.5s ease all;
-  overflow-x: hidden;
-
 }
 
 .container-header {
